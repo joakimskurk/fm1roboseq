@@ -2,6 +2,7 @@
 #   make test    the host tests (on macOS in Docker: Dinghy's host mode needs ELF sections), seconds, no FM-1
 #   make fw      the FM-1 package build/roboseq.fwsc (JieLi toolchain in ~/.jieli, SDK in ~/fw-AC79_AIoT_SDK)
 #   make check   everything CI runs: the package, then Dinghy's platform tests on it
+#   make emu     the package on fm1-emu, headless and FM1_STRICT: build/emu/panel.png (EMU=path/to/fm1-live)
 #   make image   the Docker image make test uses on macOS
 PY ?= $(shell for p in python3 /usr/bin/python3; do $$p -c 'import PIL' 2>/dev/null && { echo $$p; break; }; done)
 ifeq ($(shell uname -s),Linux)
@@ -15,7 +16,11 @@ RUN_SDK = $(DOCKER) -v "$(HOME)/fw-AC79_AIoT_SDK":/sdk:ro -e AC79_SDK=/sdk robos
 IMG = image
 endif
 
-.PHONY: test host fw check image clean
+EMU ?= ../fm1-emu/target/release/fm1-live
+EMU_MS ?= 3000
+EMU_KEYS ?= 1500:21,2600:21^,2800:25
+
+.PHONY: test host fw check emu image clean
 test: $(IMG)
 	$(RUN) sh tests/run_host.sh
 host: test
@@ -24,6 +29,11 @@ fw:
 	shasum -a 256 build/roboseq.fwsc
 check: fw $(IMG)
 	$(RUN_SDK) sh tests/run_tests.sh
+emu:             # (a key held from 1.5 s, another from 2.8 s; the panel at the end)
+	mkdir -p build/emu/work
+	cd build/emu && FM1_STRICT=1 FM1_BENCH_KEYS='$(EMU_KEYS)' $(abspath $(EMU)) --fwsc ../roboseq.fwsc --shot $(EMU_MS) | tee emu.log
+	$(PY) -c "from PIL import Image; Image.open('build/emu/work/panel.ppm').save('build/emu/panel.png')"
+	@echo "panel -> build/emu/panel.png"
 image:
 	@docker image inspect roboseq-dev >/dev/null 2>&1 || docker build -q --platform linux/amd64 -t roboseq-dev tools/docker
 clean:

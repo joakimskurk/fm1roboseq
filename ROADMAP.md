@@ -29,7 +29,8 @@ music.
 - [x] `reference/roboseq.html` as the reference (SHA-256 in reference/README.md), the April handoff beside it
 - [x] CLAUDE.md, README.md, PLATFORM.md, DECISIONS.md, this roadmap
 - [x] Makefile (`make test`, `make host`, `make fw`), CI on every push (zvenson/fm1-build, like SkurkyMello)
-- [ ] The first CI run green; the first `.fwsc` (still Dinghy's sine) boots in fm1-emu with RoboSeq's identity
+- [x] The first CI run green (2026-11-05, `6b78aa4`; its package byte-identical to `make fw`), and that `.fwsc`
+      (still Dinghy's sine) boots in fm1-emu 0.4.0 under FM1_STRICT: ROBOSEQ on the screen, a key plays (`make emu`)
 - [ ] Check `FM-1_96N` against the Firmware Hub's list (not verifiable from its public page, 2026-11-05)
 - [ ] RoboSeq's own logo for `assets/` (Dinghy's is designburg's, not under the GPL)
 

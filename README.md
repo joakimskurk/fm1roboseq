@@ -20,6 +20,7 @@ On the FM-1 it is meant to be played, not only programmed: steering the bots liv
 make test       # the app on this computer: build/host/roboseq.wav and the screens as PNG (Python 3 + Pillow)
 make fw         # build/roboseq.fwsc (JieLi toolchain and AC79 SDK: docs/DINGHY_README.md)
 make check      # the package and Dinghy's platform tests, as CI runs them
+make emu        # the package on fm1-emu, headless: build/emu/panel.png (EMU=path/to/fm1-live)
 ```
 
 ## Where things are
