@@ -1,0 +1,5080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<title>RoboSeq</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+	<script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
+	<style>
+    :root {
+			--bg: #092e2c;
+			--bg2: #0f3b39;
+			--panel: #103836;
+			--panel2: #16504b;
+			--panel3: #0e2f2c;
+			--line: #2f6a63;
+			--line2: #4f8f85;
+			--line3: #73b7a9;
+			--text: #ebfff6;
+			--text2: #d0f5e6;
+			--muted: #98d6be;
+			--accent: #8fffd1;
+			--accent2: #59d9c2;
+      --warn: #ffcc00;
+      --danger: #ff3366;
+      --danger2: #ff6688;
+			--bot-a: #ff6666;
+			--bot-a2: #cc3333;
+      --bot-b: #ff9900;
+      --bot-b2: #cc7700;
+			--belt: #63d9ff;
+      --rotator: #ffcc00;
+      --zap: #ff3366;
+			--pulse: #73ff9f;
+			--block: #30524f;
+			--shadow-soft: rgba(0, 0, 0, 0.2);
+			--shadow-mid: rgba(0, 0, 0, 0.32);
+			--shadow-hard: rgba(0, 0, 0, 0.45);
+      --pixel: "Press Start 2P", monospace;
+      --mono: "Share Tech Mono", monospace;
+    }
+
+    /* ─── RESET ─────────────────────────────────────────────────── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── GLOBAL ─────────────────────────────────────────────────── */
+		html, body {
+      min-height: 100%;
+			width: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      image-rendering: pixelated;
+    }
+		html {
+			scrollbar-gutter: stable both-edges;
+		}
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: flex-start;
+		}
+		#app {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+		}
+
+    /* CRT scanline overlay */
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 9999;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent, transparent 2px,
+        rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px
+      );
+    }
+
+    /* pixel grid background */
+    body::after {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.35;
+    }
+
+    button, select, input { font: inherit; color: inherit; }
+    button, [data-action] {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+      height: 28px;
+      cursor: pointer;
+      touch-action: none;
+    }
+
+    /* pixel-border mixin — 3px hard edge */
+    .px {
+      border: 3px solid var(--line2);
+      box-shadow: 3px 3px 0 #000;
+      border-radius: 0;
+    }
+    .px-accent {
+      border: 3px solid var(--accent);
+      box-shadow: 3px 3px 0 var(--accent2), inset 0 0 12px rgba(0,255,204,0.08);
+    }
+    .px-warn {
+      border: 3px solid var(--warn);
+      box-shadow: 3px 3px 0 #886600;
+    }
+    .px-danger {
+      border: 3px solid var(--danger);
+      box-shadow: 3px 3px 0 #880022;
+    }
+    .px-a {
+      border: 3px solid var(--bot-a);
+      box-shadow: 3px 3px 0 var(--bot-a2);
+    }
+    .px-b {
+      border: 3px solid var(--bot-b);
+      box-shadow: 3px 3px 0 var(--bot-b2);
+    }
+
+    /* ─── BUTTONS ────────────────────────────────────────────────── */
+    button {
+      cursor: pointer;
+      border: 2px solid var(--line2);
+      background: var(--panel2);
+			box-shadow: 2px 2px 0 #000, 0 5px 10px var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,0.08);
+      border-radius: 0;
+      min-height: 44px;
+      padding: 6px 10px;
+      font-family: var(--pixel);
+      font-size: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text2);
+      transition: transform 80ms, box-shadow 80ms;
+      line-height: 1.4;
+      white-space: nowrap;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: rgba(0,255,204,0.15);
+    }
+    button:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 #000;
+    }
+    button.primary {
+      background: #001a14;
+      border-color: var(--accent);
+      box-shadow: 2px 2px 0 var(--accent2);
+      color: var(--accent);
+    }
+    button.primary:hover { background: #003328; }
+    button.danger {
+      background: #1a0010;
+      border-color: var(--danger);
+      box-shadow: 2px 2px 0 #880022;
+      color: var(--danger2);
+    }
+    button.active, button.seg-on {
+      background: #001a14;
+      border-color: var(--accent);
+      box-shadow: 2px 2px 0 var(--accent2);
+      color: var(--accent);
+    }
+    button.pending {
+      background: #1a1400;
+      border-color: var(--warn);
+      box-shadow: 2px 2px 0 #886600;
+      color: var(--warn);
+      animation: blink-pending 0.6s step-end infinite;
+    }
+    @keyframes blink-pending { 50% { opacity: 0.3; } }
+    button.warn {
+      background: #1a1400;
+      border-color: var(--warn);
+      box-shadow: 2px 2px 0 #886600;
+      color: var(--warn);
+    }
+
+    select {
+      border: 2px solid var(--line2);
+      background: var(--panel3);
+      box-shadow: inset 0 0 0 1px #000;
+      border-radius: 0;
+      min-height: 44px;
+      padding: 6px 10px;
+      font-family: var(--mono);
+      font-size: 11px;
+      width: 100%;
+      max-width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      touch-action: manipulation;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0h12L6 8z' fill='%236060a0'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+
+    /* ─── APP SHELL ──────────────────────────────────────────────── */
+    .app-shell {
+      position: relative; z-index: 1;
+      width: min(100%, 740px);
+			margin: 0;
+      padding: clamp(6px, 2vw, 12px);
+      padding-bottom: max(20px, env(safe-area-inset-bottom));
+      display: grid;
+      gap: 8px;
+      align-content: start;
+      overflow: clip;
+    }
+
+    /* ─── PANELS ─────────────────────────────────────────────────── */
+    .panel {
+      background: var(--panel);
+      border: 2px solid var(--line2);
+			box-shadow: 3px 3px 0 #000, 0 10px 22px var(--shadow-mid), inset 0 1px 0 rgba(255,255,255,0.05);
+      overflow: clip;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    /* corner rivet decoration */
+    .panel::before {
+      content: "";
+      position: absolute; inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle 5px at 8px 8px, var(--line3) 60%, transparent 61%),
+        radial-gradient(circle 5px at calc(100% - 8px) 8px, var(--line3) 60%, transparent 61%),
+        radial-gradient(circle 5px at 8px calc(100% - 8px), var(--line3) 60%, transparent 61%),
+        radial-gradient(circle 5px at calc(100% - 8px) calc(100% - 8px), var(--line3) 60%, transparent 61%);
+      opacity: 0.6;
+    }
+
+	.transport { position: relative; padding: 3px 4px; display: grid; gap: 2px; }
+	.transport input[type="range"] { height: 14px; }
+    .board-panel, .planner-panel { position: relative; padding: 10px; display: grid; gap: 8px; }
+
+    /* ─── HEADER ─────────────────────────────────────────────────── */
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+			gap: 3px;
+			flex-wrap: wrap;
+    }
+
+    .title-block { display: flex; align-items: center; gap: 6px; }
+
+    .hdr-buttons { display: flex; gap: 2px; }
+
+    .eyebrow {
+      font-family: var(--pixel);
+      font-size: 6px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    h1 {
+      font-family: var(--pixel);
+			font-size: clamp(9px, 2.5vw, 13px);
+			line-height: 1;
+      color: var(--accent);
+      text-shadow: 0 0 12px var(--accent), 2px 2px 0 var(--accent2);
+      text-transform: uppercase;
+    }
+
+    .subline { display: none; }
+
+    /* live indicators */
+    .hud-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      justify-content: flex-end;
+    }
+
+    .hud-chip {
+      font-family: var(--pixel);
+			font-size: 5px;
+			padding: 1px 3px;
+      background: var(--panel3);
+      border: 1px solid var(--line2);
+      box-shadow: 1px 1px 0 #000;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+    .hud-chip strong { color: var(--accent); }
+    .hud-chip.blink strong { animation: blink 0.7s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ─── TRANSPORT CONTROLS ─────────────────────────────────────── */
+		.ctrl-grid { display: none; }
+
+    .btn-row, .seg-row {
+      display: flex;
+      flex-wrap: wrap;
+			gap: 2px;
+    }
+		.btn-row > button { flex: 1 1 auto; min-width: fit-content; }
+
+		.status-msg { display: none; }
+
+		.ctrl-group {
+      background: var(--panel3);
+      border: 1px solid var(--line);
+			padding: 2px 3px;
+      display: flex;
+      flex-wrap: wrap;
+			gap: 2px 8px;
+			align-items: center;
+    }
+
+    .ctrl-label {
+      font-family: var(--pixel);
+      font-size: 5px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 0;
+    }
+
+		.bpm-readout { display: none; }
+
+		.ctrl-item { display: flex; align-items: center; gap: 3px; }
+		.ctrl-item input[type="range"] { width: 70px; }
+
+		.transport-grid { display: grid; gap: 2px; }
+
+		.phase-dots {
+			display: flex;
+			gap: 4px;
+			align-items: center;
+			min-height: 10px;
+		}
+		.phase-dot {
+			width: 7px;
+			height: 7px;
+			border: 1px solid var(--line2);
+			background: #0b0b1a;
+			box-shadow: inset 0 0 0 1px #000;
+			opacity: 0.55;
+		}
+		.phase-dot.on {
+			background: var(--accent);
+			border-color: var(--accent2);
+			opacity: 1;
+			box-shadow: 0 0 8px rgba(0, 255, 204, 0.35);
+		}
+
+		.mixer-panel {
+			margin-top: 6px;
+			background: var(--panel3);
+			border: 2px solid var(--line);
+			padding: 10px;
+			display: grid;
+			gap: 8px;
+		}
+		.mixer-grid {
+			display: grid;
+			gap: 8px;
+		}
+		.mixer-row {
+			display: grid;
+			grid-template-columns: 70px 1fr auto;
+			align-items: center;
+			gap: 8px;
+			font-size: 10px;
+			color: var(--text2);
+		}
+		.mixer-row .mixer-value {
+			font-family: var(--pixel);
+			font-size: 7px;
+			min-width: 28px;
+			text-align: right;
+			color: var(--accent);
+		}
+
+    /* ─── BOARD ──────────────────────────────────────────────────── */
+    .bot-status-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+
+    .status-card {
+      background: var(--panel3);
+      border: 1px solid var(--line2);
+			box-shadow: 0 3px 8px var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,0.06);
+      padding: 4px 6px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2px 6px;
+      align-items: center;
+    }
+    .status-card h4 {
+      font-family: var(--pixel);
+      font-size: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0;
+    }
+    .status-card.bot-a { border-color: var(--bot-a); box-shadow: 2px 2px 0 var(--bot-a2); }
+    .status-card.bot-b { border-color: var(--bot-b); box-shadow: 2px 2px 0 var(--bot-b2); }
+    .status-stats {
+      font-size: 11px;
+      color: var(--muted);
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .status-line { font-size: 11px; color: var(--text2); }
+
+    .board-wrap { display: grid; gap: 6px; }
+
+    /* THE GRID */
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 2px;
+      background: #000;
+      border: 2px solid var(--line2);
+			box-shadow: 3px 3px 0 #000, 0 12px 20px var(--shadow-mid);
+      padding: 2px;
+    }
+
+    .cell {
+      aspect-ratio: 1;
+      background: #0c0c18;
+      border: 1px solid #1a1a30;
+			box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 2px 5px rgba(0,0,0,0.22);
+			padding: 0;
+			display: block;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* dither pattern for empty cells */
+    .cell::before {
+      content: "";
+      position: absolute; inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle 1px at 4px 4px, #1a1a30 100%, transparent 100%);
+      background-size: 8px 8px;
+      opacity: 0.6;
+    }
+
+    .cell.block {
+      background:
+        repeating-linear-gradient(45deg, #222238 0px, #222238 4px, #1a1a2e 4px, #1a1a2e 8px);
+      border-color: #334;
+    }
+    .cell.block::before { opacity: 0; }
+
+    .cell.belt {
+      background: #001a2e;
+      border-color: var(--belt);
+      box-shadow: inset 0 0 6px rgba(0,170,255,0.3);
+    }
+    .cell.belt::before { opacity: 0; }
+
+    .cell.rotator {
+      background: #1a1400;
+      border-color: var(--rotator);
+      box-shadow: inset 0 0 6px rgba(255,204,0,0.25);
+    }
+    .cell.rotator::before { opacity: 0; }
+
+    .cell.zap {
+      background: #1a0012;
+      border-color: var(--zap);
+      box-shadow: inset 0 0 6px rgba(255,51,102,0.3);
+    }
+    .cell.zap::before { opacity: 0; }
+
+    .cell.pulse {
+      background: #001a00;
+      border-color: var(--pulse);
+      box-shadow: inset 0 0 6px rgba(102,255,68,0.25);
+    }
+    .cell.pulse::before { opacity: 0; }
+
+    /* active flash */
+    .cell.active-cell {
+      outline: 2px solid #fff;
+      outline-offset: -2px;
+      animation: cell-flash 0.3s step-end;
+      contain: layout;
+      will-change: filter;
+    }
+    @keyframes cell-flash {
+      0%   { filter: brightness(1.8); }
+      50%  { filter: brightness(1.5); }
+      100% { filter: brightness(1); }
+    }
+
+    .cell-coord {
+      font-family: var(--pixel);
+      font-size: 5px;
+			color: #7c7cc2;
+			line-height: 1;
+    }
+
+		/* bot movement trail markers */
+		.trail-marker {
+			position: absolute;
+			border-radius: 50%;
+			pointer-events: none;
+			z-index: 2;
+		}
+		.trail-marker.trail-a {
+			background: var(--bot-a);
+			opacity: 0.25;
+		}
+		.trail-marker.trail-b {
+			background: var(--bot-b);
+			opacity: 0.25;
+		}
+		.trail-marker.trail-a.trail-latest { opacity: 0.5; }
+		.trail-marker.trail-b.trail-latest { opacity: 0.5; }
+
+		.cell-overlay {
+			position: absolute;
+			inset: 2px;
+			z-index: 3;
+			pointer-events: none;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+		.cell-overlay-top {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			gap: 4px;
+		}
+
+    .tile-mark {
+      font-size: clamp(14px, 4vw, 20px);
+      text-align: center;
+			z-index: 1;
+			position: absolute;
+			inset: 0;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tile-mark svg {
+      width: 100%;
+      height: 100%;
+      max-width: 36px;
+      max-height: 36px;
+			filter: drop-shadow(0 2px 3px rgba(0,0,0,0.35));
+    }
+
+		.cell-bot-row {
+			display: flex;
+			gap: 1px;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: flex-end;
+			flex: 1;
+		}
+		.cell-bot-mini {
+			display: inline-flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0;
+			padding: 0;
+			border: none;
+			background: transparent;
+			font-family: var(--pixel);
+			font-size: 6px;
+			line-height: 1;
+		}
+		.cell-bot-mini.bot-a { color: var(--bot-a); }
+		.cell-bot-mini.bot-b { color: var(--bot-b); }
+		.dir-arrow {
+			display: inline-block;
+			width: 1em;
+			text-align: center;
+			vertical-align: middle;
+			line-height: 1;
+			overflow: visible;
+		}
+		.dir-arrow::before {
+			content: "▶";
+			display: inline-block;
+		}
+		.dir-arrow.dir-N::before { transform: rotate(-90deg); }
+		.dir-arrow.dir-E::before { transform: rotate(0deg); }
+		.dir-arrow.dir-S::before { transform: rotate(90deg); }
+		.dir-arrow.dir-W::before { transform: rotate(180deg); }
+		.cell-bot-mini .dir-arrow {
+			font-size: 12px;
+			filter: drop-shadow(0 0 2px currentColor);
+			position: absolute;
+			bottom: -2px;
+			right: -10px;
+			width: auto;
+		}
+		.cell-bot-mini {
+			position: relative;
+		}
+		.cell-bot-sprite {
+			width: clamp(28px, 8vw, 48px);
+			height: clamp(28px, 8vw, 48px);
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			overflow: hidden;
+			filter: drop-shadow(0 0 3px rgba(255,255,255,0.35)) drop-shadow(0 3px 4px rgba(0,0,0,0.45));
+		}
+		.cell-bot-sprite svg {
+			width: 100%;
+			height: 100%;
+			display: block;
+			image-rendering: pixelated;
+		}
+
+    /* bot sprites using CSS */
+    .bot-chip-row {
+      display: flex; gap: 2px; flex-wrap: wrap;
+      z-index: 2; position: relative;
+    }
+    .bot-chip {
+      font-family: var(--pixel);
+      font-size: 6px;
+      padding: 2px 3px;
+      border: 1px solid;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .bot-chip.bot-a { color: #000; background: var(--bot-a); border-color: var(--bot-a2); }
+    .bot-chip.bot-b { color: #000; background: var(--bot-b); border-color: var(--bot-b2); }
+
+    /* explosion animation — pixel art style, sprite-sized */
+    @keyframes explode-pop {
+      0%   { transform: scale(0.2); opacity: 1; }
+      20%  { transform: scale(1.3); opacity: 1; }
+      50%  { transform: scale(1.0); opacity: 0.9; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+    @keyframes explode-flash {
+      0%, 20% { opacity: 1; }
+      40%     { opacity: 0; }
+      60%     { opacity: 0.8; }
+      80%     { opacity: 0; }
+      100%    { opacity: 0; }
+    }
+    .explosion {
+      position: absolute;
+      inset: -4px;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: explode-pop 0.55s ease-out forwards;
+      image-rendering: pixelated;
+    }
+    .explosion svg {
+      width: 100%;
+      height: 100%;
+      image-rendering: pixelated;
+    }
+
+    /* heart pop animation */
+    @keyframes heart-float {
+      0%   { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+      30%  { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+      60%  { transform: translate(-50%, -50%) scale(1.0); opacity: 0.9; }
+      100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    }
+
+    /* clash / dash-impact animation */
+    @keyframes clash-pop {
+      0%   { transform: scale(0.3) rotate(0deg); opacity: 1; }
+      25%  { transform: scale(1.3) rotate(15deg); opacity: 1; }
+      50%  { transform: scale(1.0) rotate(-10deg); opacity: 0.8; }
+      100% { transform: scale(1.4) rotate(5deg); opacity: 0; }
+    }
+    .dash-clash {
+      position: absolute;
+      top: -2px;
+      right: -4px;
+      z-index: 13;
+      pointer-events: none;
+      animation: clash-pop 0.5s ease-out forwards;
+      image-rendering: pixelated;
+    }
+    .dash-clash svg {
+      width: 20px;
+      height: 20px;
+    }
+    .love-heart {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 12;
+      pointer-events: none;
+      animation: heart-float 0.7s ease-out forwards;
+      image-rendering: pixelated;
+      filter: drop-shadow(0 0 3px rgba(255,80,180,0.6));
+    }
+    .love-heart svg {
+      width: 36px;
+      height: 32px;
+    }
+
+    /* legend */
+    .legend {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+    .legend-item {
+      display: flex; gap: 6px; align-items: center;
+      padding: 5px 7px;
+      background: var(--panel3);
+      border: 1px solid var(--line);
+      font-size: 10px;
+      color: var(--text2);
+    }
+    .legend-swatch {
+      width: 10px; height: 10px;
+      flex: 0 0 auto;
+      border: 1px solid #000;
+    }
+
+    /* event log */
+		.event-log {
+			display: grid;
+			gap: 3px;
+			min-height: 132px;
+			max-height: 132px;
+			overflow: hidden;
+		}
+    .event-item {
+      display: flex; gap: 8px; align-items: baseline;
+      padding: 4px 8px;
+      background: var(--panel3);
+      border-left: 3px solid var(--line2);
+      font-size: 11px;
+      color: var(--text2);
+    }
+    .event-item strong {
+      font-family: var(--pixel);
+      font-size: 6px;
+      color: var(--muted);
+      text-transform: uppercase;
+      min-width: 44px;
+    }
+    .event-item.ev-collision { border-left-color: var(--danger); }
+    .event-item.ev-zap { border-left-color: var(--zap); }
+    .event-item.ev-belt { border-left-color: var(--belt); }
+    .event-item.ev-rotator { border-left-color: var(--rotator); }
+    .event-item.ev-pulse { border-left-color: var(--pulse); }
+    .event-item.ev-love { border-left-color: #ff69b4; }
+    .event-item.ev-reset { border-left-color: var(--accent); }
+    .event-item.ev-move { border-left-color: var(--line2); }
+		.event-item.ev-empty {
+			border-left-color: var(--line);
+			opacity: 0.35;
+		}
+
+    /* panel headings */
+    .panel-head {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 6px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 2px;
+      flex-wrap: wrap;
+    }
+    .panel-head h2 {
+      font-family: var(--pixel);
+      font-size: 9px;
+      text-transform: uppercase;
+      color: var(--text);
+      letter-spacing: 0.06em;
+    }
+    .panel-copy { font-size: 10px; color: var(--muted); line-height: 1.3; margin-top: 2px; }
+
+    /* ─── PLANNER ────────────────────────────────────────────────── */
+    .planner-stack { display: grid; gap: 8px; grid-template-columns: 1fr 1fr; align-items: start; }
+
+		/* ─── DRUM MACHINE ──────────────────────────────────────────── */
+		.drum-panel {
+			padding: 8px;
+		}
+		.drum-controls {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 4px;
+			margin: 6px 0;
+		}
+		.drum-controls button {
+			font-size: 9px;
+			padding: 4px 8px;
+			min-height: 36px;
+		}
+		.drum-grid {
+			display: grid;
+			gap: 1px;
+			align-items: center;
+		}
+		.drum-label {
+			font-family: var(--pixel);
+			font-size: 7px;
+			color: var(--muted);
+			text-align: right;
+			padding-right: 4px;
+			line-height: 1;
+		}
+		.drum-cell {
+			aspect-ratio: 1;
+			background: #1a1a30;
+			border: 1px solid #2a2a44;
+			cursor: pointer;
+			min-height: 22px;
+			touch-action: manipulation;
+			transition: background 0.05s;
+		}
+		.drum-cell:active { transform: scale(0.9); }
+		.drum-cell.on { border-color: var(--accent); }
+		.drum-cell.on.voice-kick { background: var(--danger); }
+		.drum-cell.on.voice-snare { background: var(--warn); }
+		.drum-cell.on.voice-hihat { background: var(--accent); }
+		.drum-cell.current { outline: 1px solid #fff; outline-offset: -1px; }
+
+		.bassmod-panel {
+			position: relative;
+			padding: 6px;
+			display: grid;
+			gap: 4px;
+		}
+		.bassmod-panel .panel-head { gap: 4px; }
+		.bassmod-panel .panel-head .btn-row { gap: 2px; flex-wrap: wrap; }
+		.bassmod-panel .panel-head .btn-row button { min-height: 26px; font-size: 6px; padding: 3px 6px; }
+		.bassmod-grid {
+			display: grid;
+			gap: 3px;
+			grid-template-columns: 1fr;
+		}
+		.bassmod-step {
+			background: var(--panel2);
+			border: 2px solid var(--line2);
+			box-shadow: 1px 1px 0 #000;
+			padding: 4px 6px;
+			display: grid;
+			grid-template-columns: 26px 1fr 1fr 1fr;
+			gap: 4px;
+			align-items: center;
+		}
+		.bassmod-step.active {
+			border-color: var(--bot-b);
+			box-shadow: 0 0 0 1px var(--bot-b), 1px 1px 0 var(--bot-b2), 0 0 8px rgba(255, 153, 0, 0.15);
+		}
+		.bassmod-progress {
+			display: flex;
+			gap: 3px;
+			align-items: center;
+		}
+		.bassmod-progress .dot {
+			width: 6px;
+			height: 6px;
+			border: 1px solid var(--line2);
+			background: #0b0b1a;
+			opacity: 0.6;
+		}
+		.bassmod-progress .dot.on {
+			background: var(--warn);
+			border-color: var(--bot-b2);
+			opacity: 1;
+		}
+		.bassmod-panel .panel-copy {
+			font-size: 8px;
+			line-height: 1.2;
+		}
+		.bassmod-step .ctrl-label {
+			font-size: 5px;
+			margin-bottom: 1px;
+		}
+		.bassmod-step .step-index {
+			font-family: var(--pixel);
+			font-size: 7px;
+			color: var(--muted);
+			text-align: center;
+		}
+		.bassmod-step .step-index.live {
+			color: var(--bot-b);
+		}
+		.bassmod-cycle {
+			display: grid;
+			grid-template-columns: 20px 1fr 20px;
+			align-items: center;
+			gap: 2px;
+		}
+		.bassmod-cycle-btn {
+			min-height: 24px;
+			min-width: 20px;
+			padding: 0;
+			font-size: 10px;
+			line-height: 1;
+			touch-action: manipulation;
+		}
+		.bassmod-cycle-value {
+			min-height: 20px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 1px 2px;
+			background: #0d1020;
+			border: 1px solid var(--line2);
+			font-family: var(--pixel);
+			font-size: 6px;
+			color: var(--text);
+			text-transform: uppercase;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			letter-spacing: 0.08em;
+		}
+
+    .bot-card {
+      background: var(--panel2);
+      border: 2px solid var(--line2);
+			box-shadow: 3px 3px 0 #000, 0 8px 16px var(--shadow-mid), inset 0 1px 0 rgba(255,255,255,0.05);
+      display: grid;
+      gap: 4px;
+      padding: 6px;
+      min-width: 0;
+    }
+    .bot-card.bot-a { border-color: var(--bot-a); box-shadow: 3px 3px 0 var(--bot-a2); }
+    .bot-card.bot-b { border-color: var(--bot-b); box-shadow: 3px 3px 0 var(--bot-b2); }
+
+    .bot-head {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 4px;
+    }
+    .bot-name-with-art {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .tiny-robot {
+      flex: 0 0 30px;
+      height: 36px;
+      overflow: hidden;
+    }
+    .robot-badge {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 36px;
+      height: 36px;
+      grid-row: 1 / -1;
+      grid-column: 2;
+      overflow: hidden;
+    }
+    .bot-name {
+      font-family: var(--pixel);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .bot-name small {
+      display: block;
+      font-size: 8px;
+      color: var(--muted);
+      font-family: var(--mono);
+      margin-top: 3px;
+      text-transform: none;
+    }
+    .slot-count {
+      font-family: var(--pixel);
+      font-size: 7px;
+      padding: 4px 7px;
+      border: 2px solid var(--line2);
+      background: var(--panel3);
+      color: var(--muted);
+      box-shadow: 2px 2px 0 #000;
+    }
+
+    .step-list { display: grid; gap: 4px; }
+
+    /* RoboRally-style register cards */
+    .step-card {
+      background: var(--panel3);
+      border: 2px solid var(--line);
+			box-shadow: 2px 2px 0 #000, 0 4px 8px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.04);
+      padding: 4px;
+      display: grid;
+      gap: 3px;
+      transition: border-color 100ms, box-shadow 100ms;
+      min-width: 0;
+    }
+    .step-card.current {
+      border-color: var(--accent) !important;
+      box-shadow: 0 0 0 1px var(--accent), 2px 2px 0 var(--accent2), 0 0 16px rgba(0,255,204,0.2) !important;
+    }
+    .step-card.bot-a.current {
+      border-color: var(--bot-a) !important;
+      box-shadow: 0 0 0 1px var(--bot-a), 2px 2px 0 var(--bot-a2), 0 0 16px rgba(255,102,102,0.2) !important;
+    }
+    .step-card.bot-b.current {
+      border-color: var(--bot-b) !important;
+      box-shadow: 0 0 0 1px var(--bot-b), 2px 2px 0 var(--bot-b2), 0 0 16px rgba(255,153,0,0.2) !important;
+    }
+    .step-top {
+      display: flex; flex-wrap: wrap;
+      align-items: center; gap: 3px;
+    }
+    .step-index {
+      font-family: var(--pixel);
+      font-size: 8px;
+      padding: 3px 5px;
+      background: var(--panel);
+      border: 2px solid var(--line2);
+      box-shadow: 1px 1px 0 #000;
+      color: var(--muted);
+      min-width: 24px;
+      text-align: center;
+    }
+    .step-top button { font-size: 6px; min-height: 32px; }
+		.quick-btn {
+			min-height: 32px !important;
+			font-size: 6px !important;
+			padding: 3px 5px;
+			touch-action: manipulation;
+		}
+		.action-pick {
+			flex: 1;
+			min-height: 32px !important;
+			font-size: 7px !important;
+			text-align: left;
+			touch-action: manipulation;
+		}
+
+    .step-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .ctrl-label {
+      font-family: var(--pixel);
+      font-size: 7px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .step-meta {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 6px;
+      align-items: center;
+    }
+    .step-note {
+      font-size: 10px;
+      color: var(--muted);
+      padding: 5px 8px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      line-height: 1.4;
+    }
+    .step-note strong { color: var(--text2); }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────── */
+    .footer-note {
+      font-family: var(--pixel);
+      font-size: 7px;
+      color: var(--muted);
+      text-align: center;
+      padding: 6px;
+      letter-spacing: 0.08em;
+      line-height: 1.8;
+      text-transform: uppercase;
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (min-width: 600px) {
+      .bot-status-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 380px) {
+      .legend, .step-grid { grid-template-columns: 1fr; }
+      .header-bar, .panel-head, .bot-head {
+        flex-direction: column; align-items: flex-start;
+      }
+			.planner-stack { grid-template-columns: 1fr; }
+    }
+
+    /* ─── WIDESCREEN ─────────────────────────────────────────────── */
+    @media (min-width: 1100px) {
+      .app-shell {
+        width: min(100%, 1400px);
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "transport transport"
+          "drums     drums"
+          "tonematrix tonematrix"
+          "board     planner"
+          "footer    footer";
+      }
+      .app-shell > .transport      { grid-area: transport; }
+      .app-shell > .drum-panel     { grid-area: drums; }
+      .app-shell > .bassmod-wrapper  { grid-area: tonematrix; }
+      .app-shell > .board-panel    { grid-area: board; align-self: start; }
+      .app-shell > .planner-panel  { grid-area: planner; align-self: start; }
+      .app-shell > .footer-note    { grid-area: footer; }
+      .planner-stack { grid-template-columns: 1fr 1fr !important; }
+    }
+
+    /* ─── DRAG & DROP ────────────────────────────────────────────── */
+    .step-card[draggable="true"] {
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .step-card[draggable="true"]:active {
+      cursor: grabbing;
+    }
+    .step-card.drag-over {
+      border-color: var(--warn) !important;
+      background: var(--panel2) !important;
+      box-shadow: 0 0 0 1px var(--warn), 2px 2px 0 #886600 !important;
+    }
+    .step-card.dragging {
+      opacity: 0.5;
+      border-color: var(--accent2) !important;
+    }
+    .step-list.drag-active {
+      background: rgba(0,255,204,0.04);
+      border-radius: 2px;
+      padding: 4px;
+      margin: -4px;
+    }
+  </style>
+</head>
+<body>
+	<div id="app"></div>
+	<script>
+		(() => {
+			const STORAGE_KEY = "roboseq-mobile-v2";
+			const LOOP_OPTIONS = [8, 12, 16, 24, 32, 48, 64];
+			const MAX_STEPS = 64;
+			const DRUM_STEPS = 16;
+			function getDrumSteps(loopLen) {
+				const ll = loopLen !== undefined ? loopLen : state.loopLength;
+				return [12, 24, 48].includes(ll) ? 12 : 16;
+			}
+			const MAX_EVENT_SOUNDS_PER_TICK = 4;
+			const PROB_OPTIONS = [1, 0.75, 0.5];
+			const DIRS = ["N", "E", "S", "W"];
+			const DIR_VECTORS = {
+				N: { x: 0, y: -1 },
+				E: { x: 1, y: 0 },
+				S: { x: 0, y: 1 },
+				W: { x: -1, y: 0 },
+			};
+
+			const SCALES = {
+				chromatic: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+				major: [0, 2, 4, 5, 7, 9, 11],
+				minor: [0, 2, 3, 5, 7, 8, 10],
+				dorian: [0, 2, 3, 5, 7, 9, 10],
+				phrygian: [0, 1, 3, 5, 7, 8, 10],
+				lydian: [0, 2, 4, 6, 7, 9, 11],
+				mixolydian: [0, 2, 4, 5, 7, 9, 10],
+				pentatonic: [0, 2, 4, 7, 9],
+				"min-penta": [0, 3, 5, 7, 10],
+				diminished: [0, 2, 3, 5, 6, 8, 9, 11],
+				"whole-tone": [0, 2, 4, 6, 8, 10],
+				augmented: [0, 3, 4, 7, 8, 11],
+			};
+			const SCALE_NAMES = Object.keys(SCALES);
+			const SCALE_OPTIONS = ["major", "minor", "pentatonic", "dorian", "mixolydian", "chromatic"];
+			const ROOT_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+			const BASS_INTERVAL_OPTIONS = Array.from({ length: 25 }, (_, i) => i - 12);
+			const VOICE_MOD_TRIGGERS = [
+				{ id: "loop", label: "LOOP", blurb: "Advances at a set loop frequency" },
+				{ id: "manual", label: "MANUAL", blurb: "Only advances when you tap" },
+			];
+			const VOICE_MOD_LOOP_FREQ_OPTIONS = [0.25, 0.5, 1, 2, 4];
+			const DEFAULT_MIXER = {
+				master: 0.9,
+				melody: 0.9,
+				botB: 0.8,
+				percussion: 0.55,
+				fx: 0.6,
+				drums: 0.7,
+			};
+
+			const DRUM_VOICES = ["kick", "snare", "hihat"];
+			const DRUM_LABELS = { kick: "KICK", snare: "SNARE", hihat: "HIHAT" };
+
+			function buildEmptyDrumPattern() {
+				return { kick: Array(64).fill(0), snare: Array(64).fill(0), hihat: Array(64).fill(0) };
+			}
+
+			const DRUM_PRESETS = [
+				{ id: "four", label: "Four Floor", pattern: (n) => {
+					const p = buildEmptyDrumPattern();
+					for (let i = 0; i < n; i++) { if (i % 4 === 0) p.kick[i] = 1; if (i % 4 === 2) p.snare[i] = 1; p.hihat[i] = 1; }
+					return p;
+				}},
+				{ id: "break", label: "Breakbeat", pattern: (n) => {
+					const p = buildEmptyDrumPattern();
+					for (let i = 0; i < n; i++) {
+						const b = i % 8;
+						if (b === 0 || b === 3 || b === 6) p.kick[i] = 1;
+						if (b === 2 || b === 5) p.snare[i] = 1;
+						if (b % 2 === 0) p.hihat[i] = 1;
+					}
+					return p;
+				}},
+				{ id: "half", label: "Half-time", pattern: (n) => {
+					const p = buildEmptyDrumPattern();
+					for (let i = 0; i < n; i++) {
+						const b = i % 8;
+						if (b === 0) p.kick[i] = 1;
+						if (b === 4) p.snare[i] = 1;
+						if (b % 2 === 0) p.hihat[i] = 1;
+					}
+					return p;
+				}},
+				{ id: "offbeat", label: "Off-beat", pattern: (n) => {
+					const p = buildEmptyDrumPattern();
+					for (let i = 0; i < n; i++) {
+						const b = i % 8;
+						if (b === 0 || b === 5) p.kick[i] = 1;
+						if (b === 3 || b === 7) p.snare[i] = 1;
+						if (b % 2 === 1) p.hihat[i] = 1;
+					}
+					return p;
+				}},
+				{ id: "triplet", label: "Triplet", pattern: (n) => {
+					const p = buildEmptyDrumPattern();
+					for (let i = 0; i < n; i++) {
+						const b = i % 6;
+						if (b === 0) p.kick[i] = 1;
+						if (b === 3) p.snare[i] = 1;
+						if (b === 0 || b === 2 || b === 4) p.hihat[i] = 1;
+					}
+					return p;
+				}},
+				{ id: "minimal", label: "Minimal", pattern: (n) => {
+					const p = buildEmptyDrumPattern();
+					for (let i = 0; i < n; i++) {
+						const b = i % 8;
+						if (b === 0) p.kick[i] = 1;
+						if (b === 4) p.hihat[i] = 1;
+					}
+					return p;
+				}},
+			];
+
+			function scaleQuantize(midi, scaleName) {
+				const sc = SCALES[scaleName] || SCALES.chromatic;
+				const octave = Math.floor(midi / 12);
+				const semitone = ((midi % 12) + 12) % 12;
+				let best = sc[0];
+				let bestDistance = 99;
+				for (const note of sc) {
+					const distance = Math.abs(note - semitone);
+					if (distance < bestDistance) {
+						bestDistance = distance;
+						best = note;
+					}
+				}
+				return octave * 12 + best;
+			}
+
+			function scaleIntervalShift(midi, scaleName, intervalSteps) {
+				const sc = SCALES[scaleName] || SCALES.chromatic;
+				if (!intervalSteps) {
+					return scaleQuantize(midi, scaleName);
+				}
+				const quantized = scaleQuantize(midi, scaleName);
+				const direction = intervalSteps > 0 ? 1 : -1;
+				let remaining = Math.abs(intervalSteps);
+				let current = quantized;
+				while (remaining > 0) {
+					current += direction;
+					if (sc.includes(((current % 12) + 12) % 12)) {
+						remaining -= 1;
+					}
+				}
+				return current;
+			}
+
+			const ACTIONS = [
+				{ id: "move", label: "Forward", icon: "⇧", blurb: "Drive one tile forward." },
+				{ id: "back", label: "Reverse", icon: "⇩", blurb: "Back up one tile." },
+				{ id: "turnL", label: "Turn Left", icon: "↺", blurb: "Rotate 90 degrees left." },
+				{ id: "turnR", label: "Turn Right", icon: "↻", blurb: "Rotate 90 degrees right." },
+				{ id: "dash", label: "Dash", icon: "⇶", blurb: "Surge two tiles if clear." },
+				{ id: "ping", label: "Ping", icon: "✦", blurb: "Send a line pulse ahead." },
+				{ id: "wait", label: "Idle", icon: "·", blurb: "Leave space for hazards to sing." },
+			];
+
+			const MODIFIERS = [
+				{ id: "steady", label: "Steady" },
+				{ id: "bright", label: "Bright" },
+				{ id: "low", label: "Low" },
+				{ id: "wobble", label: "Wobble" },
+				{ id: "glitch", label: "Glitch" },
+			];
+
+			const BOARD = {
+				cols: 5,
+				rows: 5,
+				starts: {
+					A: { x: 0, y: 4, dir: "E" },
+					B: { x: 4, y: 0, dir: "W" },
+				},
+				tiles: {
+					"1,0": { type: "belt", dir: "E", symbol: "⇢", label: "Belt East" },
+					"2,0": { type: "zap", symbol: "⚡", label: "Zap Rail" },
+					"3,0": { type: "rotR", symbol: "↻", label: "Rotate Right" },
+					"0,1": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+					"2,1": { type: "block", symbol: "■", label: "Crate" },
+					"4,1": { type: "belt", dir: "S", symbol: "⇣", label: "Belt South" },
+					"1,2": { type: "rotL", symbol: "↺", label: "Rotate Left" },
+					"3,2": { type: "zap", symbol: "⚡", label: "Zap Rail" },
+					"0,3": { type: "belt", dir: "N", symbol: "⇡", label: "Belt North" },
+					"2,3": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+					"4,3": { type: "rotR", symbol: "↻", label: "Rotate Right" },
+					"3,4": { type: "rotL", symbol: "↺", label: "Rotate Left" },
+				},
+			};
+
+			const BOT_META = {
+				A: {
+					name: "Scout-7",
+					color: "var(--bot-a)",
+					summary: "Higher chirps, more glide, more melodic pathfinding.",
+				},
+				B: {
+					name: "Echo-3",
+					color: "var(--bot-b)",
+					summary: "Chunkier beeps, servo chatter, heavier collision voice.",
+				},
+			};
+
+			let audio = null;
+			let schedulerId = null;
+			let renderQueued = false;
+			let suspendRender = false;
+			let pendingRender = false;
+			let playbackRequestId = 0;
+			let dragState = { source: null, botId: null, fromIndex: null };
+
+			function makeStep(action, index) {
+				return {
+					action: action || ACTIONS[index % ACTIONS.length].id,
+					repeat: 1,
+					probability: index % 7 === 0 ? 0.75 : 1,
+					modifier: MODIFIERS[index % MODIFIERS.length].id,
+				};
+			}
+
+			const DEFAULT_BASSMOD_STEPS = [
+				{ scale: "major", root: 3, semitone: 0 },
+				{ scale: "major", root: 0, semitone: 0 },
+				{ scale: "major", root: 5, semitone: 0 },
+				{ scale: "major", root: 9, semitone: 0 },
+			];
+
+			const DEFAULT_BOT_STEPS = {
+				A: [
+					{ action: "dash", modifier: "steady", probability: 1 },
+					{ action: "move", modifier: "bright", probability: 1 },
+					{ action: "move", modifier: "wobble", probability: 1 },
+					{ action: "dash", modifier: "glitch", probability: 1 },
+					{ action: "back", modifier: "wobble", probability: 1 },
+					{ action: "turnL", modifier: "low", probability: 1 },
+					{ action: "move", modifier: "low", probability: 1 },
+					{ action: "dash", modifier: "bright", probability: 1 },
+					{ action: "move", modifier: "wobble", probability: 1 },
+					{ action: "dash", modifier: "glitch", probability: 1 },
+					{ action: "turnR", modifier: "glitch", probability: 1 },
+					{ action: "turnR", modifier: "bright", probability: 1 },
+					{ action: "dash", modifier: "bright", probability: 1 },
+					{ action: "move", modifier: "wobble", probability: 1 },
+					{ action: "ping", modifier: "wobble", probability: 0.75 },
+					{ action: "wait", modifier: "wobble", probability: 1 },
+				],
+				B: [
+					{ action: "move", modifier: "low", probability: 1 },
+					{ action: "move", modifier: "low", probability: 1 },
+					{ action: "move", modifier: "steady", probability: 1 },
+					{ action: "move", modifier: "wobble", probability: 1 },
+					{ action: "wait", modifier: "bright", probability: 1 },
+					{ action: "turnR", modifier: "wobble", probability: 1 },
+					{ action: "dash", modifier: "steady", probability: 1 },
+					{ action: "dash", modifier: "steady", probability: 1 },
+					{ action: "move", modifier: "bright", probability: 1 },
+					{ action: "ping", modifier: "glitch", probability: 1 },
+					{ action: "dash", modifier: "bright", probability: 1 },
+					{ action: "back", modifier: "bright", probability: 1 },
+					{ action: "wait", modifier: "wobble", probability: 1 },
+					{ action: "turnR", modifier: "wobble", probability: 1 },
+					{ action: "turnR", modifier: "glitch", probability: 1 },
+					{ action: "ping", modifier: "bright", probability: 1 },
+				],
+			};
+
+			function makeBassModStep(index) {
+				if (index < DEFAULT_BASSMOD_STEPS.length) {
+					return { ...DEFAULT_BASSMOD_STEPS[index] };
+				}
+				return {
+					scale: "major",
+					root: 0,
+					semitone: 0,
+				};
+			}
+
+			function buildBassModSteps() {
+				return Array.from({ length: 4 }, (_, index) => makeBassModStep(index));
+			}
+
+			const DEFAULT_SEQ2_STEPS = [
+				{ boardId: "--", drumPresetId: "--", regSwap: false },
+				{ boardId: "--", drumPresetId: "--", regSwap: false },
+				{ boardId: "--", drumPresetId: "--", regSwap: false },
+				{ boardId: "--", drumPresetId: "--", regSwap: false },
+			];
+
+			function buildSeq2Steps() {
+				return DEFAULT_SEQ2_STEPS.map(s => ({ ...s }));
+			}
+
+			function buildSteps(seedActions) {
+				const actions = seedActions || [];
+				if (actions.length === 0) {
+					return Array.from({ length: MAX_STEPS }, () => ({ action: "wait", probability: 1, modifier: "steady" }));
+				}
+				return Array.from({ length: MAX_STEPS }, (_, index) => makeStep(actions[index % actions.length], index));
+			}
+
+			function buildBotDefaultSteps(botId) {
+				const source = DEFAULT_BOT_STEPS[botId] || [];
+				return Array.from({ length: MAX_STEPS }, (_, index) => {
+					const step = source[index];
+					if (step) {
+						return {
+							action: step.action,
+							repeat: 1,
+							probability: step.probability,
+							modifier: step.modifier,
+						};
+					}
+					return { action: "wait", repeat: 1, probability: 1, modifier: "steady" };
+				});
+			}
+
+			function createBoardState() {
+				return {
+					A: { ...BOARD.starts.A, status: "Ready to glide", heat: 0, deaths: 0, hiddenUntil: 0, dying: false },
+					B: { ...BOARD.starts.B, status: "Ready to punch", heat: 0, deaths: 0, hiddenUntil: 0, dying: false },
+					events: [{ kind: "reset", label: "Board aligned for a fresh loop." }],
+					activeKeys: [],
+					explosions: [],
+					hearts: [],
+					clashes: [],
+					clashCooldown: 0,
+					loveSteps: 0,
+					trailA: [boardKey(BOARD.starts.A.x, BOARD.starts.A.y)],
+					trailB: [boardKey(BOARD.starts.B.x, BOARD.starts.B.y)],
+				};
+			}
+
+			function buildDefaultState() {
+				return {
+					bpm: 80,
+					loopLength: 16,
+					scale: "major",
+					transposeWithRoot: true,
+					playbackRate: 1,
+					registersSwapped: false,
+					mixer: { ...DEFAULT_MIXER },
+					bassMod: { length: 4, steps: buildBassModSteps() },
+					seq2: { active: false, pendingActive: false, index: 0, steps: buildSeq2Steps(), rndBotA: false, rndBotB: false },
+					voiceModTrigger: "loop",
+					voiceModLoopFreq: 1,
+					voiceModIndex: 0,
+					voiceModResetCount: 0,
+					voiceModStepCount: 0,
+					showSettings: false,
+					showVoiceMod: false,
+					showDrums: false,
+					showHelp: false,
+					activeBoardId: "default",
+					boardRandomDensity: 0.45,
+					drums: { on: true, presetId: "four", pattern: DRUM_PRESETS[0].pattern(16) },
+					ticksPerMove: 1,
+					moveTick: 0,
+					drumTick: 0,
+					startingPlayback: false,
+					bots: {
+						A: { ...BOT_META.A, steps: buildBotDefaultSteps("A"), programLength: 16 },
+						B: { ...BOT_META.B, steps: buildBotDefaultSteps("B"), programLength: 16 },
+					},
+					boardState: createBoardState(),
+				};
+			}
+
+			function loadState() {
+				const base = buildDefaultState();
+				try {
+					const raw = localStorage.getItem(STORAGE_KEY);
+					if (!raw) {
+						return base;
+					}
+					const parsed = JSON.parse(raw);
+					return {
+						...base,
+						bpm: clampNumber(parsed.bpm, 60, 168, base.bpm),
+						loopLength: LOOP_OPTIONS.includes(parsed.loopLength) ? parsed.loopLength : base.loopLength,
+						scale: SCALE_OPTIONS.includes(parsed.scale) ? parsed.scale : base.scale,
+						transposeWithRoot: typeof parsed.transposeWithRoot === "boolean" ? parsed.transposeWithRoot : base.transposeWithRoot,
+						playbackRate: parsed.playbackRate === 0.25 ? 0.25 : 1,
+						registersSwapped: typeof parsed.registersSwapped === "boolean" ? parsed.registersSwapped : base.registersSwapped,
+						mixer: {
+							master: clampNumber(parsed?.mixer?.master, 0, 1, base.mixer.master),
+							melody: clampNumber(parsed?.mixer?.melody, 0, 1, base.mixer.melody),
+							botB: clampNumber(parsed?.mixer?.botB, 0, 1, base.mixer.botB),
+							percussion: clampNumber(parsed?.mixer?.percussion, 0, 1, base.mixer.percussion),
+							fx: clampNumber(parsed?.mixer?.fx, 0, 1, base.mixer.fx),
+							drums: clampNumber(parsed?.mixer?.drums, 0, 1, base.mixer.drums),
+						},
+						bassMod: restoreBassMod(parsed?.bassMod, base.bassMod),
+						seq2: restoreSeq2(parsed?.seq2, base.seq2),
+						voiceModTrigger: VOICE_MOD_TRIGGERS.some(t => t.id === parsed?.voiceModTrigger) ? parsed.voiceModTrigger : base.voiceModTrigger,
+						voiceModLoopFreq: VOICE_MOD_LOOP_FREQ_OPTIONS.includes(parsed?.voiceModLoopFreq) ? parsed.voiceModLoopFreq : base.voiceModLoopFreq,
+						showSettings: false,
+						showVoiceMod: typeof parsed?.showVoiceMod === "boolean" ? parsed.showVoiceMod : base.showVoiceMod,
+						showDrums: typeof parsed?.showDrums === "boolean" ? parsed.showDrums : base.showDrums,
+						boardRandomDensity: clampNumber(parsed?.boardRandomDensity, 0.25, 0.7, base.boardRandomDensity),
+						ticksPerMove: [1, 2, 4].includes(parsed?.ticksPerMove) ? parsed.ticksPerMove : base.ticksPerMove,
+						drums: restoreDrums(parsed?.drums, base.drums, parsed?.loopLength || base.loopLength),
+						bots: {
+							A: {
+								...base.bots.A,
+								steps: restoreSteps(parsed?.bots?.A?.steps, base.bots.A.steps),
+								programLength: LOOP_OPTIONS.includes(parsed?.bots?.A?.programLength) ? Math.min(parsed.bots.A.programLength, parsed.loopLength || base.loopLength) : base.bots.A.programLength,
+							},
+							B: {
+								...base.bots.B,
+								steps: restoreSteps(parsed?.bots?.B?.steps, base.bots.B.steps),
+								programLength: LOOP_OPTIONS.includes(parsed?.bots?.B?.programLength) ? Math.min(parsed.bots.B.programLength, parsed.loopLength || base.loopLength) : base.bots.B.programLength,
+							},
+						},
+						boardState: createBoardState(),
+						playing: false,
+						startingPlayback: false,
+						transportReady: false,
+						currentStep: -1,
+						voiceModIndex: 0,
+						voiceModResetCount: 0,
+						cycle: 0,
+						message: "Loaded saved robot plan.",
+					};
+				} catch (error) {
+					return {
+						...base,
+						message: "Save data looked scrambled, so the robots started clean.",
+					};
+				}
+			}
+
+			function restoreSteps(candidate, fallback) {
+				if (!Array.isArray(candidate)) {
+					return fallback;
+				}
+				return Array.from({ length: MAX_STEPS }, (_, index) => {
+					const source = candidate[index] || fallback[index] || makeStep("move", index);
+					const fb = fallback[index] || { action: "wait", probability: 1, modifier: "steady" };
+					return {
+						action: ACTIONS.some((item) => item.id === source.action) ? source.action : fb.action,
+						repeat: 1,
+						probability: PROB_OPTIONS.includes(source.probability) ? source.probability : fb.probability,
+						modifier: MODIFIERS.some((item) => item.id === source.modifier) ? source.modifier : fb.modifier,
+					};
+				});
+			}
+
+			function restoreBassMod(candidate, fallback) {
+				const safeFallback = fallback || { length: 4, steps: buildBassModSteps() };
+				const sourceSteps = Array.isArray(candidate?.steps) ? candidate.steps : [];
+				const steps = Array.from({ length: 4 }, (_, index) => {
+					const source = sourceSteps[index] || safeFallback.steps[index] || makeBassModStep(index);
+					const fb = safeFallback.steps[index] || makeBassModStep(index);
+					return {
+						scale: SCALE_OPTIONS.includes(source.scale) ? source.scale : fb.scale,
+						root: clampNumber(source.root, 0, 11, fb.root),
+						semitone: clampNumber(source.semitone, -12, 12, fb.semitone),
+					};
+				});
+				return { length: 4, steps };
+			}
+
+			function restoreSeq2(candidate, fallback) {
+				const safeFallback = fallback || { active: false, index: 0, steps: buildSeq2Steps() };
+				const sourceSteps = Array.isArray(candidate?.steps) ? candidate.steps : [];
+				const boardIds = ["--", ...BOARD_PRESETS.map(p => p.id)];
+				const drumIds = ["--", ...DRUM_PRESETS.map(p => p.id)];
+				const steps = Array.from({ length: 4 }, (_, index) => {
+					const source = sourceSteps[index] || safeFallback.steps[index];
+					const fb = safeFallback.steps[index];
+					return {
+						boardId: boardIds.includes(source.boardId) ? source.boardId : fb.boardId,
+						drumPresetId: drumIds.includes(source.drumPresetId) ? source.drumPresetId : fb.drumPresetId,
+						regSwap: typeof source.regSwap === "boolean" ? source.regSwap : fb.regSwap,
+					};
+				});
+				return {
+					active: typeof candidate?.active === "boolean" ? candidate.active : safeFallback.active,
+					pendingActive: typeof candidate?.pendingActive === "boolean" ? candidate.pendingActive : false,
+					index: clampNumber(candidate?.index, 0, 3, 0),
+					steps,
+					rndBotA: typeof candidate?.rndBotA === "boolean" ? candidate.rndBotA : false,
+					rndBotB: typeof candidate?.rndBotB === "boolean" ? candidate.rndBotB : false,
+				};
+			}
+
+			function restoreDrums(candidate, fallback, loopLen) {
+				if (!candidate || typeof candidate !== "object") return { ...fallback, pattern: buildEmptyDrumPattern() };
+				const on = typeof candidate.on === "boolean" ? candidate.on : !!fallback.on;
+				const presetId = DRUM_PRESETS.some(p => p.id === candidate.presetId) ? candidate.presetId : fallback.presetId;
+				// For known presets, regenerate pattern at current step count
+				// so old 8-step saved patterns get properly filled to 16 (or 12)
+				const knownPreset = DRUM_PRESETS.find(p => p.id === presetId);
+				if (knownPreset && presetId !== "custom") {
+					return { on, presetId, pattern: knownPreset.pattern(getDrumSteps(loopLen)) };
+				}
+				const pattern = {};
+				DRUM_VOICES.forEach(v => {
+					if (Array.isArray(candidate.pattern?.[v]) && candidate.pattern[v].length === 64) {
+						pattern[v] = candidate.pattern[v].map(x => x ? 1 : 0);
+					} else {
+						pattern[v] = fallback.pattern[v] ? [...fallback.pattern[v]] : Array(64).fill(0);
+					}
+				});
+				return { on, presetId, pattern };
+			}
+
+			function clampNumber(value, min, max, fallback) {
+				if (typeof value !== "number" || Number.isNaN(value)) {
+					return fallback;
+				}
+				return Math.max(min, Math.min(max, value));
+			}
+
+			const state = loadState();
+			// Show tutorial on first visit
+			if (!localStorage.getItem("roboseq-seen")) {
+				state.showTutorial = true;
+				localStorage.setItem("roboseq-seen", "true");
+			}
+
+			const undoStack = [];
+			const UNDO_MAX = 20;
+
+			function pushUndo() {
+				undoStack.push(JSON.stringify({
+					bots: state.bots,
+					bassMod: state.bassMod,
+					bpm: state.bpm,
+					loopLength: state.loopLength,
+					scale: state.scale,
+					voiceModTrigger: state.voiceModTrigger,
+					voiceModLoopFreq: state.voiceModLoopFreq,
+					drums: state.drums,
+				}));
+				if (undoStack.length > UNDO_MAX) undoStack.shift();
+			}
+
+			function popUndo() {
+				if (undoStack.length === 0) {
+					state.message = "Nothing to undo.";
+					queueRender();
+					return;
+				}
+				const snapshot = JSON.parse(undoStack.pop());
+				state.bots = snapshot.bots;
+				state.bassMod = snapshot.bassMod;
+				state.bpm = snapshot.bpm;
+				state.loopLength = snapshot.loopLength;
+				state.scale = snapshot.scale;
+				state.voiceModTrigger = snapshot.voiceModTrigger;
+				state.voiceModLoopFreq = snapshot.voiceModLoopFreq;
+				if (snapshot.drums) state.drums = snapshot.drums;
+				saveState();
+				state.message = "Undo applied. (" + undoStack.length + " left)";
+				queueRender();
+			}
+
+			let _saveTimer = 0;
+			function saveState() {
+				if (_saveTimer) return;
+				_saveTimer = setTimeout(() => {
+					_saveTimer = 0;
+					try {
+						const payload = {
+							bpm: state.bpm,
+							loopLength: state.loopLength,
+							scale: state.scale,
+							transposeWithRoot: state.transposeWithRoot,
+							playbackRate: state.playbackRate,
+							mixer: state.mixer,
+							bassMod: state.bassMod,
+							seq2: state.seq2,
+							voiceModTrigger: state.voiceModTrigger,
+							voiceModLoopFreq: state.voiceModLoopFreq,
+							showVoiceMod: state.showVoiceMod,
+							showDrums: state.showDrums,
+							boardRandomDensity: state.boardRandomDensity,
+							bots: state.bots,
+							drums: state.drums,
+							ticksPerMove: state.ticksPerMove,
+						};
+						localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+					} catch (error) {
+						state.message = "Local save is blocked in this browser tab.";
+					}
+				}, 300);
+			}
+
+			function boardKey(x, y) {
+				return x + "," + y;
+			}
+
+			function getPlaybackBpm() {
+				return state.bpm * (state.playbackRate || 1) * (state.ticksPerMove || 1);
+			}
+
+			function tileAt(x, y) {
+				return BOARD.tiles[boardKey(x, y)] || null;
+			}
+
+			function turnDirection(dir, turn) {
+				const index = DIRS.indexOf(dir);
+				if (turn === "L") {
+					return DIRS[(index + 3) % 4];
+				}
+				return DIRS[(index + 1) % 4];
+			}
+
+			function relativeDirection(dir, backwards) {
+				if (!backwards) {
+					return dir;
+				}
+				return DIRS[(DIRS.indexOf(dir) + 2) % 4];
+			}
+
+			function isInside(x, y) {
+				return x >= 0 && y >= 0 && x < BOARD.cols && y < BOARD.rows;
+			}
+
+			function isBlocked(x, y) {
+				const tile = tileAt(x, y);
+				return tile && tile.type === "block";
+			}
+
+			function seededChance(botId, stepIndex, cycle, repeatIndex) {
+				const seed = (stepIndex + 1) * 12.9898 + (cycle + 1) * 78.233 + botId.charCodeAt(0) * 31.7 + (repeatIndex + 1) * 19.19;
+				return Math.abs(Math.sin(seed) * 43758.5453) % 1;
+			}
+
+			function pushEvent(events, kind, label, key) {
+				events.push({ kind, label });
+				if (key) {
+					state.boardState.activeKeys.push(key);
+				}
+			}
+
+			function otherBotId(botId) {
+				return botId === "A" ? "B" : "A";
+			}
+
+			function attemptMove(botId, heading, events, causeLabel) {
+				const bot = state.boardState[botId];
+				const other = state.boardState[otherBotId(botId)];
+				const vec = DIR_VECTORS[heading];
+				const nextX = bot.x + vec.x;
+				const nextY = bot.y + vec.y;
+				if (!isInside(nextX, nextY)) {
+					bot.status = "Clanged off the wall";
+					pushEvent(events, "collision", BOT_META[botId].name + " hit the outer wall.", boardKey(bot.x, bot.y));
+					return false;
+				}
+				if (isBlocked(nextX, nextY)) {
+					bot.status = "Blocked by a crate";
+					pushEvent(events, "collision", BOT_META[botId].name + " bumped a crate.", boardKey(nextX, nextY));
+					return false;
+				}
+				// Bots CAN share a tile — no blocking on other bot
+				// (collision damage handled separately in advanceSequence)
+				bot.x = nextX;
+				bot.y = nextY;
+				bot.status = causeLabel || "Moved cleanly";
+				const trailKey = "trail" + botId;
+				if (state.boardState[trailKey]) {
+					state.boardState[trailKey].push(boardKey(nextX, nextY));
+				}
+				pushEvent(events, "move", BOT_META[botId].name + " moved to " + nextX + "," + nextY + ".", boardKey(nextX, nextY));
+				return true;
+			}
+
+			function performPing(botId, events) {
+				const bot = state.boardState[botId];
+				const otherId = otherBotId(botId);
+				const other = state.boardState[otherId];
+				const vec = DIR_VECTORS[bot.dir];
+				let x = bot.x + vec.x;
+				let y = bot.y + vec.y;
+				while (isInside(x, y) && !isBlocked(x, y)) {
+					if (other.x === x && other.y === y) {
+						other.heat += 1;
+						other.status = "Tagged by a ping";
+						pushEvent(events, "zap", BOT_META[botId].name + " pinged " + BOT_META[otherId].name + ".", boardKey(x, y));
+						return;
+					}
+					x += vec.x;
+					y += vec.y;
+				}
+				state.boardState[botId].status = "Ping drifted into empty space";
+				pushEvent(events, "ping", BOT_META[botId].name + " sent a searching ping.", boardKey(bot.x, bot.y));
+			}
+
+			function checkDeath(botId, events) {
+				const bot = state.boardState[botId];
+				if (bot.heat < 6) return false;
+				// Mark as dying — explosion + respawn happens on the NEXT move tick
+				bot.dying = true;
+				bot.status = "Overheating — critical!";
+				pushEvent(events, "zap", BOT_META[botId].name + " is overheating!");
+				return true;
+			}
+
+			function processDeath(botId, events) {
+				// Called on the move tick AFTER checkDeath marked dying=true.
+				// This makes the explosion land on-beat.
+				const bot = state.boardState[botId];
+				if (!bot.dying) return false;
+				const deathTime = Date.now();
+				state.boardState.explosions = state.boardState.explosions || [];
+				state.boardState.explosions.push({
+					x: bot.x, y: bot.y,
+					bot: botId,
+					tick: deathTime
+				});
+				bot.deaths += 1;
+				bot.heat = 0;
+				bot.dying = false;
+				// Respawn at the corner farthest from the death position
+				const deathX = bot.x;
+				const deathY = bot.y;
+				const corners = [
+					{ x: 0, y: 0 },
+					{ x: BOARD.cols - 1, y: 0 },
+					{ x: 0, y: BOARD.rows - 1 },
+					{ x: BOARD.cols - 1, y: BOARD.rows - 1 },
+				];
+				let bestCorner = BOARD.starts[botId];
+				let bestDist = -1;
+				corners.forEach(c => {
+					const d = Math.abs(c.x - deathX) + Math.abs(c.y - deathY);
+					if (d > bestDist) { bestDist = d; bestCorner = c; }
+				});
+				bot.x = bestCorner.x;
+				bot.y = bestCorner.y;
+				bot.dir = BOARD.starts[botId].dir;
+				bot.hiddenUntil = deathTime + 600;
+				bot.status = "Overheated — rebooting";
+				pushEvent(events, "death", BOT_META[botId].name + " burned out and respawned at start. (DEATHS: " + bot.deaths + ")");
+				return true;
+			}
+
+			function applyTileEffects(botId, events) {
+				let safety = 0;
+				while (safety < 3) {
+					const bot = state.boardState[botId];
+					const tile = tileAt(bot.x, bot.y);
+					if (!tile || tile.type === "block") {
+						return;
+					}
+					if (tile.type === "belt") {
+						const moved = attemptMove(botId, tile.dir, events, "Swept by a belt");
+						pushEvent(events, "belt", BOT_META[botId].name + " rode a conveyor.", boardKey(bot.x, bot.y));
+						if (!moved) {
+							return;
+						}
+						safety += 1;
+						continue;
+					}
+					if (tile.type === "rotL") {
+						bot.dir = turnDirection(bot.dir, "L");
+						bot.status = "Spun left by the board";
+						pushEvent(events, "rotator", BOT_META[botId].name + " hit a left rotator.", boardKey(bot.x, bot.y));
+					}
+					if (tile.type === "rotR") {
+						bot.dir = turnDirection(bot.dir, "R");
+						bot.status = "Spun right by the board";
+						pushEvent(events, "rotator", BOT_META[botId].name + " hit a right rotator.", boardKey(bot.x, bot.y));
+					}
+					if (tile.type === "zap") {
+						bot.heat = Math.min(bot.heat + 1, 6);
+						bot.status = "Took a spark hit";
+						pushEvent(events, "zap", BOT_META[botId].name + " crossed a zap rail.", boardKey(bot.x, bot.y));
+					}
+					if (tile.type === "pulse") {
+						bot.heat = Math.max(0, bot.heat - 1);
+						bot.status = "Pulse pad cooled the circuits";
+						pushEvent(events, "pulse", BOT_META[botId].name + " pulsed on a recharge pad.", boardKey(bot.x, bot.y));
+					}
+					return;
+				}
+			}
+
+			function executeStepAction(botId, step, events) {
+				const bot = state.boardState[botId];
+				if (step.action === "move") {
+					attemptMove(botId, bot.dir, events, "Advanced one tile");
+					return;
+				}
+				if (step.action === "back") {
+					attemptMove(botId, relativeDirection(bot.dir, true), events, "Reversed one tile");
+					return;
+				}
+				if (step.action === "turnL") {
+					bot.dir = turnDirection(bot.dir, "L");
+					bot.status = "Turned left";
+					pushEvent(events, "turn", BOT_META[botId].name + " turned left.", boardKey(bot.x, bot.y));
+					return;
+				}
+				if (step.action === "turnR") {
+					bot.dir = turnDirection(bot.dir, "R");
+					bot.status = "Turned right";
+					pushEvent(events, "turn", BOT_META[botId].name + " turned right.", boardKey(bot.x, bot.y));
+					return;
+				}
+				if (step.action === "dash") {
+					attemptMove(botId, bot.dir, events, "Dashed ahead");
+					attemptMove(botId, bot.dir, events, "Dashed again");
+					// Dash collision: if sharing tile with other bot, damage them
+					const other = state.boardState[otherBotId(botId)];
+					if (bot.x === other.x && bot.y === other.y) {
+						other.heat += 2;
+						other.status = "Slammed by a dash!";
+						state.boardState.clashCooldown = 8;
+						state.boardState.clashes = state.boardState.clashes || [];
+						state.boardState.clashes.push({ x: bot.x, y: bot.y, attacker: botId, tick: Date.now() });
+						pushEvent(events, "zap", BOT_META[botId].name + " dashed into " + BOT_META[otherBotId(botId)].name + "!", boardKey(bot.x, bot.y));
+					}
+					return;
+				}
+				if (step.action === "ping") {
+					performPing(botId, events);
+					return;
+				}
+				bot.status = "Held position";
+				pushEvent(events, "wait", BOT_META[botId].name + " held position.", boardKey(bot.x, bot.y));
+			}
+
+			function getStepDurationSeconds() {
+				return 60 / getPlaybackBpm() / 4;
+			}
+
+			function getActiveVoiceModStep() {
+				const modIndex = state.voiceModIndex % state.bassMod.length;
+				return state.bassMod.steps[modIndex] || state.bassMod.steps[0];
+			}
+
+			/* ─── BOARD-DRIVEN MUSIC ENGINE ─────────────────────────── */
+			/* Pitch comes from where a bot IS, not what action it took.
+			   X = scale degree, Y = octave offset.
+			   Tiles shape the sound character. Heat affects intensity.
+			   ALL notes are clamped + scale-quantized — nothing can escape. */
+
+			// Hard MIDI floor/ceiling per voice — keeps everything listenable
+			let MIDI_RANGE_A = { min: 48, max: 84 };  // C3–C6
+			let MIDI_RANGE_B = { min: 36, max: 72 };  // C2–C5  (harmony register)
+
+			// Restore swapped state from saved session
+			if (state.registersSwapped) {
+				const tmp = MIDI_RANGE_A;
+				MIDI_RANGE_A = MIDI_RANGE_B;
+				MIDI_RANGE_B = tmp;
+			}
+
+			function swapRegisters() {
+				const tmp = MIDI_RANGE_A;
+				MIDI_RANGE_A = MIDI_RANGE_B;
+				MIDI_RANGE_B = tmp;
+				state.registersSwapped = !state.registersSwapped;
+				state.message = state.registersSwapped ? "Registers swapped — A is low, B is high" : "Registers restored — A is high, B is low";
+				if (!state.playing) queueRender();
+			}
+
+			// Octave-fold into range: if above max, drop by octaves; if below min, raise.
+			// Keeps the pitch class but stays in the target register — no ceiling pile-up.
+			function foldToRange(midi, range) {
+				while (midi > range.max && midi - 12 >= range.min) midi -= 12;
+				while (midi < range.min && midi + 12 <= range.max) midi += 12;
+				return Math.max(range.min, Math.min(range.max, midi));
+			}
+
+			// Fold MIDI into range, then snap to current scale so EVERY note is in-key
+			function safeNote(midi, scaleName, range) {
+				return scaleQuantize(foldToRange(midi, range), scaleName);
+			}
+
+			// Shift by scale degrees (always in-key) then fold into range
+			function safeScaleShift(midi, scaleName, degrees, range) {
+				const shifted = scaleIntervalShift(midi, scaleName, degrees);
+				return foldToRange(shifted, range);
+			}
+
+			/* ═══════════════════════════════════════════════════════════
+			   ARP ENGINE — chord & octave arpeggiator system
+			   Board state maps to arp parameters so movement through
+			   the grid IS composition. Every note is scale-quantized;
+			   constraints produce beauty.
+			   ═══════════════════════════════════════════════════════════ */
+
+			// Chord shapes expressed as scale-degree offsets from root.
+			// X position rotates through these so moving across the board
+			// creates chord progressions.
+			const CHORD_SHAPES = {
+				triad:   [0, 2, 4],           // 1-3-5 — simple & strong
+				seventh: [0, 2, 4, 6],        // 1-3-5-7 — jazzy richness
+				sus4:    [0, 3, 4],            // 1-4-5 — open, unresolved
+				add9:    [0, 2, 4, 8],         // 1-3-5-9 — sparkling extension
+				power:   [0, 4, 7],            // 1-5-8 — punk/NES power chord
+				sixth:   [0, 2, 4, 5],         // 1-3-5-6 — sweet resolution
+			};
+			const CHORD_SHAPE_KEYS = Object.keys(CHORD_SHAPES);
+
+			// Arp patterns: reorder an array of MIDI notes into musical sequences.
+			// Each creates a different rhythmic/melodic contour.
+			const ARP_PATTERNS = {
+				up:       (notes) => [...notes],
+				down:     (notes) => [...notes].reverse(),
+				upDown:   (notes) => {
+					if (notes.length <= 2) return [...notes];
+					return [...notes, ...notes.slice(1, -1).reverse()];
+				},
+				downUp:   (notes) => {
+					if (notes.length <= 2) return [...notes].reverse();
+					const d = [...notes].reverse();
+					return [...d, ...d.slice(1, -1).reverse()];
+				},
+				pingPong: (notes) => {
+					// Alternates bottom-top-bottom-top: wide intervallic leaps
+					const result = [];
+					let lo = 0, hi = notes.length - 1;
+					while (lo <= hi) {
+						result.push(notes[lo++]);
+						if (lo <= hi) result.push(notes[hi--]);
+					}
+					return result;
+				},
+				skip:     (notes) => {
+					// Every other note then fill gaps: creates syncopation
+					const evens = notes.filter((_, i) => i % 2 === 0);
+					const odds  = notes.filter((_, i) => i % 2 === 1);
+					return [...evens, ...odds];
+				},
+			};
+			const ARP_PATTERN_KEYS = Object.keys(ARP_PATTERNS);
+
+			// Build a chord: root + shape → array of in-scale MIDI notes across octaves.
+			// Octave stacking is what makes arps sound huge.
+			function buildArpChord(rootMidi, scaleName, shape, range, octaves) {
+				const notes = [];
+				for (let oct = 0; oct < octaves; oct++) {
+					const base = rootMidi + oct * 12;
+					shape.forEach(deg => {
+						const m = safeScaleShift(base, scaleName, deg, range);
+						if (!notes.includes(m)) notes.push(m);
+					});
+				}
+				return notes.sort((a, b) => a - b);
+			}
+
+			// Build an octave run: same pitch class stacked across octaves.
+			// Classic NES "thick note" technique.
+			function buildOctaveRun(rootMidi, range, octaves) {
+				const notes = [];
+				const halfSpan = Math.floor(octaves / 2);
+				for (let oct = -halfSpan; oct <= halfSpan; oct++) {
+					const m = foldToRange(rootMidi + oct * 12, range);
+					if (!notes.includes(m)) notes.push(m);
+				}
+				return notes.sort((a, b) => a - b);
+			}
+
+			// Schedule an arp: fires timed note events on a mono synth.
+			// The mono nature means each note cuts the previous — this IS
+			// the chiptune arp sound. Loops through the pattern when
+			// maxNotes > pattern length = classic cycling arpeggiator.
+			function scheduleArp(voice, midiNotes, patternFn, time, rate, gate, vel, maxNotes) {
+				if (!voice || !midiNotes.length) return;
+				const ordered = patternFn(midiNotes);
+				if (!ordered.length) return;
+				const count = maxNotes || ordered.length;
+				for (let i = 0; i < count; i++) {
+					const idx = i % ordered.length;
+					const note = Tone.Frequency(ordered[idx], "midi").toNote();
+					const v = Math.max(0.12, vel - i * 0.012);
+					// Each note sustains until the next one (or until gate expires for the last)
+					const hold = (i < count - 1) ? rate * 0.98 : gate;
+					voice.triggerAttackRelease(note, hold, time + i * rate, v);
+				}
+			}
+
+			// ─── BOARD STATE → ARP PARAMETERS ────────────────────────
+			// This is the "accidental composition" mapping.
+			// Position, tile, heat, direction, distance, action all feed in.
+			// The constraints (scale quantization, valid chord shapes)
+			// guarantee musicality regardless of where bots wander.
+
+			function getChordShape(botX, cycle) {
+				// X position + cycle slowly rotates chord: movement = progression
+				const idx = (botX + Math.floor(cycle / 3)) % CHORD_SHAPE_KEYS.length;
+				return CHORD_SHAPES[CHORD_SHAPE_KEYS[idx]];
+			}
+
+			function getArpPattern(dir) {
+				// Direction maps to contour: N=up, S=down, E=upDown, W=pingPong
+				const map = { N: 'up', E: 'upDown', S: 'down', W: 'pingPong' };
+				return ARP_PATTERNS[map[dir] || 'up'];
+			}
+
+			function getArpOctaves(heat) {
+				// Tight range keeps arps melodic — only widen at high heat
+				if (heat >= 4) return 2;
+				return 1;
+			}
+
+			function getArpRate(tileType, dur) {
+				// Half-step spacing — notes land like a broken chord across the beat
+				return dur * 0.5;
+			}
+
+			function getArpGate(tileType, modifier, dur) {
+				// Gate = how long the LAST arp note sustains (held until next step).
+				const modMul = {
+					steady: 1.0, bright: 0.8, low: 1.3, wobble: 1.1, glitch: 0.6,
+				};
+				const base = dur * 0.9; // nearly full step — note rings until next beat
+				return base * (modMul[modifier] || 1.0);
+			}
+
+			function getArpMaxNotes(tileType, heat, action, tpm) {
+				const cap = 3 * (tpm || 1);
+				let base = 2;
+				if (heat >= 3) base = 3;
+				return Math.min(base, cap);
+			}
+
+			// Complementary shape: when bots are far apart, they play
+			// contrasting chords for harmonic richness.
+			function getComplementShape(shape) {
+				if (shape === CHORD_SHAPES.triad)   return CHORD_SHAPES.seventh;
+				if (shape === CHORD_SHAPES.seventh)  return CHORD_SHAPES.add9;
+				if (shape === CHORD_SHAPES.sus4)     return CHORD_SHAPES.triad;
+				if (shape === CHORD_SHAPES.power)    return CHORD_SHAPES.sixth;
+				return CHORD_SHAPES.seventh;
+			}
+
+			function noteFromPosition(botId) {
+				const bot = state.boardState[botId];
+				const modStep = getActiveVoiceModStep();
+				const scale = SCALES[modStep.scale] || SCALES.major;
+				const root = modStep.root;
+				const rootShift = state.transposeWithRoot ? root : 0;
+
+				// X picks a scale degree (wraps if scale has fewer than 5 notes)
+				const degree = bot.x % scale.length;
+				const semitone = scale[degree];
+
+				// Y sets octave: top row = highest, bottom row = lowest
+				const octaveShift = 1 - Math.floor(bot.y / 2);
+
+				const range = botId === "A" ? MIDI_RANGE_A : MIDI_RANGE_B;
+				const scaleName = modStep.scale || "major";
+
+				if (botId === "A") {
+					const raw = (5 + octaveShift) * 12 + rootShift + semitone;
+					return safeNote(raw, scaleName, range);
+				} else {
+					// Echo-3: HARMONY VOICE — derives note relative to Scout's note
+					// X position picks a harmony interval (in scale degrees)
+					const harmonyTable = [0, 2, 4, 4, 7];  // unison, 3rd, 5th, 5th, octave
+					const harmInterval = harmonyTable[bot.x % harmonyTable.length];
+					// Y position sets octave register relative to Scout
+					const octaveOffset = 1 - Math.floor(bot.y / 2);  // +1, 0, -1
+					// Get Scout's current note as reference
+					const scoutBot = state.boardState.A;
+					const scoutDegree = scoutBot.x % scale.length;
+					const scoutSemitone = scale[scoutDegree];
+					const scoutOctaveShift = 1 - Math.floor(scoutBot.y / 2);
+					const scoutRaw = (5 + scoutOctaveShift) * 12 + rootShift + scoutSemitone;
+					const scoutMidi = safeNote(scoutRaw, scaleName, MIDI_RANGE_A);
+					// Build harmony: shift Scout's note by the harmony interval, then offset octave
+					const harmMidi = scaleIntervalShift(scoutMidi, scaleName, harmInterval) + (octaveOffset * 12);
+					return foldToRange(scaleQuantize(harmMidi, scaleName), range);
+				}
+			}
+
+			function playBoardSound(botId, step, time) {
+				if (!audio) return;
+				try {
+					const bot = state.boardState[botId];
+					const other = state.boardState[botId === "A" ? "B" : "A"];
+					// Use the tile the bot stepped onto (before belt push), falling
+					// back to current position for non-move contexts.
+					const tile = bot.steppedTile || tileAt(bot.x, bot.y);
+					const tileType = tile ? tile.type : null;
+					const midi = noteFromPosition(botId);
+					const dur = getStepDurationSeconds() * (state.ticksPerMove || 1);
+					const range = botId === "A" ? MIDI_RANGE_A : MIDI_RANGE_B;
+					const modStep = getActiveVoiceModStep();
+					const scaleName = modStep.scale || "major";
+
+					// --- DIRECTION shapes articulation ---
+					const dirArt = {
+						N: { vel: 1.0, dur: 0.6 },
+						E: { vel: 0.85, dur: 1.0 },
+						S: { vel: 0.75, dur: 1.4 },
+						W: { vel: 0.65, dur: 0.8 },
+					};
+					const da = dirArt[bot.dir] || dirArt.E;
+
+					// --- MODIFIER fine-tunes ---
+					const modMul = {
+						steady: { vel: 1.0, dur: 1.0 },
+						bright: { vel: 1.1, dur: 0.8 },
+						low:    { vel: 0.85, dur: 1.15 },
+						wobble: { vel: 0.95, dur: 0.95 },
+						glitch: { vel: 1.05, dur: 0.4 },
+					};
+					const mm = modMul[step.modifier] || modMul.steady;
+
+					// --- HEAT: scale-degree shift + loudness ---
+						// Cap pitch shift at 2 degrees (a 3rd) so notes stay
+						// close to their harmonic center. Higher heat drives
+						// velocity/brightness instead of wild pitch jumps.
+						const heatDegrees = Math.min(bot.heat, 2);
+						const heatVel = 1 + Math.min(bot.heat, 5) * 0.08;
+					// --- ACTION drives dynamics ---
+					const actDyn = {
+						move:  { vel: 0.8, dur: 1.0 },
+						back:  { vel: 0.7, dur: 0.9 },
+						turnL: { vel: 0.6, dur: 0.7 },
+						turnR: { vel: 0.6, dur: 0.7 },
+						dash:  { vel: 1.0, dur: 0.5 },
+						ping:  { vel: 0.9, dur: 0.6 },
+						wait:  { vel: 0.2, dur: 0.3 },
+					};
+					const ad = actDyn[step.action] || actDyn.wait;
+
+					const baseVel = Math.min(1, da.vel * mm.vel * ad.vel * heatVel);
+					const baseDur = dur * da.dur * mm.dur * ad.dur;
+
+					// --- TILE shapes duration ---
+					let noteDur = baseDur;
+					if (tileType === "pulse") noteDur *= 1.8;
+					else if (tileType === "zap") noteDur *= 0.5;
+
+					// Heat shifts by scale degrees (always in-key), then clamp
+					const hotMidi = safeScaleShift(midi, scaleName, heatDegrees, range);
+
+					// ─── AVOID UNISON: only Bot A checks, only exact pitch class ───
+					// Bot B derives its note from A's harmony table, so it's already
+					// consonant. Only fix true unison (same pitch class) on A.
+					let finalMidi = hotMidi;
+					if (botId === "A") {
+						const otherMidi = noteFromPosition("B");
+						const otherHot = safeScaleShift(otherMidi, scaleName, Math.min(state.boardState.B.heat, 2), MIDI_RANGE_B);
+						if (hotMidi % 12 === otherHot % 12) {
+							finalMidi = safeScaleShift(hotMidi, scaleName, 2, range);
+						}
+					}
+					const hotNote = Tone.Frequency(finalMidi, "midi").toNote();
+					const beltDir = tileType === "belt" ? (tile?.dir || bot.dir) : null;
+
+					// --- DISTANCE between bots ---
+					const dist = Math.abs(bot.x - other.x) + Math.abs(bot.y - other.y);
+
+					// ═══ ARP ENGINE: board state → musical parameters ═══
+					// Position determines chord, direction determines contour,
+					// heat determines span, tile determines rate.
+					// These constraints guarantee every random walk
+					// produces valid chord progressions.
+					const tpm = state.ticksPerMove || 1;
+					const arpCap = 4 * tpm; // 1tpm→4, 2tpm→8, 4tpm→16
+					const chordShape = getChordShape(bot.x, state.cycle);
+					const arpDir = getArpPattern(bot.dir);
+					const octaves = getArpOctaves(bot.heat);
+					const rate = getArpRate(tileType, dur);
+					const gate = getArpGate(tileType, step.modifier, dur);
+					const maxN = getArpMaxNotes(tileType, bot.heat, step.action, tpm);
+
+					// Far-apart bots play complementary chords = harmonic richness.
+					// Close bots play same chord = unison thickness.
+					const shape = (dist >= 4 && botId === "B")
+						? getComplementShape(chordShape) : chordShape;
+
+					// Build the scale-quantized note arrays
+					const chordMidi = buildArpChord(finalMidi, scaleName, shape, range, octaves);
+					const octMidi = buildOctaveRun(finalMidi, range, octaves);
+
+					if (botId === "A") {
+						// ─── SCOUT-7: melody lead ───
+
+						// 1. Root note anchor (square lead)
+						// On belt tiles the arp retriggers this synth, so shorten the anchor
+						const anchorDur = tileType === "belt" ? dur * 0.07 : noteDur * 0.95;
+						audio.botA.main.triggerAttackRelease(hotNote, anchorDur, time, baseVel);
+
+						// 2. Harmonic ping: 3rd above for warmth
+						if (step.action !== "wait") {
+							const h3midi = safeScaleShift(finalMidi, scaleName, 2, range);
+							audio.botA.ping.triggerAttackRelease(
+								Tone.Frequency(h3midi, "midi").toNote(),
+								dur * 0.18, time + dur * 0.03, baseVel * 0.4
+							);
+						}
+
+						// 3. ═══ CHORD ARPEGGIATOR ═══
+						// Fires on BELT tiles regardless of action.
+						if (tileType === "belt") {
+							const aStart = time + dur * 0.08;
+							const aVel = baseVel * 0.45;
+							const beltPat = (beltDir === "S" || beltDir === "W")
+								? ARP_PATTERNS.down : ARP_PATTERNS.up;
+							scheduleArp(audio.botA.main, chordMidi, beltPat,
+								aStart, rate, gate, aVel, maxN);
+						}
+
+					} else {
+						// ─── ECHO-3: harmony voice ───
+
+						// 1. Main harmony voice
+						// On belt tiles the arp retriggers this synth, so shorten the anchor
+						const harmAnchorDur = tileType === "belt" ? dur * 0.1 : noteDur * 0.9;
+						audio.botB.fm.triggerAttackRelease(hotNote, harmAnchorDur, time, baseVel * 0.7);
+
+						// 2. Triangle sub: octave below for bass depth
+						const subMidi = foldToRange(hotMidi - 12, range);
+						audio.botB.sub.triggerAttackRelease(
+							Tone.Frequency(subMidi, "midi").toNote(),
+							noteDur * 1.3, time, baseVel * 0.55
+						);
+
+						// 3. Belt: play note 1 octave up (no chord arp)
+						// Skipped when Scout's arp is active — one arp voice at a time.
+						const scoutTile = state.boardState.A.steppedTile || tileAt(state.boardState.A.x, state.boardState.A.y);
+						const scoutArpActive = scoutTile && scoutTile.type === "belt";
+						if (tileType === "belt" && !scoutArpActive) {
+							const upMidi = foldToRange(finalMidi + 12, range);
+							const upNote = Tone.Frequency(upMidi, "midi").toNote();
+							audio.botB.fm.triggerAttackRelease(upNote, gate, time + dur * 0.12, baseVel * 0.40);
+						}
+					}
+				} catch (error) {
+					state.message = "Board sound error: " + (error && error.message ? error.message : "unknown");
+				}
+			}
+
+			/* ---------- GHOST TICKS: musical sub-divisions between move ticks ----
+			   At tpm=2, ghost tick is an off-beat counterpoint — uses the full
+			   musical pipeline (heat, scale, unison avoidance, arps on belt).
+			   At tpm=4, three phases build rhythmic density:
+			     phase 1 → syncopated harmony hit + belt arp (inverted)
+			     phase 2 → arp-only pulse (quick staccato runs)
+			     phase 3 → tension note (dissonant interval) resolving on next beat
+			   All notes are scale-quantized and tile-aware.
+			*/
+			function playGhostTick(time, tickPhase, tpm) {
+				if (!audio) return;
+				try {
+					const dur = getStepDurationSeconds();
+					const modStep = getActiveVoiceModStep();
+					const scaleName = modStep.scale || "major";
+
+					["A", "B"].forEach((botId) => {
+						const bot = state.boardState[botId];
+						const other = state.boardState[botId === "A" ? "B" : "A"];
+						// Use the tile from the last move tick so belt arps
+						// still fire even though the belt pushed the bot away.
+						const tile = bot.steppedTile || tileAt(bot.x, bot.y);
+						const tileType = tile ? tile.type : null;
+						// If Scout has an active belt arp, suppress Echo arps
+						const scoutTile = state.boardState.A.steppedTile || tileAt(state.boardState.A.x, state.boardState.A.y);
+						const scoutArpActive = scoutTile && scoutTile.type === "belt";
+						const suppressArp = botId === "B" && scoutArpActive;
+						const midi = noteFromPosition(botId);
+						const range = botId === "A" ? MIDI_RANGE_A : MIDI_RANGE_B;
+						const heatDeg = Math.min(bot.heat, 2);
+						const hotMidi = safeScaleShift(midi, scaleName, heatDeg, range);
+
+						// Unison avoidance (same logic as playBoardSound)
+						let finalMidi = hotMidi;
+						if (botId === "A") {
+							const otherMidi = noteFromPosition("B");
+							const otherHot = safeScaleShift(otherMidi, scaleName, Math.min(state.boardState.B.heat, 2), MIDI_RANGE_B);
+							if (hotMidi % 12 === otherHot % 12) {
+								finalMidi = safeScaleShift(hotMidi, scaleName, 2, range);
+							}
+						}
+
+						// Heat-based velocity boost (ghost ticks are softer than move ticks)
+						const heatVel = 1 + heatDeg * 0.06;
+						const beltDir = tileType === "belt" ? (tile?.dir || bot.dir) : null;
+						const dist = Math.abs(bot.x - other.x) + Math.abs(bot.y - other.y);
+
+						if (tpm === 2) {
+							// ═══ TPM 2: off-beat counterpoint ═══
+							// A proper rhythmic hit — like the "and" in 1-and-2-and
+							const ghostVel = Math.min(1, 0.35 * heatVel);
+							const ghostDur = dur * 0.45;
+
+							if (botId === "A") {
+								// Melody: play a 3rd above for call-response feel
+								const h3 = safeScaleShift(finalMidi, scaleName, 2, range);
+								audio.botA.ping.triggerAttackRelease(
+									Tone.Frequency(h3, "midi").toNote(),
+									ghostDur * 0.6, time, ghostVel
+								);
+								// Belt tile: a couple of extra chord tones
+								if (tileType === "belt") {
+									const shape = getChordShape(bot.x, state.cycle);
+									const chordMidi = buildArpChord(finalMidi, scaleName, shape, range, getArpOctaves(bot.heat));
+									const pat = (beltDir === "S" || beltDir === "W") ? ARP_PATTERNS.up : ARP_PATTERNS.down;
+									scheduleArp(audio.botA.main, chordMidi, pat,
+										time + dur * 0.1, dur * 0.45, dur * 0.35, ghostVel * 0.5, 2);
+								}
+							} else {
+								// Harmony: play root with sub for rhythmic pulse
+								audio.botB.fm.triggerAttackRelease(
+									Tone.Frequency(finalMidi, "midi").toNote(),
+									ghostDur * 0.5, time, ghostVel * 0.7
+								);
+								const subMidi = foldToRange(hotMidi - 12, range);
+								audio.botB.sub.triggerAttackRelease(
+									Tone.Frequency(subMidi, "midi").toNote(),
+									ghostDur * 0.8, time, ghostVel * 0.5
+								);
+								// Belt tile: octave-up note
+								if (tileType === "belt" && !suppressArp) {
+									const upMidi = foldToRange(finalMidi + 12, range);
+									audio.botB.fm.triggerAttackRelease(
+										Tone.Frequency(upMidi, "midi").toNote(),
+										dur * 0.35, time + dur * 0.1, ghostVel * 0.4);
+								}
+							}
+
+						} else if (tpm === 4) {
+							// ═══ TPM 4: three-phase rhythmic build ═══
+							const phaseVel = Math.min(1, [0, 0.28, 0.34, 0.40][tickPhase] * heatVel);
+
+							if (tickPhase === 1) {
+								// Phase 1: syncopated harmony hit — interval jumps
+								if (botId === "A") {
+									const h5 = safeScaleShift(finalMidi, scaleName, 4, range);
+									audio.botA.ping.triggerAttackRelease(
+										Tone.Frequency(h5, "midi").toNote(),
+										dur * 0.3, time, phaseVel
+									);
+									audio.botA.main.triggerAttackRelease(
+										Tone.Frequency(finalMidi, "midi").toNote(),
+										dur * 0.15, time, phaseVel * 0.4
+									);
+									if (tileType === "belt") {
+										const shape = getChordShape(bot.x, state.cycle);
+										const chordMidi = buildArpChord(finalMidi, scaleName, shape, range, getArpOctaves(bot.heat));
+										scheduleArp(audio.botA.main, chordMidi, ARP_PATTERNS.down,
+											time + dur * 0.04, dur * 0.18, dur * 0.10, phaseVel * 0.5, 3);
+									}
+								} else {
+									audio.botB.fm.triggerAttackRelease(
+										Tone.Frequency(finalMidi, "midi").toNote(),
+										dur * 0.35, time, phaseVel * 0.7
+									);
+									const subMidi = foldToRange(hotMidi - 12, range);
+									audio.botB.sub.triggerAttackRelease(
+										Tone.Frequency(subMidi, "midi").toNote(),
+										dur * 0.5, time, phaseVel * 0.5
+									);
+									if (tileType === "belt" && !suppressArp) {
+										const upMidi = foldToRange(finalMidi + 12, range);
+										audio.botB.fm.triggerAttackRelease(
+											Tone.Frequency(upMidi, "midi").toNote(),
+											dur * 0.2, time + dur * 0.05, phaseVel * 0.45);
+									}
+								}
+							} else if (tickPhase === 2) {
+								// Phase 2: staccato arp pulse — quick scalar runs
+								if (botId === "A") {
+									const shape = getChordShape(bot.x, state.cycle);
+									const chordMidi = buildArpChord(finalMidi, scaleName, shape, range, Math.max(2, getArpOctaves(bot.heat)));
+									const pat = getArpPattern(bot.dir);
+									scheduleArp(audio.botA.main, chordMidi, pat,
+										time, dur * 0.45, dur * 0.3, phaseVel * 0.5, 2);
+								} else if (!suppressArp) {
+									const shape = (dist >= 4) ? getComplementShape(getChordShape(bot.x, state.cycle)) : getChordShape(bot.x, state.cycle);
+									const chordMidi = buildArpChord(finalMidi, scaleName, shape, range, Math.max(2, getArpOctaves(bot.heat)));
+									const pat = getArpPattern(bot.dir);
+									scheduleArp(audio.botB.fm, chordMidi, pat,
+										time, dur * 0.5, dur * 0.3, phaseVel * 0.45, 2);
+								}
+							} else if (tickPhase === 3) {
+								// Phase 3: tension — scale-step lean into the next beat
+								if (botId === "A") {
+									// Play the note one scale step ABOVE final target — creates anticipation
+									const lean = safeScaleShift(finalMidi, scaleName, 1, range);
+									audio.botA.ping.triggerAttackRelease(
+										Tone.Frequency(lean, "midi").toNote(),
+										dur * 0.22, time, phaseVel * 0.8
+									);
+									// Soft arp tail
+									if (tileType === "belt" || bot.heat >= 2) {
+										const shape = getChordShape(bot.x, state.cycle);
+										const chordMidi = buildArpChord(lean, scaleName, shape, range, 1);
+										scheduleArp(audio.botA.main, chordMidi, ARP_PATTERNS.pingPong,
+											time + dur * 0.05, dur * 0.45, dur * 0.3, phaseVel * 0.35, 2);
+									}
+								} else {
+									const lean = safeScaleShift(finalMidi, scaleName, -1, range);
+									audio.botB.fm.triggerAttackRelease(
+										Tone.Frequency(lean, "midi").toNote(),
+										dur * 0.25, time, phaseVel * 0.6
+									);
+									if ((tileType === "belt" || bot.heat >= 2) && !suppressArp) {
+										const upMidi = foldToRange(lean + 12, range);
+										audio.botB.fm.triggerAttackRelease(
+											Tone.Frequency(upMidi, "midi").toNote(),
+											dur * 0.2, time + dur * 0.05, phaseVel * 0.3);
+									}
+								}
+							}
+						}
+					});
+				} catch (error) {
+					/* ghost tick error — non-critical */
+				}
+			}
+
+			function panicAudioOutputs() {
+				if (!audio) {
+					return;
+				}
+				const now = window.Tone ? Tone.now() : undefined;
+				const safeRelease = (voice) => {
+					if (!voice) {
+						return;
+					}
+					if (typeof voice.triggerRelease === "function") {
+						try {
+							voice.triggerRelease(now);
+						} catch (error) {
+							try {
+								voice.triggerRelease();
+							} catch (innerError) {
+								/* no-op: best effort panic release */
+							}
+						}
+					}
+					if (typeof voice.releaseAll === "function") {
+						try {
+							voice.releaseAll(now);
+						} catch (error) {
+							try {
+								voice.releaseAll();
+							} catch (innerError) {
+								/* no-op: best effort panic release */
+							}
+						}
+					}
+				};
+				safeRelease(audio.botA?.main);
+				safeRelease(audio.botA?.ping);
+				safeRelease(audio.botA?.arp);
+				safeRelease(audio.botB?.fm);
+				safeRelease(audio.botB?.sub);
+				safeRelease(audio.botB?.arp);
+				safeRelease(audio.botB?.noise);
+				safeRelease(audio.fx?.collision);
+				safeRelease(audio.fx?.belt);
+				safeRelease(audio.fx?.rotator);
+				safeRelease(audio.fx?.zap);
+				safeRelease(audio.fx?.pulse);
+				safeRelease(audio.drums?.kick);
+				safeRelease(audio.drums?.snare);
+				safeRelease(audio.drums?.hihat);
+			}
+
+			function playEventSound(kind, time) {
+				if (!audio) {
+					return;
+				}
+				if (kind === "collision") {
+					audio.fx.collision.triggerAttackRelease("G2", 0.08, time, 0.7);
+				} else if (kind === "belt") {
+					audio.fx.belt.triggerAttackRelease(0.04, time, 0.35);
+				} else if (kind === "rotator") {
+					audio.fx.rotator.triggerAttackRelease("A5", 0.04, time, 0.45);
+				} else if (kind === "zap") {
+					audio.fx.zap.triggerAttackRelease(0.06, time, 0.6);
+				} else if (kind === "pulse") {
+					audio.fx.pulse.triggerAttackRelease("C6", 0.06, time, 0.4);
+				} else if (kind === "reset") {
+					audio.fx.pulse.triggerAttackRelease("E5", 0.07, time, 0.42);
+					audio.fx.pulse.triggerAttackRelease("A5", 0.07, time + 0.07, 0.4);
+					audio.fx.pulse.triggerAttackRelease("C6", 0.06, time + 0.14, 0.36);
+				} else if (kind === "death") {
+					// 3-layer explosion: low thump + brown noise boom + white crackle tail
+					audio.explosion.thump.triggerAttackRelease("C1", 0.4, time, 0.95);
+					audio.explosion.noise.triggerAttackRelease(0.35, time, 0.9);
+					audio.explosion.crackle.triggerAttackRelease(0.18, time + 0.04, 0.6);
+				}
+			}
+
+			function playDrumStep(drumTick, time) {
+				if (!audio?.drums) return;
+				const p = state.drums.pattern;
+				const i = drumTick % getDrumSteps();
+				if (p.kick[i]) audio.drums.kick.triggerAttackRelease("C1", 0.18, time, 1);
+				if (p.snare[i]) audio.drums.snare.triggerAttackRelease(0.1, time, 0.7);
+				if (p.hihat[i]) audio.drums.hihat.triggerAttackRelease(0.03, time, 0.5);
+			}
+
+			function buildAudio() {
+				try {
+				const limiter = new Tone.Limiter(-6).toDestination();
+				const masterGain = new Tone.Gain(state.mixer.master).connect(limiter);
+
+				const melodyGain = new Tone.Gain(state.mixer.melody).connect(masterGain);
+				const bassLP = new Tone.Filter({ type: "lowpass", frequency: 1400, rolloff: -12 });
+				const botBGain = new Tone.Gain(state.mixer.botB).connect(bassLP);
+				bassLP.connect(masterGain);
+				const percussionGain = new Tone.Gain(state.mixer.percussion).connect(masterGain);
+				const fxGain = new Tone.Gain(state.mixer.fx).connect(masterGain);
+				const drumsGain = new Tone.Gain(state.mixer.drums).connect(masterGain);
+
+				/* Short hall reverb – sends from melody, percussion, fx (not bass/drums) */
+				const hallReverb = new Tone.Reverb({ decay: 1.2, wet: 1.0, preDelay: 0.01 });
+				hallReverb.generate();
+				const reverbSend = new Tone.Gain(0.45).connect(hallReverb);
+				hallReverb.connect(fxGain);
+				melodyGain.connect(reverbSend);
+				percussionGain.connect(reverbSend);
+				fxGain.connect(reverbSend);
+
+				return {
+					botA: {
+						main: new Tone.Synth({
+							oscillator: { type: "square" },
+							envelope: { attack: 0.003, decay: 0.14, sustain: 0.06, release: 0.08 },
+						}).connect(melodyGain),
+						ping: new Tone.Synth({
+							oscillator: { type: "triangle" },
+							envelope: { attack: 0.003, decay: 0.06, sustain: 0, release: 0.04 },
+						}).connect(melodyGain),
+						arp: new Tone.Synth({
+							oscillator: { type: "square" },
+							envelope: { attack: 0.002, decay: 0.04, sustain: 0, release: 0.03 },
+						}).connect(melodyGain),
+					},
+					botB: {
+						fm: new Tone.Synth({
+							oscillator: { type: "square" },
+							envelope: { attack: 0.005, decay: 0.3, sustain: 0.4, release: 0.15 },
+						}).connect(botBGain),
+						sub: new Tone.Synth({
+							oscillator: { type: "triangle" },
+							envelope: { attack: 0.008, decay: 0.4, sustain: 0.5, release: 0.2 },
+						}).connect(botBGain),
+						arp: new Tone.Synth({
+							oscillator: { type: "square" },
+							envelope: { attack: 0.002, decay: 0.05, sustain: 0, release: 0.03 },
+						}).connect(botBGain),
+						noise: new Tone.NoiseSynth({
+							noise: { type: "white" },
+							envelope: { attack: 0.001, decay: 0.045, sustain: 0, release: 0.02 },
+						}).connect(percussionGain),
+					},
+					fx: {
+						collision: new Tone.Synth({
+							oscillator: { type: "square" },
+							envelope: { attack: 0.001, decay: 0.06, sustain: 0, release: 0.03 },
+						}).connect(fxGain),
+						belt: new Tone.NoiseSynth({
+							noise: { type: "white" },
+							envelope: { attack: 0.001, decay: 0.04, sustain: 0, release: 0.02 },
+						}).connect(percussionGain),
+						rotator: new Tone.Synth({
+							oscillator: { type: "triangle" },
+							envelope: { attack: 0.001, decay: 0.05, sustain: 0, release: 0.02 },
+						}).connect(fxGain),
+						zap: new Tone.NoiseSynth({
+							noise: { type: "white" },
+							envelope: { attack: 0.001, decay: 0.06, sustain: 0, release: 0.02 },
+						}).connect(percussionGain),
+						pulse: new Tone.Synth({
+							oscillator: { type: "square" },
+							envelope: { attack: 0.001, decay: 0.05, sustain: 0, release: 0.02 },
+						}).connect(fxGain),
+					},
+					drums: {
+						kick: new Tone.MembraneSynth({
+							pitchDecay: 0.04,
+							octaves: 6,
+							envelope: { attack: 0.001, decay: 0.3, sustain: 0, release: 0.06 },
+						}).connect(drumsGain),
+						snare: new Tone.NoiseSynth({
+							noise: { type: "white" },
+							envelope: { attack: 0.001, decay: 0.12, sustain: 0, release: 0.04 },
+						}).connect(drumsGain),
+						hihat: new Tone.NoiseSynth({
+							noise: { type: "white" },
+							envelope: { attack: 0.001, decay: 0.04, sustain: 0, release: 0.01 },
+						}).connect(drumsGain),
+					},
+					coin: new Tone.Synth({
+						oscillator: { type: "square" },
+						envelope: { attack: 0.001, decay: 0.08, sustain: 0, release: 0.04 },
+					}).connect(fxGain),
+					explosion: {
+						thump: new Tone.MembraneSynth({
+							pitchDecay: 0.08,
+							octaves: 4,
+							envelope: { attack: 0.001, decay: 0.4, sustain: 0, release: 0.1 },
+						}).connect(percussionGain),
+						noise: new Tone.NoiseSynth({
+							noise: { type: "brown" },
+							envelope: { attack: 0.002, decay: 0.35, sustain: 0, release: 0.08 },
+						}).connect(percussionGain),
+						crackle: new Tone.NoiseSynth({
+							noise: { type: "white" },
+							envelope: { attack: 0.001, decay: 0.18, sustain: 0, release: 0.04 },
+						}).connect(percussionGain),
+					},
+					mixer: {
+						master: masterGain,
+						melody: melodyGain,
+						botB: botBGain,
+						percussion: percussionGain,
+						fx: fxGain,
+						drums: drumsGain,
+					},
+				};
+				} catch (error) {
+					state.message = "Audio build error (fallback): " + (error && error.message ? error.message : "unknown");
+					const limiter = new Tone.Limiter(-6).toDestination();
+					const masterGain = new Tone.Gain(state.mixer.master).connect(limiter);
+					const melodyGain = new Tone.Gain(state.mixer.melody).connect(masterGain);
+					const bassLP = new Tone.Filter({ type: "lowpass", frequency: 1400, rolloff: -12 });
+					const botBGain = new Tone.Gain(state.mixer.botB).connect(bassLP);
+					bassLP.connect(masterGain);
+					const percussionGain = new Tone.Gain(state.mixer.percussion).connect(masterGain);
+					const fxGain = new Tone.Gain(state.mixer.fx).connect(masterGain);
+					const drumsGain = new Tone.Gain(state.mixer.drums).connect(masterGain);
+					const hallReverb = new Tone.Reverb({ decay: 1.2, wet: 1.0, preDelay: 0.01 });
+					hallReverb.generate();
+					const reverbSend = new Tone.Gain(0.45).connect(hallReverb);
+					hallReverb.connect(fxGain);
+					melodyGain.connect(reverbSend);
+					percussionGain.connect(reverbSend);
+					fxGain.connect(reverbSend);
+					return {
+						botA: {
+							main: new Tone.Synth({ oscillator: { type: "square" }, envelope: { attack: 0.003, decay: 0.14, sustain: 0.06, release: 0.08 } }).connect(melodyGain),
+							ping: new Tone.Synth({ oscillator: { type: "triangle" }, envelope: { attack: 0.003, decay: 0.06, sustain: 0, release: 0.04 } }).connect(melodyGain),
+							arp: new Tone.Synth({ oscillator: { type: "square" }, envelope: { attack: 0.002, decay: 0.04, sustain: 0, release: 0.03 } }).connect(melodyGain),
+						},
+						botB: {
+							fm: new Tone.Synth({ oscillator: { type: "square" }, envelope: { attack: 0.005, decay: 0.5, sustain: 0.7, release: 0.3 } }).connect(botBGain),
+							sub: new Tone.Synth({ oscillator: { type: "triangle" }, envelope: { attack: 0.008, decay: 0.4, sustain: 0.5, release: 0.2 } }).connect(botBGain),
+							arp: new Tone.Synth({ oscillator: { type: "square" }, envelope: { attack: 0.002, decay: 0.05, sustain: 0, release: 0.03 } }).connect(botBGain),
+							noise: new Tone.NoiseSynth({ noise: { type: "white" }, envelope: { attack: 0.001, decay: 0.05, sustain: 0, release: 0.02 } }).connect(percussionGain),
+						},
+						fx: {
+							collision: new Tone.Synth({ oscillator: { type: "square" }, envelope: { attack: 0.001, decay: 0.06, sustain: 0, release: 0.02 } }).connect(fxGain),
+							belt: new Tone.NoiseSynth({ noise: { type: "white" }, envelope: { attack: 0.001, decay: 0.04, sustain: 0, release: 0.02 } }).connect(percussionGain),
+							rotator: new Tone.Synth({ oscillator: { type: "triangle" }, envelope: { attack: 0.001, decay: 0.05, sustain: 0, release: 0.02 } }).connect(fxGain),
+							zap: new Tone.NoiseSynth({ noise: { type: "white" }, envelope: { attack: 0.001, decay: 0.05, sustain: 0, release: 0.02 } }).connect(percussionGain),
+							pulse: new Tone.Synth({ oscillator: { type: "square" }, envelope: { attack: 0.001, decay: 0.05, sustain: 0, release: 0.02 } }).connect(fxGain),
+						},
+						drums: {
+							kick: new Tone.MembraneSynth({ pitchDecay: 0.04, octaves: 6, envelope: { attack: 0.001, decay: 0.3, sustain: 0, release: 0.06 } }).connect(drumsGain),
+							snare: new Tone.NoiseSynth({ noise: { type: "white" }, envelope: { attack: 0.001, decay: 0.12, sustain: 0, release: 0.04 } }).connect(drumsGain),
+							hihat: new Tone.NoiseSynth({ noise: { type: "white" }, envelope: { attack: 0.001, decay: 0.04, sustain: 0, release: 0.01 } }).connect(drumsGain),
+						},
+						coin: new Tone.Synth({ oscillator: { type: "square" }, envelope: { attack: 0.001, decay: 0.08, sustain: 0, release: 0.04 } }).connect(fxGain),
+						explosion: {
+							thump: new Tone.MembraneSynth({ pitchDecay: 0.08, octaves: 4, envelope: { attack: 0.001, decay: 0.4, sustain: 0, release: 0.1 } }).connect(percussionGain),
+							noise: new Tone.NoiseSynth({ noise: { type: "brown" }, envelope: { attack: 0.002, decay: 0.35, sustain: 0, release: 0.08 } }).connect(percussionGain),
+							crackle: new Tone.NoiseSynth({ noise: { type: "white" }, envelope: { attack: 0.001, decay: 0.18, sustain: 0, release: 0.04 } }).connect(percussionGain),
+						},
+						mixer: {
+							master: masterGain,
+							melody: melodyGain,
+							botB: botBGain,
+							percussion: percussionGain,
+							fx: fxGain,
+							drums: drumsGain,
+						},
+					};
+				}
+			}
+
+			function applyMixer() {
+				if (!audio || !audio.mixer || !window.Tone) {
+					return;
+				}
+				audio.mixer.master.gain.rampTo(state.mixer.master, 0.05);
+				audio.mixer.melody.gain.rampTo(state.mixer.melody, 0.05);
+				audio.mixer.botB.gain.rampTo(state.mixer.botB, 0.05);
+				audio.mixer.percussion.gain.rampTo(state.mixer.percussion, 0.05);
+				audio.mixer.fx.gain.rampTo(state.mixer.fx, 0.05);
+				if (audio.mixer.drums) audio.mixer.drums.gain.rampTo(state.mixer.drums, 0.05);
+			}
+
+			function setMixerValue(key, value) {
+				if (!Object.prototype.hasOwnProperty.call(state.mixer, key)) {
+					return;
+				}
+				state.mixer[key] = clampNumber(value, 0, 1, DEFAULT_MIXER[key]);
+				applyMixer();
+				saveState();
+				queueRender();
+			}
+
+			function ensureScheduler() {
+				if (schedulerId !== null) {
+					return;
+				}
+				schedulerId = Tone.Transport.scheduleRepeat((time) => {
+					advanceSequence(time);
+				}, "16n");
+			}
+
+			function hardStopTransportAndAudio() {
+				if (window.Tone) {
+					if (schedulerId !== null) {
+						Tone.Transport.clear(schedulerId);
+						schedulerId = null;
+					}
+					Tone.Transport.stop();
+					Tone.Transport.cancel(0);
+					Tone.Transport.position = 0;
+				}
+				panicAudioOutputs();
+			}
+
+			async function armAudio() {
+				if (!window.Tone) {
+					state.message = "Tone.js did not load, so the robots are mute.";
+					queueRender();
+					return;
+				}
+				try {
+					await Tone.start();
+					/* Increase lookahead so audio events are scheduled
+					   well ahead of when they play — prevents jitter
+					   from DOM rendering on the main thread. */
+					Tone.context.lookAhead = 0.25;
+					if (typeof Tone.context.updateInterval === "number") {
+						Tone.context.updateInterval = 0.03;
+					}
+					state.message = "Tone ctx: " + Tone.context.state + ". Building audio...";
+					queueRender();
+					if (!audio) {
+						audio = buildAudio();
+					}
+					applyMixer();
+					Tone.Transport.bpm.value = getPlaybackBpm();
+					ensureScheduler();
+					/* Diagnostic beep — confirms end-to-end audio output */
+					try {
+						const beep = new Tone.Synth({
+							oscillator: { type: "triangle" },
+							envelope: { attack: 0.001, decay: 0.08, sustain: 0, release: 0.04 },
+						}).toDestination();
+						beep.triggerAttackRelease("C5", 0.1, Tone.now(), 0.35);
+						setTimeout(() => { try { beep.dispose(); } catch (_) {} }, 500);
+					} catch (_beepErr) { /* non-critical */ }
+					state.transportReady = true;
+					state.message = "Audio armed (ctx: " + Tone.context.state + "). Tap PLAY.";
+					queueRender();
+				} catch (error) {
+					state.message = "Audio wake-up failed: " + (error && error.message ? error.message : "unknown error") + ".";
+					queueRender();
+				}
+			}
+
+			function resetBoardState(withMessage) {
+				state.boardState = createBoardState();
+				state.currentStep = -1;
+				state.moveTick = 0;
+				state.drumTick = 0;
+				state.voiceModIndex = 0;
+				state.voiceModResetCount = 0;
+				state.voiceModStepCount = 0;
+				state.cycle = 0;
+				if (withMessage) {
+					state.message = "Board reset to start positions.";
+				}
+			}
+
+			async function startPlayback() {
+				const requestId = ++playbackRequestId;
+				state.startingPlayback = true;
+				queueRender();
+				await armAudio();
+				if (!state.transportReady || requestId !== playbackRequestId) {
+					state.startingPlayback = false;
+					queueRender();
+					return;
+				}
+				resetBoardState(false);
+				hardStopTransportAndAudio();
+				ensureScheduler();
+				if (audio?.mixer && window.Tone) {
+					const now = Tone.now();
+					audio.mixer.master.gain.cancelScheduledValues(now);
+					audio.mixer.master.gain.setValueAtTime(state.mixer.master, now);
+					audio.mixer.melody.gain.setValueAtTime(state.mixer.melody, now);
+					audio.mixer.botB.gain.setValueAtTime(state.mixer.botB, now);
+					audio.mixer.percussion.gain.setValueAtTime(state.mixer.percussion, now);
+					audio.mixer.fx.gain.setValueAtTime(state.mixer.fx, now);
+				}
+				applyMixer();
+				state.startingPlayback = false;
+				state.playing = true;
+				state.message = "Loop running.";
+				try {
+					Tone.Transport.start();
+				} catch (error) {
+					state.playing = false;
+					state.message = "Transport start failed: " + (error && error.message ? error.message : "unknown") + ".";
+				}
+				queueRender();
+			}
+
+			function stopPlayback(withMessage) {
+				playbackRequestId += 1;
+				state.startingPlayback = false;
+				state.playing = false;
+				hardStopTransportAndAudio();
+				state.currentStep = -1;
+				state.moveTick = 0;
+				state.drumTick = 0;
+				state.voiceModIndex = 0;
+				state.voiceModResetCount = 0;
+				state.voiceModStepCount = 0;
+				if (withMessage) {
+					state.message = "Loop stopped.";
+				}
+				queueRender();
+			}
+
+			function advanceSequence(time) {
+				if (!state.playing) {
+					return;
+				}
+				const events = [];
+				state.boardState.activeKeys = [];
+
+				const tpm = state.ticksPerMove || 1;
+				const isMoveTick = state.moveTick % tpm === 0;
+				let skipActions = false; // true on reset/start so bots appear at spawn first
+
+				if (state.currentStep === -1) {
+					state.currentStep = 0;
+					state.drumTick = 0;
+					state.moveTick = 0;
+					skipActions = true; // show bots at start before first move
+				} else if (isMoveTick) {
+					const nextStep = state.currentStep + 1;
+
+					// "loop" trigger: advance voice mod based on frequency
+					if (state.voiceModTrigger === "loop") {
+						state.voiceModStepCount += 1;
+						const threshold = Math.max(1, Math.round(state.voiceModLoopFreq * state.loopLength));
+						if (state.voiceModStepCount >= threshold) {
+							state.voiceModStepCount = 0;
+							advanceVoiceMod();
+						}
+					}
+
+					if (nextStep >= state.loopLength) {
+						state.cycle += 1;
+						playEventSound("reset", time);
+						// Process any deferred deaths before board reset wipes dying flag
+						["A", "B"].forEach((botId) => {
+							if (state.boardState[botId].dying) {
+								processDeath(botId, events);
+								playEventSound("death", time);
+							}
+						});
+						// Apply any queued board change — defer save off audio thread
+						if (state.pendingBoard) {
+							BOARD.tiles = state.pendingBoard.tiles;
+							state.activeBoardId = state.pendingBoard.id;
+							state.pendingBoard = null;
+							setTimeout(() => { saveState(); }, 0);
+						}
+						const deathsA = state.boardState.A.deaths;
+						const deathsB = state.boardState.B.deaths;
+						state.boardState = createBoardState();
+						state.boardState.A.deaths = deathsA;
+						state.boardState.B.deaths = deathsB;
+						state.boardState.activeKeys = [];
+						pushEvent(events, "reset", "Loop reset snapped both bots back to the launch pads.");
+						state.currentStep = 0;
+						state.drumTick = 0;
+						state.moveTick = 0;
+						state.voiceModStepCount = 0;
+						skipActions = true; // show bots at spawn for one tick
+					} else {
+						state.currentStep = nextStep;
+					}
+				}
+
+				// Bot actions + sounds only on move ticks (skipped on reset tick)
+				if (isMoveTick && !skipActions) {
+					const stepIndex = state.currentStep;
+					// First: process any deferred deaths from previous step (on-beat)
+					["A", "B"].forEach((botId) => {
+						if (state.boardState[botId].dying) {
+							processDeath(botId, events);
+							playEventSound("death", time);
+						}
+					});
+					// Then: normal step actions
+					["A", "B"].forEach((botId) => {
+						if (state.boardState[botId].dying) return; // just died this tick
+						const steps = state.bots[botId].steps || [];
+						if (!steps.length) {
+							return;
+						}
+						const progLen = state.bots[botId].programLength || state.loopLength;
+						const step = steps[stepIndex % progLen];
+						const chance = seededChance(botId, stepIndex, state.cycle, 0);
+						if (chance > step.probability) {
+							state.boardState[botId].status = "Hesitated this register";
+							pushEvent(events, "wait", BOT_META[botId].name + " skipped a planned action.", boardKey(state.boardState[botId].x, state.boardState[botId].y));
+							return;
+						}
+						// Move first, then play sound from final board position
+						executeStepAction(botId, step, events);
+						// Capture tile at landing position BEFORE belt pushes bot away
+						state.boardState[botId].steppedTile = tileAt(state.boardState[botId].x, state.boardState[botId].y);
+						applyTileEffects(botId, events);
+						checkDeath(botId, events);
+						playBoardSound(botId, step, time);
+					});
+
+					// ─── LOVE CHECK: bots sharing a tile ───
+					if (state.boardState.clashCooldown > 0) state.boardState.clashCooldown--;
+					const botA = state.boardState.A;
+					const botB = state.boardState.B;
+					if (botA.x === botB.x && botA.y === botB.y && !botA.dying && !botB.dying && state.boardState.clashCooldown === 0) {
+						state.boardState.loveSteps = (state.boardState.loveSteps || 0) + 1;
+						if (state.boardState.loveSteps === 2) {
+							// Check no upcoming dash in next step for either bot
+							const nextIdx = (stepIndex + 1) % state.loopLength;
+							const nextA = (state.bots.A.steps || [])[nextIdx % (state.bots.A.programLength || state.loopLength)];
+							const nextB = (state.bots.B.steps || [])[nextIdx % (state.bots.B.programLength || state.loopLength)];
+							const dashComing = (nextA && nextA.action === "dash") || (nextB && nextB.action === "dash");
+							if (!dashComing) {
+								state.boardState.hearts = state.boardState.hearts || [];
+								state.boardState.hearts.push({ x: botA.x, y: botA.y, tick: Date.now() });
+								pushEvent(events, "love", "Bots lingered together. 💕", boardKey(botA.x, botA.y));
+								// Coin chime — scale-quantized to current key
+								if (audio?.coin) {
+									const modStep = getActiveVoiceModStep();
+									const sc = modStep.scale || "major";
+									const lo = scaleQuantize(83, sc); // ~B5 quantized
+									const hi = scaleQuantize(lo + 5, sc); // a 4th-ish above
+									audio.coin.triggerAttackRelease(Tone.Frequency(lo, "midi").toNote(), 0.06, time, 0.7);
+									audio.coin.triggerAttackRelease(Tone.Frequency(hi, "midi").toNote(), 0.08, time + 0.07, 0.8);
+								}
+							}
+						}
+					} else {
+						state.boardState.loveSteps = 0;
+					}
+
+				} else if (tpm > 1) {
+					// Ghost ticks: fill non-move ticks with echo/arp textures
+					const tickPhase = state.moveTick % tpm;
+					playGhostTick(time, tickPhase, tpm);
+				}
+				// Drum machine playback — pattern stays locked to move ticks (bot steps)
+				// so kick/snare always land on the beat regardless of tpm.
+				// Ghost ticks get a light hihat subdivision for rhythmic continuity.
+				if (state.drums.on && audio?.drums) {
+					if (isMoveTick) {
+						playDrumStep(state.drumTick, time);
+						state.drumTick = (state.drumTick + 1) % getDrumSteps();
+					} else if (tpm > 1) {
+						// Ghost tick subdivision: soft hihat on off-beats
+						const tickPhase = state.moveTick % tpm;
+						const ghostHihatVel = tickPhase === Math.floor(tpm / 2) ? 0.25 : 0.12;
+						audio.drums.hihat.triggerAttackRelease(0.02, time, ghostHihatVel);
+					}
+				} else if (isMoveTick) {
+					state.drumTick = (state.drumTick + 1) % getDrumSteps();
+				}
+				state.moveTick += 1;
+				let fxOffsetIndex = 0;
+				events.slice(0, MAX_EVENT_SOUNDS_PER_TICK).forEach((event) => {
+					if (event.kind === "death") return; // already played directly
+					playEventSound(event.kind, time + fxOffsetIndex * 0.01);
+					fxOffsetIndex += 1;
+				});
+				state.boardState.events = events.slice(0, 6);
+
+				/* Schedule visual update via Tone.Draw so it syncs with
+				   audio but runs on the main thread outside the audio
+				   callback. This prevents DOM work from blocking the
+				   audio scheduling and causing timing jitter. */
+				Tone.Draw.schedule(() => {
+					throttledRender();
+				}, time);
+			}
+
+			function updateStep(botId, index, patch) {
+				state.bots[botId].steps[index] = {
+					...state.bots[botId].steps[index],
+					...patch,
+				};
+				saveState();
+				queueRender();
+			}
+
+			function cycleProbability(botId, index) {
+				const current = state.bots[botId].steps[index].probability;
+				const position = PROB_OPTIONS.indexOf(current);
+				const next = PROB_OPTIONS[(position + 1) % PROB_OPTIONS.length];
+				updateStep(botId, index, { probability: next });
+			}
+
+
+
+			function cycleAction(botId, index) {
+				const current = state.bots[botId].steps[index].action;
+				const actionIndex = ACTIONS.findIndex((item) => item.id === current);
+				const next = ACTIONS[(actionIndex + 1) % ACTIONS.length];
+				updateStep(botId, index, { action: next.id });
+			}
+
+			function cycleModifier(botId, index) {
+				const current = state.bots[botId].steps[index].modifier;
+				const modIndex = MODIFIERS.findIndex((item) => item.id === current);
+				const next = MODIFIERS[(modIndex + 1) % MODIFIERS.length];
+				updateStep(botId, index, { modifier: next.id });
+			}
+
+			function setLoopLength(value) {
+				const prevDrumSteps = getDrumSteps();
+				state.loopLength = value;
+				// Cap program lengths to new loop length
+				["A", "B"].forEach((id) => {
+					if ((state.bots[id].programLength || value) > value) {
+						state.bots[id].programLength = value;
+					}
+				});
+				// Re-apply drum preset when step count changes (e.g. 16 ↔ 12)
+				const newDrumSteps = getDrumSteps();
+				if (newDrumSteps !== prevDrumSteps) {
+					const preset = DRUM_PRESETS.find(p => p.id === state.drums.presetId);
+					if (preset) {
+						state.drums.pattern = preset.pattern(newDrumSteps);
+					}
+					state.drumTick = 0;
+				}
+				stopPlayback(false);
+				resetBoardState(false);
+				saveState();
+				state.message = "Loop length set to " + value + " registers.";
+				queueRender();
+			}
+
+			function setProgramLength(botId, value) {
+				const clamped = Math.min(value, state.loopLength);
+				state.bots[botId].programLength = clamped;
+				saveState();
+				state.message = BOT_META[botId].name + " program length set to " + clamped + ".";
+				queueRender();
+			}
+
+			function cycleScale() {
+				const currentIndex = SCALE_OPTIONS.indexOf(state.scale);
+				const nextIndex = (currentIndex + 1) % SCALE_OPTIONS.length;
+				state.scale = SCALE_OPTIONS[nextIndex < 0 ? 0 : nextIndex];
+				saveState();
+				state.message = "Scale set to " + state.scale + ".";
+				queueRender();
+			}
+
+			function toggleQuarterSpeed() {
+				state.playbackRate = state.playbackRate === 0.25 ? 1 : 0.25;
+				if (window.Tone) {
+					Tone.Transport.bpm.rampTo(getPlaybackBpm(), 0.04);
+				}
+				saveState();
+				state.message = state.playbackRate === 0.25 ? "Playback speed set to 1/4." : "Playback speed set to normal.";
+				queueRender();
+			}
+
+			function toggleRootTranspose() {
+				state.transposeWithRoot = !state.transposeWithRoot;
+				saveState();
+				state.message = state.transposeWithRoot
+					? "Root now transposes the sequence."
+					: "Root no longer transposes the sequence.";
+				queueRender();
+			}
+
+
+
+			function advanceVoiceMod() {
+				const prevIndex = state.voiceModIndex;
+				state.voiceModIndex = (state.voiceModIndex + 1) % state.bassMod.length;
+				state.voiceModResetCount = 0;
+
+				// Activate pending Seq 2 when Seq 1 wraps
+				if (state.voiceModIndex === 0 && prevIndex !== 0 && state.seq2.pendingActive) {
+					state.seq2.active = true;
+					state.seq2.pendingActive = false;
+					state.seq2.index = -1; // will advance to 0 below
+					state.message = "Seq 2 activated.";
+				}
+
+				// Advance Seq 2 when Seq 1 wraps back to step 0
+				if (state.voiceModIndex === 0 && prevIndex !== 0 && state.seq2.active) {
+					advanceSeq2();
+				}
+			}
+
+			function advanceSeq2() {
+				const prevIndex = state.seq2.index;
+				state.seq2.index = (state.seq2.index + 1) % state.seq2.steps.length;
+				const step = state.seq2.steps[state.seq2.index];
+
+				// Apply board change (already deferred via pendingBoard during playback)
+				if (step.boardId && step.boardId !== "--") {
+					if (step.boardId === "user") {
+						loadUserBoard();
+					} else {
+						applyBoardPreset(step.boardId);
+					}
+				}
+				// Apply drum preset inline (no pushUndo/saveState — we're in audio callback)
+				if (step.drumPresetId && step.drumPresetId !== "--") {
+					const preset = DRUM_PRESETS.find(p => p.id === step.drumPresetId);
+					if (preset) {
+						state.drums.presetId = step.drumPresetId;
+						state.drums.pattern = preset.pattern(getDrumSteps());
+					}
+				}
+				// Apply register swap
+				if (typeof step.regSwap === "boolean" && step.regSwap !== state.registersSwapped) {
+					swapRegisters();
+				}
+				// Randomize bot registers when Seq 2 wraps back to step 0
+				// Deferred to main thread so heavy JSON work doesn't block audio
+				if (state.seq2.index === 0 && prevIndex !== 0) {
+					const rndA = state.seq2.rndBotA;
+					const rndB = state.seq2.rndBotB;
+					if (rndA || rndB) {
+						setTimeout(() => {
+							if (rndA) randomizeSteps("A");
+							if (rndB) randomizeSteps("B");
+						}, 0);
+					}
+				}
+				// Defer save off audio thread
+				setTimeout(() => { saveState(); }, 0);
+			}
+
+			function cycleVoiceModTrigger() {
+				const ids = VOICE_MOD_TRIGGERS.map(t => t.id);
+				const idx = ids.indexOf(state.voiceModTrigger);
+				state.voiceModTrigger = ids[(idx + 1) % ids.length];
+				state.voiceModResetCount = 0;
+				state.voiceModStepCount = 0;
+				const info = VOICE_MOD_TRIGGERS.find(t => t.id === state.voiceModTrigger);
+				saveState();
+				state.message = "Sequencer trigger: " + info.label + " — " + info.blurb;
+				queueRender();
+			}
+
+			function cycleVoiceModLoopFreq() {
+				const idx = VOICE_MOD_LOOP_FREQ_OPTIONS.indexOf(state.voiceModLoopFreq);
+				state.voiceModLoopFreq = VOICE_MOD_LOOP_FREQ_OPTIONS[(idx + 1) % VOICE_MOD_LOOP_FREQ_OPTIONS.length];
+				state.voiceModStepCount = 0;
+				saveState();
+				const labels = { 0.25: "¼ loop", 0.5: "½ loop", 1: "1 loop", 2: "2 loops", 4: "4 loops" };
+				state.message = "Sequencer advances every " + (labels[state.voiceModLoopFreq] || state.voiceModLoopFreq) + ".";
+				queueRender();
+			}
+
+			function updateBassModStep(index, patch) {
+				state.bassMod.steps[index] = {
+					...state.bassMod.steps[index],
+					...patch,
+				};
+				saveState();
+				queueRender();
+			}
+
+			function cycleBassModStepValue(index, field, direction) {
+				const step = state.bassMod.steps[index];
+				if (!step) {
+					return;
+				}
+				if (field === "scale") {
+					let at = SCALE_OPTIONS.indexOf(step.scale);
+					if (at < 0) {
+						at = 0;
+					}
+					const next = SCALE_OPTIONS[(at + direction + SCALE_OPTIONS.length) % SCALE_OPTIONS.length];
+					updateBassModStep(index, { scale: next });
+					return;
+				}
+				if (field === "root") {
+					const next = (step.root + direction + ROOT_NAMES.length) % ROOT_NAMES.length;
+					updateBassModStep(index, { root: next });
+					return;
+				}
+				if (field === "semitone") {
+					let at = BASS_INTERVAL_OPTIONS.indexOf(step.semitone);
+					if (at < 0) {
+						at = 0;
+					}
+					const next = BASS_INTERVAL_OPTIONS[(at + direction + BASS_INTERVAL_OPTIONS.length) % BASS_INTERVAL_OPTIONS.length];
+					updateBassModStep(index, { semitone: next });
+				}
+			}
+
+			function resetBassMod() {
+				state.bassMod = { length: 4, steps: buildBassModSteps() };
+				saveState();
+				state.message = "Seq 1 reset.";
+				queueRender();
+			}
+
+			function randomizeBassMod() {
+				pushUndo();
+				const scalePool = SCALE_OPTIONS;
+				for (let i = 0; i < state.bassMod.length; i++) {
+					state.bassMod.steps[i] = {
+						scale: scalePool[Math.floor(Math.random() * scalePool.length)],
+						root: Math.floor(Math.random() * 12),
+						semitone: Math.floor(Math.random() * 7) - 3,
+					};
+				}
+				saveState();
+				state.message = "Seq 1 randomized.";
+				queueRender();
+			}
+
+			function resetSeq2() {
+				state.seq2 = { active: state.seq2.active, index: 0, steps: buildSeq2Steps(), rndBotA: state.seq2.rndBotA, rndBotB: state.seq2.rndBotB };
+				saveState();
+				state.message = "Seq 2 reset.";
+				queueRender();
+			}
+
+			function randomizeSeq2() {
+				pushUndo();
+				const boardPool = ["--", ...BOARD_PRESETS.map(p => p.id)];
+				const drumPool = ["--", ...DRUM_PRESETS.map(p => p.id)];
+				for (let i = 0; i < state.seq2.steps.length; i++) {
+					state.seq2.steps[i] = {
+						boardId: boardPool[Math.floor(Math.random() * boardPool.length)],
+						drumPresetId: drumPool[Math.floor(Math.random() * drumPool.length)],
+						regSwap: Math.random() < 0.3,
+					};
+				}
+				saveState();
+				state.message = "Seq 2 randomized.";
+				queueRender();
+			}
+
+			function randomizeSteps(botId) {
+				pushUndo();
+				const actionIds = ACTIONS.map(a => a.id);
+				const modIds = MODIFIERS.map(m => m.id);
+
+				// Early steps (0–2): weighted toward movement to escape the corner.
+				// Later steps: fully random. Keeps variety while ensuring useful openings.
+				const earlyPool = [
+					"move", "move", "move", "move",   // 4× forward
+					"dash", "dash",                     // 2× dash
+					"turnL", "turnR",                   // 1× each turn
+				];
+
+				state.bots[botId].steps = state.bots[botId].steps.map((_, i) => {
+					let action;
+					if (i < 3) {
+						// First 3 steps: pick from movement-heavy pool
+						action = earlyPool[Math.floor(Math.random() * earlyPool.length)];
+					} else {
+						action = actionIds[Math.floor(Math.random() * actionIds.length)];
+					}
+					return {
+						action,
+						repeat: 1,
+						probability: Math.random() < 0.1 ? 0.75 : 1,
+						modifier: modIds[Math.floor(Math.random() * modIds.length)],
+					};
+				});
+				saveState();
+				state.message = BOT_META[botId].name + " registers randomized.";
+				queueRender();
+			}
+
+			function randomizeAllSteps() {
+				randomizeSteps("A");
+				randomizeSteps("B");
+				state.message = "Both bot registers randomized.";
+				queueRender();
+			}
+
+			function resetAllSteps() {
+				pushUndo();
+				state.bots.A.steps = buildSteps();
+				state.bots.B.steps = buildSteps();
+				saveState();
+				state.message = "All registers cleared.";
+				queueRender();
+			}
+
+			/* ─── BOARD PRESETS ─────────────────────────────────────── */
+			const BOARD_PRESETS = [
+				{
+					id: "default", label: "Factory",
+					tiles: {
+						"1,0": { type: "belt", dir: "E", symbol: "⇢", label: "Belt East" },
+						"2,0": { type: "zap", symbol: "⚡", label: "Zap Rail" },
+						"3,0": { type: "rotR", symbol: "↻", label: "Rotate Right" },
+						"0,1": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+						"2,1": { type: "block", symbol: "■", label: "Crate" },
+						"4,1": { type: "belt", dir: "S", symbol: "⇣", label: "Belt South" },
+						"1,2": { type: "rotL", symbol: "↺", label: "Rotate Left" },
+						"3,2": { type: "zap", symbol: "⚡", label: "Zap Rail" },
+						"0,3": { type: "belt", dir: "N", symbol: "⇡", label: "Belt North" },
+						"2,3": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+						"4,3": { type: "rotR", symbol: "↻", label: "Rotate Right" },
+						"3,4": { type: "rotL", symbol: "↺", label: "Rotate Left" },
+					},
+				},
+				{
+					id: "corridor", label: "Corridor",
+					tiles: {
+						"0,0": { type: "belt", dir: "E", symbol: "⇢", label: "Belt East" },
+						"1,0": { type: "belt", dir: "E", symbol: "⇢", label: "Belt East" },
+						"2,0": { type: "belt", dir: "S", symbol: "⇣", label: "Belt South" },
+						"2,1": { type: "belt", dir: "S", symbol: "⇣", label: "Belt South" },
+						"2,2": { type: "zap", symbol: "⚡", label: "Zap Rail" },
+						"2,3": { type: "belt", dir: "N", symbol: "⇡", label: "Belt North" },
+						"1,2": { type: "block", symbol: "■", label: "Crate" },
+						"3,2": { type: "block", symbol: "■", label: "Crate" },
+						"0,2": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+						"4,2": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+						"4,4": { type: "belt", dir: "W", symbol: "⇠", label: "Belt West" },
+						"3,4": { type: "belt", dir: "W", symbol: "⇠", label: "Belt West" },
+					},
+				},
+				{
+					id: "garden", label: "Garden",
+					tiles: {
+						"1,1": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+						"3,1": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+						"1,3": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+						"3,3": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+						"2,2": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+						"0,2": { type: "rotL", symbol: "↺", label: "Rotate Left" },
+						"4,2": { type: "rotR", symbol: "↻", label: "Rotate Right" },
+						"2,0": { type: "rotR", symbol: "↻", label: "Rotate Right" },
+						"2,4": { type: "rotL", symbol: "↺", label: "Rotate Left" },
+					},
+				},
+				{
+					id: "gauntlet", label: "Gauntlet",
+					tiles: {
+						"1,0": { type: "zap", symbol: "⚡", label: "Zap Rail" },
+						"3,0": { type: "zap", symbol: "⚡", label: "Zap Rail" },
+						"0,1": { type: "zap", symbol: "⚡", label: "Zap Rail" },
+						"2,1": { type: "zap", symbol: "⚡", label: "Zap Rail" },
+						"4,1": { type: "zap", symbol: "⚡", label: "Zap Rail" },
+						"1,2": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+						"3,2": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+						"2,3": { type: "block", symbol: "■", label: "Crate" },
+						"0,3": { type: "rotL", symbol: "↺", label: "Rotate Left" },
+						"4,3": { type: "rotR", symbol: "↻", label: "Rotate Right" },
+						"1,4": { type: "zap", symbol: "⚡", label: "Zap Rail" },
+						"3,4": { type: "zap", symbol: "⚡", label: "Zap Rail" },
+					},
+				},
+				{
+					id: "spinner", label: "Spinner",
+					tiles: {
+						"1,0": { type: "rotR", symbol: "↻", label: "Rotate Right" },
+						"3,0": { type: "rotL", symbol: "↺", label: "Rotate Left" },
+						"0,1": { type: "rotL", symbol: "↺", label: "Rotate Left" },
+						"4,1": { type: "rotR", symbol: "↻", label: "Rotate Right" },
+						"2,2": { type: "zap", symbol: "⚡", label: "Zap Rail" },
+						"1,2": { type: "belt", dir: "E", symbol: "⇢", label: "Belt East" },
+						"3,2": { type: "belt", dir: "W", symbol: "⇠", label: "Belt West" },
+						"0,3": { type: "rotR", symbol: "↻", label: "Rotate Right" },
+						"4,3": { type: "rotL", symbol: "↺", label: "Rotate Left" },
+						"1,4": { type: "rotL", symbol: "↺", label: "Rotate Left" },
+						"3,4": { type: "rotR", symbol: "↻", label: "Rotate Right" },
+						"2,0": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+					},
+				},
+				{
+					id: "maze", label: "Maze",
+					tiles: {
+						"1,0": { type: "block", symbol: "■", label: "Crate" },
+						"3,0": { type: "block", symbol: "■", label: "Crate" },
+						"0,1": { type: "belt", dir: "S", symbol: "⇣", label: "Belt South" },
+						"2,1": { type: "rotR", symbol: "↻", label: "Rotate Right" },
+						"4,1": { type: "zap", symbol: "⚡", label: "Zap Rail" },
+						"1,2": { type: "block", symbol: "■", label: "Crate" },
+						"3,2": { type: "block", symbol: "■", label: "Crate" },
+						"0,3": { type: "zap", symbol: "⚡", label: "Zap Rail" },
+						"2,3": { type: "rotL", symbol: "↺", label: "Rotate Left" },
+						"4,3": { type: "belt", dir: "N", symbol: "⇡", label: "Belt North" },
+						"1,4": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+						"3,4": { type: "pulse", symbol: "◎", label: "Pulse Pad" },
+					},
+				},
+			];
+
+			function applyBoardPreset(presetId) {
+				const preset = BOARD_PRESETS.find(p => p.id === presetId);
+				if (!preset) return;
+				if (state.playing) {
+					// Queue for next loop reset — don't interrupt playback
+					// No queueRender here: the audio callback renders via Tone.Draw
+					state.pendingBoard = { tiles: { ...preset.tiles }, id: presetId };
+					state.message = preset.label + " board queued — changes on next loop.";
+					return;
+				}
+				BOARD.tiles = { ...preset.tiles };
+				state.activeBoardId = presetId;
+				resetBoardState(false);
+				saveState();
+				state.message = preset.label + " board loaded.";
+				queueRender();
+			}
+
+			function randomizeBoard() {
+				const tileTypes = [
+					() => ({ type: "belt", dir: ["N","E","S","W"][Math.floor(Math.random()*4)], symbol: "⇢", label: "Belt" }),
+					() => ({ type: "zap", symbol: "⚡", label: "Zap Rail" }),
+					() => ({ type: "pulse", symbol: "◎", label: "Pulse Pad" }),
+					() => ({ type: "rotL", symbol: "↺", label: "Rotate Left" }),
+					() => ({ type: "rotR", symbol: "↻", label: "Rotate Right" }),
+					() => ({ type: "block", symbol: "■", label: "Crate" }),
+				];
+				const tiles = {};
+				const density = clampNumber(state.boardRandomDensity, 0.25, 0.7, 0.45);
+				const startA = BOARD.starts.A.x + "," + BOARD.starts.A.y;
+				const startB = BOARD.starts.B.x + "," + BOARD.starts.B.y;
+				const maxBlocks = density >= 0.6 ? 5 : density >= 0.45 ? 4 : 3;
+				let blockCount = 0;
+				for (let y = 0; y < BOARD.rows; y++) {
+					for (let x = 0; x < BOARD.cols; x++) {
+						const key = x + "," + y;
+						if (key === startA || key === startB) continue;
+						if (Math.random() < density) {
+							const maker = tileTypes[Math.floor(Math.random() * tileTypes.length)];
+							const tile = maker();
+							if (tile.type === "block" && blockCount >= maxBlocks) continue;
+							if (tile.type === "block") blockCount++;
+							tiles[key] = tile;
+						}
+					}
+				}
+				const mode = density >= 0.6 ? "Chaos" : density >= 0.45 ? "Balanced" : "Sparse";
+				if (state.playing) {
+					// Queue for next loop reset — don't interrupt playback
+					// No queueRender: audio callback renders via Tone.Draw; UI click handler renders after
+					state.pendingBoard = { tiles: tiles, id: "random" };
+					state.message = "Board randomized — changes on next loop. (" + mode + ", " + Object.keys(tiles).length + " tiles).";
+					return;
+				}
+				BOARD.tiles = tiles;
+				state.activeBoardId = "random";
+				resetBoardState(false);
+				saveState();
+				state.message = "Board randomized (" + mode + ", " + Object.keys(tiles).length + " tiles).";
+				queueRender();
+			}
+
+			function cycleBoardDensity() {
+				const options = [0.3, 0.45, 0.6];
+				const current = clampNumber(state.boardRandomDensity, 0.25, 0.7, 0.45);
+				const idx = options.findIndex((v) => Math.abs(v - current) < 0.001);
+				state.boardRandomDensity = options[(idx + 1 + options.length) % options.length];
+				saveState();
+				const label = state.boardRandomDensity >= 0.6 ? "Chaos" : state.boardRandomDensity >= 0.45 ? "Balanced" : "Sparse";
+				state.message = "Board randomizer mode: " + label + ".";
+				queueRender();
+			}
+
+			const USER_BOARD_KEY = "roboseq-user-board";
+
+			function getUserBoard() {
+				try {
+					const raw = localStorage.getItem(USER_BOARD_KEY);
+					return raw ? JSON.parse(raw) : null;
+				} catch { return null; }
+			}
+
+			function saveUserBoard() {
+				localStorage.setItem(USER_BOARD_KEY, JSON.stringify({ tiles: { ...BOARD.tiles }, savedAt: Date.now() }));
+				state.activeBoardId = "user";
+				state.message = "Board saved to USER slot.";
+				saveState();
+				queueRender();
+			}
+
+			function loadUserBoard() {
+				const saved = getUserBoard();
+				const tiles = saved && saved.tiles ? { ...saved.tiles } : {};
+				if (state.playing) {
+					state.pendingBoard = { tiles, id: "user" };
+					state.message = "USER board queued — changes on next loop.";
+					queueRender();
+					return;
+				}
+				BOARD.tiles = tiles;
+				state.activeBoardId = "user";
+				resetBoardState(false);
+				saveState();
+				state.message = "USER board loaded" + (Object.keys(tiles).length ? "." : " (empty).");
+				queueRender();
+			}
+
+			function dirArrow(dir) {
+				return `<span class="dir-arrow dir-${dir}"></span>`;
+			}
+
+			function tilePixelArt(tile) {
+				if (!tile) return "";
+				
+				if (tile.type === "belt") {
+					// Road-style belt with pixel-art directional arrows
+					const dir = tile.dir;
+					const isVertical = dir === "N" || dir === "S";
+					
+					// Create pixel-art arrow based on direction
+					let arrowPolygon = '';
+					if (dir === "N") {
+						arrowPolygon = `<polygon points="20,8 14,18 17,18 17,28 23,28 23,18 26,18" fill="var(--belt)" />`;
+					} else if (dir === "S") {
+						arrowPolygon = `<polygon points="20,32 14,22 17,22 17,12 23,12 23,22 26,22" fill="var(--belt)" />`;
+					} else if (dir === "E") {
+						arrowPolygon = `<polygon points="32,20 22,14 22,17 12,17 12,23 22,23 22,26" fill="var(--belt)" />`;
+					} else { // W
+						arrowPolygon = `<polygon points="8,20 18,14 18,17 28,17 28,23 18,23 18,26" fill="var(--belt)" />`;
+					}
+					
+					return `
+						<svg width="40" height="40" viewBox="0 0 40 40" style="display:block;width:100%;height:100%;image-rendering:pixelated">
+							<!-- Road base --><rect x="2" y="2" width="36" height="36" fill="#001a2e" />
+							<!-- Lane edges -->${isVertical ? 
+								`<line x1="8" y1="2" x2="8" y2="38" stroke="var(--belt)" stroke-width="2" />
+								 <line x1="32" y1="2" x2="32" y2="38" stroke="var(--belt)" stroke-width="2" />` :
+								`<line x1="2" y1="8" x2="38" y2="8" stroke="var(--belt)" stroke-width="2" />
+								 <line x1="2" y1="32" x2="38" y2="32" stroke="var(--belt)" stroke-width="2" />`
+							}
+							<!-- Pixel-art arrow -->${arrowPolygon}
+						</svg>
+					`;
+				}
+				if (tile.type === "rotL" || tile.type === "rotR") {
+					// Rotator gear
+					return `
+						<svg width="40" height="40" viewBox="0 0 40 40" style="display:block;width:100%;height:100%;image-rendering:pixelated">
+							<!-- Base --><rect x="2" y="2" width="36" height="36" fill="#1a1400" />
+							<!-- Gear teeth --><g stroke="var(--rotator)" stroke-width="2">
+								<line x1="20" y1="0" x2="20" y2="6" />
+								<line x1="34" y1="6" x2="30" y2="10" />
+								<line x1="40" y1="20" x2="34" y2="20" />
+								<line x1="34" y1="34" x2="30" y2="30" />
+								<line x1="20" y1="40" x2="20" y2="34" />
+								<line x1="6" y1="34" x2="10" y2="30" />
+								<line x1="0" y1="20" x2="6" y2="20" />
+								<line x1="6" y1="6" x2="10" y2="10" />
+							</g>
+							<!-- Center hub --><circle cx="20" cy="20" r="5" fill="var(--rotator)" />
+							<!-- Direction indicator --><polygon points="${tile.type === "rotL" ? "20,14 16,20 20,26 24,20" : "20,14 24,20 20,26 16,20"}" fill="var(--panel)" />
+						</svg>
+					`;
+				}
+				if (tile.type === "zap") {
+					// Electrical hazard / shock pad
+					return `
+						<svg width="40" height="40" viewBox="0 0 40 40" style="display:block;width:100%;height:100%;image-rendering:pixelated">
+							<!-- Base --><rect x="2" y="2" width="36" height="36" fill="#1a0012" />
+							<!-- Grid pattern --><g stroke="var(--zap)" stroke-width="1" opacity="0.5">
+								<line x1="10" y1="4" x2="10" y2="36" /><line x1="20" y1="4" x2="20" y2="36" /><line x1="30" y1="4" x2="30" y2="36" />
+							</g>
+							<!-- Lightning bolts -->
+							<polygon points="14,10 16,14 12,18 16,20 10,30 18,24 14,26 20,12" fill="var(--zap)" />
+							<polygon points="24,12 26,16 22,20 26,22 20,32 28,26 24,28 30,14" fill="var(--zap)" opacity="0.7" />
+							<!-- Spark dots --><circle cx="32" cy="8" r="1" fill="var(--zap)" /><circle cx="8" cy="34" r="1" fill="var(--zap)" />
+						</svg>
+					`;
+				}
+				if (tile.type === "pulse") {
+					// Cooldown / recharge pad
+					return `
+						<svg width="40" height="40" viewBox="0 0 40 40" style="display:block;width:100%;height:100%;image-rendering:pixelated">
+							<!-- Base --><rect x="2" y="2" width="36" height="36" fill="#001a00" />
+							<!-- Concentric circles (pulse ripples) -->
+							<circle cx="20" cy="20" r="4" fill="none" stroke="var(--pulse)" stroke-width="1" />
+							<circle cx="20" cy="20" r="8" fill="none" stroke="var(--pulse)" stroke-width="1" opacity="0.6" />
+							<circle cx="20" cy="20" r="12" fill="none" stroke="var(--pulse)" stroke-width="1" opacity="0.3" />
+							<!-- Center pad --><rect x="16" y="16" width="8" height="8" fill="var(--pulse)" />
+							<!-- Glow corners --><rect x="8" y="8" width="3" height="3" fill="var(--pulse)" opacity="0.5" /><rect x="29" y="29" width="3" height="3" fill="var(--pulse)" opacity="0.5" />
+						</svg>
+					`;
+				}
+				if (tile.type === "block") {
+					// Wooden crate — planks, cross-braces, nails
+					return `
+						<svg width="40" height="40" viewBox="0 0 40 40" style="display:block;width:100%;height:100%;image-rendering:pixelated">
+							<!-- Crate body --><rect x="4" y="4" width="32" height="32" fill="#5c3d1e" />
+							<!-- Planks --><g fill="#6e4b28"><rect x="4" y="4" width="32" height="6" /><rect x="4" y="17" width="32" height="6" /><rect x="4" y="30" width="32" height="6" /></g>
+							<!-- Plank edges --><g stroke="#4a2e14" stroke-width="1"><line x1="4" y1="10" x2="36" y2="10" /><line x1="4" y1="17" x2="36" y2="17" /><line x1="4" y1="23" x2="36" y2="23" /><line x1="4" y1="30" x2="36" y2="30" /></g>
+							<!-- Cross braces --><g stroke="#8b6939" stroke-width="2"><line x1="6" y1="6" x2="34" y2="34" /><line x1="34" y1="6" x2="6" y2="34" /></g>
+							<!-- Frame --><rect x="4" y="4" width="32" height="32" fill="none" stroke="#4a2e14" stroke-width="2" />
+							<!-- Nails --><g fill="#aaa"><rect x="7" y="7" width="2" height="2" /><rect x="31" y="7" width="2" height="2" /><rect x="7" y="31" width="2" height="2" /><rect x="31" y="31" width="2" height="2" /><rect x="19" y="19" width="2" height="2" /></g>
+						</svg>
+					`;
+				}
+				return "";
+			}
+
+			function robotPixelArt(botId) {
+				if (botId === "A") {
+					// Scout-7: chibi JRPG recon bot — huge visor head, tiny limbs, antenna
+					return `
+						<svg width="64" height="64" viewBox="0 0 32 32" style="display:block;margin:0 auto;image-rendering:pixelated">
+							<!-- Antenna pip --><rect x="15" y="0" width="2" height="2" fill="var(--accent)" />
+							<!-- Antenna stalk --><rect x="15" y="2" width="2" height="2" fill="var(--bot-a2)" />
+							<!-- Head dome top --><rect x="10" y="4" width="12" height="2" fill="var(--bot-a)" />
+							<!-- Head main --><rect x="8" y="6" width="16" height="10" fill="var(--bot-a)" />
+							<!-- Head shine --><rect x="9" y="6" width="3" height="2" fill="var(--bot-a2)" opacity="0.5" />
+							<!-- Visor bg --><rect x="9" y="8" width="14" height="6" fill="#0a0a1a" />
+							<!-- Left eye --><rect x="10" y="9" width="4" height="4" fill="var(--accent)" /><rect x="12" y="10" width="2" height="2" fill="#fff" />
+							<!-- Right eye --><rect x="18" y="9" width="4" height="4" fill="var(--accent)" /><rect x="18" y="10" width="2" height="2" fill="#fff" />
+							<!-- Mouth grill --><rect x="13" y="14" width="6" height="1" fill="var(--bot-a2)" />
+							<!-- Ears --><rect x="6" y="8" width="2" height="4" fill="var(--bot-a2)" /><rect x="24" y="8" width="2" height="4" fill="var(--bot-a2)" />
+							<!-- Body --><rect x="11" y="16" width="10" height="6" fill="var(--bot-a)" />
+							<!-- Core gem --><rect x="14" y="17" width="4" height="2" fill="var(--accent)" />
+							<!-- Left arm --><rect x="8" y="17" width="3" height="4" fill="var(--bot-a2)" /><rect x="7" y="21" width="3" height="2" fill="var(--accent)" />
+							<!-- Right arm --><rect x="21" y="17" width="3" height="4" fill="var(--bot-a2)" /><rect x="22" y="21" width="3" height="2" fill="var(--accent)" />
+							<!-- Legs --><rect x="12" y="22" width="3" height="4" fill="var(--bot-a2)" /><rect x="17" y="22" width="3" height="4" fill="var(--bot-a2)" />
+							<!-- Feet --><rect x="11" y="26" width="4" height="2" fill="var(--bot-a)" /><rect x="17" y="26" width="4" height="2" fill="var(--bot-a)" />
+							<!-- Thruster glow --><rect x="12" y="28" width="2" height="2" fill="var(--accent)" opacity="0.6" /><rect x="18" y="28" width="2" height="2" fill="var(--accent)" opacity="0.6" />
+						</svg>
+					`;
+				} else {
+					// Echo-3: chibi JRPG bot — same proportions as Scout, arms & legs, horn antennas
+					return `
+						<svg width="64" height="64" viewBox="0 0 32 32" style="display:block;margin:0 auto;image-rendering:pixelated">
+							<!-- Horn antennas --><rect x="9" y="0" width="2" height="2" fill="var(--warn)" /><rect x="21" y="0" width="2" height="2" fill="var(--warn)" />
+							<!-- Antenna stalks --><rect x="10" y="2" width="2" height="2" fill="var(--bot-b2)" /><rect x="20" y="2" width="2" height="2" fill="var(--bot-b2)" />
+							<!-- Head dome top --><rect x="10" y="4" width="12" height="2" fill="var(--bot-b)" />
+							<!-- Head main --><rect x="8" y="6" width="16" height="10" fill="var(--bot-b)" />
+							<!-- Head shine --><rect x="9" y="6" width="3" height="2" fill="var(--bot-b2)" opacity="0.5" />
+							<!-- Visor bg --><rect x="9" y="8" width="14" height="6" fill="#0a0a1a" />
+							<!-- Left eye --><rect x="10" y="9" width="4" height="4" fill="var(--warn)" /><rect x="12" y="10" width="2" height="2" fill="#fff" />
+							<!-- Right eye --><rect x="18" y="9" width="4" height="4" fill="var(--warn)" /><rect x="18" y="10" width="2" height="2" fill="#fff" />
+							<!-- Mouth grill --><rect x="13" y="14" width="6" height="1" fill="var(--bot-b2)" />
+							<!-- Ears --><rect x="6" y="8" width="2" height="4" fill="var(--bot-b2)" /><rect x="24" y="8" width="2" height="4" fill="var(--bot-b2)" />
+							<!-- Body --><rect x="11" y="16" width="10" height="6" fill="var(--bot-b)" />
+							<!-- Core gem --><rect x="14" y="17" width="4" height="2" fill="var(--warn)" />
+							<!-- Left arm --><rect x="8" y="17" width="3" height="4" fill="var(--bot-b2)" /><rect x="7" y="21" width="3" height="2" fill="var(--warn)" />
+							<!-- Right arm --><rect x="21" y="17" width="3" height="4" fill="var(--bot-b2)" /><rect x="22" y="21" width="3" height="2" fill="var(--warn)" />
+							<!-- Legs --><rect x="12" y="22" width="3" height="4" fill="var(--bot-b2)" /><rect x="17" y="22" width="3" height="4" fill="var(--bot-b2)" />
+							<!-- Feet --><rect x="11" y="26" width="4" height="2" fill="var(--bot-b)" /><rect x="17" y="26" width="4" height="2" fill="var(--bot-b)" />
+							<!-- Thruster glow --><rect x="12" y="28" width="2" height="2" fill="var(--warn)" opacity="0.6" /><rect x="18" y="28" width="2" height="2" fill="var(--warn)" opacity="0.6" />
+						</svg>
+					`;
+				}
+			}
+
+			function heartPixelArt() {
+				// 9×8 pixel heart — classic game style
+				const rows = [
+					"  ##  ## ",
+					" ########",
+					"#########",
+					"#########",
+					" ####### ",
+					"  #####  ",
+					"   ###   ",
+					"    #    ",
+				];
+				const px = 4;
+				const w = 9 * px, h = 8 * px;
+				let rects = '';
+				rows.forEach((row, ry) => {
+					for (let rx = 0; rx < row.length; rx++) {
+						if (row[rx] === '#') {
+							// Lighter pink highlight on top two rows
+							const fill = ry < 2 ? '#ff8ec4' : '#ff4da6';
+							rects += `<rect x="${rx * px}" y="${ry * px}" width="${px}" height="${px}" fill="${fill}"/>`;
+						}
+					}
+				});
+				return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" style="image-rendering:pixelated">${rects}</svg>`;
+			}
+
+			function clashPixelArt() {
+				// Impact star / spark burst — 10×10 pixel art
+				return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" style="image-rendering:pixelated">
+					<!-- Outer spikes -->
+					<rect x="18" y="0"  width="4" height="4" fill="#fff"/>
+					<rect x="18" y="36" width="4" height="4" fill="#fff"/>
+					<rect x="0"  y="18" width="4" height="4" fill="#fff"/>
+					<rect x="36" y="18" width="4" height="4" fill="#fff"/>
+					<!-- Diagonal spikes -->
+					<rect x="6"  y="6"  width="4" height="4" fill="#ffdd44"/>
+					<rect x="30" y="6"  width="4" height="4" fill="#ffdd44"/>
+					<rect x="6"  y="30" width="4" height="4" fill="#ffdd44"/>
+					<rect x="30" y="30" width="4" height="4" fill="#ffdd44"/>
+					<!-- Inner ring -->
+					<rect x="14" y="10" width="4" height="4" fill="#ffdd44"/>
+					<rect x="22" y="10" width="4" height="4" fill="#ffdd44"/>
+					<rect x="10" y="14" width="4" height="4" fill="#ffdd44"/>
+					<rect x="26" y="14" width="4" height="4" fill="#ffdd44"/>
+					<rect x="10" y="22" width="4" height="4" fill="#ffdd44"/>
+					<rect x="26" y="22" width="4" height="4" fill="#ffdd44"/>
+					<rect x="14" y="26" width="4" height="4" fill="#ffdd44"/>
+					<rect x="22" y="26" width="4" height="4" fill="#ffdd44"/>
+					<!-- Center flash -->
+					<rect x="14" y="14" width="12" height="12" fill="#fff"/>
+					<rect x="16" y="16" width="8"  height="8"  fill="#ffdd44"/>
+					<rect x="18" y="18" width="4"  height="4"  fill="#fff"/>
+				</svg>`;
+			}
+
+			function explosionPixelArt(botId) {
+				const c = botId === "A" ? "var(--bot-a)" : "var(--bot-b)";
+				return `
+					<div class="explosion" aria-hidden="true">
+						<svg viewBox="0 0 16 16" style="display:block;width:100%;height:100%;image-rendering:pixelated">
+							<rect x="7" y="0" width="2" height="2" fill="${c}" />
+							<rect x="3" y="2" width="2" height="2" fill="${c}" />
+							<rect x="11" y="2" width="2" height="2" fill="${c}" />
+							<rect x="0" y="7" width="2" height="2" fill="${c}" />
+							<rect x="14" y="7" width="2" height="2" fill="${c}" />
+							<rect x="3" y="11" width="2" height="2" fill="${c}" />
+							<rect x="11" y="11" width="2" height="2" fill="${c}" />
+							<rect x="7" y="14" width="2" height="2" fill="${c}" />
+							<rect x="5" y="5" width="6" height="6" fill="#fff" style="animation:explode-flash 0.55s steps(3,end) forwards" />
+							<rect x="6" y="6" width="4" height="4" fill="${c}" />
+							<rect x="7" y="7" width="2" height="2" fill="#fff" />
+						</svg>
+					</div>
+				`;
+			}
+
+			function describeStep(step) {
+				const action = ACTIONS.find((item) => item.id === step.action);
+				const mod = MODIFIERS.find((item) => item.id === step.modifier);
+				return action.icon + " " + action.label + " · x" + step.repeat + " · " + Math.round(step.probability * 100) + "% · " + mod.label;
+			}
+
+			function actionLabel(actionId) {
+				const item = ACTIONS.find((entry) => entry.id === actionId);
+				return item ? item.label : actionId;
+			}
+
+			function renderTransport() {
+				const step = state.currentStep;
+				const phaseDots = "";
+				const mixerRows = [
+					{ key: "master", label: "Master" },
+					{ key: "melody", label: "Melody" },
+					{ key: "botB", label: "Bot B" },
+					{ key: "percussion", label: "Perc" },
+					{ key: "fx", label: "FX" },
+					{ key: "drums", label: "Drums" },
+				];
+				return `
+					<section class="panel transport">
+						<div class="header-bar">
+							<div class="title-block">
+								<h1>ROBOSEQ</h1>
+								<div class="hdr-buttons">
+									<button class="primary" data-action="toggle-play">${state.playing || state.startingPlayback ? "■ STOP" : "▶ PLAY"}</button>
+									<button class="danger" data-action="reset-board"><span style="font-size:1.4em">↺</span></button>
+									<button class="warn" data-action="toggle-settings">${state.showSettings ? "✕" : "MIX"}</button>
+									<button data-action="toggle-help">?</button>
+								</div>
+							</div>
+							<div class="hud-bar">
+								<div class="hud-chip ${state.playing ? "blink" : ""}"><strong>${state.startingPlayback ? "STARTING" : state.playing ? "◉ LIVE" : "READY"}</strong></div>
+								<div class="hud-chip">REG <strong>${step >= 0 ? String(step + 1).padStart(2, "0") : "--"}</strong>/<strong>${state.loopLength}</strong></div>
+								<div class="hud-chip">CYC <strong>${String(state.cycle + 1).padStart(2, "0")}</strong></div>
+								<div class="hud-chip"><strong>${Math.round(state.bpm * (state.playbackRate || 1))}</strong> BPM</div>
+							</div>
+						</div>
+						<div class="ctrl-group">
+							<div class="ctrl-item">
+								<span class="ctrl-label">BPM</span>
+								<input type="range" min="60" max="168" step="1" value="${state.bpm}" data-input="bpm">
+							</div>
+							<div class="ctrl-item">
+								<span class="ctrl-label">Loop</span>
+								<div class="seg-row">
+									${LOOP_OPTIONS.map((value) => `<button class="${state.loopLength === value ? "active" : ""}" data-action="loop-length" data-loop="${value}">${value}</button>`).join("")}
+								</div>
+							</div>
+							<div class="ctrl-item">
+								<span class="ctrl-label">TPM</span>
+								<div class="seg-row">
+									${[1, 2, 4].map((value) => `<button class="${state.ticksPerMove === value ? "active" : ""}" data-action="ticks-per-move" data-ticks="${value}">${value}</button>`).join("")}
+								</div>
+							</div>
+							<div class="ctrl-item">
+								<span class="ctrl-label">Scale</span>
+								<div class="seg-row">
+									<button class="active" data-action="cycle-scale">${state.scale} ↻</button>
+								</div>
+							</div>
+						</div>
+						${state.showSettings ? `
+							<div class="mixer-panel">
+								<div class="ctrl-label">MIX</div>
+								<div class="mixer-grid">
+									${mixerRows.map((row) => {
+										const value = state.mixer[row.key];
+										const pct = Math.round(value * 100);
+										return `
+											<label class="mixer-row">
+												<span>${row.label}</span>
+												<input type="range" min="0" max="1" step="0.01" value="${value}" data-input="mixer-${row.key}">
+												<span class="mixer-value">${pct}%</span>
+											</label>
+										`;
+									}).join("")}
+								</div>
+							</div>
+						` : ""}
+					</section>
+				`;
+			}
+
+			function renderStatusCards() {
+				return `
+					<div class="bot-status-grid">
+						${["A", "B"].map((botId) => {
+							const bot = state.boardState[botId];
+							const meta = BOT_META[botId];
+							const maxHP = 6;
+							const hp = Math.max(0, maxHP - bot.heat);
+							const hpPct = Math.round((hp / maxHP) * 100);
+							const hpColor = hp <= 2 ? "var(--danger)" : hp <= 4 ? "var(--warn)" : "var(--pulse)";
+							const deathTag = bot.deaths > 0 ? `<span style="font-size:8px;opacity:0.7"> DEATHS: ${bot.deaths}</span>` : "";
+							const brokenHeart = state.boardState.clashCooldown > 0 ? '<span style="position:absolute;left:-14px;top:50%;transform:translateY(-50%);font-size:10px">💔</span>' : '';
+							return `
+								<div class="status-card bot-${botId.toLowerCase()}">
+									<h4 style="color:${meta.color}">${meta.name} ${dirArrow(bot.dir)}</h4>
+									<div class="status-stats">
+										<span>${bot.x},${bot.y}${deathTag}</span>
+									</div>
+									<div style="position:relative;width:100%;height:6px;background:#1a1a2e;border-radius:3px;overflow:visible;margin:2px 0">
+										${brokenHeart}
+										<div style="width:${hpPct}%;height:100%;background:${hpColor};transition:width 0.2s;border-radius:3px"></div>
+									</div>
+									<div class="robot-badge">${robotPixelArt(botId)}</div>
+								</div>
+							`;
+						}).join("")}
+					</div>
+				`;
+			}
+
+			function renderBoard() {
+				const densityLabel = state.boardRandomDensity >= 0.6 ? "CHAOS" : state.boardRandomDensity >= 0.45 ? "BALANCED" : "SPARSE";
+				const cells = [];
+				const now = Date.now();
+				const explosions = (state.boardState.explosions || []).filter(e => now - e.tick < 700);
+				state.boardState.explosions = explosions;
+				const hearts = (state.boardState.hearts || []).filter(h => now - h.tick < 700);
+				state.boardState.hearts = hearts;
+				const activeKeySet = new Set(state.boardState.activeKeys || []);
+				const trailA = state.boardState.trailA || [];
+				const trailB = state.boardState.trailB || [];
+				const trailMapA = Object.create(null);
+				const trailMapB = Object.create(null);
+				trailA.forEach((k, idx) => { trailMapA[k] = idx; });
+				trailB.forEach((k, idx) => { trailMapB[k] = idx; });
+				const explosionMap = Object.create(null);
+				explosions.forEach((e) => {
+					const k = boardKey(e.x, e.y);
+					if (!explosionMap[k]) explosionMap[k] = [];
+					explosionMap[k].push(e);
+				});
+				const heartMap = Object.create(null);
+				hearts.forEach((h) => {
+					if (!h.shown) {
+						heartMap[boardKey(h.x, h.y)] = true;
+						h.shown = true;
+					}
+				});
+				const clashes = (state.boardState.clashes || []).filter(c => now - c.tick < 500);
+				state.boardState.clashes = clashes;
+				const clashMap = Object.create(null);
+				clashes.forEach((c) => {
+					if (!c.shown) {
+						const victim = c.attacker === "A" ? "B" : "A";
+						clashMap[boardKey(c.x, c.y)] = victim;
+						c.shown = true;
+					}
+				});
+				for (let y = 0; y < BOARD.rows; y += 1) {
+					for (let x = 0; x < BOARD.cols; x += 1) {
+						const key = boardKey(x, y);
+						const tile = tileAt(x, y);
+						const botsHere = ["A", "B"].filter((botId) => {
+							const bot = state.boardState[botId];
+							return bot.x === x && bot.y === y && now >= (bot.hiddenUntil || 0);
+						});
+						const cellExplosions = explosionMap[key] || [];
+						const cellHeart = heartMap[key];
+						const cellClash = clashMap[key];
+						const tileType = tile ? (tile.type === "rotL" || tile.type === "rotR" ? "rotator" : tile.type) : "";
+						const activeClass = activeKeySet.has(key) ? "active-cell" : "";
+						const aIdx = trailMapA[key];
+						const bIdx = trailMapB[key];
+						const trailDots = [];
+						if (Number.isInteger(aIdx) && !botsHere.includes("A")) {
+							const latest = aIdx === trailA.length - 1 ? " trail-latest" : "";
+							trailDots.push(`<span class="trail-marker trail-a${latest}" style="width:6px;height:6px;left:2px;bottom:2px"></span>`);
+						}
+						if (Number.isInteger(bIdx) && !botsHere.includes("B")) {
+							const latest = bIdx === trailB.length - 1 ? " trail-latest" : "";
+							trailDots.push(`<span class="trail-marker trail-b${latest}" style="width:6px;height:6px;right:2px;bottom:2px"></span>`);
+						}
+						cells.push(`
+							<div class="cell ${tileType} ${activeClass}" title="${tile ? tile.label : "Open tile"}">
+								<div class="tile-mark">${tile ? tilePixelArt(tile) : ""}</div>
+								${trailDots.join("")}
+								<div class="cell-overlay">
+									${cellHeart ? '<span class="love-heart">' + heartPixelArt() + '</span>' : ''}
+									<div class="cell-overlay-top">
+										<div class="cell-coord">${x},${y}</div>
+										<div class="cell-coord">${tile ? tile.label : "Open"}</div>
+									</div>
+									<div class="cell-bot-row">
+										${cellExplosions.map((e) => `
+											<span class="cell-bot-mini bot-${e.bot.toLowerCase()}">
+												<span class="cell-bot-sprite">${explosionPixelArt(e.bot)}</span>
+											</span>
+										`).join("")}
+										${botsHere.map((botId) => `
+											<span class="cell-bot-mini bot-${botId.toLowerCase()}" style="position:relative">
+												<span class="cell-bot-sprite">${robotPixelArt(botId)}</span>
+												${cellClash === botId ? '<span class="dash-clash">' + clashPixelArt() + '</span>' : ''}
+												${dirArrow(state.boardState[botId].dir)}
+											</span>
+										`).join("")}
+									</div>
+								</div>
+							</div>
+						`);
+					}
+				}
+
+				const legend = [
+					{ color: "var(--belt)", label: "Belts move bots mid-step" },
+					{ color: "var(--rotator)", label: "Rotators twist facing" },
+					{ color: "var(--zap)", label: "Zap rails add sparks" },
+					{ color: "var(--pulse)", label: "Pulse pads cool the bots" },
+				];
+
+				const eventRows = Array.from({ length: 6 }, (_, index) => {
+					const event = (state.boardState.events || [])[index];
+					if (!event) {
+						return `<div class="event-item ev-empty"><strong>--</strong><span>...</span></div>`;
+					}
+					return `<div class="event-item ev-${event.kind}"><strong>${event.kind.toUpperCase()}</strong><span>${event.label}</span></div>`;
+				});
+
+				return `
+					<section class="panel board-panel">
+						<div class="panel-head">
+							<div>
+								<h2>▦ Battle Board</h2>
+								<div class="panel-copy">5×5. Hazards fire each register. Resets every loop.</div>
+							</div>
+							<div class="hud-chip">DETERMINISTIC</div>
+						</div>
+						<div class="btn-row" style="flex-wrap:wrap">
+							${BOARD_PRESETS.map(p => {
+								const isActive = (state.activeBoardId || 'default') === p.id;
+								const isPending = state.pendingBoard && state.pendingBoard.id === p.id;
+								const cls = isPending ? 'pending' : isActive ? 'active' : '';
+								return `<button class="${cls}" data-action="board-preset" data-preset="${p.id}">${p.label}</button>`;
+							}).join("")}
+							<button class="warn" data-action="cycle-board-density">${densityLabel}</button>
+							<button class="${state.pendingBoard && state.pendingBoard.id === 'random' ? 'pending' : 'warn'}" data-action="randomize-board">⚄ REROLL</button>
+						</div>
+						<div class="btn-row" style="flex-wrap:wrap;gap:3px">
+							<button class="${state.pendingBoard && state.pendingBoard.id === 'user' ? 'pending' : state.activeBoardId === 'user' ? 'active' : ''}" data-action="load-user-board">USER</button>
+							<button class="primary" data-action="save-user-board" style="font-size:6px">💾 SAVE</button>
+							<button class="warn" data-action="clear-user-board">CLR</button>
+						</div>
+						${renderStatusCards()}
+						<div class="board-wrap">
+							<div class="board-grid">${cells.join("")}</div>
+							<div class="legend">
+								${legend.map((item) => `
+									<div class="legend-item"><span class="legend-swatch" style="background:${item.color}"></span><span>${item.label}</span></div>
+								`).join("")}
+							</div>
+							<div class="event-log">
+								${eventRows.join("")}
+							</div>
+						</div>
+					</section>
+				`;
+			}
+
+			function renderStepCard(botId, step, index) {
+				const botClass = "bot-" + botId.toLowerCase();
+				const current = state.playing && state.currentStep === index ? "current" : "";
+				const action = ACTIONS.find((item) => item.id === step.action);
+				const mod = MODIFIERS.find((item) => item.id === step.modifier);
+				const probPct = Math.round(step.probability * 100);
+				const probColor = probPct === 100 ? "var(--accent)" : probPct >= 75 ? "var(--warn)" : "var(--danger)";
+				const actionColorMap = {
+					move: "var(--pulse)",
+					back: "var(--line3)",
+					turnL: "var(--rotator)",
+					turnR: "var(--belt)",
+					dash: "var(--danger)",
+					ping: "var(--accent2)",
+					wait: "var(--muted)",
+				};
+				const modColorMap = {
+					steady: "var(--muted)",
+					bright: "var(--warn)",
+					low: "var(--bot-b)",
+					wobble: "var(--accent)",
+					glitch: "var(--danger)",
+				};
+				const actionColor = actionColorMap[step.action] || "var(--accent)";
+				const modColor = modColorMap[step.modifier] || "var(--text2)";
+				return `
+					<div class="step-card ${botClass} ${current}" draggable="true" data-drag-bot="${botId}" data-drag-step="${index}">
+						<div class="step-top">
+							<span class="step-index">${String(index + 1).padStart(2, "0")}</span>
+							<button class="action-pick" data-action="cycle-action" data-bot="${botId}" data-step="${index}" style="border-color:${actionColor};color:${actionColor}">${action.icon} ${action.label}</button>
+						</div>
+						<div class="step-top">
+							<button class="quick-btn" data-action="cycle-modifier" data-bot="${botId}" data-step="${index}" style="border-color:${modColor};color:${modColor}">MOD ${mod.label}</button>
+							<button class="quick-btn" data-action="cycle-prob" data-bot="${botId}" data-step="${index}" style="border-color:${probColor};color:${probColor}">FIRE ${probPct}%</button>
+						</div>
+					</div>
+				`;
+			}
+
+			function renderPlanner() {
+				return `
+					<section class="panel planner-panel">
+						<div class="panel-head">
+							<div>
+								<h2>▤ Program Registers</h2>
+								<div class="panel-copy">Tap a block to cycle command. No dropdowns. Drag to reorder.</div>
+							</div>
+							<div class="btn-row">
+								<button class="warn" data-action="randomize-steps" data-bot="A">⚄ RND A</button>
+								<button class="warn" data-action="randomize-steps" data-bot="B">⚄ RND B</button>
+								<button class="warn" data-action="randomize-all-steps">⚄ RND ALL</button>
+								<button class="${state.registersSwapped ? 'active' : 'warn'}" data-action="swap-registers">⇅ REG SWAP</button>
+								<button class="danger" data-action="reset-all-steps">↺ RESET</button>
+							</div>
+						</div>
+						<div class="planner-stack">
+							${["A", "B"].map((botId) => {
+								const progLen = state.bots[botId].programLength || state.loopLength;
+								const progOptions = LOOP_OPTIONS.filter(v => v <= state.loopLength);
+								return `
+								<section class="bot-card bot-${botId.toLowerCase()}">
+									<div class="bot-head">
+										<div class="bot-name-with-art">
+											<div class="bot-name" style="color:${BOT_META[botId].color}">
+												${botId === "A" ? "[A] " : "[B] "}${BOT_META[botId].name}
+											</div>
+										</div>
+										<div class="seg-row" style="gap:2px;font-size:9px">
+											${progOptions.map(v => `<button style="min-width:22px;padding:2px 4px;font-size:9px" class="${progLen === v ? "active" : ""}" data-action="program-length" data-bot="${botId}" data-len="${v}">${v}</button>`).join("")}
+										</div>
+									</div>
+									<div class="step-list">
+										${state.bots[botId].steps.slice(0, progLen).map((step, index) => renderStepCard(botId, step, index)).join("")}
+									</div>
+								</section>
+								`;
+							}).join("")}
+						</div>
+					</section>
+				`;
+			}
+
+			function renderBassModSequencer() {
+				const currentModStep = state.voiceModIndex % state.bassMod.length;
+				const freqLabels = { 0.25: "¼×", 0.5: "½×", 1: "1×", 2: "2×", 4: "4×" };
+				const freqLabel = freqLabels[state.voiceModLoopFreq] || state.voiceModLoopFreq + "×";
+				const triggerInfo = VOICE_MOD_TRIGGERS.find(t => t.id === state.voiceModTrigger);
+				if (!state.showVoiceMod) {
+					const currentStep = state.bassMod.steps[currentModStep];
+					const summaryText = (currentStep ? ROOT_NAMES[currentStep.root] + " " + currentStep.scale : "C major") + " · step " + (currentModStep + 1) + "/" + state.bassMod.length;
+					return `
+						<div class="bassmod-wrapper">
+						<section class="panel bassmod-panel">
+							<div class="panel-head" style="cursor:pointer" data-action="toggle-voicemod">
+								<div>
+									<h2>▩ Sequencer · <small style="color:var(--text2)">${summaryText}</small></h2>
+								</div>
+								<span style="font-size:10px;color:var(--text2)">▼</span>
+							</div>
+						</section>
+						</div>
+					`;
+				}
+				const resetDots = Array.from({ length: state.bassMod.length }, (_, index) => `
+					<span class="dot ${index <= state.voiceModResetCount ? "on" : ""}"></span>
+				`).join("");
+				const BOARD_SHORT = { "default": "FACT", "corridor": "CORR", "garden": "GRDN", "gauntlet": "GNTL", "spinner": "SPIN", "maze": "MAZE", "user": "USER" };
+				const DRUM_SHORT = { "four": "4FL", "break": "BRK", "half": "HLF", "offbeat": "OFF", "triplet": "TRP", "minimal": "MIN" };
+				return `
+					<div class="bassmod-wrapper">
+					<section class="panel bassmod-panel">
+						<div class="panel-head">
+							<div>
+								<h2 style="cursor:pointer" data-action="toggle-voicemod">▩ Seq 1 — Scale ▲</h2>
+								<div class="panel-copy">Scale, root &amp; semitone per step. Shifts everything each cycle.</div>
+								<div class="bassmod-progress" title="Reset progress">${resetDots}</div>
+							</div>
+							<div class="btn-row">
+								<button class="warn" data-action="cycle-voicemod-trigger">${triggerInfo.label}</button>
+								${state.voiceModTrigger === "loop" ? '<button class="warn" data-action="cycle-voicemod-loop-freq">' + freqLabel + '</button>' : ''}
+								${state.voiceModTrigger === "manual" ? '<button class="primary" data-action="manual-voicemod-advance">▶ NEXT</button>' : ''}
+								<button data-action="toggle-root-transpose">ROOT ${state.transposeWithRoot ? "ON" : "OFF"}</button>
+								<button data-action="reset-bassmod">RST</button>
+								<button data-action="randomize-bassmod">RND</button>
+								<button class="warn" data-action="toggle-voicemod">▲</button>
+							</div>
+						</div>
+						<div class="bassmod-grid">
+							<div class="bassmod-step" style="border:none;box-shadow:none;background:none;padding:0 6px">
+								<span></span>
+								<span class="ctrl-label" style="text-align:center">SCALE</span>
+								<span class="ctrl-label" style="text-align:center">ROOT</span>
+								<span class="ctrl-label" style="text-align:center">SEMITONE</span>
+							</div>
+							${state.bassMod.steps.slice(0, state.bassMod.length).map((modStep, index) => {
+								return `
+								<div class="bassmod-step ${currentModStep === index ? "active" : ""}">
+									<span class="step-index ${currentModStep === index ? "live" : ""}">
+										${currentModStep === index ? "▶" : ""} ${index + 1}
+									</span>
+									<div class="bassmod-cycle">
+										<button class="bassmod-cycle-btn" data-action="bass-scale-prev" data-step="${index}">◀</button>
+										<div class="bassmod-cycle-value">${modStep.scale}</div>
+										<button class="bassmod-cycle-btn" data-action="bass-scale-next" data-step="${index}">▶</button>
+									</div>
+									<div class="bassmod-cycle">
+										<button class="bassmod-cycle-btn" data-action="bass-root-prev" data-step="${index}">◀</button>
+										<div class="bassmod-cycle-value">${ROOT_NAMES[modStep.root] || "C"}</div>
+										<button class="bassmod-cycle-btn" data-action="bass-root-next" data-step="${index}">▶</button>
+									</div>
+									<div class="bassmod-cycle">
+										<button class="bassmod-cycle-btn" data-action="bass-interval-prev" data-step="${index}">◀</button>
+										<div class="bassmod-cycle-value">${modStep.semitone > 0 ? "+" : ""}${modStep.semitone}</div>
+										<button class="bassmod-cycle-btn" data-action="bass-interval-next" data-step="${index}">▶</button>
+									</div>
+								</div>`;
+							}).join("")}
+						</div>
+					</section>
+					<section class="panel bassmod-panel">
+						<div class="panel-head">
+							<div>
+								<h2>▩ Seq 2 — Board / Drums / Reg</h2>
+								<div class="panel-copy">Advances when Seq 1 wraps to step 1. Board, drum preset &amp; register swap.</div>
+							</div>
+							<div class="btn-row">
+						<button class="${state.seq2.pendingActive ? 'pending' : state.seq2.active ? 'active' : 'warn'}" data-action="seq2-toggle-active">${state.seq2.pendingActive ? 'PENDING' : state.seq2.active ? 'ON' : 'OFF'}</button>
+								<button class="${state.seq2.rndBotA ? 'active' : ''}" data-action="seq2-toggle-rnd-a" title="Randomize Bot A registers when Seq 2 cycles">RND A</button>
+								<button class="${state.seq2.rndBotB ? 'active' : ''}" data-action="seq2-toggle-rnd-b" title="Randomize Bot B registers when Seq 2 cycles">RND B</button>
+								<button data-action="reset-seq2">RST</button>
+								<button data-action="randomize-seq2">RND</button>
+							</div>
+						</div>
+						<div class="bassmod-grid">
+							<div class="bassmod-step" style="border:none;box-shadow:none;background:none;padding:0 6px;grid-template-columns:26px 1fr 1fr 36px">
+								<span></span>
+								<span class="ctrl-label" style="text-align:center">BOARD</span>
+								<span class="ctrl-label" style="text-align:center">DRUMS</span>
+								<span class="ctrl-label" style="text-align:center">BOT REG SWAP</span>
+							</div>
+							${state.seq2.steps.map((s2Step, index) => {
+								const boardLabel = s2Step.boardId && s2Step.boardId !== "--" ? (BOARD_SHORT[s2Step.boardId] || s2Step.boardId) : "--";
+								const drumLabel = s2Step.drumPresetId && s2Step.drumPresetId !== "--" ? (DRUM_SHORT[s2Step.drumPresetId] || s2Step.drumPresetId) : "--";
+								const isActive = state.seq2.active && state.seq2.index === index;
+								return `
+								<div class="bassmod-step ${isActive ? "active" : ""}" style="grid-template-columns:26px 1fr 1fr 36px">
+									<span class="step-index ${isActive ? "live" : ""}">
+										${isActive ? "▶" : ""} ${index + 1}
+									</span>
+									<div class="bassmod-cycle">
+										<button class="bassmod-cycle-btn" data-action="seq2-board-prev" data-step="${index}">◀</button>
+										<div class="bassmod-cycle-value">${boardLabel}</div>
+										<button class="bassmod-cycle-btn" data-action="seq2-board-next" data-step="${index}">▶</button>
+									</div>
+									<div class="bassmod-cycle">
+										<button class="bassmod-cycle-btn" data-action="seq2-drum-prev" data-step="${index}">◀</button>
+										<div class="bassmod-cycle-value">${drumLabel}</div>
+										<button class="bassmod-cycle-btn" data-action="seq2-drum-next" data-step="${index}">▶</button>
+									</div>
+									<button class="bassmod-cycle-btn" style="font-size:8px;padding:2px 4px;${s2Step.regSwap ? 'background:var(--pulse);color:#000' : ''}" data-action="seq2-regswap-toggle" data-step="${index}">${s2Step.regSwap ? "⇅" : "·"}</button>
+								</div>`;
+							}).join("")}
+						</div>
+					</section>
+					</div>
+				`;
+			}
+
+			function applyDrumPreset(presetId) {
+				const preset = DRUM_PRESETS.find(p => p.id === presetId);
+				if (!preset) return;
+				pushUndo();
+				state.drums.presetId = presetId;
+				state.drums.pattern = preset.pattern(getDrumSteps());
+				saveState();
+				state.message = "Drum preset: " + preset.label;
+				queueRender();
+			}
+
+			function toggleDrumCell(voice, step) {
+				pushUndo();
+				state.drums.pattern[voice][step] = state.drums.pattern[voice][step] ? 0 : 1;
+				state.drums.presetId = "custom";
+				saveState();
+				queueRender();
+			}
+
+			function clearDrumPattern() {
+				pushUndo();
+				state.drums.pattern = buildEmptyDrumPattern();
+				state.drums.presetId = "custom";
+				state.drums.on = false;
+				saveState();
+				state.message = "Drums cleared.";
+				queueRender();
+			}
+
+			function renderDrumSequencer() {
+				if (!state.showDrums) {
+					return `
+						<section class="panel drum-panel">
+							<div class="panel-head" style="cursor:pointer" data-action="toggle-drums">
+								<h2>🥁 Drum Machine · <small style="color:var(--text2)">${state.drums.on ? "ON" : "OFF"}</small></h2>
+								<span style="font-size:10px;color:var(--text2)">▼</span>
+							</div>
+						</section>
+					`;
+				}
+				const n = getDrumSteps();
+				const drumTick = (state.drumTick || 0) % getDrumSteps();
+				return `
+					<section class="panel drum-panel">
+						<div class="panel-head">
+							<h2 style="cursor:pointer" data-action="toggle-drums">🥁 Drum Machine ▲</h2>
+						</div>
+						<div class="drum-controls">
+							<button class="${state.drums.on ? 'primary' : ''}" data-action="toggle-drums-on">${state.drums.on ? "■ ON" : "▶ OFF"}</button>
+							${DRUM_PRESETS.map(p => `<button class="${state.drums.presetId === p.id ? 'active' : ''}" data-action="drum-preset" data-preset="${p.id}">${p.label}</button>`).join("")}
+							<button class="danger" data-action="clear-drums">CLR</button>
+						</div>
+						<div class="drum-grid" style="grid-template-columns: 40px repeat(${n}, 1fr)">
+							${DRUM_VOICES.map(voice => `
+								<div class="drum-label">${DRUM_LABELS[voice]}</div>
+								${Array.from({ length: n }, (_, i) => {
+									const on = state.drums.pattern[voice][i] ? "on" : "";
+									const current = state.playing && i === drumTick ? "current" : "";
+									return `<div class="drum-cell ${on} ${current} voice-${voice}" data-action="drum-cell" data-voice="${voice}" data-step="${i}"></div>`;
+								}).join("")}
+							`).join("")}
+						</div>
+					</section>
+				`;
+			}
+
+			function renderApp() {
+				const root = document.getElementById("app");
+				root.innerHTML = `
+					<main class="app-shell">
+						${renderTransport()}
+						${renderDrumSequencer()}
+						${renderBassModSequencer()}
+						${renderBoard()}
+						${renderPlanner()}
+						<div class="footer-note">Portrait-first · tap PLAY to start · board resets each loop · all sounds generated in-browser</div>
+					</main>
+					${state.showHelp ? `
+						<div class="tutorial-modal" style="position:fixed;inset:0;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;z-index:10000;backdrop-filter:blur(2px)">
+							<div class="px-accent" style="background:var(--panel);padding:20px;max-width:92%;max-height:90%;overflow-y:auto;border-radius:0">
+								<h2 style="font-family:var(--pixel);color:var(--accent);margin-bottom:14px">🤖 ROBOSEQ HELP</h2>
+								<div style="font-family:var(--mono);font-size:11px;color:var(--text);line-height:1.7">
+									<h3 style="color:var(--accent);margin:10px 0 6px;font-size:12px">BOARD TILES</h3>
+									<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="width:36px;height:36px;flex-shrink:0">${tilePixelArt({type:"belt",dir:"E",symbol:"⇢",label:"Belt East"})}</div><div><strong style="color:var(--belt)">BELT</strong> — Pushes the bot one tile in the arrow direction. Chains up to 3 belts.</div></div>
+									<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="width:36px;height:36px;flex-shrink:0">${tilePixelArt({type:"rotL",symbol:"↺",label:"Rotate Left"})}</div><div><strong style="color:var(--rotator)">ROTATE LEFT</strong> — Turns the bot 90° counter-clockwise.</div></div>
+									<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="width:36px;height:36px;flex-shrink:0">${tilePixelArt({type:"rotR",symbol:"↻",label:"Rotate Right"})}</div><div><strong style="color:var(--rotator)">ROTATE RIGHT</strong> — Turns the bot 90° clockwise.</div></div>
+									<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="width:36px;height:36px;flex-shrink:0">${tilePixelArt({type:"zap",symbol:"⚡",label:"Zap Rail"})}</div><div><strong style="color:var(--zap)">ZAP RAIL</strong> — Adds +1 heat. At max heat (6) the bot explodes &amp; respawns. Notes go short &amp; staccato.</div></div>
+									<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="width:36px;height:36px;flex-shrink:0">${tilePixelArt({type:"pulse",symbol:"◎",label:"Pulse Pad"})}</div><div><strong style="color:var(--pulse)">PULSE PAD</strong> — Removes 1 heat, healing the bot. Notes go longer &amp; sustained.</div></div>
+									<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="width:36px;height:36px;flex-shrink:0">${tilePixelArt({type:"block",symbol:"■",label:"Crate"})}</div><div><strong style="color:#8b6939">CRATE</strong> — Blocks movement. Bot stays in place.</div></div>
+									<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="width:36px;height:36px;flex-shrink:0;background:var(--bg);border:1px solid var(--muted)"></div><div style="color:var(--text2)"><strong>EMPTY</strong> — No effect, bot passes through.</div></div>
+									<h3 style="color:var(--accent);margin:14px 0 6px;font-size:12px">HOW IT WORKS</h3>
+									<p style="margin-bottom:6px"><strong style="color:var(--accent2)">Two bots</strong> — [A] Scout-7 (high melody) and [B] Echo-3 (bass). Each follows its own program of direction steps.</p>
+									<p style="margin-bottom:6px"><strong style="color:var(--accent2)">Program registers</strong> — Each step is a direction (N/E/S/W). Drag to reorder, tap arrows to change. The loop repeats based on the Loop length.</p>
+									<p style="margin-bottom:6px"><strong style="color:var(--accent2)">Board position = note</strong> — X position picks the note from the scale, Y sets the octave. Tile effects alter the sound in real-time.</p>
+									<p style="margin-bottom:6px"><strong style="color:var(--accent2)">Heat &amp; death</strong> — Zaps raise heat (0-6). At 6, the bot explodes and respawns at its start. Pulse pads heal.</p>
+									<h3 style="color:var(--accent);margin:14px 0 6px;font-size:12px">CONTROLS</h3>
+									<p style="margin-bottom:6px"><strong>BPM</strong> — Tempo slider (60–168).</p>
+									<p style="margin-bottom:6px"><strong>Loop</strong> — Total registers per cycle (8–64).</p>
+									<p style="margin-bottom:6px"><strong>TPM</strong> — Ticks per move (1/2/4). Higher = ghost notes between steps.</p>
+									<p style="margin-bottom:6px"><strong>Scale</strong> — Cycle through scales. All notes quantize to the chosen scale.</p>
+									<p style="margin-bottom:6px"><strong>Seq 1</strong> — Scale/root/semitone sequencer. Shifts the musical key each cycle.</p>
+									<p style="margin-bottom:6px"><strong>Seq 2</strong> — Board/drum preset/register swap sequencer. Changes the board each cycle.</p>
+									<p style="margin-bottom:6px"><strong>Drum Machine</strong> — 16-step drum grid (12 in triplet modes). Pick presets or tap cells to edit.</p>
+									<p style="margin-bottom:6px"><strong>MIX</strong> — Volume mixer for each sound layer.</p>
+								</div>
+								<button data-action="toggle-help" style="width:100%;margin-top:14px;font-size:10px">CLOSE HELP</button>
+							</div>
+						</div>
+					` : ""}
+					${state.showTutorial ? `
+						<div class="tutorial-modal" style="position:fixed;inset:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:10000;backdrop-filter:blur(2px)">
+							<div class="px-accent" style="background:var(--panel);padding:20px;max-width:90%;max-height:90%;overflow-y:auto;border-radius:0">
+								<h2 style="font-family:var(--pixel);color:var(--accent);margin-bottom:12px">🤖 WELCOME TO ROBOSEQ</h2>
+								<div style="font-family:var(--mono);font-size:12px;color:var(--text);line-height:1.8">
+									<p style="margin-bottom:10px"><strong style="color:var(--accent)">DRAG TO REORDER:</strong><br>Grab any colored card and drag it to swap positions. Rearrange steps on the fly while the loop plays!</p>
+									<p style="margin-bottom:10px"><strong style="color:var(--warn)">PROGRAM BOTH BOTS:</strong><br>[A] Scout-7 = high chirps. [B] Echo-3 = chunky beeps. Each has their own 8-24 step loop.</p>
+									<p style="margin-bottom:10px"><strong style="color:var(--pulse)">BOARD HAZARDS:</strong><br>As bots move, they hit belts, rotators, zaps, pulse pads. Each changes the beat in real-time.</p>
+									<p style="margin-bottom:10px"><strong style="color:var(--accent2)">GET STARTED:</strong><br>1. Tap <strong>PLAY</strong> to start the loop<br>2. Drag steps around to change the pattern<br>3. Tap <strong>STOP</strong> anytime</p>
+									<p style="color:var(--muted);font-size:11px">Try the preset patterns first (Relay Drift, Pinball, Scramble) to hear how it works!</p>
+								</div>
+								<button data-action="close-tutorial" style="width:100%;margin-top:16px;font-size:10px">GOT IT · CLOSE TUTORIAL</button>
+							</div>
+						</div>
+					` : ""}
+				`;
+			}
+
+			function queueRender() {
+				if (suspendRender) {
+					pendingRender = true;
+					return;
+				}
+				if (renderQueued) {
+					return;
+				}
+				renderQueued = true;
+				requestAnimationFrame(() => {
+					renderQueued = false;
+					if (suspendRender) {
+						pendingRender = true;
+						return;
+					}
+					renderApp();
+					if (pendingRender) {
+						pendingRender = false;
+						queueRender();
+					}
+				});
+			}
+
+			/* Throttled render for playback ticks — caps visual updates
+			   to ~10 fps so the audio thread stays smooth. Non-playback
+			   actions (button clicks, slider changes) still use the
+			   instant queueRender path. */
+			let lastRenderTime = 0;
+			const RENDER_INTERVAL = 120; /* ms between playback renders */
+			let renderTimerId = 0;
+			function throttledRender() {
+				const now = performance.now();
+				if (now - lastRenderTime >= RENDER_INTERVAL) {
+					lastRenderTime = now;
+					queueRender();
+				} else if (!renderTimerId) {
+					renderTimerId = setTimeout(() => {
+						renderTimerId = 0;
+						lastRenderTime = performance.now();
+						queueRender();
+					}, RENDER_INTERVAL - (now - lastRenderTime));
+				}
+			}
+
+			document.addEventListener("focusin", (event) => {
+				if (event.target && (event.target.tagName === "SELECT" || event.target.type === "range")) {
+					suspendRender = true;
+				}
+			});
+
+			document.addEventListener("pointerdown", (event) => {
+				if (event.target && (event.target.tagName === "SELECT" || event.target.type === "range")) {
+					suspendRender = true;
+				}
+			});
+
+			document.addEventListener("pointerup", (event) => {
+				if (suspendRender && event.target && event.target.type === "range") {
+					suspendRender = false;
+					if (pendingRender) {
+						pendingRender = false;
+						queueRender();
+					}
+				}
+			});
+
+			document.addEventListener("focusout", (event) => {
+				if (event.target && (event.target.tagName === "SELECT" || event.target.type === "range")) {
+					suspendRender = false;
+					if (pendingRender) {
+						pendingRender = false;
+						queueRender();
+					}
+				}
+			});
+
+			/* STOP must fire on pointerdown so it works even when
+			   rapid re-renders (queueRender during playback) replace
+			   button DOM between mousedown and click events. */
+			let _pointerGateTimer = 0;
+			let _pointerStoppedPlay = false;
+			document.addEventListener("pointerdown", (event) => {
+				const target = event.target.closest("[data-action]");
+				if (!target) return;
+
+				/* Briefly suspend rendering so the DOM isn't replaced
+				   between pointerdown and the resulting click event.
+				   This is the root cause of "unresponsive buttons"
+				   during playback — the rAF innerHTML swap destroys
+				   the element before click fires. */
+				if (state.playing && !suspendRender) {
+					suspendRender = true;
+					clearTimeout(_pointerGateTimer);
+					_pointerGateTimer = setTimeout(() => {
+						suspendRender = false;
+						if (pendingRender) {
+							pendingRender = false;
+							queueRender();
+						}
+					}, 250);
+				}
+
+				if (target.dataset.action === "toggle-play") {
+					const transportRunning = Boolean(window.Tone && Tone.Transport.state === "started");
+					if (state.playing || state.startingPlayback || transportRunning) {
+						event.preventDefault();
+						_pointerStoppedPlay = true;
+						stopPlayback(true);
+					}
+				}
+			}, true);
+
+			document.addEventListener("click", async (event) => {
+				const target = event.target.closest("[data-action]");
+				if (!target) {
+					return;
+				}
+				/* During playback, rapid innerHTML re-renders can detach the
+				   element between pointerdown and click. Bail early and let the
+				   pointerup handler below take over in that case. */
+				if (!target.isConnected) return;
+				const action = target.dataset.action;
+				if (action === "close-tutorial") {
+					state.showTutorial = false;
+					queueRender();
+					return;
+				}
+				if (action === "toggle-help") {
+					state.showHelp = !state.showHelp;
+					queueRender();
+					return;
+				}
+				if (action === "toggle-drums") {
+					state.showDrums = !state.showDrums;
+					saveState();
+					queueRender();
+					return;
+				}
+				if (action === "toggle-drums-on") {
+					state.drums.on = !state.drums.on;
+					saveState();
+					state.message = state.drums.on ? "Drums ON." : "Drums OFF.";
+					queueRender();
+					return;
+				}
+				if (action === "drum-preset") {
+					applyDrumPreset(target.dataset.preset);
+					return;
+				}
+				if (action === "drum-cell") {
+					toggleDrumCell(target.dataset.voice, Number(target.dataset.step));
+					return;
+				}
+				if (action === "clear-drums") {
+					clearDrumPattern();
+					return;
+				}
+				if (action === "board-preset") {
+					applyBoardPreset(target.dataset.preset);
+					queueRender();
+					return;
+				}
+				if (action === "randomize-board") {
+					pushUndo();
+					randomizeBoard();
+					queueRender();
+					return;
+				}
+				if (action === "cycle-board-density") {
+					cycleBoardDensity();
+					return;
+				}
+				if (action === "save-user-board") {
+					pushUndo();
+					saveUserBoard();
+					return;
+				}
+				if (action === "load-user-board") {
+					pushUndo();
+					loadUserBoard();
+					return;
+				}
+				if (action === "clear-user-board") {
+					localStorage.removeItem(USER_BOARD_KEY);
+					state.message = "USER board cleared.";
+					if (state.activeBoardId === "user") {
+						pushUndo();
+						loadUserBoard();
+					} else {
+						queueRender();
+					}
+					return;
+				}
+				if (action === "randomize-steps") {
+					randomizeSteps(target.dataset.bot);
+					queueRender();
+					return;
+				}
+				if (action === "randomize-all-steps") {
+					randomizeAllSteps();
+					return;
+				}
+				if (action === "reset-all-steps") {
+					resetAllSteps();
+					return;
+				}
+				if (action === "toggle-play") {
+					/* If pointerdown already stopped playback, don't restart */
+					if (_pointerStoppedPlay) {
+						_pointerStoppedPlay = false;
+						return;
+					}
+					const transportRunning = Boolean(window.Tone && Tone.Transport.state === "started");
+					if (state.playing || state.startingPlayback || transportRunning) {
+						stopPlayback(true);
+						return;
+					}
+					/* play — armAudio is called internally by startPlayback */
+					await startPlayback();
+					return;
+				}
+				if (action === "reset-board") {
+					resetBoardState(true);
+					queueRender();
+					return;
+				}
+				if (action === "loop-length") {
+					setLoopLength(Number(target.dataset.loop));
+					return;
+				}
+				if (action === "program-length") {
+					setProgramLength(target.dataset.bot, Number(target.dataset.len));
+					return;
+				}
+				if (action === "ticks-per-move") {
+					const val = Number(target.dataset.ticks);
+					if ([1, 2, 4].includes(val)) {
+						state.ticksPerMove = val;
+						state.moveTick = 0;
+						if (window.Tone && Tone.Transport.state === "started") {
+							Tone.Transport.bpm.rampTo(getPlaybackBpm(), 0.05);
+						}
+						state.message = "Bots move every " + val + " tick" + (val > 1 ? "s" : "") + ".";
+						saveState();
+						queueRender();
+					}
+					return;
+				}
+				if (action === "toggle-quarter-speed") {
+					toggleQuarterSpeed();
+					return;
+				}
+					if (action === "toggle-settings") {
+						state.showSettings = !state.showSettings;
+						queueRender();
+						return;
+					}
+				if (action === "cycle-scale") {
+					cycleScale();
+					return;
+				}
+				if (action === "swap-registers") {
+					swapRegisters();
+					return;
+				}
+					if (action === "cycle-voicemod-trigger") {
+						cycleVoiceModTrigger();
+						return;
+					}
+					if (action === "cycle-voicemod-loop-freq") {
+						cycleVoiceModLoopFreq();
+						return;
+					}
+					if (action === "toggle-voicemod") {
+						state.showVoiceMod = !state.showVoiceMod;
+						saveState();
+						queueRender();
+						return;
+					}
+					if (action === "manual-voicemod-advance") {
+						advanceVoiceMod();
+						saveState();
+						state.message = "Sequencer → step " + (state.voiceModIndex + 1) + ".";
+						queueRender();
+						return;
+					}
+					if (action === "toggle-root-transpose") {
+						toggleRootTranspose();
+						return;
+					}
+					if (action === "bass-scale-prev") {
+						cycleBassModStepValue(Number(target.dataset.step), "scale", -1);
+						return;
+					}
+					if (action === "bass-scale-next") {
+						cycleBassModStepValue(Number(target.dataset.step), "scale", 1);
+						return;
+					}
+					if (action === "bass-root-prev") {
+						cycleBassModStepValue(Number(target.dataset.step), "root", -1);
+						return;
+					}
+					if (action === "bass-root-next") {
+						cycleBassModStepValue(Number(target.dataset.step), "root", 1);
+						return;
+					}
+					if (action === "bass-interval-prev") {
+						cycleBassModStepValue(Number(target.dataset.step), "semitone", -1);
+						return;
+					}
+					if (action === "bass-interval-next") {
+						cycleBassModStepValue(Number(target.dataset.step), "semitone", 1);
+						return;
+					}
+					if (action === "seq2-board-prev" || action === "seq2-board-next") {
+						const stepIdx = Number(target.dataset.step);
+						const step = state.seq2.steps[stepIdx];
+						const boardIds = ["--", ...BOARD_PRESETS.map(p => p.id), "user"];
+						const cur = boardIds.indexOf(step.boardId || "--");
+						const dir = action === "seq2-board-next" ? 1 : -1;
+						const next = boardIds[(cur + dir + boardIds.length) % boardIds.length];
+						pushUndo();
+						state.seq2.steps[stepIdx] = { ...step, boardId: next };
+						saveState();
+						queueRender();
+						return;
+					}
+					if (action === "seq2-drum-prev" || action === "seq2-drum-next") {
+						const stepIdx = Number(target.dataset.step);
+						const step = state.seq2.steps[stepIdx];
+						const drumIds = ["--", ...DRUM_PRESETS.map(p => p.id)];
+						const cur = drumIds.indexOf(step.drumPresetId || "--");
+						const dir = action === "seq2-drum-next" ? 1 : -1;
+						const next = drumIds[(cur + dir + drumIds.length) % drumIds.length];
+						pushUndo();
+						state.seq2.steps[stepIdx] = { ...step, drumPresetId: next };
+						saveState();
+						queueRender();
+						return;
+					}
+					if (action === "seq2-regswap-toggle") {
+						const stepIdx = Number(target.dataset.step);
+						const step = state.seq2.steps[stepIdx];
+						pushUndo();
+						state.seq2.steps[stepIdx] = { ...step, regSwap: !step.regSwap };
+						saveState();
+						queueRender();
+						return;
+					}
+					if (action === "seq2-toggle-active") {
+						pushUndo();
+						if (!state.seq2.active && !state.seq2.pendingActive) {
+							// Turning ON
+							if (state.playing) {
+								state.seq2.pendingActive = true;
+								state.message = "Seq 2 queued — starts on next Seq 1 wrap.";
+							} else {
+								state.seq2.active = true;
+								state.message = "Seq 2 active.";
+							}
+						} else {
+							// Turning OFF (or cancelling pending)
+							state.seq2.active = false;
+							state.seq2.pendingActive = false;
+							state.message = "Seq 2 off.";
+						}
+						saveState();
+						queueRender();
+						return;
+					}
+					if (action === "seq2-toggle-rnd-a") {
+						state.seq2.rndBotA = !state.seq2.rndBotA;
+						saveState();
+						state.message = "Seq 2 cycle → randomize Bot A: " + (state.seq2.rndBotA ? "ON" : "OFF");
+						queueRender();
+						return;
+					}
+					if (action === "seq2-toggle-rnd-b") {
+						state.seq2.rndBotB = !state.seq2.rndBotB;
+						saveState();
+						state.message = "Seq 2 cycle → randomize Bot B: " + (state.seq2.rndBotB ? "ON" : "OFF");
+						queueRender();
+						return;
+					}
+					if (action === "reset-seq2") {
+						resetSeq2();
+						return;
+					}
+					if (action === "randomize-seq2") {
+						randomizeSeq2();
+						return;
+					}
+					if (action === "reset-bassmod") {
+						resetBassMod();
+						return;
+					}
+					if (action === "randomize-bassmod") {
+						randomizeBassMod();
+						return;
+					}
+
+				if (action === "cycle-prob") {
+					cycleProbability(target.dataset.bot, Number(target.dataset.step));
+					return;
+				}
+				if (action === "cycle-action") {
+					cycleAction(target.dataset.bot, Number(target.dataset.step));
+					return;
+				}
+				if (action === "cycle-modifier") {
+					cycleModifier(target.dataset.bot, Number(target.dataset.step));
+					return;
+				}
+
+			});
+
+			document.addEventListener("input", (event) => {
+				if (event.target.dataset.input === "bpm") {
+					state.bpm = Number(event.target.value);
+					if (window.Tone) {
+						Tone.Transport.bpm.rampTo(getPlaybackBpm(), 0.05);
+					}
+					saveState();
+					queueRender();
+						return;
+					}
+					if (event.target.dataset.input && event.target.dataset.input.startsWith("mixer-")) {
+						const key = event.target.dataset.input.replace("mixer-", "");
+						setMixerValue(key, Number(event.target.value));
+				}
+			});
+
+			/* ─── DRAG & DROP HANDLERS ─────────────────────────────────────────── */
+			document.addEventListener("dragstart", (event) => {
+				const card = event.target.closest("[data-drag-bot]");
+				if (!card) return;
+				const botId = card.dataset.dragBot;
+				const fromIndex = Number(card.dataset.dragStep);
+				dragState = { source: card, botId, fromIndex };
+				card.classList.add("dragging");
+				event.dataTransfer.effectAllowed = "move";
+				event.dataTransfer.setData("text/plain", `${botId}:${fromIndex}`);
+				// Add visual feedback
+				const list = card.closest(".step-list");
+				if (list) list.classList.add("drag-active");
+			});
+
+			document.addEventListener("dragend", (event) => {
+				const card = event.target.closest("[data-drag-bot]");
+				if (!card) return;
+				card.classList.remove("dragging");
+				document.querySelectorAll(".step-card").forEach(c => c.classList.remove("drag-over"));
+				document.querySelectorAll(".step-list").forEach(l => l.classList.remove("drag-active"));
+				dragState = { source: null, botId: null, fromIndex: null };
+			});
+
+			document.addEventListener("dragover", (event) => {
+				event.preventDefault();
+				event.dataTransfer.dropEffect = "move";
+				const targetCard = event.target.closest("[data-drag-bot]");
+				if (targetCard && targetCard !== dragState.source) {
+					targetCard.classList.add("drag-over");
+				}
+			});
+
+			document.addEventListener("dragleave", (event) => {
+				const targetCard = event.target.closest("[data-drag-bot]");
+				if (targetCard) {
+					targetCard.classList.remove("drag-over");
+				}
+			});
+
+			document.addEventListener("drop", (event) => {
+				event.preventDefault();
+				const targetCard = event.target.closest("[data-drag-bot]");
+				if (!targetCard || !dragState.botId) return;
+				
+				targetCard.classList.remove("drag-over");
+				const targetBotId = targetCard.dataset.dragBot;
+				const toIndex = Number(targetCard.dataset.dragStep);
+				
+				// Only allow reordering within same bot
+				if (dragState.botId !== targetBotId || dragState.fromIndex === toIndex) {
+					return;
+				}
+				
+				// Swap the steps
+				const steps = state.bots[dragState.botId].steps;
+				const temp = steps[dragState.fromIndex];
+				if (toIndex > dragState.fromIndex) {
+					// Moving down
+					for (let i = dragState.fromIndex; i < toIndex; i++) {
+						steps[i] = steps[i + 1];
+					}
+				} else {
+					// Moving up
+					for (let i = dragState.fromIndex; i > toIndex; i--) {
+						steps[i] = steps[i - 1];
+					}
+				}
+				steps[toIndex] = temp;
+				
+				saveState();
+				queueRender();
+			});
+
+			document.addEventListener("change", (event) => {
+				const target = event.target;
+				if (target && target.tagName === "SELECT") {
+					suspendRender = false;
+					if (pendingRender) {
+						pendingRender = false;
+						queueRender();
+					}
+				}
+				if (!target.dataset.select) {
+					return;
+				}
+					if (target.dataset.select.startsWith("bass-")) {
+						const stepIndex = Number(target.dataset.step);
+						if (target.dataset.select === "bass-scale") {
+							updateBassModStep(stepIndex, { scale: target.value });
+						}
+						if (target.dataset.select === "bass-root") {
+							updateBassModStep(stepIndex, { root: Number(target.value) });
+						}
+						if (target.dataset.select === "bass-semitone") {
+							updateBassModStep(stepIndex, { semitone: Number(target.value) });
+						}
+						return;
+					}
+				const botId = target.dataset.bot;
+				const stepIndex = Number(target.dataset.step);
+				if (target.dataset.select === "action") {
+					updateStep(botId, stepIndex, { action: target.value });
+				}
+				if (target.dataset.select === "modifier") {
+					updateStep(botId, stepIndex, { modifier: target.value });
+				}
+			});
+
+			document.addEventListener("keydown", async (event) => {
+				const tag = (document.activeElement || {}).tagName;
+				if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+				const key = event.key;
+				if (key === "s" || key === "S" || key === " ") {
+					event.preventDefault();
+					const transportRunning = Boolean(window.Tone && Tone.Transport.state === "started");
+					if (state.playing || state.startingPlayback || transportRunning) {
+						stopPlayback(true);
+					} else {
+						await startPlayback();
+					}
+					return;
+				}
+				if (key === "r" || key === "R") {
+					event.preventDefault();
+					randomizeAllSteps();
+					return;
+				}
+				if (key === "u" || key === "U") {
+					event.preventDefault();
+					popUndo();
+					return;
+				}
+			});
+
+			renderApp();
+		})();
+	</script>
+	<div style="position:fixed;right:8px;bottom:6px;z-index:9999;font:9px/1 'Press Start 2P',monospace;color:rgba(143,255,209,.82);letter-spacing:.04em;text-transform:lowercase;pointer-events:none;user-select:none;">work in progress</div>
+</body>
+</html>

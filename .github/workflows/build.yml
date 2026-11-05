@@ -1,0 +1,24 @@
+# Every push and pull request: the host tests, Dinghy's platform tests and the real FM-1 package, built and attested
+# by the shared zvenson/fm1-build workflow (JieLi toolchain + AC79 SDK), as SkurkyMello does. A tag vX.Y also
+# publishes the release.
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: zvenson/fm1-build/.github/workflows/build.yml@v1
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    with:
+      build: |
+        if [ "$GITHUB_REF_TYPE" = tag ]; then ./build.sh --release "${GITHUB_REF_NAME#v}"; else ./build.sh; fi
+      test: sh tests/run_host.sh && sh tests/run_tests.sh
+      packages: build/roboseq*.fwsc

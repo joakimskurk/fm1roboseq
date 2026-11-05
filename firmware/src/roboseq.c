@@ -1,6 +1,8 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* Dinghy: the smallest FM-1 firmware to build your own on. A sine wave on the keys, and that is all.
- * This is the file to change. Everything below it (platform.c) is done: updates, the USB rescue,
+/* RoboSeq for the M-VAVE FM-1: the app. Phase 0: still Dinghy's sine demo under RoboSeq's name and identity;
+ * the port of reference/roboseq.html starts in phase 1 (ROADMAP.md).
+ *
+ * From Dinghy: the smallest FM-1 firmware to build your own on. Everything below this file (platform.c) is done: updates, the USB rescue,
  * MIDI (USB, the TRS jack), USB audio, keys, knobs, LEDs, the screen, flash storage; the FM-1 and the SMK-37.
  *
  *   keys       play sines, 4 voices; the notes go out over USB-MIDI too, on the MIDI channel
@@ -15,6 +17,8 @@
  * Rules of the road (the chip has no FPU and no libgcc): integers only, no float, no 64-bit division.
  * tests/host.c runs this file on a computer: the screen as a PNG, the sound as a WAV.
  * What platform.c offers: docs/API.md. The chip's rules: docs/RULES.md. */
+#define APP_NAME "ROBOSEQ"                      /* the rescue and the crash screen say this */
+#define STORE_MAGIC 0x51455352u                 /* "RSEQ": RoboSeq's settings and blobs, never another fork's */
 static void app_idle(void);
 #define LCD_IDLE app_idle                       /* while the screen's DMA runs: MIDI in (platform.c) */
 #include "platform.c"
