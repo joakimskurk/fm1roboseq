@@ -1,10 +1,11 @@
 # random-05: reference/roboseq.html run by tools/trace/gen.mjs
 board maze
 loop 48
+bpm 80 0 1
 tpm 1
 vmtrigger manual
 vmfreq 1
-bassmodlen 8
+bassmodlen 4
 drums 1 minimal
 seq2 0 0
 seq2step 0 -- -- 0
@@ -143,602 +144,2922 @@ step B 62 turnR glitch 50
 step B 63 turnL glitch 100
 ticks 600
 T 0 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 0 | -
+N drum.kick 24 0.18 0 1
 T 0 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 62 0.1323 0 0.3465
+N B.sub 50 0.1911 0 0.27225
 T 0 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | turn,move,move
+N A.main 53 0.071071875 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
+N B.fm 62 0.118125 0 0.525
+N B.sub 50 0.170625 0 0.4125
 T 0 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 62 0.118125 0 0.357
+N B.sub 50 0.170625 0 0.2805
 T 0 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 1 | wait,collision
+N B.fm 62 0.151875 0 0.4165
+N B.sub 50 0.219375 0 0.32725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 0 5 6 6 0 0 0 0 0 maze | A 0 2 N 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | move,move,turn
+N A.main 65 0.061453125 0 0.85
+N A.ping 69 0.03375 0.005625 0.34
+N B.fm 62 0.0567 0 0.462
+N B.sub 50 0.0819 0 0.363
 T 0 6 7 7 0 0 0 0 0 maze | A 0 2 N 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | wait,move,move,belt
+N A.main 65 0.0320625 0 0.2
+N B.fm 62 0.01875 0 0.4165
+N B.sub 50 0.15136875 0 0.32725
+N B.fm 62 0.219375 0.0225 0.238
+N fx.belt -1 0.04 0.03 0.35
 T 0 7 8 8 0 0 0 0 0 maze | A 0 2 N 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | wait,wait
 T 0 8 9 9 0 0 0 0 0 maze | A 0 2 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 1 0 0 | wait,turn
+N B.fm 62 0.0378 0 0.28665
+N B.sub 50 0.0546 0 0.225225
+N drum.kick 24 0.18 0 1
 T 0 9 10 10 0 0 0 0 0 maze | A 0 2 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 62 0.0324 0 0.1001
+N B.sub 50 0.0468 0 0.07865
 T 0 10 11 11 0 0 0 0 0 maze | A 0 2 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | wait,collision
+N A.main 65 0.036871875 0 0.17
+N B.fm 62 0.115425 0 0.302575
+N B.sub 50 0.166725 0 0.2377375
+N fx.collision 43 0.08 0.01 0.7
 T 0 11 12 0 0 0 0 0 0 maze | A 0 2 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | wait,collision,collision
+N B.fm 62 0.054 0 0.5005
+N B.sub 50 0.078 0 0.39325
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 0 12 13 1 0 0 0 0 0 maze | A 0 3 N 1 0 0 | B 4 2 W 0 0 0 | 0 0 | 1 0 0 | move,zap,wait
+N A.main 64 0.0192375 0 0.7938
+N A.ping 67 0.03375 0.005625 0.31752
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.01 0.6
 T 0 13 14 2 0 0 0 0 0 maze | A 0 3 W 2 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | turn,zap,wait
+N A.main 65 0.049875 0 0.4524
+N A.ping 69 0.03375 0.005625 0.18096
+N fx.zap -1 0.06 0.01 0.6
 T 0 14 15 3 0 0 0 0 0 maze | A 1 3 W 2 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+N A.main 69 0.12825 0 0.5278
+N A.ping 72 0.03375 0.005625 0.21112
+N B.fm 65 0.0324 0 0.429975
+N B.sub 53 0.0468 0 0.3378375
 T 0 15 16 4 0 0 0 0 0 maze | A 0 3 W 3 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,zap,wait
+N A.main 65 0.07125 0 0.6448
+N A.ping 69 0.03375 0.005625 0.25792
+N fx.zap -1 0.06 0.01 0.6
 T 0 16 17 5 0 0 0 0 0 maze | A 0 3 S 4 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 1 | turn,zap,collision
+N A.main 65 0.100373437 0 0.5049
+N A.ping 69 0.03375 0.005625 0.20196
+N B.fm 62 0.054 0 0.3822
+N B.sub 50 0.078 0 0.3003
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
 T 0 17 18 6 0 0 0 0 0 maze | A 0 3 S 4 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
 T 0 18 19 7 0 0 0 0 0 maze | A 0 3 S 4 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | wait,collision,collision
+N B.fm 62 0.077625 0 0.38675
+N B.sub 50 0.112125 0 0.303875
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 0 19 20 8 0 0 0 0 0 maze | A 0 4 S 4 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,collision,collision
+N A.main 53 0.09975 0 0.8316
+N A.ping 57 0.03375 0.005625 0.33264
+N B.fm 62 0.0675 0 0.455
+N B.sub 50 0.0975 0 0.3575
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 0 20 21 9 0 0 0 0 0 maze | A 0 4 E 4 0 0 | B 4 2 W 0 0 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 53 0.118453125 0 0.63954
+N A.ping 57 0.03375 0.005625 0.255816
+N B.fm 62 0.038475 0 0.08645
+N B.sub 50 0.055575 0 0.067925
+N drum.kick 24 0.18 0 1
 T 0 21 22 10 0 0 0 0 0 maze | A 2 4 E 4 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | move,move,turn
+N A.main 59 0.035625 0 1
+N A.ping 62 0.03375 0.005625 0.4
+N B.fm 67 0.06733125 0 0.399
+N B.sub 55 0.09725625 0 0.3135
 T 0 22 23 11 0 0 0 0 0 maze | A 1 4 E 3 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | move,pulse,move,move,belt
+N A.main 57 0.331846875 0 0.62713
+N A.ping 60 0.03375 0.005625 0.250852
+N B.fm 65 0.01875 0 0.539
+N B.sub 53 0.1053 0 0.4235
+N B.fm 65 0.135 0.0225 0.308
+N fx.pulse 84 0.06 0.01 0.4
 T 0 23 24 0 0 0 0 0 0 maze | A 1 4 E 2 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | wait,pulse,wait
+N A.main 57 0.110615625 0 0.16762
+N fx.pulse 84 0.06 0.01 0.4
 T 0 24 25 1 0 0 0 0 0 maze | A 1 4 E 2 0 0 | B 4 2 N 0 0 0 | 0 0 | 1 0 0 | wait,wait
+N drum.kick 24 0.18 0 1
 T 0 25 26 2 0 0 0 0 0 maze | A 1 4 S 1 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 55 0.298501875 0 0.4617
+N A.ping 59 0.03375 0.005625 0.18468
+N fx.pulse 84 0.06 0.01 0.4
 T 0 26 27 3 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | collision,pulse,turn
+N A.main 57 0.42643125 0 0.57
+N A.ping 60 0.03375 0.005625 0.228
+N B.fm 65 0.089775 0 0.25935
+N B.sub 53 0.129675 0 0.203775
+N fx.collision 43 0.08 0 0.7
+N fx.pulse 84 0.06 0.01 0.4
 T 0 27 28 4 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | ping,pulse,ping
+N A.main 57 0.30972375 0 0.57375
+N A.ping 60 0.03375 0.005625 0.2295
+N B.fm 65 0.07695 0 0.389025
+N B.sub 53 0.11115 0 0.3056625
+N fx.pulse 84 0.06 0.01 0.4
 T 0 28 29 5 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 65 0.1323 0 0.3465
+N B.sub 53 0.1911 0 0.27225
+N drum.hihat -1 0.03 0 0.5
 T 0 29 30 6 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,pulse,wait
+N A.main 57 0.053865 0 0.1575
+N fx.pulse 84 0.06 0.01 0.4
 T 0 30 31 7 0 0 0 0 0 maze | A 1 3 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,ping
+N A.main 69 0.089775 0 0.55125
+N A.ping 72 0.03375 0.005625 0.2205
+N B.fm 65 0.1630125 0 0.401625
+N B.sub 53 0.2354625 0 0.3155625
 T 0 31 32 8 0 0 0 0 0 maze | A 1 3 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | ping,wait
+N A.main 69 0.1197 0 0.7425
+N A.ping 72 0.03375 0.005625 0.297
+N B.fm 65 0.02835 0 0.11025
+N B.sub 53 0.04095 0 0.086625
 T 0 32 33 9 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 4 S 0 0 0 | 0 0 | 1 0 0 | move,collision,pulse,move,move
+N A.main 57 0.089775 0 0.7875
+N A.ping 60 0.03375 0.005625 0.315
+N B.fm 53 0.118125 0 0.525
+N B.sub 41 0.170625 0 0.4125
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.01 0.7
+N fx.pulse 84 0.06 0.02 0.4
 T 0 33 34 10 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | wait,pulse,wait
+N A.main 57 0.127929375 0 0.1425
+N fx.pulse 84 0.06 0.01 0.4
 T 0 34 35 11 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 57 0.07182 0 0.4095
+N A.ping 60 0.03375 0.005625 0.1638
+N B.fm 53 0.02835 0 0.11025
+N B.sub 41 0.04095 0 0.086625
+N fx.pulse 84 0.06 0.01 0.4
 T 0 35 36 0 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | wait,collision
+N B.fm 53 0.2716875 0 0.357
+N B.sub 41 0.3924375 0 0.2805
+N fx.collision 43 0.08 0.01 0.7
 T 0 36 37 1 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 4 S 0 0 0 | 0 0 | 1 0 0 | wait,collision
+N B.fm 53 0.2716875 0 0.357
+N B.sub 41 0.3924375 0 0.2805
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.01 0.7
 T 0 37 38 2 0 0 0 0 0 maze | A 0 4 W 0 0 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | move,wait
+N A.main 53 0.135375 0 0.494
+N A.ping 57 0.03375 0.005625 0.1976
 T 0 38 39 3 0 0 0 0 0 maze | A 0 4 W 0 0 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 50 0.08150625 0 0.08925
+N B.sub 38 0.11773125 0 0.070125
 T 0 39 40 4 0 0 0 0 0 maze | A 0 4 W 0 0 0 | B 4 4 W 0 0 0 | 0 0 | 0 0 0 | ping,turn
+N A.main 53 0.098325 0 0.49725
+N A.ping 57 0.03375 0.005625 0.1989
+N B.fm 50 0.0378 0 0.28665
+N B.sub 38 0.0546 0 0.225225
 T 0 40 41 5 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 4 W 0 0 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 53 0.05985 0 0.66
+N A.ping 57 0.03375 0.005625 0.264
+N drum.hihat -1 0.03 0 0.5
 T 0 41 42 6 0 0 0 0 0 maze | A 0 4 N 1 0 0 | B 4 4 W 0 0 0 | 0 0 | 0 0 0 | wait,zap
+N B.fm 50 0.0324 0 0.429975
+N B.sub 38 0.0468 0 0.3378375
+N fx.zap -1 0.06 0.01 0.6
 T 0 42 43 7 0 0 0 0 0 maze | A 0 4 N 1 0 0 | B 4 4 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+N A.main 52 0.0961875 0 0.756
+N A.ping 55 0.03375 0.005625 0.3024
+N fx.collision 43 0.08 0 0.7
 T 0 43 44 8 0 0 0 0 0 maze | A 0 4 W 1 0 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | turn,turn
+N A.main 52 0.0947625 0 0.40014
+N A.ping 55 0.03375 0.005625 0.160056
+N B.fm 50 0.165375 0 0.315
+N B.sub 38 0.238875 0 0.2475
 T 0 44 45 9 0 0 0 0 0 maze | A 0 4 W 1 0 0 | B 4 4 S 0 0 0 | 0 0 | 1 0 0 | wait,wait
+N drum.kick 24 0.18 0 1
 T 0 45 46 10 0 0 0 0 0 maze | A 0 4 W 1 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,move,move,belt
+N B.fm 62 0.01875 0 0.40425
+N B.sub 50 0.2457 0 0.317625
+N B.fm 62 0.135 0.0225 0.231
+N fx.belt -1 0.04 0.03 0.35
 T 0 46 47 11 0 0 0 0 0 maze | A 0 4 W 1 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
 T 0 47 48 0 0 0 0 0 0 maze | A 0 4 W 1 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+N A.main 52 0.04275 0 0.1404
 T 1 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 0 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 1 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,turn
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N B.fm 62 0.1323 0 0.3465
+N B.sub 50 0.1911 0 0.27225
+N fx.collision 43 0.08 0 0.7
 T 1 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 53 0.071071875 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
 T 1 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | ping,turn
+N A.main 53 0.02565 0 0.945
+N A.ping 57 0.03375 0.005625 0.378
+N B.fm 62 0.118125 0 0.357
+N B.sub 50 0.170625 0 0.2805
 T 1 4 5 5 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | turn,collision
+N A.main 53 0.143390625 0 0.4335
+N A.ping 57 0.03375 0.005625 0.1734
+N B.fm 62 0.151875 0 0.4165
+N B.sub 50 0.219375 0 0.32725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 1 5 6 6 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | move,move,wait
+N A.main 59 0.102421875 0 0.7225
+N A.ping 62 0.03375 0.005625 0.289
 T 1 6 7 7 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,collision
+N A.main 59 0.0534375 0 0.17
+N B.fm 67 0.17465625 0 0.354025
+N B.sub 55 0.25228125 0 0.2781625
+N fx.collision 43 0.08 0.01 0.7
 T 1 7 8 8 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 67 0.02025 0 0.12495
+N B.sub 55 0.02925 0 0.098175
 T 1 8 9 9 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 0 | move,pulse,turn
+N A.main 57 0.23085 0 0.6545
+N A.ping 60 0.03375 0.005625 0.2618
+N B.fm 65 0.02835 0 0.441
+N B.sub 53 0.04095 0 0.3465
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
 T 1 9 10 10 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 65 0.0243 0 0.154
+N B.sub 53 0.0351 0 0.121
 T 1 10 11 11 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 1 N 1 0 0 | 0 0 | 0 0 0 | wait,move,zap
+N B.fm 67 0.043284375 0 0.50274
+N B.sub 55 0.062521875 0 0.39501
+N fx.zap -1 0.06 0.02 0.6
 T 1 11 12 0 0 0 0 0 0 maze | A 1 4 N 0 0 0 | B 4 1 N 1 0 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 53 0.053865 0 0.63
+N A.ping 57 0.03375 0.005625 0.252
+N fx.pulse 84 0.06 0.01 0.4
 T 1 12 13 1 0 0 0 0 0 maze | A 1 4 N 0 0 0 | B 4 1 N 1 0 0 | 0 0 | 1 0 0 | wait,wait
+N drum.kick 24 0.18 0 1
 T 1 13 14 2 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 1 N 1 0 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 53 0.17955 0 0.39
+N A.ping 57 0.03375 0.005625 0.156
+N fx.pulse 84 0.06 0.01 0.4
 T 1 14 15 3 0 0 0 0 0 maze | A 2 4 W 0 0 0 | B 4 1 N 2 0 0 | 0 0 | 0 0 0 | move,ping,zap
+N A.main 55 0.12825 0 0.455
+N A.ping 59 0.03375 0.005625 0.182
+N B.fm 71 0.01215 0 0.7
+N B.sub 59 0.01755 0 0.55
+N fx.zap -1 0.06 0.02 0.6
 T 1 15 16 4 0 0 0 0 0 maze | A 2 4 W 0 0 0 | B 4 1 N 3 0 0 | 0 0 | 0 0 0 | wait,wait,zap
+N B.fm 71 0.0151875 0 0.1736
+N B.sub 59 0.0219375 0 0.1364
+N fx.zap -1 0.06 0.02 0.6
 T 1 16 17 5 0 0 0 0 0 maze | A 2 4 S 0 0 0 | B 4 0 N 3 0 0 | 0 0 | 0 0 1 | turn,move
+N A.main 55 0.200746875 0 0.3825
+N A.ping 59 0.03375 0.005625 0.153
+N B.fm 71 0.0405 0 0.7
+N B.sub 59 0.0585 0 0.55
+N drum.hihat -1 0.03 0 0.5
 T 1 17 18 6 0 0 0 0 0 maze | A 2 4 S 0 0 0 | B 4 0 N 3 0 0 | 0 0 | 0 0 0 | wait,wait
 T 1 18 19 7 0 0 0 0 0 maze | A 2 4 S 0 0 0 | B 4 0 N 3 0 0 | 0 0 | 0 0 0 | ping,collision,collision
+N A.main 55 0.17206875 0 0.57375
+N A.ping 59 0.03375 0.005625 0.2295
+N B.fm 71 0.05821875 0 0.7
+N B.sub 59 0.08409375 0 0.55
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 1 19 20 8 0 0 0 0 0 maze | A 2 4 S 0 0 0 | B 4 0 N 3 0 0 | 0 0 | 0 0 0 | collision,collision,collision
+N A.main 55 0.09975 0 0.63
+N A.ping 59 0.03375 0.005625 0.252
+N B.fm 71 0.050625 0 0.7
+N B.sub 59 0.073125 0 0.55
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 1 20 21 9 0 0 0 0 0 maze | A 2 4 S 0 0 0 | B 4 0 N 3 0 0 | 0 0 | 1 0 0 | wait,wait
+N B.fm 71 0.02885625 0 0.16492
+N B.sub 59 0.04168125 0 0.12958
+N drum.kick 24 0.18 0 1
 T 1 21 22 10 0 0 0 0 0 maze | A 2 4 S 0 0 0 | B 4 0 E 3 0 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 71 0.11221875 0 0.420546
+N B.sub 59 0.16209375 0 0.330429
 T 1 22 23 11 0 0 0 0 0 maze | A 2 3 E 0 0 0 | B 4 0 E 3 0 0 | 0 0 | 0 0 0 | move,rotator,collision
+N A.main 67 0.184359375 0 0.50575
+N A.ping 71 0.03375 0.005625 0.2023
+N B.fm 71 0.1215 0 0.568106
+N B.sub 59 0.1755 0 0.446369
+N fx.rotator 81 0.04 0.01 0.45
+N fx.collision 43 0.08 0.02 0.7
 T 1 23 24 0 0 0 0 0 0 maze | A 2 3 N 0 0 0 | B 4 0 E 3 0 0 | 0 0 | 0 0 0 | wait,rotator,wait
+N A.main 67 0.036871875 0 0.17
+N fx.rotator 81 0.04 0.01 0.45
 T 1 24 25 1 0 0 0 0 0 maze | A 2 3 N 0 0 0 | B 4 0 E 3 0 0 | 0 0 | 1 0 0 | wait,wait
+N B.fm 71 0.05821875 0 0.125426
+N B.sub 59 0.08409375 0 0.098549
+N drum.kick 24 0.18 0 1
 T 1 25 26 2 0 0 0 0 0 maze | A 2 3 N 0 0 0 | B 4 0 E 3 0 0 | 0 0 | 0 0 0 | wait,wait
 T 1 26 27 3 0 0 0 0 0 maze | A 2 3 N 0 0 0 | B 4 0 N 3 0 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 71 0.06733125 0 0.49476
+N B.sub 59 0.09725625 0 0.38874
 T 1 27 28 4 0 0 0 0 0 maze | A 2 3 N 0 0 0 | B 4 0 N 3 0 0 | 0 0 | 0 0 0 | wait,ping
+N B.fm 71 0.0577125 0 0.7
+N B.sub 59 0.0833625 0 0.55
 T 1 28 29 5 0 0 0 0 0 maze | A 2 3 N 0 0 0 | B 4 0 W 3 0 0 | 0 0 | 0 0 1 | turn,rotator,turn
+N A.main 67 0.086034375 0 0.51
+N A.ping 71 0.03375 0.005625 0.204
+N B.fm 71 0.0756 0 0.372372
+N B.sub 59 0.1092 0 0.292578
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 1 29 30 6 0 0 0 0 0 maze | A 2 3 W 0 0 0 | B 4 0 W 3 0 0 | 0 0 | 0 0 0 | wait,rotator,collision
+N A.main 67 0.0171 0 0.1365
+N B.fm 71 0.15525 0 0.383656
+N B.sub 59 0.22425 0 0.301444
+N fx.rotator 81 0.04 0.01 0.45
+N fx.collision 43 0.08 0.02 0.7
 T 1 30 31 7 0 0 0 0 0 maze | A 3 3 W 0 0 0 | B 4 0 W 3 0 0 | 0 0 | 0 0 0 | move,ping
+N A.main 67 0.0513 0 0.47775
+N A.ping 71 0.03375 0.005625 0.1911
+N B.fm 71 0.09315 0 0.431613
+N B.sub 59 0.13455 0 0.3391245
 T 1 31 32 8 0 0 0 0 0 maze | A 3 3 W 0 0 0 | B 4 0 W 3 0 0 | 0 0 | 0 0 0 | ping,wait
+N A.main 67 0.0684 0 0.6435
+N A.ping 71 0.03375 0.005625 0.2574
+N B.fm 71 0.0162 0 0.118482
+N B.sub 59 0.0234 0 0.093093
 T 1 32 33 9 0 0 0 0 0 maze | A 1 3 W 0 0 0 | B 4 0 W 3 0 0 | 0 0 | 1 0 0 | move,move,collision,collision
+N A.main 65 0.0285 0 0.6825
+N A.ping 69 0.03375 0.005625 0.273
+N B.fm 69 0.0675 0 0.5642
+N B.sub 57 0.0975 0 0.4433
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 1 33 34 10 0 0 0 0 0 maze | A 1 3 W 0 0 0 | B 4 0 W 3 0 0 | 0 0 | 0 0 0 | wait,collision
+N A.main 65 0.0406125 0 0.1235
+N B.fm 69 0.139725 0 0.335699
+N B.sub 57 0.201825 0 0.2637635
+N fx.collision 43 0.08 0.01 0.7
 T 1 34 35 11 0 0 0 0 0 maze | A 1 3 N 0 0 0 | B 4 0 W 3 0 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 65 0.029925 0 0.63
+N A.ping 69 0.03375 0.005625 0.252
 T 1 35 36 0 0 0 0 0 0 maze | A 1 3 W 0 0 0 | B 4 0 W 3 0 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 65 0.0798 0 0.429
+N A.ping 69 0.03375 0.005625 0.1716
 T 1 36 37 1 0 0 0 0 0 maze | A 2 3 S 0 0 0 | B 4 0 W 3 0 0 | 0 0 | 1 0 0 | move,rotator,collision
+N A.main 67 0.089775 0 0.55125
+N A.ping 71 0.03375 0.005625 0.2205
+N B.fm 71 0.15525 0 0.383656
+N B.sub 59 0.22425 0 0.301444
+N drum.kick 24 0.18 0 1
+N fx.rotator 81 0.04 0.01 0.45
+N fx.collision 43 0.08 0.02 0.7
 T 1 37 38 2 0 0 0 0 0 maze | A 2 4 S 0 0 0 | B 4 0 W 3 0 0 | 0 0 | 0 0 0 | move,collision
+N A.main 55 0.23690625 0 0.57
+N A.ping 59 0.03375 0.005625 0.228
+N B.fm 71 0.0972 0 0.434434
+N B.sub 59 0.1404 0 0.341341
+N fx.collision 43 0.08 0.01 0.7
 T 1 38 39 3 0 0 0 0 0 maze | A 2 4 S 0 0 0 | B 4 0 W 3 0 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 71 0.046575 0 0.095914
+N B.sub 59 0.067275 0 0.075361
 T 1 39 40 4 0 0 0 0 0 maze | A 2 4 S 0 0 0 | B 4 0 N 3 0 0 | 0 0 | 0 0 0 | ping,turn
+N A.main 55 0.17206875 0 0.57375
+N A.ping 59 0.03375 0.005625 0.2295
+N B.fm 71 0.02835 0 0.54684
+N B.sub 59 0.04095 0 0.42966
 T 1 40 41 5 0 0 0 0 0 maze | A 2 4 W 0 0 0 | B 4 0 E 3 0 0 | 0 0 | 0 0 1 | turn,turn
+N A.main 55 0.0798 0 0.429
+N A.ping 59 0.03375 0.005625 0.1716
+N B.fm 71 0.11221875 0 0.420546
+N B.sub 59 0.16209375 0 0.330429
+N drum.hihat -1 0.03 0 0.5
 T 1 41 42 6 0 0 0 0 0 maze | A 2 4 N 0 0 0 | B 4 0 E 3 0 0 | 0 0 | 0 0 0 | turn,ping
+N A.main 55 0.029925 0 0.63
+N A.ping 59 0.03375 0.005625 0.252
+N B.fm 71 0.0405 0 0.697221
+N B.sub 59 0.0585 0 0.5478165
 T 1 42 43 7 0 0 0 0 0 maze | A 2 4 N 0 0 0 | B 4 0 E 3 0 0 | 0 0 | 0 0 0 | collision,wait
+N A.main 55 0.0961875 0 0.7
+N A.ping 59 0.03375 0.005625 0.28
+N fx.collision 43 0.08 0 0.7
 T 1 43 44 8 0 0 0 0 0 maze | A 2 4 W 0 0 0 | B 4 0 E 3 0 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 55 0.0947625 0 0.3705
+N A.ping 59 0.03375 0.005625 0.1482
 T 1 44 45 9 0 0 0 0 0 maze | A 2 4 W 0 0 0 | B 4 0 E 3 0 0 | 0 0 | 1 0 0 | ping,wait
+N A.main 55 0.0342 0 0.61425
+N A.ping 59 0.03375 0.005625 0.2457
+N drum.kick 24 0.18 0 1
 T 1 45 46 10 0 0 0 0 0 maze | A 2 4 W 0 0 0 | B 4 0 E 3 0 0 | 0 0 | 0 0 0 | wait,collision
+N B.fm 71 0.1215 0 0.568106
+N B.sub 59 0.1755 0 0.446369
+N fx.collision 43 0.08 0.01 0.7
 T 1 46 47 11 0 0 0 0 0 maze | A 0 4 W 0 0 0 | B 4 0 E 3 0 0 | 0 0 | 0 0 0 | move,move,wait
+N A.main 50 0.0819375 0 0.5525
+N A.ping 53 0.03375 0.005625 0.221
 T 1 47 48 0 0 0 0 0 0 maze | A 0 4 W 0 0 0 | B 4 0 E 3 0 0 | 0 0 | 0 0 0 | wait,wait
+N A.main 50 0.04275 0 0.13
 T 2 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 0 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 2 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N fx.collision 43 0.08 0 0.7
 T 2 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision,collision
+N A.main 53 0.071071875 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
+N B.fm 62 0.0675 0 0.455
+N B.sub 50 0.0975 0 0.3575
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 2 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,turn
+N A.main 53 0.02565 0 0.945
+N A.ping 57 0.03375 0.005625 0.378
+N B.fm 62 0.165375 0 0.315
+N B.sub 50 0.238875 0 0.2475
 T 2 4 5 5 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | turn,collision
+N A.main 53 0.143390625 0 0.4335
+N A.ping 57 0.03375 0.005625 0.1734
+N B.fm 62 0.212625 0 0.3675
+N B.sub 50 0.307125 0 0.28875
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 2 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 62 0.0945 0 0.3927
+N B.sub 50 0.1365 0 0.30855
 T 2 6 7 7 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,collision
+N A.main 53 0.0534375 0 0.17
+N B.fm 62 0.17465625 0 0.354025
+N B.sub 50 0.25228125 0 0.2781625
+N fx.collision 43 0.08 0.01 0.7
 T 2 7 8 8 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 62 0.02025 0 0.12495
+N B.sub 50 0.02925 0 0.098175
 T 2 8 9 9 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 1 0 0 | wait,wait
+N drum.kick 24 0.18 0 1
 T 2 9 10 10 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 53 0.086034375 0 0.51
+N A.ping 57 0.03375 0.005625 0.204
+N B.fm 62 0.0405 0 0.1309
+N B.sub 50 0.0585 0 0.10285
 T 2 10 11 11 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,collision
+N A.main 53 0.036871875 0 0.17
+N B.fm 62 0.14428125 0 0.395675
+N B.sub 50 0.20840625 0 0.3108875
+N fx.collision 43 0.08 0.01 0.7
 T 2 11 12 0 0 0 0 0 0 maze | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | turn,collision,collision
+N A.main 53 0.0399 0 0.4095
+N A.ping 57 0.03375 0.005625 0.1638
+N B.fm 62 0.0675 0 0.6545
+N B.sub 50 0.0975 0 0.51425
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 2 12 13 1 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 1 0 0 | move,pulse,wait
+N A.main 57 0.09234 0 0.47775
+N A.ping 60 0.03375 0.005625 0.1911
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
 T 2 13 14 2 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | turn,pulse,collision
+N A.main 57 0.3142125 0 0.45
+N A.ping 60 0.03375 0.005625 0.18
+N B.fm 65 0.151875 0 0.4165
+N B.sub 53 0.219375 0 0.32725
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 2 14 15 3 0 0 0 0 0 maze | A 1 3 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | move,wait
+N A.main 69 0.2244375 0 0.525
+N A.ping 72 0.03375 0.005625 0.21
 T 2 15 16 4 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | move,pulse,wait
+N A.main 57 0.448875 0 0.6
+N A.ping 60 0.03375 0.005625 0.24
+N B.fm 65 0.050625 0 0.119
+N B.sub 53 0.073125 0 0.0935
+N fx.pulse 84 0.06 0.01 0.4
 T 2 16 17 5 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | turn,pulse,collision
+N A.main 57 0.258103125 0 0.4335
+N A.ping 60 0.03375 0.005625 0.1734
+N B.fm 65 0.0675 0 0.4998
+N B.sub 53 0.0975 0 0.3927
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 2 17 18 6 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 65 0.1323 0 0.3465
+N B.sub 53 0.1911 0 0.27225
 T 2 18 19 7 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,move,move
+N B.fm 65 0.13584375 0 0.44625
+N B.sub 53 0.19621875 0 0.350625
 T 2 19 20 8 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | wait,move,move
+N B.fm 53 0.118125 0 0.525
+N B.sub 41 0.170625 0 0.4125
 T 2 20 21 9 0 0 0 0 0 maze | A 1 4 N 0 0 0 | B 4 4 S 0 0 0 | 0 0 | 1 0 0 | turn,pulse,wait
+N A.main 57 0.127929375 0 0.57
+N A.ping 60 0.03375 0.005625 0.228
+N B.fm 53 0.06733125 0 0.09975
+N B.sub 41 0.09725625 0 0.078375
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
 T 2 21 22 10 0 0 0 0 0 maze | A 1 3 N 0 0 0 | B 4 4 W 0 0 0 | 0 0 | 0 0 0 | move,collision,turn
+N A.main 69 0.021375 0 1
+N A.ping 72 0.03375 0.005625 0.4
+N B.fm 65 0.089775 0 0.25935
+N B.sub 53 0.129675 0 0.203775
+N fx.collision 43 0.08 0.01 0.7
 T 2 22 23 11 0 0 0 0 0 maze | A 1 4 N 0 0 0 | B 4 4 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,collision
+N A.main 57 0.199108125 0 0.595
+N A.ping 60 0.03375 0.005625 0.238
+N B.fm 53 0.0972 0 0.35035
+N B.sub 41 0.1404 0 0.275275
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 2 23 24 0 0 0 0 0 0 maze | A 1 4 N 0 0 0 | B 4 4 W 0 0 0 | 0 0 | 0 0 0 | wait,pulse,wait
+N A.main 57 0.066369375 0 0.17
+N fx.pulse 84 0.06 0.01 0.4
 T 2 24 25 1 0 0 0 0 0 maze | A 1 4 N 0 0 0 | B 4 4 W 0 0 0 | 0 0 | 1 0 0 | wait,pulse,wait
+N A.main 57 0.023085 0 0.21
+N B.fm 53 0.046575 0 0.07735
+N B.sub 41 0.067275 0 0.060775
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
 T 2 25 26 2 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 4 W 0 0 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 57 0.213215625 0 0.4845
+N A.ping 60 0.03375 0.005625 0.1938
+N fx.pulse 84 0.06 0.01 0.4
 T 2 26 27 3 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | move,turn
+N A.main 59 0.16921875 0 0.646
+N A.ping 62 0.03375 0.005625 0.2584
+N B.fm 55 0.15710625 0 0.29925
+N B.sub 43 0.22693125 0 0.235125
 T 2 27 28 4 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | wait,ping
+N B.fm 55 0.1346625 0 0.448875
+N B.sub 43 0.1945125 0 0.3526875
 T 2 28 29 5 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 4 E 0 0 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 55 0.0945 0 0.3927
+N B.sub 43 0.1365 0 0.30855
+N drum.hihat -1 0.03 0 0.5
 T 2 29 30 6 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 4 E 0 0 0 | 0 0 | 0 0 0 | wait,collision
+N B.fm 55 0.1940625 0 0.4046
+N B.sub 43 0.2803125 0 0.3179
+N fx.collision 43 0.08 0.01 0.7
 T 2 30 31 7 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 4 E 0 0 0 | 0 0 | 0 0 0 | move,pulse,wait
+N A.main 57 0.115425 0 0.62475
+N A.ping 60 0.03375 0.005625 0.2499
+N fx.pulse 84 0.06 0.01 0.4
 T 2 31 32 8 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 4 E 1 0 0 | 0 0 | 0 0 0 | zap,pulse,wait
+N A.main 53 0.1539 0 0.8415
+N A.ping 57 0.03375 0.005625 0.3366
+N B.fm 55 0.02025 0 0.134946
+N B.sub 43 0.02925 0 0.106029
+N fx.zap -1 0.06 0 0.6
+N fx.pulse 84 0.06 0.01 0.4
 T 2 32 33 9 0 0 0 0 0 maze | A 3 4 E 0 0 0 | B 4 4 E 1 0 0 | 0 0 | 1 0 0 | move,move,pulse,collision,collision
+N A.main 55 0.064125 0 0.8925
+N A.ping 59 0.03375 0.005625 0.357
+N B.fm 57 0.084375 0 0.6426
+N B.sub 45 0.121875 0 0.5049
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.02 0.4
+N fx.collision 43 0.08 0.03 0.7
 T 2 33 34 10 0 0 0 0 0 maze | A 3 4 E 0 0 0 | B 4 4 E 1 0 0 | 0 0 | 0 0 0 | wait,wait
 T 2 34 35 11 0 0 0 0 0 maze | A 3 4 S 0 0 0 | B 4 4 E 1 0 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 55 0.125685 0 0.4725
+N A.ping 59 0.03375 0.005625 0.189
+N B.fm 57 0.02025 0 0.134946
+N B.sub 45 0.02925 0 0.106029
+N fx.pulse 84 0.06 0.01 0.4
 T 2 35 36 0 0 0 0 0 0 maze | A 3 4 E 0 0 0 | B 4 4 E 1 0 0 | 0 0 | 0 0 0 | turn,pulse,collision
+N A.main 55 0.17955 0 0.561
+N A.ping 59 0.03375 0.005625 0.2244
+N B.fm 57 0.1940625 0 0.436968
+N B.sub 45 0.2803125 0 0.343332
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 2 36 37 1 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 4 E 1 0 0 | 0 0 | 1 0 0 | move,collision
+N A.main 55 0.064125 0 0.62475
+N A.ping 59 0.03375 0.005625 0.2499
+N B.fm 57 0.1940625 0 0.436968
+N B.sub 45 0.2803125 0 0.343332
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.01 0.7
 T 2 37 38 2 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 4 E 1 0 0 | 0 0 | 0 0 0 | wait,wait
 T 2 38 39 3 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 4 E 2 0 0 | 0 0 | 0 0 0 | zap,wait
+N A.main 55 0.106875 0 0.765
+N A.ping 59 0.03375 0.005625 0.306
+N B.fm 59 0.05821875 0 0.117334
+N B.sub 47 0.08409375 0 0.092191
+N fx.zap -1 0.06 0 0.6
 T 2 39 40 4 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 4 S 3 0 0 | 0 0 | 0 0 0 | zap,turn
+N A.main 55 0.12290625 0 0.65025
+N A.ping 59 0.03375 0.005625 0.2601
+N B.fm 59 0.06615 0 0.41013
+N B.sub 47 0.09555 0 0.322245
+N fx.zap -1 0.06 0 0.6
 T 2 40 41 5 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 4 W 3 0 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 59 0.089775 0 0.321594
+N B.sub 47 0.129675 0 0.252681
+N drum.hihat -1 0.03 0 0.5
 T 2 41 42 6 0 0 0 0 0 maze | A 2 4 S 1 0 0 | B 4 4 W 3 0 0 | 0 0 | 0 0 0 | turn,zap
+N A.main 55 0.069825 0 0.4725
+N A.ping 59 0.03375 0.005625 0.189
+N B.fm 59 0.0324 0 0.533169
+N B.sub 47 0.0468 0 0.4189185
+N fx.zap -1 0.06 0.01 0.6
 T 2 42 43 7 0 0 0 0 0 maze | A 2 3 E 1 0 0 | B 4 4 W 3 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+N A.main 69 0.1603125 0 0.6426
+N A.ping 72 0.03375 0.005625 0.25704
+N fx.rotator 81 0.04 0.01 0.45
 T 2 43 44 8 0 0 0 0 0 maze | A 2 3 W 1 0 0 | B 4 4 S 3 0 0 | 0 0 | 0 0 0 | turn,rotator,turn
+N A.main 69 0.0947625 0 0.40014
+N A.ping 72 0.03375 0.005625 0.160056
+N B.fm 71 0.165375 0 0.3906
+N B.sub 59 0.238875 0 0.3069
+N fx.rotator 81 0.04 0.01 0.45
 T 2 44 45 9 0 0 0 0 0 maze | A 2 3 W 1 0 0 | B 4 4 S 3 0 0 | 0 0 | 1 0 0 | wait,wait
+N B.fm 71 0.08150625 0 0.11067
+N B.sub 59 0.11773125 0 0.086955
+N drum.kick 24 0.18 0 1
 T 2 45 46 10 0 0 0 0 0 maze | A 2 3 W 1 0 0 | B 4 4 S 3 0 0 | 0 0 | 0 0 0 | turn,rotator,wait
+N A.main 69 0.1147125 0 0.35802
+N A.ping 72 0.03375 0.005625 0.143208
+N fx.rotator 81 0.04 0.01 0.45
 T 2 46 47 11 0 0 0 0 0 maze | A 0 3 W 2 0 0 | B 4 4 S 3 0 0 | 0 0 | 0 0 0 | move,move,zap,collision,collision
+N A.main 69 0.04096875 0 0.6409
+N A.ping 72 0.03375 0.005625 0.25636
+N B.fm 65 0.04725 0 0.68355
+N B.sub 53 0.06825 0 0.537075
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 2 47 48 0 0 0 0 0 0 maze | A 0 3 W 3 0 0 | B 4 4 S 3 0 0 | 0 0 | 0 0 0 | wait,zap,collision
+N A.main 69 0.021375 0 0.1612
+N B.fm 65 0.189 0 0.57288
+N B.sub 53 0.273 0 0.45012
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
 T 3 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 0 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 3 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,turn
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N B.fm 62 0.1323 0 0.3465
+N B.sub 50 0.1911 0 0.27225
+N fx.collision 43 0.08 0 0.7
 T 3 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 53 0.071071875 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
 T 3 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | ping,turn
+N A.main 53 0.02565 0 0.945
+N A.ping 57 0.03375 0.005625 0.378
+N B.fm 62 0.118125 0 0.357
+N B.sub 50 0.170625 0 0.2805
 T 3 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | wait,collision
+N B.fm 62 0.151875 0 0.4165
+N B.sub 50 0.219375 0 0.32725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 3 5 6 6 0 0 0 0 0 maze | A 0 2 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,move,turn
+N A.main 65 0.061453125 0 0.85
+N A.ping 69 0.03375 0.005625 0.34
+N B.fm 62 0.0567 0 0.462
+N B.sub 50 0.0819 0 0.363
 T 3 6 7 7 0 0 0 0 0 maze | A 0 2 N 0 0 0 | B 4 1 N 1 0 0 | 0 0 | 0 0 0 | wait,move,zap
+N A.main 65 0.0320625 0 0.2
+N B.fm 64 0.052396875 0 0.44982
+N B.sub 52 0.075684375 0 0.35343
+N fx.zap -1 0.06 0.02 0.6
 T 3 7 8 8 0 0 0 0 0 maze | A 0 2 N 0 0 0 | B 4 1 N 2 0 0 | 0 0 | 0 0 0 | wait,wait,zap
+N A.main 62 0.02565 0 0.22
+N B.fm 65 0.006075 0 0.17052
+N B.sub 53 0.008775 0 0.13398
+N fx.zap -1 0.06 0.02 0.6
 T 3 8 9 9 0 0 0 0 0 maze | A 0 3 N 1 0 0 | B 4 1 N 2 0 0 | 0 0 | 1 0 0 | move,zap,wait
+N A.main 64 0.038475 0 0.8316
+N A.ping 67 0.03375 0.005625 0.33264
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.01 0.6
 T 3 9 10 10 0 0 0 0 0 maze | A 0 3 N 1 0 0 | B 4 1 N 2 0 0 | 0 0 | 0 0 0 | wait,wait
 T 3 10 11 11 0 0 0 0 0 maze | A 0 3 N 1 0 0 | B 4 2 N 2 0 0 | 0 0 | 0 0 0 | wait,move
+N B.fm 65 0.08656875 0 0.53998
+N B.sub 53 0.12504375 0 0.42427
 T 3 11 12 0 0 0 0 0 0 maze | A 0 3 W 2 0 0 | B 4 0 N 2 0 0 | 0 0 | 0 0 0 | turn,zap,move,move
+N A.main 69 0.01995 0 0.47502
+N A.ping 72 0.03375 0.005625 0.190008
+N B.fm 65 0.0405 0 0.7
+N B.sub 53 0.0585 0 0.55
+N fx.zap -1 0.06 0.01 0.6
 T 3 12 13 1 0 0 0 0 0 maze | A 0 3 W 2 0 0 | B 4 0 N 2 0 0 | 0 0 | 1 0 0 | wait,ping
+N B.fm 65 0.0243 0 0.7
+N B.sub 53 0.0351 0 0.55
+N drum.kick 24 0.18 0 1
 T 3 13 14 2 0 0 0 0 0 maze | A 0 3 W 2 0 0 | B 4 1 N 3 0 0 | 0 0 | 0 0 0 | wait,move,zap
+N B.fm 65 0.0455625 0 0.6076
+N B.sub 53 0.0658125 0 0.4774
+N fx.zap -1 0.06 0.02 0.6
 T 3 14 15 3 0 0 0 0 0 maze | A 1 3 W 2 0 0 | B 4 1 N 4 0 0 | 0 0 | 0 0 0 | move,ping,zap
+N A.main 72 0.12825 0 0.5278
+N A.ping 76 0.03375 0.005625 0.21112
+N B.fm 69 0.01215 0 0.7
+N B.sub 57 0.01755 0 0.55
+N fx.zap -1 0.06 0.02 0.6
 T 3 15 16 4 0 0 0 0 0 maze | A 1 3 W 2 0 0 | B 4 1 N 5 0 0 | 0 0 | 0 0 0 | wait,wait,zap
+N B.fm 69 0.0151875 0 0.196
+N B.sub 57 0.0219375 0 0.154
+N fx.zap -1 0.06 0.02 0.6
 T 3 16 17 5 0 0 0 0 0 maze | A 1 3 S 2 0 0 | B 4 0 N 5 0 0 | 0 0 | 0 0 1 | turn,move
+N A.main 72 0.200746875 0 0.4437
+N A.ping 76 0.03375 0.005625 0.17748
+N B.fm 69 0.0405 0 0.7
+N B.sub 57 0.0585 0 0.55
+N drum.hihat -1 0.03 0 0.5
 T 3 17 18 6 0 0 0 0 0 maze | A 1 4 S 1 0 0 | B 4 0 E 5 0 0 | 0 0 | 0 0 0 | move,collision,pulse,turn
+N A.main 55 0.089775 0 0.8505
+N A.ping 59 0.03375 0.005625 0.3402
+N B.fm 69 0.0945 0 0.54978
+N B.sub 57 0.1365 0 0.43197
+N fx.collision 43 0.08 0.01 0.7
+N fx.pulse 84 0.06 0.02 0.4
 T 3 18 19 7 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 0 E 5 0 0 | 0 0 | 0 0 0 | ping,pulse,collision,collision
+N A.main 53 0.30972375 0 0.57375
+N A.ping 57 0.03375 0.005625 0.2295
+N B.fm 69 0.09703125 0 0.7
+N B.sub 57 0.14015625 0 0.55
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 3 19 20 8 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 0 E 5 0 0 | 0 0 | 0 0 0 | collision,pulse,collision,collision
+N A.main 53 0.17955 0 0.63
+N A.ping 57 0.03375 0.005625 0.252
+N B.fm 69 0.084375 0 0.7
+N B.sub 57 0.121875 0 0.55
+N fx.collision 43 0.08 0 0.7
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 3 20 21 9 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 E 5 0 0 | 0 0 | 1 0 0 | turn,pulse,wait
+N A.main 53 0.213215625 0 0.4845
+N A.ping 57 0.03375 0.005625 0.1938
+N B.fm 69 0.04809375 0 0.15827
+N B.sub 57 0.06946875 0 0.124355
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
 T 3 21 22 10 0 0 0 0 0 maze | A 3 4 E 0 0 0 | B 4 0 S 5 0 0 | 0 0 | 0 0 0 | move,move,pulse,turn
+N A.main 55 0.064125 0 0.8925
+N A.ping 59 0.03375 0.005625 0.357
+N B.fm 71 0.15710625 0 0.41895
+N B.sub 59 0.22693125 0 0.329175
+N fx.pulse 84 0.06 0.02 0.4
 T 3 22 23 11 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 0 S 5 0 0 | 0 0 | 0 0 0 | move,collision
+N A.main 55 0.184359375 0 0.50575
+N A.ping 59 0.03375 0.005625 0.2023
+N B.fm 71 0.1701 0 0.56595
+N B.sub 59 0.2457 0 0.444675
+N fx.collision 43 0.08 0.01 0.7
 T 3 23 24 0 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 2 S 5 0 0 | 0 0 | 0 0 0 | wait,move,move
+N A.main 55 0.061453125 0 0.1445
+N B.fm 71 0.11221875 0 0.69825
+N B.sub 59 0.16209375 0 0.548625
 T 3 24 25 1 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 2 S 5 0 0 | 0 0 | 1 0 0 | wait,wait
+N drum.kick 24 0.18 0 1
 T 3 25 26 2 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 4 S 5 0 0 | 0 0 | 0 0 0 | wait,move,move
+N B.fm 59 0.11221875 0 0.69825
+N B.sub 47 0.16209375 0 0.548625
 T 3 26 27 3 0 0 0 0 0 maze | A 3 4 E 0 0 0 | B 4 4 E 5 0 0 | 0 0 | 0 0 0 | move,pulse,turn
+N A.main 55 0.30459375 0 0.646
+N A.ping 59 0.03375 0.005625 0.2584
+N B.fm 59 0.11221875 0 0.47481
+N B.sub 47 0.16209375 0 0.373065
+N fx.pulse 84 0.06 0.01 0.4
 T 3 27 28 4 0 0 0 0 0 maze | A 3 4 E 0 0 0 | B 4 4 E 5 0 0 | 0 0 | 0 0 0 | wait,ping
+N B.fm 59 0.0961875 0 0.7
+N B.sub 47 0.1389375 0 0.55
 T 3 28 29 5 0 0 0 0 0 maze | A 3 4 S 0 0 0 | B 4 4 N 5 0 0 | 0 0 | 0 0 1 | turn,pulse,turn
+N A.main 55 0.361344375 0 0.3825
+N A.ping 59 0.03375 0.005625 0.153
+N B.fm 59 0.0567 0 0.6468
+N B.sub 47 0.0819 0 0.5082
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 3 29 30 6 0 0 0 0 0 maze | A 3 4 S 0 0 0 | B 4 2 N 5 0 0 | 0 0 | 0 0 0 | wait,pulse,move,move,belt
+N A.main 55 0.053865 0 0.1575
+N B.fm 71 0.01875 0 0.6664
+N B.sub 59 0.1681875 0 0.5236
+N B.fm 71 0.219375 0.0225 0.3808
+N fx.pulse 84 0.06 0.01 0.4
 T 3 30 31 7 0 0 0 0 0 maze | A 3 3 S 0 0 0 | B 4 2 N 5 0 0 | 0 0 | 0 0 0 | move,wait
+N A.main 67 0.089775 0 0.55125
+N A.ping 71 0.03375 0.005625 0.2205
 T 3 31 32 8 0 0 0 0 0 maze | A 3 3 S 0 0 0 | B 4 2 N 5 0 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 71 0.01215 0 0.2058
+N B.sub 59 0.01755 0 0.1617
 T 3 32 33 9 0 0 0 0 0 maze | A 3 4 S 0 0 0 | B 4 2 N 5 0 0 | 0 0 | 1 0 0 | move,collision,pulse,wait
+N A.main 55 0.089775 0 0.7875
+N A.ping 59 0.03375 0.005625 0.315
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.01 0.7
+N fx.pulse 84 0.06 0.02 0.4
 T 3 33 34 10 0 0 0 0 0 maze | A 3 4 S 0 0 0 | B 4 2 N 5 0 0 | 0 0 | 0 0 0 | wait,move,move,belt
+N B.fm 71 0.01875 0 0.5831
+N B.sub 59 0.15136875 0 0.45815
+N B.fm 71 0.219375 0.0225 0.3332
+N fx.belt -1 0.04 0.03 0.35
 T 3 34 35 11 0 0 0 0 0 maze | A 3 4 W 0 0 0 | B 4 2 N 5 0 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 55 0.07182 0 0.4095
+N A.ping 59 0.03375 0.005625 0.1638
+N B.fm 71 0.01215 0 0.2058
+N B.sub 59 0.01755 0 0.1617
+N fx.pulse 84 0.06 0.01 0.4
 T 3 35 36 0 0 0 0 0 0 maze | A 3 4 W 0 0 0 | B 4 1 N 6 0 1 | 0 0 | 0 0 0 | wait,move,zap,zap
+N B.fm 71 0.05821875 0 0.6664
+N B.sub 59 0.08409375 0 0.5236
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 3 36 37 1 0 0 0 0 0 maze | A 3 4 W 0 0 0 | B 0 4 W 0 1 0 | 0 0 | 1 0 0 | death,wait,collision
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N B.fm 43 0.15525 0 0.3094
+N B.sub 43 0.22425 0 0.2431
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.01 0.7
 T 3 37 38 2 0 0 0 0 0 maze | A 3 4 W 0 0 0 | B 0 4 W 0 1 0 | 0 0 | 0 0 0 | wait,wait
 T 3 38 39 3 0 0 0 0 0 maze | A 3 4 W 0 0 0 | B 0 4 W 1 1 0 | 0 0 | 0 0 0 | zap,pulse,wait
+N A.main 55 0.1539 0 0.585
+N A.ping 59 0.03375 0.005625 0.234
+N B.fm 45 0.046575 0 0.083538
+N B.sub 45 0.067275 0 0.065637
+N fx.zap -1 0.06 0 0.6
+N fx.pulse 84 0.06 0.01 0.4
 T 3 39 40 4 0 0 0 0 0 maze | A 3 4 W 0 0 0 | B 0 4 N 2 1 0 | 0 0 | 0 0 0 | zap,pulse,turn
+N A.main 55 0.176985 0 0.49725
+N A.ping 59 0.03375 0.005625 0.1989
+N B.fm 47 0.02835 0 0.51156
+N B.sub 47 0.04095 0 0.40194
+N fx.zap -1 0.06 0 0.6
+N fx.pulse 84 0.06 0.01 0.4
 T 3 40 41 5 0 0 0 0 0 maze | A 3 4 N 0 0 0 | B 0 4 E 2 1 0 | 0 0 | 0 0 1 | turn,pulse,turn
+N A.main 55 0.10773 0 0.66
+N A.ping 59 0.03375 0.005625 0.264
+N B.fm 47 0.11221875 0 0.393414
+N B.sub 47 0.16209375 0 0.309111
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 3 41 42 6 0 0 0 0 0 maze | A 3 4 E 1 0 0 | B 0 4 E 2 1 0 | 0 0 | 0 0 0 | turn,pulse,zap
+N A.main 55 0.089775 0 0.5355
+N A.ping 59 0.03375 0.005625 0.2142
+N B.fm 47 0.0405 0 0.652239
+N B.sub 47 0.0585 0 0.5124735
+N fx.pulse 84 0.06 0.01 0.4
+N fx.zap -1 0.06 0.02 0.6
 T 3 42 43 7 0 0 0 0 0 maze | A 2 4 E 1 0 0 | B 0 4 E 2 1 0 | 0 0 | 0 0 0 | move,wait
+N A.main 57 0.1603125 0 0.6426
+N A.ping 60 0.03375 0.005625 0.25704
 T 3 43 44 8 0 0 0 0 0 maze | A 2 4 N 1 0 0 | B 0 4 N 2 1 0 | 0 0 | 0 0 0 | turn,turn
+N A.main 57 0.071071875 0 0.6156
+N A.ping 60 0.03375 0.005625 0.24624
+N B.fm 47 0.070875 0 0.4872
+N B.sub 47 0.102375 0 0.3828
 T 3 44 45 9 0 0 0 0 0 maze | A 2 4 N 1 0 0 | B 0 4 N 2 1 0 | 0 0 | 1 0 0 | ping,wait
+N A.main 57 0.02565 0 1
+N A.ping 60 0.03375 0.005625 0.4
+N B.fm 47 0.03493125 0 0.13804
+N B.sub 47 0.05045625 0 0.10846
+N drum.kick 24 0.18 0 1
 T 3 45 46 10 0 0 0 0 0 maze | A 2 4 N 1 0 0 | B 0 4 N 2 1 0 | 0 0 | 0 0 0 | wait,collision
+N B.fm 47 0.0729 0 0.62524
+N B.sub 47 0.1053 0 0.49126
+N fx.collision 43 0.08 0.01 0.7
 T 3 46 47 11 0 0 0 0 0 maze | A 2 2 N 1 0 0 | B 0 4 N 2 1 0 | 0 0 | 0 0 0 | move,move,wait
+N A.main 69 0.061453125 0 0.918
+N A.ping 72 0.03375 0.005625 0.3672
 T 3 47 48 0 0 0 0 0 0 maze | A 2 2 N 1 0 0 | B 0 3 N 3 1 0 | 0 0 | 0 0 0 | wait,move,zap
+N A.main 69 0.0320625 0 0.216
+N B.fm 71 0.0405 0 0.7
+N B.sub 59 0.0585 0 0.55
+N fx.zap -1 0.06 0.02 0.6
 T 4 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 1 0 | 0 0 | 1 0 0 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 4 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | collision,turn
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N B.fm 62 0.1323 0 0.3465
+N B.sub 50 0.1911 0 0.27225
+N fx.collision 43 0.08 0 0.7
 T 4 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 53 0.071071875 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
 T 4 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 0 0 0 | ping,turn
+N A.main 53 0.02565 0 0.945
+N A.ping 57 0.03375 0.005625 0.378
+N B.fm 62 0.118125 0 0.357
+N B.sub 50 0.170625 0 0.2805
 T 4 4 5 5 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 0 0 1 | turn,collision
+N A.main 53 0.143390625 0 0.4335
+N A.ping 57 0.03375 0.005625 0.1734
+N B.fm 62 0.151875 0 0.4165
+N B.sub 50 0.219375 0 0.32725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 4 5 6 6 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 0 0 0 | move,move,wait
+N A.main 59 0.102421875 0 0.7225
+N A.ping 62 0.03375 0.005625 0.289
 T 4 6 7 7 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 0 0 0 | wait,collision
+N A.main 59 0.0534375 0 0.17
+N B.fm 67 0.17465625 0 0.354025
+N B.sub 55 0.25228125 0 0.2781625
+N fx.collision 43 0.08 0.01 0.7
 T 4 7 8 8 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 67 0.02025 0 0.12495
+N B.sub 55 0.02925 0 0.098175
 T 4 8 9 9 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 1 0 0 | move,pulse,wait
+N A.main 57 0.23085 0 0.6545
+N A.ping 60 0.03375 0.005625 0.2618
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
 T 4 9 10 10 0 0 0 0 0 maze | A 1 4 N 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 57 0.154861875 0 0.51
+N A.ping 60 0.03375 0.005625 0.204
+N fx.pulse 84 0.06 0.01 0.4
 T 4 10 11 11 0 0 0 0 0 maze | A 1 4 N 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 0 0 0 | wait,collision
+N B.fm 65 0.14428125 0 0.395675
+N B.sub 53 0.20840625 0 0.3108875
+N fx.collision 43 0.08 0.01 0.7
 T 4 11 12 0 0 0 0 0 0 maze | A 1 4 N 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 0 0 0 | wait,collision,collision
+N B.fm 65 0.0675 0 0.6545
+N B.sub 53 0.0975 0 0.51425
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 4 12 13 1 0 0 0 0 0 maze | A 1 4 N 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 1 0 0 | collision,pulse,wait
+N A.main 57 0.069255 0 0.735
+N A.ping 60 0.03375 0.005625 0.294
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0 0.7
+N fx.pulse 84 0.06 0.01 0.4
 T 4 13 14 2 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 0 0 0 | turn,pulse,collision
+N A.main 57 0.17955 0 0.39
+N A.ping 60 0.03375 0.005625 0.156
+N B.fm 65 0.151875 0 0.4165
+N B.sub 53 0.219375 0 0.32725
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 4 14 15 3 0 0 0 0 0 maze | A 2 4 W 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 0 0 0 | move,ping
+N A.main 59 0.12825 0 0.455
+N A.ping 62 0.03375 0.005625 0.182
+N B.fm 67 0.0405 0 0.562275
+N B.sub 55 0.0585 0 0.4417875
 T 4 15 16 4 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 0 0 0 | move,pulse,wait
+N A.main 57 0.2565 0 0.52
+N A.ping 60 0.03375 0.005625 0.208
+N B.fm 65 0.050625 0 0.119
+N B.sub 53 0.073125 0 0.0935
+N fx.pulse 84 0.06 0.01 0.4
 T 4 16 17 5 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 0 0 1 | turn,pulse,collision
+N A.main 57 0.361344375 0 0.3825
+N A.ping 60 0.03375 0.005625 0.153
+N B.fm 65 0.0675 0 0.4998
+N B.sub 53 0.0975 0 0.3927
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 4 17 18 6 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | collision,collision,pulse,turn
+N A.main 57 0.089775 0 0.7875
+N A.ping 60 0.03375 0.005625 0.315
+N B.fm 65 0.1323 0 0.3465
+N B.sub 53 0.1911 0 0.27225
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.pulse 84 0.06 0.02 0.4
 T 4 18 19 7 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 2 S 0 1 0 | 0 0 | 0 0 0 | ping,pulse,move,move
+N A.main 57 0.30972375 0 0.57375
+N A.ping 60 0.03375 0.005625 0.2295
+N B.fm 65 0.13584375 0 0.44625
+N B.sub 53 0.19621875 0 0.350625
+N fx.pulse 84 0.06 0.01 0.4
 T 4 19 20 8 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 4 S 0 1 0 | 0 0 | 0 0 0 | collision,pulse,move,move
+N A.main 57 0.17955 0 0.63
+N A.ping 60 0.03375 0.005625 0.252
+N B.fm 53 0.118125 0 0.525
+N B.sub 41 0.170625 0 0.4125
+N fx.collision 43 0.08 0 0.7
+N fx.pulse 84 0.06 0.01 0.4
 T 4 20 21 9 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 4 S 0 1 0 | 0 0 | 1 0 0 | turn,pulse,wait
+N A.main 57 0.213215625 0 0.4845
+N A.ping 60 0.03375 0.005625 0.1938
+N B.fm 53 0.06733125 0 0.09975
+N B.sub 41 0.09725625 0 0.078375
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
 T 4 21 22 10 0 0 0 0 0 maze | A 3 4 E 0 0 0 | B 4 4 W 0 1 0 | 0 0 | 0 0 0 | move,move,pulse,turn
+N A.main 59 0.064125 0 0.8925
+N A.ping 62 0.03375 0.005625 0.357
+N B.fm 55 0.089775 0 0.25935
+N B.sub 43 0.129675 0 0.203775
+N fx.pulse 84 0.06 0.02 0.4
 T 4 22 23 11 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 4 W 0 1 0 | 0 0 | 0 0 0 | move,collision
+N A.main 59 0.184359375 0 0.50575
+N A.ping 62 0.03375 0.005625 0.2023
+N B.fm 55 0.0972 0 0.35035
+N B.sub 43 0.1404 0 0.275275
+N fx.collision 43 0.08 0.01 0.7
 T 4 23 24 0 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 4 W 0 1 0 | 0 0 | 0 0 0 | wait,wait
+N A.main 59 0.061453125 0 0.1445
 T 4 24 25 1 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 4 W 0 1 0 | 0 0 | 1 0 0 | wait,wait
+N drum.kick 24 0.18 0 1
 T 4 25 26 2 0 0 0 0 0 maze | A 2 4 S 2 0 0 | B 2 4 W 0 1 0 | 7 0 | 0 0 0 | turn,move,move,zap
+N A.main 59 0.165834375 0 0.4275
+N A.ping 62 0.03375 0.005625 0.171
+N B.fm 50 0.064125 0 0.43225
+N B.sub 38 0.092625 0 0.339625
+N fx.zap -1 0.06 0.03 0.6
 T 4 26 27 3 0 0 0 0 0 maze | A 2 4 S 2 0 0 | B 2 4 S 0 1 0 | 6 0 | 0 0 0 | wait,turn
+N B.fm 50 0.15710625 0 0.29925
+N B.sub 38 0.22693125 0 0.235125
 T 4 27 28 4 0 0 0 0 0 maze | A 2 4 S 2 0 0 | B 2 4 S 0 1 0 | 5 0 | 0 0 0 | ping,ping
+N A.main 59 0.17206875 0 0.66555
+N A.ping 62 0.03375 0.005625 0.26622
+N B.fm 50 0.1346625 0 0.448875
+N B.sub 38 0.1945125 0 0.3526875
 T 4 28 29 5 0 0 0 0 0 maze | A 2 4 W 2 0 0 | B 2 4 E 0 1 0 | 4 0 | 0 0 1 | turn,turn
+N A.main 59 0.1147125 0 0.38454
+N A.ping 62 0.03375 0.005625 0.153816
+N B.fm 50 0.0945 0 0.3927
+N B.sub 38 0.1365 0 0.30855
+N drum.hihat -1 0.03 0 0.5
 T 4 29 30 6 0 0 0 0 0 maze | A 2 4 W 2 0 0 | B 3 4 E 0 1 0 | 3 0 | 0 0 0 | wait,move,pulse
+N B.fm 50 0.3493125 0 0.4046
+N B.sub 38 0.5045625 0 0.3179
+N fx.pulse 84 0.06 0.02 0.4
 T 4 30 31 7 0 0 0 0 0 maze | A 3 4 W 1 0 0 | B 3 4 E 0 1 0 | 2 0 | 0 0 0 | move,pulse,wait
+N A.main 57 0.09234 0 0.51597
+N A.ping 60 0.03375 0.005625 0.206388
+N fx.pulse 84 0.06 0.01 0.4
 T 4 31 32 8 0 0 0 0 0 maze | A 3 4 W 1 0 0 | B 3 4 E 0 1 0 | 1 0 | 0 0 0 | wait,wait,pulse
+N B.fm 50 0.03645 0 0.12495
+N B.sub 38 0.05265 0 0.098175
+N fx.pulse 84 0.06 0.02 0.4
 T 4 32 33 9 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 4 E 0 1 0 | 0 0 | 1 0 0 | move,move,pulse,move,collision
+N A.main 53 0.0513 0 0.6825
+N A.ping 57 0.03375 0.005625 0.273
+N B.fm 53 0.084375 0 0.595
+N B.sub 41 0.121875 0 0.4675
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.02 0.4
 T 4 33 34 10 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 3 4 E 0 1 0 | 0 0 | 0 0 0 | wait,move,pulse
+N B.fm 48 0.31438125 0 0.354025
+N B.sub 36 0.45410625 0 0.2781625
+N fx.pulse 84 0.06 0.02 0.4
 T 4 34 35 11 0 0 0 0 0 maze | A 1 4 N 0 0 0 | B 3 4 E 0 1 0 | 0 0 | 0 0 0 | turn,pulse,wait,pulse
+N A.main 53 0.053865 0 0.63
+N A.ping 57 0.03375 0.005625 0.252
+N B.fm 48 0.03645 0 0.12495
+N B.sub 36 0.05265 0 0.098175
+N fx.pulse 84 0.06 0.01 0.4
+N fx.pulse 84 0.06 0.03 0.4
 T 4 35 36 0 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 4 E 0 1 0 | 0 0 | 0 0 0 | turn,pulse,move
+N A.main 53 0.14364 0 0.429
+N A.ping 57 0.03375 0.005625 0.1716
+N B.fm 53 0.1940625 0 0.4046
+N B.sub 41 0.2803125 0 0.3179
+N fx.pulse 84 0.06 0.01 0.4
 T 4 36 37 1 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 4 E 0 1 0 | 0 0 | 1 0 0 | wait,collision
+N B.fm 53 0.1940625 0 0.4046
+N B.sub 41 0.2803125 0 0.3179
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.01 0.7
 T 4 37 38 2 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 4 E 0 1 0 | 0 0 | 0 0 0 | wait,wait
 T 4 38 39 3 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 4 E 0 1 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 53 0.05821875 0 0.10115
+N B.sub 41 0.08409375 0 0.079475
 T 4 39 40 4 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 4 S 0 1 0 | 0 0 | 0 0 0 | ping,pulse,turn
+N A.main 57 0.176985 0 0.49725
+N A.ping 60 0.03375 0.005625 0.1989
+N B.fm 53 0.06615 0 0.33075
+N B.sub 41 0.09555 0 0.259875
+N fx.pulse 84 0.06 0.01 0.4
 T 4 40 41 5 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 4 W 0 1 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 53 0.089775 0 0.25935
+N B.sub 41 0.129675 0 0.203775
+N drum.hihat -1 0.03 0 0.5
 T 4 41 42 6 0 0 0 0 0 maze | A 1 4 W 1 0 0 | B 4 4 W 0 1 0 | 0 0 | 0 0 0 | wait,zap
+N B.fm 53 0.0324 0 0.429975
+N B.sub 41 0.0468 0 0.3378375
+N fx.zap -1 0.06 0.01 0.6
 T 4 42 43 7 0 0 0 0 0 maze | A 2 4 W 1 0 0 | B 4 4 W 0 1 0 | 0 0 | 0 0 0 | move,wait
+N A.main 57 0.12825 0 0.4914
+N A.ping 60 0.03375 0.005625 0.19656
 T 4 43 44 8 0 0 0 0 0 maze | A 2 4 S 1 0 0 | B 4 4 S 0 1 0 | 0 0 | 0 0 0 | turn,turn
+N A.main 57 0.165834375 0 0.4617
+N A.ping 60 0.03375 0.005625 0.18468
+N B.fm 55 0.165375 0 0.315
+N B.sub 43 0.238875 0 0.2475
 T 4 44 45 9 0 0 0 0 0 maze | A 2 4 S 1 0 0 | B 4 4 S 0 1 0 | 0 0 | 1 0 0 | wait,wait
+N drum.kick 24 0.18 0 1
 T 4 45 46 10 0 0 0 0 0 maze | A 2 4 S 1 0 0 | B 4 2 S 0 1 0 | 0 0 | 0 0 0 | wait,move,move,belt
+N B.fm 67 0.01875 0 0.40425
+N B.sub 55 0.2457 0 0.317625
+N B.fm 67 0.135 0.0225 0.231
+N fx.belt -1 0.04 0.03 0.35
 T 4 46 47 11 0 0 0 0 0 maze | A 2 4 S 1 0 0 | B 4 4 S 0 1 0 | 0 0 | 0 0 0 | collision,collision,move,move
+N A.main 57 0.143390625 0 0.6885
+N A.ping 60 0.03375 0.005625 0.2754
+N B.fm 55 0.04725 0 0.55125
+N B.sub 43 0.06825 0 0.433125
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 4 47 48 0 0 0 0 0 0 maze | A 2 4 S 1 0 0 | B 4 4 S 0 1 0 | 0 0 | 0 0 0 | wait,collision
+N A.main 57 0.0748125 0 0.162
+N B.fm 55 0.189 0 0.462
+N B.sub 43 0.273 0 0.363
+N fx.collision 43 0.08 0.01 0.7
 T 5 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 1 0 | 0 0 | 1 0 0 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 5 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | collision,wait
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N fx.collision 43 0.08 0 0.7
 T 5 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 53 0.071071875 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
 T 5 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | ping,turn
+N A.main 53 0.02565 0 0.945
+N A.ping 57 0.03375 0.005625 0.378
+N B.fm 62 0.165375 0 0.315
+N B.sub 50 0.238875 0 0.2475
 T 5 4 5 5 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 1 | turn,collision
+N A.main 53 0.143390625 0 0.4335
+N A.ping 57 0.03375 0.005625 0.1734
+N B.fm 62 0.212625 0 0.3675
+N B.sub 50 0.307125 0 0.28875
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 5 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 62 0.0945 0 0.3927
+N B.sub 50 0.1365 0 0.30855
 T 5 6 7 7 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 0 0 0 | wait,collision
+N A.main 53 0.0534375 0 0.17
+N B.fm 62 0.17465625 0 0.354025
+N B.sub 50 0.25228125 0 0.2781625
+N fx.collision 43 0.08 0.01 0.7
 T 5 7 8 8 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 E 0 1 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 62 0.02025 0 0.12495
+N B.sub 50 0.02925 0 0.098175
 T 5 8 9 9 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 N 0 1 0 | 0 0 | 1 0 0 | collision,turn
+N A.main 53 0.12825 0 0.6545
+N A.ping 57 0.03375 0.005625 0.2618
+N B.fm 62 0.02835 0 0.441
+N B.sub 50 0.04095 0 0.3465
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0 0.7
 T 5 9 10 10 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 62 0.0243 0 0.154
+N B.sub 50 0.0351 0 0.121
 T 5 10 11 11 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 1 N 1 1 0 | 0 0 | 0 0 0 | wait,move,zap
+N A.main 53 0.061453125 0 0.1445
+N B.fm 64 0.043284375 0 0.50274
+N B.sub 52 0.062521875 0 0.39501
+N fx.zap -1 0.06 0.02 0.6
 T 5 11 12 0 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 1 N 1 1 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 50 0.029925 0 0.63
+N A.ping 53 0.03375 0.005625 0.252
 T 5 12 13 1 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 1 N 2 1 0 | 0 0 | 1 0 0 | wait,ping,zap
+N B.fm 65 0.01215 0 0.7
+N B.sub 53 0.01755 0 0.55
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.02 0.6
 T 5 13 14 2 0 0 0 0 0 maze | A 0 4 W 0 0 0 | B 4 2 N 2 1 0 | 0 0 | 0 0 0 | turn,move
+N A.main 50 0.09975 0 0.39
+N A.ping 53 0.03375 0.005625 0.156
+N B.fm 65 0.091125 0 0.5684
+N B.sub 53 0.131625 0 0.4466
 T 5 14 15 3 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 2 N 2 1 0 | 0 0 | 0 0 0 | move,pulse,ping
+N A.main 53 0.23085 0 0.455
+N A.ping 57 0.03375 0.005625 0.182
+N B.fm 69 0.0243 0 0.7
+N B.sub 57 0.0351 0 0.55
+N fx.pulse 84 0.06 0.01 0.4
 T 5 15 16 4 0 0 0 0 0 maze | A 1 4 W 0 0 0 | B 4 2 N 2 1 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 69 0.030375 0 0.1624
+N B.sub 57 0.043875 0 0.1276
 T 5 16 17 5 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 1 N 3 1 0 | 0 0 | 0 0 1 | turn,pulse,move,zap
+N A.main 53 0.361344375 0 0.3825
+N A.ping 57 0.03375 0.005625 0.153
+N B.fm 69 0.02025 0 0.7
+N B.sub 57 0.02925 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
+N fx.zap -1 0.06 0.03 0.6
 T 5 17 18 6 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 1 E 4 1 0 | 0 0 | 0 0 0 | collision,collision,pulse,turn,zap
+N A.main 53 0.089775 0 0.7875
+N A.ping 57 0.03375 0.005625 0.315
+N B.fm 69 0.04725 0 0.518364
+N B.sub 57 0.06825 0 0.407286
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.pulse 84 0.06 0.02 0.4
 T 5 18 19 7 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 1 E 5 1 0 | 0 0 | 0 0 0 | ping,pulse,collision,collision,zap
+N A.main 53 0.30972375 0 0.57375
+N A.ping 57 0.03375 0.005625 0.2295
+N B.fm 69 0.048515625 0 0.7
+N B.sub 57 0.070078125 0 0.55
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 5 19 20 8 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 4 1 E 6 1 1 | 0 0 | 0 0 0 | collision,pulse,collision,collision,zap,zap
+N A.main 53 0.17955 0 0.63
+N A.ping 57 0.03375 0.005625 0.252
+N B.fm 69 0.0421875 0 0.7
+N B.sub 57 0.0609375 0 0.55
+N fx.collision 43 0.08 0 0.7
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 5 20 21 9 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 1 0 0 | death,wait,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N B.fm 41 0.038475 0 0.08645
+N B.sub 41 0.055575 0 0.067925
+N drum.kick 24 0.18 0 1
 T 5 21 22 10 0 0 0 0 0 maze | A 1 4 S 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 41 0.06733125 0 0.399
+N B.sub 41 0.09725625 0 0.3135
 T 5 22 23 11 0 0 0 0 0 maze | A 1 3 S 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 0 0 0 | move,collision
+N A.main 69 0.258103125 0 0.44625
+N A.ping 72 0.03375 0.005625 0.1785
+N B.fm 53 0.0729 0 0.539
+N B.sub 41 0.1053 0 0.4235
+N fx.collision 43 0.08 0.01 0.7
 T 5 23 24 0 0 0 0 0 0 maze | A 1 3 S 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 0 0 0 | wait,wait
+N A.main 69 0.086034375 0 0.1275
 T 5 24 25 1 0 0 0 0 0 maze | A 1 3 S 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 1 0 0 | wait,wait
+N A.main 69 0.029925 0 0.1575
+N drum.kick 24 0.18 0 1
 T 5 25 26 2 0 0 0 0 0 maze | A 1 3 W 0 0 0 | B 0 2 N 0 2 0 | 0 0 | 0 0 0 | turn,move,move
+N A.main 69 0.0947625 0 0.3705
+N A.ping 72 0.03375 0.005625 0.1482
+N B.fm 65 0.04809375 0 0.665
+N B.sub 53 0.06946875 0 0.5225
 T 5 26 27 3 0 0 0 0 0 maze | A 1 3 W 0 0 0 | B 0 2 W 0 2 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 65 0.089775 0 0.25935
+N B.sub 53 0.129675 0 0.203775
 T 5 27 28 4 0 0 0 0 0 maze | A 1 3 W 0 0 0 | B 0 2 W 0 2 0 | 0 0 | 0 0 0 | ping,ping
+N A.main 69 0.098325 0 0.49725
+N A.ping 72 0.03375 0.005625 0.1989
+N B.fm 65 0.07695 0 0.389025
+N B.sub 53 0.11115 0 0.3056625
 T 5 28 29 5 0 0 0 0 0 maze | A 1 3 W 0 0 0 | B 0 2 S 0 2 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 65 0.1323 0 0.3465
+N B.sub 53 0.1911 0 0.27225
+N drum.hihat -1 0.03 0 0.5
 T 5 29 30 6 0 0 0 0 0 maze | A 1 3 W 0 0 0 | B 0 3 S 1 2 0 | 0 0 | 0 0 0 | wait,move,zap
+N B.fm 67 0.13584375 0 0.38556
+N B.sub 55 0.19621875 0 0.30294
+N fx.zap -1 0.06 0.02 0.6
 T 5 30 31 7 0 0 0 0 0 maze | A 2 3 S 0 0 0 | B 0 3 S 1 2 0 | 0 0 | 0 0 0 | move,rotator,wait
+N A.main 67 0.089775 0 0.55125
+N A.ping 71 0.03375 0.005625 0.2205
+N fx.rotator 81 0.04 0.01 0.45
 T 5 31 32 8 0 0 0 0 0 maze | A 2 3 S 0 0 0 | B 0 3 S 2 2 0 | 0 0 | 0 0 0 | wait,wait,zap
+N B.fm 71 0.014175 0 0.12789
+N B.sub 59 0.020475 0 0.100485
+N fx.zap -1 0.06 0.02 0.6
 T 5 32 33 9 0 0 0 0 0 maze | A 2 4 S 0 0 0 | B 0 4 S 2 2 0 | 0 0 | 1 0 0 | move,collision,move,collision
+N A.main 55 0.049875 0 0.7875
+N A.ping 59 0.03375 0.005625 0.315
+N B.fm 47 0.118125 0 0.609
+N B.sub 47 0.170625 0 0.4785
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 5 33 34 10 0 0 0 0 0 maze | A 2 4 S 0 0 0 | B 0 3 S 3 2 0 | 0 0 | 0 0 0 | wait,move,zap
+N B.fm 59 0.122259375 0 0.387345
+N B.sub 47 0.176596875 0 0.3043425
+N fx.zap -1 0.06 0.02 0.6
 T 5 34 35 11 0 0 0 0 0 maze | A 2 4 W 0 0 0 | B 0 3 S 3 2 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 55 0.0399 0 0.4095
+N A.ping 59 0.03375 0.005625 0.1638
 T 5 35 36 0 0 0 0 0 0 maze | A 2 4 S 0 0 0 | B 0 3 S 3 2 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 55 0.13965 0 0.495
+N A.ping 59 0.03375 0.005625 0.198
 T 5 36 37 1 0 0 0 0 0 maze | A 2 3 E 0 0 0 | B 0 4 S 3 2 0 | 0 0 | 1 0 0 | move,rotator,move
+N A.main 67 0.064125 0 0.62475
+N A.ping 71 0.03375 0.005625 0.2499
+N B.fm 59 0.2716875 0 0.44268
+N B.sub 47 0.3924375 0 0.34782
+N drum.kick 24 0.18 0 1
+N fx.rotator 81 0.04 0.01 0.45
 T 5 37 38 2 0 0 0 0 0 maze | A 2 3 E 0 0 0 | B 0 4 S 3 2 0 | 0 0 | 0 0 0 | wait,wait
 T 5 38 39 3 0 0 0 0 0 maze | A 2 3 E 0 0 0 | B 0 4 S 3 2 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 59 0.08150625 0 0.11067
+N B.sub 47 0.11773125 0 0.086955
 T 5 39 40 4 0 0 0 0 0 maze | A 2 3 N 0 0 0 | B 0 4 W 3 2 0 | 0 0 | 0 0 0 | ping,rotator,turn
+N A.main 67 0.07374375 0 0.765
+N A.ping 71 0.03375 0.005625 0.306
+N B.fm 59 0.0378 0 0.355446
+N B.sub 47 0.0546 0 0.279279
+N fx.rotator 81 0.04 0.01 0.45
 T 5 40 41 5 0 0 0 0 0 maze | A 2 3 N 0 0 0 | B 0 4 N 3 2 0 | 0 0 | 0 0 1 | turn,rotator,turn
+N A.main 67 0.05985 0 0.66
+N A.ping 71 0.03375 0.005625 0.264
+N B.fm 59 0.06733125 0 0.49476
+N B.sub 47 0.09725625 0 0.38874
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 5 41 42 6 0 0 0 0 0 maze | A 2 3 N 0 0 0 | B 0 4 N 3 2 0 | 0 0 | 0 0 0 | turn,rotator,ping
+N A.main 67 0.029925 0 0.63
+N A.ping 71 0.03375 0.005625 0.252
+N B.fm 59 0.0243 0 0.7
+N B.sub 47 0.0351 0 0.55
+N fx.rotator 81 0.04 0.01 0.45
 T 5 42 43 7 0 0 0 0 0 maze | A 2 4 N 0 0 0 | B 0 4 N 3 2 0 | 0 0 | 0 0 0 | move,collision
+N A.main 55 0.0961875 0 0.7
+N A.ping 59 0.03375 0.005625 0.28
+N B.fm 47 0.08656875 0 0.57722
+N B.sub 47 0.12504375 0 0.45353
+N fx.collision 43 0.08 0.01 0.7
 T 5 43 44 8 0 0 0 0 0 maze | A 2 4 W 0 0 0 | B 0 4 N 3 2 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 55 0.0947625 0 0.3705
+N A.ping 59 0.03375 0.005625 0.1482
 T 5 44 45 9 0 0 0 0 0 maze | A 2 4 W 0 0 0 | B 0 4 N 4 2 0 | 0 0 | 1 0 0 | zap,wait
+N A.main 55 0.0342 0 0.61425
+N A.ping 59 0.03375 0.005625 0.2457
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0 0.6
 T 5 45 46 10 0 0 0 0 0 maze | A 2 4 N 0 0 0 | B 0 4 N 4 2 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 55 0.086034375 0 0.51
+N A.ping 59 0.03375 0.005625 0.204
 T 5 46 47 11 0 0 0 0 0 maze | A 2 2 N 0 0 0 | B 0 4 N 4 2 0 | 0 0 | 0 0 0 | move,move,wait
+N A.main 67 0.061453125 0 0.85
+N A.ping 71 0.03375 0.005625 0.34
 T 5 47 48 0 0 0 0 0 0 maze | A 2 2 N 0 0 0 | B 0 3 N 5 2 0 | 0 0 | 0 0 0 | wait,move,zap
+N A.main 67 0.0320625 0 0.2
+N B.fm 71 0.0405 0 0.7
+N B.sub 59 0.0585 0 0.55
+N fx.zap -1 0.06 0.02 0.6
 T 6 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 0 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 6 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | collision,wait
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N fx.collision 43 0.08 0 0.7
 T 6 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | turn,collision,collision
+N A.main 53 0.071071875 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
+N B.fm 62 0.0675 0 0.455
+N B.sub 50 0.0975 0 0.3575
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 6 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 62 0.165375 0 0.315
+N B.sub 50 0.238875 0 0.2475
 T 6 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 1 | wait,collision
+N B.fm 62 0.212625 0 0.3675
+N B.sub 50 0.307125 0 0.28875
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 6 5 6 6 0 0 0 0 0 maze | A 0 2 N 0 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | move,move,wait
+N A.main 65 0.061453125 0 0.85
+N A.ping 69 0.03375 0.005625 0.34
 T 6 6 7 7 0 0 0 0 0 maze | A 0 2 N 0 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | wait,collision
+N A.main 65 0.0320625 0 0.2
+N B.fm 62 0.24451875 0 0.312375
+N B.sub 50 0.35319375 0 0.2454375
+N fx.collision 43 0.08 0.01 0.7
 T 6 7 8 8 0 0 0 0 0 maze | A 0 2 N 0 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | wait,wait
+N A.main 65 0.02565 0 0.22
+N B.fm 62 0.02835 0 0.11025
+N B.sub 50 0.04095 0 0.086625
 T 6 8 9 9 0 0 0 0 0 maze | A 0 3 N 1 0 0 | B 4 0 S 0 2 0 | 0 0 | 1 0 0 | move,zap,wait
+N A.main 64 0.038475 0 0.8316
+N A.ping 67 0.03375 0.005625 0.33264
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.01 0.6
 T 6 9 10 10 0 0 0 0 0 maze | A 0 3 W 2 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | turn,zap,wait
+N A.main 65 0.05735625 0 0.38454
+N A.ping 69 0.03375 0.005625 0.153816
+N fx.zap -1 0.06 0.01 0.6
 T 6 10 11 11 0 0 0 0 0 maze | A 0 3 W 3 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | wait,zap,collision
+N A.main 65 0.02458125 0 0.13702
+N B.fm 62 0.20199375 0 0.349125
+N B.sub 50 0.29176875 0 0.2743125
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
 T 6 11 12 0 0 0 0 0 0 maze | A 0 3 S 4 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | turn,zap,wait
+N A.main 65 0.0349125 0 0.6237
+N A.ping 69 0.03375 0.005625 0.24948
+N fx.zap -1 0.06 0.01 0.6
 T 6 12 13 1 0 0 0 0 0 maze | A 0 3 S 4 0 0 | B 4 0 S 0 2 0 | 0 0 | 1 0 0 | wait,wait
+N drum.kick 24 0.18 0 1
 T 6 13 14 2 0 0 0 0 0 maze | A 0 3 E 5 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | turn,zap,wait
+N A.main 65 0.06234375 0 0.714
+N A.ping 69 0.03375 0.005625 0.2856
+N fx.zap -1 0.06 0.01 0.6
 T 6 14 15 3 0 0 0 0 0 maze | A 0 3 E 6 0 1 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | collision,zap,zap,ping
+N A.main 65 0.08015625 0 0.833
+N A.ping 69 0.03375 0.005625 0.3332
+N B.fm 62 0.0567 0 0.496125
+N B.sub 50 0.0819 0 0.3898125
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 6 15 16 4 0 0 0 0 0 maze | A 4 0 E 0 1 0 | B 4 0 S 0 2 0 | 0 1 | 0 0 0 | death,collision,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 84 0.178125 0 0.68
+N A.ping 76 0.03375 0.005625 0.272
+N B.fm 69 0.070875 0 0.105
+N B.sub 57 0.102375 0 0.0825
+N fx.collision 43 0.08 0 0.7
 T 6 16 17 5 0 0 0 0 0 maze | A 4 0 N 0 1 0 | B 4 1 S 1 2 0 | 0 0 | 0 0 1 | turn,move,zap
+N A.main 84 0.086034375 0 0.51
+N A.ping 76 0.03375 0.005625 0.204
+N B.fm 71 0.04725 0 0.47628
+N B.sub 59 0.06825 0 0.37422
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 6 17 18 6 0 0 0 0 0 maze | A 4 0 N 0 1 0 | B 4 1 S 1 2 0 | 0 0 | 0 0 0 | collision,collision,wait
+N A.main 81 0.021375 0 1
+N A.ping 84 0.03375 0.005625 0.4
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 6 18 19 7 0 0 0 0 0 maze | A 4 0 N 0 1 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 0 | wait,move,move,move,belt
+N B.fm 71 0.01875 0 0.48195
+N B.sub 59 0.19621875 0 0.378675
+N B.fm 71 0.219375 0.0225 0.2754
 T 6 19 20 8 0 0 0 0 0 maze | A 4 0 N 0 1 0 | B 4 4 S 1 2 0 | 0 0 | 0 0 0 | wait,move,move
+N B.fm 71 0.118125 0 0.567
+N B.sub 59 0.170625 0 0.4455
 T 6 20 21 9 0 0 0 0 0 maze | A 4 0 W 0 1 0 | B 4 4 S 1 2 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 81 0.0947625 0 0.3705
+N A.ping 84 0.03375 0.005625 0.1482
+N B.fm 71 0.06733125 0 0.10773
+N B.sub 59 0.09725625 0 0.084645
+N drum.kick 24 0.18 0 1
 T 6 21 22 10 0 0 0 0 0 maze | A 4 0 W 0 1 0 | B 4 4 W 1 2 0 | 0 0 | 0 0 0 | collision,collision,turn
+N A.main 81 0.0285 0 0.6825
+N A.ping 84 0.03375 0.005625 0.273
+N B.fm 71 0.089775 0 0.280098
+N B.sub 59 0.129675 0 0.220077
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 6 22 23 11 0 0 0 0 0 maze | A 4 0 W 0 1 0 | B 4 4 W 1 2 0 | 0 0 | 0 0 0 | collision,collision
+N A.main 81 0.1474875 0 0.38675
+N A.ping 84 0.03375 0.005625 0.1547
+N B.fm 71 0.0972 0 0.378378
+N B.sub 59 0.1404 0 0.297297
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 6 23 24 0 0 0 0 0 0 maze | A 4 0 W 0 1 0 | B 2 4 W 1 2 0 | 0 0 | 0 0 0 | wait,move,move
+N A.main 81 0.0491625 0 0.1105
+N B.fm 65 0.064125 0 0.46683
+N B.sub 53 0.092625 0 0.366795
 T 6 24 25 1 0 0 0 0 0 maze | A 4 0 W 0 1 0 | B 2 4 W 1 2 0 | 0 0 | 1 0 0 | wait,wait
+N B.fm 65 0.046575 0 0.083538
+N B.sub 53 0.067275 0 0.065637
+N drum.kick 24 0.18 0 1
 T 6 25 26 2 0 0 0 0 0 maze | A 4 0 N 0 1 0 | B 0 4 W 1 2 0 | 0 0 | 0 0 0 | turn,move,move
+N A.main 81 0.071071875 0 0.57
+N A.ping 84 0.03375 0.005625 0.228
+N B.fm 71 0.064125 0 0.46683
+N B.sub 59 0.092625 0 0.366795
 T 6 26 27 3 0 0 0 0 0 maze | A 4 0 N 0 1 0 | B 0 4 S 1 2 0 | 0 0 | 0 0 0 | collision,turn
+N A.main 81 0.10153125 0 0.76
+N A.ping 84 0.03375 0.005625 0.304
+N B.fm 71 0.15710625 0 0.32319
+N B.sub 59 0.22693125 0 0.253935
+N fx.collision 43 0.08 0 0.7
 T 6 27 28 4 0 0 0 0 0 maze | A 4 0 N 0 1 0 | B 0 4 S 1 2 0 | 0 0 | 0 0 0 | ping,ping
+N A.main 81 0.07374375 0 0.765
+N A.ping 84 0.03375 0.005625 0.306
+N B.fm 71 0.1346625 0 0.484785
+N B.sub 59 0.1945125 0 0.3809025
 T 6 28 29 5 0 0 0 0 0 maze | A 4 0 N 0 1 0 | B 0 4 E 1 2 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 71 0.0945 0 0.424116
+N B.sub 59 0.1365 0 0.333234
+N drum.hihat -1 0.03 0 0.5
 T 6 29 30 6 0 0 0 0 0 maze | A 4 0 N 0 1 0 | B 1 4 E 0 2 0 | 0 0 | 0 0 0 | wait,move,pulse
+N A.main 81 0.012825 0 0.21
+N B.fm 72 0.3493125 0 0.4046
+N B.sub 60 0.5045625 0 0.3179
+N fx.pulse 84 0.06 0.02 0.4
 T 6 30 31 7 0 0 0 0 0 maze | A 4 1 N 1 1 0 | B 1 4 E 0 2 0 | 0 0 | 0 0 0 | move,zap,ping,pulse
+N A.main 83 0.0192375 0 0.7938
+N A.ping 74 0.03375 0.005625 0.31752
+N B.fm 72 0.2095875 0 0.455175
+N B.sub 60 0.3027375 0 0.3576375
+N fx.zap -1 0.06 0.01 0.6
+N fx.pulse 84 0.06 0.03 0.4
 T 6 31 32 8 0 0 0 0 0 maze | A 4 1 N 1 1 0 | B 1 4 E 0 2 0 | 0 0 | 0 0 0 | wait,wait,pulse
+N B.fm 72 0.03645 0 0.12495
+N B.sub 60 0.05265 0 0.098175
+N fx.pulse 84 0.06 0.02 0.4
 T 6 32 33 9 0 0 0 0 0 maze | A 4 0 N 1 1 0 | B 3 4 E 0 2 0 | 0 0 | 1 0 0 | move,collision,move,move,pulse
+N A.main 83 0.021375 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 64 0.151875 0 0.595
+N B.sub 52 0.219375 0 0.4675
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.01 0.7
 T 6 33 34 10 0 0 0 0 0 maze | A 4 0 N 1 1 0 | B 3 4 E 0 2 0 | 0 0 | 0 0 0 | wait,wait
+N A.main 83 0.030459375 0 0.2052
 T 6 34 35 11 0 0 0 0 0 maze | A 4 0 E 1 1 0 | B 3 4 E 0 2 0 | 0 0 | 0 0 0 | turn,wait,pulse
+N A.main 83 0.049875 0 0.57834
+N A.ping 74 0.03375 0.005625 0.231336
+N B.fm 64 0.03645 0 0.12495
+N B.sub 52 0.05265 0 0.098175
+N fx.pulse 84 0.06 0.02 0.4
 T 6 35 36 0 0 0 0 0 0 maze | A 4 0 N 1 1 0 | B 3 4 E 0 2 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 83 0.05985 0 0.7128
+N A.ping 74 0.03375 0.005625 0.28512
 T 6 36 37 1 0 0 0 0 0 maze | A 4 1 N 2 1 0 | B 4 4 E 0 2 0 | 0 0 | 1 0 0 | move,zap,move
+N A.main 84 0.0192375 0 0.8526
+N A.ping 76 0.03375 0.005625 0.34104
+N B.fm 69 0.1940625 0 0.4046
+N B.sub 57 0.2803125 0 0.3179
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.01 0.6
 T 6 37 38 2 0 0 0 0 0 maze | A 4 1 N 2 1 0 | B 4 4 E 0 2 0 | 0 0 | 0 0 0 | wait,wait
 T 6 38 39 3 0 0 0 0 0 maze | A 4 1 N 2 1 0 | B 4 4 E 0 2 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 69 0.05821875 0 0.10115
+N B.sub 57 0.08409375 0 0.079475
 T 6 39 40 4 0 0 0 0 0 maze | A 4 1 N 3 1 0 | B 4 4 S 0 2 0 | 0 0 | 0 0 0 | ping,zap,turn
+N A.main 84 0.036871875 0 0.9486
+N A.ping 76 0.03375 0.005625 0.37944
+N B.fm 69 0.06615 0 0.33075
+N B.sub 57 0.09555 0 0.259875
+N fx.zap -1 0.06 0.01 0.6
 T 6 40 41 5 0 0 0 0 0 maze | A 4 1 N 3 1 0 | B 4 4 W 0 2 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 69 0.089775 0 0.25935
+N B.sub 57 0.129675 0 0.203775
+N drum.hihat -1 0.03 0 0.5
 T 6 41 42 6 0 0 0 0 0 maze | A 4 1 N 3 1 0 | B 4 4 W 0 2 0 | 0 0 | 0 0 0 | wait,ping
+N B.fm 69 0.0324 0 0.429975
+N B.sub 57 0.0468 0 0.3378375
 T 6 42 43 7 0 0 0 0 0 maze | A 4 2 N 3 1 0 | B 4 4 W 0 2 0 | 0 0 | 0 0 0 | move,wait
+N A.main 72 0.0961875 0 0.868
+N A.ping 76 0.03375 0.005625 0.3472
 T 6 43 44 8 0 0 0 0 0 maze | A 4 2 W 3 1 0 | B 4 4 W 0 2 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 72 0.0947625 0 0.45942
+N A.ping 76 0.03375 0.005625 0.183768
 T 6 44 45 9 0 0 0 0 0 maze | A 4 2 W 3 1 0 | B 4 4 W 0 2 0 | 0 0 | 1 0 0 | wait,wait
+N B.fm 69 0.046575 0 0.07735
+N B.sub 57 0.067275 0 0.060775
+N drum.kick 24 0.18 0 1
 T 6 45 46 10 0 0 0 0 0 maze | A 4 2 N 3 1 0 | B 4 4 W 0 2 0 | 0 0 | 0 0 0 | turn,collision
+N A.main 72 0.086034375 0 0.6324
+N A.ping 76 0.03375 0.005625 0.25296
+N B.fm 69 0.0972 0 0.35035
+N B.sub 57 0.1404 0 0.275275
+N fx.collision 43 0.08 0.01 0.7
 T 6 46 47 11 0 0 0 0 0 maze | A 4 0 N 3 1 0 | B 4 4 W 0 2 0 | 0 0 | 0 0 0 | move,move,wait
+N A.main 84 0.061453125 0 1
+N A.ping 76 0.03375 0.005625 0.4
 T 6 47 48 0 0 0 0 0 0 maze | A 4 0 N 3 1 0 | B 4 4 W 0 2 0 | 0 0 | 0 0 0 | wait,wait
+N A.main 84 0.0320625 0 0.248
 T 7 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 0 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 7 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | collision,turn
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N B.fm 62 0.1323 0 0.3465
+N B.sub 50 0.1911 0 0.27225
+N fx.collision 43 0.08 0 0.7
 T 7 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 1 0 | B 4 2 S 0 2 0 | 0 0 | 0 0 0 | turn,move,move
+N A.main 53 0.071071875 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
+N B.fm 62 0.118125 0 0.525
+N B.sub 50 0.170625 0 0.4125
 T 7 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 1 0 | B 4 2 E 0 2 0 | 0 0 | 0 0 0 | ping,turn
+N A.main 53 0.02565 0 0.945
+N A.ping 57 0.03375 0.005625 0.378
+N B.fm 62 0.118125 0 0.357
+N B.sub 50 0.170625 0 0.2805
 T 7 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 1 0 | B 4 2 E 0 2 0 | 0 0 | 0 0 1 | wait,collision
+N B.fm 62 0.151875 0 0.4165
+N B.sub 50 0.219375 0 0.32725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 7 5 6 6 0 0 0 0 0 maze | A 0 2 N 0 1 0 | B 4 2 E 0 2 0 | 0 0 | 0 0 0 | move,move,wait
+N A.main 65 0.061453125 0 0.85
+N A.ping 69 0.03375 0.005625 0.34
 T 7 6 7 7 0 0 0 0 0 maze | A 0 2 N 0 1 0 | B 4 2 E 0 2 0 | 0 0 | 0 0 0 | wait,collision
+N A.main 65 0.0320625 0 0.2
+N B.fm 62 0.17465625 0 0.354025
+N B.sub 50 0.25228125 0 0.2781625
+N fx.collision 43 0.08 0.01 0.7
 T 7 7 8 8 0 0 0 0 0 maze | A 0 2 N 0 1 0 | B 4 2 E 0 2 0 | 0 0 | 0 0 0 | wait,wait
+N A.main 65 0.02565 0 0.22
+N B.fm 62 0.02025 0 0.12495
+N B.sub 50 0.02925 0 0.098175
 T 7 8 9 9 0 0 0 0 0 maze | A 0 3 N 1 1 0 | B 4 2 E 0 2 0 | 0 0 | 1 0 0 | move,zap,wait
+N A.main 64 0.038475 0 0.8316
+N A.ping 67 0.03375 0.005625 0.33264
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.01 0.6
 T 7 9 10 10 0 0 0 0 0 maze | A 0 3 N 1 1 0 | B 4 2 E 0 2 0 | 0 0 | 0 0 0 | wait,wait
 T 7 10 11 11 0 0 0 0 0 maze | A 0 3 N 1 1 0 | B 4 2 E 0 2 0 | 0 0 | 0 0 0 | wait,collision
+N B.fm 62 0.14428125 0 0.395675
+N B.sub 50 0.20840625 0 0.3108875
+N fx.collision 43 0.08 0.01 0.7
 T 7 11 12 0 0 0 0 0 0 maze | A 0 3 W 2 1 0 | B 4 2 E 0 2 0 | 0 0 | 0 0 0 | turn,zap,collision,collision
+N A.main 65 0.01995 0 0.47502
+N A.ping 69 0.03375 0.005625 0.190008
+N B.fm 62 0.0675 0 0.6545
+N B.sub 50 0.0975 0 0.51425
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 7 12 13 1 0 0 0 0 0 maze | A 0 3 W 2 1 0 | B 4 2 E 0 2 0 | 0 0 | 1 0 0 | wait,ping
+N B.fm 62 0.0405 0 0.562275
+N B.sub 50 0.0585 0 0.4417875
+N drum.kick 24 0.18 0 1
 T 7 13 14 2 0 0 0 0 0 maze | A 0 3 S 3 1 0 | B 4 2 E 0 2 0 | 0 0 | 0 0 0 | turn,zap,collision
+N A.main 65 0.08728125 0 0.558
+N A.ping 69 0.03375 0.005625 0.2232
+N B.fm 62 0.151875 0 0.4165
+N B.sub 50 0.219375 0 0.32725
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
 T 7 14 15 3 0 0 0 0 0 maze | A 0 2 S 3 1 0 | B 4 2 E 0 2 0 | 0 0 | 0 0 0 | move,ping
+N A.main 65 0.2244375 0 0.651
+N A.ping 69 0.03375 0.005625 0.2604
+N B.fm 62 0.0405 0 0.562275
+N B.sub 50 0.0585 0 0.4417875
 T 7 15 16 4 0 0 0 0 0 maze | A 0 3 S 4 1 0 | B 4 2 E 0 2 0 | 0 0 | 0 0 0 | move,zap,wait
+N A.main 65 0.1246875 0 0.792
+N A.ping 69 0.03375 0.005625 0.3168
+N fx.zap -1 0.06 0.01 0.6
 T 7 16 17 5 0 0 0 0 0 maze | A 0 3 E 5 1 0 | B 4 2 E 0 2 0 | 0 0 | 0 0 1 | turn,zap,collision
+N A.main 65 0.0716953125 0 0.6069
+N A.ping 69 0.03375 0.005625 0.24276
+N B.fm 62 0.0675 0 0.4998
+N B.sub 50 0.0975 0 0.3927
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
 T 7 17 18 6 0 0 0 0 0 maze | A 0 3 E 5 1 0 | B 4 2 E 0 2 0 | 0 0 | 0 0 0 | wait,wait
 T 7 18 19 7 0 0 0 0 0 maze | A 0 3 E 6 1 1 | B 4 2 E 0 2 0 | 0 0 | 0 0 0 | ping,zap,zap,collision,collision
+N A.main 65 0.061453125 0 0.91035
+N A.ping 69 0.03375 0.005625 0.36414
+N B.fm 62 0.09703125 0 0.50575
+N B.sub 50 0.14015625 0 0.397375
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 7 19 20 8 0 0 0 0 0 maze | A 4 0 E 0 2 0 | B 4 2 E 0 2 0 | 0 0 | 0 0 0 | death,collision,collision,collision
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 84 0.07125 0 0.714
+N A.ping 76 0.03375 0.005625 0.2856
+N B.fm 69 0.084375 0 0.595
+N B.sub 57 0.121875 0 0.4675
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 7 20 21 9 0 0 0 0 0 maze | A 4 0 N 0 2 0 | B 4 2 E 0 2 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 84 0.071071875 0 0.57
+N A.ping 76 0.03375 0.005625 0.228
+N B.fm 69 0.04809375 0 0.11305
+N B.sub 57 0.06946875 0 0.088825
+N drum.kick 24 0.18 0 1
 T 7 21 22 10 0 0 0 0 0 maze | A 4 0 N 0 2 0 | B 4 2 S 0 2 0 | 0 0 | 0 0 0 | collision,collision,turn
+N A.main 84 0.021375 0 1
+N A.ping 76 0.03375 0.005625 0.4
+N B.fm 69 0.15710625 0 0.29925
+N B.sub 57 0.22693125 0 0.235125
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 7 22 23 11 0 0 0 0 0 maze | A 4 1 N 1 2 0 | B 4 1 S 1 2 0 | 0 1 | 0 0 0 | move,zap,move,zap
+N A.main 83 0.0553078125 0 0.6426
+N A.ping 74 0.03375 0.005625 0.25704
+N B.fm 71 0.08505 0 0.43659
+N B.sub 59 0.12285 0 0.343035
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 7 23 24 0 0 0 0 0 0 maze | A 4 1 N 2 2 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 0 | wait,zap,move,move,move,belt
+N A.main 84 0.0184359375 0 0.1972
+N B.fm 71 0.01875 0 0.53865
+N B.sub 59 0.16209375 0 0.423225
+N B.fm 71 0.185625 0.0225 0.3078
+N fx.zap -1 0.06 0.01 0.6
 T 7 24 25 1 0 0 0 0 0 maze | A 4 1 N 3 2 0 | B 4 2 S 1 2 0 | 0 0 | 1 0 0 | wait,zap,wait
+N A.main 84 0.0064125 0 0.2604
+N B.fm 71 0.08150625 0 0.09639
+N B.sub 59 0.11773125 0 0.075735
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.01 0.6
 T 7 25 26 2 0 0 0 0 0 maze | A 4 1 N 3 2 0 | B 4 4 S 1 2 0 | 0 0 | 0 0 0 | wait,move,move
+N B.fm 71 0.11221875 0 0.53865
+N B.sub 59 0.16209375 0 0.423225
 T 7 26 27 3 0 0 0 0 0 maze | A 4 1 N 3 2 0 | B 4 4 E 1 2 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 71 0.11221875 0 0.366282
+N B.sub 59 0.16209375 0 0.287793
 T 7 27 28 4 0 0 0 0 0 maze | A 4 1 N 3 2 0 | B 4 4 E 1 2 0 | 0 0 | 0 0 0 | wait,ping
+N B.fm 71 0.0961875 0 0.549423
+N B.sub 59 0.1389375 0 0.4316895
 T 7 28 29 5 0 0 0 0 0 maze | A 4 1 E 4 2 0 | B 4 4 N 1 2 0 | 0 0 | 0 0 1 | turn,zap,turn
+N A.main 84 0.0716953125 0 0.57222
+N A.ping 76 0.03375 0.005625 0.228888
+N B.fm 71 0.0567 0 0.49896
+N B.sub 59 0.0819 0 0.39204
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 7 29 30 6 0 0 0 0 0 maze | A 4 1 E 4 2 0 | B 4 4 N 1 2 0 | 0 0 | 0 0 0 | wait,wait
 T 7 30 31 7 0 0 0 0 0 maze | A 3 1 E 4 2 0 | B 4 4 N 1 2 0 | 0 0 | 0 0 0 | move,ping
+N A.main 83 0.064125 0 0.82467
+N A.ping 74 0.03375 0.005625 0.329868
+N B.fm 69 0.0698625 0 0.57834
+N B.sub 57 0.1009125 0 0.45441
 T 7 31 32 8 0 0 0 0 0 maze | A 3 1 E 4 2 0 | B 4 4 N 1 2 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 69 0.01215 0 0.15876
+N B.sub 57 0.01755 0 0.12474
 T 7 32 33 9 0 0 0 0 0 maze | A 4 1 E 5 2 0 | B 4 2 N 1 2 0 | 0 0 | 1 0 0 | move,collision,zap,move,move
+N A.main 84 0.0178125 0 1
+N A.ping 76 0.03375 0.005625 0.4
+N B.fm 71 0.050625 0 0.7
+N B.sub 59 0.073125 0 0.55
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 7 33 34 10 0 0 0 0 0 maze | A 4 1 E 6 2 1 | B 4 2 N 1 2 0 | 0 0 | 0 0 0 | wait,zap,zap,move,move,belt
+N A.main 84 0.0253828125 0 0.2261
+N B.fm 71 0.01875 0 0.44982
+N B.sub 59 0.15136875 0 0.35343
+N B.fm 71 0.219375 0.0225 0.25704
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 7 34 35 11 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 0 | death,turn,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 50 0.069825 0 0.4725
+N A.ping 53 0.03375 0.005625 0.189
+N B.fm 64 0.01215 0 0.15876
+N B.sub 52 0.01755 0 0.12474
 T 7 35 36 0 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 1 N 2 2 0 | 0 0 | 0 0 0 | turn,move,zap
+N A.main 50 0.09975 0 0.561
+N A.ping 53 0.03375 0.005625 0.2244
+N B.fm 65 0.05821875 0 0.55216
+N B.sub 53 0.08409375 0 0.43384
+N fx.zap -1 0.06 0.02 0.6
 T 7 36 37 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 N 2 2 0 | 0 0 | 1 0 0 | collision,move
+N A.main 50 0.064125 0 0.62475
+N A.ping 53 0.03375 0.005625 0.2499
+N B.fm 65 0.1164375 0 0.55216
+N B.sub 53 0.1681875 0 0.43384
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0 0.7
 T 7 37 38 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 1 N 3 2 0 | 0 0 | 0 0 0 | wait,move,zap
+N B.fm 65 0.03645 0 0.66836
+N B.sub 53 0.05265 0 0.52514
+N fx.zap -1 0.06 0.02 0.6
 T 7 38 39 3 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 1 N 4 2 0 | 0 0 | 0 0 0 | wait,wait,zap
+N B.fm 65 0.017465625 0 0.15708
+N B.sub 53 0.025228125 0 0.12342
+N fx.zap -1 0.06 0.02 0.6
 T 7 39 40 4 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 1 E 5 2 0 | 0 0 | 0 0 0 | ping,turn,zap
+N A.main 50 0.12290625 0 0.65025
+N A.ping 53 0.03375 0.005625 0.2601
+N B.fm 65 0.023625 0 0.52479
+N B.sub 53 0.034125 0 0.412335
+N fx.zap -1 0.06 0.02 0.6
 T 7 40 41 5 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 1 S 6 2 1 | 0 0 | 0 0 1 | wait,turn,zap,zap
+N B.fm 65 0.078553125 0 0.41895
+N B.sub 53 0.113465625 0 0.329175
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 7 41 42 6 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 0 4 W 0 3 0 | 0 1 | 0 0 0 | death,wait,ping
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N B.fm 38 0.0324 0 0.429975
+N B.sub 38 0.0468 0 0.3378375
 T 7 42 43 7 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 0 4 W 0 3 0 | 0 2 | 0 0 0 | collision,wait,love
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N fx.collision 43 0.08 0 0.7
 T 7 43 44 8 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 0 4 S 0 3 0 | 0 3 | 0 0 0 | turn,turn
+N A.main 53 0.071071875 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
+N B.fm 38 0.165375 0 0.315
+N B.sub 38 0.238875 0 0.2475
 T 7 44 45 9 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 0 4 S 0 3 0 | 0 4 | 1 0 0 | ping,wait
+N A.main 53 0.02565 0 0.945
+N A.ping 57 0.03375 0.005625 0.378
+N drum.kick 24 0.18 0 1
 T 7 45 46 10 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 0 3 S 1 3 0 | 0 0 | 0 0 0 | wait,move,zap
+N B.fm 52 0.08505 0 0.43659
+N B.sub 40 0.12285 0 0.343035
+N fx.zap -1 0.06 0.02 0.6
 T 7 46 47 11 0 0 0 0 0 maze | A 0 4 N 2 3 0 | B 0 4 S 1 3 0 | 7 0 | 0 0 0 | wait,move,collision,zap
+N B.fm 40 0.04725 0 0.59535
+N B.sub 40 0.06825 0 0.467775
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 7 47 48 0 0 0 0 0 0 maze | A 0 4 N 2 3 0 | B 0 4 S 1 3 0 | 6 0 | 0 0 0 | wait,collision
+N A.main 53 0.0320625 0 0.232
+N B.fm 40 0.189 0 0.49896
+N B.sub 40 0.273 0 0.39204
+N fx.collision 43 0.08 0.01 0.7
 T 8 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 3 0 | 0 0 | 1 0 0 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 8 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | collision,turn
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N B.fm 62 0.1323 0 0.3465
+N B.sub 50 0.1911 0 0.27225
+N fx.collision 43 0.08 0 0.7
 T 8 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 2 S 0 3 0 | 0 0 | 0 0 0 | turn,move,move
+N A.main 53 0.071071875 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
+N B.fm 62 0.118125 0 0.525
+N B.sub 50 0.170625 0 0.4125
 T 8 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 0 | ping,turn
+N A.main 53 0.02565 0 0.945
+N A.ping 57 0.03375 0.005625 0.378
+N B.fm 62 0.118125 0 0.357
+N B.sub 50 0.170625 0 0.2805
 T 8 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 1 | wait,collision
+N B.fm 62 0.151875 0 0.4165
+N B.sub 50 0.219375 0 0.32725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 8 5 6 6 0 0 0 0 0 maze | A 0 2 N 0 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 0 | move,move,wait
+N A.main 65 0.061453125 0 0.85
+N A.ping 69 0.03375 0.005625 0.34
 T 8 6 7 7 0 0 0 0 0 maze | A 0 2 N 0 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 0 | wait,collision
+N A.main 65 0.0320625 0 0.2
+N B.fm 62 0.17465625 0 0.354025
+N B.sub 50 0.25228125 0 0.2781625
+N fx.collision 43 0.08 0.01 0.7
 T 8 7 8 8 0 0 0 0 0 maze | A 0 2 N 0 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 0 | wait,wait
 T 8 8 9 9 0 0 0 0 0 maze | A 0 3 N 1 3 0 | B 4 2 E 0 3 0 | 0 0 | 1 0 0 | move,zap,wait
+N A.main 64 0.038475 0 0.8316
+N A.ping 67 0.03375 0.005625 0.33264
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.01 0.6
 T 8 9 10 10 0 0 0 0 0 maze | A 0 3 N 1 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 0 | wait,wait
 T 8 10 11 11 0 0 0 0 0 maze | A 0 3 N 2 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 0 | wait,zap,collision
+N A.main 65 0.0184359375 0 0.1972
+N B.fm 62 0.14428125 0 0.395675
+N B.sub 50 0.20840625 0 0.3108875
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
 T 8 11 12 0 0 0 0 0 0 maze | A 0 3 W 3 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 0 | turn,zap,collision,collision
+N A.main 65 0.01995 0 0.50778
+N A.ping 69 0.03375 0.005625 0.203112
+N B.fm 62 0.0675 0 0.6545
+N B.sub 50 0.0975 0 0.51425
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 8 12 13 1 0 0 0 0 0 maze | A 1 3 W 3 3 0 | B 4 2 E 0 3 0 | 0 0 | 1 0 0 | move,wait
+N A.main 69 0.0513 0 0.59241
+N A.ping 72 0.03375 0.005625 0.236964
+N drum.kick 24 0.18 0 1
 T 8 13 14 2 0 0 0 0 0 maze | A 1 3 W 3 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 0 | wait,wait
 T 8 14 15 3 0 0 0 0 0 maze | A 2 3 S 3 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 0 | move,rotator,ping
+N A.main 71 0.2244375 0 0.651
+N A.ping 74 0.03375 0.005625 0.2604
+N B.fm 67 0.0405 0 0.562275
+N B.sub 55 0.0585 0 0.4417875
+N fx.rotator 81 0.04 0.01 0.45
 T 8 15 16 4 0 0 0 0 0 maze | A 2 4 S 3 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 0 | move,wait
+N A.main 59 0.249375 0 0.744
+N A.ping 62 0.03375 0.005625 0.2976
 T 8 16 17 5 0 0 0 0 0 maze | A 2 4 E 3 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 1 | turn,collision
+N A.main 59 0.143390625 0 0.53754
+N A.ping 62 0.03375 0.005625 0.215016
+N B.fm 67 0.0675 0 0.4998
+N B.sub 55 0.0975 0 0.3927
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 8 17 18 6 0 0 0 0 0 maze | A 2 4 E 3 3 0 | B 4 2 S 0 3 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 67 0.1323 0 0.3465
+N B.sub 55 0.1911 0 0.27225
 T 8 18 19 7 0 0 0 0 0 maze | A 2 4 E 3 3 0 | B 4 4 S 0 3 0 | 0 0 | 0 0 0 | ping,move,move
+N A.main 59 0.12290625 0 0.80631
+N A.ping 62 0.03375 0.005625 0.322524
+N B.fm 55 0.13584375 0 0.44625
+N B.sub 43 0.19621875 0 0.350625
 T 8 19 20 8 0 0 0 0 0 maze | A 3 4 E 2 3 0 | B 4 4 S 0 3 0 | 0 0 | 0 0 0 | move,pulse,collision,collision
+N A.main 59 0.12825 0 0.82824
+N A.ping 62 0.03375 0.005625 0.331296
+N B.fm 55 0.118125 0 0.525
+N B.sub 43 0.170625 0 0.4125
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 8 20 21 9 0 0 0 0 0 maze | A 3 4 N 1 3 0 | B 4 4 S 0 3 0 | 0 0 | 1 0 0 | turn,pulse,wait
+N A.main 57 0.127929375 0 0.6156
+N A.ping 60 0.03375 0.005625 0.24624
+N B.fm 55 0.06733125 0 0.09975
+N B.sub 43 0.09725625 0 0.078375
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
 T 8 21 22 10 0 0 0 0 0 maze | A 3 3 N 1 3 0 | B 4 4 W 0 3 0 | 0 0 | 0 0 0 | move,collision,turn
+N A.main 69 0.021375 0 1
+N A.ping 72 0.03375 0.005625 0.4
+N B.fm 67 0.089775 0 0.25935
+N B.sub 55 0.129675 0 0.203775
+N fx.collision 43 0.08 0.01 0.7
 T 8 22 23 11 0 0 0 0 0 maze | A 3 4 N 0 3 0 | B 4 4 W 0 3 0 | 0 0 | 0 0 0 | move,pulse,collision
+N A.main 59 0.199108125 0 0.595
+N A.ping 62 0.03375 0.005625 0.238
+N B.fm 55 0.0972 0 0.35035
+N B.sub 43 0.1404 0 0.275275
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 8 23 24 0 0 0 0 0 0 maze | A 3 4 N 0 3 0 | B 4 4 W 0 3 0 | 0 0 | 0 0 0 | wait,wait
 T 8 24 25 1 0 0 0 0 0 maze | A 3 4 N 0 3 0 | B 4 4 W 0 3 0 | 0 0 | 1 0 0 | wait,pulse,wait
+N A.main 59 0.023085 0 0.21
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
 T 8 25 26 2 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 4 W 0 3 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 59 0.213215625 0 0.4845
+N A.ping 62 0.03375 0.005625 0.1938
+N fx.pulse 84 0.06 0.01 0.4
 T 8 26 27 3 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 4 S 0 3 0 | 0 1 | 0 0 0 | move,turn
+N A.main 60 0.16921875 0 0.646
+N A.ping 64 0.03375 0.005625 0.2584
+N B.fm 57 0.15710625 0 0.29925
+N B.sub 45 0.22693125 0 0.235125
 T 8 27 28 4 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 4 S 0 3 0 | 0 2 | 0 0 0 | wait,ping,love
+N B.fm 57 0.1346625 0 0.448875
+N B.sub 45 0.1945125 0 0.3526875
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
 T 8 28 29 5 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 4 E 0 3 0 | 0 3 | 0 0 1 | wait,turn
+N B.fm 57 0.0945 0 0.3927
+N B.sub 45 0.1365 0 0.30855
+N drum.hihat -1 0.03 0 0.5
 T 8 29 30 6 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 4 E 0 3 0 | 0 4 | 0 0 0 | wait,wait
 T 8 30 31 7 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 4 E 0 3 0 | 0 0 | 0 0 0 | move,pulse,ping
+N A.main 59 0.115425 0 0.62475
+N A.ping 62 0.03375 0.005625 0.2499
+N B.fm 55 0.1164375 0 0.455175
+N B.sub 43 0.1681875 0 0.3576375
+N fx.pulse 84 0.06 0.01 0.4
 T 8 31 32 8 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 4 E 0 3 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 55 0.02025 0 0.12495
+N B.sub 43 0.02925 0 0.098175
 T 8 32 33 9 0 0 0 0 0 maze | A 4 4 E 2 3 0 | B 4 4 E 2 3 0 | 7 0 | 1 0 0 | move,collision,zap,collision,collision,zap
+N A.main 57 0.035625 0 0.8925
+N A.ping 60 0.03375 0.005625 0.357
+N B.fm 60 0.084375 0 0.6902
+N B.sub 48 0.121875 0 0.5423
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 8 33 34 10 0 0 0 0 0 maze | A 4 4 E 2 3 0 | B 4 4 E 2 3 0 | 6 0 | 0 0 0 | wait,wait
+N A.main 64 0.050765625 0 0.18734
 T 8 34 35 11 0 0 0 0 0 maze | A 4 4 S 2 3 0 | B 4 4 E 2 3 0 | 5 0 | 0 0 0 | turn,wait
+N A.main 64 0.069825 0 0.5481
+N A.ping 67 0.03375 0.005625 0.21924
+N B.fm 60 0.02025 0 0.144942
+N B.sub 48 0.02925 0 0.113883
 T 8 35 36 0 0 0 0 0 0 maze | A 4 4 E 2 3 0 | B 4 4 E 2 3 0 | 4 0 | 0 0 0 | turn,collision
+N A.main 64 0.09975 0 0.65076
+N A.ping 67 0.03375 0.005625 0.260304
+N B.fm 60 0.1940625 0 0.469336
+N B.sub 48 0.2803125 0 0.368764
+N fx.collision 43 0.08 0.01 0.7
 T 8 36 37 1 0 0 0 0 0 maze | A 3 4 E 1 3 0 | B 4 4 E 2 3 0 | 3 0 | 1 0 0 | move,pulse,collision
+N A.main 57 0.115425 0 0.67473
+N A.ping 60 0.03375 0.005625 0.269892
+N B.fm 59 0.1940625 0 0.469336
+N B.sub 47 0.2803125 0 0.368764
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 8 37 38 2 0 0 0 0 0 maze | A 3 4 E 1 3 0 | B 4 4 E 2 3 0 | 2 0 | 0 0 0 | wait,wait
 T 8 38 39 3 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 4 E 3 3 0 | 1 0 | 0 0 0 | zap,pulse,wait
+N A.main 55 0.192375 0 0.765
+N A.ping 59 0.03375 0.005625 0.306
+N B.fm 59 0.05821875 0 0.125426
+N B.sub 47 0.08409375 0 0.098549
+N fx.zap -1 0.06 0 0.6
+N fx.pulse 84 0.06 0.01 0.4
 T 8 39 40 4 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 4 S 4 3 0 | 0 0 | 0 0 0 | zap,pulse,turn
+N A.main 55 0.22123125 0 0.65025
+N A.ping 59 0.03375 0.005625 0.2601
+N B.fm 59 0.06615 0 0.43659
+N B.sub 47 0.09555 0 0.343035
+N fx.zap -1 0.06 0 0.6
+N fx.pulse 84 0.06 0.01 0.4
 T 8 40 41 5 0 0 0 0 0 maze | A 3 4 S 0 3 0 | B 4 4 S 4 3 0 | 0 0 | 0 0 1 | turn,pulse,wait
+N A.main 55 0.25137 0 0.495
+N A.ping 59 0.03375 0.005625 0.198
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 8 41 42 6 0 0 0 0 0 maze | A 3 4 S 0 3 0 | B 4 4 S 4 3 0 | 0 0 | 0 0 0 | wait,ping
+N B.fm 59 0.0567 0 0.654885
+N B.sub 47 0.0819 0 0.5145525
 T 8 42 43 7 0 0 0 0 0 maze | A 3 4 S 0 3 0 | B 4 2 S 4 3 0 | 0 0 | 0 0 0 | wait,move,move,belt
+N B.fm 71 0.01875 0 0.460845
+N B.sub 59 0.29176875 0 0.3620925
+N B.fm 71 0.185625 0.0225 0.26334
+N fx.belt -1 0.04 0.03 0.35
 T 8 43 44 8 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 2 S 4 3 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 55 0.213215625 0 0.4845
+N A.ping 59 0.03375 0.005625 0.1938
+N fx.pulse 84 0.06 0.01 0.4
 T 8 44 45 9 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 2 S 4 3 0 | 0 0 | 1 0 0 | ping,pulse,wait
+N A.main 55 0.07695 0 0.80325
+N A.ping 59 0.03375 0.005625 0.3213
+N B.fm 71 0.08150625 0 0.11781
+N B.sub 59 0.11773125 0 0.092565
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
 T 8 45 46 10 0 0 0 0 0 maze | A 3 4 S 0 3 0 | B 4 2 S 4 3 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 55 0.361344375 0 0.3825
+N A.ping 59 0.03375 0.005625 0.153
+N fx.pulse 84 0.06 0.01 0.4
 T 8 46 47 11 0 0 0 0 0 maze | A 3 4 S 0 3 0 | B 4 4 S 4 3 0 | 0 0 | 0 0 0 | wait,move,move
+N B.fm 59 0.04725 0 0.7
+N B.sub 47 0.06825 0 0.55
 T 8 47 48 0 0 0 0 0 0 maze | A 3 4 S 0 3 0 | B 4 4 S 4 3 0 | 0 0 | 0 0 0 | wait,pulse,wait
+N A.main 55 0.1346625 0 0.15
+N fx.pulse 84 0.06 0.01 0.4
 T 9 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 3 0 | 0 0 | 1 0 0 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 9 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | collision,turn
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N B.fm 62 0.1323 0 0.3465
+N B.sub 50 0.1911 0 0.27225
+N fx.collision 43 0.08 0 0.7
 T 9 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 2 S 0 3 0 | 0 0 | 0 0 0 | turn,move,move
+N A.main 53 0.071071875 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
+N B.fm 62 0.118125 0 0.525
+N B.sub 50 0.170625 0 0.4125
 T 9 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 62 0.118125 0 0.357
+N B.sub 50 0.170625 0 0.2805
 T 9 4 5 5 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 1 | turn,collision
+N A.main 53 0.143390625 0 0.4335
+N A.ping 57 0.03375 0.005625 0.1734
+N B.fm 62 0.151875 0 0.4165
+N B.sub 50 0.219375 0 0.32725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 9 5 6 6 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 2 N 0 3 0 | 0 0 | 0 0 0 | move,move,turn
+N A.main 59 0.102421875 0 0.7225
+N A.ping 62 0.03375 0.005625 0.289
+N B.fm 67 0.0567 0 0.462
+N B.sub 55 0.0819 0 0.363
 T 9 6 7 7 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 2 N 0 3 0 | 0 0 | 0 0 0 | wait,move,move,belt
+N A.main 59 0.0534375 0 0.17
+N B.fm 67 0.01875 0 0.4165
+N B.sub 55 0.15136875 0 0.32725
+N B.fm 67 0.219375 0.0225 0.238
+N fx.belt -1 0.04 0.03 0.35
 T 9 7 8 8 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 2 N 0 3 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 67 0.01215 0 0.147
+N B.sub 55 0.01755 0 0.1155
 T 9 8 9 9 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 2 N 0 3 0 | 0 0 | 1 0 0 | move,pulse,wait
+N A.main 57 0.23085 0 0.6545
+N A.ping 60 0.03375 0.005625 0.2618
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
 T 9 9 10 10 0 0 0 0 0 maze | A 1 4 N 0 3 0 | B 4 2 N 0 3 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 57 0.154861875 0 0.51
+N A.ping 60 0.03375 0.005625 0.204
+N fx.pulse 84 0.06 0.01 0.4
 T 9 10 11 11 0 0 0 0 0 maze | A 1 4 N 0 3 0 | B 4 2 N 0 3 0 | 0 0 | 0 0 0 | wait,pulse,move,move,belt
+N A.main 57 0.066369375 0 0.17
+N B.fm 65 0.01875 0 0.4655
+N B.sub 53 0.12504375 0 0.36575
+N B.fm 65 0.185625 0.0225 0.266
+N fx.pulse 84 0.06 0.01 0.4
 T 9 11 12 0 0 0 0 0 0 maze | A 1 4 W 0 3 0 | B 4 0 N 0 3 0 | 0 0 | 0 0 0 | turn,pulse,move,move
+N A.main 57 0.07182 0 0.4095
+N A.ping 60 0.03375 0.005625 0.1638
+N B.fm 65 0.0405 0 0.7
+N B.sub 53 0.0585 0 0.55
+N fx.pulse 84 0.06 0.01 0.4
 T 9 12 13 1 0 0 0 0 0 maze | A 1 4 W 0 3 0 | B 4 0 N 0 3 0 | 0 0 | 1 0 0 | wait,ping
+N B.fm 65 0.0243 0 0.6615
+N B.sub 53 0.0351 0 0.51975
+N drum.kick 24 0.18 0 1
 T 9 13 14 2 0 0 0 0 0 maze | A 1 4 S 0 3 0 | B 4 0 N 0 3 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 57 0.3142125 0 0.45
+N A.ping 60 0.03375 0.005625 0.18
+N fx.pulse 84 0.06 0.01 0.4
 T 9 14 15 3 0 0 0 0 0 maze | A 1 3 S 0 3 0 | B 4 0 N 0 3 0 | 0 0 | 0 0 0 | move,ping
+N A.main 69 0.2244375 0 0.525
+N A.ping 72 0.03375 0.005625 0.21
+N B.fm 65 0.0243 0 0.6615
+N B.sub 53 0.0351 0 0.51975
 T 9 15 16 4 0 0 0 0 0 maze | A 1 4 S 0 3 0 | B 4 0 N 0 3 0 | 0 0 | 0 0 0 | move,pulse,wait
+N A.main 57 0.448875 0 0.6
+N A.ping 60 0.03375 0.005625 0.24
+N fx.pulse 84 0.06 0.01 0.4
 T 9 16 17 5 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 N 0 3 0 | 0 0 | 0 0 1 | turn,pulse,collision
+N A.main 57 0.258103125 0 0.4335
+N A.ping 60 0.03375 0.005625 0.1734
+N B.fm 65 0.0405 0 0.588
+N B.sub 53 0.0585 0 0.462
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 9 17 18 6 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 65 0.0945 0 0.3927
+N B.sub 53 0.1365 0 0.30855
 T 9 18 19 7 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | ping,pulse,collision,collision
+N A.main 57 0.22123125 0 0.65025
+N A.ping 60 0.03375 0.005625 0.2601
+N B.fm 65 0.09703125 0 0.50575
+N B.sub 53 0.14015625 0 0.397375
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 9 19 20 8 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | move,collision,collision
+N A.main 59 0.07125 0 0.714
+N A.ping 62 0.03375 0.005625 0.2856
+N B.fm 67 0.084375 0 0.595
+N B.sub 55 0.121875 0 0.4675
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 9 20 21 9 0 0 0 0 0 maze | A 2 4 N 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 59 0.071071875 0 0.57
+N A.ping 62 0.03375 0.005625 0.228
+N B.fm 67 0.04809375 0 0.11305
+N B.sub 55 0.06946875 0 0.088825
+N drum.kick 24 0.18 0 1
 T 9 21 22 10 0 0 0 0 0 maze | A 2 2 N 0 3 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | move,move,turn
+N A.main 71 0.021375 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 67 0.15710625 0 0.29925
+N B.sub 55 0.22693125 0 0.235125
 T 9 22 23 11 0 0 0 0 0 maze | A 2 3 W 0 3 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | move,rotator,collision
+N A.main 71 0.1474875 0 0.38675
+N A.ping 74 0.03375 0.005625 0.1547
+N B.fm 67 0.1701 0 0.40425
+N B.sub 55 0.2457 0 0.317625
+N fx.rotator 81 0.04 0.01 0.45
+N fx.collision 43 0.08 0.02 0.7
 T 9 23 24 0 0 0 0 0 0 maze | A 2 3 S 0 3 0 | B 4 2 S 0 3 0 | 0 0 | 0 0 0 | wait,rotator,move,move
+N A.main 71 0.086034375 0 0.1275
+N B.fm 67 0.11221875 0 0.49875
+N B.sub 55 0.16209375 0 0.391875
+N fx.rotator 81 0.04 0.01 0.45
 T 9 24 25 1 0 0 0 0 0 maze | A 2 3 S 0 3 0 | B 4 2 S 0 3 0 | 0 0 | 1 0 0 | wait,wait
+N B.fm 67 0.08150625 0 0.08925
+N B.sub 55 0.11773125 0 0.070125
+N drum.kick 24 0.18 0 1
 T 9 25 26 2 0 0 0 0 0 maze | A 2 3 S 0 3 0 | B 4 4 S 0 3 0 | 0 0 | 0 0 0 | wait,move,move
+N B.fm 67 0.11221875 0 0.49875
+N B.sub 55 0.16209375 0 0.391875
 T 9 26 27 3 0 0 0 0 0 maze | A 2 4 S 0 3 0 | B 4 4 E 0 3 0 | 0 0 | 0 0 0 | move,turn
+N A.main 59 0.23690625 0 0.57
+N A.ping 62 0.03375 0.005625 0.228
+N B.fm 55 0.11221875 0 0.33915
+N B.sub 43 0.16209375 0 0.266475
 T 9 27 28 4 0 0 0 0 0 maze | A 2 4 S 0 3 0 | B 4 4 E 0 3 0 | 0 0 | 0 0 0 | wait,ping
+N B.fm 55 0.0961875 0 0.508725
+N B.sub 43 0.1389375 0 0.3997125
 T 9 28 29 5 0 0 0 0 0 maze | A 2 4 S 0 3 0 | B 4 4 N 0 3 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 55 0.0567 0 0.462
+N B.sub 43 0.0819 0 0.363
+N drum.hihat -1 0.03 0 0.5
 T 9 29 30 6 0 0 0 0 0 maze | A 2 4 S 0 3 0 | B 4 4 N 0 3 0 | 0 0 | 0 0 0 | wait,wait
+N A.main 59 0.029925 0 0.1575
 T 9 30 31 7 0 0 0 0 0 maze | A 2 3 E 0 3 0 | B 4 4 N 0 3 0 | 0 0 | 0 0 0 | move,rotator,ping
+N A.main 71 0.064125 0 0.62475
+N A.ping 74 0.03375 0.005625 0.2499
+N B.fm 67 0.0698625 0 0.5355
+N B.sub 55 0.1009125 0 0.42075
+N fx.rotator 81 0.04 0.01 0.45
 T 9 31 32 8 0 0 0 0 0 maze | A 2 3 N 0 3 0 | B 4 4 N 0 3 0 | 0 0 | 0 0 0 | ping,rotator,wait
+N A.main 71 0.0513 0 0.99
+N A.ping 74 0.03375 0.005625 0.396
+N B.fm 67 0.01215 0 0.147
+N B.sub 55 0.01755 0 0.1155
+N fx.rotator 81 0.04 0.01 0.45
 T 9 32 33 9 0 0 0 0 0 maze | A 2 1 E 0 3 0 | B 4 2 N 0 3 0 | 0 0 | 1 0 0 | move,move,rotator,move,move
+N A.main 83 0.035625 0 0.8925
+N A.ping 74 0.03375 0.005625 0.357
+N B.fm 67 0.050625 0 0.7
+N B.sub 55 0.073125 0 0.55
+N drum.kick 24 0.18 0 1
+N fx.rotator 81 0.04 0.02 0.45
 T 9 33 34 10 0 0 0 0 0 maze | A 2 1 E 0 3 0 | B 4 2 N 0 3 0 | 0 0 | 0 0 0 | wait,wait
 T 9 34 35 11 0 0 0 0 0 maze | A 2 1 W 0 3 0 | B 4 2 N 0 3 0 | 0 0 | 0 0 0 | turn,rotator,wait
+N A.main 83 0.0399 0 0.4095
+N A.ping 74 0.03375 0.005625 0.1638
+N fx.rotator 81 0.04 0.01 0.45
 T 9 35 36 0 0 0 0 0 0 maze | A 2 1 W 0 3 0 | B 4 1 N 1 3 0 | 0 0 | 0 0 0 | turn,rotator,move,zap
+N A.main 83 0.0798 0 0.429
+N A.ping 74 0.03375 0.005625 0.1716
+N B.fm 69 0.05821875 0 0.51408
+N B.sub 57 0.08409375 0 0.40392
+N fx.rotator 81 0.04 0.01 0.45
+N fx.zap -1 0.06 0.03 0.6
 T 9 36 37 1 0 0 0 0 0 maze | A 3 1 W 0 3 0 | B 4 0 N 1 3 0 | 0 0 | 1 0 0 | move,move
+N A.main 79 0.0513 0 0.47775
+N A.ping 83 0.03375 0.005625 0.1911
+N B.fm 69 0.1164375 0 0.51408
+N B.sub 57 0.1681875 0 0.40392
+N drum.kick 24 0.18 0 1
 T 9 37 38 2 0 0 0 0 0 maze | A 3 1 W 0 3 0 | B 4 0 N 1 3 0 | 0 0 | 0 0 0 | wait,wait
 T 9 38 39 3 0 0 0 0 0 maze | A 3 1 W 0 3 0 | B 4 0 N 1 3 0 | 0 0 | 0 0 0 | ping,wait
+N A.main 79 0.0855 0 0.585
+N A.ping 83 0.03375 0.005625 0.234
+N B.fm 69 0.03493125 0 0.12852
+N B.sub 57 0.05045625 0 0.10098
 T 9 39 40 4 0 0 0 0 0 maze | A 3 1 W 0 3 0 | B 4 0 E 1 3 0 | 0 0 | 0 0 0 | ping,turn
+N A.main 79 0.098325 0 0.49725
+N A.ping 83 0.03375 0.005625 0.1989
+N B.fm 69 0.04725 0 0.404838
+N B.sub 57 0.06825 0 0.318087
 T 9 40 41 5 0 0 0 0 0 maze | A 3 1 W 0 3 0 | B 4 0 E 1 3 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 9 41 42 6 0 0 0 0 0 maze | A 3 1 N 0 3 0 | B 4 0 E 1 3 0 | 0 0 | 0 0 0 | turn,ping
+N A.main 79 0.029925 0 0.63
+N A.ping 83 0.03375 0.005625 0.252
+N B.fm 69 0.0405 0 0.607257
+N B.sub 57 0.0585 0 0.4771305
 T 9 42 43 7 0 0 0 0 0 maze | A 3 1 N 0 3 0 | B 4 0 E 1 3 0 | 0 0 | 0 0 0 | collision,collision
+N A.main 79 0.0961875 0 0.7
+N A.ping 83 0.03375 0.005625 0.28
+N B.fm 69 0.14428125 0 0.427329
+N B.sub 57 0.20840625 0 0.3357585
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 9 43 44 8 0 0 0 0 0 maze | A 3 1 W 0 3 0 | B 4 0 N 1 3 0 | 0 0 | 0 0 0 | turn,turn
+N A.main 79 0.0947625 0 0.3705
+N A.ping 83 0.03375 0.005625 0.1482
+N B.fm 69 0.070875 0 0.4536
+N B.sub 57 0.102375 0 0.3564
 T 9 44 45 9 0 0 0 0 0 maze | A 3 1 W 0 3 0 | B 4 0 N 1 3 0 | 0 0 | 1 0 0 | ping,wait
+N A.main 79 0.0342 0 0.61425
+N A.ping 83 0.03375 0.005625 0.2457
+N B.fm 69 0.03493125 0 0.12852
+N B.sub 57 0.05045625 0 0.10098
+N drum.kick 24 0.18 0 1
 T 9 45 46 10 0 0 0 0 0 maze | A 3 1 N 0 3 0 | B 4 1 N 2 3 0 | 0 0 | 0 0 0 | turn,move,zap
+N A.main 79 0.086034375 0 0.51
+N A.ping 83 0.03375 0.005625 0.204
+N B.fm 71 0.03645 0 0.62524
+N B.sub 59 0.05265 0 0.49126
+N fx.zap -1 0.06 0.02 0.6
 T 9 46 47 11 0 0 0 0 0 maze | A 3 1 N 0 3 0 | B 4 0 N 2 3 0 | 0 0 | 0 0 0 | wait,move,collision
+N B.fm 71 0.02025 0 0.7
+N B.sub 59 0.02925 0 0.55
+N fx.collision 43 0.08 0.02 0.7
 T 9 47 48 0 0 0 0 0 0 maze | A 3 1 N 0 3 0 | B 4 0 N 2 3 0 | 0 0 | 0 0 0 | wait,collision
+N A.main 79 0.0320625 0 0.2
+N B.fm 71 0.081 0 0.7
+N B.sub 59 0.117 0 0.55
+N fx.collision 43 0.08 0.01 0.7
 T 10 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 3 0 | 0 0 | 1 0 0 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 10 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | collision,turn
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N B.fm 62 0.1323 0 0.3465
+N B.sub 50 0.1911 0 0.27225
+N fx.collision 43 0.08 0 0.7
 T 10 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 53 0.071071875 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
 T 10 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | ping,turn
+N A.main 53 0.02565 0 0.945
+N A.ping 57 0.03375 0.005625 0.378
+N B.fm 62 0.118125 0 0.357
+N B.sub 50 0.170625 0 0.2805
 T 10 4 5 5 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 1 | turn,collision
+N A.main 53 0.143390625 0 0.4335
+N A.ping 57 0.03375 0.005625 0.1734
+N B.fm 62 0.151875 0 0.4165
+N B.sub 50 0.219375 0 0.32725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 10 5 6 6 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | move,move,wait
+N A.main 59 0.102421875 0 0.7225
+N A.ping 62 0.03375 0.005625 0.289
 T 10 6 7 7 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | wait,collision
+N A.main 59 0.0534375 0 0.17
+N B.fm 67 0.17465625 0 0.354025
+N B.sub 55 0.25228125 0 0.2781625
+N fx.collision 43 0.08 0.01 0.7
 T 10 7 8 8 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | wait,wait
 T 10 8 9 9 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 1 0 0 | move,pulse,wait
+N A.main 57 0.23085 0 0.6545
+N A.ping 60 0.03375 0.005625 0.2618
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
 T 10 9 10 10 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 65 0.0405 0 0.1309
+N B.sub 53 0.0585 0 0.10285
 T 10 10 11 11 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | wait,pulse,collision
+N A.main 57 0.110615625 0 0.1445
+N B.fm 65 0.14428125 0 0.395675
+N B.sub 53 0.20840625 0 0.3108875
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 10 11 12 0 0 0 0 0 0 maze | A 1 4 N 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 57 0.053865 0 0.63
+N A.ping 60 0.03375 0.005625 0.252
+N fx.pulse 84 0.06 0.01 0.4
 T 10 12 13 1 0 0 0 0 0 maze | A 1 4 N 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 1 0 0 | collision,pulse,wait
+N A.main 57 0.069255 0 0.735
+N A.ping 60 0.03375 0.005625 0.294
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0 0.7
+N fx.pulse 84 0.06 0.01 0.4
 T 10 13 14 2 0 0 0 0 0 maze | A 1 4 W 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | turn,pulse,collision
+N A.main 57 0.17955 0 0.39
+N A.ping 60 0.03375 0.005625 0.156
+N B.fm 65 0.151875 0 0.4165
+N B.sub 53 0.219375 0 0.32725
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 10 14 15 3 0 0 0 0 0 maze | A 2 4 W 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | move,ping
+N A.main 59 0.12825 0 0.455
+N A.ping 62 0.03375 0.005625 0.182
+N B.fm 67 0.0405 0 0.562275
+N B.sub 55 0.0585 0 0.4417875
 T 10 15 16 4 0 0 0 0 0 maze | A 1 4 W 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | move,pulse,wait
+N A.main 57 0.2565 0 0.52
+N A.ping 60 0.03375 0.005625 0.208
+N B.fm 65 0.050625 0 0.119
+N B.sub 53 0.073125 0 0.0935
+N fx.pulse 84 0.06 0.01 0.4
 T 10 16 17 5 0 0 0 0 0 maze | A 1 4 S 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 1 | turn,pulse,collision
+N A.main 57 0.361344375 0 0.3825
+N A.ping 60 0.03375 0.005625 0.153
+N B.fm 65 0.0675 0 0.4998
+N B.sub 53 0.0975 0 0.3927
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 10 17 18 6 0 0 0 0 0 maze | A 1 4 S 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | wait,wait
 T 10 18 19 7 0 0 0 0 0 maze | A 1 4 S 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | wait,collision,collision
+N B.fm 65 0.09703125 0 0.50575
+N B.sub 53 0.14015625 0 0.397375
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 10 19 20 8 0 0 0 0 0 maze | A 1 4 S 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | wait,collision,collision
+N B.fm 65 0.084375 0 0.595
+N B.sub 53 0.121875 0 0.4675
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 10 20 21 9 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 1 0 0 | turn,pulse,wait
+N A.main 57 0.213215625 0 0.4845
+N A.ping 60 0.03375 0.005625 0.1938
+N B.fm 65 0.04809375 0 0.11305
+N B.sub 53 0.06946875 0 0.088825
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
 T 10 21 22 10 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | move,move,pulse,turn
+N A.main 59 0.064125 0 0.8925
+N A.ping 62 0.03375 0.005625 0.357
+N B.fm 67 0.15710625 0 0.29925
+N B.sub 55 0.22693125 0 0.235125
+N fx.pulse 84 0.06 0.02 0.4
 T 10 22 23 11 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | move,collision
+N A.main 59 0.184359375 0 0.50575
+N A.ping 62 0.03375 0.005625 0.2023
+N B.fm 67 0.1701 0 0.40425
+N B.sub 55 0.2457 0 0.317625
+N fx.collision 43 0.08 0.01 0.7
 T 10 23 24 0 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | wait,wait
 T 10 24 25 1 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 S 0 3 0 | 0 0 | 1 0 0 | wait,wait
+N A.main 59 0.021375 0 0.1785
+N drum.kick 24 0.18 0 1
 T 10 25 26 2 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | wait,wait
 T 10 26 27 3 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 67 0.11221875 0 0.33915
+N B.sub 55 0.16209375 0 0.266475
 T 10 27 28 4 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 E 0 3 0 | 0 0 | 0 0 0 | wait,ping
+N B.fm 67 0.0961875 0 0.508725
+N B.sub 55 0.1389375 0 0.3997125
 T 10 28 29 5 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 N 0 3 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 67 0.0567 0 0.462
+N B.sub 55 0.0819 0 0.363
+N drum.hihat -1 0.03 0 0.5
 T 10 29 30 6 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 N 0 3 0 | 0 0 | 0 0 0 | wait,collision
+N B.fm 67 0.1164375 0 0.476
+N B.sub 55 0.1681875 0 0.374
+N fx.collision 43 0.08 0.01 0.7
 T 10 30 31 7 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 N 0 3 0 | 0 0 | 0 0 0 | move,pulse,wait
+N A.main 57 0.115425 0 0.62475
+N A.ping 60 0.03375 0.005625 0.2499
+N fx.pulse 84 0.06 0.01 0.4
 T 10 31 32 8 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 N 0 3 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 65 0.01215 0 0.147
+N B.sub 53 0.01755 0 0.1155
 T 10 32 33 9 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 0 N 0 3 0 | 0 0 | 1 0 0 | move,move,pulse,wait
+N A.main 59 0.064125 0 0.8925
+N A.ping 62 0.03375 0.005625 0.357
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.02 0.4
 T 10 33 34 10 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 1 N 1 3 0 | 0 0 | 0 0 0 | wait,pulse,move,zap
+N A.main 59 0.091378125 0 0.1615
+N B.fm 69 0.052396875 0 0.44982
+N B.sub 57 0.075684375 0 0.35343
+N fx.pulse 84 0.06 0.01 0.4
+N fx.zap -1 0.06 0.03 0.6
 T 10 34 35 11 0 0 0 0 0 maze | A 3 4 S 0 3 0 | B 4 1 N 1 3 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 55 0.125685 0 0.4725
+N A.ping 59 0.03375 0.005625 0.189
+N fx.pulse 84 0.06 0.01 0.4
 T 10 35 36 0 0 0 0 0 0 maze | A 3 4 S 0 3 0 | B 4 0 N 1 3 0 | 0 0 | 0 0 0 | wait,move
+N B.fm 69 0.1164375 0 0.51408
+N B.sub 57 0.1681875 0 0.40392
 T 10 36 37 1 0 0 0 0 0 maze | A 3 3 S 0 3 0 | B 4 0 N 1 3 0 | 0 0 | 1 0 0 | move,collision
+N A.main 67 0.089775 0 0.55125
+N A.ping 71 0.03375 0.005625 0.2205
+N B.fm 69 0.1164375 0 0.51408
+N B.sub 57 0.1681875 0 0.40392
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.01 0.7
 T 10 37 38 2 0 0 0 0 0 maze | A 3 4 S 0 3 0 | B 4 0 N 1 3 0 | 0 0 | 0 0 0 | move,pulse,wait
+N A.main 55 0.42643125 0 0.57
+N A.ping 59 0.03375 0.005625 0.228
+N fx.pulse 84 0.06 0.01 0.4
 T 10 38 39 3 0 0 0 0 0 maze | A 3 4 S 0 3 0 | B 4 0 N 1 3 0 | 0 0 | 0 0 0 | ping,pulse,wait
+N A.main 55 0.269325 0 0.675
+N A.ping 59 0.03375 0.005625 0.27
+N B.fm 69 0.03493125 0 0.12852
+N B.sub 57 0.05045625 0 0.10098
+N fx.pulse 84 0.06 0.01 0.4
 T 10 39 40 4 0 0 0 0 0 maze | A 3 4 S 0 3 0 | B 4 0 E 1 3 0 | 0 0 | 0 0 0 | ping,pulse,turn
+N A.main 55 0.30972375 0 0.57375
+N A.ping 59 0.03375 0.005625 0.2295
+N B.fm 69 0.04725 0 0.404838
+N B.sub 57 0.06825 0 0.318087
+N fx.pulse 84 0.06 0.01 0.4
 T 10 40 41 5 0 0 0 0 0 maze | A 3 4 S 0 3 0 | B 4 0 S 1 3 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 69 0.15710625 0 0.32319
+N B.sub 57 0.22693125 0 0.253935
+N drum.hihat -1 0.03 0 0.5
 T 10 41 42 6 0 0 0 0 0 maze | A 3 4 S 0 3 0 | B 4 0 S 1 3 0 | 0 0 | 0 0 0 | wait,ping
+N B.fm 69 0.0567 0 0.535815
+N B.sub 57 0.0819 0 0.4209975
 T 10 42 43 7 0 0 0 0 0 maze | A 3 3 S 0 3 0 | B 4 0 S 1 3 0 | 0 0 | 0 0 0 | move,wait
+N A.main 67 0.2244375 0 0.525
+N A.ping 71 0.03375 0.005625 0.21
 T 10 43 44 8 0 0 0 0 0 maze | A 3 3 E 0 3 0 | B 4 0 S 1 3 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 67 0.118453125 0 0.4845
+N A.ping 71 0.03375 0.005625 0.1938
 T 10 44 45 9 0 0 0 0 0 maze | A 3 3 E 0 3 0 | B 4 0 S 1 3 0 | 0 0 | 1 0 0 | ping,wait
+N A.main 67 0.04275 0 0.80325
+N A.ping 71 0.03375 0.005625 0.3213
+N drum.kick 24 0.18 0 1
 T 10 45 46 10 0 0 0 0 0 maze | A 3 3 S 0 3 0 | B 4 0 S 1 3 0 | 0 0 | 0 0 0 | turn,collision
+N A.main 67 0.200746875 0 0.3825
+N A.ping 71 0.03375 0.005625 0.153
+N B.fm 69 0.1701 0 0.43659
+N B.sub 57 0.2457 0 0.343035
+N fx.collision 43 0.08 0.01 0.7
 T 10 46 47 11 0 0 0 0 0 maze | A 3 4 S 0 3 0 | B 4 0 S 1 3 0 | 0 0 | 0 0 0 | move,collision,pulse,wait
+N A.main 55 0.258103125 0 0.6375
+N A.ping 59 0.03375 0.005625 0.255
+N fx.collision 43 0.08 0.01 0.7
+N fx.pulse 84 0.06 0.02 0.4
 T 10 47 48 0 0 0 0 0 0 maze | A 3 4 S 0 3 0 | B 4 0 S 1 3 0 | 0 0 | 0 0 0 | wait,pulse,wait
+N A.main 55 0.1346625 0 0.15
+N fx.pulse 84 0.06 0.01 0.4
 T 11 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 3 0 | 0 0 | 1 0 0 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 11 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | collision,turn
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N B.fm 62 0.1323 0 0.3465
+N B.sub 50 0.1911 0 0.27225
+N fx.collision 43 0.08 0 0.7
 T 11 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 2 S 0 3 0 | 0 0 | 0 0 0 | turn,move,move
+N A.main 53 0.071071875 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
+N B.fm 62 0.118125 0 0.525
+N B.sub 50 0.170625 0 0.4125
 T 11 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 0 | ping,turn
+N A.main 53 0.02565 0 0.945
+N A.ping 57 0.03375 0.005625 0.378
+N B.fm 62 0.118125 0 0.357
+N B.sub 50 0.170625 0 0.2805
 T 11 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 2 E 0 3 0 | 0 0 | 0 0 1 | wait,collision
+N B.fm 62 0.151875 0 0.4165
+N B.sub 50 0.219375 0 0.32725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 11 5 6 6 0 0 0 0 0 maze | A 0 2 N 0 3 0 | B 4 2 N 0 3 0 | 0 0 | 0 0 0 | move,move,turn
+N A.main 65 0.061453125 0 0.85
+N A.ping 69 0.03375 0.005625 0.34
+N B.fm 62 0.0567 0 0.462
+N B.sub 50 0.0819 0 0.363
 T 11 6 7 7 0 0 0 0 0 maze | A 0 2 N 0 3 0 | B 4 2 N 0 3 0 | 0 0 | 0 0 0 | wait,move,move,belt
+N A.main 65 0.0320625 0 0.2
+N B.fm 62 0.01875 0 0.4165
+N B.sub 50 0.15136875 0 0.32725
+N B.fm 62 0.219375 0.0225 0.238
+N fx.belt -1 0.04 0.03 0.35
 T 11 7 8 8 0 0 0 0 0 maze | A 0 2 N 0 3 0 | B 4 2 N 0 3 0 | 0 0 | 0 0 0 | wait,wait
+N A.main 65 0.02565 0 0.22
+N B.fm 62 0.01215 0 0.147
+N B.sub 50 0.01755 0 0.1155
 T 11 8 9 9 0 0 0 0 0 maze | A 0 3 N 1 3 0 | B 4 2 W 0 3 0 | 0 0 | 1 0 0 | move,zap,turn
+N A.main 64 0.038475 0 0.8316
+N A.ping 67 0.03375 0.005625 0.33264
+N B.fm 62 0.0378 0 0.28665
+N B.sub 50 0.0546 0 0.225225
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.01 0.6
 T 11 9 10 10 0 0 0 0 0 maze | A 0 3 N 1 3 0 | B 4 2 W 0 3 0 | 0 0 | 0 0 0 | wait,wait
 T 11 10 11 11 0 0 0 0 0 maze | A 0 3 N 2 3 0 | B 4 2 W 0 3 0 | 0 0 | 0 0 0 | wait,zap,collision
+N A.main 65 0.0184359375 0 0.1972
+N B.fm 62 0.115425 0 0.302575
+N B.sub 50 0.166725 0 0.2377375
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
 T 11 11 12 0 0 0 0 0 0 maze | A 0 3 N 2 3 0 | B 4 2 W 0 3 0 | 0 0 | 0 0 0 | wait,collision,collision
+N B.fm 62 0.054 0 0.5005
+N B.sub 50 0.078 0 0.39325
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 11 12 13 1 0 0 0 0 0 maze | A 0 3 N 2 3 0 | B 4 2 W 0 3 0 | 0 0 | 1 0 0 | wait,wait
+N drum.kick 24 0.18 0 1
 T 11 13 14 2 0 0 0 0 0 maze | A 0 3 W 3 3 0 | B 4 2 W 0 3 0 | 0 0 | 0 0 0 | turn,zap,collision
+N A.main 65 0.049875 0 0.4836
+N A.ping 69 0.03375 0.005625 0.19344
+N B.fm 62 0.1215 0 0.3185
+N B.sub 50 0.1755 0 0.25025
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
 T 11 14 15 3 0 0 0 0 0 maze | A 1 3 W 3 3 0 | B 4 2 W 0 3 0 | 0 0 | 0 0 0 | move,ping
+N A.main 69 0.12825 0 0.5642
+N A.ping 72 0.03375 0.005625 0.22568
+N B.fm 65 0.0324 0 0.429975
+N B.sub 53 0.0468 0 0.3378375
 T 11 15 16 4 0 0 0 0 0 maze | A 0 3 W 4 3 0 | B 4 2 W 0 3 0 | 0 0 | 0 0 0 | move,zap,wait
+N A.main 65 0.07125 0 0.6864
+N A.ping 69 0.03375 0.005625 0.27456
+N fx.zap -1 0.06 0.01 0.6
 T 11 16 17 5 0 0 0 0 0 maze | A 0 3 S 5 3 0 | B 4 2 W 0 3 0 | 0 0 | 0 0 1 | turn,zap,collision
+N A.main 65 0.100373437 0 0.5355
+N A.ping 69 0.03375 0.005625 0.2142
+N B.fm 62 0.054 0 0.3822
+N B.sub 50 0.078 0 0.3003
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
 T 11 17 18 6 0 0 0 0 0 maze | A 0 4 S 5 3 0 | B 4 2 W 0 3 0 | 0 0 | 0 0 0 | move,collision,wait
+N A.main 53 0.049875 0 1
+N A.ping 57 0.03375 0.005625 0.4
+N fx.collision 43 0.08 0.01 0.7
 T 11 18 19 7 0 0 0 0 0 maze | A 0 4 S 5 3 0 | B 4 2 W 0 3 0 | 0 0 | 0 0 0 | ping,collision,collision
+N A.main 53 0.17206875 0 0.80325
+N A.ping 57 0.03375 0.005625 0.3213
+N B.fm 62 0.077625 0 0.38675
+N B.sub 50 0.112125 0 0.303875
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 11 19 20 8 0 0 0 0 0 maze | A 0 4 S 5 3 0 | B 4 2 W 0 3 0 | 0 0 | 0 0 0 | wait,collision,collision
+N B.fm 62 0.0675 0 0.455
+N B.sub 50 0.0975 0 0.3575
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 11 20 21 9 0 0 0 0 0 maze | A 0 4 E 5 3 0 | B 4 2 W 0 3 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 53 0.118453125 0 0.6783
+N A.ping 57 0.03375 0.005625 0.27132
+N B.fm 62 0.038475 0 0.08645
+N B.sub 50 0.055575 0 0.067925
+N drum.kick 24 0.18 0 1
 T 11 21 22 10 0 0 0 0 0 maze | A 2 4 E 5 3 0 | B 4 2 N 0 3 0 | 0 0 | 0 0 0 | move,move,turn
+N A.main 59 0.035625 0 1
+N A.ping 62 0.03375 0.005625 0.4
+N B.fm 67 0.06733125 0 0.399
+N B.sub 55 0.09725625 0 0.3135
 T 11 22 23 11 0 0 0 0 0 maze | A 1 4 E 4 3 0 | B 4 2 N 0 3 0 | 0 0 | 0 0 0 | move,pulse,move,move,belt
+N A.main 57 0.331846875 0 0.66759
+N A.ping 60 0.03375 0.005625 0.267036
+N B.fm 65 0.01875 0 0.539
+N B.sub 53 0.1053 0 0.4235
+N B.fm 65 0.135 0.0225 0.308
+N fx.pulse 84 0.06 0.01 0.4
 T 11 23 24 0 0 0 0 0 0 maze | A 1 4 E 3 3 0 | B 4 0 N 0 3 0 | 0 0 | 0 0 0 | wait,pulse,move,move
+N A.main 57 0.110615625 0 0.17918
+N B.fm 65 0.04809375 0 0.665
+N B.sub 53 0.06946875 0 0.5225
+N fx.pulse 84 0.06 0.01 0.4
 T 11 24 25 1 0 0 0 0 0 maze | A 1 4 E 2 3 0 | B 4 0 N 0 3 0 | 0 0 | 1 0 0 | wait,pulse,wait
+N A.main 57 0.038475 0 0.20706
+N B.fm 65 0.03493125 0 0.119
+N B.sub 53 0.05045625 0 0.0935
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
 T 11 25 26 2 0 0 0 0 0 maze | A 1 4 E 2 3 0 | B 4 0 N 0 3 0 | 0 0 | 0 0 0 | wait,collision,collision
+N B.fm 65 0.04809375 0 0.665
+N B.sub 53 0.06946875 0 0.5225
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 11 26 27 3 0 0 0 0 0 maze | A 2 4 E 2 3 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 0 | move,turn
+N A.main 59 0.16921875 0 0.74936
+N A.ping 62 0.03375 0.005625 0.299744
+N B.fm 67 0.089775 0 0.25935
+N B.sub 55 0.129675 0 0.203775
 T 11 27 28 4 0 0 0 0 0 maze | A 2 4 E 2 3 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 0 | wait,ping
+N B.fm 67 0.07695 0 0.389025
+N B.sub 55 0.11115 0 0.3056625
 T 11 28 29 5 0 0 0 0 0 maze | A 2 4 S 2 3 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 1 | turn,turn
+N A.main 59 0.200746875 0 0.4437
+N A.ping 62 0.03375 0.005625 0.17748
+N B.fm 67 0.1323 0 0.3465
+N B.sub 55 0.1911 0 0.27225
+N drum.hihat -1 0.03 0 0.5
 T 11 29 30 6 0 0 0 0 0 maze | A 2 4 S 2 3 0 | B 4 1 S 1 3 0 | 0 0 | 0 0 0 | wait,move,zap
+N B.fm 69 0.13584375 0 0.38556
+N B.sub 57 0.19621875 0 0.30294
+N fx.zap -1 0.06 0.02 0.6
 T 11 30 31 7 0 0 0 0 0 maze | A 2 3 E 2 3 0 | B 4 1 S 2 3 0 | 0 0 | 0 0 0 | move,rotator,ping,zap
+N A.main 71 0.064125 0 0.72471
+N A.ping 74 0.03375 0.005625 0.289884
+N B.fm 71 0.08150625 0 0.465885
+N B.sub 59 0.11773125 0 0.3660525
+N fx.rotator 81 0.04 0.01 0.45
+N fx.zap -1 0.06 0.03 0.6
 T 11 31 32 8 0 0 0 0 0 maze | A 2 3 N 2 3 0 | B 4 1 S 3 3 0 | 0 0 | 0 0 0 | ping,rotator,wait,zap
+N A.main 74 0.0513 0 1
+N A.ping 77 0.03375 0.005625 0.4
+N B.fm 71 0.014175 0 0.13671
+N B.sub 59 0.020475 0 0.107415
+N fx.rotator 81 0.04 0.01 0.45
+N fx.zap -1 0.06 0.03 0.6
 T 11 32 33 9 0 0 0 0 0 maze | A 2 1 E 2 3 0 | B 4 1 S 3 3 0 | 0 0 | 1 0 0 | move,move,rotator,wait
+N A.main 74 0.035625 0 1
+N A.ping 77 0.03375 0.005625 0.4
+N drum.kick 24 0.18 0 1
+N fx.rotator 81 0.04 0.02 0.45
 T 11 33 34 10 0 0 0 0 0 maze | A 2 1 S 2 3 0 | B 4 1 S 3 3 0 | 0 0 | 0 0 0 | wait,rotator,wait
+N A.main 74 0.071071875 0 0.1653
+N fx.rotator 81 0.04 0.01 0.45
 T 11 34 35 11 0 0 0 0 0 maze | A 2 1 N 2 3 0 | B 4 1 S 4 3 0 | 0 0 | 0 0 0 | turn,rotator,wait,zap
+N A.main 74 0.029925 0 0.7308
+N A.ping 77 0.03375 0.005625 0.29232
+N B.fm 71 0.014175 0 0.14553
+N B.sub 59 0.020475 0 0.114345
+N fx.rotator 81 0.04 0.01 0.45
+N fx.zap -1 0.06 0.03 0.6
 T 11 35 36 0 0 0 0 0 0 maze | A 2 1 N 2 3 0 | B 4 1 S 4 3 0 | 0 0 | 0 0 0 | turn,rotator,wait
+N A.main 74 0.05985 0 0.7656
+N A.ping 77 0.03375 0.005625 0.30624
+N fx.rotator 81 0.04 0.01 0.45
 T 11 36 37 1 0 0 0 0 0 maze | A 2 1 N 2 3 0 | B 4 2 S 4 3 0 | 0 0 | 1 0 0 | wait,move
+N B.fm 71 0.2716875 0 0.47124
+N B.sub 59 0.3924375 0 0.37026
+N drum.kick 24 0.18 0 1
 T 11 37 38 2 0 0 0 0 0 maze | A 2 0 N 2 3 0 | B 4 1 S 5 3 0 | 0 0 | 0 0 0 | move,move,zap
+N A.main 74 0.10153125 0 0.8816
+N A.ping 77 0.03375 0.005625 0.35264
+N B.fm 71 0.08505 0 0.56595
+N B.sub 59 0.12285 0 0.444675
+N fx.zap -1 0.06 0.02 0.6
 T 11 38 39 3 0 0 0 0 0 maze | A 2 0 N 2 3 0 | B 4 1 S 6 3 1 | 0 0 | 0 0 0 | ping,wait,zap,zap
+N A.main 74 0.064125 0 1
+N A.ping 77 0.03375 0.005625 0.4
+N B.fm 71 0.040753125 0 0.12495
+N B.sub 59 0.058865625 0 0.098175
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 11 39 40 4 0 0 0 0 0 maze | A 2 0 N 2 3 0 | B 0 4 N 0 4 0 | 0 0 | 0 0 0 | death,ping,turn
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 83 0.07374375 0 0.8874
+N A.ping 74 0.03375 0.005625 0.35496
+N B.fm 67 0.02835 0 0.441
+N B.sub 55 0.04095 0 0.3465
 T 11 40 41 5 0 0 0 0 0 maze | A 2 0 E 2 3 0 | B 0 4 N 0 4 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 83 0.09975 0 0.65076
+N A.ping 74 0.03375 0.005625 0.260304
+N drum.hihat -1 0.03 0 0.5
 T 11 41 42 6 0 0 0 0 0 maze | A 2 0 S 2 3 0 | B 0 4 N 0 4 0 | 0 0 | 0 0 0 | turn,ping
+N A.main 83 0.069825 0 0.5481
+N A.ping 74 0.03375 0.005625 0.21924
+N B.fm 67 0.0243 0 0.6615
+N B.sub 55 0.0351 0 0.51975
 T 11 42 43 7 0 0 0 0 0 maze | A 2 0 S 2 3 0 | B 0 4 N 0 4 0 | 0 0 | 0 0 0 | collision,collision
+N A.main 83 0.2244375 0 0.609
+N A.ping 74 0.03375 0.005625 0.2436
+N B.fm 67 0.08656875 0 0.4655
+N B.sub 55 0.12504375 0 0.36575
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 11 43 44 8 0 0 0 0 0 maze | A 2 0 E 2 3 0 | B 0 4 N 0 4 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 83 0.118453125 0 0.56202
+N A.ping 74 0.03375 0.005625 0.224808
 T 11 44 45 9 0 0 0 0 0 maze | A 2 0 E 2 3 0 | B 0 4 N 0 4 0 | 0 0 | 1 0 0 | ping,wait
+N A.main 83 0.04275 0 0.93177
+N A.ping 74 0.03375 0.005625 0.372708
+N B.fm 67 0.03493125 0 0.119
+N B.sub 55 0.05045625 0 0.0935
+N drum.kick 24 0.18 0 1
 T 11 45 46 10 0 0 0 0 0 maze | A 2 0 E 2 3 0 | B 0 4 N 0 4 0 | 0 0 | 0 0 0 | wait,collision
+N B.fm 67 0.0729 0 0.539
+N B.sub 55 0.1053 0 0.4235
+N fx.collision 43 0.08 0.01 0.7
 T 11 46 47 11 0 0 0 0 0 maze | A 2 0 E 2 3 0 | B 0 4 N 0 4 0 | 0 0 | 0 0 0 | wait,wait
 T 11 47 48 0 0 0 0 0 0 maze | A 2 0 E 2 3 0 | B 0 3 N 1 4 0 | 0 0 | 0 0 0 | wait,move,zap
+N A.main 83 0.0534375 0 0.1972
+N B.fm 69 0.0405 0 0.66528
+N B.sub 57 0.0585 0 0.52272
+N fx.zap -1 0.06 0.02 0.6
 T 12 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 4 0 | 0 0 | 1 0 0 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 12 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 S 0 4 0 | 0 0 | 0 0 0 | collision,turn
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N B.fm 62 0.1323 0 0.3465
+N B.sub 50 0.1911 0 0.27225
+N fx.collision 43 0.08 0 0.7
 T 12 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 S 0 4 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 53 0.071071875 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
 T 12 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 0 | ping,turn
+N A.main 53 0.02565 0 0.945
+N A.ping 57 0.03375 0.005625 0.378
+N B.fm 62 0.118125 0 0.357
+N B.sub 50 0.170625 0 0.2805
 T 12 4 5 5 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 1 | turn,collision
+N A.main 53 0.143390625 0 0.4335
+N A.ping 57 0.03375 0.005625 0.1734
+N B.fm 62 0.151875 0 0.4165
+N B.sub 50 0.219375 0 0.32725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 12 5 6 6 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 0 | move,move,wait
+N A.main 59 0.102421875 0 0.7225
+N A.ping 62 0.03375 0.005625 0.289
 T 12 6 7 7 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 0 | wait,collision
+N A.main 59 0.0534375 0 0.17
+N B.fm 67 0.17465625 0 0.354025
+N B.sub 55 0.25228125 0 0.2781625
+N fx.collision 43 0.08 0.01 0.7
 T 12 7 8 8 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 0 | wait,wait
 T 12 8 9 9 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 E 0 4 0 | 0 0 | 1 0 0 | move,pulse,wait
+N A.main 57 0.23085 0 0.6545
+N A.ping 60 0.03375 0.005625 0.2618
+N drum.kick 24 0.18 0 1
+N fx.pulse 84 0.06 0.01 0.4
 T 12 9 10 10 0 0 0 0 0 maze | A 1 4 N 0 3 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 0 | turn,pulse,wait
+N A.main 57 0.154861875 0 0.51
+N A.ping 60 0.03375 0.005625 0.204
+N fx.pulse 84 0.06 0.01 0.4
 T 12 10 11 11 0 0 0 0 0 maze | A 1 4 N 0 3 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 0 | wait,collision
+N B.fm 65 0.14428125 0 0.395675
+N B.sub 53 0.20840625 0 0.3108875
+N fx.collision 43 0.08 0.01 0.7
 T 12 11 12 0 0 0 0 0 0 maze | A 1 4 W 0 3 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 0 | turn,pulse,collision,collision
+N A.main 57 0.07182 0 0.4095
+N A.ping 60 0.03375 0.005625 0.1638
+N B.fm 65 0.0675 0 0.6545
+N B.sub 53 0.0975 0 0.51425
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 12 12 13 1 0 0 0 0 0 maze | A 1 4 W 0 3 0 | B 4 0 E 0 4 0 | 0 0 | 1 0 0 | wait,wait
+N drum.kick 24 0.18 0 1
 T 12 13 14 2 0 0 0 0 0 maze | A 1 4 S 0 3 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 0 | turn,pulse,collision
+N A.main 57 0.3142125 0 0.45
+N A.ping 60 0.03375 0.005625 0.18
+N B.fm 65 0.151875 0 0.4165
+N B.sub 53 0.219375 0 0.32725
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 12 14 15 3 0 0 0 0 0 maze | A 1 3 S 0 3 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 0 | move,ping
+N A.main 69 0.2244375 0 0.525
+N A.ping 72 0.03375 0.005625 0.21
+N B.fm 65 0.0405 0 0.562275
+N B.sub 53 0.0585 0 0.4417875
 T 12 15 16 4 0 0 0 0 0 maze | A 1 4 S 0 3 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 0 | move,pulse,wait
+N A.main 57 0.448875 0 0.6
+N A.ping 60 0.03375 0.005625 0.24
+N B.fm 65 0.050625 0 0.119
+N B.sub 53 0.073125 0 0.0935
+N fx.pulse 84 0.06 0.01 0.4
 T 12 16 17 5 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 1 | turn,pulse,collision
+N A.main 57 0.258103125 0 0.4335
+N A.ping 60 0.03375 0.005625 0.1734
+N B.fm 65 0.0675 0 0.4998
+N B.sub 53 0.0975 0 0.3927
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 12 17 18 6 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 S 0 4 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 65 0.1323 0 0.3465
+N B.sub 53 0.1911 0 0.27225
 T 12 18 19 7 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 2 S 0 4 0 | 0 0 | 0 0 0 | ping,pulse,move,move
+N A.main 57 0.22123125 0 0.65025
+N A.ping 60 0.03375 0.005625 0.2601
+N B.fm 65 0.13584375 0 0.44625
+N B.sub 53 0.19621875 0 0.350625
+N fx.pulse 84 0.06 0.01 0.4
 T 12 19 20 8 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | move,move,move
+N A.main 59 0.07125 0 0.714
+N A.ping 62 0.03375 0.005625 0.2856
+N B.fm 55 0.118125 0 0.525
+N B.sub 43 0.170625 0 0.4125
 T 12 20 21 9 0 0 0 0 0 maze | A 2 4 N 0 3 0 | B 4 4 S 0 4 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 59 0.071071875 0 0.57
+N A.ping 62 0.03375 0.005625 0.228
+N B.fm 55 0.06733125 0 0.09975
+N B.sub 43 0.09725625 0 0.078375
+N drum.kick 24 0.18 0 1
 T 12 21 22 10 0 0 0 0 0 maze | A 2 4 N 0 3 0 | B 4 4 W 0 4 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 55 0.089775 0 0.25935
+N B.sub 43 0.129675 0 0.203775
 T 12 22 23 11 0 0 0 0 0 maze | A 2 4 N 0 3 0 | B 4 4 W 0 4 0 | 0 0 | 0 0 0 | collision,collision
+N A.main 59 0.110615625 0 0.595
+N A.ping 62 0.03375 0.005625 0.238
+N B.fm 55 0.0972 0 0.35035
+N B.sub 43 0.1404 0 0.275275
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 12 23 24 0 0 0 0 0 0 maze | A 2 4 N 2 3 0 | B 2 4 W 0 4 0 | 7 0 | 0 0 0 | wait,move,move,zap
+N B.fm 50 0.064125 0 0.43225
+N B.sub 38 0.092625 0 0.339625
+N fx.zap -1 0.06 0.03 0.6

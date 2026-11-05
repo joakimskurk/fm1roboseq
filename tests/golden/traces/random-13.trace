@@ -1,10 +1,11 @@
 # random-13: reference/roboseq.html run by tools/trace/gen.mjs
 board corridor
 loop 64
+bpm 80 0 1
 tpm 1
 vmtrigger loop
 vmfreq 8
-bassmodlen 8
+bassmodlen 4
 drums 1 break
 seq2 0 0
 seq2step 0 -- -- 0
@@ -143,602 +144,4001 @@ step B 62 ping steady 50
 step B 63 dash steady 50
 ticks 600
 T 0 0 1 1 0 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | -
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 0 1 2 2 0 1 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
 T 0 2 3 3 0 2 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,move,collision
+N A.main 59 0.035625 0 0.8925
+N A.ping 62 0.03375 0.005625 0.357
+N B.fm 67 0.1215 0 0.3185
+N B.sub 55 0.1755 0 0.25025
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.02 0.7
 T 0 3 4 4 0 3 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 0 | turn,ping
+N A.main 59 0.086034375 0 0.51
+N A.ping 62 0.03375 0.005625 0.204
+N B.fm 67 0.09315 0 0.348075
+N B.sub 55 0.13455 0 0.2734875
+N drum.kick 24 0.18 0 1
 T 0 4 5 5 0 4 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 67 0.165375 0 0.315
+N B.sub 55 0.238875 0 0.2475
+N drum.hihat -1 0.03 0 0.5
 T 0 5 6 6 0 5 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 1 0 | ping,wait
+N A.main 59 0.06091875 0 0.855
+N A.ping 62 0.03375 0.005625 0.342
+N B.fm 67 0.06733125 0 0.09975
+N B.sub 55 0.09725625 0 0.078375
+N drum.snare -1 0.1 0 0.7
 T 0 6 7 7 0 6 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 1 0 1 | wait,wait
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 0 7 8 8 0 7 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 67 0.04725 0 0.37485
+N B.sub 55 0.06825 0 0.294525
 T 0 8 9 9 0 8 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 1 | wait,turn
+N B.fm 67 0.0567 0 0.462
+N B.sub 55 0.0819 0 0.363
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 0 9 10 10 0 9 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | wait,move
+N B.fm 67 0.03645 0 0.5145
+N B.sub 55 0.05265 0 0.40425
 T 0 10 11 11 0 10 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 1 1 | collision,wait
+N A.main 59 0.07695 0 0.77
+N A.ping 62 0.03375 0.005625 0.308
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
 T 0 11 12 12 0 11 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 1 0 0 | turn,turn
+N A.main 59 0.09975 0 0.561
+N A.ping 62 0.03375 0.005625 0.2244
+N B.fm 67 0.108675 0 0.23205
+N B.sub 55 0.156975 0 0.182325
+N drum.kick 24 0.18 0 1
 T 0 12 13 13 0 12 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+N A.main 59 0.0534375 0 0.17
+N drum.hihat -1 0.03 0 0.5
 T 0 13 14 14 0 13 0 0 0 corridor | A 1 4 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 1 0 | move,wait
+N A.main 57 0.12825 0 0.6545
+N A.ping 60 0.03375 0.005625 0.2618
+N drum.snare -1 0.1 0 0.7
 T 0 14 15 15 0 14 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 1 0 1 | move,move,move,belt,collision
+N A.main 59 0.013125 0 0.8925
+N A.ping 62 0.03375 0.005625 0.357
+N A.main 65 0.091875 0.015 0.401625
+N A.main 64 0.10125 0.10875 0.389625
+N B.fm 67 0.0972 0 0.35035
+N B.sub 55 0.1404 0 0.275275
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 0 15 16 0 0 15 0 0 0 corridor | A 1 4 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | move,wait
+N A.main 57 0.1603125 0 0.595
+N A.ping 60 0.03375 0.005625 0.238
 T 0 16 17 1 0 16 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 1 0 1 | move,collision
+N A.main 53 0.064125 0 0.62475
+N A.ping 57 0.03375 0.005625 0.2499
+N B.fm 62 0.0486 0 0.334425
+N B.sub 50 0.0702 0 0.2627625
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 0 17 18 2 0 17 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+N A.main 53 0.04275 0 0.187
 T 0 18 19 3 0 18 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 1 1 | wait,collision
+N B.fm 62 0.0486 0 0.334425
+N B.sub 50 0.0702 0 0.2627625
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 0 19 20 4 0 19 0 0 0 corridor | A 0 4 S 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 1 0 0 | turn,turn
+N A.main 53 0.1745625 0 0.45
+N A.ping 57 0.03375 0.005625 0.18
+N B.fm 62 0.070875 0 0.42
+N B.sub 50 0.102375 0 0.33
+N drum.kick 24 0.18 0 1
 T 0 20 21 5 0 20 0 0 0 corridor | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | ping,move
+N A.main 53 0.14214375 0 0.64125
+N A.ping 57 0.03375 0.005625 0.2565
+N B.fm 62 0.0961875 0 0.532
+N B.sub 50 0.1389375 0 0.418
+N drum.hihat -1 0.03 0 0.5
 T 0 21 22 6 0 21 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 0 | turn,wait
+N A.main 53 0.1246875 0 0.51
+N A.ping 57 0.03375 0.005625 0.204
+N B.fm 62 0.030375 0 0.14
+N B.sub 50 0.043875 0 0.11
+N drum.snare -1 0.1 0 0.7
 T 0 22 23 7 0 22 0 0 0 corridor | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | move,turn
+N A.main 57 0.16921875 0 0.646
+N A.ping 60 0.03375 0.005625 0.2584
+N B.fm 65 0.108675 0 0.23205
+N B.sub 53 0.156975 0 0.182325
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 0 23 24 8 0 23 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,wait
+N A.main 53 0.152296875 0 0.56525
+N A.ping 57 0.03375 0.005625 0.2261
 T 0 24 25 9 0 24 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 1 0 0 | 0 0 | 1 0 1 | wait,move,move,move,belt,move,belt,zap
+N B.fm 59 0.01875 0 0.51597
+N B.sub 47 0.039 0 0.405405
+N B.fm 71 0.10125 0.0225 0.29484
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 0 25 26 10 0 25 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 S 2 0 0 | 0 0 | 0 0 0 | collision,turn,zap
+N A.main 50 0.152296875 0 0.56525
+N A.ping 53 0.03375 0.005625 0.2261
+N B.fm 60 0.033075 0 0.38367
+N B.sub 48 0.047775 0 0.301455
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 0 26 27 11 0 26 0 0 0 corridor | A 2 4 E 1 0 0 | B 2 2 S 3 0 0 | 0 0 | 0 1 1 | move,move,zap,zap
+N A.main 55 0.035625 0 0.8925
+N A.ping 59 0.03375 0.005625 0.357
+N B.fm 65 0.08150625 0 0.498015
+N B.sub 53 0.11773125 0 0.3912975
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 0 27 28 12 0 27 0 0 0 corridor | A 2 4 E 3 0 0 | B 2 4 S 3 0 0 | 7 0 | 1 0 0 | wait,move,move,zap
+N A.main 57 0.061453125 0 0.15606
+N B.fm 53 0.11221875 0 0.61845
+N B.sub 41 0.16209375 0 0.485925
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.03 0.6
 T 0 28 29 13 0 28 0 0 0 corridor | A 2 4 E 3 0 0 | B 2 4 S 3 0 0 | 6 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 0 29 30 14 0 29 0 0 0 corridor | A 2 4 E 3 0 0 | B 2 4 S 3 0 0 | 5 0 | 0 1 0 | ping,wait
+N A.main 59 0.0855 0 1
+N A.ping 62 0.03375 0.005625 0.4
+N drum.snare -1 0.1 0 0.7
 T 0 30 31 15 0 30 0 0 0 corridor | A 2 4 E 5 0 0 | B 2 4 S 3 0 0 | 7 0 | 1 0 1 | wait,collision,collision,zap
+N B.fm 53 0.04725 0 0.68355
+N B.sub 41 0.06825 0 0.537075
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 0 31 32 0 0 31 0 0 0 corridor | A 1 4 E 5 0 0 | B 2 4 S 3 0 0 | 6 0 | 0 0 0 | move,collision
+N A.main 57 0.064125 0 0.87465
+N A.ping 60 0.03375 0.005625 0.34986
+N B.fm 52 0.2716875 0 0.44268
+N B.sub 40 0.3924375 0 0.34782
+N fx.collision 43 0.08 0.01 0.7
 T 0 32 33 1 0 32 0 0 0 corridor | A 1 4 N 5 0 0 | B 2 2 S 4 0 0 | 5 0 | 1 0 1 | turn,move,move,belt,zap
+N A.main 57 0.086034375 0 0.714
+N A.ping 60 0.03375 0.005625 0.2856
+N B.fm 64 0.01875 0 0.53361
+N B.sub 52 0.2457 0 0.419265
+N B.fm 64 0.135 0.0225 0.30492
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 0 33 34 2 0 33 0 0 0 corridor | A 1 3 N 5 0 0 | B 2 4 S 4 0 0 | 4 0 | 0 0 0 | move,move,move
+N A.main 69 0.10153125 0 1
+N A.ping 72 0.03375 0.005625 0.4
+N B.fm 64 0.04725 0 0.7
+N B.sub 52 0.06825 0 0.55
 T 0 34 35 3 0 34 0 0 0 corridor | A 1 3 W 5 0 0 | B 2 2 S 5 0 0 | 3 0 | 0 1 1 | turn,move,move,belt,zap
+N A.main 69 0.0399 0 0.5733
+N A.ping 72 0.03375 0.005625 0.22932
+N B.fm 64 0.01875 0 0.56595
+N B.sub 52 0.2457 0 0.444675
+N B.fm 64 0.135 0.0225 0.3234
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 0 35 36 4 0 35 0 0 0 corridor | A 1 3 W 5 0 0 | B 2 2 E 6 0 1 | 2 0 | 1 0 0 | wait,turn,zap,zap
+N A.main 69 0.0342 0 0.2002
+N B.fm 64 0.0590625 0 0.4998
+N B.sub 52 0.0853125 0 0.3927
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 0 36 37 5 0 36 0 0 0 corridor | A 2 2 W 6 0 1 | B 2 1 W 0 1 0 | 1 0 | 0 0 1 | death,move,move,belt,zap,zap,ping,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 71 0.013125 0 0.637
+N A.ping 74 0.03375 0.005625 0.2548
+N A.main 71 0.091875 0.015 0.28665
+N A.main 76 0.091875 0.10875 0.27465
+N A.main 77 0.16875 0.2025 0.26265
+N B.fm 62 0.01875 0 0.45045
+N B.sub 50 0.0936 0 0.353925
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
 T 0 37 38 6 0 37 0 0 0 corridor | A 2 2 E 0 1 0 | B 2 1 W 0 1 0 | 0 0 | 0 1 0 | death,move,move,belt,move,belt,move,belt,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 67 0.013125 0 0.748
+N A.ping 71 0.03375 0.005625 0.2992
+N A.main 67 0.091875 0.015 0.3366
+N A.main 72 0.135 0.10875 0.3246
+N drum.snare -1 0.1 0 0.7
+N fx.belt -1 0.04 0.02 0.35
 T 0 38 39 7 0 38 0 0 0 corridor | A 2 2 E 1 1 0 | B 2 1 W 0 1 0 | 0 0 | 1 0 1 | ping,zap,wait
+N A.main 69 0.050765625 0 0.78489
+N A.ping 72 0.03375 0.005625 0.313956
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 0 39 40 8 0 39 0 0 0 corridor | A 2 2 E 2 1 0 | B 2 2 W 1 1 0 | 0 1 | 0 0 0 | ping,zap,ping,move,belt,zap
+N A.main 71 0.021375 0 0.93177
+N A.ping 74 0.03375 0.005625 0.372708
+N B.fm 64 0.01875 0 0.375921
+N B.sub 52 0.13455 0 0.2953665
+N B.fm 64 0.219375 0.0225 0.214812
+N fx.zap -1 0.06 0.01 0.6
 T 0 40 41 9 0 40 0 0 0 corridor | A 2 2 E 3 1 0 | B 2 2 W 1 1 0 | 0 2 | 1 0 1 | ping,zap,wait,love
+N A.main 71 0.050765625 0 0.90117
+N A.ping 74 0.03375 0.005625 0.360468
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 0 41 42 10 0 41 0 0 0 corridor | A 2 2 E 4 1 0 | B 2 2 W 2 1 0 | 0 3 | 0 0 0 | collision,zap,wait,zap
+N A.main 71 0.0921796875 0 0.66759
+N A.ping 74 0.03375 0.005625 0.267036
+N B.fm 65 0.0192375 0 0.100282
+N B.sub 53 0.0277875 0 0.078793
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 0 42 43 11 0 42 0 0 0 corridor | A 2 2 S 5 1 0 | B 2 2 W 2 1 0 | 0 4 | 0 1 1 | turn,zap,wait
+N A.main 71 0.08728125 0 0.63
+N A.ping 74 0.03375 0.005625 0.252
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 0 43 44 12 0 43 0 0 0 corridor | A 2 2 S 5 1 0 | B 2 2 S 3 1 0 | 0 5 | 1 0 0 | wait,turn,zap
+N B.fm 65 0.033075 0 0.41013
+N B.sub 53 0.047775 0 0.322245
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.02 0.6
 T 0 44 45 13 0 44 0 0 0 corridor | A 2 2 E 6 1 1 | B 2 2 S 3 1 0 | 0 0 | 0 0 1 | turn,zap,zap,wait
+N A.main 71 0.0716953125 0 0.6069
+N A.ping 74 0.03375 0.005625 0.24276
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 0 45 46 14 0 45 0 0 0 corridor | A 0 0 E 0 2 0 | B 2 2 S 4 1 0 | 0 0 | 0 1 0 | death,wait,move,move,belt,zap
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N B.fm 72 0.01875 0 0.509355
+N B.sub 60 0.12285 0 0.4002075
+N B.fm 72 0.10125 0.0225 0.29106
+N drum.snare -1 0.1 0 0.7
 T 0 46 47 15 0 46 0 0 0 corridor | A 0 0 E 0 2 0 | B 2 2 S 4 1 0 | 0 0 | 1 0 1 | wait,wait
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 0 47 48 0 0 47 0 0 0 corridor | A 2 1 E 0 2 0 | B 2 2 S 4 1 0 | 0 0 | 0 0 0 | wait,move,belt,move,belt,move,belt,wait
+N A.main 79 0.013125 0 0.1445
+N A.main 74 0.091875 0.015 0.12
+N A.main 79 0.219375 0.10875 0.12
+N fx.belt -1 0.04 0.02 0.35
 T 0 48 49 1 0 48 0 0 0 corridor | A 2 2 N 1 2 0 | B 2 2 S 4 1 0 | 0 1 | 1 0 1 | turn,move,belt,zap,wait
+N A.main 69 0.013125 0 0.6804
+N A.ping 72 0.03375 0.005625 0.27216
+N A.main 76 0.091875 0.015 0.30618
+N A.main 74 0.10125 0.10875 0.29418
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 0 49 50 2 0 49 0 0 0 corridor | A 2 2 N 1 2 0 | B 2 2 S 5 1 0 | 0 2 | 0 0 0 | wait,wait,zap,love
+N B.fm 65 0.040753125 0 0.12495
+N B.sub 53 0.058865625 0 0.098175
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N fx.zap -1 0.06 0.02 0.6
 T 0 50 51 3 0 50 0 0 0 corridor | A 2 2 N 2 2 0 | B 2 2 S 5 1 0 | 0 3 | 0 1 1 | ping,zap,wait
+N A.main 71 0.036871875 0 0.8874
+N A.ping 74 0.03375 0.005625 0.35496
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 0 51 52 4 0 51 0 0 0 corridor | A 2 2 N 2 2 0 | B 2 2 S 6 1 1 | 0 0 | 1 0 0 | wait,move,move,belt,zap,zap
+N B.fm 65 0.01875 0 0.5145
+N B.sub 53 0.307125 0 0.40425
+N B.fm 65 0.16875 0.0225 0.294
+N drum.kick 24 0.18 0 1
+N fx.belt -1 0.04 0.03 0.35
 T 0 52 53 5 0 52 0 0 0 corridor | A 2 2 E 3 2 0 | B 2 2 W 0 2 0 | 0 1 | 0 0 1 | death,turn,zap,move,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 71 0.049875 0 0.69564
+N A.ping 74 0.03375 0.005625 0.278256
+N B.fm 62 0.01875 0 0.334425
+N B.sub 50 0.0702 0 0.2627625
+N B.fm 62 0.10125 0.0225 0.1911
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 0 53 54 6 0 53 0 0 0 corridor | A 2 2 E 4 2 0 | B 2 2 W 0 2 0 | 0 2 | 0 1 0 | wait,zap,wait,love
+N A.main 71 0.02671875 0 0.2244
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0.01 0.6
 T 0 54 55 7 0 54 0 0 0 corridor | A 2 2 E 4 2 0 | B 2 2 W 1 2 0 | 0 3 | 1 0 1 | wait,collision,zap
+N B.fm 64 0.0243 0 0.361179
+N B.sub 52 0.0351 0 0.2837835
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 0 55 56 8 0 55 0 0 0 corridor | A 2 2 E 5 2 0 | B 2 2 W 3 2 0 | 7 0 | 0 0 0 | collision,collision,zap,zap,wait
+N A.main 71 0.0178125 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 0 56 57 9 0 56 0 0 0 corridor | A 2 2 E 6 2 1 | B 2 2 W 4 2 0 | 6 0 | 1 0 1 | collision,zap,zap,collision,zap
+N A.main 71 0.08015625 0 0.833
+N A.ping 74 0.03375 0.005625 0.3332
+N B.fm 65 0.064125 0 0.456456
+N B.sub 53 0.092625 0 0.358644
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 0 57 58 10 0 57 0 0 0 corridor | A 2 1 E 0 3 0 | B 2 2 W 5 2 0 | 5 0 | 0 0 0 | death,collision,move,belt,move,belt,move,belt,wait,zap
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 79 0.013125 0 0.62475
+N A.ping 83 0.03375 0.005625 0.2499
+N A.main 74 0.091875 0.015 0.2811375
+N A.main 79 0.10125 0.10875 0.2691375
+N B.fm 65 0.02025 0 0.1274
+N B.sub 53 0.02925 0 0.1001
+N fx.collision 43 0.08 0 0.7
+N fx.belt -1 0.04 0.02 0.35
 T 0 58 59 11 0 58 0 0 0 corridor | A 2 2 E 1 3 0 | B 2 2 S 6 2 1 | 4 0 | 0 1 1 | wait,move,belt,zap,turn,zap,zap
+N A.main 69 0.013125 0 0.20196
+N A.main 76 0.091875 0.015 0.12
+N A.main 74 0.135 0.10875 0.12
+N B.fm 65 0.095090625 0 0.37485
+N B.sub 53 0.137353125 0 0.294525
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 0 59 60 12 0 59 0 0 0 corridor | A 2 2 E 2 3 0 | B 2 1 S 0 3 0 | 3 0 | 1 0 0 | death,collision,zap,turn,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 71 0.0890625 0 0.7888
+N A.ping 74 0.03375 0.005625 0.31552
+N B.fm 62 0.01875 0 0.3465
+N B.sub 50 0.1911 0 0.27225
+N B.fm 62 0.135 0.0225 0.198
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
 T 0 60 61 13 0 60 0 0 0 corridor | A 2 2 S 3 3 0 | B 2 2 S 1 3 0 | 2 0 | 0 0 1 | turn,zap,move,move,move,belt,zap
+N A.main 71 0.08728125 0 0.558
+N A.ping 74 0.03375 0.005625 0.2232
+N B.fm 64 0.01875 0 0.59535
+N B.sub 52 0.06825 0 0.467775
+N B.fm 64 0.10125 0.0225 0.3402
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 0 61 62 14 0 61 0 0 0 corridor | A 2 2 S 3 3 0 | B 2 2 E 2 3 0 | 1 0 | 0 1 0 | wait,turn,zap
+N B.fm 65 0.023625 0 0.434826
+N B.sub 53 0.034125 0 0.341649
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 0 62 63 15 0 62 0 0 0 corridor | A 2 2 E 4 3 0 | B 2 2 E 3 3 0 | 0 1 | 1 0 1 | turn,zap,ping,zap
+N A.main 71 0.06234375 0 0.6732
+N A.ping 74 0.03375 0.005625 0.26928
+N B.fm 65 0.05821875 0 0.564417
+N B.sub 53 0.08409375 0 0.4434705
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 0 63 64 0 0 63 0 0 0 corridor | A 2 2 E 7 3 0 | B 2 2 E 4 3 0 | 7 0 | 0 0 0 | collision,zap,collision,collision,zap,zap
+N A.main 71 0.084609375 0 0.9044
+N A.ping 74 0.03375 0.005625 0.36176
+N B.fm 65 0.040078125 0 0.7
+N B.sub 53 0.057890625 0 0.55
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 1 0 1 1 0 0 0 0 0 corridor | A 0 4 E 0 3 0 | B 4 0 W 0 3 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 1 1 2 2 0 1 0 0 0 corridor | A 0 4 S 0 3 0 | B 3 0 W 0 3 0 | 0 0 | 0 0 0 | turn,move
+N A.main 53 0.1745625 0 0.45
+N A.ping 57 0.03375 0.005625 0.18
+N B.fm 69 0.054 0 0.3822
+N B.sub 57 0.078 0 0.3003
 T 1 2 3 3 0 2 0 0 0 corridor | A 0 4 S 0 3 0 | B 3 0 W 0 3 0 | 0 0 | 0 1 1 | wait,wait
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 1 3 4 4 0 3 0 0 0 corridor | A 0 4 E 0 3 0 | B 3 0 W 0 3 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 50 0.143390625 0 0.4335
+N A.ping 53 0.03375 0.005625 0.1734
+N drum.kick 24 0.18 0 1
 T 1 4 5 5 0 4 0 0 0 corridor | A 1 4 E 0 3 0 | B 3 0 S 0 3 0 | 0 0 | 0 0 1 | move,turn
+N A.main 53 0.1425 0 0.748
+N A.ping 57 0.03375 0.005625 0.2992
+N B.fm 72 0.165375 0 0.315
+N B.sub 60 0.238875 0 0.2475
+N drum.hihat -1 0.03 0 0.5
 T 1 5 6 6 0 5 0 0 0 corridor | A 1 4 E 0 3 0 | B 3 0 S 0 3 0 | 0 0 | 0 1 0 | ping,wait
+N A.main 53 0.10153125 0 0.72675
+N A.ping 57 0.03375 0.005625 0.2907
+N drum.snare -1 0.1 0 0.7
 T 1 6 7 7 0 6 0 0 0 corridor | A 1 4 E 0 3 0 | B 3 0 W 0 3 0 | 0 0 | 1 0 1 | wait,turn
+N A.main 53 0.061453125 0 0.1445
+N B.fm 72 0.108675 0 0.23205
+N B.sub 60 0.156975 0 0.182325
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 1 7 8 8 0 7 0 0 0 corridor | A 1 4 E 0 3 0 | B 3 0 S 0 3 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 72 0.06615 0 0.33075
+N B.sub 60 0.09555 0 0.259875
 T 1 8 9 9 0 8 0 0 0 corridor | A 1 4 E 0 3 0 | B 3 0 E 0 3 0 | 0 0 | 1 0 1 | ping,turn
+N A.main 53 0.106875 0 0.765
+N A.ping 57 0.03375 0.005625 0.306
+N B.fm 72 0.0945 0 0.3927
+N B.sub 60 0.1365 0 0.30855
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 1 9 10 10 0 9 0 0 0 corridor | A 1 4 E 0 3 0 | B 2 2 E 1 3 0 | 0 0 | 0 0 0 | ping,move,move,belt,move,belt,zap
+N A.main 53 0.12290625 0 0.65025
+N A.ping 57 0.03375 0.005625 0.2601
+N B.fm 62 0.01875 0 0.472311
+N B.sub 50 0.08775 0 0.3711015
+N B.fm 62 0.10125 0.0225 0.269892
+N fx.belt -1 0.04 0.03 0.35
 T 1 10 11 11 0 10 0 0 0 corridor | A 0 4 E 0 3 0 | B 2 2 N 2 3 0 | 0 0 | 0 1 1 | move,turn,zap
+N A.main 50 0.12825 0 0.6545
+N A.ping 53 0.03375 0.005625 0.2618
+N B.fm 60 0.0354375 0 0.4872
+N B.sub 48 0.0511875 0 0.3828
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 1 11 12 12 0 11 0 0 0 corridor | A 0 4 S 0 3 0 | B 2 2 N 2 3 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 50 0.13965 0 0.495
+N A.ping 53 0.03375 0.005625 0.198
+N drum.kick 24 0.18 0 1
 T 1 12 13 13 0 12 0 0 0 corridor | A 0 4 S 0 3 0 | B 2 2 N 2 3 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 1 13 14 14 0 13 0 0 0 corridor | A 0 3 S 0 3 0 | B 2 2 N 2 3 0 | 0 0 | 0 1 0 | move,wait
+N A.main 62 0.17955 0 0.5775
+N A.ping 65 0.03375 0.005625 0.231
+N drum.snare -1 0.1 0 0.7
 T 1 14 15 15 0 14 0 0 0 corridor | A 0 4 S 0 3 0 | B 2 2 N 3 3 0 | 0 0 | 1 0 1 | move,collision,move,move,belt,zap
+N A.main 50 0.049875 0 0.7875
+N A.ping 53 0.03375 0.005625 0.315
+N B.fm 60 0.01875 0 0.66836
+N B.sub 48 0.1053 0 0.52514
+N B.fm 72 0.135 0.0225 0.38192
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 1 15 16 0 0 15 0 0 0 corridor | A 0 3 S 0 3 0 | B 2 2 N 4 3 0 | 0 0 | 0 0 0 | move,move,move,belt,zap
+N A.main 62 0.2244375 0 0.525
+N A.ping 65 0.03375 0.005625 0.21
+N B.fm 72 0.01875 0 0.6468
+N B.sub 60 0.131625 0 0.5082
+N B.fm 72 0.16875 0.0225 0.3696
+N fx.belt -1 0.04 0.03 0.35
 T 1 16 17 1 0 16 0 0 0 corridor | A 0 2 S 0 3 0 | B 2 2 N 5 3 0 | 0 0 | 1 0 1 | move,pulse,move,move,belt,zap
+N A.main 62 0.161595 0 0.55125
+N A.ping 65 0.03375 0.005625 0.2205
+N B.fm 72 0.01875 0 0.7
+N B.sub 60 0.05265 0 0.55
+N B.fm 72 0.10125 0.0225 0.4
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 1 17 18 2 0 17 0 0 0 corridor | A 0 2 S 0 3 0 | B 2 2 N 5 3 0 | 0 0 | 0 0 0 | wait,pulse,wait
+N A.main 62 0.10773 0 0.165
+N fx.pulse 84 0.06 0.01 0.4
 T 1 18 19 3 0 18 0 0 0 corridor | A 0 3 S 0 3 0 | B 2 2 N 6 3 1 | 0 0 | 0 1 1 | move,move,move,belt,zap,zap
+N A.main 62 0.249375 0 0.6
+N A.ping 65 0.03375 0.005625 0.24
+N B.fm 72 0.01875 0 0.7
+N B.sub 60 0.05265 0 0.55
+N B.fm 72 0.10125 0.0225 0.4
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 1 19 20 4 0 19 0 0 0 corridor | A 0 3 W 0 3 0 | B 0 0 W 0 4 0 | 0 0 | 1 0 0 | death,turn,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 65 0.09975 0 0.39
+N A.ping 69 0.03375 0.005625 0.156
+N drum.kick 24 0.18 0 1
 T 1 20 21 5 0 20 0 0 0 corridor | A 0 3 W 0 3 0 | B 2 1 W 0 4 0 | 0 0 | 0 0 1 | wait,collision,move,belt,move,belt,move,belt
+N B.fm 69 0.01875 0 0.3458
+N B.sub 57 0.18525 0 0.2717
+N B.fm 69 0.185625 0.0225 0.1976
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.belt -1 0.04 0.03 0.35
 T 1 21 22 6 0 21 0 0 0 corridor | A 0 3 W 0 3 0 | B 2 1 W 0 4 0 | 0 0 | 0 1 0 | wait,wait
+N drum.snare -1 0.1 0 0.7
 T 1 22 23 7 0 22 0 0 0 corridor | A 0 3 W 0 3 0 | B 2 2 S 1 4 0 | 0 0 | 1 0 1 | collision,turn,move,belt,zap
+N A.main 62 0.135375 0 0.494
+N A.ping 65 0.03375 0.005625 0.1976
+N B.fm 71 0.01875 0 0.28917
+N B.sub 59 0.27470625 0 0.227205
+N B.fm 71 0.219375 0.0225 0.16524
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.belt -1 0.04 0.03 0.35
 T 1 23 24 8 0 23 0 0 0 corridor | A 1 3 W 0 3 0 | B 2 2 E 2 4 0 | 0 0 | 0 0 0 | move,turn,zap
+N A.main 65 0.1218375 0 0.43225
+N A.ping 69 0.03375 0.005625 0.1729
+N B.fm 64 0.04725 0 0.455532
+N B.sub 52 0.06825 0 0.357918
+N fx.zap -1 0.06 0.02 0.6
 T 1 24 25 9 0 24 0 0 0 corridor | A 2 2 W 3 3 0 | B 2 2 E 3 4 0 | 7 0 | 1 0 1 | move,move,belt,zap,collision,collision,zap,zap
+N A.main 69 0.013125 0 0.4914
+N A.ping 72 0.03375 0.005625 0.19656
+N A.main 69 0.091875 0.015 0.22113
+N A.main 74 0.16875 0.10875 0.20913
+N B.fm 65 0.016875 0 0.7
+N B.sub 53 0.024375 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 1 25 26 10 0 25 0 0 0 corridor | A 2 2 W 3 3 0 | B 2 2 N 4 4 0 | 6 0 | 0 0 0 | wait,turn,zap
+N B.fm 65 0.014175 0 0.58212
+N B.sub 53 0.020475 0 0.45738
+N fx.zap -1 0.06 0.02 0.6
 T 1 26 27 11 0 26 0 0 0 corridor | A 2 2 W 3 3 0 | B 2 2 N 5 4 0 | 5 0 | 0 1 1 | wait,ping,zap
+N B.fm 65 0.03493125 0 0.7
+N B.sub 53 0.05045625 0 0.55
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 1 27 28 12 0 27 0 0 0 corridor | A 2 2 W 3 3 0 | B 2 2 N 6 4 1 | 4 0 | 1 0 0 | wait,move,move,move,belt,move,belt,zap,zap
+N B.fm 65 0.01875 0 0.7
+N B.sub 53 0.06946875 0 0.55
+N drum.kick 24 0.18 0 1
 T 1 28 29 13 0 28 0 0 0 corridor | A 2 2 W 4 3 0 | B 2 1 N 0 5 0 | 3 0 | 0 0 1 | death,collision,zap,turn,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 71 0.0819375 0 0.58344
+N A.ping 74 0.03375 0.005625 0.233376
+N B.fm 62 0.01875 0 0.462
+N B.sub 50 0.0819 0 0.363
+N B.fm 62 0.135 0.0225 0.264
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
 T 1 29 30 14 0 29 0 0 0 corridor | A 2 2 W 5 3 0 | B 2 2 E 1 5 0 | 2 0 | 0 1 0 | ping,zap,turn,move,belt,zap
+N A.main 71 0.0342 0 0.9009
+N A.ping 74 0.03375 0.005625 0.36036
+N B.fm 64 0.01875 0 0.327726
+N B.sub 52 0.19621875 0 0.257499
+N B.fm 64 0.219375 0.0225 0.187272
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0.01 0.6
 T 1 30 31 15 0 30 0 0 0 corridor | A 2 2 N 8 3 1 | B 2 2 E 2 5 0 | 7 0 | 1 0 1 | turn,zap,zap,collision,collision,zap,zap
+N A.main 71 0.0430171875 0 0.714
+N A.ping 74 0.03375 0.005625 0.2856
+N B.fm 65 0.016875 0 0.7
+N B.sub 53 0.024375 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 1 31 32 0 0 31 0 0 0 corridor | A 2 1 E 0 4 0 | B 2 2 E 3 5 0 | 6 0 | 0 0 0 | death,collision,move,belt,move,belt,move,belt,collision,zap
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 79 0.013125 0 0.62475
+N A.ping 83 0.03375 0.005625 0.2499
+N A.main 74 0.091875 0.015 0.2811375
+N A.main 79 0.10125 0.10875 0.2691375
+N B.fm 65 0.09703125 0 0.501704
+N B.sub 53 0.14015625 0 0.394196
+N fx.collision 43 0.08 0 0.7
+N fx.belt -1 0.04 0.02 0.35
 T 1 32 33 1 0 32 0 0 0 corridor | A 2 2 N 1 4 0 | B 2 2 E 4 5 0 | 5 0 | 1 0 1 | turn,move,belt,zap,collision,zap
+N A.main 69 0.013125 0 0.5508
+N A.ping 72 0.03375 0.005625 0.22032
+N A.main 76 0.091875 0.015 0.24786
+N A.main 74 0.219375 0.10875 0.23586
+N B.fm 65 0.06075 0 0.604758
+N B.sub 53 0.08775 0 0.475167
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 1 33 34 2 0 33 0 0 0 corridor | A 2 2 N 4 4 0 | B 2 2 E 5 5 0 | 7 0 | 0 0 0 | move,move,belt,zap,collision,collision,zap,zap
+N A.main 71 0.013125 0 0.8816
+N A.ping 74 0.03375 0.005625 0.35264
+N A.main 77 0.091875 0.015 0.39672
+N A.main 76 0.185625 0.10875 0.38472
+N B.fm 65 0.016875 0 0.7
+N B.sub 53 0.024375 0 0.55
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 1 34 35 3 0 34 0 0 0 corridor | A 2 2 N 4 4 0 | B 2 2 E 6 5 1 | 6 0 | 0 1 1 | wait,collision,zap,zap
+N B.fm 65 0.06075 0 0.64141
+N B.sub 53 0.08775 0 0.503965
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 1 35 36 4 0 35 0 0 0 corridor | A 2 2 N 5 4 0 | B 2 1 S 0 6 0 | 5 0 | 1 0 0 | death,wait,zap,turn,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 71 0.012825 0 0.308
+N B.fm 62 0.01875 0 0.315
+N B.sub 50 0.238875 0 0.2475
+N B.fm 62 0.16875 0.0225 0.18
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.01 0.6
 T 1 36 37 5 0 36 0 0 0 corridor | A 2 2 N 6 4 1 | B 2 1 S 0 6 0 | 4 0 | 0 0 1 | move,move,belt,zap,zap,wait
+N A.main 71 0.013125 0 0.98
+N A.ping 74 0.03375 0.005625 0.392
+N A.main 71 0.091875 0.015 0.441
+N A.main 76 0.091875 0.10875 0.429
+N A.main 77 0.16875 0.2025 0.417
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 1 37 38 6 0 37 0 0 0 corridor | A 2 2 E 0 5 0 | B 2 2 S 1 6 0 | 3 0 | 0 1 0 | death,move,move,belt,move,belt,move,belt,move,zap
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 67 0.013125 0 0.748
+N A.ping 71 0.03375 0.005625 0.2992
+N A.main 67 0.091875 0.015 0.3366
+N A.main 72 0.135 0.10875 0.3246
+N B.fm 64 0.04725 0 0.47628
+N B.sub 52 0.06825 0 0.37422
+N drum.snare -1 0.1 0 0.7
+N fx.belt -1 0.04 0.02 0.35
 T 1 38 39 7 0 38 0 0 0 corridor | A 2 2 E 1 5 0 | B 2 2 S 2 6 0 | 2 0 | 1 0 1 | ping,zap,move,move,belt,zap
+N A.main 69 0.050765625 0 0.78489
+N A.ping 72 0.03375 0.005625 0.313956
+N B.fm 65 0.01875 0 0.4263
+N B.sub 53 0.307125 0 0.33495
+N B.fm 65 0.16875 0.0225 0.2436
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 1 39 40 8 0 39 0 0 0 corridor | A 2 2 E 2 5 0 | B 2 2 S 3 6 0 | 1 0 | 0 0 0 | ping,zap,ping,zap
+N A.main 71 0.021375 0 0.93177
+N A.ping 74 0.03375 0.005625 0.372708
+N B.fm 65 0.08150625 0 0.498015
+N B.sub 53 0.11773125 0 0.3912975
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 1 40 41 9 0 40 0 0 0 corridor | A 2 2 E 3 5 0 | B 2 2 E 4 6 0 | 0 1 | 1 0 1 | ping,zap,turn,zap
+N A.main 71 0.050765625 0 0.90117
+N A.ping 74 0.03375 0.005625 0.360468
+N B.fm 65 0.0590625 0 0.47124
+N B.sub 53 0.0853125 0 0.37026
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 1 41 42 10 0 41 0 0 0 corridor | A 2 2 E 4 5 0 | B 2 2 E 5 6 0 | 0 2 | 0 0 0 | collision,zap,wait,zap,love
+N A.main 71 0.0921796875 0 0.66759
+N A.ping 74 0.03375 0.005625 0.267036
+N B.fm 65 0.024046875 0 0.15827
+N B.sub 53 0.034734375 0 0.124355
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 1 42 43 11 0 42 0 0 0 corridor | A 2 2 E 4 5 0 | B 2 2 E 5 6 0 | 0 3 | 0 1 1 | wait,wait
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 1 43 44 12 0 43 0 0 0 corridor | A 2 2 E 5 5 0 | B 2 2 N 6 6 1 | 7 0 | 1 0 0 | collision,collision,zap,zap,turn,zap,zap
+N A.main 71 0.0178125 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 65 0.014175 0 0.6174
+N B.sub 53 0.020475 0 0.4851
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 1 44 45 13 0 44 0 0 0 corridor | A 2 2 N 6 5 1 | B 0 0 W 0 7 0 | 6 0 | 0 0 1 | death,turn,zap,zap,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 71 0.0430171875 0 0.714
+N A.ping 74 0.03375 0.005625 0.2856
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 1 45 46 14 0 45 0 0 0 corridor | A 0 0 E 0 6 0 | B 2 2 W 0 7 0 | 5 0 | 0 1 0 | death,wait,move,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N B.fm 69 0.01875 0 0.334425
+N B.sub 57 0.0702 0 0.2627625
+N B.fm 69 0.10125 0.0225 0.1911
+N drum.snare -1 0.1 0 0.7
 T 1 46 47 15 0 46 0 0 0 corridor | A 2 1 E 0 6 0 | B 2 2 W 0 7 0 | 4 0 | 1 0 1 | ping,move,belt,move,belt,move,belt,wait
+N A.main 79 0.013125 0 0.72675
+N A.ping 83 0.03375 0.005625 0.2907
+N A.main 74 0.091875 0.015 0.3270375
+N A.main 79 0.185625 0.10875 0.3150375
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
 T 1 47 48 0 0 47 0 0 0 corridor | A 2 1 E 0 6 0 | B 2 2 W 0 7 0 | 3 0 | 0 0 0 | wait,wait
 T 1 48 49 1 0 48 0 0 0 corridor | A 2 2 N 1 6 0 | B 2 2 W 0 7 0 | 2 0 | 1 0 1 | turn,move,belt,zap,wait
+N A.main 69 0.013125 0 0.6804
+N A.ping 72 0.03375 0.005625 0.27216
+N A.main 76 0.091875 0.015 0.30618
+N A.main 74 0.10125 0.10875 0.29418
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 1 49 50 2 0 49 0 0 0 corridor | A 2 2 N 1 6 0 | B 2 2 W 0 7 0 | 1 0 | 0 0 0 | wait,wait
 T 1 50 51 3 0 50 0 0 0 corridor | A 2 2 N 2 6 0 | B 2 2 W 1 7 0 | 0 1 | 0 1 1 | ping,zap,collision,zap
+N A.main 71 0.036871875 0 0.8874
+N A.ping 74 0.03375 0.005625 0.35496
+N B.fm 64 0.0486 0 0.378378
+N B.sub 52 0.0702 0 0.297297
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 1 51 52 4 0 51 0 0 0 corridor | A 2 2 N 3 6 0 | B 2 2 W 2 7 0 | 0 2 | 1 0 0 | move,move,belt,zap,collision,zap,love
+N A.main 71 0.013125 0 0.9548
+N A.ping 74 0.03375 0.005625 0.38192
+N A.main 71 0.091875 0.015 0.42966
+N A.main 76 0.091875 0.10875 0.41766
+N A.main 77 0.135 0.2025 0.40566
+N B.fm 65 0.06075 0 0.36946
+N B.sub 53 0.08775 0 0.29029
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N drum.kick 24 0.18 0 1
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 1 52 53 5 0 52 0 0 0 corridor | A 2 2 E 4 6 0 | B 2 2 W 3 7 0 | 0 3 | 0 0 1 | turn,zap,collision,zap
+N A.main 71 0.049875 0 0.74052
+N A.ping 74 0.03375 0.005625 0.296208
+N B.fm 65 0.0243 0 0.414687
+N B.sub 53 0.0351 0 0.3258255
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 1 53 54 6 0 53 0 0 0 corridor | A 2 2 E 5 6 0 | B 2 2 W 4 7 0 | 0 4 | 0 1 0 | wait,zap,wait,zap
+N A.main 71 0.02671875 0 0.238
+N B.fm 65 0.0081 0 0.126126
+N B.sub 53 0.0117 0 0.099099
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 1 54 55 7 0 54 0 0 0 corridor | A 2 2 E 5 6 0 | B 2 2 W 5 7 0 | 0 5 | 1 0 1 | wait,collision,zap
+N B.fm 65 0.0243 0 0.468195
+N B.sub 53 0.0351 0 0.3678675
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 1 55 56 8 0 55 0 0 0 corridor | A 2 2 E 6 6 1 | B 2 2 N 6 7 1 | 7 0 | 0 0 0 | collision,collision,zap,zap,zap,turn,zap,zap
+N A.main 71 0.0178125 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 65 0.0354375 0 0.588
+N B.sub 53 0.0511875 0 0.462
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 1 56 57 9 0 56 0 0 0 corridor | A 2 1 E 0 7 0 | B 2 1 W 0 8 0 | 6 0 | 1 0 1 | death,death,collision,move,belt,move,belt,move,belt,collision,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 83 0.013125 0 0.595
+N A.ping 74 0.03375 0.005625 0.238
+N A.main 76 0.091875 0.015 0.26775
+N A.main 77 0.16875 0.10875 0.25575
+N B.fm 62 0.01875 0 0.3458
+N B.sub 50 0.18525 0 0.2717
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
 T 1 57 58 10 0 57 0 0 0 corridor | A 1 1 E 0 7 0 | B 2 2 W 1 8 0 | 5 0 | 0 0 0 | move,wait,move,belt,zap
+N A.main 77 0.064125 0 0.62475
+N A.ping 81 0.03375 0.005625 0.2499
+N B.fm 62 0.01875 0 0.09828
+N B.sub 50 0.0585 0 0.07722
+N B.fm 62 0.16875 0.0225 0.05616
+N fx.belt -1 0.04 0.03 0.35
 T 1 58 59 11 0 58 0 0 0 corridor | A 1 1 E 0 7 0 | B 2 2 S 2 8 0 | 4 0 | 0 1 1 | wait,turn,zap
+N A.main 77 0.04275 0 0.187
+N B.fm 64 0.095090625 0 0.31059
+N B.sub 52 0.137353125 0 0.244035
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 1 59 60 12 0 59 0 0 0 corridor | A 1 1 E 0 7 0 | B 2 2 E 3 8 0 | 3 0 | 1 0 0 | wait,turn,zap
+N B.fm 64 0.04725 0 0.486948
+N B.sub 52 0.06825 0 0.382602
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.02 0.6
 T 1 60 61 13 0 60 0 0 0 corridor | A 1 1 S 0 7 0 | B 2 2 E 4 8 0 | 2 0 | 0 0 1 | turn,collision,collision,zap
+N A.main 77 0.1745625 0 0.45
+N A.ping 81 0.03375 0.005625 0.18
+N B.fm 64 0.016875 0 0.7
+N B.sub 52 0.024375 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 1 61 62 14 0 61 0 0 0 corridor | A 1 1 S 0 7 0 | B 2 2 N 5 8 0 | 1 0 | 0 1 0 | ping,turn,zap
+N A.main 77 0.14214375 0 0.64125
+N A.ping 81 0.03375 0.005625 0.2565
+N B.fm 64 0.014175 0 0.6174
+N B.sub 52 0.020475 0 0.4851
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 1 62 63 15 0 62 0 0 0 corridor | A 1 1 S 0 7 0 | B 2 2 N 6 8 1 | 0 0 | 1 0 1 | wait,ping,zap,zap
+N B.fm 64 0.03493125 0 0.7
+N B.sub 52 0.05045625 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 1 63 64 0 0 63 0 0 0 corridor | A 1 1 S 0 7 0 | B 2 1 W 0 9 0 | 0 0 | 0 0 0 | death,wait,collision,collision,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N B.fm 72 0.01875 0 0.43225
+N B.sub 60 0.092625 0 0.339625
+N B.fm 72 0.185625 0.0225 0.247
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 2 0 1 1 0 0 0 0 0 corridor | A 0 4 E 0 7 0 | B 4 0 W 0 9 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 2 1 2 2 0 1 0 0 0 corridor | A 0 4 S 0 7 0 | B 4 0 W 0 9 0 | 0 0 | 0 0 0 | turn,wait
+N A.main 53 0.1745625 0 0.45
+N A.ping 57 0.03375 0.005625 0.18
 T 2 2 3 3 0 2 0 0 0 corridor | A 0 4 S 0 7 0 | B 4 0 W 0 9 0 | 0 0 | 0 1 1 | collision,collision,collision
+N A.main 53 0.049875 0 0.7875
+N A.ping 57 0.03375 0.005625 0.315
+N B.fm 62 0.1215 0 0.3185
+N B.sub 50 0.1755 0 0.25025
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 2 3 4 4 0 3 0 0 0 corridor | A 0 4 E 0 7 0 | B 4 0 W 0 9 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 53 0.143390625 0 0.4335
+N A.ping 57 0.03375 0.005625 0.1734
+N drum.kick 24 0.18 0 1
 T 2 4 5 5 0 4 0 0 0 corridor | A 1 4 E 0 7 0 | B 4 0 S 0 9 0 | 0 0 | 0 0 1 | move,turn
+N A.main 57 0.1425 0 0.748
+N A.ping 60 0.03375 0.005625 0.2992
+N B.fm 65 0.165375 0 0.315
+N B.sub 53 0.238875 0 0.2475
+N drum.hihat -1 0.03 0 0.5
 T 2 5 6 6 0 5 0 0 0 corridor | A 1 4 E 0 7 0 | B 4 0 S 0 9 0 | 0 0 | 0 1 0 | wait,wait
+N B.fm 65 0.06733125 0 0.09975
+N B.sub 53 0.09725625 0 0.078375
+N drum.snare -1 0.1 0 0.7
 T 2 6 7 7 0 6 0 0 0 corridor | A 1 4 E 0 7 0 | B 4 0 W 0 9 0 | 0 0 | 1 0 1 | wait,turn
+N B.fm 65 0.108675 0 0.23205
+N B.sub 53 0.156975 0 0.182325
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 2 7 8 8 0 7 0 0 0 corridor | A 1 4 E 0 7 0 | B 4 0 S 0 9 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 65 0.06615 0 0.33075
+N B.sub 53 0.09555 0 0.259875
 T 2 8 9 9 0 8 0 0 0 corridor | A 1 4 E 0 7 0 | B 4 0 S 0 9 0 | 0 0 | 1 0 1 | wait,wait
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 2 9 10 10 0 9 0 0 0 corridor | A 1 4 E 0 7 0 | B 4 0 S 0 9 0 | 0 0 | 0 0 0 | ping,collision
+N A.main 57 0.12290625 0 0.65025
+N A.ping 60 0.03375 0.005625 0.2601
+N B.fm 65 0.08505 0 0.385875
+N B.sub 53 0.12285 0 0.3031875
+N fx.collision 43 0.08 0.01 0.7
 T 2 10 11 11 0 10 0 0 0 corridor | A 0 4 E 0 7 0 | B 4 0 E 0 9 0 | 0 0 | 0 1 1 | move,turn
+N A.main 53 0.12825 0 0.6545
+N A.ping 57 0.03375 0.005625 0.2618
+N B.fm 62 0.118125 0 0.357
+N B.sub 50 0.170625 0 0.2805
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 2 11 12 12 0 11 0 0 0 corridor | A 0 4 S 0 7 0 | B 4 0 E 0 9 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 53 0.13965 0 0.495
+N A.ping 57 0.03375 0.005625 0.198
+N drum.kick 24 0.18 0 1
 T 2 12 13 13 0 12 0 0 0 corridor | A 0 4 S 0 7 0 | B 4 0 E 0 9 0 | 0 0 | 0 0 1 | wait,wait
+N A.main 53 0.0748125 0 0.15
+N drum.hihat -1 0.03 0 0.5
 T 2 13 14 14 0 13 0 0 0 corridor | A 0 3 S 0 7 0 | B 4 0 E 0 9 0 | 0 0 | 0 1 0 | move,wait
+N A.main 65 0.17955 0 0.5775
+N A.ping 69 0.03375 0.005625 0.231
+N B.fm 62 0.05821875 0 0.10115
+N B.sub 50 0.08409375 0 0.079475
+N drum.snare -1 0.1 0 0.7
 T 2 14 15 15 0 14 0 0 0 corridor | A 0 4 S 0 7 0 | B 4 0 E 0 9 0 | 0 0 | 1 0 1 | move,collision,wait
+N A.main 53 0.049875 0 0.7875
+N A.ping 57 0.03375 0.005625 0.315
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 2 15 16 0 0 15 0 0 0 corridor | A 0 3 S 0 7 0 | B 3 0 E 0 9 0 | 0 0 | 0 0 0 | move,move
+N A.main 65 0.2244375 0 0.525
+N A.ping 69 0.03375 0.005625 0.21
+N B.fm 69 0.151875 0 0.4165
+N B.sub 57 0.219375 0 0.32725
 T 2 16 17 1 0 16 0 0 0 corridor | A 0 2 S 0 7 0 | B 2 2 E 1 9 0 | 0 0 | 1 0 1 | move,pulse,move,move,belt,move,belt,zap
+N A.main 62 0.161595 0 0.55125
+N A.ping 65 0.03375 0.005625 0.2205
+N B.fm 71 0.01875 0 0.472311
+N B.sub 59 0.08775 0 0.3711015
+N B.fm 71 0.10125 0.0225 0.269892
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 2 17 18 2 0 17 0 0 0 corridor | A 0 2 S 0 7 0 | B 2 2 E 2 9 0 | 0 0 | 0 0 0 | wait,pulse,wait,zap
+N A.main 62 0.10773 0 0.165
+N B.fm 72 0.010125 0 0.144942
+N B.sub 60 0.014625 0 0.113883
+N fx.pulse 84 0.06 0.01 0.4
+N fx.zap -1 0.06 0.03 0.6
 T 2 18 19 3 0 18 0 0 0 corridor | A 0 3 S 0 7 0 | B 2 2 E 3 9 0 | 0 0 | 0 1 1 | move,collision,zap
+N A.main 62 0.249375 0 0.6
+N A.ping 65 0.03375 0.005625 0.24
+N B.fm 72 0.030375 0 0.542283
+N B.sub 60 0.043875 0 0.4260795
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 2 19 20 4 0 19 0 0 0 corridor | A 0 3 S 0 7 0 | B 2 2 E 3 9 0 | 0 0 | 1 0 0 | wait,wait
+N drum.kick 24 0.18 0 1
 T 2 20 21 5 0 20 0 0 0 corridor | A 0 3 S 0 7 0 | B 2 2 E 4 9 0 | 0 0 | 0 0 1 | ping,collision,zap
+N A.main 62 0.14214375 0 0.64125
+N A.ping 65 0.03375 0.005625 0.2565
+N B.fm 72 0.08015625 0 0.596904
+N B.sub 60 0.11578125 0 0.468996
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 2 21 22 6 0 21 0 0 0 corridor | A 0 3 E 0 7 0 | B 2 2 E 5 9 0 | 0 0 | 0 1 0 | turn,wait,zap
+N A.main 62 0.1246875 0 0.51
+N A.ping 65 0.03375 0.005625 0.204
+N B.fm 72 0.0253125 0 0.1666
+N B.sub 60 0.0365625 0 0.1309
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 2 22 23 7 0 22 0 0 0 corridor | A 1 3 E 0 7 0 | B 2 2 N 6 9 1 | 0 0 | 1 0 1 | move,turn,zap,zap
+N A.main 65 0.16921875 0 0.646
+N A.ping 69 0.03375 0.005625 0.2584
+N B.fm 64 0.040753125 0 0.4998
+N B.sub 52 0.058865625 0 0.3927
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 2 23 24 8 0 23 0 0 0 corridor | A 0 3 E 0 7 0 | B 0 0 W 0 10 0 | 0 0 | 0 0 0 | death,move,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 65 0.152296875 0 0.56525
+N A.ping 69 0.03375 0.005625 0.2261
 T 2 24 25 9 0 24 0 0 0 corridor | A 0 3 E 0 7 0 | B 2 1 W 0 10 0 | 0 0 | 1 0 1 | collision,collision,collision,move,belt,move,belt,move,belt
+N A.main 65 0.1603125 0 0.595
+N A.ping 69 0.03375 0.005625 0.238
+N B.fm 69 0.01875 0 0.47775
+N B.sub 57 0.039 0 0.375375
+N B.fm 69 0.10125 0.0225 0.273
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 2 25 26 10 0 25 0 0 0 corridor | A 0 3 E 0 7 0 | B 2 2 S 1 10 0 | 0 0 | 0 0 0 | collision,turn,move,belt,zap
+N A.main 62 0.152296875 0 0.56525
+N A.ping 65 0.03375 0.005625 0.2261
+N B.fm 71 0.01875 0 0.35721
+N B.sub 59 0.09555 0 0.280665
+N B.fm 71 0.10125 0.0225 0.20412
+N fx.collision 43 0.08 0 0.7
+N fx.belt -1 0.04 0.03 0.35
 T 2 26 27 11 0 26 0 0 0 corridor | A 2 2 E 1 7 0 | B 2 2 S 2 10 0 | 0 1 | 0 1 1 | move,move,move,belt,zap,ping,zap
+N A.main 69 0.013125 0 0.9639
+N A.ping 72 0.03375 0.005625 0.38556
+N A.main 69 0.091875 0.015 0.433755
+N A.main 74 0.10125 0.10875 0.421755
+N B.fm 65 0.08150625 0 0.465885
+N B.sub 53 0.11773125 0 0.3660525
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 2 27 28 12 0 27 0 0 0 corridor | A 2 2 E 1 7 0 | B 2 4 S 2 10 0 | 0 0 | 1 0 0 | wait,move,move
+N B.fm 65 0.11221875 0 0.57855
+N B.sub 53 0.16209375 0 0.454575
+N drum.kick 24 0.18 0 1
 T 2 28 29 13 0 28 0 0 0 corridor | A 2 2 E 1 7 0 | B 2 4 W 2 10 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 65 0.0756 0 0.348348
+N B.sub 53 0.1092 0 0.273702
+N drum.hihat -1 0.03 0 0.5
 T 2 29 30 14 0 29 0 0 0 corridor | A 2 2 E 2 7 0 | B 2 4 N 2 10 0 | 0 0 | 0 1 0 | ping,zap,turn
+N A.main 71 0.04275 0 0.97614
+N A.ping 74 0.03375 0.005625 0.390456
+N B.fm 65 0.08150625 0 0.41412
+N B.sub 53 0.11773125 0 0.32538
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0.01 0.6
 T 2 30 31 15 0 30 0 0 0 corridor | A 2 2 S 3 7 0 | B 2 4 N 2 10 0 | 0 0 | 1 0 1 | turn,zap,wait
+N A.main 71 0.100373437 0 0.4743
+N A.ping 74 0.03375 0.005625 0.18972
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 2 31 32 0 0 31 0 0 0 corridor | A 2 2 S 4 7 0 | B 2 2 N 3 10 0 | 0 1 | 0 0 0 | move,move,belt,zap,move,move,belt,zap
+N A.main 71 0.013125 0 0.72765
+N A.ping 74 0.03375 0.005625 0.29106
+N A.main 83 0.091875 0.015 0.3274425
+N A.main 77 0.091875 0.10875 0.3154425
+N A.main 76 0.10125 0.2025 0.3034425
+N B.fm 65 0.01875 0 0.59024
+N B.sub 53 0.1681875 0 0.46376
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 2 32 33 1 0 32 0 0 0 corridor | A 2 2 E 5 7 0 | B 2 2 N 4 10 0 | 0 2 | 1 0 1 | turn,zap,move,move,belt,zap
+N A.main 71 0.0716953125 0 0.6069
+N A.ping 74 0.03375 0.005625 0.24276
+N B.fm 65 0.01875 0 0.7
+N B.sub 53 0.1053 0 0.55
+N B.fm 65 0.135 0.0225 0.4
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 2 33 34 2 0 33 0 0 0 corridor | A 2 2 E 5 7 0 | B 2 2 N 5 10 0 | 0 3 | 0 0 0 | wait,move,move,move,belt,move,belt,zap
+N B.fm 65 0.01875 0 0.7
+N B.sub 53 0.02925 0 0.55
+N B.fm 65 0.10125 0.0225 0.4
 T 2 34 35 3 0 34 0 0 0 corridor | A 2 2 N 6 7 1 | B 2 2 N 6 10 1 | 0 0 | 0 1 1 | turn,zap,zap,move,move,belt,zap,zap
+N A.main 71 0.0149625 0 0.882
+N A.ping 74 0.03375 0.005625 0.3528
+N B.fm 65 0.01875 0 0.7
+N B.sub 53 0.1053 0 0.55
+N B.fm 65 0.135 0.0225 0.4
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 2 35 36 4 0 35 0 0 0 corridor | A 2 1 E 0 8 0 | B 2 1 S 0 11 0 | 0 1 | 1 0 0 | death,death,wait,move,belt,move,belt,move,belt,turn,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 83 0.013125 0 0.187
+N A.main 76 0.091875 0.015 0.12
+N A.main 77 0.135 0.10875 0.12
+N B.fm 62 0.01875 0 0.315
+N B.sub 50 0.238875 0 0.2475
+N drum.kick 24 0.18 0 1
 T 2 36 37 5 0 36 0 0 0 corridor | A 1 1 E 0 8 0 | B 2 2 S 1 11 0 | 0 0 | 0 0 1 | move,ping,move,belt,zap
+N A.main 77 0.1603125 0 0.595
+N A.ping 81 0.03375 0.005625 0.238
+N B.fm 62 0.01875 0 0.56133
+N B.sub 50 0.1638 0 0.441045
+N B.fm 62 0.135 0.0225 0.32076
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 2 37 38 6 0 37 0 0 0 corridor | A 2 2 E 1 8 0 | B 2 2 S 1 11 0 | 0 1 | 0 1 0 | move,move,belt,zap,wait
+N A.main 69 0.013125 0 0.80784
+N A.ping 72 0.03375 0.005625 0.323136
+N A.main 76 0.091875 0.015 0.363528
+N A.main 74 0.135 0.10875 0.351528
+N drum.snare -1 0.1 0 0.7
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 2 38 39 7 0 38 0 0 0 corridor | A 2 2 E 2 8 0 | B 2 2 S 2 11 0 | 0 2 | 1 0 1 | ping,zap,move,move,belt,zap,love
+N A.main 71 0.050765625 0 0.84303
+N A.ping 74 0.03375 0.005625 0.337212
+N B.fm 65 0.01875 0 0.4263
+N B.sub 53 0.307125 0 0.33495
+N B.fm 65 0.16875 0.0225 0.2436
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 2 39 40 8 0 39 0 0 0 corridor | A 2 2 E 2 8 0 | B 2 2 S 3 11 0 | 0 3 | 0 0 0 | wait,ping,zap
+N B.fm 65 0.08150625 0 0.498015
+N B.sub 53 0.11773125 0 0.3912975
+N fx.zap -1 0.06 0.02 0.6
 T 2 40 41 9 0 40 0 0 0 corridor | A 2 2 E 2 8 0 | B 2 2 E 4 11 0 | 0 4 | 1 0 1 | wait,turn,zap
+N B.fm 65 0.0590625 0 0.47124
+N B.sub 53 0.0853125 0 0.37026
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 2 41 42 10 0 41 0 0 0 corridor | A 2 2 E 3 8 0 | B 2 2 E 4 11 0 | 0 5 | 0 0 0 | collision,zap,wait
+N A.main 71 0.0921796875 0 0.62713
+N A.ping 74 0.03375 0.005625 0.250852
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
 T 2 42 43 11 0 42 0 0 0 corridor | A 2 2 S 4 8 0 | B 2 2 E 4 11 0 | 0 6 | 0 1 1 | turn,zap,wait
+N A.main 71 0.08728125 0 0.594
+N A.ping 74 0.03375 0.005625 0.2376
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 2 43 44 12 0 43 0 0 0 corridor | A 2 2 S 4 8 0 | B 2 2 N 5 11 0 | 0 7 | 1 0 0 | wait,turn,zap
+N B.fm 65 0.014175 0 0.6174
+N B.sub 53 0.020475 0 0.4851
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.02 0.6
 T 2 44 45 13 0 44 0 0 0 corridor | A 2 2 E 5 8 0 | B 2 2 W 6 11 1 | 0 0 | 0 0 1 | turn,zap,turn,zap,zap
+N A.main 71 0.0716953125 0 0.6069
+N A.ping 74 0.03375 0.005625 0.24276
+N B.fm 65 0.0378 0 0.42042
+N B.sub 53 0.0546 0 0.33033
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 2 45 46 14 0 45 0 0 0 corridor | A 2 2 E 6 8 1 | B 0 0 W 0 12 0 | 0 0 | 0 1 0 | death,collision,zap,zap,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 71 0.07125 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N drum.snare -1 0.1 0 0.7
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 2 46 47 15 0 46 0 0 0 corridor | A 2 1 E 0 9 0 | B 2 1 S 0 12 0 | 0 1 | 1 0 1 | death,ping,move,belt,move,belt,move,belt,turn,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 83 0.013125 0 0.72675
+N A.ping 74 0.03375 0.005625 0.2907
+N A.main 76 0.091875 0.015 0.3270375
+N A.main 77 0.185625 0.10875 0.3150375
+N B.fm 62 0.01875 0 0.315
+N B.sub 50 0.238875 0 0.2475
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
 T 2 47 48 0 0 47 0 0 0 corridor | A 2 2 E 1 9 0 | B 2 2 E 1 12 0 | 0 2 | 0 0 0 | wait,move,belt,zap,turn,move,belt,zap,love
+N A.main 69 0.013125 0 0.15606
+N A.main 76 0.091875 0.015 0.12
+N A.main 74 0.219375 0.10875 0.12
+N B.fm 64 0.01875 0 0.327726
+N B.sub 52 0.19621875 0 0.257499
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 2 48 49 1 0 48 0 0 0 corridor | A 2 2 N 2 9 0 | B 2 2 E 2 12 0 | 0 3 | 1 0 1 | turn,zap,wait,zap
+N A.main 71 0.0149625 0 0.7308
+N A.ping 74 0.03375 0.005625 0.29232
+N B.fm 65 0.0253125 0 0.13804
+N B.sub 53 0.0365625 0 0.10846
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 2 49 50 2 0 49 0 0 0 corridor | A 2 2 N 3 9 0 | B 2 2 E 3 12 0 | 0 4 | 0 0 0 | ping,zap,wait,zap
+N A.main 71 0.0320625 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 65 0.029109375 0 0.125426
+N B.sub 53 0.042046875 0 0.098549
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 2 50 51 3 0 50 0 0 0 corridor | A 2 2 N 4 9 0 | B 2 2 E 4 12 0 | 0 5 | 0 1 1 | ping,zap,collision,zap
+N A.main 71 0.036871875 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 65 0.06075 0 0.604758
+N B.sub 53 0.08775 0 0.475167
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 2 51 52 4 0 51 0 0 0 corridor | A 2 2 N 5 9 0 | B 2 2 E 4 12 0 | 0 6 | 1 0 0 | move,move,belt,zap,wait
+N A.main 71 0.013125 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N A.main 71 0.091875 0.015 0.45
+N A.main 76 0.091875 0.10875 0.438
+N A.main 77 0.135 0.2025 0.426
+N drum.kick 24 0.18 0 1
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 2 52 53 5 0 52 0 0 0 corridor | A 2 2 E 6 9 1 | B 2 2 E 5 12 0 | 0 0 | 0 0 1 | turn,zap,zap,collision,zap
+N A.main 71 0.049875 0 0.7854
+N A.ping 74 0.03375 0.005625 0.31416
+N B.fm 65 0.030375 0 0.612255
+N B.sub 53 0.043875 0 0.4810575
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 2 53 54 6 0 53 0 0 0 corridor | A 0 0 E 0 10 0 | B 2 2 E 6 12 1 | 0 0 | 0 1 0 | death,wait,wait,zap,zap
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N B.fm 72 0.010125 0 0.17493
+N B.sub 60 0.014625 0 0.137445
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 2 54 55 7 0 54 0 0 0 corridor | A 2 1 E 0 10 0 | B 2 2 W 0 13 0 | 0 0 | 1 0 1 | death,collision,move,belt,move,belt,move,belt,move,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 83 0.013125 0 0.6545
+N A.ping 74 0.03375 0.005625 0.2618
+N A.main 76 0.091875 0.015 0.294525
+N A.main 77 0.135 0.10875 0.282525
+N B.fm 62 0.01875 0 0.334425
+N B.sub 50 0.0702 0 0.2627625
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.belt -1 0.04 0.02 0.35
 T 2 55 56 8 0 55 0 0 0 corridor | A 4 1 E 0 10 0 | B 2 2 N 1 13 0 | 0 0 | 0 0 0 | move,move,turn,zap
+N A.main 81 0.035625 0 0.8925
+N A.ping 84 0.03375 0.005625 0.357
+N B.fm 65 0.0354375 0 0.4536
+N B.sub 53 0.0511875 0 0.3564
+N fx.zap -1 0.06 0.03 0.6
 T 2 56 57 9 0 56 0 0 0 corridor | A 3 1 E 0 10 0 | B 2 2 N 2 13 0 | 0 0 | 1 0 1 | move,move,move,belt,zap
+N A.main 79 0.1603125 0 0.595
+N A.ping 83 0.03375 0.005625 0.238
+N B.fm 65 0.01875 0 0.61712
+N B.sub 53 0.1389375 0 0.48488
+N B.fm 65 0.185625 0.0225 0.35264
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 2 57 58 10 0 57 0 0 0 corridor | A 2 2 E 1 10 0 | B 2 2 N 3 13 0 | 0 1 | 0 0 0 | move,move,belt,zap,wait,zap
+N A.main 69 0.013125 0 0.67473
+N A.ping 72 0.03375 0.005625 0.269892
+N A.main 76 0.091875 0.015 0.3036285
+N A.main 74 0.10125 0.10875 0.2916285
+N B.fm 65 0.0151875 0 0.1736
+N B.sub 53 0.0219375 0 0.1364
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 2 58 59 11 0 58 0 0 0 corridor | A 2 2 E 2 10 0 | B 2 2 W 4 13 0 | 0 2 | 0 1 1 | wait,zap,turn,zap,love
+N A.main 71 0.021375 0 0.21692
+N B.fm 65 0.0543375 0 0.306306
+N B.sub 53 0.0784875 0 0.240669
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 2 59 60 12 0 59 0 0 0 corridor | A 2 2 E 3 10 0 | B 2 2 W 4 13 0 | 0 3 | 1 0 0 | collision,zap,wait
+N A.main 71 0.0890625 0 0.8432
+N A.ping 74 0.03375 0.005625 0.33728
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
 T 2 60 61 13 0 60 0 0 0 corridor | A 2 2 S 6 10 0 | B 2 2 W 5 13 0 | 7 0 | 0 0 1 | turn,zap,collision,collision,zap,zap
+N A.main 71 0.08728125 0 0.594
+N A.ping 74 0.03375 0.005625 0.2376
+N B.fm 65 0.0135 0 0.66885
+N B.sub 53 0.0195 0 0.525525
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 2 61 62 14 0 61 0 0 0 corridor | A 2 2 S 6 10 0 | B 2 2 S 6 13 1 | 6 0 | 0 1 0 | wait,turn,zap,zap
+N B.fm 65 0.033075 0 0.46305
+N B.sub 53 0.047775 0 0.363825
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 2 62 63 15 0 62 0 0 0 corridor | A 2 2 E 6 10 1 | B 2 1 W 0 14 0 | 5 0 | 1 0 1 | death,turn,zap,zap,ping,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 71 0.06234375 0 0.714
+N A.ping 74 0.03375 0.005625 0.2856
+N B.fm 62 0.01875 0 0.348075
+N B.sub 50 0.13455 0 0.2734875
+N B.fm 62 0.219375 0.0225 0.1989
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 2 63 64 0 0 63 0 0 0 corridor | A 2 2 E 0 11 0 | B 0 1 W 0 14 0 | 4 0 | 0 0 0 | death,move,move,belt,move,belt,move,belt,move,move
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 67 0.013125 0 0.646
+N A.ping 71 0.03375 0.005625 0.2584
+N A.main 67 0.091875 0.015 0.2907
+N A.main 72 0.185625 0.10875 0.2787
+N B.fm 67 0.064125 0 0.43225
+N B.sub 55 0.092625 0 0.339625
+N fx.belt -1 0.04 0.02 0.35
 T 3 0 1 1 0 0 0 0 0 corridor | A 0 4 E 0 11 0 | B 4 0 W 0 14 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 3 1 2 2 0 1 0 0 0 corridor | A 0 4 S 0 11 0 | B 3 0 W 0 14 0 | 0 0 | 0 0 0 | turn,move
+N A.main 53 0.1745625 0 0.45
+N A.ping 57 0.03375 0.005625 0.18
+N B.fm 69 0.054 0 0.3822
+N B.sub 57 0.078 0 0.3003
 T 3 2 3 3 0 2 0 0 0 corridor | A 0 4 S 0 11 0 | B 3 0 W 0 14 0 | 0 0 | 0 1 1 | collision,collision,wait
+N A.main 50 0.049875 0 0.7875
+N A.ping 53 0.03375 0.005625 0.315
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 3 3 4 4 0 3 0 0 0 corridor | A 0 4 E 0 11 0 | B 3 0 W 0 14 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 50 0.143390625 0 0.4335
+N A.ping 53 0.03375 0.005625 0.1734
+N drum.kick 24 0.18 0 1
 T 3 4 5 5 0 4 0 0 0 corridor | A 0 4 E 0 11 0 | B 3 0 S 0 14 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 69 0.165375 0 0.315
+N B.sub 57 0.238875 0 0.2475
+N drum.hihat -1 0.03 0 0.5
 T 3 5 6 6 0 5 0 0 0 corridor | A 0 4 E 0 11 0 | B 3 0 S 0 14 0 | 0 0 | 0 1 0 | wait,wait
+N drum.snare -1 0.1 0 0.7
 T 3 6 7 7 0 6 0 0 0 corridor | A 0 4 E 0 11 0 | B 3 0 S 0 14 0 | 0 0 | 1 0 1 | wait,wait
+N A.main 50 0.061453125 0 0.1445
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 3 7 8 8 0 7 0 0 0 corridor | A 0 4 N 0 11 0 | B 3 0 E 0 14 0 | 0 0 | 0 0 0 | turn,turn
+N A.main 50 0.029925 0 0.63
+N A.ping 53 0.03375 0.005625 0.252
+N B.fm 69 0.04725 0 0.37485
+N B.sub 57 0.06825 0 0.294525
 T 3 8 9 9 0 8 0 0 0 corridor | A 0 4 N 0 11 0 | B 3 0 E 0 14 0 | 0 0 | 1 0 1 | ping,wait
+N A.main 50 0.064125 0 0.9
+N A.ping 53 0.03375 0.005625 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 3 9 10 10 0 9 0 0 0 corridor | A 0 4 N 0 11 0 | B 3 0 E 0 14 0 | 0 0 | 0 0 0 | ping,wait
+N A.main 50 0.07374375 0 0.765
+N A.ping 53 0.03375 0.005625 0.306
 T 3 10 11 11 0 10 0 0 0 corridor | A 0 4 N 0 11 0 | B 3 0 E 0 14 0 | 0 0 | 0 1 1 | wait,wait
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 3 11 12 12 0 11 0 0 0 corridor | A 0 4 E 0 11 0 | B 3 0 E 0 14 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 50 0.09975 0 0.561
+N A.ping 53 0.03375 0.005625 0.2244
+N drum.kick 24 0.18 0 1
 T 3 12 13 13 0 12 0 0 0 corridor | A 0 4 E 0 11 0 | B 3 0 E 0 14 0 | 0 0 | 0 0 1 | wait,wait
+N B.fm 69 0.050625 0 0.119
+N B.sub 57 0.073125 0 0.0935
+N drum.hihat -1 0.03 0 0.5
 T 3 13 14 14 0 13 0 0 0 corridor | A 0 4 E 0 11 0 | B 3 0 E 0 14 0 | 0 0 | 0 1 0 | wait,wait
+N B.fm 69 0.05821875 0 0.10115
+N B.sub 57 0.08409375 0 0.079475
+N drum.snare -1 0.1 0 0.7
 T 3 14 15 15 0 14 0 0 0 corridor | A 2 4 E 0 11 0 | B 2 2 E 1 14 0 | 0 0 | 1 0 1 | move,move,move,move,belt,move,belt,zap
+N A.main 55 0.035625 0 0.8925
+N A.ping 59 0.03375 0.005625 0.357
+N B.fm 64 0.01875 0 0.494802
+N B.sub 52 0.1755 0 0.388773
+N B.fm 64 0.135 0.0225 0.282744
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 3 15 16 0 0 15 0 0 0 corridor | A 1 4 E 0 11 0 | B 2 2 E 2 14 0 | 0 0 | 0 0 0 | move,collision,zap
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N B.fm 64 0.0759375 0 0.48314
+N B.sub 52 0.1096875 0 0.37961
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 3 16 17 1 0 16 0 0 0 corridor | A 0 4 E 0 11 0 | B 2 2 E 2 14 0 | 0 0 | 1 0 1 | move,wait
+N A.main 50 0.064125 0 0.62475
+N A.ping 53 0.03375 0.005625 0.2499
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 3 17 18 2 0 17 0 0 0 corridor | A 0 4 E 0 11 0 | B 2 2 E 3 14 0 | 0 0 | 0 0 0 | wait,wait,zap
+N A.main 50 0.04275 0 0.187
+N B.fm 60 0.010125 0 0.154938
+N B.sub 48 0.014625 0 0.121737
+N fx.zap -1 0.06 0.02 0.6
 T 3 18 19 3 0 18 0 0 0 corridor | A 1 4 E 0 11 0 | B 2 2 E 4 14 0 | 0 0 | 0 1 1 | move,collision,zap
+N A.main 53 0.178125 0 0.68
+N A.ping 57 0.03375 0.005625 0.272
+N B.fm 64 0.030375 0 0.577269
+N B.sub 52 0.043875 0 0.4535685
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 3 19 20 4 0 19 0 0 0 corridor | A 1 4 S 0 11 0 | B 2 2 E 4 14 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 53 0.1745625 0 0.45
+N A.ping 57 0.03375 0.005625 0.18
+N drum.kick 24 0.18 0 1
 T 3 20 21 5 0 20 0 0 0 corridor | A 1 4 S 0 11 0 | B 2 2 E 5 14 0 | 0 0 | 0 0 1 | ping,collision,zap
+N A.main 53 0.14214375 0 0.64125
+N A.ping 57 0.03375 0.005625 0.2565
+N B.fm 64 0.08015625 0 0.63308
+N B.sub 52 0.11578125 0 0.49742
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 3 21 22 6 0 21 0 0 0 corridor | A 1 4 E 0 11 0 | B 2 2 E 6 14 1 | 0 0 | 0 1 0 | turn,wait,zap,zap
+N A.main 53 0.1246875 0 0.51
+N A.ping 57 0.03375 0.005625 0.204
+N B.fm 64 0.0253125 0 0.1666
+N B.sub 52 0.0365625 0 0.1309
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 3 22 23 7 0 22 0 0 0 corridor | A 1 4 E 0 11 0 | B 2 1 S 0 15 0 | 0 0 | 1 0 1 | death,wait,turn,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N B.fm 72 0.01875 0 0.26775
+N B.sub 60 0.27470625 0 0.210375
+N B.fm 72 0.219375 0.0225 0.153
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 3 23 24 8 0 23 0 0 0 corridor | A 0 4 E 0 11 0 | B 2 2 E 1 15 0 | 0 0 | 0 0 0 | move,turn,move,belt,zap
+N A.main 50 0.152296875 0 0.56525
+N A.ping 53 0.03375 0.005625 0.2261
+N B.fm 59 0.01875 0 0.424116
+N B.sub 47 0.1365 0 0.333234
+N B.fm 71 0.135 0.0225 0.242352
+N fx.belt -1 0.04 0.03 0.35
 T 3 24 25 9 0 24 0 0 0 corridor | A 0 4 E 0 11 0 | B 2 2 E 2 15 0 | 0 0 | 1 0 1 | wait,collision,collision,zap
+N B.fm 60 0.016875 0 0.7
+N B.sub 48 0.024375 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 3 25 26 10 0 25 0 0 0 corridor | A 0 4 E 0 11 0 | B 2 2 N 3 15 0 | 0 0 | 0 0 0 | wait,turn,zap
+N B.fm 60 0.014175 0 0.54684
+N B.sub 48 0.020475 0 0.42966
+N fx.zap -1 0.06 0.02 0.6
 T 3 26 27 11 0 26 0 0 0 corridor | A 2 4 E 0 11 0 | B 2 2 N 4 15 0 | 0 0 | 0 1 1 | move,move,ping,zap
+N A.main 55 0.035625 0 0.8925
+N A.ping 59 0.03375 0.005625 0.357
+N B.fm 65 0.03493125 0 0.7
+N B.sub 53 0.05045625 0 0.55
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.03 0.6
 T 3 27 28 12 0 27 0 0 0 corridor | A 2 4 E 0 11 0 | B 2 2 N 5 15 0 | 0 0 | 1 0 0 | wait,move,move,move,belt,move,belt,zap
+N B.fm 65 0.01875 0 0.7
+N B.sub 53 0.06946875 0 0.55
+N B.fm 65 0.185625 0.0225 0.4
+N drum.kick 24 0.18 0 1
 T 3 28 29 13 0 28 0 0 0 corridor | A 2 4 E 0 11 0 | B 2 2 E 6 15 1 | 0 0 | 0 0 1 | move,move,belt,turn,zap,zap
+N A.main 55 0.013125 0 0.578
+N A.ping 59 0.03375 0.005625 0.2312
+N A.main 69 0.091875 0.015 0.2601
+N A.main 62 0.219375 0.10875 0.2481
+N B.fm 65 0.04725 0 0.54978
+N B.sub 53 0.06825 0 0.43197
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
 T 3 29 30 14 0 29 0 0 0 corridor | A 2 4 E 0 11 0 | B 2 1 N 0 16 0 | 0 0 | 0 1 0 | death,ping,turn,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 59 0.0855 0 0.8415
+N A.ping 62 0.03375 0.005625 0.3366
+N B.fm 62 0.01875 0 0.357
+N B.sub 50 0.11773125 0 0.2805
+N B.fm 62 0.219375 0.0225 0.204
+N drum.snare -1 0.1 0 0.7
 T 3 30 31 15 0 30 0 0 0 corridor | A 2 4 S 0 11 0 | B 2 2 N 1 16 0 | 0 0 | 1 0 1 | turn,move,collision,move,belt,move,belt,zap
+N A.main 55 0.200746875 0 0.3825
+N A.ping 59 0.03375 0.005625 0.153
+N B.fm 64 0.01875 0 0.7
+N B.sub 52 0.02925 0 0.55
+N B.fm 64 0.10125 0.0225 0.4
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.02 0.7
 T 3 31 32 0 0 31 0 0 0 corridor | A 2 4 S 0 11 0 | B 2 2 N 2 16 0 | 0 0 | 0 0 0 | wait,move,move,belt,zap
+N B.fm 65 0.01875 0 0.55216
+N B.sub 53 0.1681875 0 0.43384
+N B.fm 65 0.219375 0.0225 0.31552
+N fx.belt -1 0.04 0.03 0.35
 T 3 32 33 1 0 32 0 0 0 corridor | A 2 4 E 0 11 0 | B 2 2 N 2 16 0 | 0 0 | 1 0 1 | turn,wait
+N A.main 55 0.143390625 0 0.4335
+N A.ping 59 0.03375 0.005625 0.1734
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 3 33 34 2 0 33 0 0 0 corridor | A 2 4 E 0 11 0 | B 2 2 N 3 16 0 | 0 0 | 0 0 0 | wait,move,move,move,belt,move,belt,zap
+N B.fm 65 0.01875 0 0.7
+N B.sub 53 0.02925 0 0.55
+N B.fm 65 0.10125 0.0225 0.4
 T 3 34 35 3 0 34 0 0 0 corridor | A 2 4 N 0 11 0 | B 2 2 N 4 16 0 | 0 0 | 0 1 1 | turn,move,move,belt,zap
+N A.main 55 0.029925 0 0.63
+N A.ping 59 0.03375 0.005625 0.252
+N B.fm 65 0.01875 0 0.7
+N B.sub 53 0.1053 0 0.55
+N B.fm 65 0.135 0.0225 0.4
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 3 35 36 4 0 35 0 0 0 corridor | A 2 4 N 0 11 0 | B 2 2 W 5 16 0 | 0 0 | 1 0 0 | wait,turn,zap
+N A.main 55 0.02565 0 0.22
+N B.fm 65 0.04725 0 0.3822
+N B.sub 53 0.06825 0 0.3003
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.02 0.6
 T 3 36 37 5 0 36 0 0 0 corridor | A 2 4 N 0 11 0 | B 2 2 W 6 16 1 | 0 0 | 0 0 1 | collision,ping,zap,zap
+N A.main 55 0.0961875 0 0.7
+N A.ping 59 0.03375 0.005625 0.28
+N B.fm 65 0.0324 0 0.63063
+N B.sub 53 0.0468 0 0.495495
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 3 37 38 6 0 37 0 0 0 corridor | A 2 2 N 1 11 0 | B 0 0 W 0 17 0 | 0 0 | 0 1 0 | death,move,move,belt,zap,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 69 0.013125 0 0.9504
+N A.ping 72 0.03375 0.005625 0.38016
+N A.main 69 0.091875 0.015 0.42768
+N A.main 72 0.135 0.10875 0.41568
+N drum.snare -1 0.1 0 0.7
+N fx.belt -1 0.04 0.02 0.35
 T 3 38 39 7 0 38 0 0 0 corridor | A 2 2 N 2 11 0 | B 2 2 W 0 17 0 | 0 1 | 1 0 1 | ping,zap,move,move,belt,move,belt,move,belt
+N A.main 71 0.030459375 0 0.9918
+N A.ping 74 0.03375 0.005625 0.39672
+N B.fm 62 0.01875 0 0.3185
+N B.sub 50 0.1755 0 0.25025
+N B.fm 62 0.16875 0.0225 0.182
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 3 39 40 8 0 39 0 0 0 corridor | A 2 2 N 3 11 0 | B 2 2 W 1 17 0 | 0 2 | 0 0 0 | ping,zap,ping,zap,love
+N A.main 71 0.012825 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 64 0.046575 0 0.375921
+N B.sub 52 0.067275 0 0.2953665
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 3 40 41 9 0 40 0 0 0 corridor | A 2 2 N 4 11 0 | B 2 2 S 2 17 0 | 0 3 | 1 0 1 | ping,zap,turn,zap
+N A.main 71 0.030459375 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 65 0.0826875 0 0.3654
+N B.sub 53 0.1194375 0 0.2871
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 3 41 42 10 0 41 0 0 0 corridor | A 2 2 N 5 11 0 | B 2 2 S 2 17 0 | 0 4 | 0 0 0 | move,move,belt,zap,wait
+N A.main 71 0.013125 0 0.833
+N A.ping 74 0.03375 0.005625 0.3332
+N A.main 71 0.091875 0.015 0.37485
+N A.main 74 0.091875 0.10875 0.36285
+N A.main 77 0.219375 0.2025 0.35085
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 3 42 43 11 0 42 0 0 0 corridor | A 2 2 E 6 11 1 | B 2 2 S 2 17 0 | 0 0 | 0 1 1 | turn,zap,zap,wait
+N A.main 71 0.06234375 0 0.714
+N A.ping 74 0.03375 0.005625 0.2856
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 3 43 44 12 0 43 0 0 0 corridor | A 0 0 E 0 12 0 | B 2 2 E 3 17 0 | 0 0 | 1 0 0 | death,wait,turn,zap
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N B.fm 72 0.023625 0 0.464814
+N B.sub 60 0.034125 0 0.365211
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.02 0.6
 T 3 44 45 13 0 44 0 0 0 corridor | A 2 1 N 0 12 0 | B 2 2 N 4 17 0 | 0 0 | 0 0 1 | turn,move,belt,move,belt,move,belt,turn,zap
+N A.main 79 0.013125 0 0.51
+N A.ping 83 0.03375 0.005625 0.204
+N A.main 74 0.091875 0.015 0.2295
+N A.main 79 0.219375 0.10875 0.2175
+N B.fm 65 0.02835 0 0.60984
+N B.sub 53 0.04095 0 0.47916
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
 T 3 45 46 14 0 45 0 0 0 corridor | A 2 1 N 0 12 0 | B 2 2 N 4 17 0 | 0 0 | 0 1 0 | wait,wait
+N drum.snare -1 0.1 0 0.7
 T 3 46 47 15 0 46 0 0 0 corridor | A 2 2 N 1 12 0 | B 2 2 N 4 17 0 | 0 1 | 1 0 1 | ping,move,belt,zap,wait
+N A.main 69 0.013125 0 0.9234
+N A.ping 72 0.03375 0.005625 0.36936
+N A.main 83 0.091875 0.015 0.41553
+N A.main 76 0.185625 0.10875 0.40353
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 3 47 48 0 0 47 0 0 0 corridor | A 2 2 N 2 12 0 | B 2 2 W 5 17 0 | 0 2 | 0 0 0 | wait,zap,turn,zap,love
+N A.main 71 0.0184359375 0 0.1972
+N B.fm 65 0.0543375 0 0.32487
+N B.sub 53 0.0784875 0 0.255255
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 3 48 49 1 0 48 0 0 0 corridor | A 2 2 N 2 12 0 | B 2 2 W 6 17 1 | 0 0 | 1 0 1 | wait,wait,zap,zap
+N B.fm 65 0.02025 0 0.1274
+N B.sub 53 0.02925 0 0.1001
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 3 49 50 2 0 49 0 0 0 corridor | A 2 2 N 2 12 0 | B 2 1 W 0 18 0 | 0 0 | 0 0 0 | death,wait,wait,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N B.fm 62 0.01875 0 0.07735
+N B.sub 50 0.067275 0 0.060775
+N B.fm 62 0.219375 0.0225 0.0442
 T 3 50 51 3 0 50 0 0 0 corridor | A 2 2 N 3 12 0 | B 3 1 W 1 18 0 | 0 0 | 0 1 1 | zap,zap,move
+N A.main 71 0.036871875 0 0.9486
+N A.ping 74 0.03375 0.005625 0.37944
+N B.fm 64 0.0972 0 0.378378
+N B.sub 52 0.1404 0 0.297297
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0 0.6
+N fx.zap -1 0.06 0.01 0.6
 T 3 51 52 4 0 51 0 0 0 corridor | A 2 2 N 4 12 0 | B 4 1 W 1 18 0 | 0 0 | 1 0 0 | move,move,belt,zap,move
+N A.main 71 0.013125 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N A.main 71 0.091875 0.015 0.45
+N A.main 74 0.091875 0.10875 0.438
+N A.main 77 0.135 0.2025 0.426
+N B.fm 69 0.1215 0 0.34398
+N B.sub 57 0.1755 0 0.27027
+N drum.kick 24 0.18 0 1
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 3 52 53 5 0 52 0 0 0 corridor | A 2 2 E 5 12 0 | B 4 1 W 1 18 0 | 0 0 | 0 0 1 | turn,zap,collision
+N A.main 71 0.049875 0 0.7854
+N A.ping 74 0.03375 0.005625 0.31416
+N B.fm 69 0.0486 0 0.361179
+N B.sub 57 0.0702 0 0.2837835
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
 T 3 53 54 6 0 53 0 0 0 corridor | A 2 2 E 6 12 1 | B 4 1 W 1 18 0 | 0 0 | 0 1 0 | wait,zap,zap,wait
+N A.main 71 0.02671875 0 0.238
+N B.fm 69 0.0162 0 0.103194
+N B.sub 57 0.0234 0 0.081081
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 3 54 55 7 0 54 0 0 0 corridor | A 2 1 E 0 13 0 | B 4 1 W 1 18 0 | 0 0 | 1 0 1 | death,collision,move,belt,move,belt,move,belt,collision
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 79 0.013125 0 0.6545
+N A.ping 83 0.03375 0.005625 0.2618
+N A.main 74 0.091875 0.015 0.294525
+N A.main 79 0.135 0.10875 0.282525
+N B.fm 69 0.0486 0 0.361179
+N B.sub 57 0.0702 0 0.2837835
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.belt -1 0.04 0.02 0.35
 T 3 55 56 8 0 55 0 0 0 corridor | A 4 1 E 0 13 0 | B 4 1 W 3 18 0 | 7 0 | 0 0 0 | move,move,zap,wait
+N A.main 81 0.035625 0 0.8925
+N A.ping 84 0.03375 0.005625 0.357
+N fx.zap -1 0.06 0.02 0.6
 T 3 56 57 9 0 56 0 0 0 corridor | A 3 1 E 0 13 0 | B 4 1 W 3 18 0 | 6 0 | 1 0 1 | move,wait
+N A.main 79 0.1603125 0 0.595
+N A.ping 83 0.03375 0.005625 0.238
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 3 57 58 10 0 57 0 0 0 corridor | A 2 2 E 1 13 0 | B 4 1 W 3 18 0 | 5 0 | 0 0 0 | move,move,belt,zap,wait
+N A.main 69 0.013125 0 0.67473
+N A.ping 72 0.03375 0.005625 0.269892
+N A.main 83 0.091875 0.015 0.3036285
+N A.main 76 0.10125 0.10875 0.2916285
+N B.fm 71 0.0405 0 0.11284
+N B.sub 59 0.0585 0 0.08866
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 3 58 59 11 0 58 0 0 0 corridor | A 2 2 E 2 13 0 | B 4 1 S 3 18 0 | 4 0 | 0 1 1 | wait,zap,turn
+N A.main 74 0.021375 0 0.21692
+N B.fm 71 0.19018125 0 0.33201
+N B.sub 59 0.27470625 0 0.260865
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 3 59 60 12 0 59 0 0 0 corridor | A 2 2 E 2 13 0 | B 4 1 E 3 18 0 | 3 0 | 1 0 0 | wait,turn
+N B.fm 71 0.0945 0 0.486948
+N B.sub 59 0.1365 0 0.382602
+N drum.kick 24 0.18 0 1
 T 3 60 61 13 0 60 0 0 0 corridor | A 2 2 E 2 13 0 | B 4 1 E 3 18 0 | 2 0 | 0 0 1 | wait,collision,collision
+N B.fm 71 0.03375 0 0.7
+N B.sub 59 0.04875 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 3 61 62 14 0 61 0 0 0 corridor | A 2 2 E 2 13 0 | B 4 1 N 3 18 0 | 1 0 | 0 1 0 | wait,turn
+N B.fm 71 0.02835 0 0.54684
+N B.sub 59 0.04095 0 0.42966
+N drum.snare -1 0.1 0 0.7
 T 3 62 63 15 0 62 0 0 0 corridor | A 2 2 E 2 13 0 | B 4 1 N 3 18 0 | 0 0 | 1 0 1 | wait,ping
+N B.fm 71 0.0698625 0 0.66402
+N B.sub 59 0.1009125 0 0.52173
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 3 63 64 0 0 63 0 0 0 corridor | A 2 2 E 2 13 0 | B 4 0 N 3 18 0 | 0 0 | 0 0 0 | wait,move,collision
+N B.fm 71 0.04809375 0 0.7
+N B.sub 59 0.06946875 0 0.55
+N fx.collision 43 0.08 0.02 0.7
 T 4 0 1 1 0 0 0 0 0 corridor | A 0 4 E 0 13 0 | B 4 0 W 0 18 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 4 1 2 2 0 1 0 0 0 corridor | A 0 4 S 0 13 0 | B 3 0 W 0 18 0 | 0 0 | 0 0 0 | turn,move
+N A.main 53 0.1745625 0 0.45
+N A.ping 57 0.03375 0.005625 0.18
+N B.fm 69 0.054 0 0.3822
+N B.sub 57 0.078 0 0.3003
 T 4 2 3 3 0 2 0 0 0 corridor | A 0 4 S 0 13 0 | B 4 0 W 0 18 0 | 0 0 | 0 1 1 | wait,move
+N B.fm 62 0.1215 0 0.3185
+N B.sub 50 0.1755 0 0.25025
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 4 3 4 4 0 3 0 0 0 corridor | A 0 4 E 0 13 0 | B 4 0 W 0 18 0 | 0 0 | 1 0 0 | turn,ping
+N A.main 53 0.143390625 0 0.4335
+N A.ping 57 0.03375 0.005625 0.1734
+N B.fm 62 0.09315 0 0.348075
+N B.sub 50 0.13455 0 0.2734875
+N drum.kick 24 0.18 0 1
 T 4 4 5 5 0 4 0 0 0 corridor | A 1 4 E 0 13 0 | B 4 0 S 0 18 0 | 0 0 | 0 0 1 | move,turn
+N A.main 57 0.1425 0 0.748
+N A.ping 60 0.03375 0.005625 0.2992
+N B.fm 65 0.165375 0 0.315
+N B.sub 53 0.238875 0 0.2475
+N drum.hihat -1 0.03 0 0.5
 T 4 5 6 6 0 5 0 0 0 corridor | A 1 4 E 0 13 0 | B 4 0 S 0 18 0 | 0 0 | 0 1 0 | wait,wait
+N drum.snare -1 0.1 0 0.7
 T 4 6 7 7 0 6 0 0 0 corridor | A 1 4 E 0 13 0 | B 4 0 S 0 18 0 | 0 0 | 1 0 1 | wait,wait
+N A.main 57 0.061453125 0 0.1445
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 4 7 8 8 0 7 0 0 0 corridor | A 1 4 E 0 13 0 | B 4 0 E 0 18 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 65 0.04725 0 0.37485
+N B.sub 53 0.06825 0 0.294525
 T 4 8 9 9 0 8 0 0 0 corridor | A 1 4 E 0 13 0 | B 4 0 E 0 18 0 | 0 0 | 1 0 1 | ping,wait
+N A.main 57 0.106875 0 0.765
+N A.ping 60 0.03375 0.005625 0.306
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 4 9 10 10 0 9 0 0 0 corridor | A 1 4 E 0 13 0 | B 4 0 E 0 18 0 | 0 0 | 0 0 0 | ping,wait
+N A.main 57 0.12290625 0 0.65025
+N A.ping 60 0.03375 0.005625 0.2601
 T 4 10 11 11 0 10 0 0 0 corridor | A 1 4 E 0 13 0 | B 4 0 E 0 18 0 | 0 0 | 0 1 1 | wait,wait
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 4 11 12 12 0 11 0 0 0 corridor | A 1 4 S 0 13 0 | B 4 0 N 0 18 0 | 0 0 | 1 0 0 | turn,turn
+N A.main 57 0.13965 0 0.495
+N A.ping 60 0.03375 0.005625 0.198
+N B.fm 65 0.08150625 0 0.357
+N B.sub 53 0.11773125 0 0.2805
+N drum.kick 24 0.18 0 1
 T 4 12 13 13 0 12 0 0 0 corridor | A 1 4 S 0 13 0 | B 4 0 N 0 18 0 | 0 0 | 0 0 1 | wait,wait
+N A.main 57 0.0748125 0 0.15
+N drum.hihat -1 0.03 0 0.5
 T 4 13 14 14 0 13 0 0 0 corridor | A 1 3 S 0 13 0 | B 4 0 N 0 18 0 | 0 0 | 0 1 0 | move,wait
+N A.main 69 0.17955 0 0.5775
+N A.ping 72 0.03375 0.005625 0.231
+N B.fm 65 0.03493125 0 0.119
+N B.sub 53 0.05045625 0 0.0935
+N drum.snare -1 0.1 0 0.7
 T 4 14 15 15 0 14 0 0 0 corridor | A 1 4 S 0 13 0 | B 4 1 N 0 18 0 | 0 0 | 1 0 1 | move,collision,move
+N A.main 57 0.049875 0 0.7875
+N A.ping 60 0.03375 0.005625 0.315
+N B.fm 65 0.0729 0 0.539
+N B.sub 53 0.1053 0 0.4235
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 4 15 16 0 0 15 0 0 0 corridor | A 1 3 S 0 13 0 | B 4 2 N 0 18 0 | 0 0 | 0 0 0 | move,move,pulse
+N A.main 69 0.2244375 0 0.525
+N A.ping 72 0.03375 0.005625 0.21
+N B.fm 65 0.164025 0 0.49
+N B.sub 53 0.236925 0 0.385
+N fx.pulse 84 0.06 0.02 0.4
 T 4 16 17 1 0 16 0 0 0 corridor | A 1 3 S 0 13 0 | B 4 3 N 0 18 0 | 0 0 | 1 0 1 | collision,move
+N A.main 69 0.089775 0 0.55125
+N A.ping 72 0.03375 0.005625 0.2205
+N B.fm 65 0.03645 0 0.5145
+N B.sub 53 0.05265 0 0.40425
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
 T 4 17 18 2 0 17 0 0 0 corridor | A 1 3 S 0 13 0 | B 4 3 N 0 18 0 | 0 0 | 0 0 0 | wait,wait
+N A.main 69 0.05985 0 0.165
+N B.fm 65 0.01215 0 0.147
+N B.sub 53 0.01755 0 0.1155
 T 4 18 19 3 0 18 0 0 0 corridor | A 1 4 S 0 13 0 | B 2 4 N 0 18 0 | 0 0 | 0 1 1 | move,move,move,belt,move,belt
+N A.main 57 0.249375 0 0.6
+N A.ping 60 0.03375 0.005625 0.24
+N B.fm 48 0.01875 0 0.5145
+N B.sub 36 0.05265 0 0.40425
+N B.fm 60 0.10125 0.0225 0.294
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 4 19 20 4 0 19 0 0 0 corridor | A 1 4 W 0 13 0 | B 2 4 E 0 18 0 | 0 0 | 1 0 0 | turn,turn
+N A.main 53 0.09975 0 0.39
+N A.ping 57 0.03375 0.005625 0.156
+N B.fm 48 0.118125 0 0.357
+N B.sub 36 0.170625 0 0.2805
+N drum.kick 24 0.18 0 1
 T 4 20 21 5 0 20 0 0 0 corridor | A 1 4 W 0 13 0 | B 2 4 E 0 18 0 | 0 0 | 0 0 1 | ping,move,move,belt
+N A.main 53 0.081225 0 0.55575
+N A.ping 57 0.03375 0.005625 0.2223
+N B.fm 48 0.01875 0 0.4522
+N B.sub 36 0.2315625 0 0.3553
+N B.fm 60 0.185625 0.0225 0.2584
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 4 21 22 6 0 21 0 0 0 corridor | A 1 4 S 0 13 0 | B 2 4 E 0 18 0 | 0 0 | 0 1 0 | turn,wait
+N A.main 53 0.1745625 0 0.45
+N A.ping 57 0.03375 0.005625 0.18
+N drum.snare -1 0.1 0 0.7
 T 4 22 23 7 0 22 0 0 0 corridor | A 1 4 S 0 13 0 | B 2 4 N 0 18 0 | 0 0 | 1 0 1 | collision,turn
+N A.main 53 0.23690625 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
+N B.fm 48 0.08150625 0 0.357
+N B.sub 36 0.11773125 0 0.2805
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
 T 4 23 24 8 0 23 0 0 0 corridor | A 1 3 S 0 13 0 | B 2 4 N 0 18 0 | 0 0 | 0 0 0 | move,wait
+N A.main 65 0.213215625 0 0.49875
+N A.ping 69 0.03375 0.005625 0.1995
 T 4 24 25 9 0 24 0 0 0 corridor | A 1 3 S 0 13 0 | B 2 2 N 1 18 0 | 0 0 | 1 0 1 | collision,move,move,zap
+N A.main 65 0.2244375 0 0.525
+N A.ping 69 0.03375 0.005625 0.21
+N B.fm 62 0.010125 0 0.7
+N B.sub 50 0.014625 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 4 25 26 10 0 25 0 0 0 corridor | A 1 3 S 0 13 0 | B 2 2 W 2 18 0 | 0 0 | 0 0 0 | collision,turn,zap
+N A.main 65 0.213215625 0 0.49875
+N A.ping 69 0.03375 0.005625 0.1995
+N B.fm 64 0.0189 0 0.332514
+N B.sub 52 0.0273 0 0.261261
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 4 26 27 11 0 26 0 0 0 corridor | A 1 4 S 0 13 0 | B 2 2 W 3 18 0 | 0 0 | 0 1 1 | move,collision,ping,zap
+N A.main 53 0.049875 0 0.7875
+N A.ping 57 0.03375 0.005625 0.315
+N B.fm 64 0.046575 0 0.431613
+N B.sub 52 0.067275 0 0.3391245
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 4 27 28 12 0 27 0 0 0 corridor | A 1 4 S 0 13 0 | B 2 2 W 4 18 0 | 0 0 | 1 0 0 | wait,collision,collision,zap
+N A.main 53 0.086034375 0 0.1275
+N B.fm 64 0.0320625 0 0.57057
+N B.sub 52 0.0463125 0 0.448305
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 4 28 29 13 0 28 0 0 0 corridor | A 1 4 S 0 13 0 | B 2 2 N 5 18 0 | 0 0 | 0 0 1 | collision,turn,zap
+N A.main 53 0.28678125 0 0.51
+N A.ping 57 0.03375 0.005625 0.204
+N B.fm 64 0.02835 0 0.6468
+N B.sub 52 0.04095 0 0.5082
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 4 29 30 14 0 29 0 0 0 corridor | A 1 4 S 0 13 0 | B 2 2 E 6 18 1 | 0 0 | 0 1 0 | ping,turn,zap,zap
+N A.main 53 0.1197 0 0.7425
+N A.ping 57 0.03375 0.005625 0.297
+N B.fm 64 0.067921875 0 0.42483
+N B.sub 52 0.098109375 0 0.333795
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 4 30 31 15 0 30 0 0 0 corridor | A 1 4 W 0 13 0 | B 2 1 W 0 19 0 | 0 0 | 1 0 1 | death,turn,collision,collision,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 57 0.1147125 0 0.3315
+N A.ping 60 0.03375 0.005625 0.1326
+N B.fm 72 0.01875 0 0.47775
+N B.sub 60 0.039 0 0.375375
+N B.fm 72 0.10125 0.0225 0.273
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 4 31 32 0 0 31 0 0 0 corridor | A 1 4 W 0 13 0 | B 1 1 W 0 19 0 | 0 0 | 0 0 0 | wait,move
+N B.fm 69 0.15525 0 0.3094
+N B.sub 57 0.22425 0 0.2431
 T 4 32 33 1 0 32 0 0 0 corridor | A 1 4 S 0 13 0 | B 2 2 W 1 19 0 | 0 0 | 1 0 1 | turn,move,move,belt,zap
+N A.main 53 0.200746875 0 0.3825
+N A.ping 57 0.03375 0.005625 0.153
+N B.fm 62 0.01875 0 0.378378
+N B.sub 50 0.1404 0 0.297297
+N B.fm 62 0.135 0.0225 0.216216
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 4 33 34 2 0 33 0 0 0 corridor | A 1 4 S 0 13 0 | B 2 2 W 2 19 0 | 0 0 | 0 0 0 | wait,collision,collision,zap
+N B.fm 64 0.0135 0 0.55419
+N B.sub 52 0.0195 0 0.435435
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 4 34 35 3 0 34 0 0 0 corridor | A 1 4 S 0 13 0 | B 2 2 W 3 19 0 | 0 0 | 0 1 1 | wait,collision,zap
+N B.fm 64 0.0486 0 0.434434
+N B.sub 52 0.0702 0 0.341341
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 4 35 36 4 0 35 0 0 0 corridor | A 1 4 S 0 13 0 | B 2 2 S 4 19 0 | 0 0 | 1 0 0 | wait,turn,zap
+N A.main 53 0.05985 0 0.165
+N B.fm 64 0.0826875 0 0.4158
+N B.sub 52 0.1194375 0 0.3267
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.02 0.6
 T 4 36 37 5 0 36 0 0 0 corridor | A 1 3 S 0 13 0 | B 2 2 S 4 19 0 | 0 0 | 0 0 1 | move,wait
+N A.main 65 0.2244375 0 0.525
+N A.ping 69 0.03375 0.005625 0.21
+N drum.hihat -1 0.03 0 0.5
 T 4 37 38 6 0 37 0 0 0 corridor | A 1 4 S 0 13 0 | B 2 2 S 4 19 0 | 0 0 | 0 1 0 | move,wait
+N A.main 53 0.1995 0 0.66
+N A.ping 57 0.03375 0.005625 0.264
+N drum.snare -1 0.1 0 0.7
 T 4 38 39 7 0 38 0 0 0 corridor | A 1 4 S 0 13 0 | B 2 2 S 5 19 0 | 0 0 | 1 0 1 | ping,move,move,belt,zap
+N A.main 53 0.14214375 0 0.64125
+N A.ping 57 0.03375 0.005625 0.2565
+N B.fm 64 0.01875 0 0.5145
+N B.sub 52 0.307125 0 0.40425
+N B.fm 64 0.16875 0.0225 0.294
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 4 39 40 8 0 39 0 0 0 corridor | A 1 4 S 0 13 0 | B 2 2 S 6 19 1 | 0 0 | 0 0 0 | ping,ping,zap,zap
+N A.main 53 0.05985 0 0.70875
+N A.ping 57 0.03375 0.005625 0.2835
+N B.fm 64 0.08150625 0 0.562275
+N B.sub 52 0.11773125 0 0.4417875
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 4 40 41 9 0 40 0 0 0 corridor | A 1 4 S 0 13 0 | B 2 1 S 0 20 0 | 0 0 | 1 0 1 | death,wait,turn,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N B.fm 72 0.01875 0 0.315
+N B.sub 60 0.238875 0 0.2475
+N B.fm 72 0.16875 0.0225 0.18
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 4 41 42 10 0 41 0 0 0 corridor | A 1 3 S 0 13 0 | B 2 2 S 1 20 0 | 0 0 | 0 0 0 | move,wait,move,belt,zap
+N A.main 65 0.258103125 0 0.44625
+N A.ping 69 0.03375 0.005625 0.1785
+N B.fm 62 0.01875 0 0.10773
+N B.sub 50 0.09725625 0 0.084645
+N B.fm 62 0.185625 0.0225 0.06156
+N fx.belt -1 0.04 0.03 0.35
 T 4 42 43 11 0 42 0 0 0 corridor | A 1 3 W 0 13 0 | B 2 2 S 1 20 0 | 0 0 | 0 1 1 | turn,wait
+N A.main 65 0.09975 0 0.39
+N A.ping 69 0.03375 0.005625 0.156
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 4 43 44 12 0 43 0 0 0 corridor | A 1 3 W 0 13 0 | B 2 2 E 2 20 0 | 0 0 | 1 0 0 | wait,turn,zap
+N B.fm 64 0.023625 0 0.434826
+N B.sub 52 0.034125 0 0.341649
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.02 0.6
 T 4 44 45 13 0 44 0 0 0 corridor | A 1 3 S 0 13 0 | B 2 2 E 2 20 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 65 0.200746875 0 0.3825
+N A.ping 69 0.03375 0.005625 0.153
+N drum.hihat -1 0.03 0 0.5
 T 4 45 46 14 0 45 0 0 0 corridor | A 1 3 S 0 13 0 | B 2 2 E 3 20 0 | 0 0 | 0 1 0 | wait,collision,zap
+N B.fm 64 0.030375 0 0.542283
+N B.sub 52 0.043875 0 0.4260795
+N drum.snare -1 0.1 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 4 46 47 15 0 46 0 0 0 corridor | A 1 3 S 0 13 0 | B 2 2 N 4 20 0 | 0 0 | 1 0 1 | ping,turn,zap
+N A.main 65 0.14214375 0 0.64125
+N A.ping 69 0.03375 0.005625 0.2565
+N B.fm 64 0.0354375 0 0.5544
+N B.sub 52 0.0511875 0 0.4356
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 4 47 48 0 0 47 0 0 0 corridor | A 1 3 S 0 13 0 | B 2 2 N 4 20 0 | 0 0 | 0 0 0 | wait,wait
 T 4 48 49 1 0 48 0 0 0 corridor | A 1 3 S 0 13 0 | B 2 2 N 5 20 0 | 0 0 | 1 0 1 | wait,wait,zap
+N B.fm 64 0.0151875 0 0.196
+N B.sub 52 0.0219375 0 0.154
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 4 49 50 2 0 49 0 0 0 corridor | A 1 3 S 0 13 0 | B 2 2 N 6 20 1 | 0 0 | 0 0 0 | ping,wait,zap,zap
+N A.main 65 0.149625 0 0.675
+N A.ping 69 0.03375 0.005625 0.27
+N B.fm 64 0.017465625 0 0.1666
+N B.sub 52 0.025228125 0 0.1309
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 4 50 51 3 0 50 0 0 0 corridor | A 1 3 S 0 13 0 | B 0 0 W 0 21 0 | 0 0 | 0 1 1 | death,ping,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 69 0.17206875 0 0.57375
+N A.ping 72 0.03375 0.005625 0.2295
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 4 51 52 4 0 51 0 0 0 corridor | A 1 3 S 0 13 0 | B 0 0 W 0 21 0 | 0 0 | 1 0 0 | collision,wait
+N A.main 69 0.17955 0 0.5775
+N A.ping 72 0.03375 0.005625 0.231
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0 0.7
 T 4 52 53 5 0 52 0 0 0 corridor | A 1 3 W 0 13 0 | B 2 2 W 0 21 0 | 0 0 | 0 0 1 | turn,move,move,belt,move,belt,move,belt
+N A.main 69 0.0798 0 0.429
+N A.ping 72 0.03375 0.005625 0.1716
+N B.fm 72 0.01875 0 0.334425
+N B.sub 60 0.0702 0 0.2627625
+N B.fm 72 0.10125 0.0225 0.1911
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 4 53 54 6 0 53 0 0 0 corridor | A 1 3 W 0 13 0 | B 2 2 W 1 21 0 | 0 0 | 0 1 0 | wait,wait,zap
+N A.main 65 0.04275 0 0.13
+N B.fm 62 0.0081 0 0.103194
+N B.sub 50 0.0117 0 0.081081
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 4 54 55 7 0 54 0 0 0 corridor | A 1 3 W 0 13 0 | B 2 2 W 2 21 0 | 0 0 | 1 0 1 | wait,collision,zap
+N B.fm 64 0.0243 0 0.387933
+N B.sub 52 0.0351 0 0.3048045
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 4 55 56 8 0 55 0 0 0 corridor | A 0 3 W 0 13 0 | B 2 2 N 3 21 0 | 0 0 | 0 0 0 | move,collision,turn,zap
+N A.main 62 0.0285 0 0.6825
+N A.ping 65 0.03375 0.005625 0.273
+N B.fm 72 0.0354375 0 0.5208
+N B.sub 60 0.0511875 0 0.4092
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 4 56 57 9 0 56 0 0 0 corridor | A 1 3 W 0 13 0 | B 2 2 N 4 21 0 | 0 0 | 1 0 1 | move,move,move,belt,zap
+N A.main 65 0.12825 0 0.455
+N A.ping 69 0.03375 0.005625 0.182
+N B.fm 64 0.01875 0 0.7
+N B.sub 52 0.1389375 0 0.55
+N B.fm 64 0.185625 0.0225 0.4
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 4 57 58 10 0 57 0 0 0 corridor | A 2 2 W 1 13 0 | B 2 2 N 4 21 0 | 0 1 | 0 0 0 | move,move,belt,zap,wait
+N A.main 69 0.013125 0 0.51597
+N A.ping 72 0.03375 0.005625 0.206388
+N A.main 69 0.091875 0.015 0.2321865
+N A.main 72 0.10125 0.10875 0.2201865
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 4 58 59 11 0 58 0 0 0 corridor | A 2 2 W 2 13 0 | B 2 2 W 5 21 0 | 0 2 | 0 1 1 | wait,zap,turn,zap,love
+N A.main 71 0.0171 0 0.16588
+N B.fm 65 0.0543375 0 0.32487
+N B.sub 53 0.0784875 0 0.255255
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 4 59 60 12 0 59 0 0 0 corridor | A 2 2 W 3 13 0 | B 2 2 S 6 21 1 | 0 0 | 1 0 0 | collision,zap,turn,zap,zap
+N A.main 71 0.07125 0 0.6448
+N A.ping 74 0.03375 0.005625 0.25792
+N B.fm 65 0.06615 0 0.4851
+N B.sub 53 0.09555 0 0.38115
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 4 60 61 13 0 60 0 0 0 corridor | A 2 2 N 4 13 0 | B 2 1 W 0 22 0 | 0 0 | 0 0 1 | death,turn,zap,collision,collision,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 71 0.03740625 0 0.792
+N A.ping 74 0.03375 0.005625 0.3168
+N B.fm 62 0.01875 0 0.47775
+N B.sub 50 0.039 0 0.375375
+N B.fm 62 0.10125 0.0225 0.273
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
 T 4 61 62 14 0 61 0 0 0 corridor | A 2 2 N 5 13 0 | B 2 2 S 2 22 0 | 0 1 | 0 1 0 | zap,zap,turn,move,belt,zap
+N A.main 71 0.030459375 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 65 0.01875 0 0.38367
+N B.sub 53 0.09555 0 0.301455
+N B.fm 65 0.10125 0.0225 0.21924
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0 0.6
+N fx.zap -1 0.06 0.01 0.6
 T 4 62 63 15 0 62 0 0 0 corridor | A 2 2 N 5 13 0 | B 2 2 S 3 22 0 | 0 2 | 1 0 1 | wait,ping,zap
+N B.fm 65 0.08150625 0 0.498015
+N B.sub 53 0.11773125 0 0.3912975
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 4 63 64 0 0 63 0 0 0 corridor | A 2 2 N 6 13 1 | B 2 4 S 3 22 0 | 0 0 | 0 0 0 | move,move,belt,zap,zap,move,move
+N A.main 71 0.013125 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N A.main 84 0.091875 0.015 0.45
+N A.main 83 0.091875 0.10875 0.438
+N A.main 77 0.185625 0.2025 0.426
+N B.fm 65 0.11221875 0 0.61845
+N B.sub 53 0.16209375 0 0.485925
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 5 0 1 1 0 0 0 0 0 corridor | A 0 4 E 0 14 0 | B 4 0 W 0 22 0 | 0 0 | 1 0 1 | death,reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 5 1 2 2 0 1 0 0 0 corridor | A 0 4 E 0 14 0 | B 4 0 W 0 22 0 | 0 0 | 0 0 0 | wait,wait
 T 5 2 3 3 0 2 0 0 0 corridor | A 0 4 E 0 14 0 | B 4 0 W 0 22 0 | 0 0 | 0 1 1 | wait,wait
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 5 3 4 4 0 3 0 0 0 corridor | A 0 4 N 0 14 0 | B 4 0 W 0 22 0 | 0 0 | 1 0 0 | turn,ping
+N A.main 53 0.086034375 0 0.51
+N A.ping 57 0.03375 0.005625 0.204
+N B.fm 62 0.09315 0 0.348075
+N B.sub 50 0.13455 0 0.2734875
+N drum.kick 24 0.18 0 1
 T 5 4 5 5 0 4 0 0 0 corridor | A 0 3 N 0 14 0 | B 4 0 S 0 22 0 | 0 0 | 0 0 1 | move,turn
+N A.main 65 0.0855 0 0.88
+N A.ping 69 0.03375 0.005625 0.352
+N B.fm 62 0.165375 0 0.315
+N B.sub 50 0.238875 0 0.2475
+N drum.hihat -1 0.03 0 0.5
 T 5 5 6 6 0 5 0 0 0 corridor | A 0 3 N 0 14 0 | B 4 0 S 0 22 0 | 0 0 | 0 1 0 | wait,wait
+N B.fm 62 0.06733125 0 0.09975
+N B.sub 50 0.09725625 0 0.078375
+N drum.snare -1 0.1 0 0.7
 T 5 6 7 7 0 6 0 0 0 corridor | A 0 3 N 0 14 0 | B 4 0 S 0 22 0 | 0 0 | 1 0 1 | wait,wait
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 5 7 8 8 0 7 0 0 0 corridor | A 0 3 N 0 14 0 | B 4 0 E 0 22 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 62 0.04725 0 0.37485
+N B.sub 50 0.06825 0 0.294525
 T 5 8 9 9 0 8 0 0 0 corridor | A 0 3 N 0 14 0 | B 4 0 N 0 22 0 | 0 0 | 1 0 1 | ping,turn
+N A.main 65 0.064125 0 0.9
+N A.ping 69 0.03375 0.005625 0.36
+N B.fm 62 0.0567 0 0.462
+N B.sub 50 0.0819 0 0.363
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 5 9 10 10 0 9 0 0 0 corridor | A 0 3 N 0 14 0 | B 4 1 N 0 22 0 | 0 0 | 0 0 0 | wait,move
+N B.fm 62 0.03645 0 0.5145
+N B.sub 50 0.05265 0 0.40425
 T 5 10 11 11 0 10 0 0 0 corridor | A 0 4 N 0 14 0 | B 4 1 W 0 22 0 | 0 0 | 0 1 1 | move,turn
+N A.main 53 0.07695 0 0.77
+N A.ping 57 0.03375 0.005625 0.308
+N B.fm 62 0.0945 0 0.273
+N B.sub 50 0.1365 0 0.2145
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 5 11 12 12 0 11 0 0 0 corridor | A 0 4 E 0 14 0 | B 4 1 W 0 22 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 53 0.09975 0 0.561
+N A.ping 57 0.03375 0.005625 0.2244
+N drum.kick 24 0.18 0 1
 T 5 12 13 13 0 12 0 0 0 corridor | A 0 4 E 0 14 0 | B 4 1 W 0 22 0 | 0 0 | 0 0 1 | wait,wait
+N B.fm 62 0.0405 0 0.091
+N B.sub 50 0.0585 0 0.0715
+N drum.hihat -1 0.03 0 0.5
 T 5 13 14 14 0 13 0 0 0 corridor | A 0 4 E 0 14 0 | B 4 1 W 0 22 0 | 0 0 | 0 1 0 | collision,wait
+N A.main 53 0.12825 0 0.6545
+N A.ping 57 0.03375 0.005625 0.2618
+N B.fm 62 0.046575 0 0.07735
+N B.sub 50 0.067275 0 0.060775
+N drum.snare -1 0.1 0 0.7
+N fx.collision 43 0.08 0 0.7
 T 5 14 15 15 0 14 0 0 0 corridor | A 2 4 E 0 14 0 | B 4 1 W 0 22 0 | 0 0 | 1 0 1 | move,move,collision
+N A.main 59 0.035625 0 0.8925
+N A.ping 62 0.03375 0.005625 0.357
+N B.fm 67 0.0972 0 0.35035
+N B.sub 55 0.1404 0 0.275275
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.02 0.7
 T 5 15 16 0 0 15 0 0 0 corridor | A 1 4 E 0 14 0 | B 4 1 W 0 22 0 | 0 0 | 0 0 0 | move,collision
+N A.main 57 0.1603125 0 0.595
+N A.ping 60 0.03375 0.005625 0.238
+N B.fm 65 0.1215 0 0.3185
+N B.sub 53 0.1755 0 0.25025
+N fx.collision 43 0.08 0.01 0.7
 T 5 16 17 1 0 16 0 0 0 corridor | A 0 4 E 0 14 0 | B 4 1 W 0 22 0 | 0 0 | 1 0 1 | move,collision
+N A.main 53 0.064125 0 0.62475
+N A.ping 57 0.03375 0.005625 0.2499
+N B.fm 62 0.0486 0 0.334425
+N B.sub 50 0.0702 0 0.2627625
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 5 17 18 2 0 17 0 0 0 corridor | A 0 4 E 0 14 0 | B 4 1 W 0 22 0 | 0 0 | 0 0 0 | wait,wait
+N A.main 53 0.04275 0 0.187
+N B.fm 62 0.0162 0 0.09555
+N B.sub 50 0.0234 0 0.075075
 T 5 18 19 3 0 18 0 0 0 corridor | A 1 4 E 0 14 0 | B 4 1 W 0 22 0 | 0 0 | 0 1 1 | move,collision
+N A.main 57 0.178125 0 0.68
+N A.ping 60 0.03375 0.005625 0.272
+N B.fm 65 0.0486 0 0.334425
+N B.sub 53 0.0702 0 0.2627625
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 5 19 20 4 0 19 0 0 0 corridor | A 1 4 S 0 14 0 | B 4 1 W 0 22 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 57 0.1745625 0 0.45
+N A.ping 60 0.03375 0.005625 0.18
+N drum.kick 24 0.18 0 1
 T 5 20 21 5 0 20 0 0 0 corridor | A 1 4 S 0 14 0 | B 4 1 W 0 22 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 5 21 22 6 0 21 0 0 0 corridor | A 1 4 S 0 14 0 | B 4 1 W 0 22 0 | 0 0 | 0 1 0 | wait,wait
+N B.fm 65 0.0405 0 0.091
+N B.sub 53 0.0585 0 0.0715
+N drum.snare -1 0.1 0 0.7
 T 5 22 23 7 0 22 0 0 0 corridor | A 1 4 S 0 14 0 | B 4 1 S 0 22 0 | 0 0 | 1 0 1 | collision,turn
+N A.main 57 0.23690625 0 0.57
+N A.ping 60 0.03375 0.005625 0.228
+N B.fm 65 0.19018125 0 0.26775
+N B.sub 53 0.27470625 0 0.210375
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
 T 5 23 24 8 0 23 0 0 0 corridor | A 1 3 S 0 14 0 | B 4 1 E 0 22 0 | 0 0 | 0 0 0 | move,turn
+N A.main 69 0.213215625 0 0.49875
+N A.ping 72 0.03375 0.005625 0.1995
+N B.fm 65 0.0945 0 0.3927
+N B.sub 53 0.1365 0 0.30855
 T 5 24 25 9 0 24 0 0 0 corridor | A 1 3 S 0 14 0 | B 4 1 E 0 22 0 | 0 0 | 1 0 1 | collision,collision,collision
+N A.main 69 0.2244375 0 0.525
+N A.ping 72 0.03375 0.005625 0.21
+N B.fm 65 0.03375 0 0.62475
+N B.sub 53 0.04875 0 0.490875
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 5 25 26 10 0 25 0 0 0 corridor | A 1 3 S 0 14 0 | B 4 1 N 0 22 0 | 0 0 | 0 0 0 | collision,turn
+N A.main 69 0.213215625 0 0.49875
+N A.ping 72 0.03375 0.005625 0.1995
+N B.fm 65 0.02835 0 0.441
+N B.sub 53 0.04095 0 0.3465
+N fx.collision 43 0.08 0 0.7
 T 5 26 27 11 0 26 0 0 0 corridor | A 1 4 S 0 14 0 | B 4 1 N 0 22 0 | 0 0 | 0 1 1 | move,collision,ping
+N A.main 57 0.049875 0 0.7875
+N A.ping 60 0.03375 0.005625 0.315
+N B.fm 65 0.0698625 0 0.5355
+N B.sub 53 0.1009125 0 0.42075
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 5 27 28 12 0 27 0 0 0 corridor | A 1 4 S 0 14 0 | B 4 0 N 0 22 0 | 0 0 | 1 0 0 | wait,move,collision
+N A.main 57 0.086034375 0 0.1275
+N B.fm 65 0.04809375 0 0.665
+N B.sub 53 0.06946875 0 0.5225
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.02 0.7
 T 5 28 29 13 0 28 0 0 0 corridor | A 1 4 S 0 14 0 | B 4 0 E 0 22 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 65 0.0945 0 0.3927
+N B.sub 53 0.1365 0 0.30855
+N drum.hihat -1 0.03 0 0.5
 T 5 29 30 14 0 29 0 0 0 corridor | A 1 4 S 0 14 0 | B 4 0 S 0 22 0 | 0 0 | 0 1 0 | ping,turn
+N A.main 57 0.1197 0 0.7425
+N A.ping 60 0.03375 0.005625 0.297
+N B.fm 65 0.19018125 0 0.26775
+N B.sub 53 0.27470625 0 0.210375
+N drum.snare -1 0.1 0 0.7
 T 5 30 31 15 0 30 0 0 0 corridor | A 1 4 W 0 14 0 | B 4 2 S 0 22 0 | 0 0 | 1 0 1 | turn,move,move,pulse
+N A.main 57 0.1147125 0 0.3315
+N A.ping 60 0.03375 0.005625 0.1326
+N B.fm 65 0.08505 0 0.55125
+N B.sub 53 0.12285 0 0.433125
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.03 0.4
 T 5 31 32 0 0 31 0 0 0 corridor | A 1 4 W 0 14 0 | B 4 3 S 0 22 0 | 0 0 | 0 0 0 | wait,move
+N B.fm 65 0.2716875 0 0.357
+N B.sub 53 0.3924375 0 0.2805
 T 5 32 33 1 0 32 0 0 0 corridor | A 1 4 S 0 14 0 | B 4 3 S 0 22 0 | 0 0 | 1 0 1 | turn,wait
+N A.main 57 0.200746875 0 0.3825
+N A.ping 60 0.03375 0.005625 0.153
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 5 33 34 2 0 33 0 0 0 corridor | A 1 4 S 0 14 0 | B 2 4 S 0 22 0 | 0 0 | 0 0 0 | wait,move,collision,move,belt,move,belt
+N B.fm 48 0.01875 0 0.55125
+N B.sub 36 0.06825 0 0.433125
+N B.fm 60 0.10125 0.0225 0.315
+N fx.collision 43 0.08 0.02 0.7
 T 5 34 35 3 0 34 0 0 0 corridor | A 1 4 E 0 14 0 | B 2 4 S 0 22 0 | 0 0 | 0 1 1 | turn,wait
+N A.main 53 0.049875 0 0.5355
+N A.ping 57 0.03375 0.005625 0.2142
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 5 35 36 4 0 35 0 0 0 corridor | A 1 4 E 0 14 0 | B 2 4 E 0 22 0 | 0 0 | 1 0 0 | wait,turn
+N A.main 53 0.04275 0 0.187
+N B.fm 48 0.118125 0 0.357
+N B.sub 36 0.170625 0 0.2805
+N drum.kick 24 0.18 0 1
 T 5 36 37 5 0 36 0 0 0 corridor | A 0 4 E 0 14 0 | B 2 4 E 0 22 0 | 0 0 | 0 0 1 | move,wait
+N A.main 50 0.1603125 0 0.595
+N A.ping 53 0.03375 0.005625 0.238
+N drum.hihat -1 0.03 0 0.5
 T 5 37 38 6 0 37 0 0 0 corridor | A 1 4 E 0 14 0 | B 2 4 E 0 22 0 | 0 0 | 0 1 0 | move,wait
+N A.main 53 0.1425 0 0.748
+N A.ping 57 0.03375 0.005625 0.2992
+N drum.snare -1 0.1 0 0.7
 T 5 38 39 7 0 38 0 0 0 corridor | A 1 4 E 0 14 0 | B 1 4 E 1 22 0 | 0 1 | 1 0 1 | zap,move
+N A.main 53 0.10153125 0 0.72675
+N A.ping 57 0.03375 0.005625 0.2907
+N B.fm 47 0.151875 0 0.44982
+N B.sub 47 0.219375 0 0.35343
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0 0.6
 T 5 39 40 8 0 39 0 0 0 corridor | A 1 4 E 0 14 0 | B 1 4 E 1 22 0 | 0 2 | 0 0 0 | ping,ping,love
+N A.main 53 0.04275 0 0.80325
+N A.ping 57 0.03375 0.005625 0.3213
+N B.fm 47 0.1164375 0 0.491589
+N B.sub 47 0.1681875 0 0.3862485
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
 T 5 40 41 9 0 40 0 0 0 corridor | A 1 4 E 0 14 0 | B 1 4 N 1 22 0 | 0 3 | 1 0 1 | ping,turn
+N A.main 53 0.10153125 0 0.72675
+N A.ping 57 0.03375 0.005625 0.2907
+N B.fm 47 0.070875 0 0.4536
+N B.sub 47 0.102375 0 0.3564
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 5 41 42 10 0 41 0 0 0 corridor | A 0 4 E 0 14 0 | B 1 4 N 1 22 0 | 0 0 | 0 0 0 | move,wait
+N A.main 50 0.184359375 0 0.50575
+N A.ping 53 0.03375 0.005625 0.2023
 T 5 42 43 11 0 42 0 0 0 corridor | A 0 4 E 0 14 0 | B 1 4 E 1 22 0 | 0 0 | 0 1 1 | wait,turn
+N B.fm 43 0.13584375 0 0.327726
+N B.sub 43 0.19621875 0 0.257499
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 5 43 44 12 0 43 0 0 0 corridor | A 2 4 E 0 14 0 | B 1 4 N 1 22 0 | 0 0 | 1 0 0 | move,move,turn
+N A.main 55 0.035625 0 0.8925
+N A.ping 59 0.03375 0.005625 0.357
+N B.fm 48 0.02835 0 0.47628
+N B.sub 36 0.04095 0 0.37422
+N drum.kick 24 0.18 0 1
 T 5 44 45 13 0 44 0 0 0 corridor | A 2 4 N 0 14 0 | B 1 4 N 1 22 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 55 0.086034375 0 0.51
+N A.ping 59 0.03375 0.005625 0.204
+N drum.hihat -1 0.03 0 0.5
 T 5 45 46 14 0 45 0 0 0 corridor | A 2 2 N 1 14 0 | B 1 4 N 1 22 0 | 0 0 | 0 1 0 | move,move,belt,zap,wait
+N A.main 69 0.013125 0 0.9504
+N A.ping 72 0.03375 0.005625 0.38016
+N A.main 69 0.091875 0.015 0.42768
+N A.main 72 0.135 0.10875 0.41568
+N drum.snare -1 0.1 0 0.7
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 5 46 47 15 0 46 0 0 0 corridor | A 2 2 N 2 14 0 | B 1 4 N 1 22 0 | 0 0 | 1 0 1 | ping,zap,wait
+N A.main 71 0.030459375 0 0.9918
+N A.ping 74 0.03375 0.005625 0.39672
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 5 47 48 0 0 47 0 0 0 corridor | A 2 2 N 2 14 0 | B 1 4 N 1 22 0 | 0 0 | 0 0 0 | wait,wait
 T 5 48 49 1 0 48 0 0 0 corridor | A 2 2 N 2 14 0 | B 1 4 N 1 22 0 | 0 0 | 1 0 1 | wait,wait
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 5 49 50 2 0 49 0 0 0 corridor | A 2 2 N 2 14 0 | B 1 4 N 1 22 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 60 0.03493125 0 0.12852
+N B.sub 48 0.05045625 0 0.10098
 T 5 50 51 3 0 50 0 0 0 corridor | A 2 2 N 3 14 0 | B 1 4 N 1 22 0 | 0 0 | 0 1 1 | ping,zap,collision
+N A.main 71 0.036871875 0 0.9486
+N A.ping 74 0.03375 0.005625 0.37944
+N B.fm 60 0.0729 0 0.58212
+N B.sub 48 0.1053 0 0.45738
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
 T 5 51 52 4 0 51 0 0 0 corridor | A 2 2 N 4 14 0 | B 1 4 N 1 22 0 | 0 0 | 1 0 0 | move,move,belt,zap,collision
+N A.main 71 0.013125 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N A.main 71 0.091875 0.015 0.45
+N A.main 74 0.091875 0.10875 0.438
+N A.main 77 0.135 0.2025 0.426
+N B.fm 60 0.091125 0 0.5292
+N B.sub 48 0.131625 0 0.4158
+N drum.kick 24 0.18 0 1
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 5 52 53 5 0 52 0 0 0 corridor | A 2 2 E 5 14 0 | B 1 4 N 1 22 0 | 0 0 | 0 0 1 | turn,zap,collision
+N A.main 71 0.049875 0 0.7854
+N A.ping 74 0.03375 0.005625 0.31416
+N B.fm 60 0.03645 0 0.55566
+N B.sub 48 0.05265 0 0.43659
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
 T 5 53 54 6 0 53 0 0 0 corridor | A 2 2 E 5 14 0 | B 1 4 N 1 22 0 | 0 0 | 0 1 0 | wait,wait
+N B.fm 60 0.01215 0 0.15876
+N B.sub 48 0.01755 0 0.12474
+N drum.snare -1 0.1 0 0.7
 T 5 54 55 7 0 54 0 0 0 corridor | A 2 2 E 6 14 1 | B 1 4 N 1 22 0 | 0 0 | 1 0 1 | collision,zap,zap,collision
+N A.main 71 0.064125 0 0.9163
+N A.ping 74 0.03375 0.005625 0.36652
+N B.fm 60 0.03645 0 0.55566
+N B.sub 48 0.05265 0 0.43659
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 5 55 56 8 0 55 0 0 0 corridor | A 2 2 E 1 15 0 | B 1 4 N 1 22 0 | 0 0 | 0 0 0 | death,move,move,move,belt,move,belt,zap,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 69 0.013125 0 0.9639
+N A.ping 72 0.03375 0.005625 0.38556
+N A.main 83 0.091875 0.015 0.433755
+N A.main 76 0.10125 0.10875 0.421755
 T 5 56 57 9 0 56 0 0 0 corridor | A 2 2 E 2 15 0 | B 1 3 N 1 22 0 | 0 0 | 1 0 1 | collision,zap,move
+N A.main 71 0.08015625 0 0.6902
+N A.ping 74 0.03375 0.005625 0.27608
+N B.fm 72 0.0961875 0 0.57456
+N B.sub 60 0.1389375 0 0.45144
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
 T 5 57 58 10 0 57 0 0 0 corridor | A 2 2 E 3 15 0 | B 1 3 N 1 22 0 | 0 0 | 0 0 0 | collision,zap,wait
+N A.main 71 0.0320625 0 0.77469
+N A.ping 74 0.03375 0.005625 0.309876
+N B.fm 72 0.030375 0 0.1512
+N B.sub 60 0.043875 0 0.1188
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
 T 5 58 59 11 0 58 0 0 0 corridor | A 2 2 E 4 15 0 | B 1 3 W 1 22 0 | 0 0 | 0 1 1 | wait,zap,turn
+N A.main 71 0.021375 0 0.24684
+N B.fm 72 0.108675 0 0.250614
+N B.sub 60 0.156975 0 0.196911
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 5 59 60 12 0 59 0 0 0 corridor | A 2 2 E 5 15 0 | B 1 3 S 1 22 0 | 0 0 | 1 0 0 | collision,zap,turn
+N A.main 71 0.0890625 0 0.952
+N A.ping 74 0.03375 0.005625 0.3808
+N B.fm 72 0.1323 0 0.37422
+N B.sub 60 0.1911 0 0.29403
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
 T 5 60 61 13 0 60 0 0 0 corridor | A 2 2 S 6 15 1 | B 1 4 S 1 22 0 | 0 0 | 0 0 1 | turn,zap,zap,move,collision
+N A.main 71 0.08728125 0 0.63
+N A.ping 74 0.03375 0.005625 0.252
+N B.fm 60 0.04725 0 0.59535
+N B.sub 48 0.06825 0 0.467775
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 5 61 62 14 0 61 0 0 0 corridor | A 0 0 E 0 16 0 | B 1 4 E 1 22 0 | 0 0 | 0 1 0 | death,wait,turn
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N B.fm 67 0.04725 0 0.404838
+N B.sub 55 0.06825 0 0.318087
+N drum.snare -1 0.1 0 0.7
 T 5 62 63 15 0 62 0 0 0 corridor | A 2 1 N 0 16 0 | B 1 4 E 1 22 0 | 0 0 | 1 0 1 | turn,move,belt,move,belt,move,belt,ping
+N A.main 79 0.013125 0 0.6
+N A.ping 83 0.03375 0.005625 0.24
+N A.main 74 0.091875 0.015 0.27
+N A.main 79 0.16875 0.10875 0.258
+N B.fm 72 0.1164375 0 0.491589
+N B.sub 60 0.1681875 0 0.3862485
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
 T 5 63 64 0 0 63 0 0 0 corridor | A 2 2 N 1 16 0 | B 2 4 E 1 22 0 | 0 0 | 0 0 0 | move,move,belt,move,belt,zap,move,move,move,belt
+N A.main 69 0.013125 0 0.8208
+N A.ping 72 0.03375 0.005625 0.32832
+N A.main 83 0.091875 0.015 0.36936
+N A.main 76 0.185625 0.10875 0.35736
+N B.fm 64 0.01875 0 0.61047
+N B.sub 52 0.11578125 0 0.479655
+N fx.belt -1 0.04 0.02 0.35
 T 6 0 1 1 0 0 0 0 0 corridor | A 0 4 E 0 16 0 | B 4 0 W 0 22 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 6 1 2 2 0 1 0 0 0 corridor | A 0 4 E 0 16 0 | B 4 0 W 0 22 0 | 0 0 | 0 0 0 | wait,wait
 T 6 2 3 3 0 2 0 0 0 corridor | A 2 4 E 0 16 0 | B 4 0 W 0 22 0 | 0 0 | 0 1 1 | move,move,collision
+N A.main 59 0.035625 0 0.8925
+N A.ping 62 0.03375 0.005625 0.357
+N B.fm 67 0.1215 0 0.3185
+N B.sub 55 0.1755 0 0.25025
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.02 0.7
 T 6 3 4 4 0 3 0 0 0 corridor | A 2 4 N 0 16 0 | B 4 0 W 0 22 0 | 0 0 | 1 0 0 | turn,ping
+N A.main 59 0.086034375 0 0.51
+N A.ping 62 0.03375 0.005625 0.204
+N B.fm 67 0.09315 0 0.348075
+N B.sub 55 0.13455 0 0.2734875
+N drum.kick 24 0.18 0 1
 T 6 4 5 5 0 4 0 0 0 corridor | A 2 4 N 0 16 0 | B 4 0 S 0 22 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 67 0.165375 0 0.315
+N B.sub 55 0.238875 0 0.2475
+N drum.hihat -1 0.03 0 0.5
 T 6 5 6 6 0 5 0 0 0 corridor | A 2 4 N 0 16 0 | B 4 0 S 0 22 0 | 0 0 | 0 1 0 | ping,wait
+N A.main 59 0.06091875 0 0.855
+N A.ping 62 0.03375 0.005625 0.342
+N drum.snare -1 0.1 0 0.7
 T 6 6 7 7 0 6 0 0 0 corridor | A 2 4 N 0 16 0 | B 4 0 W 0 22 0 | 0 0 | 1 0 1 | wait,turn
+N A.main 59 0.036871875 0 0.17
+N B.fm 67 0.108675 0 0.23205
+N B.sub 55 0.156975 0 0.182325
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 6 7 8 8 0 7 0 0 0 corridor | A 2 4 W 0 16 0 | B 4 0 S 0 22 0 | 0 0 | 0 0 0 | turn,turn
+N A.main 59 0.0399 0 0.4095
+N A.ping 62 0.03375 0.005625 0.1638
+N B.fm 67 0.06615 0 0.33075
+N B.sub 55 0.09555 0 0.259875
 T 6 8 9 9 0 8 0 0 0 corridor | A 2 4 W 0 16 0 | B 4 0 S 0 22 0 | 0 0 | 1 0 1 | ping,wait
+N A.main 59 0.0855 0 0.585
+N A.ping 62 0.03375 0.005625 0.234
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 6 9 10 10 0 9 0 0 0 corridor | A 2 4 W 0 16 0 | B 4 0 S 0 22 0 | 0 0 | 0 0 0 | ping,wait
+N A.main 59 0.098325 0 0.49725
+N A.ping 62 0.03375 0.005625 0.1989
 T 6 10 11 11 0 10 0 0 0 corridor | A 2 4 W 0 16 0 | B 4 0 E 0 22 0 | 0 0 | 0 1 1 | move,move,belt,turn
+N A.main 59 0.013125 0 0.5005
+N A.ping 62 0.03375 0.005625 0.2002
+N A.main 71 0.091875 0.015 0.225225
+N A.main 65 0.135 0.10875 0.213225
+N B.fm 67 0.118125 0 0.357
+N B.sub 55 0.170625 0 0.2805
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
 T 6 11 12 12 0 11 0 0 0 corridor | A 2 4 N 0 16 0 | B 4 0 E 0 22 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 59 0.05985 0 0.66
+N A.ping 62 0.03375 0.005625 0.264
+N drum.kick 24 0.18 0 1
 T 6 12 13 13 0 12 0 0 0 corridor | A 2 4 N 0 16 0 | B 4 0 E 0 22 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 6 13 14 14 0 13 0 0 0 corridor | A 2 4 N 0 16 0 | B 4 0 E 0 22 0 | 0 0 | 0 1 0 | collision,wait
+N A.main 59 0.07695 0 0.77
+N A.ping 62 0.03375 0.005625 0.308
+N drum.snare -1 0.1 0 0.7
+N fx.collision 43 0.08 0 0.7
 T 6 14 15 15 0 14 0 0 0 corridor | A 2 2 N 1 16 0 | B 3 0 E 0 22 0 | 0 0 | 1 0 1 | move,move,zap,move
+N A.main 69 0.0106875 0 1
+N A.ping 72 0.03375 0.005625 0.4
+N B.fm 62 0.1215 0 0.45815
+N B.sub 50 0.1755 0 0.359975
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 6 15 16 0 0 15 0 0 0 corridor | A 2 2 N 2 16 0 | B 2 2 E 1 22 0 | 0 1 | 0 0 0 | move,move,belt,zap,move,move,belt,move,belt,zap
+N A.main 71 0.013125 0 0.812
+N A.ping 74 0.03375 0.005625 0.3248
+N A.main 71 0.091875 0.015 0.3654
+N A.main 77 0.16875 0.10875 0.3534
+N B.fm 64 0.01875 0 0.44982
+N B.sub 52 0.219375 0 0.35343
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 6 16 17 1 0 16 0 0 0 corridor | A 2 2 N 3 16 0 | B 2 2 E 1 22 0 | 0 2 | 1 0 1 | move,move,belt,zap,wait,love
+N A.main 71 0.013125 0 0.9114
+N A.ping 74 0.03375 0.005625 0.36456
+N A.main 71 0.091875 0.015 0.41013
+N A.main 77 0.091875 0.10875 0.39813
+N A.main 83 0.10125 0.2025 0.38613
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 6 17 18 2 0 17 0 0 0 corridor | A 2 2 N 4 16 0 | B 2 2 E 2 22 0 | 0 3 | 0 0 0 | wait,zap,wait,zap
+N A.main 71 0.012825 0 0.2904
+N B.fm 65 0.010125 0 0.144942
+N B.sub 53 0.014625 0 0.113883
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 6 18 19 3 0 18 0 0 0 corridor | A 2 2 N 4 16 0 | B 2 2 E 3 22 0 | 0 4 | 0 1 1 | wait,collision,zap
+N B.fm 65 0.030375 0 0.542283
+N B.sub 53 0.043875 0 0.4260795
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 6 19 20 4 0 19 0 0 0 corridor | A 2 2 N 4 16 0 | B 2 2 S 4 22 0 | 0 5 | 1 0 0 | wait,turn,zap
+N B.fm 65 0.0826875 0 0.4158
+N B.sub 53 0.1194375 0 0.3267
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.02 0.6
 T 6 20 21 5 0 20 0 0 0 corridor | A 2 2 N 5 16 0 | B 2 2 S 5 22 0 | 0 6 | 0 0 1 | ping,zap,move,move,belt,zap
+N A.main 71 0.030459375 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 65 0.01875 0 0.5586
+N B.sub 53 0.3241875 0 0.4389
+N B.fm 65 0.185625 0.0225 0.3192
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 6 21 22 6 0 21 0 0 0 corridor | A 2 2 W 6 16 1 | B 2 2 S 6 22 1 | 0 0 | 0 1 0 | turn,zap,zap,wait,zap,zap
+N A.main 71 0.049875 0 0.546
+N A.ping 74 0.03375 0.005625 0.2184
+N B.fm 65 0.0354375 0 0.147
+N B.sub 53 0.0511875 0 0.1155
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 6 22 23 7 0 22 0 0 0 corridor | A 2 2 E 0 17 0 | B 2 1 S 0 23 0 | 0 0 | 1 0 1 | death,death,move,move,belt,move,belt,move,belt,turn,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 71 0.013125 0 0.646
+N A.ping 74 0.03375 0.005625 0.2584
+N A.main 71 0.091875 0.015 0.2907
+N A.main 77 0.185625 0.10875 0.2787
+N B.fm 62 0.01875 0 0.26775
+N B.sub 50 0.27470625 0 0.210375
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 6 23 24 8 0 23 0 0 0 corridor | A 2 2 E 1 17 0 | B 2 2 E 1 23 0 | 0 1 | 0 0 0 | collision,zap,turn,move,belt,zap
+N A.main 69 0.0761484375 0 0.61047
+N A.ping 72 0.03375 0.005625 0.244188
+N B.fm 64 0.01875 0 0.424116
+N B.sub 52 0.1365 0 0.333234
+N B.fm 64 0.135 0.0225 0.242352
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
 T 6 24 25 9 0 24 0 0 0 corridor | A 2 2 E 3 17 0 | B 2 2 E 2 23 0 | 7 0 | 1 0 1 | wait,collision,collision,zap,zap
+N B.fm 65 0.016875 0 0.7
+N B.sub 53 0.024375 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 6 25 26 10 0 25 0 0 0 corridor | A 2 2 E 4 17 0 | B 2 2 N 3 23 0 | 6 0 | 0 0 0 | collision,zap,turn,zap
+N A.main 71 0.0761484375 0 0.74613
+N A.ping 74 0.03375 0.005625 0.298452
+N B.fm 65 0.014175 0 0.54684
+N B.sub 53 0.020475 0 0.42966
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 6 26 27 11 0 26 0 0 0 corridor | A 2 2 E 5 17 0 | B 2 2 N 6 23 1 | 7 0 | 0 1 1 | collision,collision,zap,zap,ping,zap,zap
+N A.main 71 0.0178125 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 65 0.03493125 0 0.7
+N B.sub 53 0.05045625 0 0.55
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 6 27 28 12 0 27 0 0 0 corridor | A 2 2 E 6 17 1 | B 2 1 W 0 24 0 | 6 0 | 1 0 0 | death,wait,zap,zap,collision,collision,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 71 0.0307265625 0 0.2023
+N B.fm 62 0.01875 0 0.43225
+N B.sub 50 0.092625 0 0.339625
+N B.fm 62 0.185625 0.0225 0.247
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 6 28 29 13 0 28 0 0 0 corridor | A 0 0 E 0 18 0 | B 2 2 N 1 24 0 | 5 0 | 0 0 1 | death,wait,turn,move,belt,zap
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N B.fm 71 0.01875 0 0.49896
+N B.sub 59 0.0819 0 0.39204
+N B.fm 71 0.135 0.0225 0.28512
+N drum.hihat -1 0.03 0 0.5
 T 6 29 30 14 0 29 0 0 0 corridor | A 2 1 E 0 18 0 | B 2 2 E 2 24 0 | 4 0 | 0 1 0 | ping,move,belt,move,belt,move,belt,turn,zap
+N A.main 79 0.013125 0 0.8415
+N A.ping 83 0.03375 0.005625 0.3366
+N A.main 74 0.091875 0.015 0.378675
+N A.main 79 0.135 0.10875 0.366675
+N B.fm 65 0.067921875 0 0.352002
+N B.sub 53 0.098109375 0 0.276573
+N drum.snare -1 0.1 0 0.7
+N fx.belt -1 0.04 0.02 0.35
 T 6 30 31 15 0 30 0 0 0 corridor | A 2 2 S 3 18 0 | B 2 2 E 3 24 0 | 7 0 | 1 0 1 | turn,move,belt,zap,collision,collision,zap,zap
+N A.main 69 0.013125 0 0.4131
+N A.ping 72 0.03375 0.005625 0.16524
+N A.main 81 0.091875 0.015 0.185895
+N A.main 76 0.219375 0.10875 0.173895
+N B.fm 65 0.016875 0 0.7
+N B.sub 53 0.024375 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 6 31 32 0 0 31 0 0 0 corridor | A 2 2 S 3 18 0 | B 2 2 E 4 24 0 | 6 0 | 0 0 0 | wait,collision,zap
+N B.fm 65 0.09703125 0 0.534072
+N B.sub 53 0.14015625 0 0.419628
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 6 32 33 1 0 32 0 0 0 corridor | A 2 2 E 4 18 0 | B 2 2 E 5 24 0 | 5 0 | 1 0 1 | turn,zap,collision,zap
+N A.main 71 0.0716953125 0 0.57222
+N A.ping 74 0.03375 0.005625 0.228888
+N B.fm 65 0.06075 0 0.64141
+N B.sub 53 0.08775 0 0.503965
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 6 33 34 2 0 33 0 0 0 corridor | A 2 2 E 5 18 0 | B 2 2 E 5 24 0 | 4 0 | 0 0 0 | collision,zap,wait
+N A.main 71 0.084609375 0 0.9044
+N A.ping 74 0.03375 0.005625 0.36176
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
 T 6 34 35 3 0 34 0 0 0 corridor | A 2 2 N 6 18 1 | B 2 2 E 6 24 1 | 3 0 | 0 1 1 | turn,zap,zap,collision,zap,zap
+N A.main 71 0.0149625 0 0.882
+N A.ping 74 0.03375 0.005625 0.3528
+N B.fm 65 0.06075 0 0.64141
+N B.sub 53 0.08775 0 0.503965
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 6 35 36 4 0 35 0 0 0 corridor | A 2 1 E 0 19 0 | B 2 1 S 0 25 0 | 2 0 | 1 0 0 | death,death,wait,move,belt,move,belt,move,belt,turn,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 83 0.013125 0 0.187
+N A.main 77 0.091875 0.015 0.12
+N A.main 83 0.135 0.10875 0.12
+N B.fm 62 0.01875 0 0.315
+N B.sub 50 0.238875 0 0.2475
+N drum.kick 24 0.18 0 1
 T 6 36 37 5 0 36 0 0 0 corridor | A 1 1 E 0 19 0 | B 2 2 S 1 25 0 | 1 0 | 0 0 1 | move,ping,move,belt,zap
+N A.main 77 0.1603125 0 0.595
+N A.ping 81 0.03375 0.005625 0.238
+N B.fm 62 0.01875 0 0.56133
+N B.sub 50 0.1638 0 0.441045
+N B.fm 62 0.135 0.0225 0.32076
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 6 37 38 6 0 37 0 0 0 corridor | A 2 2 E 1 19 0 | B 2 2 S 1 25 0 | 0 1 | 0 1 0 | move,move,belt,zap,wait
+N A.main 69 0.013125 0 0.80784
+N A.ping 72 0.03375 0.005625 0.323136
+N A.main 81 0.091875 0.015 0.363528
+N A.main 76 0.135 0.10875 0.351528
+N drum.snare -1 0.1 0 0.7
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 6 38 39 7 0 38 0 0 0 corridor | A 2 2 E 2 19 0 | B 2 2 S 2 25 0 | 0 2 | 1 0 1 | ping,zap,move,move,belt,zap,love
+N A.main 71 0.050765625 0 0.84303
+N A.ping 74 0.03375 0.005625 0.337212
+N B.fm 65 0.01875 0 0.4263
+N B.sub 53 0.307125 0 0.33495
+N B.fm 65 0.16875 0.0225 0.2436
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 6 39 40 8 0 39 0 0 0 corridor | A 2 2 E 2 19 0 | B 2 2 S 3 25 0 | 0 3 | 0 0 0 | wait,ping,zap
+N B.fm 65 0.08150625 0 0.498015
+N B.sub 53 0.11773125 0 0.3912975
+N fx.zap -1 0.06 0.02 0.6
 T 6 40 41 9 0 40 0 0 0 corridor | A 2 2 E 2 19 0 | B 2 2 E 4 25 0 | 0 4 | 1 0 1 | wait,turn,zap
+N B.fm 65 0.0590625 0 0.47124
+N B.sub 53 0.0853125 0 0.37026
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 6 41 42 10 0 41 0 0 0 corridor | A 2 2 E 3 19 0 | B 2 2 E 4 25 0 | 0 5 | 0 0 0 | collision,zap,wait
+N A.main 71 0.0921796875 0 0.62713
+N A.ping 74 0.03375 0.005625 0.250852
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
 T 6 42 43 11 0 42 0 0 0 corridor | A 2 2 E 3 19 0 | B 2 2 E 4 25 0 | 0 6 | 0 1 1 | wait,wait
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 6 43 44 12 0 43 0 0 0 corridor | A 2 2 E 3 19 0 | B 2 2 N 5 25 0 | 0 7 | 1 0 0 | wait,turn,zap
+N B.fm 65 0.014175 0 0.6174
+N B.sub 53 0.020475 0 0.4851
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.02 0.6
 T 6 44 45 13 0 44 0 0 0 corridor | A 2 2 N 4 19 0 | B 2 2 W 6 25 1 | 0 0 | 0 0 1 | turn,zap,turn,zap,zap
+N A.main 71 0.0430171875 0 0.6732
+N A.ping 74 0.03375 0.005625 0.26928
+N B.fm 65 0.0378 0 0.42042
+N B.sub 53 0.0546 0 0.33033
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 6 45 46 14 0 45 0 0 0 corridor | A 2 2 N 5 19 0 | B 0 0 W 0 26 0 | 0 0 | 0 1 0 | death,move,move,belt,zap,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 71 0.013125 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N A.main 83 0.091875 0.015 0.45
+N A.main 77 0.091875 0.10875 0.438
+N A.main 71 0.135 0.2025 0.426
+N drum.snare -1 0.1 0 0.7
+N fx.belt -1 0.04 0.02 0.35
 T 6 46 47 15 0 46 0 0 0 corridor | A 2 2 N 6 19 1 | B 0 0 W 0 26 0 | 0 0 | 1 0 1 | ping,zap,zap,wait
+N A.main 71 0.030459375 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 6 47 48 0 0 47 0 0 0 corridor | A 0 0 E 0 20 0 | B 0 0 W 0 26 0 | 0 1 | 0 0 0 | death,wait,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
 T 6 48 49 1 0 48 0 0 0 corridor | A 2 1 N 0 20 0 | B 2 1 W 0 26 0 | 0 2 | 1 0 1 | turn,move,belt,move,belt,move,belt,wait,move,belt,move,belt,move,belt,love
+N A.main 83 0.013125 0 0.63
+N A.ping 74 0.03375 0.005625 0.252
+N A.main 77 0.091875 0.015 0.2835
+N A.main 83 0.10125 0.10875 0.2715
+N B.fm 62 0.01875 0 0.091
+N B.sub 50 0.0585 0 0.0715
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
 T 6 49 50 2 0 49 0 0 0 corridor | A 2 2 N 1 20 0 | B 2 2 W 1 26 0 | 0 3 | 0 0 0 | ping,move,belt,zap,wait,move,belt,zap
+N A.main 69 0.013125 0 0.972
+N A.ping 72 0.03375 0.005625 0.3888
+N A.main 81 0.091875 0.015 0.4374
+N A.main 76 0.16875 0.10875 0.4254
+N B.fm 64 0.01875 0 0.083538
+N B.sub 52 0.067275 0 0.065637
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 6 50 51 3 0 50 0 0 0 corridor | A 2 2 N 2 20 0 | B 2 2 W 2 26 0 | 0 4 | 0 1 1 | ping,zap,collision,zap
+N A.main 71 0.036871875 0 0.8874
+N A.ping 74 0.03375 0.005625 0.35496
+N B.fm 65 0.0486 0 0.406406
+N B.sub 53 0.0702 0 0.319319
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 6 51 52 4 0 51 0 0 0 corridor | A 2 2 N 3 20 0 | B 2 2 W 3 26 0 | 0 5 | 1 0 0 | move,move,belt,zap,collision,zap
+N A.main 71 0.013125 0 0.9548
+N A.ping 74 0.03375 0.005625 0.38192
+N A.main 71 0.091875 0.015 0.42966
+N A.main 77 0.091875 0.10875 0.41766
+N A.main 83 0.135 0.2025 0.40566
+N B.fm 65 0.06075 0 0.39494
+N B.sub 53 0.08775 0 0.31031
+N drum.kick 24 0.18 0 1
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 6 52 53 5 0 52 0 0 0 corridor | A 2 2 E 4 20 0 | B 2 2 W 4 26 0 | 0 6 | 0 0 1 | turn,zap,collision,zap
+N A.main 71 0.049875 0 0.74052
+N A.ping 74 0.03375 0.005625 0.296208
+N B.fm 65 0.0243 0 0.441441
+N B.sub 53 0.0351 0 0.3468465
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 6 53 54 6 0 53 0 0 0 corridor | A 2 2 E 4 20 0 | B 2 2 W 5 26 0 | 0 7 | 0 1 0 | wait,wait,zap
+N B.fm 65 0.0081 0 0.13377
+N B.sub 53 0.0117 0 0.105105
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 6 54 55 7 0 54 0 0 0 corridor | A 2 2 E 5 20 0 | B 2 2 W 6 26 1 | 0 0 | 1 0 1 | collision,zap,collision,zap,zap
+N A.main 71 0.064125 0 0.9163
+N A.ping 74 0.03375 0.005625 0.36652
+N B.fm 65 0.0243 0 0.468195
+N B.sub 53 0.0351 0 0.3678675
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 6 55 56 8 0 55 0 0 0 corridor | A 2 2 E 6 20 1 | B 2 1 N 0 27 0 | 0 0 | 0 0 0 | death,collision,collision,zap,zap,turn,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 71 0.0178125 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 62 0.01875 0 0.42
+N B.sub 50 0.102375 0 0.33
+N B.fm 62 0.16875 0.0225 0.24
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 6 56 57 9 0 56 0 0 0 corridor | A 2 1 E 0 21 0 | B 2 2 N 1 27 0 | 0 0 | 1 0 1 | death,collision,move,belt,move,belt,move,belt,move,move,belt,move,belt,zap
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 79 0.013125 0 0.595
+N A.ping 83 0.03375 0.005625 0.238
+N A.main 74 0.091875 0.015 0.26775
+N A.main 79 0.16875 0.10875 0.25575
+N B.fm 64 0.01875 0 0.57456
+N B.sub 52 0.1389375 0 0.45144
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.belt -1 0.04 0.02 0.35
 T 6 57 58 10 0 57 0 0 0 corridor | A 1 1 E 0 21 0 | B 2 2 N 2 27 0 | 0 0 | 0 0 0 | move,wait,zap
+N A.main 77 0.064125 0 0.62475
+N A.ping 81 0.03375 0.005625 0.2499
+N B.fm 64 0.0151875 0 0.1624
+N B.sub 52 0.0219375 0 0.1276
+N fx.zap -1 0.06 0.02 0.6
 T 6 58 59 11 0 58 0 0 0 corridor | A 1 1 E 0 21 0 | B 2 2 W 3 27 0 | 0 0 | 0 1 1 | wait,turn,zap
+N A.main 77 0.04275 0 0.187
+N B.fm 64 0.0543375 0 0.287742
+N B.sub 52 0.0784875 0 0.226083
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 6 59 60 12 0 59 0 0 0 corridor | A 2 2 E 1 21 0 | B 2 2 S 4 27 0 | 0 1 | 1 0 0 | move,move,belt,zap,turn,zap
+N A.main 69 0.013125 0 0.7344
+N A.ping 72 0.03375 0.005625 0.29376
+N A.main 81 0.091875 0.015 0.33048
+N A.main 76 0.16875 0.10875 0.31848
+N B.fm 65 0.06615 0 0.45738
+N B.sub 53 0.09555 0 0.35937
+N drum.kick 24 0.18 0 1
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 6 60 61 13 0 60 0 0 0 corridor | A 2 2 E 1 21 0 | B 2 4 S 4 27 0 | 0 0 | 0 0 1 | wait,move,move
+N B.fm 65 0.04725 0 0.7
+N B.sub 53 0.06825 0 0.55
+N drum.hihat -1 0.03 0 0.5
 T 6 61 62 14 0 61 0 0 0 corridor | A 2 2 E 1 21 0 | B 2 4 E 4 27 0 | 0 0 | 0 1 0 | wait,turn
+N B.fm 65 0.04725 0 0.494802
+N B.sub 53 0.06825 0 0.388773
+N drum.snare -1 0.1 0 0.7
 T 6 62 63 15 0 62 0 0 0 corridor | A 2 2 N 2 21 0 | B 2 4 E 4 27 0 | 0 0 | 1 0 1 | turn,zap,ping
+N A.main 71 0.03740625 0 0.696
+N A.ping 74 0.03375 0.005625 0.2784
+N B.fm 65 0.1164375 0 0.600831
+N B.sub 53 0.1681875 0 0.4720815
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 6 63 64 0 0 63 0 0 0 corridor | A 2 2 N 3 21 0 | B 2 4 E 4 27 0 | 0 0 | 0 0 0 | move,move,belt,zap,move,move,move,belt,move,belt
+N A.main 71 0.013125 0 0.9424
+N A.ping 74 0.03375 0.005625 0.37696
+N A.main 83 0.091875 0.015 0.42408
+N A.main 77 0.091875 0.10875 0.41208
+N A.main 71 0.185625 0.2025 0.40008
+N B.fm 65 0.01875 0 0.7
+N B.sub 53 0.11578125 0 0.55
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 7 0 1 1 0 0 0 0 0 corridor | A 0 4 E 0 21 0 | B 4 0 W 0 27 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 7 1 2 2 0 1 0 0 0 corridor | A 0 4 S 0 21 0 | B 3 0 W 0 27 0 | 0 0 | 0 0 0 | turn,move
+N A.main 53 0.1745625 0 0.45
+N A.ping 57 0.03375 0.005625 0.18
+N B.fm 69 0.054 0 0.3822
+N B.sub 57 0.078 0 0.3003
 T 7 2 3 3 0 2 0 0 0 corridor | A 0 4 S 0 21 0 | B 4 0 W 0 27 0 | 0 0 | 0 1 1 | collision,collision,move
+N A.main 50 0.049875 0 0.7875
+N A.ping 53 0.03375 0.005625 0.315
+N B.fm 62 0.1215 0 0.3185
+N B.sub 50 0.1755 0 0.25025
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 7 3 4 4 0 3 0 0 0 corridor | A 0 4 E 0 21 0 | B 4 0 W 0 27 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 53 0.143390625 0 0.4335
+N A.ping 57 0.03375 0.005625 0.1734
+N drum.kick 24 0.18 0 1
 T 7 4 5 5 0 4 0 0 0 corridor | A 0 4 E 0 21 0 | B 4 0 S 0 27 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 62 0.165375 0 0.315
+N B.sub 50 0.238875 0 0.2475
+N drum.hihat -1 0.03 0 0.5
 T 7 5 6 6 0 5 0 0 0 corridor | A 0 4 E 0 21 0 | B 4 0 S 0 27 0 | 0 0 | 0 1 0 | wait,wait
+N drum.snare -1 0.1 0 0.7
 T 7 6 7 7 0 6 0 0 0 corridor | A 0 4 E 0 21 0 | B 4 0 W 0 27 0 | 0 0 | 1 0 1 | wait,turn
+N B.fm 62 0.108675 0 0.23205
+N B.sub 50 0.156975 0 0.182325
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 7 7 8 8 0 7 0 0 0 corridor | A 0 4 N 0 21 0 | B 4 0 S 0 27 0 | 0 0 | 0 0 0 | turn,turn
+N A.main 53 0.029925 0 0.63
+N A.ping 57 0.03375 0.005625 0.252
+N B.fm 62 0.06615 0 0.33075
+N B.sub 50 0.09555 0 0.259875
 T 7 8 9 9 0 8 0 0 0 corridor | A 0 4 N 0 21 0 | B 4 0 S 0 27 0 | 0 0 | 1 0 1 | ping,wait
+N A.main 53 0.064125 0 0.9
+N A.ping 57 0.03375 0.005625 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 7 9 10 10 0 9 0 0 0 corridor | A 0 4 N 0 21 0 | B 4 0 S 0 27 0 | 0 0 | 0 0 0 | wait,wait
 T 7 10 11 11 0 10 0 0 0 corridor | A 0 4 N 0 21 0 | B 4 0 E 0 27 0 | 0 0 | 0 1 1 | wait,turn
+N B.fm 62 0.118125 0 0.357
+N B.sub 50 0.170625 0 0.2805
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 7 11 12 12 0 11 0 0 0 corridor | A 0 4 E 0 21 0 | B 4 0 N 0 27 0 | 0 0 | 1 0 0 | turn,turn
+N A.main 53 0.09975 0 0.561
+N A.ping 57 0.03375 0.005625 0.2244
+N B.fm 62 0.08150625 0 0.357
+N B.sub 50 0.11773125 0 0.2805
+N drum.kick 24 0.18 0 1
 T 7 12 13 13 0 12 0 0 0 corridor | A 0 4 E 0 21 0 | B 4 0 N 0 27 0 | 0 0 | 0 0 1 | wait,wait
+N B.fm 62 0.030375 0 0.14
+N B.sub 50 0.043875 0 0.11
+N drum.hihat -1 0.03 0 0.5
 T 7 13 14 14 0 13 0 0 0 corridor | A 0 4 E 0 21 0 | B 4 0 N 0 27 0 | 0 0 | 0 1 0 | collision,wait
+N A.main 53 0.12825 0 0.6545
+N A.ping 57 0.03375 0.005625 0.2618
+N B.fm 62 0.03493125 0 0.119
+N B.sub 50 0.05045625 0 0.0935
+N drum.snare -1 0.1 0 0.7
+N fx.collision 43 0.08 0 0.7
 T 7 14 15 15 0 14 0 0 0 corridor | A 2 4 E 0 21 0 | B 4 1 N 0 27 0 | 0 0 | 1 0 1 | move,move,move
+N A.main 59 0.035625 0 0.8925
+N A.ping 62 0.03375 0.005625 0.357
+N B.fm 67 0.0729 0 0.539
+N B.sub 55 0.1053 0 0.4235
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 7 15 16 0 0 15 0 0 0 corridor | A 1 4 E 0 21 0 | B 4 1 N 0 27 0 | 0 0 | 0 0 0 | move,wait
+N A.main 57 0.1603125 0 0.595
+N A.ping 60 0.03375 0.005625 0.238
 T 7 16 17 1 0 16 0 0 0 corridor | A 0 4 E 0 21 0 | B 4 2 N 0 27 0 | 0 0 | 1 0 1 | move,move,pulse
+N A.main 53 0.064125 0 0.62475
+N A.ping 57 0.03375 0.005625 0.2499
+N B.fm 62 0.06561 0 0.5145
+N B.sub 50 0.09477 0 0.40425
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.02 0.4
 T 7 17 18 2 0 17 0 0 0 corridor | A 0 4 E 0 21 0 | B 4 2 N 0 27 0 | 0 0 | 0 0 0 | wait,wait,pulse
+N A.main 53 0.04275 0 0.187
+N B.fm 62 0.02187 0 0.147
+N B.sub 50 0.03159 0 0.1155
+N fx.pulse 84 0.06 0.02 0.4
 T 7 18 19 3 0 18 0 0 0 corridor | A 1 4 E 0 21 0 | B 4 3 N 0 27 0 | 0 0 | 0 1 1 | move,move
+N A.main 57 0.178125 0 0.68
+N A.ping 60 0.03375 0.005625 0.272
+N B.fm 65 0.03645 0 0.5145
+N B.sub 53 0.05265 0 0.40425
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 7 19 20 4 0 19 0 0 0 corridor | A 1 4 S 0 21 0 | B 4 3 N 0 27 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 57 0.1745625 0 0.45
+N A.ping 60 0.03375 0.005625 0.18
+N drum.kick 24 0.18 0 1
 T 7 20 21 5 0 20 0 0 0 corridor | A 1 4 S 0 21 0 | B 4 3 N 0 27 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 57 0.14214375 0 0.64125
+N A.ping 60 0.03375 0.005625 0.2565
+N drum.hihat -1 0.03 0 0.5
 T 7 21 22 6 0 21 0 0 0 corridor | A 1 4 E 0 21 0 | B 4 3 N 0 27 0 | 0 0 | 0 1 0 | turn,wait
+N A.main 57 0.1246875 0 0.51
+N A.ping 60 0.03375 0.005625 0.204
+N B.fm 65 0.030375 0 0.14
+N B.sub 53 0.043875 0 0.11
+N drum.snare -1 0.1 0 0.7
 T 7 22 23 7 0 22 0 0 0 corridor | A 2 4 E 0 21 0 | B 4 3 W 0 27 0 | 0 0 | 1 0 1 | move,turn
+N A.main 59 0.16921875 0 0.646
+N A.ping 62 0.03375 0.005625 0.2584
+N B.fm 67 0.108675 0 0.23205
+N B.sub 55 0.156975 0 0.182325
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 7 23 24 8 0 23 0 0 0 corridor | A 1 4 E 0 21 0 | B 4 3 S 0 27 0 | 0 0 | 0 0 0 | move,turn
+N A.main 57 0.152296875 0 0.56525
+N A.ping 60 0.03375 0.005625 0.2261
+N B.fm 65 0.1323 0 0.3465
+N B.sub 53 0.1911 0 0.27225
 T 7 24 25 9 0 24 0 0 0 corridor | A 0 4 E 0 21 0 | B 2 4 S 0 27 0 | 0 0 | 1 0 1 | move,move,collision,move,belt,move,belt
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N B.fm 45 0.01875 0 0.55125
+N B.sub 45 0.06825 0 0.433125
+N B.fm 57 0.10125 0.0225 0.315
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.02 0.7
 T 7 25 26 10 0 25 0 0 0 corridor | A 0 4 E 0 21 0 | B 2 4 E 0 27 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 45 0.04725 0 0.37485
+N B.sub 45 0.06825 0 0.294525
 T 7 26 27 11 0 26 0 0 0 corridor | A 2 4 E 0 21 0 | B 2 4 E 2 27 0 | 7 0 | 0 1 1 | move,move,zap,ping
+N A.main 55 0.035625 0 0.8925
+N A.ping 59 0.03375 0.005625 0.357
+N B.fm 53 0.1164375 0 0.528003
+N B.sub 41 0.1681875 0 0.4148595
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 7 27 28 12 0 27 0 0 0 corridor | A 2 4 E 0 21 0 | B 2 4 E 2 27 0 | 6 0 | 1 0 0 | wait,move,move,move,belt,move,belt
+N B.fm 53 0.01875 0 0.65569
+N B.sub 41 0.11578125 0 0.515185
+N B.fm 65 0.185625 0.0225 0.37468
+N drum.kick 24 0.18 0 1
 T 7 28 29 13 0 28 0 0 0 corridor | A 2 4 E 0 21 0 | B 2 4 S 2 27 0 | 5 0 | 0 0 1 | move,move,belt,turn
+N A.main 55 0.013125 0 0.578
+N A.ping 59 0.03375 0.005625 0.2312
+N A.main 67 0.091875 0.015 0.2601
+N A.main 62 0.219375 0.10875 0.2481
+N B.fm 53 0.1323 0 0.40194
+N B.sub 41 0.1911 0 0.31581
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
 T 7 29 30 14 0 29 0 0 0 corridor | A 2 4 E 0 21 0 | B 2 4 S 2 27 0 | 4 0 | 0 1 0 | ping,wait
+N A.main 55 0.0855 0 0.8415
+N A.ping 59 0.03375 0.005625 0.3366
+N drum.snare -1 0.1 0 0.7
 T 7 30 31 15 0 30 0 0 0 corridor | A 2 4 E 2 21 0 | B 2 4 S 2 27 0 | 7 0 | 1 0 1 | wait,collision,collision,zap
+N B.fm 53 0.04725 0 0.63945
+N B.sub 41 0.06825 0 0.502425
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 7 31 32 0 0 31 0 0 0 corridor | A 2 4 E 2 21 0 | B 2 4 S 2 27 0 | 6 0 | 0 0 0 | wait,collision
+N B.fm 53 0.2716875 0 0.41412
+N B.sub 41 0.3924375 0 0.32538
+N fx.collision 43 0.08 0.01 0.7
 T 7 32 33 1 0 32 0 0 0 corridor | A 2 4 N 2 21 0 | B 2 2 S 3 27 0 | 5 0 | 1 0 1 | turn,move,move,belt,zap
+N A.main 59 0.086034375 0 0.5916
+N A.ping 62 0.03375 0.005625 0.23664
+N B.fm 65 0.01875 0 0.50127
+N B.sub 53 0.2457 0 0.393855
+N B.fm 65 0.135 0.0225 0.28644
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 7 33 34 2 0 33 0 0 0 corridor | A 2 2 N 3 21 0 | B 2 4 S 3 27 0 | 4 0 | 0 0 0 | move,move,belt,zap,move,move
+N A.main 71 0.013125 0 0.9424
+N A.ping 74 0.03375 0.005625 0.37696
+N A.main 71 0.091875 0.015 0.42408
+N A.main 77 0.091875 0.10875 0.41208
+N A.main 83 0.185625 0.2025 0.40008
+N B.fm 65 0.04725 0 0.68355
+N B.sub 53 0.06825 0 0.537075
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 7 34 35 3 0 34 0 0 0 corridor | A 2 2 N 3 21 0 | B 2 2 S 4 27 0 | 3 0 | 0 1 1 | wait,move,move,belt,zap
+N B.fm 65 0.01875 0 0.53361
+N B.sub 53 0.2457 0 0.419265
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 7 35 36 4 0 35 0 0 0 corridor | A 2 2 N 4 21 0 | B 2 2 E 5 27 0 | 2 0 | 1 0 0 | wait,zap,turn,zap
+N A.main 71 0.012825 0 0.2904
+N B.fm 65 0.0590625 0 0.4998
+N B.sub 53 0.0853125 0 0.3927
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 7 36 37 5 0 36 0 0 0 corridor | A 2 2 N 5 21 0 | B 2 2 E 6 27 1 | 1 0 | 0 0 1 | move,move,belt,zap,ping,zap,zap
+N A.main 71 0.013125 0 0.98
+N A.ping 74 0.03375 0.005625 0.392
+N A.main 71 0.091875 0.015 0.441
+N A.main 77 0.091875 0.10875 0.429
+N A.main 83 0.16875 0.2025 0.417
+N B.fm 65 0.0405 0 0.7
+N B.sub 53 0.0585 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 7 37 38 6 0 37 0 0 0 corridor | A 2 2 N 6 21 1 | B 2 1 W 0 28 0 | 0 0 | 0 1 0 | death,move,move,belt,zap,zap,collision,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 71 0.013125 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N A.main 83 0.091875 0.015 0.45
+N A.main 77 0.091875 0.10875 0.438
+N A.main 71 0.135 0.2025 0.426
+N B.fm 62 0.01875 0 0.3822
+N B.sub 50 0.078 0 0.3003
+N drum.snare -1 0.1 0 0.7
+N fx.belt -1 0.04 0.02 0.35
 T 7 38 39 7 0 38 0 0 0 corridor | A 2 1 E 0 22 0 | B 3 1 W 0 28 0 | 0 0 | 1 0 1 | death,ping,move,belt,move,belt,move,belt,move
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 79 0.013125 0 0.72675
+N A.ping 83 0.03375 0.005625 0.2907
+N A.main 74 0.091875 0.015 0.3270375
+N A.main 79 0.185625 0.10875 0.3150375
+N B.fm 62 0.1215 0 0.3185
+N B.sub 50 0.1755 0 0.25025
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
 T 7 39 40 8 0 39 0 0 0 corridor | A 2 2 E 1 22 0 | B 3 1 W 1 28 0 | 0 0 | 0 0 0 | zap,move,belt,zap,wait
+N A.main 69 0.013125 0 0.86751
+N A.ping 72 0.03375 0.005625 0.347004
+N A.main 81 0.091875 0.015 0.3903795
+N A.main 76 0.10125 0.10875 0.3783795
+N fx.zap -1 0.06 0 0.6
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 7 40 41 9 0 40 0 0 0 corridor | A 2 2 E 1 22 0 | B 3 1 S 1 28 0 | 0 0 | 1 0 1 | wait,turn
+N B.fm 64 0.165375 0 0.3402
+N B.sub 52 0.238875 0 0.2673
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 7 41 42 10 0 41 0 0 0 corridor | A 2 2 E 2 22 0 | B 3 1 S 1 28 0 | 0 0 | 0 0 0 | collision,zap,wait
+N A.main 71 0.0921796875 0 0.58667
+N A.ping 74 0.03375 0.005625 0.234668
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
 T 7 42 43 11 0 42 0 0 0 corridor | A 2 2 E 2 22 0 | B 3 1 W 1 28 0 | 0 0 | 0 1 1 | wait,turn
+N B.fm 64 0.108675 0 0.250614
+N B.sub 52 0.156975 0 0.196911
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 7 43 44 12 0 43 0 0 0 corridor | A 2 2 E 3 22 0 | B 3 1 S 1 28 0 | 0 0 | 1 0 0 | collision,collision,zap,turn
+N A.main 71 0.0178125 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 64 0.06615 0 0.35721
+N B.sub 52 0.09555 0 0.280665
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 7 44 45 13 0 44 0 0 0 corridor | A 2 2 N 4 22 0 | B 3 1 S 1 28 0 | 0 0 | 0 0 1 | turn,zap,wait
+N A.main 71 0.0430171875 0 0.6732
+N A.ping 74 0.03375 0.005625 0.26928
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 7 45 46 14 0 45 0 0 0 corridor | A 2 2 N 4 22 0 | B 3 0 S 1 28 0 | 0 0 | 0 1 0 | wait,move
+N B.fm 64 0.08505 0 0.416745
+N B.sub 52 0.12285 0 0.3274425
+N drum.snare -1 0.1 0 0.7
 T 7 46 47 15 0 46 0 0 0 corridor | A 2 2 N 4 22 0 | B 3 0 E 1 28 0 | 0 0 | 1 0 1 | wait,turn
+N B.fm 64 0.118125 0 0.38556
+N B.sub 52 0.170625 0 0.30294
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 7 47 48 0 0 47 0 0 0 corridor | A 2 2 N 5 22 0 | B 3 0 N 1 28 0 | 0 0 | 0 0 0 | wait,zap,turn
+N A.main 71 0.0184359375 0 0.238
+N B.fm 64 0.08150625 0 0.38556
+N B.sub 52 0.11773125 0 0.30294
+N fx.zap -1 0.06 0.01 0.6
 T 7 48 49 1 0 48 0 0 0 corridor | A 2 2 N 5 22 0 | B 3 0 N 1 28 0 | 0 0 | 1 0 1 | wait,wait
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 7 49 50 2 0 49 0 0 0 corridor | A 2 2 N 5 22 0 | B 3 0 N 1 28 0 | 0 0 | 0 0 0 | wait,wait
+N B.fm 64 0.03493125 0 0.12852
+N B.sub 52 0.05045625 0 0.10098
 T 7 50 51 3 0 50 0 0 0 corridor | A 2 2 N 6 22 1 | B 3 1 N 1 28 0 | 0 0 | 0 1 1 | ping,zap,zap,move
+N A.main 71 0.036871875 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 64 0.0729 0 0.58212
+N B.sub 52 0.1053 0 0.45738
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 7 51 52 4 0 51 0 0 0 corridor | A 2 1 E 0 23 0 | B 3 1 N 1 28 0 | 0 0 | 1 0 0 | death,collision,move,belt,move,belt,move,belt,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 79 0.013125 0 0.6545
+N A.ping 83 0.03375 0.005625 0.2618
+N A.main 74 0.091875 0.015 0.294525
+N A.main 79 0.135 0.10875 0.282525
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0 0.7
+N fx.belt -1 0.04 0.02 0.35
 T 7 52 53 5 0 52 0 0 0 corridor | A 2 2 S 1 23 0 | B 3 1 N 1 28 0 | 0 0 | 0 0 1 | turn,move,belt,zap,wait
+N A.main 69 0.013125 0 0.5346
+N A.ping 72 0.03375 0.005625 0.21384
+N A.main 81 0.091875 0.015 0.24057
+N A.main 76 0.135 0.10875 0.22857
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 7 53 54 6 0 53 0 0 0 corridor | A 2 2 S 1 23 0 | B 3 1 N 1 28 0 | 0 0 | 0 1 0 | wait,wait
+N drum.snare -1 0.1 0 0.7
 T 7 54 55 7 0 54 0 0 0 corridor | A 2 2 S 1 23 0 | B 3 1 N 1 28 0 | 0 0 | 1 0 1 | wait,collision
+N B.fm 64 0.03645 0 0.55566
+N B.sub 52 0.05265 0 0.43659
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 7 55 56 8 0 55 0 0 0 corridor | A 2 4 S 1 23 0 | B 3 1 E 1 28 0 | 0 0 | 0 0 0 | move,move,turn
+N A.main 57 0.049875 0 0.8505
+N A.ping 60 0.03375 0.005625 0.3402
+N B.fm 64 0.118125 0 0.38556
+N B.sub 52 0.170625 0 0.30294
 T 7 56 57 9 0 56 0 0 0 corridor | A 2 2 S 2 23 0 | B 4 1 E 1 28 0 | 0 0 | 1 0 1 | move,move,belt,zap,move
+N A.main 71 0.013125 0 0.609
+N A.ping 74 0.03375 0.005625 0.2436
+N A.main 71 0.091875 0.015 0.27405
+N A.main 77 0.16875 0.10875 0.26205
+N B.fm 69 0.1603125 0 0.488376
+N B.sub 57 0.2315625 0 0.383724
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 7 57 58 10 0 57 0 0 0 corridor | A 2 2 S 3 23 0 | B 4 1 E 1 28 0 | 0 0 | 0 0 0 | move,move,belt,zap,wait
+N A.main 71 0.013125 0 0.68355
+N A.ping 74 0.03375 0.005625 0.27342
+N A.main 83 0.091875 0.015 0.3075975
+N A.main 77 0.091875 0.10875 0.2955975
+N A.main 71 0.10125 0.2025 0.2835975
+N B.fm 69 0.050625 0 0.12852
+N B.sub 57 0.073125 0 0.10098
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 7 58 59 11 0 58 0 0 0 corridor | A 2 2 S 4 23 0 | B 4 1 N 1 28 0 | 0 0 | 0 1 1 | wait,zap,turn
+N A.main 71 0.029925 0 0.2178
+N B.fm 69 0.08150625 0 0.38556
+N B.sub 57 0.11773125 0 0.30294
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 7 59 60 12 0 59 0 0 0 corridor | A 2 2 S 5 23 0 | B 4 1 N 1 28 0 | 0 0 | 1 0 0 | move,move,belt,zap,wait
+N A.main 71 0.013125 0 0.84
+N A.ping 74 0.03375 0.005625 0.336
+N A.main 71 0.091875 0.015 0.378
+N A.main 77 0.091875 0.10875 0.366
+N A.main 83 0.16875 0.2025 0.354
+N drum.kick 24 0.18 0 1
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 7 60 61 13 0 60 0 0 0 corridor | A 2 2 W 6 23 1 | B 4 0 N 1 28 0 | 0 0 | 0 0 1 | turn,zap,zap,move,collision
+N A.main 71 0.049875 0 0.546
+N A.ping 74 0.03375 0.005625 0.2184
+N B.fm 69 0.02025 0 0.7
+N B.sub 57 0.02925 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 7 61 62 14 0 61 0 0 0 corridor | A 2 1 E 0 24 0 | B 4 0 W 2 28 0 | 0 0 | 0 1 0 | death,zap,move,belt,move,belt,move,belt,turn
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 79 0.013125 0 0.72675
+N A.ping 83 0.03375 0.005625 0.2907
+N A.main 74 0.091875 0.015 0.3270375
+N A.main 79 0.185625 0.10875 0.3150375
+N B.fm 71 0.0378 0 0.332514
+N B.sub 59 0.0546 0 0.261261
+N drum.snare -1 0.1 0 0.7
+N fx.zap -1 0.06 0 0.6
+N fx.belt -1 0.04 0.02 0.35
 T 7 62 63 15 0 62 0 0 0 corridor | A 2 1 E 0 24 0 | B 4 0 W 2 28 0 | 0 0 | 1 0 1 | wait,ping
+N B.fm 71 0.09315 0 0.403767
+N B.sub 59 0.13455 0 0.3172455
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 7 63 64 0 0 63 0 0 0 corridor | A 3 1 E 0 24 0 | B 2 2 W 3 28 0 | 0 0 | 0 0 0 | move,move,move,move,belt,move,belt,zap
+N A.main 79 0.16921875 0 0.646
+N A.ping 83 0.03375 0.005625 0.2584
+N B.fm 65 0.01875 0 0.53599
+N B.sub 53 0.092625 0 0.421135
+N B.fm 65 0.185625 0.0225 0.30628
 T 8 0 1 1 0 0 0 0 0 corridor | A 0 4 E 0 24 0 | B 4 0 W 0 28 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 8 1 2 2 0 1 0 0 0 corridor | A 0 4 S 0 24 0 | B 3 0 W 0 28 0 | 0 0 | 0 0 0 | turn,move
+N A.main 53 0.1745625 0 0.45
+N A.ping 57 0.03375 0.005625 0.18
+N B.fm 69 0.054 0 0.3822
+N B.sub 57 0.078 0 0.3003
 T 8 2 3 3 0 2 0 0 0 corridor | A 0 4 S 0 24 0 | B 4 0 W 0 28 0 | 0 0 | 0 1 1 | collision,collision,move
+N A.main 50 0.049875 0 0.7875
+N A.ping 53 0.03375 0.005625 0.315
+N B.fm 62 0.1215 0 0.3185
+N B.sub 50 0.1755 0 0.25025
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 8 3 4 4 0 3 0 0 0 corridor | A 0 4 E 0 24 0 | B 4 0 W 0 28 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 53 0.143390625 0 0.4335
+N A.ping 57 0.03375 0.005625 0.1734
+N drum.kick 24 0.18 0 1
 T 8 4 5 5 0 4 0 0 0 corridor | A 0 4 E 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 62 0.165375 0 0.315
+N B.sub 50 0.238875 0 0.2475
+N drum.hihat -1 0.03 0 0.5
 T 8 5 6 6 0 5 0 0 0 corridor | A 0 4 E 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 0 1 0 | ping,wait
+N A.main 53 0.10153125 0 0.72675
+N A.ping 57 0.03375 0.005625 0.2907
+N drum.snare -1 0.1 0 0.7
 T 8 6 7 7 0 6 0 0 0 corridor | A 0 4 E 0 24 0 | B 4 0 W 0 28 0 | 0 0 | 1 0 1 | wait,turn
+N A.main 53 0.061453125 0 0.1445
+N B.fm 62 0.108675 0 0.23205
+N B.sub 50 0.156975 0 0.182325
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 8 7 8 8 0 7 0 0 0 corridor | A 0 4 E 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 62 0.06615 0 0.33075
+N B.sub 50 0.09555 0 0.259875
 T 8 8 9 9 0 8 0 0 0 corridor | A 0 4 E 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 1 0 1 | ping,wait
+N A.main 53 0.106875 0 0.765
+N A.ping 57 0.03375 0.005625 0.306
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 8 9 10 10 0 9 0 0 0 corridor | A 0 4 E 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 0 0 0 | wait,wait
 T 8 10 11 11 0 10 0 0 0 corridor | A 0 4 E 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 0 1 1 | collision,wait
+N A.main 53 0.12825 0 0.6545
+N A.ping 57 0.03375 0.005625 0.2618
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
 T 8 11 12 12 0 11 0 0 0 corridor | A 0 4 S 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 1 0 0 | turn,wait
+N A.main 53 0.13965 0 0.495
+N A.ping 57 0.03375 0.005625 0.198
+N drum.kick 24 0.18 0 1
 T 8 12 13 13 0 12 0 0 0 corridor | A 0 4 S 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 0 0 1 | wait,wait
+N A.main 53 0.0748125 0 0.15
+N drum.hihat -1 0.03 0 0.5
 T 8 13 14 14 0 13 0 0 0 corridor | A 0 4 S 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 0 1 0 | wait,wait
+N drum.snare -1 0.1 0 0.7
 T 8 14 15 15 0 14 0 0 0 corridor | A 0 4 S 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 1 0 1 | collision,collision,collision
+N A.main 53 0.049875 0 0.7875
+N A.ping 57 0.03375 0.005625 0.315
+N B.fm 62 0.1701 0 0.40425
+N B.sub 50 0.2457 0 0.317625
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 8 15 16 0 0 15 0 0 0 corridor | A 0 3 S 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 0 0 0 | move,wait
+N A.main 65 0.2244375 0 0.525
+N A.ping 69 0.03375 0.005625 0.21
 T 8 16 17 1 0 16 0 0 0 corridor | A 0 2 S 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 1 0 1 | move,pulse,collision
+N A.main 65 0.161595 0 0.55125
+N A.ping 69 0.03375 0.005625 0.2205
+N B.fm 62 0.08505 0 0.385875
+N B.sub 50 0.12285 0 0.3031875
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 8 17 18 2 0 17 0 0 0 corridor | A 0 2 S 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 0 0 0 | wait,pulse,wait
+N A.main 65 0.10773 0 0.165
+N B.fm 62 0.02835 0 0.11025
+N B.sub 50 0.04095 0 0.086625
+N fx.pulse 84 0.06 0.01 0.4
 T 8 18 19 3 0 18 0 0 0 corridor | A 0 3 S 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 0 1 1 | move,collision
+N A.main 65 0.249375 0 0.6
+N A.ping 69 0.03375 0.005625 0.24
+N B.fm 62 0.08505 0 0.385875
+N B.sub 50 0.12285 0 0.3031875
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 8 19 20 4 0 19 0 0 0 corridor | A 0 3 W 0 24 0 | B 4 0 W 0 28 0 | 0 0 | 1 0 0 | turn,turn
+N A.main 65 0.09975 0 0.39
+N A.ping 69 0.03375 0.005625 0.156
+N B.fm 62 0.0945 0 0.273
+N B.sub 50 0.1365 0 0.2145
+N drum.kick 24 0.18 0 1
 T 8 20 21 5 0 20 0 0 0 corridor | A 0 3 W 0 24 0 | B 4 0 W 0 28 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 65 0.081225 0 0.55575
+N A.ping 69 0.03375 0.005625 0.2223
+N drum.hihat -1 0.03 0 0.5
 T 8 21 22 6 0 21 0 0 0 corridor | A 0 3 S 0 24 0 | B 4 0 W 0 28 0 | 0 0 | 0 1 0 | turn,wait
+N A.main 65 0.1745625 0 0.45
+N A.ping 69 0.03375 0.005625 0.18
+N drum.snare -1 0.1 0 0.7
 T 8 22 23 7 0 22 0 0 0 corridor | A 0 4 S 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 1 0 1 | move,turn
+N A.main 53 0.23690625 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
+N B.fm 62 0.19018125 0 0.26775
+N B.sub 50 0.27470625 0 0.210375
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 8 23 24 8 0 23 0 0 0 corridor | A 0 3 S 0 24 0 | B 4 0 S 0 28 0 | 0 0 | 0 0 0 | move,wait
+N A.main 65 0.213215625 0 0.49875
+N A.ping 69 0.03375 0.005625 0.1995
 T 8 24 25 9 0 24 0 0 0 corridor | A 0 2 S 0 24 0 | B 4 2 S 0 28 0 | 0 0 | 1 0 1 | move,pulse,move,move,pulse
+N A.main 65 0.4039875 0 0.525
+N A.ping 69 0.03375 0.005625 0.21
+N B.fm 62 0.08505 0 0.55125
+N B.sub 50 0.12285 0 0.433125
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 8 25 26 10 0 25 0 0 0 corridor | A 0 1 S 0 24 0 | B 4 2 E 0 28 0 | 0 0 | 0 0 0 | move,turn,pulse
+N A.main 77 0.213215625 0 0.49875
+N A.ping 81 0.03375 0.005625 0.1995
+N B.fm 62 0.08505 0 0.37485
+N B.sub 50 0.12285 0 0.294525
+N fx.pulse 84 0.06 0.02 0.4
 T 8 26 27 11 0 26 0 0 0 corridor | A 0 3 S 0 24 0 | B 4 2 E 0 28 0 | 0 0 | 0 1 1 | move,move,ping,pulse
+N A.main 65 0.049875 0 0.7875
+N A.ping 69 0.03375 0.005625 0.315
+N B.fm 62 0.2095875 0 0.455175
+N B.sub 50 0.3027375 0 0.3576375
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.03 0.4
 T 8 27 28 12 0 27 0 0 0 corridor | A 0 3 S 0 24 0 | B 4 2 E 0 28 0 | 0 0 | 1 0 0 | wait,collision,collision,pulse
+N B.fm 62 0.14428125 0 0.56525
+N B.sub 50 0.20840625 0 0.444125
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+N fx.pulse 84 0.06 0.03 0.4
 T 8 28 29 13 0 28 0 0 0 corridor | A 0 3 S 0 24 0 | B 4 2 S 0 28 0 | 0 0 | 0 0 1 | wait,turn,pulse
+N B.fm 62 0.23814 0 0.3465
+N B.sub 50 0.34398 0 0.27225
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.02 0.4
 T 8 29 30 14 0 29 0 0 0 corridor | A 0 3 S 0 24 0 | B 4 2 S 0 28 0 | 0 0 | 0 1 0 | ping,wait
+N A.main 65 0.1197 0 0.7425
+N A.ping 69 0.03375 0.005625 0.297
+N drum.snare -1 0.1 0 0.7
 T 8 30 31 15 0 30 0 0 0 corridor | A 0 3 W 0 24 0 | B 2 4 S 0 28 0 | 0 0 | 1 0 1 | turn,move,move,move,belt,move,belt
+N A.main 65 0.1147125 0 0.3315
+N A.ping 69 0.03375 0.005625 0.1326
+N B.fm 57 0.01875 0 0.55125
+N B.sub 45 0.06825 0 0.433125
+N B.fm 69 0.10125 0.0225 0.315
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 8 31 32 0 0 31 0 0 0 corridor | A 0 3 W 0 24 0 | B 2 4 S 0 28 0 | 0 0 | 0 0 0 | wait,collision
+N B.fm 57 0.2716875 0 0.357
+N B.sub 45 0.3924375 0 0.2805
+N fx.collision 43 0.08 0.01 0.7
 T 8 32 33 1 0 32 0 0 0 corridor | A 0 3 S 0 24 0 | B 2 4 S 0 28 0 | 0 0 | 1 0 1 | turn,wait
+N A.main 62 0.200746875 0 0.3825
+N A.ping 65 0.03375 0.005625 0.153
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 8 33 34 2 0 33 0 0 0 corridor | A 0 4 S 0 24 0 | B 2 4 S 0 28 0 | 0 0 | 0 0 0 | move,collision,collision
+N A.main 50 0.23690625 0 0.57
+N A.ping 53 0.03375 0.005625 0.228
+N B.fm 45 0.04725 0 0.55125
+N B.sub 45 0.06825 0 0.433125
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 8 34 35 3 0 34 0 0 0 corridor | A 0 4 S 0 24 0 | B 2 2 S 1 28 0 | 0 0 | 0 1 1 | wait,move,move,belt,zap
+N B.fm 59 0.01875 0 0.43659
+N B.sub 47 0.2457 0 0.343035
+N B.fm 71 0.135 0.0225 0.24948
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 8 35 36 4 0 35 0 0 0 corridor | A 0 4 S 0 24 0 | B 2 2 E 2 28 0 | 0 0 | 1 0 0 | wait,turn,zap
+N A.main 50 0.05985 0 0.165
+N B.fm 60 0.0590625 0 0.41412
+N B.sub 48 0.0853125 0 0.32538
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.02 0.6
 T 8 36 37 5 0 36 0 0 0 corridor | A 0 3 S 0 24 0 | B 2 2 E 3 28 0 | 0 0 | 0 0 1 | move,ping,zap
+N A.main 62 0.2244375 0 0.525
+N A.ping 65 0.03375 0.005625 0.21
+N B.fm 72 0.0405 0 0.7
+N B.sub 60 0.0585 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 8 37 38 6 0 37 0 0 0 corridor | A 0 4 S 0 24 0 | B 2 2 E 3 28 0 | 0 0 | 0 1 0 | move,wait
+N A.main 50 0.1995 0 0.66
+N A.ping 53 0.03375 0.005625 0.264
+N drum.snare -1 0.1 0 0.7
 T 8 38 39 7 0 38 0 0 0 corridor | A 0 4 S 0 24 0 | B 2 2 E 4 28 0 | 0 0 | 1 0 1 | ping,collision,zap
+N A.main 50 0.14214375 0 0.64125
+N A.ping 53 0.03375 0.005625 0.2565
+N B.fm 60 0.0759375 0 0.54978
+N B.sub 48 0.1096875 0 0.43197
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 8 39 40 8 0 39 0 0 0 corridor | A 0 4 S 0 24 0 | B 2 2 E 4 28 0 | 0 0 | 0 0 0 | wait,wait
 T 8 40 41 9 0 40 0 0 0 corridor | A 0 4 S 0 24 0 | B 2 2 E 4 28 0 | 0 0 | 1 0 1 | ping,wait
+N A.main 50 0.14214375 0 0.64125
+N A.ping 53 0.03375 0.005625 0.2565
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 8 41 42 10 0 41 0 0 0 corridor | A 0 3 S 0 24 0 | B 2 2 E 4 28 0 | 0 0 | 0 0 0 | move,wait
+N A.main 62 0.258103125 0 0.44625
+N A.ping 65 0.03375 0.005625 0.1785
 T 8 42 43 11 0 42 0 0 0 corridor | A 0 3 S 0 24 0 | B 2 2 S 5 28 0 | 0 0 | 0 1 1 | wait,turn,zap
+N B.fm 72 0.095090625 0 0.37485
+N B.sub 60 0.137353125 0 0.294525
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 8 43 44 12 0 43 0 0 0 corridor | A 0 3 S 0 24 0 | B 2 2 E 6 28 1 | 0 0 | 1 0 0 | wait,turn,zap,zap
+N B.fm 72 0.023625 0 0.52479
+N B.sub 60 0.034125 0 0.412335
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 8 44 45 13 0 44 0 0 0 corridor | A 0 3 E 0 24 0 | B 2 1 S 0 29 0 | 0 0 | 0 0 1 | death,turn,turn,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 65 0.143390625 0 0.4335
+N A.ping 69 0.03375 0.005625 0.1734
+N B.fm 69 0.01875 0 0.3465
+N B.sub 57 0.1911 0 0.27225
+N B.fm 69 0.135 0.0225 0.198
+N drum.hihat -1 0.03 0 0.5
 T 8 45 46 14 0 45 0 0 0 corridor | A 1 3 E 0 24 0 | B 2 1 S 0 29 0 | 0 0 | 0 1 0 | move,wait
+N A.main 65 0.1425 0 0.748
+N A.ping 69 0.03375 0.005625 0.2992
+N drum.snare -1 0.1 0 0.7
 T 8 46 47 15 0 46 0 0 0 corridor | A 1 3 E 0 24 0 | B 2 2 E 1 29 0 | 0 0 | 1 0 1 | wait,turn,move,belt,zap
+N B.fm 62 0.01875 0 0.38556
+N B.sub 50 0.170625 0 0.30294
+N B.fm 62 0.16875 0.0225 0.22032
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 8 47 48 0 0 47 0 0 0 corridor | A 1 3 E 0 24 0 | B 2 2 E 1 29 0 | 0 0 | 0 0 0 | wait,wait
 T 8 48 49 1 0 48 0 0 0 corridor | A 1 3 N 0 24 0 | B 2 2 E 2 29 0 | 0 0 | 1 0 1 | turn,wait,zap
+N A.main 65 0.029925 0 0.63
+N A.ping 69 0.03375 0.005625 0.252
+N B.fm 64 0.0253125 0 0.13804
+N B.sub 52 0.0365625 0 0.10846
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 8 49 50 2 0 49 0 0 0 corridor | A 1 3 N 0 24 0 | B 2 2 E 3 29 0 | 0 0 | 0 0 0 | wait,wait,zap
+N B.fm 64 0.029109375 0 0.125426
+N B.sub 52 0.042046875 0 0.098549
+N fx.zap -1 0.06 0.02 0.6
 T 8 50 51 3 0 50 0 0 0 corridor | A 1 3 N 0 24 0 | B 2 2 E 4 29 0 | 0 0 | 0 1 1 | wait,collision,zap
+N B.fm 64 0.06075 0 0.604758
+N B.sub 52 0.08775 0 0.475167
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 8 51 52 4 0 51 0 0 0 corridor | A 1 4 N 0 24 0 | B 2 2 E 5 29 0 | 0 0 | 1 0 0 | move,collision,zap
+N A.main 53 0.07695 0 0.77
+N A.ping 57 0.03375 0.005625 0.308
+N B.fm 64 0.0759375 0 0.5831
+N B.sub 52 0.1096875 0 0.45815
+N drum.kick 24 0.18 0 1
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 8 52 53 5 0 52 0 0 0 corridor | A 1 4 E 0 24 0 | B 2 2 E 6 29 1 | 0 0 | 0 0 1 | turn,collision,zap,zap
+N A.main 53 0.09975 0 0.561
+N A.ping 57 0.03375 0.005625 0.2244
+N B.fm 64 0.030375 0 0.612255
+N B.sub 52 0.043875 0 0.4810575
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 8 53 54 6 0 53 0 0 0 corridor | A 1 4 E 0 24 0 | B 2 1 W 0 30 0 | 0 0 | 0 1 0 | death,wait,wait,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 57 0.0534375 0 0.17
+N B.fm 72 0.01875 0 0.09555
+N B.sub 60 0.0234 0 0.075075
+N B.fm 72 0.10125 0.0225 0.0546
+N drum.snare -1 0.1 0 0.7
 T 8 54 55 7 0 54 0 0 0 corridor | A 1 4 E 0 24 0 | B 3 1 W 0 30 0 | 0 0 | 1 0 1 | wait,move
+N B.fm 72 0.0486 0 0.334425
+N B.sub 60 0.0702 0 0.2627625
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 8 55 56 8 0 55 0 0 0 corridor | A 2 4 E 0 24 0 | B 3 1 N 0 30 0 | 0 0 | 0 0 0 | move,move,move,belt,turn
+N A.main 55 0.013125 0 0.8925
+N A.ping 59 0.03375 0.005625 0.357
+N A.main 67 0.091875 0.015 0.401625
+N A.main 62 0.10125 0.10875 0.389625
+N B.fm 62 0.070875 0 0.42
+N B.sub 50 0.102375 0 0.33
+N fx.belt -1 0.04 0.03 0.35
 T 8 56 57 9 0 56 0 0 0 corridor | A 1 4 E 0 24 0 | B 3 0 N 0 30 0 | 0 0 | 1 0 1 | move,move
+N A.main 53 0.1603125 0 0.595
+N A.ping 57 0.03375 0.005625 0.238
+N B.fm 72 0.0961875 0 0.532
+N B.sub 60 0.1389375 0 0.418
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 8 57 58 10 0 57 0 0 0 corridor | A 0 4 E 0 24 0 | B 3 0 N 0 30 0 | 0 0 | 0 0 0 | move,wait
+N A.main 50 0.064125 0 0.62475
+N A.ping 53 0.03375 0.005625 0.2499
+N B.fm 69 0.030375 0 0.14
+N B.sub 57 0.043875 0 0.11
 T 8 58 59 11 0 58 0 0 0 corridor | A 0 4 E 0 24 0 | B 3 0 W 0 30 0 | 0 0 | 0 1 1 | wait,turn
+N A.main 50 0.04275 0 0.187
+N B.fm 69 0.108675 0 0.23205
+N B.sub 57 0.156975 0 0.182325
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 8 59 60 12 0 59 0 0 0 corridor | A 1 4 E 0 24 0 | B 3 0 S 0 30 0 | 0 0 | 1 0 0 | move,turn
+N A.main 53 0.178125 0 0.68
+N A.ping 57 0.03375 0.005625 0.272
+N B.fm 72 0.1323 0 0.3465
+N B.sub 60 0.1911 0 0.27225
+N drum.kick 24 0.18 0 1
 T 8 60 61 13 0 60 0 0 0 corridor | A 1 4 S 0 24 0 | B 3 1 S 0 30 0 | 0 0 | 0 0 1 | turn,move,collision
+N A.main 53 0.1745625 0 0.45
+N A.ping 57 0.03375 0.005625 0.18
+N B.fm 72 0.04725 0 0.55125
+N B.sub 60 0.06825 0 0.433125
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.02 0.7
 T 8 61 62 14 0 61 0 0 0 corridor | A 1 4 S 0 24 0 | B 3 1 E 0 30 0 | 0 0 | 0 1 0 | ping,turn
+N A.main 53 0.14214375 0 0.64125
+N A.ping 57 0.03375 0.005625 0.2565
+N B.fm 72 0.04725 0 0.37485
+N B.sub 60 0.06825 0 0.294525
+N drum.snare -1 0.1 0 0.7
 T 8 62 63 15 0 62 0 0 0 corridor | A 1 4 E 0 24 0 | B 3 1 E 0 30 0 | 0 0 | 1 0 1 | turn,ping
+N A.main 53 0.1246875 0 0.51
+N A.ping 57 0.03375 0.005625 0.204
+N B.fm 72 0.1164375 0 0.455175
+N B.sub 60 0.1681875 0 0.3576375
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 8 63 64 0 0 63 0 0 0 corridor | A 2 4 E 0 24 0 | B 4 1 E 0 30 0 | 0 0 | 0 0 0 | move,move,collision
+N A.main 55 0.16921875 0 0.646
+N A.ping 59 0.03375 0.005625 0.2584
+N B.fm 67 0.08015625 0 0.56525
+N B.sub 55 0.11578125 0 0.444125
+N fx.collision 43 0.08 0.02 0.7
 T 9 0 1 1 0 0 0 0 0 corridor | A 0 4 E 0 24 0 | B 4 0 W 0 30 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 9 1 2 2 0 1 0 0 0 corridor | A 0 4 S 0 24 0 | B 3 0 W 0 30 0 | 0 0 | 0 0 0 | turn,move
+N A.main 53 0.1745625 0 0.45
+N A.ping 57 0.03375 0.005625 0.18
+N B.fm 69 0.054 0 0.3822
+N B.sub 57 0.078 0 0.3003
 T 9 2 3 3 0 2 0 0 0 corridor | A 0 4 S 0 24 0 | B 4 0 W 0 30 0 | 0 0 | 0 1 1 | wait,move
+N B.fm 62 0.1215 0 0.3185
+N B.sub 50 0.1755 0 0.25025
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 9 3 4 4 0 3 0 0 0 corridor | A 0 4 E 0 24 0 | B 4 0 W 0 30 0 | 0 0 | 1 0 0 | turn,ping
+N A.main 53 0.143390625 0 0.4335
+N A.ping 57 0.03375 0.005625 0.1734
+N B.fm 62 0.09315 0 0.348075
+N B.sub 50 0.13455 0 0.2734875
+N drum.kick 24 0.18 0 1
 T 9 4 5 5 0 4 0 0 0 corridor | A 1 4 E 0 24 0 | B 4 0 S 0 30 0 | 0 0 | 0 0 1 | move,turn
+N A.main 57 0.1425 0 0.748
+N A.ping 60 0.03375 0.005625 0.2992
+N B.fm 65 0.165375 0 0.315
+N B.sub 53 0.238875 0 0.2475
+N drum.hihat -1 0.03 0 0.5
 T 9 5 6 6 0 5 0 0 0 corridor | A 1 4 E 0 24 0 | B 4 0 S 0 30 0 | 0 0 | 0 1 0 | ping,wait
+N A.main 57 0.10153125 0 0.72675
+N A.ping 60 0.03375 0.005625 0.2907
+N drum.snare -1 0.1 0 0.7
 T 9 6 7 7 0 6 0 0 0 corridor | A 1 4 E 0 24 0 | B 4 0 W 0 30 0 | 0 0 | 1 0 1 | wait,turn
+N A.main 57 0.061453125 0 0.1445
+N B.fm 65 0.108675 0 0.23205
+N B.sub 53 0.156975 0 0.182325
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 9 7 8 8 0 7 0 0 0 corridor | A 1 4 E 0 24 0 | B 4 0 S 0 30 0 | 0 0 | 0 0 0 | wait,turn
+N B.fm 65 0.06615 0 0.33075
+N B.sub 53 0.09555 0 0.259875
 T 9 8 9 9 0 8 0 0 0 corridor | A 1 4 E 0 24 0 | B 4 0 S 0 30 0 | 0 0 | 1 0 1 | ping,wait
+N A.main 57 0.106875 0 0.765
+N A.ping 60 0.03375 0.005625 0.306
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 9 9 10 10 0 9 0 0 0 corridor | A 1 4 E 0 24 0 | B 4 0 S 0 30 0 | 0 0 | 0 0 0 | ping,wait
+N A.main 57 0.12290625 0 0.65025
+N A.ping 60 0.03375 0.005625 0.2601
 T 9 10 11 11 0 10 0 0 0 corridor | A 0 4 E 0 24 0 | B 4 0 S 0 30 0 | 0 0 | 0 1 1 | move,wait
+N A.main 53 0.12825 0 0.6545
+N A.ping 57 0.03375 0.005625 0.2618
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 9 11 12 12 0 11 0 0 0 corridor | A 0 4 S 0 24 0 | B 4 0 E 0 30 0 | 0 0 | 1 0 0 | turn,turn
+N A.main 53 0.13965 0 0.495
+N A.ping 57 0.03375 0.005625 0.198
+N B.fm 62 0.13584375 0 0.30345
+N B.sub 50 0.19621875 0 0.238425
+N drum.kick 24 0.18 0 1
 T 9 12 13 13 0 12 0 0 0 corridor | A 0 4 S 0 24 0 | B 4 0 E 0 30 0 | 0 0 | 0 0 1 | wait,wait
+N B.fm 62 0.050625 0 0.119
+N B.sub 50 0.073125 0 0.0935
+N drum.hihat -1 0.03 0 0.5
 T 9 13 14 14 0 13 0 0 0 corridor | A 0 3 S 0 24 0 | B 4 0 E 0 30 0 | 0 0 | 0 1 0 | move,wait
+N A.main 65 0.17955 0 0.5775
+N A.ping 69 0.03375 0.005625 0.231
+N drum.snare -1 0.1 0 0.7
 T 9 14 15 15 0 14 0 0 0 corridor | A 0 4 S 0 24 0 | B 3 0 E 0 30 0 | 0 0 | 1 0 1 | move,collision,move
+N A.main 53 0.049875 0 0.7875
+N A.ping 57 0.03375 0.005625 0.315
+N B.fm 69 0.1215 0 0.45815
+N B.sub 57 0.1755 0 0.359975
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 9 15 16 0 0 15 0 0 0 corridor | A 0 3 S 0 24 0 | B 3 0 E 0 30 0 | 0 0 | 0 0 0 | move,wait
+N A.main 62 0.2244375 0 0.525
+N A.ping 65 0.03375 0.005625 0.21
 T 9 16 17 1 0 16 0 0 0 corridor | A 0 2 S 0 24 0 | B 2 2 E 1 30 0 | 0 0 | 1 0 1 | move,pulse,move,move,belt,move,belt,zap
+N A.main 62 0.161595 0 0.55125
+N A.ping 65 0.03375 0.005625 0.2205
+N B.fm 71 0.01875 0 0.472311
+N B.sub 59 0.08775 0 0.3711015
+N B.fm 71 0.10125 0.0225 0.269892
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 9 17 18 2 0 17 0 0 0 corridor | A 0 2 S 0 24 0 | B 2 2 E 2 30 0 | 0 0 | 0 0 0 | wait,pulse,wait,zap
+N A.main 62 0.10773 0 0.165
+N B.fm 72 0.010125 0 0.144942
+N B.sub 60 0.014625 0 0.113883
+N fx.pulse 84 0.06 0.01 0.4
+N fx.zap -1 0.06 0.03 0.6
 T 9 18 19 3 0 18 0 0 0 corridor | A 0 3 S 0 24 0 | B 2 2 E 3 30 0 | 0 0 | 0 1 1 | move,collision,zap
+N A.main 62 0.249375 0 0.6
+N A.ping 65 0.03375 0.005625 0.24
+N B.fm 72 0.030375 0 0.542283
+N B.sub 60 0.043875 0 0.4260795
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 9 19 20 4 0 19 0 0 0 corridor | A 0 3 W 0 24 0 | B 2 2 S 4 30 0 | 0 0 | 1 0 0 | turn,turn,zap
+N A.main 62 0.09975 0 0.39
+N A.ping 65 0.03375 0.005625 0.156
+N B.fm 72 0.0826875 0 0.4158
+N B.sub 60 0.1194375 0 0.3267
+N drum.kick 24 0.18 0 1
+N fx.zap -1 0.06 0.02 0.6
 T 9 20 21 5 0 20 0 0 0 corridor | A 0 3 W 0 24 0 | B 2 2 S 5 30 0 | 0 0 | 0 0 1 | wait,move,move,belt,zap
+N B.fm 72 0.01875 0 0.5586
+N B.sub 60 0.3241875 0 0.4389
+N B.fm 72 0.185625 0.0225 0.3192
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 9 21 22 6 0 21 0 0 0 corridor | A 0 3 S 0 24 0 | B 2 2 S 5 30 0 | 0 0 | 0 1 0 | turn,wait
+N A.main 62 0.1745625 0 0.45
+N A.ping 65 0.03375 0.005625 0.18
+N drum.snare -1 0.1 0 0.7
 T 9 22 23 7 0 22 0 0 0 corridor | A 0 4 S 0 24 0 | B 2 2 E 6 30 1 | 0 0 | 1 0 1 | move,turn,zap,zap
+N A.main 50 0.23690625 0 0.57
+N A.ping 53 0.03375 0.005625 0.228
+N B.fm 60 0.067921875 0 0.42483
+N B.sub 48 0.098109375 0 0.333795
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 9 23 24 8 0 23 0 0 0 corridor | A 0 3 S 0 24 0 | B 2 1 S 0 31 0 | 0 0 | 0 0 0 | death,move,turn,move,belt,move,belt,move,belt
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 65 0.213215625 0 0.49875
+N A.ping 69 0.03375 0.005625 0.1995
+N B.fm 69 0.01875 0 0.3465
+N B.sub 57 0.1911 0 0.27225
+N B.fm 69 0.135 0.0225 0.198

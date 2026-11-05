@@ -63,11 +63,35 @@ The HTML's game, bit for bit, in C with host tests; no sound and no screen yet.
 
 ## Phase 2: sound = HTML
 
-- `tools/tone-ref`: render the HTML's voices with Tone.Offline (as SkurkyMello does) into `tests/golden/html`
-- The voices: lead and bass (Tone.Synth), the event one-shots (NoiseSynth, MembraneSynth), the drums; the chain:
-  the chip colour (bit-crush, EQ, delay), the buses (melody, bot B, percussion, FX, drums), reverb, limiter, master
-- Arp and chords from position (`noteFromPosition`, `buildArpChord`, the arp patterns), ghost ticks
-- `make parity`: the C engine against the renders, with tolerances in the tests; the audio's load measured
+Three layers, each checked against the HTML itself (DECISIONS.md D8). (The April handoff's "chip colour" of
+bit-crush, EQ and delay is not in the HTML of 2026-11-05: its chain is the buses, bot B's low-pass, a hall reverb
+and the limiter.)
+
+### 2a. The score: which notes, when, how long, how loud (exact, as phase 1)
+
+- [x] `tools/trace`: the HTML's script in Node with a recording `audio`: every `triggerAttackRelease` of every tick
+      (voice, note, time, duration, velocity) into the golden traces (2026-11-05)
+- [x] `rs_score.c`: playBoardSound (noteFromPosition, heat, unison avoidance, the arps and chords from position),
+      playGhostTick (tpm 2 and 4), the event sounds (the first four events, their 10 ms offsets, the doubled reset),
+      the drums, the explosion, the coin; integer time (1/256 sample) and velocity (Q15)
+- [x] Every note of every scenario equal to the HTML's, within rounding: 90,391 notes in 36 scenarios (three new
+      ones for tempo, 1/4 speed and the root's transpose), every voice; deliberate bugs fail them; the score is in
+      the chip's fingerprint (8491cc7c on chip and host)
+
+### 2b. The voices: how each one sounds (measured, as SkurkyMello)
+
+- [ ] `tools/tone-ref`: the HTML's own `buildAudio()` in headless Chromium (Brave here) under Tone.Offline, Tone
+      14.7.77 as the page loads it: each voice alone, and whole loops of the default scenario
+- [ ] Find out what the chain really does: fxGain -> reverb send -> reverb -> fxGain is a cycle without a
+      DelayNode, which Web Audio mutes; if so the FX bus and the reverb are silent in the HTML, and the port is too
+- [ ] The C voices: Tone.Synth (square, triangle; Tone's exponential envelope), NoiseSynth (white, brown),
+      MembraneSynth (kick, thump); `make parity` against the renders with tolerances in the tests
+
+### 2c. The mix and the load
+
+- [ ] The buses and their levels (DEFAULT_MIXER), bot B's 1400 Hz low-pass, the reverb as the renders show it, the
+      limiter at -6 dB; voice allocation as Tone's monophonic Synths (a new note cuts the last)
+- [ ] In the audio interrupt; the load measured in fm1-emu under FM1_STRICT, the worst block under half the budget
 
 ## Phase 3: playing it (controls and screen)
 

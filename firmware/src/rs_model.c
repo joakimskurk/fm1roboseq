@@ -229,7 +229,7 @@ static void check_death(struct rs_state *s, int b, struct rs_tick_out *o)   /* c
     ev(o, RS_EV_ZAP);
 }
 
-static void process_death(struct rs_state *s, int b, struct rs_tick_out *o)   /* processDeath() */
+static void process_death(struct rs_state *s, int b, struct rs_tick_out *o)   /* processDeath(), and its sound */
 {
     static const int8_t CX[4] = {0, RS_COLS - 1, 0, RS_COLS - 1}, CY[4] = {0, 0, RS_ROWS - 1, RS_ROWS - 1};
     struct rs_bot *bot = &s->bot[b];
@@ -243,6 +243,7 @@ static void process_death(struct rs_state *s, int b, struct rs_tick_out *o)   /*
     bot->x = (int8_t)bx, bot->y = (int8_t)by, bot->dir = START[b].dir;
     o->died[b] = 1;
     ev(o, RS_EV_DEATH);
+    rs_score_event(s, RS_EV_DEATH, 0, o);               /* playEventSound("death"), at once */
 }
 
 static void apply_tile_effects(struct rs_state *s, int b, struct rs_tick_out *o)   /* applyTileEffects() */
@@ -334,6 +335,7 @@ void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
         if (next >= s->loop_len) {                      /* the loop resets */
             s->cycle++;
             o->loop_reset = 1;
+            rs_score_event(s, RS_EV_RESET, 0, o);       /* playEventSound("reset") (and again with the events below) */
             for (int b = 0; b < 2; b++) process_death(s, b, o);
             if (s->pending_board != RS_B_NONE) {
                 s->board = s->pending_tiles;
@@ -360,8 +362,10 @@ void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
             if (rs_skips(b, (uint32_t)si, s->cycle, st->prob)) { ev(o, RS_EV_WAIT); continue; }   /* hesitated */
             execute_step(s, b, st, o);
             s->bot[b].stepped_tile = tile_at(s, s->bot[b].x, s->bot[b].y);
+            s->bot[b].stepped_dir = s->board.t[s->bot[b].y * RS_COLS + s->bot[b].x].dir;
             apply_tile_effects(s, b, o);
             check_death(s, b, o);
+            rs_score_board(s, b, st, o);                /* playBoardSound(), from where it ended up */
             o->acted[b] = 1, o->played[b] = *st;
         }
         /* the love check: both on one tile, two steps running, no dash coming */
@@ -373,25 +377,34 @@ void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
                 int ni = (si + 1) % s->loop_len;
                 const struct rs_step *na = &s->prog[0].s[ni % (s->prog[0].len ? s->prog[0].len : s->loop_len)];
                 const struct rs_step *nb = &s->prog[1].s[ni % (s->prog[1].len ? s->prog[1].len : s->loop_len)];
-                if (na->action != RS_DASH && nb->action != RS_DASH) { ev(o, RS_EV_LOVE); o->love = 1; }
+                if (na->action != RS_DASH && nb->action != RS_DASH) { ev(o, RS_EV_LOVE); o->love = 1; rs_score_coin(s, o); }
             }
         } else {
             s->love_steps = 0;
         }
     } else if (tpm > 1) {                               /* a ghost tick (also the reset tick's, phase 0: the HTML's) */
         o->ghost = 1, o->ghost_phase = (uint8_t)(s->move_tick % tpm);
+        rs_score_ghost(s, o->ghost_phase, o);
     }
 
     if (is_move) {                                      /* the drums, locked to the moves */
         if (s->drums_on) {
             uint8_t i = (uint8_t)(s->drum_tick % rs_drum_steps(s->loop_len));
             o->drum_k = s->drum_k[i], o->drum_s = s->drum_s[i], o->drum_h = s->drum_h[i];
+            rs_score_drums(s, i, o);
         }
         s->drum_tick = (uint8_t)((s->drum_tick + 1) % rs_drum_steps(s->loop_len));
     } else if (tpm > 1 && s->drums_on) {
         o->drum_ghost = 1;
+        rs_score_ghost_hat(s, (int)(s->move_tick % tpm), o);
     }
     s->move_tick++;
+    /* the events' own sounds: the first four (a death keeps its place, it has sounded), 10 ms apart */
+    for (int i = 0, at = 0; i < o->nevents && i < 4; i++) {
+        if (o->events[i] == RS_EV_DEATH) continue;
+        rs_score_event(s, o->events[i], (uint32_t)at * 112896u, o);   /* 10 ms: 441 samples x 256 */
+        at++;
+    }
     if (s->rnd_due) {                                   /* seq 2's rolls, after the tick as the HTML's setTimeout */
         uint8_t due = s->rnd_due;
         s->rnd_due = 0;
@@ -580,7 +593,7 @@ int rs_pop_undo(struct rs_state *s)
 int rs_undo_depth(void) { return undo_n; }
 void rs_undo_clear(void) { undo_top = undo_n = 0; }
 
-/* ---- a fingerprint of the model: the default state's first 400 ticks (tests/golden/traces/default.trace) and the
+/* ---- a fingerprint of the model: the default state's first 400 ticks with their score (default.trace) and the
  * chance of 64 steps x 32 loops for both bots, hashed (FNV-1a). The same on any machine that runs the model right:
  * the host tests print it, the firmware computes it at boot, make emu reads it back from the chip's RAM. */
 static uint32_t fnv(uint32_t h, uint32_t v)
@@ -602,6 +615,11 @@ uint32_t rs_selfcheck(void)
             h = fnv(h, (uint32_t)(uint8_t)s.bot[b].x | (uint32_t)(uint8_t)s.bot[b].y << 8 | (uint32_t)s.bot[b].dir << 16 |
                            (uint32_t)(uint16_t)s.bot[b].heat << 20);
         for (int i = 0; i < o.nevents; i++) h = fnv(h, o.events[i]);
+        for (int i = 0; i < o.nnotes; i++) {            /* and the score */
+            const struct rs_note *n = &o.notes[i];
+            h = fnv(h, (uint32_t)n->voice | (uint32_t)(uint8_t)n->midi << 8 | (uint32_t)n->vel << 16);
+            h = fnv(fnv(h, n->at), n->dur);
+        }
         h = fnv(h, (uint32_t)s.cycle << 8 | (uint32_t)(uint16_t)s.step);
     }
     for (int b = 0; b < 2; b++)

@@ -1,6 +1,7 @@
 # board-spinner: reference/roboseq.html run by tools/trace/gen.mjs
 board spinner
 loop 16
+bpm 80 0 1
 tpm 1
 vmtrigger loop
 vmfreq 4
@@ -143,162 +144,1393 @@ step B 62 wait steady 100
 step B 63 wait steady 100
 ticks 160
 T 0 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | -
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 0 1 2 2 0 1 0 0 0 spinner | A 1 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 1 | move,rotator,move,rotator
+N A.main 57 0.0855 0 0.88
+N A.ping 60 0.03375 0.005625 0.352
+N B.fm 72 0.2716875 0 0.357
+N B.sub 60 0.3924375 0 0.2805
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 0 2 3 3 0 2 0 0 0 spinner | A 1 3 N 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 1 1 | move,move
+N A.main 65 0.10153125 0 0.76
+N A.ping 69 0.03375 0.005625 0.304
+N B.fm 72 0.23625 0 0.42
+N B.sub 60 0.34125 0 0.33
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 0 3 4 4 0 3 0 0 0 spinner | A 1 1 N 0 0 0 | B 2 2 S 1 0 0 | 0 0 | 0 0 1 | move,move,move,move,belt,zap
+N A.main 77 0.021375 0 1
+N A.ping 81 0.03375 0.005625 0.4
+N B.fm 62 0.01875 0 0.43092
+N B.sub 50 0.3241875 0 0.33858
+N B.fm 62 0.185625 0.0225 0.24624
+N drum.hihat -1 0.03 0 0.5
 T 0 4 5 5 0 4 0 0 0 spinner | A 2 2 N 1 0 0 | B 2 2 S 2 0 0 | 0 1 | 1 0 1 | move,move,belt,zap,wait,zap
+N A.main 69 0.013125 0 0.7182
+N A.ping 72 0.03375 0.005625 0.28728
+N A.main 69 0.091875 0.015 0.32319
+N A.main 74 0.185625 0.10875 0.31119
+N B.fm 65 0.02835 0 0.13398
+N B.sub 53 0.04095 0 0.10527
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 0 5 6 6 0 5 0 0 0 spinner | A 2 2 W 2 0 0 | B 2 2 W 3 0 0 | 0 2 | 0 0 1 | turn,zap,turn,zap
+N A.main 71 0.05735625 0 0.38454
+N A.ping 74 0.03375 0.005625 0.153816
+N B.fm 65 0.0448875 0 0.321594
+N B.sub 53 0.0648375 0 0.252681
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 0 6 7 7 0 6 0 0 0 spinner | A 2 2 W 3 0 0 | B 0 2 W 3 0 0 | 0 0 | 0 1 1 | move,move,belt,zap,move,move
+N A.main 71 0.013125 0 0.54808
+N A.ping 74 0.03375 0.005625 0.219232
+N A.main 71 0.091875 0.015 0.246636
+N A.main 76 0.091875 0.10875 0.234636
+N A.main 77 0.219375 0.2025 0.222636
+N B.fm 71 0.0675 0 0.5642
+N B.sub 59 0.0975 0 0.4433
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 0 7 8 8 0 7 0 0 0 spinner | A 0 2 W 5 0 0 | B 0 2 W 5 0 0 | 7 0 | 0 0 1 | move,move,zap,collision,collision,zap
+N A.main 69 0.057 0 0.8866
+N A.ping 72 0.03375 0.005625 0.35464
+N B.fm 65 0.0675 0 0.637
+N B.sub 53 0.0975 0 0.5005
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 0 8 9 9 0 8 0 0 0 spinner | A 0 2 W 5 0 0 | B 0 2 W 5 0 0 | 6 0 | 1 0 1 | collision,collision
+N A.main 69 0.135375 0 0.6916
+N A.ping 72 0.03375 0.005625 0.27664
+N B.fm 65 0.108 0 0.56056
+N B.sub 53 0.156 0 0.44044
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 0 9 10 10 0 9 0 0 0 spinner | A 0 2 W 5 0 0 | B 0 2 W 7 0 1 | 7 0 | 0 0 1 | collision,collision,zap,ping,zap
+N A.main 69 0.0285 0 0.9555
+N A.ping 72 0.03375 0.005625 0.3822
+N B.fm 65 0.0324 0 0.601965
+N B.sub 53 0.0468 0 0.4729725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 0 10 11 11 0 10 0 0 0 spinner | A 0 2 N 5 0 0 | B 2 0 W 0 1 0 | 6 0 | 0 1 1 | death,turn,move,move,pulse
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 65 0.029925 0 0.882
+N A.ping 69 0.03375 0.005625 0.3528
+N B.fm 69 0.0972 0 0.5005
+N B.sub 57 0.1404 0 0.39325
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 0 11 12 12 0 11 0 0 0 spinner | A 0 2 E 5 0 0 | B 3 0 S 0 1 0 | 5 0 | 0 0 1 | turn,move,rotator
+N A.main 65 0.09975 0 0.7854
+N A.ping 69 0.03375 0.005625 0.31416
+N B.fm 69 0.1701 0 0.40425
+N B.sub 57 0.2457 0 0.317625
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 0 12 13 13 0 12 0 0 0 spinner | A 2 2 E 6 0 1 | B 3 0 E 0 1 0 | 4 0 | 1 0 1 | move,move,zap,zap,wait,rotator
+N A.main 71 0.035625 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 62 0.04809375 0 0.11305
+N B.sub 50 0.06946875 0 0.088825
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 0 13 14 14 0 13 0 0 0 spinner | A 1 0 S 0 1 0 | B 3 0 E 0 1 0 | 3 0 | 0 0 1 | death,move,rotator,turn,rotator
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 77 0.23690625 0 0.57
+N A.ping 81 0.03375 0.005625 0.228
+N B.fm 72 0.11221875 0 0.33915
+N B.sub 60 0.16209375 0 0.266475
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 0 14 15 15 0 14 0 0 0 spinner | A 1 0 W 0 1 0 | B 3 0 E 0 1 0 | 2 0 | 0 1 1 | ping,rotator,turn,rotator
+N A.main 77 0.081225 0 0.55575
+N A.ping 81 0.03375 0.005625 0.2223
+N B.fm 72 0.04725 0 0.37485
+N B.sub 60 0.06825 0 0.294525
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 0 15 16 0 0 15 0 0 0 spinner | A 1 0 N 0 1 0 | B 3 0 N 0 1 0 | 1 0 | 0 0 1 | wait,rotator,ping,rotator
+N A.main 77 0.030459375 0 0.19
+N B.fm 72 0.0486 0 0.693
+N B.sub 60 0.0702 0 0.5445
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 1 0 1 1 1 0 0 0 0 spinner | A 0 4 E 0 1 0 | B 4 0 W 0 1 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 1 1 2 2 1 1 0 0 0 spinner | A 1 4 N 0 1 0 | B 3 0 S 0 1 0 | 0 0 | 0 0 1 | move,rotator,move,rotator
+N A.main 53 0.0855 0 0.88
+N A.ping 57 0.03375 0.005625 0.352
+N B.fm 69 0.2716875 0 0.357
+N B.sub 57 0.3924375 0 0.2805
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 1 2 3 3 1 2 0 0 0 spinner | A 1 3 N 0 1 0 | B 3 1 S 0 1 0 | 0 0 | 0 1 1 | move,move
+N A.main 62 0.10153125 0 0.76
+N A.ping 65 0.03375 0.005625 0.304
+N B.fm 69 0.23625 0 0.42
+N B.sub 57 0.34125 0 0.33
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 1 3 4 4 1 3 0 0 0 spinner | A 1 1 N 0 1 0 | B 2 2 S 1 1 0 | 0 0 | 0 0 1 | move,move,move,move,belt,zap
+N A.main 74 0.021375 0 1
+N A.ping 77 0.03375 0.005625 0.4
+N B.fm 71 0.01875 0 0.43092
+N B.sub 59 0.3241875 0 0.33858
+N B.fm 71 0.185625 0.0225 0.24624
+N drum.hihat -1 0.03 0 0.5
 T 1 4 5 5 1 4 0 0 0 spinner | A 2 2 N 1 1 0 | B 2 2 S 2 1 0 | 0 1 | 1 0 1 | move,move,belt,zap,wait,zap
+N A.main 65 0.013125 0 0.7182
+N A.ping 69 0.03375 0.005625 0.28728
+N A.main 65 0.091875 0.015 0.32319
+N A.main 71 0.185625 0.10875 0.31119
+N B.fm 62 0.02835 0 0.13398
+N B.sub 50 0.04095 0 0.10527
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 1 5 6 6 1 5 0 0 0 spinner | A 2 2 W 2 1 0 | B 2 2 W 3 1 0 | 0 2 | 0 0 1 | turn,zap,turn,zap
+N A.main 67 0.05735625 0 0.38454
+N A.ping 71 0.03375 0.005625 0.153816
+N B.fm 62 0.0448875 0 0.321594
+N B.sub 50 0.0648375 0 0.252681
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 1 6 7 7 1 6 0 0 0 spinner | A 2 2 W 3 1 0 | B 0 2 W 3 1 0 | 0 0 | 0 1 1 | move,move,belt,zap,move,move
+N A.main 67 0.013125 0 0.54808
+N A.ping 71 0.03375 0.005625 0.219232
+N A.main 67 0.091875 0.015 0.246636
+N A.main 72 0.091875 0.10875 0.234636
+N A.main 74 0.219375 0.2025 0.222636
+N B.fm 67 0.0675 0 0.5642
+N B.sub 55 0.0975 0 0.4433
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 1 7 8 8 1 7 0 0 0 spinner | A 0 2 W 5 1 0 | B 0 2 W 5 1 0 | 7 0 | 0 0 1 | move,move,zap,collision,collision,zap
+N A.main 67 0.057 0 0.8866
+N A.ping 71 0.03375 0.005625 0.35464
+N B.fm 64 0.0675 0 0.637
+N B.sub 52 0.0975 0 0.5005
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 1 8 9 9 1 8 0 0 0 spinner | A 0 2 W 5 1 0 | B 0 2 W 5 1 0 | 6 0 | 1 0 1 | collision,collision
+N A.main 67 0.135375 0 0.6916
+N A.ping 71 0.03375 0.005625 0.27664
+N B.fm 64 0.108 0 0.56056
+N B.sub 52 0.156 0 0.44044
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 1 9 10 10 1 9 0 0 0 spinner | A 0 2 W 5 1 0 | B 0 2 W 7 1 1 | 7 0 | 0 0 1 | collision,collision,zap,ping,zap
+N A.main 67 0.0285 0 0.9555
+N A.ping 71 0.03375 0.005625 0.3822
+N B.fm 64 0.0324 0 0.601965
+N B.sub 52 0.0468 0 0.4729725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 1 10 11 11 1 10 0 0 0 spinner | A 0 2 N 5 1 0 | B 2 0 W 0 2 0 | 6 0 | 0 1 1 | death,turn,move,move,pulse
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 64 0.029925 0 0.882
+N A.ping 67 0.03375 0.005625 0.3528
+N B.fm 67 0.0972 0 0.5005
+N B.sub 55 0.1404 0 0.39325
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 1 11 12 12 1 11 0 0 0 spinner | A 0 2 E 5 1 0 | B 3 0 S 0 2 0 | 5 0 | 0 0 1 | turn,move,rotator
+N A.main 64 0.09975 0 0.7854
+N A.ping 67 0.03375 0.005625 0.31416
+N B.fm 67 0.1701 0 0.40425
+N B.sub 55 0.2457 0 0.317625
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 1 12 13 13 1 12 0 0 0 spinner | A 2 2 E 6 1 1 | B 3 0 E 0 2 0 | 4 0 | 1 0 1 | move,move,zap,zap,wait,rotator
+N A.main 67 0.035625 0 1
+N A.ping 71 0.03375 0.005625 0.4
+N B.fm 71 0.04809375 0 0.11305
+N B.sub 59 0.06946875 0 0.088825
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 1 13 14 14 1 13 0 0 0 spinner | A 1 0 S 0 2 0 | B 3 0 E 0 2 0 | 3 0 | 0 0 1 | death,move,rotator,turn,rotator
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 74 0.23690625 0 0.57
+N A.ping 77 0.03375 0.005625 0.228
+N B.fm 69 0.11221875 0 0.33915
+N B.sub 57 0.16209375 0 0.266475
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 1 14 15 15 1 14 0 0 0 spinner | A 1 0 W 0 2 0 | B 3 0 E 0 2 0 | 2 0 | 0 1 1 | ping,rotator,turn,rotator
+N A.main 74 0.081225 0 0.55575
+N A.ping 77 0.03375 0.005625 0.2223
+N B.fm 69 0.04725 0 0.37485
+N B.sub 57 0.06825 0 0.294525
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 1 15 16 0 1 15 0 0 0 spinner | A 1 0 N 0 2 0 | B 3 0 N 0 2 0 | 1 0 | 0 0 1 | wait,rotator,ping,rotator
+N A.main 74 0.030459375 0 0.19
+N B.fm 69 0.0486 0 0.693
+N B.sub 57 0.0702 0 0.5445
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 2 0 1 1 2 0 0 0 0 spinner | A 0 4 E 0 2 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 2 1 2 2 2 1 0 0 0 spinner | A 1 4 N 0 2 0 | B 3 0 S 0 2 0 | 0 0 | 0 0 1 | move,rotator,move,rotator
+N A.main 59 0.0855 0 0.88
+N A.ping 62 0.03375 0.005625 0.352
+N B.fm 62 0.2716875 0 0.357
+N B.sub 50 0.3924375 0 0.2805
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 2 2 3 3 2 2 0 0 0 spinner | A 1 3 N 0 2 0 | B 3 1 S 0 2 0 | 0 0 | 0 1 1 | move,move
+N A.main 67 0.10153125 0 0.76
+N A.ping 71 0.03375 0.005625 0.304
+N B.fm 62 0.23625 0 0.42
+N B.sub 50 0.34125 0 0.33
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 2 3 4 4 2 3 0 0 0 spinner | A 1 1 N 0 2 0 | B 2 2 S 1 2 0 | 0 0 | 0 0 1 | move,move,move,move,belt,zap
+N A.main 79 0.021375 0 1
+N A.ping 83 0.03375 0.005625 0.4
+N B.fm 64 0.01875 0 0.43092
+N B.sub 52 0.3241875 0 0.33858
+N B.fm 64 0.185625 0.0225 0.24624
+N drum.hihat -1 0.03 0 0.5
 T 2 4 5 5 2 4 0 0 0 spinner | A 2 2 N 1 2 0 | B 2 2 S 2 2 0 | 0 1 | 1 0 1 | move,move,belt,zap,wait,zap
+N A.main 71 0.013125 0 0.7182
+N A.ping 74 0.03375 0.005625 0.28728
+N A.main 71 0.091875 0.015 0.32319
+N A.main 76 0.185625 0.10875 0.31119
+N B.fm 67 0.02835 0 0.13398
+N B.sub 55 0.04095 0 0.10527
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 2 5 6 6 2 5 0 0 0 spinner | A 2 2 W 2 2 0 | B 2 2 W 3 2 0 | 0 2 | 0 0 1 | turn,zap,turn,zap
+N A.main 72 0.05735625 0 0.38454
+N A.ping 76 0.03375 0.005625 0.153816
+N B.fm 67 0.0448875 0 0.321594
+N B.sub 55 0.0648375 0 0.252681
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 2 6 7 7 2 6 0 0 0 spinner | A 2 2 W 3 2 0 | B 0 2 W 3 2 0 | 0 0 | 0 1 1 | move,move,belt,zap,move,move
+N A.main 72 0.013125 0 0.54808
+N A.ping 76 0.03375 0.005625 0.219232
+N A.main 72 0.091875 0.015 0.246636
+N A.main 77 0.091875 0.10875 0.234636
+N A.main 79 0.219375 0.2025 0.222636
+N B.fm 72 0.0675 0 0.5642
+N B.sub 60 0.0975 0 0.4433
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 2 7 8 8 2 7 0 0 0 spinner | A 0 2 W 5 2 0 | B 0 2 W 5 2 0 | 7 0 | 0 0 1 | move,move,zap,collision,collision,zap
+N A.main 72 0.057 0 0.8866
+N A.ping 76 0.03375 0.005625 0.35464
+N B.fm 69 0.0675 0 0.637
+N B.sub 57 0.0975 0 0.5005
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 2 8 9 9 2 8 0 0 0 spinner | A 0 2 W 5 2 0 | B 0 2 W 5 2 0 | 6 0 | 1 0 1 | collision,collision
+N A.main 72 0.135375 0 0.6916
+N A.ping 76 0.03375 0.005625 0.27664
+N B.fm 69 0.108 0 0.56056
+N B.sub 57 0.156 0 0.44044
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 2 9 10 10 2 9 0 0 0 spinner | A 0 2 W 5 2 0 | B 0 2 W 7 2 1 | 7 0 | 0 0 1 | collision,collision,zap,ping,zap
+N A.main 72 0.0285 0 0.9555
+N A.ping 76 0.03375 0.005625 0.3822
+N B.fm 69 0.0324 0 0.601965
+N B.sub 57 0.0468 0 0.4729725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 2 10 11 11 2 10 0 0 0 spinner | A 0 2 N 5 2 0 | B 2 0 W 0 3 0 | 6 0 | 0 1 1 | death,turn,move,move,pulse
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 69 0.029925 0 0.882
+N A.ping 72 0.03375 0.005625 0.3528
+N B.fm 72 0.0972 0 0.5005
+N B.sub 60 0.1404 0 0.39325
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 2 11 12 12 2 11 0 0 0 spinner | A 0 2 E 5 2 0 | B 3 0 S 0 3 0 | 5 0 | 0 0 1 | turn,move,rotator
+N A.main 69 0.09975 0 0.7854
+N A.ping 72 0.03375 0.005625 0.31416
+N B.fm 72 0.1701 0 0.40425
+N B.sub 60 0.2457 0 0.317625
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 2 12 13 13 2 12 0 0 0 spinner | A 2 2 E 6 2 1 | B 3 0 E 0 3 0 | 4 0 | 1 0 1 | move,move,zap,zap,wait,rotator
+N A.main 72 0.035625 0 1
+N A.ping 76 0.03375 0.005625 0.4
+N B.fm 64 0.04809375 0 0.11305
+N B.sub 52 0.06946875 0 0.088825
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 2 13 14 14 2 13 0 0 0 spinner | A 1 0 S 0 3 0 | B 3 0 E 0 3 0 | 3 0 | 0 0 1 | death,move,rotator,turn,rotator
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 79 0.23690625 0 0.57
+N A.ping 83 0.03375 0.005625 0.228
+N B.fm 62 0.11221875 0 0.33915
+N B.sub 50 0.16209375 0 0.266475
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 2 14 15 15 2 14 0 0 0 spinner | A 1 0 W 0 3 0 | B 3 0 E 0 3 0 | 2 0 | 0 1 1 | ping,rotator,turn,rotator
+N A.main 79 0.081225 0 0.55575
+N A.ping 83 0.03375 0.005625 0.2223
+N B.fm 62 0.04725 0 0.37485
+N B.sub 50 0.06825 0 0.294525
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 2 15 16 0 2 15 0 0 0 spinner | A 1 0 N 0 3 0 | B 3 0 N 0 3 0 | 1 0 | 0 0 1 | wait,rotator,ping,rotator
+N A.main 79 0.030459375 0 0.19
+N B.fm 62 0.0486 0 0.693
+N B.sub 50 0.0702 0 0.5445
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 3 0 1 1 3 0 0 0 0 spinner | A 0 4 E 0 3 0 | B 4 0 W 0 3 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 3 1 2 2 3 1 0 0 0 spinner | A 1 4 N 0 3 0 | B 3 0 S 0 3 0 | 0 0 | 0 0 1 | move,rotator,move,rotator
+N A.main 62 0.0855 0 0.88
+N A.ping 65 0.03375 0.005625 0.352
+N B.fm 65 0.2716875 0 0.357
+N B.sub 53 0.3924375 0 0.2805
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 3 2 3 3 3 2 0 0 0 spinner | A 1 3 N 0 3 0 | B 3 1 S 0 3 0 | 0 0 | 0 1 1 | move,move
+N A.main 71 0.10153125 0 0.76
+N A.ping 74 0.03375 0.005625 0.304
+N B.fm 65 0.23625 0 0.42
+N B.sub 53 0.34125 0 0.33
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 3 3 4 4 3 3 0 0 0 spinner | A 1 1 N 0 3 0 | B 2 2 S 1 3 0 | 0 0 | 0 0 1 | move,move,move,move,belt,zap
+N A.main 83 0.021375 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 67 0.01875 0 0.43092
+N B.sub 55 0.3241875 0 0.33858
+N B.fm 67 0.185625 0.0225 0.24624
+N drum.hihat -1 0.03 0 0.5
 T 3 4 5 5 3 4 0 0 0 spinner | A 2 2 N 1 3 0 | B 2 2 S 2 3 0 | 0 1 | 1 0 1 | move,move,belt,zap,wait,zap
+N A.main 74 0.013125 0 0.7182
+N A.ping 77 0.03375 0.005625 0.28728
+N A.main 74 0.091875 0.015 0.32319
+N A.main 76 0.185625 0.10875 0.31119
+N B.fm 71 0.02835 0 0.13398
+N B.sub 59 0.04095 0 0.10527
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 3 5 6 6 3 5 0 0 0 spinner | A 2 2 W 2 3 0 | B 2 2 W 3 3 0 | 0 2 | 0 0 1 | turn,zap,turn,zap
+N A.main 76 0.05735625 0 0.38454
+N A.ping 79 0.03375 0.005625 0.153816
+N B.fm 71 0.0448875 0 0.321594
+N B.sub 59 0.0648375 0 0.252681
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 3 6 7 7 3 6 0 0 0 spinner | A 2 2 W 3 3 0 | B 0 2 W 3 3 0 | 0 0 | 0 1 1 | move,move,belt,zap,move,move
+N A.main 76 0.013125 0 0.54808
+N A.ping 79 0.03375 0.005625 0.219232
+N A.main 76 0.091875 0.015 0.246636
+N A.main 77 0.091875 0.10875 0.234636
+N A.main 79 0.219375 0.2025 0.222636
+N B.fm 64 0.0675 0 0.5642
+N B.sub 52 0.0975 0 0.4433
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 3 7 8 8 3 7 0 0 0 spinner | A 0 2 W 5 3 0 | B 0 2 W 5 3 0 | 7 0 | 0 0 1 | move,move,zap,collision,collision,zap
+N A.main 76 0.057 0 0.8866
+N A.ping 79 0.03375 0.005625 0.35464
+N B.fm 72 0.0675 0 0.637
+N B.sub 60 0.0975 0 0.5005
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 3 8 9 9 3 8 0 0 0 spinner | A 0 2 W 5 3 0 | B 0 2 W 5 3 0 | 6 0 | 1 0 1 | collision,collision
+N A.main 76 0.135375 0 0.6916
+N A.ping 79 0.03375 0.005625 0.27664
+N B.fm 72 0.108 0 0.56056
+N B.sub 60 0.156 0 0.44044
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 3 9 10 10 3 9 0 0 0 spinner | A 0 2 W 5 3 0 | B 0 2 W 7 3 1 | 7 0 | 0 0 1 | collision,collision,zap,ping,zap
+N A.main 76 0.0285 0 0.9555
+N A.ping 79 0.03375 0.005625 0.3822
+N B.fm 72 0.0324 0 0.601965
+N B.sub 60 0.0468 0 0.4729725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 3 10 11 11 3 10 0 0 0 spinner | A 0 2 N 5 3 0 | B 2 0 W 0 4 0 | 6 0 | 0 1 1 | death,turn,move,move,pulse
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 72 0.029925 0 0.882
+N A.ping 76 0.03375 0.005625 0.3528
+N B.fm 64 0.0972 0 0.5005
+N B.sub 52 0.1404 0 0.39325
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 3 11 12 12 3 11 0 0 0 spinner | A 0 2 E 5 3 0 | B 3 0 S 0 4 0 | 5 0 | 0 0 1 | turn,move,rotator
+N A.main 72 0.09975 0 0.7854
+N A.ping 76 0.03375 0.005625 0.31416
+N B.fm 64 0.1701 0 0.40425
+N B.sub 52 0.2457 0 0.317625
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 3 12 13 13 3 12 0 0 0 spinner | A 2 2 E 6 3 1 | B 3 0 E 0 4 0 | 4 0 | 1 0 1 | move,move,zap,zap,wait,rotator
+N A.main 76 0.035625 0 1
+N A.ping 79 0.03375 0.005625 0.4
+N B.fm 67 0.04809375 0 0.11305
+N B.sub 55 0.06946875 0 0.088825
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 3 13 14 14 3 13 0 0 0 spinner | A 1 0 S 0 4 0 | B 3 0 E 0 4 0 | 3 0 | 0 0 1 | death,move,rotator,turn,rotator
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 83 0.23690625 0 0.57
+N A.ping 74 0.03375 0.005625 0.228
+N B.fm 65 0.11221875 0 0.33915
+N B.sub 53 0.16209375 0 0.266475
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 3 14 15 15 3 14 0 0 0 spinner | A 1 0 W 0 4 0 | B 3 0 E 0 4 0 | 2 0 | 0 1 1 | ping,rotator,turn,rotator
+N A.main 83 0.081225 0 0.55575
+N A.ping 74 0.03375 0.005625 0.2223
+N B.fm 65 0.04725 0 0.37485
+N B.sub 53 0.06825 0 0.294525
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 3 15 16 0 3 15 0 0 0 spinner | A 1 0 N 0 4 0 | B 3 0 N 0 4 0 | 1 0 | 0 0 1 | wait,rotator,ping,rotator
+N A.main 83 0.030459375 0 0.19
+N B.fm 65 0.0486 0 0.693
+N B.sub 53 0.0702 0 0.5445
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 4 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 4 0 | B 4 0 W 0 4 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 4 1 2 2 0 1 0 0 0 spinner | A 1 4 N 0 4 0 | B 3 0 S 0 4 0 | 0 0 | 0 0 1 | move,rotator,move,rotator
+N A.main 57 0.0855 0 0.88
+N A.ping 60 0.03375 0.005625 0.352
+N B.fm 72 0.2716875 0 0.357
+N B.sub 60 0.3924375 0 0.2805
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 4 2 3 3 0 2 0 0 0 spinner | A 1 3 N 0 4 0 | B 3 1 S 0 4 0 | 0 0 | 0 1 1 | move,move
+N A.main 65 0.10153125 0 0.76
+N A.ping 69 0.03375 0.005625 0.304
+N B.fm 72 0.23625 0 0.42
+N B.sub 60 0.34125 0 0.33
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 4 3 4 4 0 3 0 0 0 spinner | A 1 1 N 0 4 0 | B 2 2 S 1 4 0 | 0 0 | 0 0 1 | move,move,move,move,belt,zap
+N A.main 77 0.021375 0 1
+N A.ping 81 0.03375 0.005625 0.4
+N B.fm 62 0.01875 0 0.43092
+N B.sub 50 0.3241875 0 0.33858
+N B.fm 62 0.185625 0.0225 0.24624
+N drum.hihat -1 0.03 0 0.5
 T 4 4 5 5 0 4 0 0 0 spinner | A 2 2 N 1 4 0 | B 2 2 S 2 4 0 | 0 1 | 1 0 1 | move,move,belt,zap,wait,zap
+N A.main 69 0.013125 0 0.7182
+N A.ping 72 0.03375 0.005625 0.28728
+N A.main 69 0.091875 0.015 0.32319
+N A.main 72 0.185625 0.10875 0.31119
+N B.fm 65 0.02835 0 0.13398
+N B.sub 53 0.04095 0 0.10527
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 4 5 6 6 0 5 0 0 0 spinner | A 2 2 W 2 4 0 | B 2 2 W 3 4 0 | 0 2 | 0 0 1 | turn,zap,turn,zap
+N A.main 71 0.05735625 0 0.38454
+N A.ping 74 0.03375 0.005625 0.153816
+N B.fm 65 0.0448875 0 0.321594
+N B.sub 53 0.0648375 0 0.252681
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 4 6 7 7 0 6 0 0 0 spinner | A 2 2 W 3 4 0 | B 0 2 W 3 4 0 | 0 0 | 0 1 1 | move,move,belt,zap,move,move
+N A.main 71 0.013125 0 0.54808
+N A.ping 74 0.03375 0.005625 0.219232
+N A.main 71 0.091875 0.015 0.246636
+N A.main 74 0.091875 0.10875 0.234636
+N A.main 77 0.219375 0.2025 0.222636
+N B.fm 71 0.0675 0 0.5642
+N B.sub 59 0.0975 0 0.4433
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 4 7 8 8 0 7 0 0 0 spinner | A 0 2 W 5 4 0 | B 0 2 W 5 4 0 | 7 0 | 0 0 1 | move,move,zap,collision,collision,zap
+N A.main 69 0.057 0 0.8866
+N A.ping 72 0.03375 0.005625 0.35464
+N B.fm 65 0.0675 0 0.637
+N B.sub 53 0.0975 0 0.5005
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 4 8 9 9 0 8 0 0 0 spinner | A 0 2 W 5 4 0 | B 0 2 W 5 4 0 | 6 0 | 1 0 1 | collision,collision
+N A.main 69 0.135375 0 0.6916
+N A.ping 72 0.03375 0.005625 0.27664
+N B.fm 65 0.108 0 0.56056
+N B.sub 53 0.156 0 0.44044
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 4 9 10 10 0 9 0 0 0 spinner | A 0 2 W 5 4 0 | B 0 2 W 7 4 1 | 7 0 | 0 0 1 | collision,collision,zap,ping,zap
+N A.main 69 0.0285 0 0.9555
+N A.ping 72 0.03375 0.005625 0.3822
+N B.fm 65 0.0324 0 0.601965
+N B.sub 53 0.0468 0 0.4729725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 4 10 11 11 0 10 0 0 0 spinner | A 0 2 N 5 4 0 | B 2 0 W 0 5 0 | 6 0 | 0 1 1 | death,turn,move,move,pulse
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 65 0.029925 0 0.882
+N A.ping 69 0.03375 0.005625 0.3528
+N B.fm 69 0.0972 0 0.5005
+N B.sub 57 0.1404 0 0.39325
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 4 11 12 12 0 11 0 0 0 spinner | A 0 2 E 5 4 0 | B 3 0 S 0 5 0 | 5 0 | 0 0 1 | turn,move,rotator
+N A.main 65 0.09975 0 0.7854
+N A.ping 69 0.03375 0.005625 0.31416
+N B.fm 69 0.1701 0 0.40425
+N B.sub 57 0.2457 0 0.317625
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 4 12 13 13 0 12 0 0 0 spinner | A 2 2 E 6 4 1 | B 3 0 E 0 5 0 | 4 0 | 1 0 1 | move,move,zap,zap,wait,rotator
+N A.main 71 0.035625 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 62 0.04809375 0 0.11305
+N B.sub 50 0.06946875 0 0.088825
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 4 13 14 14 0 13 0 0 0 spinner | A 1 0 S 0 5 0 | B 3 0 E 0 5 0 | 3 0 | 0 0 1 | death,move,rotator,turn,rotator
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 77 0.23690625 0 0.57
+N A.ping 81 0.03375 0.005625 0.228
+N B.fm 72 0.11221875 0 0.33915
+N B.sub 60 0.16209375 0 0.266475
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 4 14 15 15 0 14 0 0 0 spinner | A 1 0 W 0 5 0 | B 3 0 E 0 5 0 | 2 0 | 0 1 1 | ping,rotator,turn,rotator
+N A.main 77 0.081225 0 0.55575
+N A.ping 81 0.03375 0.005625 0.2223
+N B.fm 72 0.04725 0 0.37485
+N B.sub 60 0.06825 0 0.294525
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 4 15 16 0 0 15 0 0 0 spinner | A 1 0 N 0 5 0 | B 3 0 N 0 5 0 | 1 0 | 0 0 1 | wait,rotator,ping,rotator
+N A.main 77 0.030459375 0 0.19
+N B.fm 72 0.0486 0 0.693
+N B.sub 60 0.0702 0 0.5445
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 5 0 1 1 1 0 0 0 0 spinner | A 0 4 E 0 5 0 | B 4 0 W 0 5 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 5 1 2 2 1 1 0 0 0 spinner | A 1 4 N 0 5 0 | B 3 0 S 0 5 0 | 0 0 | 0 0 1 | move,rotator,move,rotator
+N A.main 53 0.0855 0 0.88
+N A.ping 57 0.03375 0.005625 0.352
+N B.fm 69 0.2716875 0 0.357
+N B.sub 57 0.3924375 0 0.2805
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 5 2 3 3 1 2 0 0 0 spinner | A 1 3 N 0 5 0 | B 3 1 S 0 5 0 | 0 0 | 0 1 1 | move,move
+N A.main 62 0.10153125 0 0.76
+N A.ping 65 0.03375 0.005625 0.304
+N B.fm 69 0.23625 0 0.42
+N B.sub 57 0.34125 0 0.33
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 5 3 4 4 1 3 0 0 0 spinner | A 1 1 N 0 5 0 | B 2 2 S 1 5 0 | 0 0 | 0 0 1 | move,move,move,move,belt,zap
+N A.main 74 0.021375 0 1
+N A.ping 77 0.03375 0.005625 0.4
+N B.fm 71 0.01875 0 0.43092
+N B.sub 59 0.3241875 0 0.33858
+N B.fm 71 0.185625 0.0225 0.24624
+N drum.hihat -1 0.03 0 0.5
 T 5 4 5 5 1 4 0 0 0 spinner | A 2 2 N 1 5 0 | B 2 2 S 2 5 0 | 0 1 | 1 0 1 | move,move,belt,zap,wait,zap
+N A.main 65 0.013125 0 0.7182
+N A.ping 69 0.03375 0.005625 0.28728
+N A.main 65 0.091875 0.015 0.32319
+N A.main 69 0.185625 0.10875 0.31119
+N B.fm 62 0.02835 0 0.13398
+N B.sub 50 0.04095 0 0.10527
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 5 5 6 6 1 5 0 0 0 spinner | A 2 2 W 2 5 0 | B 2 2 W 3 5 0 | 0 2 | 0 0 1 | turn,zap,turn,zap
+N A.main 67 0.05735625 0 0.38454
+N A.ping 71 0.03375 0.005625 0.153816
+N B.fm 62 0.0448875 0 0.321594
+N B.sub 50 0.0648375 0 0.252681
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 5 6 7 7 1 6 0 0 0 spinner | A 2 2 W 3 5 0 | B 0 2 W 3 5 0 | 0 0 | 0 1 1 | move,move,belt,zap,move,move
+N A.main 67 0.013125 0 0.54808
+N A.ping 71 0.03375 0.005625 0.219232
+N A.main 67 0.091875 0.015 0.246636
+N A.main 71 0.091875 0.10875 0.234636
+N A.main 74 0.219375 0.2025 0.222636
+N B.fm 67 0.0675 0 0.5642
+N B.sub 55 0.0975 0 0.4433
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 5 7 8 8 1 7 0 0 0 spinner | A 0 2 W 5 5 0 | B 0 2 W 5 5 0 | 7 0 | 0 0 1 | move,move,zap,collision,collision,zap
+N A.main 67 0.057 0 0.8866
+N A.ping 71 0.03375 0.005625 0.35464
+N B.fm 64 0.0675 0 0.637
+N B.sub 52 0.0975 0 0.5005
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 5 8 9 9 1 8 0 0 0 spinner | A 0 2 W 5 5 0 | B 0 2 W 5 5 0 | 6 0 | 1 0 1 | collision,collision
+N A.main 67 0.135375 0 0.6916
+N A.ping 71 0.03375 0.005625 0.27664
+N B.fm 64 0.108 0 0.56056
+N B.sub 52 0.156 0 0.44044
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 5 9 10 10 1 9 0 0 0 spinner | A 0 2 W 5 5 0 | B 0 2 W 7 5 1 | 7 0 | 0 0 1 | collision,collision,zap,ping,zap
+N A.main 67 0.0285 0 0.9555
+N A.ping 71 0.03375 0.005625 0.3822
+N B.fm 64 0.0324 0 0.601965
+N B.sub 52 0.0468 0 0.4729725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 5 10 11 11 1 10 0 0 0 spinner | A 0 2 N 5 5 0 | B 2 0 W 0 6 0 | 6 0 | 0 1 1 | death,turn,move,move,pulse
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 64 0.029925 0 0.882
+N A.ping 67 0.03375 0.005625 0.3528
+N B.fm 67 0.0972 0 0.5005
+N B.sub 55 0.1404 0 0.39325
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 5 11 12 12 1 11 0 0 0 spinner | A 0 2 E 5 5 0 | B 3 0 S 0 6 0 | 5 0 | 0 0 1 | turn,move,rotator
+N A.main 64 0.09975 0 0.7854
+N A.ping 67 0.03375 0.005625 0.31416
+N B.fm 67 0.1701 0 0.40425
+N B.sub 55 0.2457 0 0.317625
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 5 12 13 13 1 12 0 0 0 spinner | A 2 2 E 6 5 1 | B 3 0 E 0 6 0 | 4 0 | 1 0 1 | move,move,zap,zap,wait,rotator
+N A.main 67 0.035625 0 1
+N A.ping 71 0.03375 0.005625 0.4
+N B.fm 71 0.04809375 0 0.11305
+N B.sub 59 0.06946875 0 0.088825
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 5 13 14 14 1 13 0 0 0 spinner | A 1 0 S 0 6 0 | B 3 0 E 0 6 0 | 3 0 | 0 0 1 | death,move,rotator,turn,rotator
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 74 0.23690625 0 0.57
+N A.ping 77 0.03375 0.005625 0.228
+N B.fm 69 0.11221875 0 0.33915
+N B.sub 57 0.16209375 0 0.266475
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 5 14 15 15 1 14 0 0 0 spinner | A 1 0 W 0 6 0 | B 3 0 E 0 6 0 | 2 0 | 0 1 1 | ping,rotator,turn,rotator
+N A.main 74 0.081225 0 0.55575
+N A.ping 77 0.03375 0.005625 0.2223
+N B.fm 69 0.04725 0 0.37485
+N B.sub 57 0.06825 0 0.294525
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 5 15 16 0 1 15 0 0 0 spinner | A 1 0 N 0 6 0 | B 3 0 N 0 6 0 | 1 0 | 0 0 1 | wait,rotator,ping,rotator
+N A.main 74 0.030459375 0 0.19
+N B.fm 69 0.0486 0 0.693
+N B.sub 57 0.0702 0 0.5445
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 6 0 1 1 2 0 0 0 0 spinner | A 0 4 E 0 6 0 | B 4 0 W 0 6 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 6 1 2 2 2 1 0 0 0 spinner | A 1 4 N 0 6 0 | B 3 0 S 0 6 0 | 0 0 | 0 0 1 | move,rotator,move,rotator
+N A.main 59 0.0855 0 0.88
+N A.ping 62 0.03375 0.005625 0.352
+N B.fm 62 0.2716875 0 0.357
+N B.sub 50 0.3924375 0 0.2805
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 6 2 3 3 2 2 0 0 0 spinner | A 1 3 N 0 6 0 | B 3 1 S 0 6 0 | 0 0 | 0 1 1 | move,move
+N A.main 67 0.10153125 0 0.76
+N A.ping 71 0.03375 0.005625 0.304
+N B.fm 62 0.23625 0 0.42
+N B.sub 50 0.34125 0 0.33
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 6 3 4 4 2 3 0 0 0 spinner | A 1 1 N 0 6 0 | B 2 2 S 1 6 0 | 0 0 | 0 0 1 | move,move,move,move,belt,zap
+N A.main 79 0.021375 0 1
+N A.ping 83 0.03375 0.005625 0.4
+N B.fm 64 0.01875 0 0.43092
+N B.sub 52 0.3241875 0 0.33858
+N B.fm 64 0.185625 0.0225 0.24624
+N drum.hihat -1 0.03 0 0.5
 T 6 4 5 5 2 4 0 0 0 spinner | A 2 2 N 1 6 0 | B 2 2 S 2 6 0 | 0 1 | 1 0 1 | move,move,belt,zap,wait,zap
+N A.main 71 0.013125 0 0.7182
+N A.ping 74 0.03375 0.005625 0.28728
+N A.main 71 0.091875 0.015 0.32319
+N A.main 77 0.185625 0.10875 0.31119
+N B.fm 67 0.02835 0 0.13398
+N B.sub 55 0.04095 0 0.10527
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 6 5 6 6 2 5 0 0 0 spinner | A 2 2 W 2 6 0 | B 2 2 W 3 6 0 | 0 2 | 0 0 1 | turn,zap,turn,zap
+N A.main 72 0.05735625 0 0.38454
+N A.ping 76 0.03375 0.005625 0.153816
+N B.fm 67 0.0448875 0 0.321594
+N B.sub 55 0.0648375 0 0.252681
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 6 6 7 7 2 6 0 0 0 spinner | A 2 2 W 3 6 0 | B 0 2 W 3 6 0 | 0 0 | 0 1 1 | move,move,belt,zap,move,move
+N A.main 72 0.013125 0 0.54808
+N A.ping 76 0.03375 0.005625 0.219232
+N A.main 72 0.091875 0.015 0.246636
+N A.main 79 0.091875 0.10875 0.234636
+N A.main 84 0.219375 0.2025 0.222636
+N B.fm 72 0.0675 0 0.5642
+N B.sub 60 0.0975 0 0.4433
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 6 7 8 8 2 7 0 0 0 spinner | A 0 2 W 5 6 0 | B 0 2 W 5 6 0 | 7 0 | 0 0 1 | move,move,zap,collision,collision,zap
+N A.main 72 0.057 0 0.8866
+N A.ping 76 0.03375 0.005625 0.35464
+N B.fm 69 0.0675 0 0.637
+N B.sub 57 0.0975 0 0.5005
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 6 8 9 9 2 8 0 0 0 spinner | A 0 2 W 5 6 0 | B 0 2 W 5 6 0 | 6 0 | 1 0 1 | collision,collision
+N A.main 72 0.135375 0 0.6916
+N A.ping 76 0.03375 0.005625 0.27664
+N B.fm 69 0.108 0 0.56056
+N B.sub 57 0.156 0 0.44044
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 6 9 10 10 2 9 0 0 0 spinner | A 0 2 W 5 6 0 | B 0 2 W 7 6 1 | 7 0 | 0 0 1 | collision,collision,zap,ping,zap
+N A.main 72 0.0285 0 0.9555
+N A.ping 76 0.03375 0.005625 0.3822
+N B.fm 69 0.0324 0 0.601965
+N B.sub 57 0.0468 0 0.4729725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 6 10 11 11 2 10 0 0 0 spinner | A 0 2 N 5 6 0 | B 2 0 W 0 7 0 | 6 0 | 0 1 1 | death,turn,move,move,pulse
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 69 0.029925 0 0.882
+N A.ping 72 0.03375 0.005625 0.3528
+N B.fm 72 0.0972 0 0.5005
+N B.sub 60 0.1404 0 0.39325
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 6 11 12 12 2 11 0 0 0 spinner | A 0 2 E 5 6 0 | B 3 0 S 0 7 0 | 5 0 | 0 0 1 | turn,move,rotator
+N A.main 69 0.09975 0 0.7854
+N A.ping 72 0.03375 0.005625 0.31416
+N B.fm 72 0.1701 0 0.40425
+N B.sub 60 0.2457 0 0.317625
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 6 12 13 13 2 12 0 0 0 spinner | A 2 2 E 6 6 1 | B 3 0 E 0 7 0 | 4 0 | 1 0 1 | move,move,zap,zap,wait,rotator
+N A.main 72 0.035625 0 1
+N A.ping 76 0.03375 0.005625 0.4
+N B.fm 64 0.04809375 0 0.11305
+N B.sub 52 0.06946875 0 0.088825
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 6 13 14 14 2 13 0 0 0 spinner | A 1 0 S 0 7 0 | B 3 0 E 0 7 0 | 3 0 | 0 0 1 | death,move,rotator,turn,rotator
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 79 0.23690625 0 0.57
+N A.ping 83 0.03375 0.005625 0.228
+N B.fm 62 0.11221875 0 0.33915
+N B.sub 50 0.16209375 0 0.266475
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 6 14 15 15 2 14 0 0 0 spinner | A 1 0 W 0 7 0 | B 3 0 E 0 7 0 | 2 0 | 0 1 1 | ping,rotator,turn,rotator
+N A.main 79 0.081225 0 0.55575
+N A.ping 83 0.03375 0.005625 0.2223
+N B.fm 62 0.04725 0 0.37485
+N B.sub 50 0.06825 0 0.294525
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 6 15 16 0 2 15 0 0 0 spinner | A 1 0 N 0 7 0 | B 3 0 N 0 7 0 | 1 0 | 0 0 1 | wait,rotator,ping,rotator
+N A.main 79 0.030459375 0 0.19
+N B.fm 62 0.0486 0 0.693
+N B.sub 50 0.0702 0 0.5445
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 7 0 1 1 3 0 0 0 0 spinner | A 0 4 E 0 7 0 | B 4 0 W 0 7 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 7 1 2 2 3 1 0 0 0 spinner | A 1 4 N 0 7 0 | B 3 0 S 0 7 0 | 0 0 | 0 0 1 | move,rotator,move,rotator
+N A.main 62 0.0855 0 0.88
+N A.ping 65 0.03375 0.005625 0.352
+N B.fm 65 0.2716875 0 0.357
+N B.sub 53 0.3924375 0 0.2805
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 7 2 3 3 3 2 0 0 0 spinner | A 1 3 N 0 7 0 | B 3 1 S 0 7 0 | 0 0 | 0 1 1 | move,move
+N A.main 71 0.10153125 0 0.76
+N A.ping 74 0.03375 0.005625 0.304
+N B.fm 65 0.23625 0 0.42
+N B.sub 53 0.34125 0 0.33
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 7 3 4 4 3 3 0 0 0 spinner | A 1 1 N 0 7 0 | B 2 2 S 1 7 0 | 0 0 | 0 0 1 | move,move,move,move,belt,zap
+N A.main 83 0.021375 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 67 0.01875 0 0.43092
+N B.sub 55 0.3241875 0 0.33858
+N B.fm 67 0.185625 0.0225 0.24624
+N drum.hihat -1 0.03 0 0.5
 T 7 4 5 5 3 4 0 0 0 spinner | A 2 2 N 1 7 0 | B 2 2 S 2 7 0 | 0 1 | 1 0 1 | move,move,belt,zap,wait,zap
+N A.main 74 0.013125 0 0.7182
+N A.ping 77 0.03375 0.005625 0.28728
+N A.main 74 0.091875 0.015 0.32319
+N A.main 81 0.185625 0.10875 0.31119
+N B.fm 71 0.02835 0 0.13398
+N B.sub 59 0.04095 0 0.10527
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 7 5 6 6 3 5 0 0 0 spinner | A 2 2 W 2 7 0 | B 2 2 W 3 7 0 | 0 2 | 0 0 1 | turn,zap,turn,zap
+N A.main 76 0.05735625 0 0.38454
+N A.ping 79 0.03375 0.005625 0.153816
+N B.fm 71 0.0448875 0 0.321594
+N B.sub 59 0.0648375 0 0.252681
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 7 6 7 7 3 6 0 0 0 spinner | A 2 2 W 3 7 0 | B 0 2 W 3 7 0 | 0 0 | 0 1 1 | move,move,belt,zap,move,move
+N A.main 76 0.013125 0 0.54808
+N A.ping 79 0.03375 0.005625 0.219232
+N A.main 76 0.091875 0.015 0.246636
+N A.main 83 0.091875 0.10875 0.234636
+N A.main 76 0.219375 0.2025 0.222636
+N B.fm 64 0.0675 0 0.5642
+N B.sub 52 0.0975 0 0.4433
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 7 7 8 8 3 7 0 0 0 spinner | A 0 2 W 5 7 0 | B 0 2 W 5 7 0 | 7 0 | 0 0 1 | move,move,zap,collision,collision,zap
+N A.main 76 0.057 0 0.8866
+N A.ping 79 0.03375 0.005625 0.35464
+N B.fm 72 0.0675 0 0.637
+N B.sub 60 0.0975 0 0.5005
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 7 8 9 9 3 8 0 0 0 spinner | A 0 2 W 5 7 0 | B 0 2 W 5 7 0 | 6 0 | 1 0 1 | collision,collision
+N A.main 76 0.135375 0 0.6916
+N A.ping 79 0.03375 0.005625 0.27664
+N B.fm 72 0.108 0 0.56056
+N B.sub 60 0.156 0 0.44044
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 7 9 10 10 3 9 0 0 0 spinner | A 0 2 W 5 7 0 | B 0 2 W 7 7 1 | 7 0 | 0 0 1 | collision,collision,zap,ping,zap
+N A.main 76 0.0285 0 0.9555
+N A.ping 79 0.03375 0.005625 0.3822
+N B.fm 72 0.0324 0 0.601965
+N B.sub 60 0.0468 0 0.4729725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 7 10 11 11 3 10 0 0 0 spinner | A 0 2 N 5 7 0 | B 2 0 W 0 8 0 | 6 0 | 0 1 1 | death,turn,move,move,pulse
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 72 0.029925 0 0.882
+N A.ping 76 0.03375 0.005625 0.3528
+N B.fm 64 0.0972 0 0.5005
+N B.sub 52 0.1404 0 0.39325
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 7 11 12 12 3 11 0 0 0 spinner | A 0 2 E 5 7 0 | B 3 0 S 0 8 0 | 5 0 | 0 0 1 | turn,move,rotator
+N A.main 72 0.09975 0 0.7854
+N A.ping 76 0.03375 0.005625 0.31416
+N B.fm 64 0.1701 0 0.40425
+N B.sub 52 0.2457 0 0.317625
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 7 12 13 13 3 12 0 0 0 spinner | A 2 2 E 6 7 1 | B 3 0 E 0 8 0 | 4 0 | 1 0 1 | move,move,zap,zap,wait,rotator
+N A.main 76 0.035625 0 1
+N A.ping 79 0.03375 0.005625 0.4
+N B.fm 67 0.04809375 0 0.11305
+N B.sub 55 0.06946875 0 0.088825
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 7 13 14 14 3 13 0 0 0 spinner | A 1 0 S 0 8 0 | B 3 0 E 0 8 0 | 3 0 | 0 0 1 | death,move,rotator,turn,rotator
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 83 0.23690625 0 0.57
+N A.ping 74 0.03375 0.005625 0.228
+N B.fm 65 0.11221875 0 0.33915
+N B.sub 53 0.16209375 0 0.266475
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 7 14 15 15 3 14 0 0 0 spinner | A 1 0 S 0 8 0 | B 3 0 E 0 8 0 | 2 0 | 0 1 1 | wait,turn,rotator
+N B.fm 65 0.04725 0 0.37485
+N B.sub 53 0.06825 0 0.294525
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 7 15 16 0 3 15 0 0 0 spinner | A 1 0 W 0 8 0 | B 3 0 N 0 8 0 | 1 0 | 0 0 1 | wait,rotator,ping,rotator
+N A.main 83 0.0406125 0 0.1235
+N B.fm 65 0.0486 0 0.693
+N B.sub 53 0.0702 0 0.5445
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 8 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 8 0 | B 4 0 W 0 8 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 8 1 2 2 0 1 0 0 0 spinner | A 1 4 N 0 8 0 | B 3 0 S 0 8 0 | 0 0 | 0 0 1 | move,rotator,move,rotator
+N A.main 57 0.0855 0 0.88
+N A.ping 60 0.03375 0.005625 0.352
+N B.fm 72 0.2716875 0 0.357
+N B.sub 60 0.3924375 0 0.2805
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 8 2 3 3 0 2 0 0 0 spinner | A 1 3 N 0 8 0 | B 3 1 S 0 8 0 | 0 0 | 0 1 1 | move,move
+N A.main 65 0.10153125 0 0.76
+N A.ping 69 0.03375 0.005625 0.304
+N B.fm 72 0.23625 0 0.42
+N B.sub 60 0.34125 0 0.33
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 8 3 4 4 0 3 0 0 0 spinner | A 1 1 N 0 8 0 | B 2 2 S 1 8 0 | 0 0 | 0 0 1 | move,move,move,move,belt,zap
+N A.main 77 0.021375 0 1
+N A.ping 81 0.03375 0.005625 0.4
+N B.fm 62 0.01875 0 0.43092
+N B.sub 50 0.3241875 0 0.33858
+N B.fm 62 0.185625 0.0225 0.24624
+N drum.hihat -1 0.03 0 0.5
 T 8 4 5 5 0 4 0 0 0 spinner | A 2 2 N 1 8 0 | B 2 2 S 2 8 0 | 0 1 | 1 0 1 | move,move,belt,zap,wait,zap
+N A.main 69 0.013125 0 0.7182
+N A.ping 72 0.03375 0.005625 0.28728
+N A.main 69 0.091875 0.015 0.32319
+N A.main 76 0.185625 0.10875 0.31119
+N B.fm 65 0.02835 0 0.13398
+N B.sub 53 0.04095 0 0.10527
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 8 5 6 6 0 5 0 0 0 spinner | A 2 2 W 2 8 0 | B 2 2 W 3 8 0 | 0 2 | 0 0 1 | turn,zap,turn,zap
+N A.main 71 0.05735625 0 0.38454
+N A.ping 74 0.03375 0.005625 0.153816
+N B.fm 65 0.0448875 0 0.321594
+N B.sub 53 0.0648375 0 0.252681
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 8 6 7 7 0 6 0 0 0 spinner | A 2 2 W 3 8 0 | B 0 2 W 3 8 0 | 0 0 | 0 1 1 | move,move,belt,zap,move,move
+N A.main 71 0.013125 0 0.54808
+N A.ping 74 0.03375 0.005625 0.219232
+N A.main 71 0.091875 0.015 0.246636
+N A.main 77 0.091875 0.10875 0.234636
+N A.main 83 0.219375 0.2025 0.222636
+N B.fm 71 0.0675 0 0.5642
+N B.sub 59 0.0975 0 0.4433
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 8 7 8 8 0 7 0 0 0 spinner | A 0 2 W 5 8 0 | B 0 2 W 5 8 0 | 7 0 | 0 0 1 | move,move,zap,collision,collision,zap
+N A.main 69 0.057 0 0.8866
+N A.ping 72 0.03375 0.005625 0.35464
+N B.fm 65 0.0675 0 0.637
+N B.sub 53 0.0975 0 0.5005
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 8 8 9 9 0 8 0 0 0 spinner | A 0 2 W 5 8 0 | B 0 2 W 5 8 0 | 6 0 | 1 0 1 | collision,collision
+N A.main 69 0.135375 0 0.6916
+N A.ping 72 0.03375 0.005625 0.27664
+N B.fm 65 0.108 0 0.56056
+N B.sub 53 0.156 0 0.44044
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 8 9 10 10 0 9 0 0 0 spinner | A 0 2 W 5 8 0 | B 0 2 W 7 8 1 | 7 0 | 0 0 1 | collision,collision,zap,ping,zap
+N A.main 69 0.0285 0 0.9555
+N A.ping 72 0.03375 0.005625 0.3822
+N B.fm 65 0.0324 0 0.601965
+N B.sub 53 0.0468 0 0.4729725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 8 10 11 11 0 10 0 0 0 spinner | A 0 2 N 5 8 0 | B 2 0 W 0 9 0 | 6 0 | 0 1 1 | death,turn,move,move,pulse
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 65 0.029925 0 0.882
+N A.ping 69 0.03375 0.005625 0.3528
+N B.fm 69 0.0972 0 0.5005
+N B.sub 57 0.1404 0 0.39325
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 8 11 12 12 0 11 0 0 0 spinner | A 0 2 E 5 8 0 | B 3 0 S 0 9 0 | 5 0 | 0 0 1 | turn,move,rotator
+N A.main 65 0.09975 0 0.7854
+N A.ping 69 0.03375 0.005625 0.31416
+N B.fm 69 0.1701 0 0.40425
+N B.sub 57 0.2457 0 0.317625
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 8 12 13 13 0 12 0 0 0 spinner | A 2 2 E 6 8 1 | B 3 0 E 0 9 0 | 4 0 | 1 0 1 | move,move,zap,zap,wait,rotator
+N A.main 71 0.035625 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 62 0.04809375 0 0.11305
+N B.sub 50 0.06946875 0 0.088825
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 8 13 14 14 0 13 0 0 0 spinner | A 1 0 S 0 9 0 | B 3 0 E 0 9 0 | 3 0 | 0 0 1 | death,move,rotator,turn,rotator
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 77 0.23690625 0 0.57
+N A.ping 81 0.03375 0.005625 0.228
+N B.fm 72 0.11221875 0 0.33915
+N B.sub 60 0.16209375 0 0.266475
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 8 14 15 15 0 14 0 0 0 spinner | A 1 0 W 0 9 0 | B 3 0 E 0 9 0 | 2 0 | 0 1 1 | ping,rotator,turn,rotator
+N A.main 77 0.081225 0 0.55575
+N A.ping 81 0.03375 0.005625 0.2223
+N B.fm 72 0.04725 0 0.37485
+N B.sub 60 0.06825 0 0.294525
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 8 15 16 0 0 15 0 0 0 spinner | A 1 0 N 0 9 0 | B 3 0 N 0 9 0 | 1 0 | 0 0 1 | wait,rotator,ping,rotator
+N A.main 77 0.030459375 0 0.19
+N B.fm 72 0.0486 0 0.693
+N B.sub 60 0.0702 0 0.5445
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 9 0 1 1 1 0 0 0 0 spinner | A 0 4 E 0 9 0 | B 4 0 W 0 9 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 9 1 2 2 1 1 0 0 0 spinner | A 1 4 N 0 9 0 | B 3 0 S 0 9 0 | 0 0 | 0 0 1 | move,rotator,move,rotator
+N A.main 53 0.0855 0 0.88
+N A.ping 57 0.03375 0.005625 0.352
+N B.fm 69 0.2716875 0 0.357
+N B.sub 57 0.3924375 0 0.2805
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 9 2 3 3 1 2 0 0 0 spinner | A 1 3 N 0 9 0 | B 3 1 S 0 9 0 | 0 0 | 0 1 1 | move,move
+N A.main 62 0.10153125 0 0.76
+N A.ping 65 0.03375 0.005625 0.304
+N B.fm 69 0.23625 0 0.42
+N B.sub 57 0.34125 0 0.33
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 9 3 4 4 1 3 0 0 0 spinner | A 1 1 N 0 9 0 | B 2 2 S 1 9 0 | 0 0 | 0 0 1 | move,move,move,move,belt,zap
+N A.main 74 0.021375 0 1
+N A.ping 77 0.03375 0.005625 0.4
+N B.fm 71 0.01875 0 0.43092
+N B.sub 59 0.3241875 0 0.33858
+N B.fm 71 0.185625 0.0225 0.24624
+N drum.hihat -1 0.03 0 0.5
 T 9 4 5 5 1 4 0 0 0 spinner | A 2 2 N 1 9 0 | B 2 2 S 2 9 0 | 0 1 | 1 0 1 | move,move,belt,zap,wait,zap
+N A.main 65 0.013125 0 0.7182
+N A.ping 69 0.03375 0.005625 0.28728
+N A.main 65 0.091875 0.015 0.32319
+N A.main 69 0.185625 0.10875 0.31119
+N B.fm 62 0.02835 0 0.13398
+N B.sub 50 0.04095 0 0.10527
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 9 5 6 6 1 5 0 0 0 spinner | A 2 2 W 2 9 0 | B 2 2 W 3 9 0 | 0 2 | 0 0 1 | turn,zap,turn,zap
+N A.main 67 0.05735625 0 0.38454
+N A.ping 71 0.03375 0.005625 0.153816
+N B.fm 62 0.0448875 0 0.321594
+N B.sub 50 0.0648375 0 0.252681
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 9 6 7 7 1 6 0 0 0 spinner | A 2 2 W 3 9 0 | B 0 2 W 3 9 0 | 0 0 | 0 1 1 | move,move,belt,zap,move,move
+N A.main 67 0.013125 0 0.54808
+N A.ping 71 0.03375 0.005625 0.219232
+N A.main 67 0.091875 0.015 0.246636
+N A.main 71 0.091875 0.10875 0.234636
+N A.main 74 0.219375 0.2025 0.222636
+N B.fm 67 0.0675 0 0.5642
+N B.sub 55 0.0975 0 0.4433
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 9 7 8 8 1 7 0 0 0 spinner | A 0 2 W 5 9 0 | B 0 2 W 5 9 0 | 7 0 | 0 0 1 | move,move,zap,collision,collision,zap
+N A.main 67 0.057 0 0.8866
+N A.ping 71 0.03375 0.005625 0.35464
+N B.fm 64 0.0675 0 0.637
+N B.sub 52 0.0975 0 0.5005
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 9 8 9 9 1 8 0 0 0 spinner | A 0 2 W 5 9 0 | B 0 2 W 5 9 0 | 6 0 | 1 0 1 | collision,collision
+N A.main 67 0.135375 0 0.6916
+N A.ping 71 0.03375 0.005625 0.27664
+N B.fm 64 0.108 0 0.56056
+N B.sub 52 0.156 0 0.44044
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 9 9 10 10 1 9 0 0 0 spinner | A 0 2 W 5 9 0 | B 0 2 W 7 9 1 | 7 0 | 0 0 1 | collision,collision,zap,ping,zap
+N A.main 67 0.0285 0 0.9555
+N A.ping 71 0.03375 0.005625 0.3822
+N B.fm 64 0.0324 0 0.601965
+N B.sub 52 0.0468 0 0.4729725
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 9 10 11 11 1 10 0 0 0 spinner | A 0 2 N 5 9 0 | B 2 0 W 0 10 0 | 6 0 | 0 1 1 | death,turn,move,move,pulse
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 64 0.029925 0 0.882
+N A.ping 67 0.03375 0.005625 0.3528
+N B.fm 67 0.0972 0 0.5005
+N B.sub 55 0.1404 0 0.39325
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 9 11 12 12 1 11 0 0 0 spinner | A 0 2 E 5 9 0 | B 3 0 S 0 10 0 | 5 0 | 0 0 1 | turn,move,rotator
+N A.main 64 0.09975 0 0.7854
+N A.ping 67 0.03375 0.005625 0.31416
+N B.fm 67 0.1701 0 0.40425
+N B.sub 55 0.2457 0 0.317625
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 9 12 13 13 1 12 0 0 0 spinner | A 2 2 E 6 9 1 | B 3 0 E 0 10 0 | 4 0 | 1 0 1 | move,move,zap,zap,wait,rotator
+N A.main 67 0.035625 0 1
+N A.ping 71 0.03375 0.005625 0.4
+N B.fm 71 0.04809375 0 0.11305
+N B.sub 59 0.06946875 0 0.088825
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 9 13 14 14 1 13 0 0 0 spinner | A 1 0 S 0 10 0 | B 3 0 E 0 10 0 | 3 0 | 0 0 1 | death,move,rotator,turn,rotator
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 74 0.23690625 0 0.57
+N A.ping 77 0.03375 0.005625 0.228
+N B.fm 69 0.11221875 0 0.33915
+N B.sub 57 0.16209375 0 0.266475
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 9 14 15 15 1 14 0 0 0 spinner | A 1 0 W 0 10 0 | B 3 0 E 0 10 0 | 2 0 | 0 1 1 | ping,rotator,turn,rotator
+N A.main 74 0.081225 0 0.55575
+N A.ping 77 0.03375 0.005625 0.2223
+N B.fm 69 0.04725 0 0.37485
+N B.sub 57 0.06825 0 0.294525
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45
 T 9 15 16 0 1 15 0 0 0 spinner | A 1 0 N 0 10 0 | B 3 0 N 0 10 0 | 1 0 | 0 0 1 | wait,rotator,ping,rotator
+N A.main 74 0.030459375 0 0.19
+N B.fm 69 0.0486 0 0.693
+N B.sub 57 0.0702 0 0.5445
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.rotator 81 0.04 0.03 0.45

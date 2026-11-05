@@ -40,7 +40,7 @@ struct rs_bot {                                                 /* boardState.A 
     uint8_t dir, dying;
     int16_t heat;                                               /* the HTML's pings and dashes add without a cap */
     uint16_t deaths;
-    uint8_t stepped_tile;                                       /* the tile it landed on before a belt moved it */
+    uint8_t stepped_tile, stepped_dir;                          /* the tile it landed on before a belt moved it (and a belt's way) */
 };
 
 struct rs_prog { struct rs_step s[RS_MAX_STEPS]; uint8_t len; };   /* a bot's register; len 1..64 */
@@ -78,6 +78,21 @@ struct rs_state {
     uint8_t clash_cooldown, love_steps;
 };
 
+/* a note, as the HTML's triggerAttackRelease(note, duration, time, velocity) on one of its voices */
+enum rs_voice {
+    RS_V_A_MAIN, RS_V_A_PING, RS_V_B_FM, RS_V_B_SUB, RS_V_COLLISION, RS_V_BELT, RS_V_ROTATOR, RS_V_ZAP, RS_V_PULSE,
+    RS_V_KICK, RS_V_SNARE, RS_V_HIHAT, RS_V_COIN, RS_V_EX_THUMP, RS_V_EX_NOISE, RS_V_EX_CRACKLE, RS_NVOICES
+};
+#define RS_MAX_NOTES 48         /* the notes of one tick (a busy tpm-4 belt tick makes ~30) */
+#define RS_NOISE (-1)           /* the midi of a noise voice's note */
+#define RS_SR 44100u
+struct rs_note {
+    uint8_t voice;
+    int8_t midi;                                                /* RS_NOISE for the noise voices */
+    uint16_t vel;                                               /* Q15, 32768 = 1 */
+    uint32_t at, dur;                                           /* from the tick's start, and how long: 1/256 sample */
+};
+
 struct rs_tick_out {
     uint8_t nevents;
     uint8_t events[RS_MAX_EVENTS];
@@ -89,6 +104,8 @@ struct rs_tick_out {
     uint8_t love;                                               /* the coin chime */
     uint8_t ghost, ghost_phase;                                 /* tpm > 1, a ghost tick (playGhostTick) and its phase */
     uint8_t drum_k, drum_s, drum_h, drum_ghost;                 /* the drum step played, or a ghost hihat */
+    uint8_t nnotes;
+    struct rs_note notes[RS_MAX_NOTES];                         /* the score of this tick, in the HTML's call order */
 };
 
 extern const char *const rs_action_name[RS_NACTIONS];
@@ -97,6 +114,7 @@ extern const char *const rs_event_name[RS_NEVENTS];
 extern const char *const rs_board_name[RS_NBOARDS + 2];   /* the presets, then random, user */
 extern const char *const rs_drum_name[RS_NDRUMS];
 extern const char rs_dir_name[4];
+extern const char *const rs_voice_name[RS_NVOICES];
 
 void rs_default(struct rs_state *s);                            /* buildDefaultState() */
 void rs_load_board(struct rs_state *s, uint8_t id);             /* applyBoardPreset(): now, or queued while playing */
@@ -107,6 +125,15 @@ void rs_reset(struct rs_state *s);                              /* resetBoardSta
 void rs_start(struct rs_state *s);                              /* resetBoardState(), then playing */
 void rs_stop(struct rs_state *s);                               /* stopPlayback()'s state */
 void rs_tick(struct rs_state *s, struct rs_tick_out *o);        /* advanceSequence() */
+uint32_t rs_step_q8(const struct rs_state *s);                  /* getStepDurationSeconds(), in 1/256 samples */
+
+/* the score (rs_score.c): what the HTML's audio plays at each point of advanceSequence */
+void rs_score_board(const struct rs_state *s, int b, const struct rs_step *st, struct rs_tick_out *o);   /* playBoardSound() */
+void rs_score_ghost(const struct rs_state *s, int phase, struct rs_tick_out *o);   /* playGhostTick() */
+void rs_score_event(const struct rs_state *s, uint8_t kind, uint32_t at, struct rs_tick_out *o);   /* playEventSound() */
+void rs_score_drums(const struct rs_state *s, uint8_t i, struct rs_tick_out *o);   /* playDrumStep() */
+void rs_score_ghost_hat(const struct rs_state *s, int phase, struct rs_tick_out *o);
+void rs_score_coin(const struct rs_state *s, struct rs_tick_out *o);   /* the love check's chime */
 void rs_advance_voice_mod(struct rs_state *s);                  /* advanceVoiceMod(): MANUAL's tap, LOOP's count */
 
 /* editing, as the HTML's controls do it */

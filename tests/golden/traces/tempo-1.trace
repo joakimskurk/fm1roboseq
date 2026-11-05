@@ -1,0 +1,2372 @@
+# tempo-1: reference/roboseq.html run by tools/trace/gen.mjs
+board gauntlet
+loop 16
+bpm 97 1 1
+tpm 4
+vmtrigger loop
+vmfreq 4
+bassmodlen 4
+drums 1 four
+seq2 0 0
+seq2step 0 -- -- 0
+seq2step 1 -- -- 0
+seq2step 2 -- -- 0
+seq2step 3 -- -- 0
+prog A 16
+step A 0 move wobble 50
+step A 1 ping glitch 50
+step A 2 ping glitch 75
+step A 3 turnR wobble 100
+step A 4 turnL low 50
+step A 5 back steady 50
+step A 6 ping steady 75
+step A 7 ping low 50
+step A 8 wait bright 100
+step A 9 turnR glitch 75
+step A 10 move low 50
+step A 11 ping steady 100
+step A 12 dash glitch 50
+step A 13 ping glitch 100
+step A 14 turnL low 75
+step A 15 turnL low 100
+step A 16 turnL steady 50
+step A 17 dash glitch 75
+step A 18 turnL bright 50
+step A 19 move bright 75
+step A 20 ping wobble 100
+step A 21 turnL glitch 75
+step A 22 turnL wobble 50
+step A 23 turnL glitch 75
+step A 24 turnL wobble 50
+step A 25 dash glitch 75
+step A 26 ping wobble 50
+step A 27 turnR steady 50
+step A 28 wait glitch 50
+step A 29 dash steady 100
+step A 30 wait steady 50
+step A 31 turnL glitch 50
+step A 32 wait glitch 75
+step A 33 back steady 50
+step A 34 turnR glitch 100
+step A 35 move glitch 75
+step A 36 move low 50
+step A 37 move low 50
+step A 38 ping bright 75
+step A 39 dash glitch 75
+step A 40 move low 100
+step A 41 turnL steady 75
+step A 42 turnL low 75
+step A 43 move wobble 75
+step A 44 move wobble 75
+step A 45 dash steady 50
+step A 46 turnR bright 50
+step A 47 back steady 100
+step A 48 wait low 75
+step A 49 turnL bright 75
+step A 50 turnL bright 75
+step A 51 dash steady 50
+step A 52 back wobble 50
+step A 53 back bright 50
+step A 54 move glitch 50
+step A 55 turnL low 100
+step A 56 ping glitch 100
+step A 57 dash glitch 75
+step A 58 dash wobble 100
+step A 59 wait wobble 50
+step A 60 turnR glitch 100
+step A 61 wait bright 100
+step A 62 back steady 50
+step A 63 back low 100
+prog B 12
+step B 0 move bright 75
+step B 1 wait wobble 100
+step B 2 turnR wobble 100
+step B 3 wait steady 100
+step B 4 dash wobble 50
+step B 5 turnR wobble 75
+step B 6 back bright 75
+step B 7 move bright 50
+step B 8 ping glitch 75
+step B 9 ping glitch 100
+step B 10 dash glitch 100
+step B 11 dash wobble 75
+step B 12 back bright 100
+step B 13 ping glitch 50
+step B 14 wait bright 100
+step B 15 turnR bright 50
+step B 16 move glitch 75
+step B 17 wait wobble 75
+step B 18 move steady 50
+step B 19 dash steady 75
+step B 20 move wobble 100
+step B 21 turnL steady 75
+step B 22 dash steady 50
+step B 23 move steady 75
+step B 24 turnL glitch 100
+step B 25 turnL low 75
+step B 26 dash low 50
+step B 27 turnL glitch 75
+step B 28 ping glitch 50
+step B 29 turnR steady 50
+step B 30 ping low 50
+step B 31 move steady 100
+step B 32 turnR steady 75
+step B 33 wait bright 75
+step B 34 dash bright 100
+step B 35 ping glitch 100
+step B 36 turnR low 75
+step B 37 ping bright 50
+step B 38 turnR glitch 75
+step B 39 wait wobble 75
+step B 40 turnR low 75
+step B 41 turnR bright 50
+step B 42 dash steady 50
+step B 43 turnL low 75
+step B 44 wait wobble 100
+step B 45 move wobble 50
+step B 46 wait wobble 100
+step B 47 back bright 50
+step B 48 turnR low 100
+step B 49 wait wobble 100
+step B 50 wait glitch 75
+step B 51 wait wobble 100
+step B 52 dash wobble 75
+step B 53 turnL steady 75
+step B 54 back glitch 75
+step B 55 turnR bright 100
+step B 56 wait low 100
+step B 57 back wobble 75
+step B 58 turnL glitch 100
+step B 59 back steady 100
+step B 60 turnL low 75
+step B 61 wait glitch 75
+step B 62 move low 100
+step B 63 dash wobble 100
+ticks 400
+T 0 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | -
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+T 0 0 2 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 0 3 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 71 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 0 4 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 0 1 5 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+N B.fm 62 0.126927835 0 0.08645
+N B.sub 50 0.183340206 0 0.067925
+N drum.hihat -1 0.03 0 0.5
+T 0 1 6 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 1 7 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 71 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 1 8 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 0 2 9 3 0 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 1 | ping,turn
+N A.main 53 0.141030928 0 0.80325
+N A.ping 57 0.111340206 0.018556701 0.3213
+N B.fm 62 0.222123711 0 0.399
+N B.sub 50 0.320845361 0 0.3135
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 0 2 10 3 0 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 2 11 3 0 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 2 12 3 0 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 0 3 13 4 0 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 53 0.547082474 0 0.4275
+N A.ping 57 0.111340206 0.018556701 0.171
+N B.fm 62 0.100206186 0 0.14
+N B.sub 50 0.144742268 0 0.11
+N drum.hihat -1 0.03 0 0.5
+T 0 3 14 4 0 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 3 15 4 0 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 72 0.0681958763 0 0.17
+N A.main 69 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 3 16 4 0 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 0 4 17 5 0 4 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 1 | wait,collision,collision
+N B.fm 62 0.158659794 0 0.665
+N B.sub 50 0.229175258 0 0.5225
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+T 0 4 18 5 0 4 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 4 19 5 0 4 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 72 0.0681958763 0 0.17
+N A.main 69 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 4 20 5 0 4 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 0 5 21 6 0 5 0 0 0 gauntlet | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | move,rotator,turn
+N A.main 65 0.528865979 0 0.595
+N A.ping 69 0.111340206 0.018556701 0.238
+N B.fm 62 0.370206186 0 0.33915
+N B.sub 50 0.534742268 0 0.266475
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+T 0 5 22 6 0 5 0 0 0 gauntlet | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0463917526 0 0.28
+N A.main 65 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 5 23 6 0 5 0 0 0 gauntlet | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 65 0.0681958763 0 0.17
+N A.main 69 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 5 24 6 0 5 0 0 0 gauntlet | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 0 6 25 7 0 6 0 0 0 gauntlet | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 1 1 | wait,wait
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 0 6 26 7 0 6 0 0 0 gauntlet | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0463917526 0 0.28
+N A.main 65 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 6 27 7 0 6 0 0 0 gauntlet | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 65 0.0681958763 0 0.17
+N A.main 69 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 6 28 7 0 6 0 0 0 gauntlet | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 0 7 29 8 0 7 0 0 0 gauntlet | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
+T 0 7 30 8 0 7 0 0 0 gauntlet | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0463917526 0 0.28
+N A.main 65 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 7 31 8 0 7 0 0 0 gauntlet | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 65 0.0681958763 0 0.17
+N A.main 69 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 7 32 8 0 7 0 0 0 gauntlet | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 0 8 33 9 0 8 0 0 0 gauntlet | A 0 3 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 1 0 1 | wait,rotator,ping
+N A.main 65 0.0846185567 0 0.22
+N B.fm 62 0.133608247 0 0.562275
+N B.sub 50 0.192989691 0 0.4417875
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+T 0 8 34 9 0 8 0 0 0 gauntlet | A 0 3 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0463917526 0 0.28
+N A.main 65 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 8 35 9 0 8 0 0 0 gauntlet | A 0 3 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 65 0.0681958763 0 0.17
+N A.main 69 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 8 36 9 0 8 0 0 0 gauntlet | A 0 3 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 0 9 37 10 0 9 0 0 0 gauntlet | A 0 3 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | wait,ping
+N B.fm 62 0.133608247 0 0.562275
+N B.sub 50 0.192989691 0 0.4417875
+N drum.hihat -1 0.03 0 0.5
+T 0 9 38 10 0 9 0 0 0 gauntlet | A 0 3 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0463917526 0 0.28
+N A.main 65 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 9 39 10 0 9 0 0 0 gauntlet | A 0 3 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 65 0.0681958763 0 0.17
+N A.main 69 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 9 40 10 0 9 0 0 0 gauntlet | A 0 3 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 0 10 41 11 0 10 0 0 0 gauntlet | A 0 2 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 1 1 | move,collision,collision
+N A.main 65 0.405463918 0 0.68
+N A.ping 69 0.111340206 0.018556701 0.272
+N B.fm 62 0.111340206 0 0.62475
+N B.sub 50 0.160824742 0 0.490875
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+T 0 10 42 11 0 10 0 0 0 gauntlet | A 0 2 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0463917526 0 0.28
+N A.main 65 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 10 43 11 0 10 0 0 0 gauntlet | A 0 2 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 65 0.0681958763 0 0.17
+N A.main 69 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 10 44 11 0 10 0 0 0 gauntlet | A 0 2 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 0 11 45 12 0 11 0 0 0 gauntlet | A 0 2 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | ping,collision,collision
+N A.main 65 0.211546392 0 0.9
+N A.ping 69 0.111340206 0.018556701 0.36
+N B.fm 62 0.26443299 0 0.56525
+N B.sub 50 0.381958763 0 0.444125
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+T 0 11 46 12 0 11 0 0 0 gauntlet | A 0 2 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0463917526 0 0.28
+N A.main 65 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 11 47 12 0 11 0 0 0 gauntlet | A 0 2 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 65 0.0681958763 0 0.17
+N A.main 69 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 11 48 12 0 11 0 0 0 gauntlet | A 0 2 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 0 12 49 13 0 12 0 0 0 gauntlet | A 0 0 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 1 0 1 | move,move,wait
+N A.main 77 0.0705154639 0 1
+N A.ping 81 0.111340206 0.018556701 0.4
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+T 0 12 50 13 0 12 0 0 0 gauntlet | A 0 0 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0463917526 0 0.28
+N A.main 77 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 12 51 13 0 12 0 0 0 gauntlet | A 0 0 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 77 0.0681958763 0 0.17
+N A.main 81 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 12 52 13 0 12 0 0 0 gauntlet | A 0 0 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 0 13 53 14 0 13 0 0 0 gauntlet | A 0 0 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 77 0.0846185567 0 0.945
+N A.ping 81 0.111340206 0.018556701 0.378
+N B.fm 62 0.158659794 0 0.11305
+N B.sub 50 0.229175258 0 0.088825
+N drum.hihat -1 0.03 0 0.5
+T 0 13 54 14 0 13 0 0 0 gauntlet | A 0 0 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0463917526 0 0.28
+N A.main 77 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 13 55 14 0 13 0 0 0 gauntlet | A 0 0 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 77 0.0681958763 0 0.17
+N A.main 81 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 13 56 14 0 13 0 0 0 gauntlet | A 0 0 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 0 14 57 15 0 14 0 0 0 gauntlet | A 0 0 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 1 1 | turn,turn
+N A.main 77 0.37843299 0 0.3315
+N A.ping 81 0.111340206 0.018556701 0.1326
+N B.fm 62 0.51828866 0 0.29925
+N B.sub 50 0.748639175 0 0.235125
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 0 14 58 15 0 14 0 0 0 gauntlet | A 0 0 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0463917526 0 0.28
+N A.main 77 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 14 59 15 0 14 0 0 0 gauntlet | A 0 0 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 77 0.0681958763 0 0.17
+N A.main 84 0.0463917526 0.0695876289 0.158
+N B.fm 71 0.0757731959 0 0.153
+N B.fm 69 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 14 60 15 0 14 0 0 0 gauntlet | A 0 0 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 0 15 61 0 0 15 0 0 0 gauntlet | A 0 0 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 77 0.662257732 0 0.3825
+N A.ping 81 0.111340206 0.018556701 0.153
+N B.fm 62 0.233814433 0 0.105
+N B.sub 50 0.337731959 0 0.0825
+N drum.hihat -1 0.03 0 0.5
+T 0 15 62 0 0 15 0 0 0 gauntlet | A 0 0 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0463917526 0 0.28
+N A.main 77 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 0 15 63 0 0 15 0 0 0 gauntlet | A 0 0 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 84 0.0681958763 0 0.17
+N A.main 81 0.0463917526 0.0695876289 0.158
+N B.fm 71 0.0757731959 0 0.153
+N B.fm 69 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 0 15 64 0 0 15 0 0 0 gauntlet | A 0 0 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 1 0 1 1 1 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+T 1 0 2 1 1 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 1 0 3 1 1 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 52 0.0681958763 0 0.17
+N A.main 55 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 72 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 1 0 4 1 1 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 1 1 5 2 1 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 52 0.141030928 0 0.80325
+N A.ping 55 0.111340206 0.018556701 0.3213
+N B.fm 72 0.126927835 0 0.08645
+N B.sub 60 0.183340206 0 0.067925
+N drum.hihat -1 0.03 0 0.5
+T 1 1 6 2 1 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 1 1 7 2 1 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 52 0.0681958763 0 0.17
+N A.main 55 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 72 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 1 1 8 2 1 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 1 2 9 3 1 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 1 | wait,turn
+N B.fm 72 0.222123711 0 0.399
+N B.sub 60 0.320845361 0 0.3135
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 1 2 10 3 1 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 1 2 11 3 1 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 52 0.0681958763 0 0.17
+N A.main 55 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 1 2 12 3 1 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 1 3 13 4 1 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 52 0.547082474 0 0.4275
+N A.ping 55 0.111340206 0.018556701 0.171
+N B.fm 72 0.100206186 0 0.14
+N B.sub 60 0.144742268 0 0.11
+N drum.hihat -1 0.03 0 0.5
+T 1 3 14 4 1 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 1 3 15 4 1 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 71 0.0681958763 0 0.17
+N A.main 67 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 1 3 16 4 1 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 1 4 17 5 1 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 1 | turn,collision,collision
+N A.main 52 0.473041237 0 0.4335
+N A.ping 55 0.111340206 0.018556701 0.1734
+N B.fm 72 0.158659794 0 0.665
+N B.sub 60 0.229175258 0 0.5225
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+T 1 4 18 5 1 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 1 4 19 5 1 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 52 0.0681958763 0 0.17
+N A.main 55 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 1 4 20 5 1 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 1 5 21 6 1 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | collision,wait
+N A.main 52 0.528865979 0 0.595
+N A.ping 55 0.111340206 0.018556701 0.238
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+T 1 5 22 6 1 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 1 5 23 6 1 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 52 0.0681958763 0 0.17
+N A.main 55 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 1 5 24 6 1 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 1 6 25 7 1 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 1 N 1 0 0 | 0 0 | 0 1 1 | ping,move,zap
+N A.main 52 0.35257732 0 0.765
+N A.ping 55 0.111340206 0.018556701 0.306
+N B.fm 62 0.120247423 0 0.58212
+N B.sub 50 0.173690722 0 0.45738
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+T 1 6 26 7 1 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 1 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0463917526 0 0.28
+N A.main 48 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.20776
+N B.sub 50 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 1 6 27 7 1 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 1 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 48 0.0681958763 0 0.17
+N A.main 52 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 65 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 1 6 28 7 1 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 1 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 50 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 1 7 29 8 1 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 1 | wait,move
+N B.fm 62 0.267216495 0 0.66528
+N B.sub 50 0.385979381 0 0.52272
+N drum.hihat -1 0.03 0 0.5
+T 1 7 30 8 1 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0463917526 0 0.28
+N A.main 48 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.20776
+N B.sub 50 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 1 7 31 8 1 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 48 0.0681958763 0 0.17
+N A.main 52 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 65 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 1 7 32 8 1 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 50 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 1 8 33 9 1 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 1 0 1 | wait,ping
+N A.main 48 0.141030928 0 0.187
+N B.fm 62 0.0801649485 0 0.7
+N B.sub 50 0.115793814 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+T 1 8 34 9 1 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0463917526 0 0.28
+N A.main 48 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.20776
+N B.sub 50 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 1 8 35 9 1 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 48 0.0681958763 0 0.17
+N A.main 52 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 65 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 1 8 36 9 1 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 50 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 1 9 37 10 1 9 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 1 | turn,ping
+N A.main 48 0.230350515 0 0.4725
+N A.ping 52 0.111340206 0.018556701 0.189
+N B.fm 62 0.0801649485 0 0.7
+N B.sub 50 0.115793814 0 0.55
+N drum.hihat -1 0.03 0 0.5
+T 1 9 38 10 1 9 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0463917526 0 0.28
+N A.main 48 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.20776
+N B.sub 50 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 1 9 39 10 1 9 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 67 0.0681958763 0 0.17
+N A.main 64 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 65 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 1 9 40 10 1 9 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 50 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 1 10 41 11 1 10 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 1 1 | wait,collision,collision
+N B.fm 62 0.0668041237 0 0.7
+N B.sub 50 0.0964948454 0 0.55
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+T 1 10 42 11 1 10 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0463917526 0 0.28
+N A.main 48 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.20776
+N B.sub 50 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 1 10 43 11 1 10 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 67 0.0681958763 0 0.17
+N A.main 64 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 65 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 1 10 44 11 1 10 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 50 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 1 11 45 12 1 11 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 48 0.493608247 0 0.675
+N A.ping 52 0.111340206 0.018556701 0.27
+N drum.hihat -1 0.03 0 0.5
+T 1 11 46 12 1 11 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0463917526 0 0.28
+N A.main 48 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.20776
+N B.sub 50 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 1 11 47 12 1 11 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 67 0.0681958763 0 0.17
+N A.main 64 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 65 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 1 11 48 12 1 11 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 50 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 1 12 49 13 1 12 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 1 0 1 | wait,wait
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+T 1 12 50 13 1 12 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0463917526 0 0.28
+N A.main 48 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.20776
+N B.sub 50 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 1 12 51 13 1 12 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 67 0.0681958763 0 0.17
+N A.main 64 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 65 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 1 12 52 13 1 12 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 50 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 1 13 53 14 1 13 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 48 0.197443299 0 0.70875
+N A.ping 52 0.111340206 0.018556701 0.2835
+N B.fm 62 0.0951958763 0 0.14364
+N B.sub 50 0.137505155 0 0.11286
+N drum.hihat -1 0.03 0 0.5
+T 1 13 54 14 1 13 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0463917526 0 0.28
+N A.main 48 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.20776
+N B.sub 50 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 1 13 55 14 1 13 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 67 0.0681958763 0 0.17
+N A.main 64 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 65 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 1 13 56 14 1 13 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 50 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 1 14 57 15 1 14 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 1 1 | turn,turn
+N A.main 48 0.473041237 0 0.4335
+N A.ping 52 0.111340206 0.018556701 0.1734
+N B.fm 62 0.370206186 0 0.366282
+N B.sub 50 0.534742268 0 0.287793
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 1 14 58 15 1 14 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0463917526 0 0.28
+N A.main 48 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.20776
+N B.sub 50 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 1 14 59 15 1 14 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 48 0.0681958763 0 0.17
+N A.main 52 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 65 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 1 14 60 15 1 14 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 50 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 1 15 61 0 1 15 0 0 0 gauntlet | A 0 4 N 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 48 0.283824742 0 0.51
+N A.ping 52 0.111340206 0.018556701 0.204
+N B.fm 62 0.167010309 0 0.12852
+N B.sub 50 0.241237113 0 0.10098
+N drum.hihat -1 0.03 0 0.5
+T 1 15 62 0 1 15 0 0 0 gauntlet | A 0 4 N 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0463917526 0 0.28
+N A.main 48 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.20776
+N B.sub 50 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 1 15 63 0 1 15 0 0 0 gauntlet | A 0 4 N 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 48 0.0681958763 0 0.17
+N A.main 52 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 65 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 1 15 64 0 1 15 0 0 0 gauntlet | A 0 4 N 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 50 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 2 0 1 1 2 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+T 2 0 2 1 2 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0463917526 0 0.28
+N A.main 57 0.0231958763 0 0.112
+N B.fm 65 0.0541237113 0 0.196
+N B.sub 53 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 2 0 3 1 2 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 57 0.0681958763 0 0.17
+N A.main 60 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 72 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 2 0 4 1 2 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0340206186 0 0.32
+N B.fm 64 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 2 1 5 2 2 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 57 0.141030928 0 0.80325
+N A.ping 60 0.111340206 0.018556701 0.3213
+N B.fm 65 0.126927835 0 0.08645
+N B.sub 53 0.183340206 0 0.067925
+N drum.hihat -1 0.03 0 0.5
+T 2 1 6 2 2 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0463917526 0 0.28
+N A.main 57 0.0231958763 0 0.112
+N B.fm 65 0.0541237113 0 0.196
+N B.sub 53 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 2 1 7 2 2 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 57 0.0681958763 0 0.17
+N A.main 60 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 72 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 2 1 8 2 2 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0340206186 0 0.32
+N B.fm 64 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 2 2 9 3 2 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 1 | ping,turn
+N A.main 57 0.141030928 0 0.80325
+N A.ping 60 0.111340206 0.018556701 0.3213
+N B.fm 65 0.222123711 0 0.399
+N B.sub 53 0.320845361 0 0.3135
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 2 2 10 3 2 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0463917526 0 0.28
+N A.main 57 0.0231958763 0 0.112
+N B.fm 65 0.0541237113 0 0.196
+N B.sub 53 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 2 2 11 3 2 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 57 0.0681958763 0 0.17
+N A.main 60 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 2 2 12 3 2 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0340206186 0 0.32
+N B.fm 64 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 2 3 13 4 2 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 57 0.547082474 0 0.4275
+N A.ping 60 0.111340206 0.018556701 0.171
+N B.fm 65 0.100206186 0 0.14
+N B.sub 53 0.144742268 0 0.11
+N drum.hihat -1 0.03 0 0.5
+T 2 3 14 4 2 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0463917526 0 0.28
+N A.main 57 0.0231958763 0 0.112
+N B.fm 65 0.0541237113 0 0.196
+N B.sub 53 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 2 3 15 4 2 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 76 0.0681958763 0 0.17
+N A.main 72 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 2 3 16 4 2 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0340206186 0 0.32
+N B.fm 64 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 2 4 17 5 2 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 1 | turn,collision,collision
+N A.main 57 0.473041237 0 0.4335
+N A.ping 60 0.111340206 0.018556701 0.1734
+N B.fm 65 0.158659794 0 0.665
+N B.sub 53 0.229175258 0 0.5225
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+T 2 4 18 5 2 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0463917526 0 0.28
+N A.main 57 0.0231958763 0 0.112
+N B.fm 65 0.0541237113 0 0.196
+N B.sub 53 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 2 4 19 5 2 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 57 0.0681958763 0 0.17
+N A.main 60 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 2 4 20 5 2 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0340206186 0 0.32
+N B.fm 64 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 2 5 21 6 2 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 65 0.370206186 0 0.33915
+N B.sub 53 0.534742268 0 0.266475
+N drum.hihat -1 0.03 0 0.5
+T 2 5 22 6 2 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0463917526 0 0.28
+N A.main 57 0.0231958763 0 0.112
+N B.fm 65 0.0541237113 0 0.196
+N B.sub 53 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 2 5 23 6 2 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 57 0.0681958763 0 0.17
+N A.main 60 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 2 5 24 6 2 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0340206186 0 0.32
+N B.fm 64 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 2 6 25 7 2 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 3 0 E 1 0 0 | 0 0 | 0 1 1 | ping,move,zap
+N A.main 57 0.35257732 0 0.765
+N A.ping 60 0.111340206 0.018556701 0.306
+N B.fm 62 0.200412371 0 0.494802
+N B.sub 50 0.289484536 0 0.388773
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+T 2 6 26 7 2 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 3 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.20776
+N B.sub 50 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 2 6 27 7 2 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 3 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 65 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 2 6 28 7 2 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 3 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 2 7 29 8 2 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 1 | wait,move
+N B.fm 67 0.445360825 0 0.565488
+N B.sub 55 0.643298969 0 0.444312
+N drum.hihat -1 0.03 0 0.5
+T 2 7 30 8 2 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 67 0.0541237113 0 0.20776
+N B.sub 55 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 2 7 31 8 2 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 64 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 2 7 32 8 2 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 65 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 2 8 33 9 2 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 1 0 1 | wait,ping
+N A.main 53 0.141030928 0 0.187
+N B.fm 67 0.133608247 0 0.607257
+N B.sub 55 0.192989691 0 0.4771305
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+T 2 8 34 9 2 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 67 0.0541237113 0 0.20776
+N B.sub 55 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 2 8 35 9 2 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 64 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 2 8 36 9 2 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 65 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 2 9 37 10 2 9 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 1 | turn,ping
+N A.main 53 0.230350515 0 0.4725
+N A.ping 57 0.111340206 0.018556701 0.189
+N B.fm 67 0.133608247 0 0.607257
+N B.sub 55 0.192989691 0 0.4771305
+N drum.hihat -1 0.03 0 0.5
+T 2 9 38 10 2 9 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 67 0.0541237113 0 0.20776
+N B.sub 55 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 2 9 39 10 2 9 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 72 0.0681958763 0 0.17
+N A.main 69 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 64 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 2 9 40 10 2 9 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 65 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 2 10 41 11 2 10 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 1 1 | collision,collision,collision
+N A.main 53 0.946082474 0 0.51
+N A.ping 57 0.111340206 0.018556701 0.204
+N B.fm 67 0.111340206 0 0.67473
+N B.sub 55 0.160824742 0 0.530145
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+T 2 10 42 11 2 10 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 67 0.0541237113 0 0.20776
+N B.sub 55 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 2 10 43 11 2 10 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 72 0.0681958763 0 0.17
+N A.main 69 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 64 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 2 10 44 11 2 10 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 65 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 2 11 45 12 2 11 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 1 | ping,collision,collision
+N A.main 53 0.493608247 0 0.675
+N A.ping 57 0.111340206 0.018556701 0.27
+N B.fm 67 0.26443299 0 0.61047
+N B.sub 55 0.381958763 0 0.479655
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+T 2 11 46 12 2 11 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 67 0.0541237113 0 0.20776
+N B.sub 55 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 2 11 47 12 2 11 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 72 0.0681958763 0 0.17
+N A.main 69 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 64 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 2 11 48 12 2 11 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 65 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 2 12 49 13 2 12 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 1 0 1 | collision,collision,wait
+N A.main 53 0.164536082 0 0.7875
+N A.ping 57 0.111340206 0.018556701 0.315
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+T 2 12 50 13 2 12 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 67 0.0541237113 0 0.20776
+N B.sub 55 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 2 12 51 13 2 12 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 72 0.0681958763 0 0.17
+N A.main 69 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 64 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 2 12 52 13 2 12 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 65 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 2 13 53 14 2 13 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 53 0.197443299 0 0.70875
+N A.ping 57 0.111340206 0.018556701 0.2835
+N B.fm 67 0.158659794 0 0.122094
+N B.sub 55 0.229175258 0 0.095931
+N drum.hihat -1 0.03 0 0.5
+T 2 13 54 14 2 13 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 67 0.0541237113 0 0.20776
+N B.sub 55 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 2 13 55 14 2 13 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 72 0.0681958763 0 0.17
+N A.main 69 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.16218
+N B.fm 64 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 2 13 56 14 2 13 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 65 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 2 14 57 15 2 14 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 S 1 0 0 | 0 0 | 0 1 1 | turn,turn
+N A.main 53 0.473041237 0 0.4335
+N A.ping 57 0.111340206 0.018556701 0.1734
+N B.fm 67 0.51828866 0 0.32319
+N B.sub 55 0.748639175 0 0.253935
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 2 14 58 15 2 14 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 S 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 67 0.0541237113 0 0.20776
+N B.sub 55 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 2 14 59 15 2 14 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 S 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 71 0.0757731959 0 0.16218
+N B.fm 67 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 2 14 60 15 2 14 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 S 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 65 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 2 15 61 0 2 15 0 0 0 gauntlet | A 0 4 N 0 0 0 | B 4 0 S 1 0 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 53 0.283824742 0 0.51
+N A.ping 57 0.111340206 0.018556701 0.204
+N B.fm 67 0.233814433 0 0.1134
+N B.sub 55 0.337731959 0 0.0891
+N drum.hihat -1 0.03 0 0.5
+T 2 15 62 0 2 15 0 0 0 gauntlet | A 0 4 N 0 0 0 | B 4 0 S 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 67 0.0541237113 0 0.20776
+N B.sub 55 0.0773195876 0 0.1484
+N drum.hihat -1 0.02 0 0.12
+T 2 15 63 0 2 15 0 0 0 gauntlet | A 0 4 N 0 0 0 | B 4 0 S 1 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 71 0.0757731959 0 0.16218
+N B.fm 67 0.0463917526 0.0773195876 0.15018
+N drum.hihat -1 0.02 0 0.25
+T 2 15 64 0 2 15 0 0 0 gauntlet | A 0 4 N 0 0 0 | B 4 0 S 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 65 0.0386597938 0 0.2544
+N drum.hihat -1 0.02 0 0.12
+T 3 0 1 1 3 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+T 3 0 2 1 3 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 0 3 1 3 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 60 0.0681958763 0 0.17
+N A.main 64 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 72 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 0 4 1 3 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 3 1 5 2 3 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 60 0.141030928 0 0.80325
+N A.ping 64 0.111340206 0.018556701 0.3213
+N B.fm 69 0.126927835 0 0.08645
+N B.sub 57 0.183340206 0 0.067925
+N drum.hihat -1 0.03 0 0.5
+T 3 1 6 2 3 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 1 7 2 3 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 60 0.0681958763 0 0.17
+N A.main 64 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 72 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 1 8 2 3 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 3 2 9 3 3 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 1 | ping,turn
+N A.main 60 0.141030928 0 0.80325
+N A.ping 64 0.111340206 0.018556701 0.3213
+N B.fm 69 0.222123711 0 0.399
+N B.sub 57 0.320845361 0 0.3135
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 3 2 10 3 3 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 2 11 3 3 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 60 0.0681958763 0 0.17
+N A.main 64 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 2 12 3 3 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 3 3 13 4 3 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 60 0.547082474 0 0.4275
+N A.ping 64 0.111340206 0.018556701 0.171
+N B.fm 69 0.100206186 0 0.14
+N B.sub 57 0.144742268 0 0.11
+N drum.hihat -1 0.03 0 0.5
+T 3 3 14 4 3 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 3 15 4 3 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 83 0.0681958763 0 0.17
+N A.main 79 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 3 16 4 3 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 3 4 17 5 3 4 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 1 | wait,wait
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+T 3 4 18 5 3 4 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 4 19 5 3 4 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 83 0.0681958763 0 0.17
+N A.main 79 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 4 20 5 3 4 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 3 5 21 6 3 5 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 69 0.370206186 0 0.33915
+N B.sub 57 0.534742268 0 0.266475
+N drum.hihat -1 0.03 0 0.5
+T 3 5 22 6 3 5 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 5 23 6 3 5 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 83 0.0681958763 0 0.17
+N A.main 79 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 5 24 6 3 5 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 3 6 25 7 3 6 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 1 1 | ping,wait
+N A.main 60 0.493608247 0 0.675
+N A.ping 64 0.111340206 0.018556701 0.27
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 3 6 26 7 3 6 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 6 27 7 3 6 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 83 0.0681958763 0 0.17
+N A.main 79 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 6 28 7 3 6 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 3 7 29 8 3 7 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | ping,collision
+N A.main 60 0.567649485 0 0.57375
+N A.ping 64 0.111340206 0.018556701 0.2295
+N B.fm 69 0.445360825 0 0.5236
+N B.sub 57 0.643298969 0 0.4114
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+T 3 7 30 8 3 7 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 7 31 8 3 7 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 83 0.0681958763 0 0.17
+N A.main 79 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 7 32 8 3 7 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 3 8 33 9 3 8 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 1 0 1 | wait,ping
+N A.main 60 0.197443299 0 0.165
+N B.fm 69 0.133608247 0 0.562275
+N B.sub 57 0.192989691 0 0.4417875
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+T 3 8 34 9 3 8 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 8 35 9 3 8 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 83 0.0681958763 0 0.17
+N A.main 79 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 8 36 9 3 8 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 3 9 37 10 3 9 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | turn,ping
+N A.main 60 0.131628866 0 0.4095
+N A.ping 64 0.111340206 0.018556701 0.1638
+N B.fm 69 0.133608247 0 0.562275
+N B.sub 57 0.192989691 0 0.4417875
+N drum.hihat -1 0.03 0 0.5
+T 3 9 38 10 3 9 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 9 39 10 3 9 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 60 0.0681958763 0 0.17
+N A.main 83 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 9 40 10 3 9 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 3 10 41 11 3 10 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 1 1 | wait,collision,collision
+N B.fm 69 0.111340206 0 0.62475
+N B.sub 57 0.160824742 0 0.490875
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+T 3 10 42 11 3 10 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 10 43 11 3 10 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 60 0.0681958763 0 0.17
+N A.main 83 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 10 44 11 3 10 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 3 11 45 12 3 11 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | ping,collision,collision
+N A.main 60 0.282061856 0 0.585
+N A.ping 64 0.111340206 0.018556701 0.234
+N B.fm 69 0.26443299 0 0.56525
+N B.sub 57 0.381958763 0 0.444125
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+T 3 11 46 12 3 11 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 11 47 12 3 11 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 60 0.0681958763 0 0.17
+N A.main 83 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 11 48 12 3 11 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 3 12 49 13 3 12 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 1 0 1 | wait,collision
+N B.fm 69 0.445360825 0 0.5236
+N B.sub 57 0.643298969 0 0.4114
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+T 3 12 50 13 3 12 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 12 51 13 3 12 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 60 0.0681958763 0 0.17
+N A.main 83 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 12 52 13 3 12 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 3 13 53 14 3 13 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 60 0.112824742 0 0.61425
+N A.ping 64 0.111340206 0.018556701 0.2457
+N B.fm 69 0.158659794 0 0.11305
+N B.sub 57 0.229175258 0 0.088825
+N drum.hihat -1 0.03 0 0.5
+T 3 13 54 14 3 13 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 13 55 14 3 13 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 60 0.0681958763 0 0.17
+N A.main 83 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 13 56 14 3 13 0 0 0 gauntlet | A 0 4 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 3 14 57 15 3 14 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 1 1 | turn,turn
+N A.main 60 0.662257732 0 0.3825
+N A.ping 64 0.111340206 0.018556701 0.153
+N B.fm 69 0.51828866 0 0.29925
+N B.sub 57 0.748639175 0 0.235125
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 3 14 58 15 3 14 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 14 59 15 3 14 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 83 0.0681958763 0 0.17
+N A.main 79 0.0463917526 0.0695876289 0.158
+N B.fm 72 0.0757731959 0 0.153
+N B.fm 69 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 14 60 15 3 14 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 3 15 61 0 3 15 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 60 0.473041237 0 0.4335
+N A.ping 64 0.111340206 0.018556701 0.1734
+N B.fm 69 0.233814433 0 0.105
+N B.sub 57 0.337731959 0 0.0825
+N drum.hihat -1 0.03 0 0.5
+T 3 15 62 0 3 15 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0463917526 0 0.28
+N A.main 60 0.0231958763 0 0.112
+N B.fm 69 0.0541237113 0 0.196
+N B.sub 57 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 3 15 63 0 3 15 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 60 0.0681958763 0 0.17
+N A.main 64 0.0463917526 0.0695876289 0.158
+N B.fm 72 0.0757731959 0 0.153
+N B.fm 69 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 3 15 64 0 3 15 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0340206186 0 0.32
+N B.fm 67 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+T 4 0 2 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 0 3 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 72 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 0 4 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 1 5 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 53 0.141030928 0 0.80325
+N A.ping 57 0.111340206 0.018556701 0.3213
+N B.fm 62 0.126927835 0 0.08645
+N B.sub 50 0.183340206 0 0.067925
+N drum.hihat -1 0.03 0 0.5
+T 4 1 6 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 1 7 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 72 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 1 8 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 2 9 3 0 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 1 | wait,turn
+N B.fm 62 0.222123711 0 0.399
+N B.sub 50 0.320845361 0 0.3135
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 4 2 10 3 0 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 2 11 3 0 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 2 12 3 0 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 3 13 4 0 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 53 0.547082474 0 0.4275
+N A.ping 57 0.111340206 0.018556701 0.171
+N B.fm 62 0.100206186 0 0.14
+N B.sub 50 0.144742268 0 0.11
+N drum.hihat -1 0.03 0 0.5
+T 4 3 14 4 0 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 3 15 4 0 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 76 0.0681958763 0 0.17
+N A.main 72 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 3 16 4 0 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 4 17 5 0 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 1 | turn,collision,collision
+N A.main 53 0.473041237 0 0.4335
+N A.ping 57 0.111340206 0.018556701 0.1734
+N B.fm 62 0.158659794 0 0.665
+N B.sub 50 0.229175258 0 0.5225
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+T 4 4 18 5 0 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 4 19 5 0 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 4 20 5 0 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 5 21 6 0 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
+T 4 5 22 6 0 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 5 23 6 0 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 5 24 6 0 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 6 25 7 0 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 1 | ping,wait
+N A.main 53 0.35257732 0 0.765
+N A.ping 57 0.111340206 0.018556701 0.306
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 4 6 26 7 0 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 6 27 7 0 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 6 28 7 0 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 7 29 8 0 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
+T 4 7 30 8 0 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 7 31 8 0 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 7 32 8 0 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 8 33 9 0 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 1 | wait,ping
+N A.main 53 0.141030928 0 0.187
+N B.fm 62 0.0801649485 0 0.6615
+N B.sub 50 0.115793814 0 0.51975
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+T 4 8 34 9 0 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 8 35 9 0 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 8 36 9 0 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 9 37 10 0 9 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | turn,ping
+N A.main 53 0.230350515 0 0.4725
+N A.ping 57 0.111340206 0.018556701 0.189
+N B.fm 62 0.0801649485 0 0.6615
+N B.sub 50 0.115793814 0 0.51975
+N drum.hihat -1 0.03 0 0.5
+T 4 9 38 10 0 9 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 9 39 10 0 9 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 76 0.0681958763 0 0.17
+N A.main 72 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 9 40 10 0 9 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 10 41 11 0 10 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 1 | wait,collision,collision
+N B.fm 62 0.0668041237 0 0.7
+N B.sub 50 0.0964948454 0 0.55
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+T 4 10 42 11 0 10 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 10 43 11 0 10 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 76 0.0681958763 0 0.17
+N A.main 72 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 10 44 11 0 10 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 11 45 12 0 11 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | ping,collision,collision
+N A.main 53 0.493608247 0 0.675
+N A.ping 57 0.111340206 0.018556701 0.27
+N B.fm 62 0.158659794 0 0.665
+N B.sub 50 0.229175258 0 0.5225
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+T 4 11 46 12 0 11 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 11 47 12 0 11 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 76 0.0681958763 0 0.17
+N A.main 72 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 11 48 12 0 11 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 12 49 13 0 12 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 1 | collision,collision,collision
+N A.main 53 0.164536082 0 0.7875
+N A.ping 57 0.111340206 0.018556701 0.315
+N B.fm 62 0.267216495 0 0.616
+N B.sub 50 0.385979381 0 0.484
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+T 4 12 50 13 0 12 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 12 51 13 0 12 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 76 0.0681958763 0 0.17
+N A.main 72 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 12 52 13 0 12 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 13 53 14 0 13 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 53 0.197443299 0 0.70875
+N A.ping 57 0.111340206 0.018556701 0.2835
+N B.fm 62 0.0951958763 0 0.133
+N B.sub 50 0.137505155 0 0.1045
+N drum.hihat -1 0.03 0 0.5
+T 4 13 54 14 0 13 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 13 55 14 0 13 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 76 0.0681958763 0 0.17
+N A.main 72 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 13 56 14 0 13 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 14 57 15 0 14 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 1 1 | turn,turn
+N A.main 53 0.473041237 0 0.4335
+N A.ping 57 0.111340206 0.018556701 0.1734
+N B.fm 62 0.370206186 0 0.33915
+N B.sub 50 0.534742268 0 0.266475
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 4 14 58 15 0 14 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 14 59 15 0 14 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 14 60 15 0 14 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 4 15 61 0 0 15 0 0 0 gauntlet | A 0 4 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 53 0.283824742 0 0.51
+N A.ping 57 0.111340206 0.018556701 0.204
+N B.fm 62 0.167010309 0 0.119
+N B.sub 50 0.241237113 0 0.0935
+N drum.hihat -1 0.03 0 0.5
+T 4 15 62 0 0 15 0 0 0 gauntlet | A 0 4 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.28
+N A.main 53 0.0231958763 0 0.112
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 4 15 63 0 0 15 0 0 0 gauntlet | A 0 4 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.17
+N A.main 57 0.0463917526 0.0695876289 0.158
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 4 15 64 0 0 15 0 0 0 gauntlet | A 0 4 N 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.32
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 0 1 1 1 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+T 5 0 2 1 1 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 0 3 1 1 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 52 0.0681958763 0 0.17
+N A.main 55 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 72 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 0 4 1 1 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 1 5 2 1 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+N B.fm 72 0.126927835 0 0.08645
+N B.sub 60 0.183340206 0 0.067925
+N drum.hihat -1 0.03 0 0.5
+T 5 1 6 2 1 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 1 7 2 1 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 52 0.0681958763 0 0.17
+N A.main 55 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 72 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 1 8 2 1 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 2 9 3 1 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 1 | wait,turn
+N B.fm 72 0.222123711 0 0.399
+N B.sub 60 0.320845361 0 0.3135
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 5 2 10 3 1 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 2 11 3 1 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 52 0.0681958763 0 0.17
+N A.main 55 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 2 12 3 1 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 3 13 4 1 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 52 0.547082474 0 0.4275
+N A.ping 55 0.111340206 0.018556701 0.171
+N B.fm 72 0.100206186 0 0.14
+N B.sub 60 0.144742268 0 0.11
+N drum.hihat -1 0.03 0 0.5
+T 5 3 14 4 1 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 3 15 4 1 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 74 0.0681958763 0 0.17
+N A.main 71 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 3 16 4 1 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 4 17 5 1 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 1 | turn,collision,collision
+N A.main 52 0.473041237 0 0.4335
+N A.ping 55 0.111340206 0.018556701 0.1734
+N B.fm 72 0.158659794 0 0.665
+N B.sub 60 0.229175258 0 0.5225
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+T 5 4 18 5 1 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 4 19 5 1 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 52 0.0681958763 0 0.17
+N A.main 55 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 4 20 5 1 4 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 5 21 6 1 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 72 0.370206186 0 0.33915
+N B.sub 60 0.534742268 0 0.266475
+N drum.hihat -1 0.03 0 0.5
+T 5 5 22 6 1 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 5 23 6 1 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 52 0.0681958763 0 0.17
+N A.main 55 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 5 24 6 1 5 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 6 25 7 1 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 1 1 | wait,wait
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 5 6 26 7 1 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 6 27 7 1 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 52 0.0681958763 0 0.17
+N A.main 55 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 6 28 7 1 6 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 7 29 8 1 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
+T 5 7 30 8 1 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 7 31 8 1 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 52 0.0681958763 0 0.17
+N A.main 55 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 7 32 8 1 7 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 8 33 9 1 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 1 0 1 | wait,ping
+N A.main 52 0.141030928 0 0.187
+N B.fm 72 0.133608247 0 0.562275
+N B.sub 60 0.192989691 0 0.4417875
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+T 5 8 34 9 1 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 8 35 9 1 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 52 0.0681958763 0 0.17
+N A.main 55 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 8 36 9 1 8 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 9 37 10 1 9 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | wait,ping
+N B.fm 72 0.133608247 0 0.562275
+N B.sub 60 0.192989691 0 0.4417875
+N drum.hihat -1 0.03 0 0.5
+T 5 9 38 10 1 9 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.28
+N A.main 52 0.0231958763 0 0.112
+N B.fm 72 0.0541237113 0 0.196
+N B.sub 60 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 9 39 10 1 9 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 52 0.0681958763 0 0.17
+N A.main 55 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 67 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 9 40 10 1 9 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.32
+N B.fm 71 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 10 41 11 1 10 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 1 1 | move,zap,collision,collision
+N A.main 52 0.337886598 0 0.62424
+N A.ping 55 0.111340206 0.018556701 0.249696
+N B.fm 62 0.111340206 0 0.62475
+N B.sub 50 0.160824742 0 0.490875
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
+T 5 10 42 11 1 10 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0463917526 0 0.2968
+N A.main 52 0.0231958763 0 0.11872
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 10 43 11 1 10 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 52 0.0681958763 0 0.1802
+N A.main 57 0.0463917526 0.0695876289 0.1682
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 10 44 11 1 10 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0340206186 0 0.3392
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 11 45 12 1 11 0 0 0 gauntlet | A 1 4 E 2 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | ping,zap,wait
+N A.main 53 0.17628866 0 0.8874
+N A.ping 57 0.111340206 0.018556701 0.35496
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+T 5 11 46 12 1 11 0 0 0 gauntlet | A 1 4 E 2 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.3136
+N A.main 53 0.0231958763 0 0.12544
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 11 47 12 1 11 0 0 0 gauntlet | A 1 4 E 2 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.1904
+N A.main 59 0.0463917526 0.0695876289 0.1784
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 11 48 12 1 11 0 0 0 gauntlet | A 1 4 E 2 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.3584
+N A.main 55 0.0681958763 0.00773195876 0.1568
+N A.main 62 0.0463917526 0.0773195876 0.1448
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 12 49 13 1 12 0 0 0 gauntlet | A 1 4 E 2 0 0 | B 4 0 E 0 0 0 | 0 0 | 1 0 1 | wait,collision
+N B.fm 62 0.445360825 0 0.5236
+N B.sub 50 0.643298969 0 0.4114
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+T 5 12 50 13 1 12 0 0 0 gauntlet | A 1 4 E 2 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.3136
+N A.main 53 0.0231958763 0 0.12544
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 12 51 13 1 12 0 0 0 gauntlet | A 1 4 E 2 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.1904
+N A.main 59 0.0463917526 0.0695876289 0.1784
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 12 52 13 1 12 0 0 0 gauntlet | A 1 4 E 2 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.3584
+N A.main 55 0.0681958763 0.00773195876 0.1568
+N A.main 62 0.0463917526 0.0773195876 0.1448
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 13 53 14 1 13 0 0 0 gauntlet | A 1 4 E 3 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 1 | ping,zap,wait
+N A.main 53 0.0705154639 0 0.99603
+N A.ping 57 0.111340206 0.018556701 0.398412
+N B.fm 62 0.158659794 0 0.11305
+N B.sub 50 0.229175258 0 0.088825
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+T 5 13 54 14 1 13 0 0 0 gauntlet | A 1 4 E 3 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.3136
+N A.main 53 0.0231958763 0 0.12544
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 13 55 14 1 13 0 0 0 gauntlet | A 1 4 E 3 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.1904
+N A.main 59 0.0463917526 0.0695876289 0.1784
+N B.fm 62 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 13 56 14 1 13 0 0 0 gauntlet | A 1 4 E 3 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.3584
+N A.main 55 0.0681958763 0.00773195876 0.1568
+N A.main 62 0.0463917526 0.0773195876 0.1448
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 14 57 15 1 14 0 0 0 gauntlet | A 1 4 N 4 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 1 1 | turn,zap,turn
+N A.main 53 0.141912371 0 0.6732
+N A.ping 57 0.111340206 0.018556701 0.26928
+N B.fm 62 0.51828866 0 0.29925
+N B.sub 50 0.748639175 0 0.235125
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+T 5 14 58 15 1 14 0 0 0 gauntlet | A 1 4 N 4 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.3136
+N A.main 53 0.0231958763 0 0.12544
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 14 59 15 1 14 0 0 0 gauntlet | A 1 4 N 4 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.1904
+N A.main 59 0.0463917526 0.0695876289 0.1784
+N B.fm 72 0.0757731959 0 0.153
+N B.fm 69 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 14 60 15 1 14 0 0 0 gauntlet | A 1 4 N 4 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.3584
+N A.main 55 0.0681958763 0.00773195876 0.1568
+N A.main 62 0.0463917526 0.0773195876 0.1448
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 5 15 61 0 1 15 0 0 0 gauntlet | A 1 4 W 5 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | turn,zap,wait
+N A.main 53 0.189216495 0 0.4641
+N A.ping 57 0.111340206 0.018556701 0.18564
+N B.fm 62 0.233814433 0 0.105
+N B.sub 50 0.337731959 0 0.0825
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+T 5 15 62 0 1 15 0 0 0 gauntlet | A 1 4 W 5 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0463917526 0 0.3136
+N A.main 53 0.0231958763 0 0.12544
+N B.fm 62 0.0541237113 0 0.196
+N B.sub 50 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 5 15 63 0 1 15 0 0 0 gauntlet | A 1 4 W 5 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 53 0.0681958763 0 0.1904
+N A.main 72 0.0463917526 0.0695876289 0.1784
+N B.fm 72 0.0757731959 0 0.153
+N B.fm 69 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 5 15 64 0 1 15 0 0 0 gauntlet | A 1 4 W 5 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0340206186 0 0.3584
+N A.main 55 0.0681958763 0.00773195876 0.1568
+N A.main 62 0.0463917526 0.0773195876 0.1448
+N B.fm 60 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 6 0 1 1 2 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+T 6 0 2 1 2 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0463917526 0 0.28
+N A.main 57 0.0231958763 0 0.112
+N B.fm 65 0.0541237113 0 0.196
+N B.sub 53 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 6 0 3 1 2 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 57 0.0681958763 0 0.17
+N A.main 62 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 72 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 6 0 4 1 2 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0340206186 0 0.32
+N B.fm 64 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 6 1 5 2 2 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+N B.fm 65 0.126927835 0 0.08645
+N B.sub 53 0.183340206 0 0.067925
+N drum.hihat -1 0.03 0 0.5
+T 6 1 6 2 2 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0463917526 0 0.28
+N A.main 57 0.0231958763 0 0.112
+N B.fm 65 0.0541237113 0 0.196
+N B.sub 53 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 6 1 7 2 2 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 57 0.0681958763 0 0.17
+N A.main 62 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 72 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 6 1 8 2 2 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0340206186 0 0.32
+N B.fm 64 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 6 2 9 3 2 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 1 | ping,turn
+N A.main 57 0.141030928 0 0.80325
+N A.ping 60 0.111340206 0.018556701 0.3213
+N B.fm 65 0.222123711 0 0.399
+N B.sub 53 0.320845361 0 0.3135
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+T 6 2 10 3 2 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0463917526 0 0.28
+N A.main 57 0.0231958763 0 0.112
+N B.fm 65 0.0541237113 0 0.196
+N B.sub 53 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 6 2 11 3 2 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 57 0.0681958763 0 0.17
+N A.main 62 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 6 2 12 3 2 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0340206186 0 0.32
+N B.fm 64 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12
+T 6 3 13 4 2 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 57 0.547082474 0 0.4275
+N A.ping 60 0.111340206 0.018556701 0.171
+N B.fm 65 0.100206186 0 0.14
+N B.sub 53 0.144742268 0 0.11
+N drum.hihat -1 0.03 0 0.5
+T 6 3 14 4 2 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0463917526 0 0.28
+N A.main 57 0.0231958763 0 0.112
+N B.fm 65 0.0541237113 0 0.196
+N B.sub 53 0.0773195876 0 0.14
+N drum.hihat -1 0.02 0 0.12
+T 6 3 15 4 2 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.main 76 0.0681958763 0 0.17
+N A.main 74 0.0463917526 0.0695876289 0.158
+N B.fm 64 0.0757731959 0 0.153
+N B.fm 65 0.0463917526 0.0773195876 0.141
+N drum.hihat -1 0.02 0 0.25
+T 6 3 16 4 2 3 0 0 0 gauntlet | A 0 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0340206186 0 0.32
+N B.fm 64 0.0386597938 0 0.24
+N drum.hihat -1 0.02 0 0.12

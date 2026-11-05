@@ -46,7 +46,8 @@ export function loadRoboSeq() {
     src = src.replace(end, `globalThis.__rs = {
         get state() { return state; }, BOARD, BOARD_PRESETS, DRUM_PRESETS, ACTIONS, MODIFIERS, SCALES,
         advanceSequence, resetBoardState, applyBoardPreset, seededChance, getDrumSteps, scaleQuantize,
-        scaleIntervalShift, buildBotDefaultSteps, buildDefaultState,
+        scaleIntervalShift, buildBotDefaultSteps, buildDefaultState, getStepDurationSeconds, swapRegisters,
+        setAudio(a) { audio = a; },
     };
 })();`);
     const store = new Map();
@@ -61,7 +62,13 @@ export function loadRoboSeq() {
             setItem: (k, v) => store.set(k, String(v)),
             removeItem: (k) => store.delete(k),
         },
-        Tone: stub("Tone"),
+        Tone: new Proxy({}, {
+            get(t, k) {
+                // Tone.Frequency(midi, "midi").toNote() -> "m<midi>" (the recorder reads it back); the rest stubs
+                if (k === "Frequency") return (v, unit) => ({ toNote: () => (unit === "midi" ? "m" + v : String(v)) });
+                return stub("Tone." + String(k));
+            },
+        }),
         setTimeout: () => 0, clearTimeout() {}, setInterval: () => 0, clearInterval() {},
         requestAnimationFrame: () => 0, cancelAnimationFrame() {},
         matchMedia: () => ({ matches: false, addEventListener() {}, addListener() {} }),
@@ -75,6 +82,25 @@ export function loadRoboSeq() {
     vm.runInContext(src, ctx, { filename: "roboseq.html" });
     const rs = ctx.__rs;
     rs.events = () => { const e = ctx.__events || []; ctx.__events = []; return e; };
+    rs.record = () => {                  // a recording audio: every voice's triggerAttackRelease, in call order
+        const notes = [];
+        const voice = (name) => ({
+            triggerAttackRelease: (...a) => notes.push([name, ...a]),
+            triggerRelease() {}, releaseAll() {},
+        });
+        const audio = {
+            botA: { main: voice("A.main"), ping: voice("A.ping"), arp: voice("A.arp") },
+            botB: { fm: voice("B.fm"), sub: voice("B.sub"), arp: voice("B.arp"), noise: voice("B.noise") },
+            fx: { collision: voice("fx.collision"), belt: voice("fx.belt"), rotator: voice("fx.rotator"),
+                  zap: voice("fx.zap"), pulse: voice("fx.pulse") },
+            drums: { kick: voice("drum.kick"), snare: voice("drum.snare"), hihat: voice("drum.hihat") },
+            coin: voice("coin"),
+            explosion: { thump: voice("ex.thump"), noise: voice("ex.noise"), crackle: voice("ex.crackle") },
+            mixer: {},
+        };
+        rs.setAudio(audio);
+        return () => notes.splice(0);
+    };
     ctx.__events = [];
     return rs;
 }

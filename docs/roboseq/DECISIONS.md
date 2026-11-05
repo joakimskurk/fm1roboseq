@@ -47,4 +47,17 @@ order. It leaves out what only draws or explains: the status strings, the event 
 explosions, hearts and clashes lists, `hiddenUntil` (a 600 ms fade after a respawn, from `Date.now()`); phase 3 draws
 those from the events. The HTML's quirks are kept: a dash moves twice even when the first move was stopped, a zap
 caps heat at 6 (and so lowers heat a dash pushed above it), pings and dashes add heat without a cap, every seq 2 step
-sets the register swap, the reset tick of a tpm > 1 loop also plays a ghost tick (phase 0).
+sets the register swap, the reset tick of a tpm > 1 loop also plays a ghost tick (phase 0). Seq 1 has 4 steps in this HTML
+(`restoreBassMod` always makes 4; the April handoff's 4/8 is older); the model keeps room for 8 but nothing sets it.
+In the score: the reset sound plays twice on a loop reset (at once, and again among the events), a death keeps its
+place among the first four events without sounding there, and bot B's board sound computes a chord it never plays
+(its complement shape shows only in the tpm-4 ghost ticks).
+
+## D8. Sound in three layers, each against the HTML (2026-11-05)
+
+What the HTML plays is mostly logic: where the bots stand, their heat, the tile and the step decide the notes, the
+arps, the ghost ticks and the event sounds. That part is exact and is checked like phase 1, note by note against the
+HTML's own script run in Node with a recording `audio` (2a). How each note sounds (Tone's oscillators, envelopes,
+noise, membrane, filter, reverb, limiter) is measured against Tone.Offline renders of the HTML's own `buildAudio()`
+in a headless Chromium, with tolerances (2b, 2c), as SkurkyMello learned to. So a difference in the music can't
+hide behind a difference in timbre, and the reverse.

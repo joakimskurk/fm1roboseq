@@ -6,11 +6,21 @@
 // A .trace file: the scenario as "key value" lines, then one "T" line per tick:
 //   T cycle step moveTick drumTick vmIndex vmCount seq2Index seq2Active swapped board
 //     | A x y dir heat deaths dying | B x y dir heat deaths dying | clash love | drums k s h | events
+// and after it one "N" line per note the HTML's audio played in that tick, in call order:
+//   N voice midi duration offset velocity      (midi -1 for noise; seconds, the offset from the tick's time)
 import { mkdirSync, writeFileSync, readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { loadRoboSeq, HTML } from "./html.mjs";
 
 const OUT = new URL("../../tests/golden/traces/", import.meta.url);
+
+const g = (x) => Number(x.toPrecision(9)).toString();
+function midiOf(name) {                               // "m57" (Tone.Frequency in html.mjs) or "G2" (C4 = 60)
+    if (name[0] === "m") return Number(name.slice(1));
+    const m = /^([A-G])(#|b)?(-?\d+)$/.exec(name);
+    if (!m) throw new Error("note " + name);
+    return 12 * (Number(m[3]) + 1) + { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 }[m[1]] + (m[2] === "#" ? 1 : m[2] === "b" ? -1 : 0);
+}
 
 function lcg(seed) {                                  // the scenarios' own randomness: fixed, so the traces are too
     let s = seed >>> 0;
@@ -22,11 +32,14 @@ function run(rs, sc) {
     st.playing = false;
     rs.applyBoardPreset(sc.board);
     st.loopLength = sc.loop;
+    st.bpm = sc.bpm;
+    st.playbackRate = sc.quarter ? 0.25 : 1;
+    st.transposeWithRoot = sc.transpose;
     st.ticksPerMove = sc.tpm;
     st.voiceModTrigger = sc.vmTrigger;
     st.voiceModLoopFreq = sc.vmFreq;
     st.bassMod.length = sc.bassModLen;
-    st.registersSwapped = false;
+    if (st.registersSwapped) rs.swapRegisters();       // (the ranges are the page's own variables: swap them back too)
     st.drums.on = sc.drumsOn;
     st.drums.presetId = sc.drumPreset;
     st.drums.pattern = rs.DRUM_PRESETS.find((p) => p.id === sc.drumPreset).pattern(rs.getDrumSteps(sc.loop));
@@ -44,10 +57,11 @@ function run(rs, sc) {
     rs.resetBoardState(false);
     st.playing = true;
     rs.events();
+    take();
 
     const lines = [];
     lines.push(`# ${sc.name}: reference/roboseq.html run by tools/trace/gen.mjs`);
-    lines.push(`board ${sc.board}`, `loop ${sc.loop}`, `tpm ${sc.tpm}`, `vmtrigger ${sc.vmTrigger}`,
+    lines.push(`board ${sc.board}`, `loop ${sc.loop}`, `bpm ${sc.bpm} ${sc.quarter ? 1 : 0} ${sc.transpose ? 1 : 0}`, `tpm ${sc.tpm}`, `vmtrigger ${sc.vmTrigger}`,
         `vmfreq ${sc.vmFreq * 4}`, `bassmodlen ${sc.bassModLen}`, `drums ${sc.drumsOn ? 1 : 0} ${sc.drumPreset}`,
         `seq2 ${sc.seq2.active ? 1 : 0} ${sc.seq2.pending ? 1 : 0}`);
     sc.seq2.steps.forEach((s, i) => lines.push(`seq2step ${i} ${s.boardId} ${s.drumPresetId} ${s.regSwap ? 1 : 0}`));
@@ -58,8 +72,10 @@ function run(rs, sc) {
     lines.push(`ticks ${sc.ticks}`);
     for (let t = 0; t < sc.ticks; t++) {
         const drumTick = st.drumTick, isMove = st.moveTick % (st.ticksPerMove || 1) === 0;
-        rs.advanceSequence(0);
+        const t0 = t * rs.getStepDurationSeconds();
+        rs.advanceSequence(t0);
         const ev = rs.events();
+        const notes = take();
         // the drum step that played this tick: the pattern at the drum tick before it advanced (a reset tick plays 0)
         let k = 0, s = 0, h = 0;
         if (st.drums.on && isMove) {
@@ -71,6 +87,12 @@ function run(rs, sc) {
         lines.push(`T ${st.cycle} ${st.currentStep} ${st.moveTick} ${st.drumTick} ${st.voiceModIndex} ${st.voiceModStepCount} ` +
             `${st.seq2.index} ${st.seq2.active ? 1 : 0} ${st.registersSwapped ? 1 : 0} ${st.activeBoardId} | A ${b("A")} | B ${b("B")} | ` +
             `${st.boardState.clashCooldown} ${st.boardState.loveSteps || 0} | ${k} ${s} ${h} | ${ev.join(",") || "-"}`);
+        for (const n of notes) {
+            const [voice, ...a] = n;
+            const noise = typeof a[0] === "number";
+            const [note, dur, time, vel] = noise ? [null, ...a] : a;
+            lines.push(`N ${voice} ${noise ? -1 : midiOf(note)} ${g(dur)} ${g(time - t0)} ${g(vel)}`);
+        }
     }
     return lines.join("\n") + "\n";
 }
@@ -85,7 +107,7 @@ const LOOPS = [8, 12, 16, 24, 32, 48, 64];
 function base(rs, name) {
     const st = rs.buildDefaultState();
     return {
-        name, board: "default", loop: 16, tpm: 1, vmTrigger: "loop", vmFreq: 1, bassModLen: 4,
+        name, board: "default", loop: 16, bpm: 80, quarter: false, transpose: true, tpm: 1, vmTrigger: "loop", vmFreq: 1, bassModLen: 4,
         drumsOn: true, drumPreset: "four",
         seq2: { active: false, pending: false, steps: st.seq2.steps.map((s) => ({ ...s })) },
         prog: {
@@ -108,6 +130,7 @@ function randomProgram(r, len) {
 }
 
 const rs = loadRoboSeq();
+const take = rs.record();
 const scenarios = [];
 scenarios.push({ ...base(rs, "default"), ticks: 400 });
 for (const b of BOARDS) scenarios.push({ ...base(rs, "board-" + b), board: b, ticks: 160 });
@@ -118,7 +141,7 @@ for (let i = 0; i < 24; i++) {
     sc.tpm = [1, 1, 2, 4][i % 4];
     sc.vmFreq = [0.25, 0.5, 1, 2, 4][i % 5];
     sc.vmTrigger = i % 6 === 5 ? "manual" : "loop";
-    sc.bassModLen = i % 2 ? 8 : 4;
+    sc.bassModLen = 4;                                // (this HTML's Seq 1 always has 4 steps: restoreBassMod)
     sc.drumsOn = i % 7 !== 3;
     sc.drumPreset = DRUMS[i % DRUMS.length];
     sc.prog.A = randomProgram(r, 1 + Math.floor(r() * 64));
@@ -136,6 +159,14 @@ for (let i = 0; i < 24; i++) {
         { boardId: "default", drumPresetId: "four", regSwap: false },
     ] };
     sc.ticks = 800;
+    scenarios.push(sc);
+}
+for (const [i, [bpm, q, tr, tpm]] of [[123, false, false, 2], [97, true, true, 4], [140, false, true, 1]].entries()) {
+    // tempo, 1/4 speed and the root's transpose (every duration scales with them)
+    const r = lcg(2000 + i), sc = base(rs, "tempo-" + i);
+    Object.assign(sc, { bpm, quarter: q, transpose: tr, tpm, board: BOARDS[(i * 2 + 1) % BOARDS.length], ticks: 400 });
+    sc.prog.A = randomProgram(r, 16);
+    sc.prog.B = randomProgram(r, 12);
     scenarios.push(sc);
 }
 {   // heat and deaths: zaps and dashes into each other on the gauntlet

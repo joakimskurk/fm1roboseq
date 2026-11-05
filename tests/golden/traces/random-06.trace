@@ -1,6 +1,7 @@
 # random-06: reference/roboseq.html run by tools/trace/gen.mjs
 board default
 loop 64
+bpm 80 0 1
 tpm 2
 vmtrigger loop
 vmfreq 2
@@ -143,602 +144,3524 @@ step B 62 wait wobble 75
 step B 63 move glitch 100
 ticks 600
 T 0 0 1 1 0 0 0 0 0 default | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 0 0 2 1 0 0 0 0 0 default | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 1 3 2 0 1 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 1 | wait,move,rotator
+N B.fm 69 0.0405 0 0.588
+N B.sub 57 0.0585 0 0.462
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 0 1 4 2 0 1 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 2 5 3 0 2 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 1 1 | turn,turn,rotator
+N A.main 50 0.05985 0 0.66
+N A.ping 53 0.03375 0.005625 0.264
+N B.fm 69 0.1323 0 0.3465
+N B.sub 57 0.1911 0 0.27225
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 0 2 6 3 0 2 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 3 7 4 0 3 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait,rotator
+N B.fm 69 0.038475 0 0.08645
+N B.sub 57 0.055575 0 0.067925
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 0 3 8 4 0 3 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 4 9 5 0 4 0 0 0 default | A 0 4 W 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 1 0 1 | turn,turn,rotator
+N A.main 50 0.0947625 0 0.3705
+N A.ping 53 0.03375 0.005625 0.1482
+N B.fm 69 0.089775 0 0.25935
+N B.sub 57 0.129675 0 0.203775
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 0 4 10 5 0 4 0 0 0 default | A 0 4 W 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 5 11 6 0 5 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 0 0 | 0 0 | 0 0 1 | ping,move,zap
+N A.main 50 0.081225 0 0.55575
+N A.ping 53 0.03375 0.005625 0.2223
+N B.fm 71 0.027 0 0.412776
+N B.sub 59 0.039 0 0.324324
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 0 5 12 6 0 5 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 0 6 13 7 0 6 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 0 0 | 0 0 | 0 1 1 | wait,wait
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 0 6 14 7 0 6 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 0 7 15 8 0 7 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 0 0 | 0 0 | 0 0 1 | collision,collision,wait
+N A.main 50 0.057 0 0.715
+N A.ping 53 0.03375 0.005625 0.286
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 0 7 16 8 0 7 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 0 8 17 9 0 8 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 2 0 0 | 0 0 | 1 0 1 | ping,turn,zap
+N A.main 50 0.0342 0 0.61425
+N A.ping 53 0.03375 0.005625 0.2457
+N B.fm 72 0.014175 0 0.51156
+N B.sub 60 0.020475 0 0.40194
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 0 8 18 9 0 8 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 2 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 9 19 10 0 9 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 3 0 0 | 0 0 | 0 0 1 | wait,collision,zap
+N B.fm 72 0.02025 0 0.7
+N B.sub 60 0.02925 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 0 9 20 10 0 9 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 3 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 10 21 11 0 10 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 4 0 0 | 0 0 | 0 1 1 | collision,turn,zap
+N A.main 50 0.163875 0 0.442
+N A.ping 53 0.03375 0.005625 0.1768
+N B.fm 72 0.0378 0 0.396396
+N B.sub 60 0.0546 0 0.311454
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 0 10 22 11 0 10 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 4 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 11 23 12 0 11 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 0 0 | 0 0 | 0 0 1 | ping,turn,zap
+N A.main 50 0.0342 0 0.61425
+N A.ping 53 0.03375 0.005625 0.2457
+N B.fm 72 0.040753125 0 0.4998
+N B.sub 60 0.058865625 0 0.3927
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 0 11 24 12 0 11 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 12 25 13 0 12 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 0 0 | 0 0 | 1 0 1 | collision,wait
+N A.main 50 0.057 0 0.546
+N A.ping 53 0.03375 0.005625 0.2184
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
 T 0 12 26 13 0 12 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 13 27 14 0 13 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 0 0 | 0 0 | 0 0 1 | collision,wait
+N A.main 50 0.1425 0 0.52
+N A.ping 53 0.03375 0.005625 0.208
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
 T 0 13 28 14 0 13 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 0 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 14 29 15 0 14 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 6 0 1 | 0 0 | 0 1 1 | ping,ping,zap,zap
+N A.main 50 0.081225 0 0.55575
+N A.ping 53 0.03375 0.005625 0.2223
+N B.fm 72 0.03493125 0 0.7
+N B.sub 60 0.05045625 0 0.55
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 0 14 30 15 0 14 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 6 0 1 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 15 31 0 0 15 0 0 0 default | A 0 4 N 0 0 0 | B 0 4 W 0 1 0 | 0 1 | 0 0 1 | death,turn,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 53 0.029925 0 0.63
+N A.ping 57 0.03375 0.005625 0.252
+N drum.hihat -1 0.03 0 0.5
 T 0 15 32 0 0 15 0 0 0 default | A 0 4 N 0 0 0 | B 0 4 W 0 1 0 | 0 1 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 38 0.02109375 0 0.245
+N B.sub 38 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 16 33 1 0 16 0 0 0 default | A 0 4 N 0 0 0 | B 0 4 N 0 1 0 | 0 2 | 1 0 1 | ping,turn
+N A.main 53 0.06091875 0 0.855
+N A.ping 57 0.03375 0.005625 0.342
+N B.fm 38 0.08150625 0 0.357
+N B.sub 38 0.11773125 0 0.2805
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 0 16 34 1 0 16 0 0 0 default | A 0 4 N 0 0 0 | B 0 4 N 0 1 0 | 0 2 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 38 0.02109375 0 0.245
+N B.sub 38 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 17 35 2 0 17 0 0 0 default | A 0 2 N 0 0 0 | B 0 2 N 0 1 0 | 0 3 | 0 0 1 | move,move,move,move,belt
+N A.main 65 0.050765625 0 0.95
+N A.ping 69 0.03375 0.005625 0.38
+N B.fm 62 0.01875 0 0.588
+N B.sub 50 0.0585 0 0.462
+N B.fm 62 0.10125 0.0225 0.336
+N drum.hihat -1 0.03 0 0.5
 T 0 17 36 2 0 17 0 0 0 default | A 0 2 N 0 0 0 | B 0 2 N 0 1 0 | 0 3 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N B.fm 62 0.0328125 0.009375 0.14
+N drum.hihat -1 0.02 0 0.25
 T 0 18 37 3 0 18 0 0 0 default | A 0 2 N 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 1 1 | wait,move,pulse
+N B.fm 62 0.0729 0 0.588
+N B.sub 50 0.1053 0 0.462
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.02 0.4
 T 0 18 38 3 0 18 0 0 0 default | A 0 2 N 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 19 39 4 0 19 0 0 0 default | A 0 2 W 0 0 0 | B 0 1 E 0 1 0 | 0 0 | 0 0 1 | turn,turn,pulse
+N A.main 65 0.1147125 0 0.3315
+N A.ping 69 0.03375 0.005625 0.1326
+N B.fm 62 0.1701 0 0.3927
+N B.sub 50 0.2457 0 0.30855
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.02 0.4
 T 0 19 40 4 0 19 0 0 0 default | A 0 2 W 0 0 0 | B 0 1 E 0 1 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 20 41 5 0 20 0 0 0 default | A 0 2 W 0 0 0 | B 0 1 E 0 1 0 | 0 0 | 1 0 1 | wait,wait,pulse
+N A.main 65 0.0406125 0 0.1235
+N B.fm 62 0.08656875 0 0.11305
+N B.sub 50 0.12504375 0 0.088825
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.02 0.4
 T 0 20 42 5 0 20 0 0 0 default | A 0 2 W 0 0 0 | B 0 1 E 0 1 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 21 43 6 0 21 0 0 0 default | A 0 2 W 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 0 1 | collision,turn,pulse
+N A.main 65 0.163875 0 0.442
+N A.ping 69 0.03375 0.005625 0.1768
+N B.fm 62 0.12119625 0 0.399
+N B.sub 50 0.17506125 0 0.3135
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.pulse 84 0.06 0.02 0.4
 T 0 21 44 6 0 21 0 0 0 default | A 0 2 W 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 22 45 7 0 22 0 0 0 default | A 0 2 N 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 1 1 | turn,wait
+N A.main 65 0.05985 0 0.66
+N A.ping 69 0.03375 0.005625 0.264
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 0 22 46 7 0 22 0 0 0 default | A 0 2 N 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 23 47 8 0 23 0 0 0 default | A 0 2 N 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 0 23 48 8 0 23 0 0 0 default | A 0 2 N 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 24 49 9 0 24 0 0 0 default | A 0 2 N 0 0 0 | B 0 0 N 0 1 0 | 0 0 | 1 0 1 | wait,move,collision
+N B.fm 62 0.0405 0 0.7
+N B.sub 50 0.0585 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.02 0.7
 T 0 24 50 9 0 24 0 0 0 default | A 0 2 N 0 0 0 | B 0 0 N 0 1 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 25 51 10 0 25 0 0 0 default | A 0 2 N 0 0 0 | B 0 0 E 0 1 0 | 0 0 | 0 0 1 | wait,turn
+N A.main 65 0.030459375 0 0.19
+N B.fm 62 0.04725 0 0.37485
+N B.sub 50 0.06825 0 0.294525
+N drum.hihat -1 0.03 0 0.5
 T 0 25 52 10 0 25 0 0 0 default | A 0 2 N 0 0 0 | B 0 0 E 0 1 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 26 53 11 0 26 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 E 1 1 0 | 0 0 | 0 1 1 | wait,move,move,belt,zap
+N A.main 65 0.036871875 0 0.17
+N B.fm 71 0.01875 0 0.539784
+N B.sub 59 0.0975 0 0.424116
+N B.fm 71 0.10125 0.0225 0.308448
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 0 26 54 11 0 26 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 E 1 1 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N B.fm 71 0.0328125 0.009375 0.1484
+N drum.hihat -1 0.02 0 0.25
 T 0 27 55 12 0 27 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 2 1 0 | 0 0 | 0 0 1 | wait,turn,zap
+N A.main 62 0.0320625 0 0.2
+N B.fm 72 0.02835 0 0.53592
+N B.sub 60 0.04095 0 0.42108
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 0 27 56 12 0 27 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 2 1 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 28 57 13 0 28 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 2 1 0 | 0 0 | 1 0 1 | wait,wait
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 0 28 58 13 0 28 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 2 1 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 29 59 14 0 29 0 0 0 default | A 0 2 E 0 0 0 | B 2 0 N 2 1 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 62 0.143390625 0 0.4335
+N A.ping 65 0.03375 0.005625 0.1734
+N drum.hihat -1 0.03 0 0.5
 T 0 29 60 14 0 29 0 0 0 default | A 0 2 E 0 0 0 | B 2 0 N 2 1 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 30 61 15 0 30 0 0 0 default | A 0 2 E 0 0 0 | B 2 0 N 3 1 0 | 0 0 | 0 1 1 | wait,collision,collision,zap
+N B.fm 72 0.0253125 0 0.7
+N B.sub 60 0.0365625 0 0.55
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 0 30 62 15 0 30 0 0 0 default | A 0 2 E 0 0 0 | B 2 0 N 3 1 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 31 63 0 0 31 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 3 1 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 62 0.05985 0 0.66
+N A.ping 65 0.03375 0.005625 0.264
+N drum.hihat -1 0.03 0 0.5
 T 0 31 64 0 0 31 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 3 1 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 32 65 1 1 0 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 4 1 0 | 0 0 | 1 0 1 | move,move,belt,collision,collision,zap
+N A.main 60 0.013125 0 0.665
+N A.ping 64 0.03375 0.005625 0.266
+N A.main 60 0.091875 0.015 0.29925
+N A.main 64 0.185625 0.10875 0.28725
+N B.fm 71 0.02025 0 0.7
+N B.sub 59 0.02925 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.collision 43 0.08 0.03 0.7
 T 0 32 66 1 1 0 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 4 1 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0253125 0 0.35
+N A.main 67 0.04134375 0.009375 0.175
+N A.main 64 0.0328125 0.0515625 0.163
+N B.fm 71 0.02109375 0 0.2744
+N B.sub 59 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 33 67 2 1 1 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 4 1 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 0 33 68 2 1 1 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 4 1 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0253125 0 0.35
+N A.main 67 0.04134375 0.009375 0.175
+N A.main 64 0.0328125 0.0515625 0.163
+N B.fm 71 0.02109375 0 0.2744
+N B.sub 59 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 34 69 3 1 2 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 5 1 0 | 0 0 | 0 1 1 | ping,collision,zap
+N A.main 60 0.06091875 0 0.855
+N A.ping 64 0.03375 0.005625 0.342
+N B.fm 71 0.02025 0 0.7
+N B.sub 59 0.02925 0 0.55
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 0 34 70 3 1 2 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 5 1 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2744
+N B.sub 59 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 35 71 4 1 3 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 6 1 1 | 0 0 | 0 0 1 | wait,collision,zap,zap
+N B.fm 71 0.02025 0 0.7
+N B.sub 59 0.02925 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 0 35 72 4 1 3 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 6 1 1 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2744
+N B.sub 59 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 36 73 5 1 4 0 0 0 default | A 0 1 N 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 1 0 1 | death,move,pulse,turn
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 76 0.1539 0 0.88
+N A.ping 79 0.03375 0.005625 0.352
+N B.fm 60 0.0567 0 0.462
+N B.sub 48 0.0819 0 0.363
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 0 36 74 5 1 4 0 0 0 default | A 0 1 N 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0253125 0 0.35
+N B.fm 60 0.02109375 0 0.245
+N B.sub 48 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 37 75 6 1 5 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 0 0 1 | move,wait
+N A.main 76 0.12290625 0 0.68
+N A.ping 79 0.03375 0.005625 0.272
+N B.fm 60 0.02885625 0 0.133
+N B.sub 48 0.04168125 0 0.1045
+N drum.hihat -1 0.03 0 0.5
 T 0 37 76 6 1 5 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0253125 0 0.35
+N B.fm 60 0.02109375 0 0.245
+N B.sub 48 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 38 77 7 1 6 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 0 1 1 | wait,turn
+N B.fm 60 0.089775 0 0.25935
+N B.sub 48 0.129675 0 0.203775
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 0 38 78 7 1 6 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0253125 0 0.35
+N B.fm 60 0.02109375 0 0.245
+N B.sub 48 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 39 79 8 1 7 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 0 0 1 | collision,collision
+N A.main 76 0.04275 0 0.84
+N A.ping 79 0.03375 0.005625 0.336
+N B.fm 60 0.054 0 0.3822
+N B.sub 48 0.078 0 0.3003
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 0 39 80 8 1 7 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0253125 0 0.35
+N B.fm 60 0.02109375 0 0.245
+N B.sub 48 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 40 81 9 1 8 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 1 0 1 | ping,wait
+N A.main 76 0.064125 0 0.9
+N A.ping 79 0.03375 0.005625 0.36
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 0 40 82 9 1 8 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0253125 0 0.35
+N B.fm 60 0.02109375 0 0.245
+N B.sub 48 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 41 83 10 1 9 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 0 0 1 | wait,collision,collision
+N B.fm 60 0.054 0 0.5005
+N B.sub 48 0.078 0 0.39325
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 0 41 84 10 1 9 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0253125 0 0.35
+N B.fm 60 0.02109375 0 0.245
+N B.sub 48 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 42 85 11 1 10 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 0 1 1 | ping,turn
+N A.main 76 0.02565 0 0.945
+N A.ping 79 0.03375 0.005625 0.378
+N B.fm 60 0.02835 0 0.441
+N B.sub 48 0.04095 0 0.3465
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 0 42 86 11 1 10 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0253125 0 0.35
+N B.fm 60 0.02109375 0 0.245
+N B.sub 48 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 43 87 12 1 11 0 0 0 default | A 0 0 W 0 0 0 | B 0 2 N 0 2 0 | 0 0 | 0 0 1 | turn,move,move,belt
+N A.main 76 0.0798 0 0.429
+N A.ping 79 0.03375 0.005625 0.1716
+N B.fm 72 0.01875 0 0.588
+N B.sub 60 0.0585 0 0.462
+N B.fm 72 0.10125 0.0225 0.336
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 0 43 88 12 1 11 0 0 0 default | A 0 0 W 0 0 0 | B 0 2 N 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N B.fm 72 0.0328125 0.009375 0.14
+N drum.hihat -1 0.02 0 0.25
 T 0 44 89 13 1 12 0 0 0 default | A 0 0 W 0 0 0 | B 0 2 W 0 2 0 | 0 0 | 1 0 1 | wait,turn
+N B.fm 72 0.0756 0 0.3003
+N B.sub 60 0.1092 0 0.23595
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 0 44 90 13 1 12 0 0 0 default | A 0 0 W 0 0 0 | B 0 2 W 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 45 91 14 1 13 0 0 0 default | A 0 0 S 0 0 0 | B 0 2 N 0 2 0 | 0 0 | 0 0 1 | turn,turn
+N A.main 76 0.165834375 0 0.4275
+N A.ping 79 0.03375 0.005625 0.171
+N B.fm 72 0.08150625 0 0.357
+N B.sub 60 0.11773125 0 0.2805
+N drum.hihat -1 0.03 0 0.5
 T 0 45 92 14 1 13 0 0 0 default | A 0 0 S 0 0 0 | B 0 2 N 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 46 93 15 1 14 0 0 0 default | A 0 0 S 0 0 0 | B 0 2 N 0 2 0 | 0 0 | 0 1 1 | wait,wait
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 0 46 94 15 1 14 0 0 0 default | A 0 0 S 0 0 0 | B 0 2 N 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 0 47 95 0 1 15 0 0 0 default | A 0 0 S 0 0 0 | B 0 2 N 1 2 0 | 0 0 | 0 0 1 | zap,wait
+N A.main 72 0.14214375 0 0.64125
+N A.ping 76 0.03375 0.005625 0.2565
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0 0.6
 T 0 47 96 0 1 15 0 0 0 default | A 0 0 S 0 0 0 | B 0 2 N 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 76 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.2597
+N B.sub 50 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 0 48 97 1 1 16 0 0 0 default | A 0 2 S 0 0 0 | B 0 2 N 3 2 0 | 7 0 | 1 0 1 | move,move,zap,wait
+N A.main 60 0.09975 0 0.825
+N A.ping 64 0.03375 0.005625 0.33
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 0 48 98 1 1 16 0 0 0 default | A 0 2 S 0 0 0 | B 0 2 N 3 2 0 | 7 0 | 0 0 0 | -
+N A.ping 64 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.2744
+N B.sub 52 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 49 99 2 1 17 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 N 3 2 0 | 6 0 | 0 0 1 | ping,move,move
+N A.main 60 0.05985 0 0.70875
+N A.ping 64 0.03375 0.005625 0.2835
+N B.fm 64 0.0405 0 0.7
+N B.sub 52 0.0585 0 0.55
+N drum.hihat -1 0.03 0 0.5
 T 0 49 100 2 1 17 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 N 3 2 0 | 6 0 | 0 0 0 | -
+N A.ping 64 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.2744
+N B.sub 52 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 50 101 3 1 18 0 0 0 default | A 0 1 S 0 0 0 | B 0 0 N 3 2 0 | 5 0 | 0 1 1 | move,pulse,wait
+N A.main 72 0.4039875 0 0.525
+N A.ping 76 0.03375 0.005625 0.21
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 0 50 102 3 1 18 0 0 0 default | A 0 1 S 0 0 0 | B 0 0 N 3 2 0 | 5 0 | 0 0 0 | -
+N A.ping 76 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.2744
+N B.sub 52 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 51 103 4 1 19 0 0 0 default | A 0 1 S 0 0 0 | B 0 0 N 3 2 0 | 4 0 | 0 0 1 | wait,collision
+N B.fm 64 0.0405 0 0.7
+N B.sub 52 0.0585 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 0 51 104 4 1 19 0 0 0 default | A 0 1 S 0 0 0 | B 0 0 N 3 2 0 | 4 0 | 0 0 0 | -
+N A.ping 76 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.2744
+N B.sub 52 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 52 105 5 1 20 0 0 0 default | A 0 1 S 0 0 0 | B 0 0 N 3 2 0 | 3 0 | 1 0 1 | ping,pulse,collision
+N A.main 72 0.10773 0 0.70875
+N A.ping 76 0.03375 0.005625 0.2835
+N B.fm 64 0.0405 0 0.7
+N B.sub 52 0.0585 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 0 52 106 5 1 20 0 0 0 default | A 0 1 S 0 0 0 | B 0 0 N 3 2 0 | 3 0 | 0 0 0 | -
+N A.ping 76 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.2744
+N B.sub 52 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 53 107 6 1 21 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 N 3 2 0 | 2 0 | 0 0 1 | move,wait
+N A.main 60 0.09975 0 0.63
+N A.ping 64 0.03375 0.005625 0.252
+N drum.hihat -1 0.03 0 0.5
 T 0 53 108 6 1 21 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 N 3 2 0 | 2 0 | 0 0 0 | -
+N A.ping 64 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.2744
+N B.sub 52 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 54 109 7 1 22 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 N 3 2 0 | 1 0 | 0 1 1 | wait,wait
+N B.fm 64 0.02885625 0 0.16492
+N B.sub 52 0.04168125 0 0.12958
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 0 54 110 7 1 22 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 N 3 2 0 | 1 0 | 0 0 0 | -
+N A.ping 64 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.2744
+N B.sub 52 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 55 111 8 1 23 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 1 | ping,turn
+N A.main 60 0.14214375 0 0.64125
+N A.ping 64 0.03375 0.005625 0.2565
+N B.fm 64 0.089775 0 0.321594
+N B.sub 52 0.129675 0 0.252681
+N drum.hihat -1 0.03 0 0.5
 T 0 55 112 8 1 23 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.2744
+N B.sub 52 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 56 113 9 1 24 0 0 0 default | A 0 2 W 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 1 0 1 | turn,wait
+N A.main 60 0.0399 0 0.4095
+N A.ping 64 0.03375 0.005625 0.1638
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 0 56 114 9 1 24 0 0 0 default | A 0 2 W 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.2744
+N B.sub 52 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 57 115 10 1 25 0 0 0 default | A 0 2 W 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 60 0.081225 0 0.55575
+N A.ping 64 0.03375 0.005625 0.2223
+N drum.hihat -1 0.03 0 0.5
 T 0 57 116 10 1 25 0 0 0 default | A 0 2 W 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.2744
+N B.sub 52 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 58 117 11 1 26 0 0 0 default | A 0 2 W 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 1 1 | wait,collision,collision
+N B.fm 64 0.054 0 0.62062
+N B.sub 52 0.078 0 0.48763
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 0 58 118 11 1 26 0 0 0 default | A 0 2 W 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.2744
+N B.sub 52 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 59 119 12 1 27 0 0 0 default | A 1 2 S 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 0 0 1 | move,rotator,turn
+N A.main 62 0.17955 0 0.5775
+N A.ping 65 0.03375 0.005625 0.231
+N B.fm 65 0.02835 0 0.54684
+N B.sub 53 0.04095 0 0.42966
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 0 59 120 12 1 27 0 0 0 default | A 1 2 S 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.2744
+N B.sub 53 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 60 121 13 1 28 0 0 0 default | A 1 2 N 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 1 0 1 | turn,rotator,collision
+N A.main 62 0.086034375 0 0.51
+N A.ping 65 0.03375 0.005625 0.204
+N B.fm 65 0.0405 0 0.7
+N B.sub 53 0.0585 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.collision 43 0.08 0.02 0.7
 T 0 60 122 13 1 28 0 0 0 default | A 1 2 N 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.2744
+N B.sub 53 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 61 123 14 1 29 0 0 0 default | A 1 2 N 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 65 0.0756 0 0.372372
+N B.sub 53 0.1092 0 0.292578
+N drum.hihat -1 0.03 0 0.5
 T 0 61 124 14 1 29 0 0 0 default | A 1 2 N 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.2744
+N B.sub 53 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 62 125 15 1 30 0 0 0 default | A 1 1 N 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 0 1 1 | move,turn
+N A.main 74 0.12290625 0 0.68
+N A.ping 77 0.03375 0.005625 0.272
+N B.fm 65 0.08150625 0 0.44268
+N B.sub 53 0.11773125 0 0.34782
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 0 62 126 15 1 30 0 0 0 default | A 1 1 N 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 0 0 0 | -
+N A.ping 77 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.2744
+N B.sub 53 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 0 63 127 0 1 31 0 0 0 default | A 1 1 N 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 0 63 128 0 1 31 0 0 0 default | A 1 1 N 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 0 0 0 | -
+N A.ping 77 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.2744
+N B.sub 53 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 1 0 1 1 2 0 0 0 0 default | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N A.ping 60 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 1 0 2 1 2 0 0 0 0 default | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 1 1 3 2 2 1 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 2 0 | 0 0 | 0 0 1 | ping,move,rotator
+N A.main 57 0.04275 0 0.80325
+N A.ping 60 0.03375 0.005625 0.3213
+N B.fm 72 0.0405 0 0.588
+N B.sub 60 0.0585 0 0.462
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 1 1 4 2 2 1 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 1 2 5 3 2 2 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 2 0 | 0 0 | 0 1 1 | wait,wait
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 1 2 6 3 2 2 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 1 3 7 4 2 3 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 E 0 2 0 | 0 0 | 0 0 1 | collision,wait,rotator
+N A.main 53 0.152296875 0 0.56525
+N A.ping 57 0.03375 0.005625 0.2261
+N B.fm 72 0.04809375 0 0.11305
+N B.sub 60 0.06946875 0 0.088825
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.rotator 81 0.04 0.02 0.45
 T 1 3 8 4 2 3 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 E 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 1 4 9 5 2 4 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 E 0 2 0 | 0 0 | 1 0 1 | turn,turn,rotator
+N A.main 53 0.071071875 0 0.57
+N A.ping 57 0.03375 0.005625 0.228
+N B.fm 72 0.11221875 0 0.33915
+N B.sub 60 0.16209375 0 0.266475
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 1 4 10 5 2 4 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 E 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 1 5 11 6 2 5 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 E 0 2 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 53 0.06091875 0 0.855
+N A.ping 57 0.03375 0.005625 0.342
+N drum.hihat -1 0.03 0 0.5
 T 1 5 12 6 2 5 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 E 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 1 6 13 7 2 6 0 0 0 default | A 0 4 N 0 0 0 | B 2 0 E 1 2 0 | 0 0 | 0 1 1 | ping,move,zap
+N A.main 53 0.06091875 0 0.855
+N A.ping 57 0.03375 0.005625 0.342
+N B.fm 62 0.030375 0 0.472311
+N B.sub 50 0.043875 0 0.3711015
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 1 6 14 7 2 6 0 0 0 default | A 0 4 N 0 0 0 | B 2 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.2597
+N B.sub 50 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 7 15 8 2 7 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | move,move,move,move
+N A.main 65 0.04275 0 1
+N A.ping 69 0.03375 0.005625 0.4
+N B.fm 67 0.0675 0 0.7
+N B.sub 55 0.0975 0 0.55
+N drum.hihat -1 0.03 0 0.5
 T 1 7 16 8 2 7 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 8 17 9 2 8 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 S 1 2 0 | 0 0 | 1 0 1 | ping,turn
+N A.main 65 0.02565 0 0.945
+N A.ping 69 0.03375 0.005625 0.378
+N B.fm 67 0.06615 0 0.35721
+N B.sub 55 0.09555 0 0.280665
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 1 8 18 9 2 8 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 S 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 9 19 10 2 9 0 0 0 default | A 0 2 N 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 1 | move,move,belt,move,move,belt
+N A.main 65 0.013125 0 0.7
+N A.ping 69 0.03375 0.005625 0.28
+N A.main 65 0.091875 0.015 0.315
+N A.main 69 0.16875 0.10875 0.303
+N B.fm 67 0.01875 0 0.47628
+N B.sub 55 0.1365 0 0.37422
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
 T 1 9 20 10 2 9 0 0 0 default | A 0 2 N 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N A.main 72 0.04134375 0.009375 0.175
+N A.main 69 0.0328125 0.0515625 0.163
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 10 21 11 2 10 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 1 1 | move,pulse,turn
+N A.main 77 0.22123125 0 0.68
+N A.ping 81 0.03375 0.005625 0.272
+N B.fm 67 0.0945 0 0.424116
+N B.sub 55 0.1365 0 0.333234
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 1 10 22 11 2 10 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 11 23 12 2 11 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 1 | ping,pulse,wait
+N A.main 77 0.04617 0 0.945
+N A.ping 81 0.03375 0.005625 0.378
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 1 11 24 12 2 11 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 12 25 13 2 12 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 1 0 1 | wait,wait
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 1 12 26 13 2 12 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 13 27 14 2 13 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 1 | move,wait
+N A.main 77 0.106875 0 0.8
+N A.ping 81 0.03375 0.005625 0.32
+N drum.hihat -1 0.03 0 0.5
 T 1 13 28 14 2 13 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 14 29 15 2 14 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 1 1 | ping,ping
+N A.main 77 0.06091875 0 0.855
+N A.ping 81 0.03375 0.005625 0.342
+N B.fm 67 0.1164375 0 0.491589
+N B.sub 55 0.1681875 0 0.3862485
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 1 14 30 15 2 14 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 15 31 0 2 15 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 1 | wait,collision,collision
+N B.fm 67 0.0675 0 0.7
+N B.sub 55 0.0975 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 1 15 32 0 2 15 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 16 33 1 2 16 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 1 0 1 | ping,wait
+N A.main 77 0.06091875 0 0.855
+N A.ping 81 0.03375 0.005625 0.342
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 1 16 34 1 2 16 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 17 35 2 2 17 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 1 | collision,collision,collision
+N A.main 77 0.050765625 0 0.95
+N A.ping 81 0.03375 0.005625 0.38
+N B.fm 67 0.0675 0 0.539784
+N B.sub 55 0.0975 0 0.424116
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 1 17 36 2 2 17 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 18 37 3 2 18 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 1 1 | move,pulse,collision
+N A.main 77 0.13851 0 0.77
+N A.ping 81 0.03375 0.005625 0.308
+N B.fm 67 0.0675 0 0.539784
+N B.sub 55 0.0975 0 0.424116
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 1 18 38 3 2 18 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 19 39 4 2 19 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 1 | turn,pulse,wait
+N A.main 77 0.2064825 0 0.3315
+N A.ping 81 0.03375 0.005625 0.1326
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 1 19 40 4 2 19 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 20 41 5 2 20 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 1 0 1 | wait,wait
+N B.fm 67 0.04809375 0 0.122094
+N B.sub 55 0.06946875 0 0.095931
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 1 20 42 5 2 20 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 21 43 6 2 21 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 67 0.06733125 0 0.43092
+N B.sub 55 0.09725625 0 0.33858
+N drum.hihat -1 0.03 0 0.5
 T 1 21 44 6 2 21 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 22 45 7 2 22 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 1 1 | wait,move,move,belt
+N B.fm 67 0.01875 0 0.63504
+N B.sub 55 0.0585 0 0.49896
+N B.fm 67 0.10125 0.0225 0.36288
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 1 22 46 7 2 22 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N B.fm 67 0.0328125 0.009375 0.1484
+N drum.hihat -1 0.02 0 0.25
 T 1 23 47 8 2 23 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 1 23 48 8 2 23 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N B.fm 67 0.0328125 0.009375 0.1484
+N drum.hihat -1 0.02 0 0.25
 T 1 24 49 9 2 24 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 1 0 1 | collision,collision,pulse,move,move
+N A.main 77 0.12825 0 0.65
+N A.ping 81 0.03375 0.005625 0.26
+N B.fm 67 0.0405 0 0.7
+N B.sub 55 0.0585 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.pulse 84 0.06 0.02 0.4
 T 1 24 50 9 2 24 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 25 51 10 2 25 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 67 0.04725 0 0.404838
+N B.sub 55 0.06825 0 0.318087
+N drum.hihat -1 0.03 0 0.5
 T 1 25 52 10 2 25 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 26 53 11 2 26 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 1 1 | wait,collision
+N B.fm 67 0.0675 0 0.539784
+N B.sub 55 0.0975 0 0.424116
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 1 26 54 11 2 26 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 27 55 12 2 27 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 0 0 1 | wait,pulse,turn
+N A.main 77 0.07695 0 0.13
+N B.fm 67 0.0567 0 0.49896
+N B.sub 55 0.0819 0 0.39204
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 1 27 56 12 2 27 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 28 57 13 2 28 0 0 0 default | A 0 1 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 1 0 1 | turn,pulse,turn
+N A.main 77 0.10773 0 0.66
+N A.ping 81 0.03375 0.005625 0.264
+N B.fm 67 0.13584375 0 0.327726
+N B.sub 55 0.19621875 0 0.257499
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 1 28 58 13 2 28 0 0 0 default | A 0 1 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 29 59 14 2 29 0 0 0 default | A 0 1 E 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | turn,pulse,collision,collision
+N A.main 77 0.258103125 0 0.4335
+N A.ping 81 0.03375 0.005625 0.1734
+N B.fm 67 0.03375 0 0.67473
+N B.sub 55 0.04875 0 0.530145
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 1 29 60 14 2 29 0 0 0 default | A 0 1 E 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 30 61 15 2 30 0 0 0 default | A 0 1 E 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 1 1 | wait,collision,collision
+N B.fm 67 0.084375 0 0.6426
+N B.sub 55 0.121875 0 0.5049
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 1 30 62 15 2 30 0 0 0 default | A 0 1 E 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 31 63 0 2 31 0 0 0 default | A 0 1 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | turn,pulse,wait
+N A.main 77 0.10773 0 0.66
+N A.ping 81 0.03375 0.005625 0.264
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 1 31 64 0 2 31 0 0 0 default | A 0 1 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2597
+N B.sub 55 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 32 65 1 3 0 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 1 0 1 | move,collision,collision
+N A.main 69 0.091378125 0 0.665
+N A.ping 72 0.03375 0.005625 0.266
+N B.fm 71 0.0675 0 0.7
+N B.sub 59 0.0975 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 1 32 66 1 3 0 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 33 67 2 3 1 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 S 1 2 0 | 0 0 | 0 0 1 | turn,turn
+N A.main 69 0.09975 0 0.39
+N A.ping 72 0.03375 0.005625 0.156
+N B.fm 71 0.19018125 0 0.28917
+N B.sub 59 0.27470625 0 0.227205
+N drum.hihat -1 0.03 0 0.5
 T 1 33 68 2 3 1 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 S 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 34 69 3 3 2 0 0 0 default | A 0 2 W 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 1 1 | wait,move,move,belt
+N B.fm 71 0.01875 0 0.47628
+N B.sub 59 0.1365 0 0.37422
+N B.fm 71 0.10125 0.0225 0.27216
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 1 34 70 3 3 2 0 0 0 default | A 0 2 W 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N B.fm 71 0.0328125 0.009375 0.1484
+N drum.hihat -1 0.02 0 0.25
 T 1 35 71 4 3 3 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 W 1 2 0 | 0 0 | 0 0 1 | ping,move,rotator
+N A.main 69 0.098325 0 0.49725
+N A.ping 72 0.03375 0.005625 0.1989
+N B.fm 71 0.054 0 0.412776
+N B.sub 59 0.078 0 0.324324
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 1 35 72 4 3 3 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 W 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 36 73 5 3 4 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 W 1 2 0 | 0 0 | 1 0 1 | collision,wait
+N A.main 69 0.114 0 0.572
+N A.ping 72 0.03375 0.005625 0.2288
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
 T 1 36 74 5 3 4 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 W 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 37 75 6 3 5 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 N 1 2 0 | 0 0 | 0 0 1 | collision,wait,rotator
+N A.main 69 0.163875 0 0.442
+N A.ping 72 0.03375 0.005625 0.1768
+N B.fm 71 0.02885625 0 0.14364
+N B.sub 59 0.04168125 0 0.11286
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.rotator 81 0.04 0.02 0.45
 T 1 37 76 6 3 5 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 N 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 38 77 7 3 6 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 N 1 2 0 | 0 0 | 0 1 1 | wait,turn,rotator
+N B.fm 71 0.06733125 0 0.43092
+N B.sub 59 0.09725625 0 0.33858
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 1 38 78 7 3 6 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 N 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 39 79 8 3 7 0 0 0 default | A 0 2 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 1 | collision,move
+N A.main 69 0.057 0 0.546
+N A.ping 72 0.03375 0.005625 0.2184
+N B.fm 71 0.0405 0 0.63504
+N B.sub 59 0.0585 0 0.49896
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
 T 1 39 80 8 3 7 0 0 0 default | A 0 2 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 40 81 9 3 8 0 0 0 default | A 0 2 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 1 0 1 | ping,wait
+N A.main 69 0.0855 0 0.585
+N A.ping 72 0.03375 0.005625 0.234
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 1 40 82 9 3 8 0 0 0 default | A 0 2 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 41 83 10 3 9 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 0 0 1 | turn,move,move
+N A.main 69 0.071071875 0 0.57
+N A.ping 72 0.03375 0.005625 0.228
+N B.fm 71 0.0405 0 0.7
+N B.sub 59 0.0585 0 0.55
+N drum.hihat -1 0.03 0 0.5
 T 1 41 84 10 3 9 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 42 85 11 3 10 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 1 1 | wait,turn
+N B.fm 71 0.04725 0 0.404838
+N B.sub 59 0.06825 0 0.318087
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 1 42 86 11 3 10 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 43 87 12 3 11 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | turn,collision
+N A.main 69 0.0798 0 0.429
+N A.ping 72 0.03375 0.005625 0.1716
+N B.fm 71 0.0675 0 0.539784
+N B.sub 59 0.0975 0 0.424116
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 1 43 88 12 3 11 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 44 89 13 3 12 0 0 0 default | A 1 2 S 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 1 0 1 | move,rotator,turn
+N A.main 71 0.213215625 0 0.49875
+N A.ping 74 0.03375 0.005625 0.1995
+N B.fm 72 0.0567 0 0.49896
+N B.sub 60 0.0819 0 0.39204
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 1 44 90 13 3 12 0 0 0 default | A 1 2 S 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 74 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 45 91 14 3 13 0 0 0 default | A 1 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | turn,rotator,turn
+N A.main 71 0.071071875 0 0.57
+N A.ping 74 0.03375 0.005625 0.228
+N B.fm 72 0.13584375 0 0.327726
+N B.sub 60 0.19621875 0 0.257499
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 1 45 92 14 3 13 0 0 0 default | A 1 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 74 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 46 93 15 3 14 0 0 0 default | A 1 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 1 1 | ping,rotator,wait
+N A.main 71 0.081225 0 0.55575
+N A.ping 74 0.03375 0.005625 0.2223
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 1 46 94 15 3 14 0 0 0 default | A 1 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 74 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 47 95 0 3 15 0 0 0 default | A 1 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 1 47 96 0 3 15 0 0 0 default | A 1 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 74 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 48 97 1 3 16 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 1 0 1 | move,collision,wait
+N A.main 69 0.057 0 0.715
+N A.ping 72 0.03375 0.005625 0.286
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 1 48 98 1 3 16 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 49 99 2 3 17 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 69 0.0342 0 0.61425
+N A.ping 72 0.03375 0.005625 0.2457
+N drum.hihat -1 0.03 0 0.5
 T 1 49 100 2 3 17 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 50 101 3 3 18 0 0 0 default | A 1 2 S 0 0 0 | B 4 0 S 1 2 0 | 0 0 | 0 1 1 | move,rotator,turn
+N A.main 71 0.2244375 0 0.525
+N A.ping 74 0.03375 0.005625 0.21
+N B.fm 72 0.19018125 0 0.28917
+N B.sub 60 0.27470625 0 0.227205
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 1 50 102 3 3 18 0 0 0 default | A 1 2 S 0 0 0 | B 4 0 S 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 74 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 51 103 4 3 19 0 0 0 default | A 1 3 S 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 1 | move,move,move,belt
+N A.main 71 0.28678125 0 0.51
+N A.ping 74 0.03375 0.005625 0.204
+N B.fm 72 0.01875 0 0.47628
+N B.sub 60 0.1365 0 0.37422
+N B.fm 72 0.10125 0.0225 0.27216
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 1 51 104 4 3 19 0 0 0 default | A 1 3 S 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 74 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N B.fm 72 0.0328125 0.009375 0.1484
+N drum.hihat -1 0.02 0 0.25
 T 1 52 105 5 3 20 0 0 0 default | A 1 3 S 0 0 0 | B 4 3 W 1 2 0 | 0 0 | 1 0 1 | ping,move,rotator
+N A.main 71 0.05985 0 0.70875
+N A.ping 74 0.03375 0.005625 0.2835
+N B.fm 72 0.054 0 0.412776
+N B.sub 60 0.078 0 0.324324
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 1 52 106 5 3 20 0 0 0 default | A 1 3 S 0 0 0 | B 4 3 W 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 74 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 53 107 6 3 21 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 E 1 2 0 | 0 0 | 0 0 1 | move,turn,rotator
+N A.main 59 0.09975 0 0.63
+N A.ping 62 0.03375 0.005625 0.252
+N B.fm 72 0.0945 0 0.424116
+N B.sub 60 0.1365 0 0.333234
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 1 53 108 6 3 21 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 54 109 7 3 22 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 E 1 2 0 | 0 0 | 0 1 1 | wait,wait
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 1 54 110 7 3 22 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 55 111 8 3 23 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 E 1 2 0 | 0 0 | 0 0 1 | ping,turn,rotator
+N A.main 59 0.14214375 0 0.64125
+N A.ping 62 0.03375 0.005625 0.2565
+N B.fm 72 0.11221875 0 0.366282
+N B.sub 60 0.16209375 0 0.287793
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 1 55 112 8 3 23 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 E 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 56 113 9 3 24 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 S 1 2 0 | 0 0 | 1 0 1 | wait,collision,rotator
+N B.fm 72 0.0945 0 0.47628
+N B.sub 60 0.1365 0 0.37422
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.rotator 81 0.04 0.02 0.45
 T 1 56 114 9 3 24 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 S 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 57 115 10 3 25 0 0 0 default | A 1 4 S 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 1 | ping,move
+N A.main 59 0.14214375 0 0.64125
+N A.ping 62 0.03375 0.005625 0.2565
+N B.fm 72 0.08505 0 0.416745
+N B.sub 60 0.12285 0 0.3274425
+N drum.hihat -1 0.03 0 0.5
 T 1 57 116 10 3 25 0 0 0 default | A 1 4 S 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 58 117 11 3 26 0 0 0 default | A 1 4 S 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 1 1 | collision,collision,wait
+N A.main 59 0.118453125 0 0.7125
+N A.ping 62 0.03375 0.005625 0.285
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 1 58 118 11 3 26 0 0 0 default | A 1 4 S 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 59 119 12 3 27 0 0 0 default | A 1 4 S 0 0 0 | B 4 2 W 1 2 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 72 0.0378 0 0.309582
+N B.sub 60 0.0546 0 0.243243
+N drum.hihat -1 0.03 0 0.5
 T 1 59 120 12 3 27 0 0 0 default | A 1 4 S 0 0 0 | B 4 2 W 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 1 60 121 13 3 28 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 W 2 2 0 | 0 0 | 1 0 1 | turn,move,zap
+N A.main 59 0.143390625 0 0.4335
+N A.ping 62 0.03375 0.005625 0.1734
+N B.fm 69 0.027 0 0.443352
+N B.sub 57 0.039 0 0.348348
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 1 60 122 13 3 28 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 W 2 2 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.2744
+N B.sub 57 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 1 61 123 14 3 29 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 S 3 2 0 | 0 0 | 0 0 1 | wait,turn,zap
+N A.main 59 0.050765625 0 0.1615
+N B.fm 69 0.06615 0 0.42966
+N B.sub 57 0.09555 0 0.33759
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 1 61 124 14 3 29 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 S 3 2 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.2744
+N B.sub 57 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 1 62 125 15 3 30 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 W 4 2 0 | 0 0 | 0 1 1 | wait,turn,zap
+N B.fm 69 0.0543375 0 0.306306
+N B.sub 57 0.0784875 0 0.240669
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 1 62 126 15 3 30 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 W 4 2 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.2744
+N B.sub 57 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 1 63 127 0 3 31 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 W 4 2 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 1 63 128 0 3 31 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 W 4 2 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.2744
+N B.sub 57 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 0 1 1 0 0 0 0 0 default | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N A.ping 57 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 2 0 2 1 0 0 0 0 0 default | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 1 3 2 0 1 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 2 0 | 0 0 | 0 0 1 | ping,move,rotator
+N A.main 53 0.04275 0 0.80325
+N A.ping 57 0.03375 0.005625 0.3213
+N B.fm 69 0.0405 0 0.588
+N B.sub 57 0.0585 0 0.462
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 2 1 4 2 0 1 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 2 5 3 0 2 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 S 0 2 0 | 0 0 | 0 1 1 | turn,turn,rotator
+N A.main 50 0.05985 0 0.66
+N A.ping 53 0.03375 0.005625 0.264
+N B.fm 69 0.1323 0 0.3465
+N B.sub 57 0.1911 0 0.27225
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 2 2 6 3 0 2 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 S 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 3 7 4 0 3 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 S 0 2 0 | 0 0 | 0 0 1 | collision,wait
+N A.main 50 0.091378125 0 0.665
+N A.ping 53 0.03375 0.005625 0.266
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
 T 2 3 8 4 0 3 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 S 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 4 9 5 0 4 0 0 0 default | A 0 4 W 0 0 0 | B 3 0 S 0 2 0 | 0 0 | 1 0 1 | turn,turn,rotator
+N A.main 50 0.0947625 0 0.3705
+N A.ping 53 0.03375 0.005625 0.1482
+N B.fm 69 0.15710625 0 0.29925
+N B.sub 57 0.22693125 0 0.235125
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 2 4 10 5 0 4 0 0 0 default | A 0 4 W 0 0 0 | B 3 0 S 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 5 11 6 0 5 0 0 0 default | A 0 4 W 0 0 0 | B 3 1 S 0 2 0 | 0 0 | 0 0 1 | wait,move
+N B.fm 69 0.0945 0 0.441
+N B.sub 57 0.1365 0 0.3465
+N drum.hihat -1 0.03 0 0.5
 T 2 5 12 6 0 5 0 0 0 default | A 0 4 W 0 0 0 | B 3 1 S 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 6 13 7 0 6 0 0 0 default | A 0 4 W 0 0 0 | B 3 0 W 0 2 0 | 0 0 | 0 1 1 | wait,move,rotator
+N B.fm 69 0.0486 0 0.334425
+N B.sub 57 0.0702 0 0.2627625
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 2 6 14 7 0 6 0 0 0 default | A 0 4 W 0 0 0 | B 3 0 W 0 2 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 7 15 8 0 7 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 2 0 | 0 0 | 0 0 1 | collision,collision,move,move,move,belt,zap
+N A.main 50 0.057 0 0.715
+N A.ping 53 0.03375 0.005625 0.286
+N B.fm 71 0.01875 0 0.54054
+N B.sub 59 0.078 0 0.42471
+N B.fm 71 0.135 0.0225 0.30888
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
 T 2 7 16 8 0 7 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 2 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N B.fm 71 0.0328125 0.009375 0.1484
+N drum.hihat -1 0.02 0 0.25
 T 2 8 17 9 0 8 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 2 2 0 | 0 0 | 1 0 1 | ping,turn,zap
+N A.main 50 0.0342 0 0.61425
+N A.ping 53 0.03375 0.005625 0.2457
+N B.fm 72 0.014175 0 0.51156
+N B.sub 60 0.020475 0 0.40194
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 2 8 18 9 0 8 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 2 2 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 9 19 10 0 9 0 0 0 default | A 1 4 W 0 0 0 | B 2 0 N 3 2 0 | 0 0 | 0 0 1 | move,collision,zap
+N A.main 53 0.12825 0 0.455
+N A.ping 57 0.03375 0.005625 0.182
+N B.fm 64 0.02025 0 0.7
+N B.sub 52 0.02925 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 2 9 20 10 0 9 0 0 0 default | A 1 4 W 0 0 0 | B 2 0 N 3 2 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.2744
+N B.sub 52 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 10 21 11 0 10 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 4 2 0 | 0 0 | 0 1 1 | move,turn,zap
+N A.main 50 0.163875 0 0.442
+N A.ping 53 0.03375 0.005625 0.1768
+N B.fm 72 0.0378 0 0.396396
+N B.sub 60 0.0546 0 0.311454
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 2 10 22 11 0 10 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 4 2 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 11 23 12 0 11 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 2 0 | 0 0 | 0 0 1 | ping,turn,zap
+N A.main 50 0.0342 0 0.61425
+N A.ping 53 0.03375 0.005625 0.2457
+N B.fm 72 0.040753125 0 0.4998
+N B.sub 60 0.058865625 0 0.3927
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 2 11 24 12 0 11 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 2 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 12 25 13 0 12 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 2 0 | 0 0 | 1 0 1 | collision,wait
+N A.main 50 0.057 0 0.546
+N A.ping 53 0.03375 0.005625 0.2184
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
 T 2 12 26 13 0 12 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 2 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 13 27 14 0 13 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 6 2 1 | 0 0 | 0 0 1 | collision,collision,collision,zap,zap
+N A.main 50 0.1425 0 0.52
+N A.ping 53 0.03375 0.005625 0.208
+N B.fm 72 0.0253125 0 0.7
+N B.sub 60 0.0365625 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 2 13 28 14 0 13 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 6 2 1 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 14 29 15 0 14 0 0 0 default | A 0 4 W 0 0 0 | B 0 4 W 0 3 0 | 0 1 | 0 1 1 | death,ping,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 53 0.081225 0 0.55575
+N A.ping 57 0.03375 0.005625 0.2223
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 2 14 30 15 0 14 0 0 0 default | A 0 4 W 0 0 0 | B 0 4 W 0 3 0 | 0 1 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 38 0.02109375 0 0.245
+N B.sub 38 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 15 31 0 0 15 0 0 0 default | A 0 4 W 2 0 0 | B 0 4 W 0 3 0 | 7 0 | 0 0 1 | wait,collision,collision,zap
+N B.fm 38 0.054 0 0.5005
+N B.sub 38 0.078 0 0.39325
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 2 15 32 0 0 15 0 0 0 default | A 0 4 W 2 0 0 | B 0 4 W 0 3 0 | 7 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.392
+N B.fm 38 0.02109375 0 0.245
+N B.sub 38 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 16 33 1 0 16 0 0 0 default | A 0 4 W 2 0 0 | B 0 4 N 0 3 0 | 6 0 | 1 0 1 | ping,turn
+N A.main 53 0.081225 0 0.64467
+N A.ping 57 0.03375 0.005625 0.257868
+N B.fm 38 0.08150625 0 0.357
+N B.sub 38 0.11773125 0 0.2805
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 2 16 34 1 0 16 0 0 0 default | A 0 4 W 2 0 0 | B 0 4 N 0 3 0 | 6 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.392
+N B.fm 38 0.02109375 0 0.245
+N B.sub 38 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 17 35 2 0 17 0 0 0 default | A 0 4 W 2 0 0 | B 0 2 N 0 3 0 | 5 0 | 0 0 1 | wait,move,move,belt
+N B.fm 50 0.01875 0 0.588
+N B.sub 38 0.0585 0 0.462
+N B.fm 62 0.10125 0.0225 0.336
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 2 17 36 2 0 17 0 0 0 default | A 0 4 W 2 0 0 | B 0 2 N 0 3 0 | 5 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.392
+N B.fm 50 0.02109375 0 0.245
+N B.sub 38 0.03375 0 0.175
+N B.fm 62 0.0328125 0.009375 0.14
+N drum.hihat -1 0.02 0 0.25
 T 2 18 37 3 0 18 0 0 0 default | A 1 4 W 2 0 0 | B 0 1 N 0 3 0 | 4 0 | 0 1 1 | move,move,pulse
+N A.main 57 0.1026 0 0.58058
+N A.ping 60 0.03375 0.005625 0.232232
+N B.fm 65 0.0729 0 0.588
+N B.sub 53 0.1053 0 0.462
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.02 0.4
 T 2 18 38 3 0 18 0 0 0 default | A 1 4 W 2 0 0 | B 0 1 N 0 3 0 | 4 0 | 0 0 0 | -
+N A.ping 60 0.0253125 0 0.392
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 19 39 4 0 19 0 0 0 default | A 1 4 S 2 0 0 | B 0 1 N 0 3 0 | 3 0 | 0 0 1 | turn,wait
+N A.main 57 0.200746875 0 0.4437
+N A.ping 60 0.03375 0.005625 0.17748
+N drum.hihat -1 0.03 0 0.5
 T 2 19 40 4 0 19 0 0 0 default | A 1 4 S 2 0 0 | B 0 1 N 0 3 0 | 3 0 | 0 0 0 | -
+N A.ping 60 0.0253125 0 0.392
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 20 41 5 0 20 0 0 0 default | A 1 4 S 2 0 0 | B 0 1 N 0 3 0 | 2 0 | 1 0 1 | wait,wait,pulse
+N A.main 57 0.071071875 0 0.1653
+N B.fm 65 0.05194125 0 0.133
+N B.sub 53 0.07502625 0 0.1045
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.02 0.4
 T 2 20 42 5 0 20 0 0 0 default | A 1 4 S 2 0 0 | B 0 1 N 0 3 0 | 2 0 | 0 0 0 | -
+N A.ping 60 0.0253125 0 0.392
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 21 43 6 0 21 0 0 0 default | A 1 4 S 2 0 0 | B 0 1 W 0 3 0 | 1 0 | 0 0 1 | collision,turn,pulse
+N A.main 57 0.28678125 0 0.5916
+N A.ping 60 0.03375 0.005625 0.23664
+N B.fm 65 0.161595 0 0.25935
+N B.sub 53 0.233415 0 0.203775
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.pulse 84 0.06 0.02 0.4
 T 2 21 44 6 0 21 0 0 0 default | A 1 4 S 2 0 0 | B 0 1 W 0 3 0 | 1 0 | 0 0 0 | -
+N A.ping 60 0.0253125 0 0.392
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 22 45 7 0 22 0 0 0 default | A 1 4 W 2 0 0 | B 0 1 W 0 3 0 | 0 0 | 0 1 1 | turn,wait
+N A.main 57 0.0798 0 0.49764
+N A.ping 60 0.03375 0.005625 0.199056
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 2 22 46 7 0 22 0 0 0 default | A 1 4 W 2 0 0 | B 0 1 W 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0253125 0 0.392
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 23 47 8 0 23 0 0 0 default | A 1 4 N 2 0 0 | B 0 1 W 0 3 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 57 0.0748125 0 0.696
+N A.ping 60 0.03375 0.005625 0.2784
+N drum.hihat -1 0.03 0 0.5
 T 2 23 48 8 0 23 0 0 0 default | A 1 4 N 2 0 0 | B 0 1 W 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0253125 0 0.392
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 24 49 9 0 24 0 0 0 default | A 1 2 W 2 0 0 | B 0 1 W 0 3 0 | 0 0 | 1 0 1 | move,move,rotator,collision,collision,pulse
+N A.main 69 0.07125 0 0.754
+N A.ping 72 0.03375 0.005625 0.3016
+N B.fm 65 0.0972 0 0.5005
+N B.sub 53 0.1404 0 0.39325
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
+N fx.collision 43 0.08 0.03 0.7
 T 2 24 50 9 0 24 0 0 0 default | A 1 2 W 2 0 0 | B 0 1 W 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.392
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 25 51 10 0 25 0 0 0 default | A 1 2 S 2 0 0 | B 0 1 N 0 3 0 | 0 0 | 0 0 1 | wait,rotator,turn,pulse
+N A.main 69 0.071071875 0 0.1653
+N B.fm 65 0.05103 0 0.441
+N B.sub 53 0.07371 0 0.3465
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.pulse 84 0.06 0.03 0.4
 T 2 25 52 10 0 25 0 0 0 default | A 1 2 S 2 0 0 | B 0 1 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.392
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 26 53 11 0 26 0 0 0 default | A 1 2 E 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 1 1 | wait,rotator,move
+N A.main 69 0.061453125 0 0.16762
+N B.fm 65 0.0405 0 0.588
+N B.sub 53 0.0585 0 0.462
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 2 26 54 11 0 26 0 0 0 default | A 1 2 E 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.392
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 27 55 12 0 27 0 0 0 default | A 1 2 N 2 0 0 | B 0 0 W 0 3 0 | 0 0 | 0 0 1 | wait,rotator,turn
+N A.main 69 0.0320625 0 0.232
+N B.fm 65 0.0756 0 0.3003
+N B.sub 53 0.1092 0 0.23595
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 2 27 56 12 0 27 0 0 0 default | A 1 2 N 2 0 0 | B 0 0 W 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.392
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 28 57 13 0 28 0 0 0 default | A 1 2 N 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 1 0 1 | wait,turn
+N B.fm 65 0.08150625 0 0.357
+N B.sub 53 0.11773125 0 0.2805
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 2 28 58 13 0 28 0 0 0 default | A 1 2 N 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.392
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 29 59 14 0 29 0 0 0 default | A 1 2 N 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 1 | turn,rotator,collision,collision
+N A.main 69 0.086034375 0 0.5916
+N A.ping 72 0.03375 0.005625 0.23664
+N B.fm 65 0.02025 0 0.7
+N B.sub 53 0.02925 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 2 29 60 14 0 29 0 0 0 default | A 1 2 N 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.392
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 30 61 15 0 30 0 0 0 default | A 1 3 N 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 1 1 | move,wait
+N A.main 69 0.038475 0 0.8526
+N A.ping 72 0.03375 0.005625 0.34104
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 2 30 62 15 0 30 0 0 0 default | A 1 3 N 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.392
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 31 63 0 0 31 0 0 0 default | A 1 3 W 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 69 0.0798 0 0.49764
+N A.ping 72 0.03375 0.005625 0.199056
+N drum.hihat -1 0.03 0 0.5
 T 2 31 64 0 0 31 0 0 0 default | A 1 3 W 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.392
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 32 65 1 1 0 0 0 0 default | A 2 3 W 1 0 0 | B 0 0 N 0 3 0 | 0 0 | 1 0 1 | move,pulse,collision,collision
+N A.main 65 0.2193075 0 0.46683
+N A.ping 69 0.03375 0.005625 0.186732
+N B.fm 64 0.0405 0 0.7
+N B.sub 52 0.0585 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 2 32 66 1 1 0 0 0 0 default | A 2 3 W 1 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.371
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 33 67 2 1 1 0 0 0 default | A 2 3 W 1 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 2 33 68 2 1 1 0 0 0 default | A 2 3 W 1 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.371
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 34 69 3 1 2 0 0 0 default | A 2 3 W 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 1 1 | ping,pulse,collision
+N A.main 67 0.146205 0 0.55575
+N A.ping 71 0.03375 0.005625 0.2223
+N B.fm 64 0.0405 0 0.588
+N B.sub 52 0.0585 0 0.462
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 2 34 70 3 1 2 0 0 0 default | A 2 3 W 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 71 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 35 71 4 1 3 0 0 0 default | A 2 3 W 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 1 | ping,pulse,collision
+N A.main 67 0.176985 0 0.49725
+N A.ping 71 0.03375 0.005625 0.1989
+N B.fm 64 0.0405 0 0.588
+N B.sub 52 0.0585 0 0.462
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 2 35 72 4 1 3 0 0 0 default | A 2 3 W 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 71 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 36 73 5 1 4 0 0 0 default | A 1 3 W 0 0 0 | B 0 0 E 0 3 0 | 0 0 | 1 0 1 | move,turn
+N A.main 65 0.114 0 0.572
+N A.ping 69 0.03375 0.005625 0.2288
+N B.fm 62 0.0945 0 0.3927
+N B.sub 50 0.1365 0 0.30855
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 2 36 74 5 1 4 0 0 0 default | A 1 3 W 0 0 0 | B 0 0 E 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 37 75 6 1 5 0 0 0 default | A 1 3 W 0 0 0 | B 0 0 E 0 3 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 2 37 76 6 1 5 0 0 0 default | A 1 3 W 0 0 0 | B 0 0 E 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 38 77 7 1 6 0 0 0 default | A 1 3 N 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 1 1 | turn,turn
+N A.main 65 0.071071875 0 0.57
+N A.ping 69 0.03375 0.005625 0.228
+N B.fm 62 0.06733125 0 0.399
+N B.sub 50 0.09725625 0 0.3135
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 2 38 78 7 1 6 0 0 0 default | A 1 3 N 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 39 79 8 1 7 0 0 0 default | A 1 2 W 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 1 | move,rotator,collision
+N A.main 65 0.057 0 0.546
+N A.ping 69 0.03375 0.005625 0.2184
+N B.fm 62 0.0405 0 0.588
+N B.sub 50 0.0585 0 0.462
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.collision 43 0.08 0.02 0.7
 T 2 39 80 8 1 7 0 0 0 default | A 1 2 W 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 40 81 9 1 8 0 0 0 default | A 1 2 W 0 0 0 | B 0 1 N 0 3 0 | 0 0 | 1 0 1 | wait,move,pulse
+N B.fm 62 0.06561 0 0.5145
+N B.sub 50 0.09477 0 0.40425
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.02 0.4
 T 2 40 82 9 1 8 0 0 0 default | A 1 2 W 0 0 0 | B 0 1 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 41 83 10 1 9 0 0 0 default | A 1 2 W 0 0 0 | B 0 1 N 0 3 0 | 0 0 | 0 0 1 | turn,rotator,wait
+N A.main 65 0.0947625 0 0.3705
+N A.ping 69 0.03375 0.005625 0.1482
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 2 41 84 10 1 9 0 0 0 default | A 1 2 W 0 0 0 | B 0 1 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 42 85 11 1 10 0 0 0 default | A 1 2 S 0 0 0 | B 0 1 E 0 3 0 | 0 0 | 0 1 1 | ping,rotator,turn,pulse
+N A.main 65 0.05985 0 0.70875
+N A.ping 69 0.03375 0.005625 0.2835
+N B.fm 62 0.08505 0 0.37485
+N B.sub 50 0.12285 0 0.294525
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.pulse 84 0.06 0.03 0.4
 T 2 42 86 11 1 10 0 0 0 default | A 1 2 S 0 0 0 | B 0 1 E 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 69 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 43 87 12 1 11 0 0 0 default | A 1 2 N 0 0 0 | B 1 1 E 0 3 0 | 0 0 | 0 0 1 | turn,rotator,move
+N A.main 65 0.05985 0 0.66
+N A.ping 69 0.03375 0.005625 0.264
+N B.fm 65 0.0675 0 0.4998
+N B.sub 53 0.0975 0 0.3927
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 2 43 88 12 1 11 0 0 0 default | A 1 2 N 0 0 0 | B 1 1 E 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 44 89 13 1 12 0 0 0 default | A 1 2 N 0 0 0 | B 1 1 N 0 3 0 | 0 0 | 1 0 1 | wait,turn
+N B.fm 65 0.0567 0 0.462
+N B.sub 53 0.0819 0 0.363
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 2 44 90 13 1 12 0 0 0 default | A 1 2 N 0 0 0 | B 1 1 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 45 91 14 1 13 0 0 0 default | A 1 2 S 0 0 0 | B 1 1 N 0 3 0 | 0 0 | 0 0 1 | turn,rotator,wait
+N A.main 62 0.165834375 0 0.4275
+N A.ping 65 0.03375 0.005625 0.171
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
 T 2 45 92 14 1 13 0 0 0 default | A 1 2 S 0 0 0 | B 1 1 N 0 3 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 46 93 15 1 14 0 0 0 default | A 1 2 E 0 0 0 | B 2 0 N 1 3 0 | 0 0 | 0 1 1 | ping,rotator,move,collision,move,belt,zap
+N A.main 62 0.10153125 0 0.72675
+N A.ping 65 0.03375 0.005625 0.2907
+N B.fm 71 0.01875 0 0.7
+N B.sub 59 0.02925 0 0.55
+N B.fm 71 0.10125 0.0225 0.4
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.collision 43 0.08 0.03 0.7
 T 2 46 94 15 1 14 0 0 0 default | A 1 2 E 0 0 0 | B 2 0 N 1 3 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N B.fm 71 0.0328125 0.009375 0.1484
+N drum.hihat -1 0.02 0 0.25
 T 2 47 95 0 1 15 0 0 0 default | A 1 2 N 0 0 0 | B 2 0 N 2 3 0 | 0 0 | 0 0 1 | ping,rotator,collision,collision,zap
+N A.main 62 0.06091875 0 0.855
+N A.ping 65 0.03375 0.005625 0.342
+N B.fm 72 0.0253125 0 0.7
+N B.sub 60 0.0365625 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.01 0.45
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 2 47 96 0 1 15 0 0 0 default | A 1 2 N 0 0 0 | B 2 0 N 2 3 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 48 97 1 1 16 0 0 0 default | A 2 0 N 1 0 0 | B 2 0 N 3 3 0 | 0 1 | 1 0 1 | move,move,move,belt,zap,ping,zap
+N A.main 77 0.013125 0 1
+N A.ping 81 0.03375 0.005625 0.4
+N A.main 77 0.091875 0.015 0.45
+N A.main 83 0.135 0.10875 0.438
+N B.fm 62 0.03493125 0 0.66402
+N B.sub 50 0.05045625 0 0.52173
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 2 48 98 1 1 16 0 0 0 default | A 2 0 N 1 0 0 | B 2 0 N 3 3 0 | 0 1 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.371
+N A.main 84 0.04134375 0.009375 0.1855
+N A.main 83 0.0328125 0.0515625 0.1735
+N B.fm 62 0.02109375 0 0.2744
+N B.sub 50 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 49 99 2 1 17 0 0 0 default | A 2 0 N 4 0 0 | B 2 0 N 4 3 0 | 7 0 | 0 0 1 | ping,zap,collision,collision,zap,zap
+N A.main 79 0.012825 0 1
+N A.ping 83 0.03375 0.005625 0.4
+N B.fm 62 0.02025 0 0.7
+N B.sub 50 0.02925 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 2 49 100 2 1 17 0 0 0 default | A 2 0 N 4 0 0 | B 2 0 N 4 3 0 | 7 0 | 0 0 0 | -
+N A.ping 83 0.0253125 0 0.392
+N B.fm 62 0.02109375 0 0.2744
+N B.sub 50 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 50 101 3 1 18 0 0 0 default | A 2 0 N 5 0 0 | B 2 0 E 5 3 0 | 6 0 | 0 1 1 | collision,zap,turn,zap
+N A.main 79 0.04809375 0 0.98
+N A.ping 83 0.03375 0.005625 0.392
+N B.fm 62 0.067921875 0 0.42483
+N B.sub 50 0.098109375 0 0.333795
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 2 50 102 3 1 18 0 0 0 default | A 2 0 N 5 0 0 | B 2 0 E 5 3 0 | 6 0 | 0 0 0 | -
+N A.ping 83 0.0253125 0 0.392
+N B.fm 62 0.02109375 0 0.2744
+N B.sub 50 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 51 103 4 1 19 0 0 0 default | A 2 0 N 6 0 1 | B 3 0 S 5 3 0 | 5 0 | 0 0 1 | collision,zap,zap,move,rotator
+N A.main 79 0.061453125 0 0.952
+N A.ping 83 0.03375 0.005625 0.3808
+N B.fm 62 0.0945 0 0.6174
+N B.sub 50 0.1365 0 0.4851
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
 T 2 51 104 4 1 19 0 0 0 default | A 2 0 N 6 0 1 | B 3 0 S 5 3 0 | 5 0 | 0 0 0 | -
+N A.ping 83 0.0253125 0 0.392
+N B.fm 62 0.02109375 0 0.2744
+N B.sub 50 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 52 105 5 1 20 0 0 0 default | A 0 4 E 0 1 0 | B 3 1 S 5 3 0 | 4 0 | 1 0 1 | death,ping,move
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 48 0.04275 0 0.80325
+N A.ping 52 0.03375 0.005625 0.3213
+N B.fm 71 0.0945 0 0.6174
+N B.sub 59 0.1365 0 0.4851
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 2 52 106 5 1 20 0 0 0 default | A 0 4 E 0 1 0 | B 3 1 S 5 3 0 | 4 0 | 0 0 0 | -
+N A.ping 52 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2744
+N B.sub 59 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 53 107 6 1 21 0 0 0 default | A 0 4 E 0 1 0 | B 3 1 W 5 3 0 | 3 0 | 0 0 1 | wait,turn
+N B.fm 71 0.0756 0 0.42042
+N B.sub 59 0.1092 0 0.33033
+N drum.hihat -1 0.03 0 0.5
 T 2 53 108 6 1 21 0 0 0 default | A 0 4 E 0 1 0 | B 3 1 W 5 3 0 | 3 0 | 0 0 0 | -
+N A.ping 52 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2744
+N B.sub 59 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 54 109 7 1 22 0 0 0 default | A 1 4 E 0 1 0 | B 3 1 W 5 3 0 | 2 0 | 0 1 1 | move,wait
+N A.main 50 0.178125 0 0.68
+N A.ping 53 0.03375 0.005625 0.272
+N B.fm 72 0.038475 0 0.12103
+N B.sub 60 0.055575 0 0.095095
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 2 54 110 7 1 22 0 0 0 default | A 1 4 E 0 1 0 | B 3 1 W 5 3 0 | 2 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 55 111 8 1 23 0 0 0 default | A 1 4 E 0 1 0 | B 3 1 S 5 3 0 | 1 0 | 0 0 1 | ping,turn
+N A.main 50 0.10153125 0 0.72675
+N A.ping 53 0.03375 0.005625 0.2907
+N B.fm 72 0.15710625 0 0.41895
+N B.sub 60 0.22693125 0 0.329175
+N drum.hihat -1 0.03 0 0.5
 T 2 55 112 8 1 23 0 0 0 default | A 1 4 E 0 1 0 | B 3 1 S 5 3 0 | 1 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 56 113 9 1 24 0 0 0 default | A 1 4 E 0 1 0 | B 3 2 S 6 3 1 | 0 0 | 1 0 1 | wait,move,zap,zap
+N B.fm 60 0.04725 0 0.6174
+N B.sub 48 0.06825 0 0.4851
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 2 56 114 9 1 24 0 0 0 default | A 1 4 E 0 1 0 | B 3 2 S 6 3 1 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 60 0.02109375 0 0.2744
+N B.sub 48 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 2 57 115 10 1 25 0 0 0 default | A 1 4 E 0 1 0 | B 0 0 W 0 4 0 | 0 0 | 0 0 1 | death,ping,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 53 0.10153125 0 0.72675
+N A.ping 57 0.03375 0.005625 0.2907
+N drum.hihat -1 0.03 0 0.5
 T 2 57 116 10 1 25 0 0 0 default | A 1 4 E 0 1 0 | B 0 0 W 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 58 117 11 1 26 0 0 0 default | A 1 4 E 0 1 0 | B 0 0 W 0 4 0 | 0 0 | 0 1 1 | wait,wait
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 2 58 118 11 1 26 0 0 0 default | A 1 4 E 0 1 0 | B 0 0 W 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 59 119 12 1 27 0 0 0 default | A 0 4 E 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 0 0 1 | move,turn
+N A.main 52 0.12825 0 0.6545
+N A.ping 55 0.03375 0.005625 0.2618
+N B.fm 60 0.02835 0 0.441
+N B.sub 48 0.04095 0 0.3465
+N drum.hihat -1 0.03 0 0.5
 T 2 59 120 12 1 27 0 0 0 default | A 0 4 E 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0253125 0 0.35
+N B.fm 60 0.02109375 0 0.245
+N B.sub 48 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 60 121 13 1 28 0 0 0 default | A 0 4 N 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 1 0 1 | turn,collision
+N A.main 52 0.086034375 0 0.51
+N A.ping 55 0.03375 0.005625 0.204
+N B.fm 60 0.0405 0 0.588
+N B.sub 48 0.0585 0 0.462
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 2 60 122 13 1 28 0 0 0 default | A 0 4 N 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0253125 0 0.35
+N B.fm 60 0.02109375 0 0.245
+N B.sub 48 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 61 123 14 1 29 0 0 0 default | A 0 4 N 0 1 0 | B 0 0 W 0 4 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 60 0.0756 0 0.3003
+N B.sub 48 0.1092 0 0.23595
+N drum.hihat -1 0.03 0 0.5
 T 2 61 124 14 1 29 0 0 0 default | A 0 4 N 0 1 0 | B 0 0 W 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0253125 0 0.35
+N B.fm 60 0.02109375 0 0.245
+N B.sub 48 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 62 125 15 1 30 0 0 0 default | A 0 2 N 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 0 1 1 | move,move,belt,turn
+N A.main 64 0.013125 0 0.68
+N A.ping 67 0.03375 0.005625 0.272
+N A.main 64 0.091875 0.015 0.306
+N A.main 67 0.219375 0.10875 0.294
+N B.fm 72 0.08150625 0 0.357
+N B.sub 60 0.11773125 0 0.2805
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
 T 2 62 126 15 1 30 0 0 0 default | A 0 2 N 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0253125 0 0.35
+N A.main 71 0.04134375 0.009375 0.175
+N A.main 67 0.0328125 0.0515625 0.163
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 2 63 127 0 1 31 0 0 0 default | A 0 2 N 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 0 0 1 | wait,collision,collision
+N B.fm 72 0.02025 0 0.7
+N B.sub 60 0.02925 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 2 63 128 0 1 31 0 0 0 default | A 0 2 N 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0253125 0 0.35
+N A.main 71 0.04134375 0.009375 0.175
+N A.main 67 0.0328125 0.0515625 0.163
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 0 1 1 2 0 0 0 0 default | A 0 4 E 0 1 0 | B 4 0 W 0 4 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N A.ping 60 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 3 0 2 1 2 0 0 0 0 default | A 0 4 E 0 1 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 1 3 2 2 1 0 0 0 default | A 0 4 E 0 1 0 | B 3 0 N 0 4 0 | 0 0 | 0 0 1 | ping,move,rotator
+N A.main 57 0.04275 0 0.80325
+N A.ping 60 0.03375 0.005625 0.3213
+N B.fm 72 0.0405 0 0.588
+N B.sub 60 0.0585 0 0.462
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 3 1 4 2 2 1 0 0 0 default | A 0 4 E 0 1 0 | B 3 0 N 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 2 5 3 2 2 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 N 0 4 0 | 0 0 | 0 1 1 | turn,wait
+N A.main 53 0.05985 0 0.66
+N A.ping 57 0.03375 0.005625 0.264
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 3 2 6 3 2 2 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 N 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 3 7 4 2 3 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 1 | collision,wait,rotator
+N A.main 53 0.091378125 0 0.665
+N A.ping 57 0.03375 0.005625 0.266
+N B.fm 72 0.04809375 0 0.11305
+N B.sub 60 0.06946875 0 0.088825
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.rotator 81 0.04 0.02 0.45
 T 3 3 8 4 2 3 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 4 9 5 2 4 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 1 0 1 | wait,turn,rotator
+N B.fm 72 0.11221875 0 0.33915
+N B.sub 60 0.16209375 0 0.266475
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 3 4 10 5 2 4 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 5 11 6 2 5 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 3 5 12 6 2 5 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 6 13 7 2 6 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 1 1 | ping,wait
+N A.main 53 0.06091875 0 0.855
+N A.ping 57 0.03375 0.005625 0.342
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 3 6 14 7 2 6 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 7 15 8 2 7 0 0 0 default | A 0 2 N 0 1 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 1 | move,move,move,collision
+N A.main 65 0.04275 0 1
+N A.ping 69 0.03375 0.005625 0.4
+N B.fm 65 0.0675 0 0.6545
+N B.sub 53 0.0975 0 0.51425
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.03 0.7
 T 3 7 16 8 2 7 0 0 0 default | A 0 2 N 0 1 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 8 17 9 2 8 0 0 0 default | A 0 2 N 0 1 0 | B 4 0 S 0 4 0 | 0 0 | 1 0 1 | ping,turn
+N A.main 69 0.02565 0 0.945
+N A.ping 72 0.03375 0.005625 0.378
+N B.fm 65 0.06615 0 0.33075
+N B.sub 53 0.09555 0 0.259875
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 3 8 18 9 2 8 0 0 0 default | A 0 2 N 0 1 0 | B 4 0 S 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 9 19 10 2 9 0 0 0 default | A 0 2 N 0 1 0 | B 4 2 S 0 4 0 | 0 0 | 0 0 1 | move,move,belt,move,move,belt
+N A.main 69 0.013125 0 0.7
+N A.ping 72 0.03375 0.005625 0.28
+N A.main 69 0.091875 0.015 0.315
+N A.main 72 0.16875 0.10875 0.303
+N B.fm 65 0.01875 0 0.441
+N B.sub 53 0.1365 0 0.3465
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
 T 3 9 20 10 2 9 0 0 0 default | A 0 2 N 0 1 0 | B 4 2 S 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N A.main 79 0.04134375 0.009375 0.175
+N A.main 76 0.0328125 0.0515625 0.163
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 10 21 11 2 10 0 0 0 default | A 0 2 N 0 1 0 | B 4 2 E 0 4 0 | 0 0 | 0 1 1 | wait,turn
+N B.fm 65 0.0945 0 0.3927
+N B.sub 53 0.1365 0 0.30855
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 3 10 22 11 2 10 0 0 0 default | A 0 2 N 0 1 0 | B 4 2 E 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N A.main 79 0.04134375 0.009375 0.175
+N A.main 76 0.0328125 0.0515625 0.163
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 11 23 12 2 11 0 0 0 default | A 0 2 N 0 1 0 | B 4 2 S 0 4 0 | 0 0 | 0 0 1 | ping,turn
+N A.main 69 0.02565 0 0.945
+N A.ping 72 0.03375 0.005625 0.378
+N B.fm 65 0.19018125 0 0.26775
+N B.sub 53 0.27470625 0 0.210375
+N drum.hihat -1 0.03 0 0.5
 T 3 11 24 12 2 11 0 0 0 default | A 0 2 N 0 1 0 | B 4 2 S 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 12 25 13 2 12 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 1 0 1 | wait,move,move
+N B.fm 65 0.04725 0 0.55125
+N B.sub 53 0.06825 0 0.433125
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 3 12 26 13 2 12 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 13 27 14 2 13 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 1 | wait,collision,collision
+N B.fm 65 0.118125 0 0.525
+N B.sub 53 0.170625 0 0.4125
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 3 13 28 14 2 13 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 14 29 15 2 14 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 1 1 | ping,ping
+N A.main 69 0.06091875 0 0.855
+N A.ping 72 0.03375 0.005625 0.342
+N B.fm 65 0.1630125 0 0.401625
+N B.sub 53 0.2354625 0 0.3155625
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 3 14 30 15 2 14 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 15 31 0 2 15 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 1 | wait,collision,collision
+N B.fm 65 0.0945 0 0.5775
+N B.sub 53 0.1365 0 0.45375
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 3 15 32 0 2 15 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 16 33 1 2 16 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 1 0 1 | ping,wait
+N A.main 69 0.06091875 0 0.855
+N A.ping 72 0.03375 0.005625 0.342
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 3 16 34 1 2 16 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 72 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 17 35 2 2 17 0 0 0 default | A 0 0 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 1 | move,move,collision
+N A.main 81 0.050765625 0 0.95
+N A.ping 84 0.03375 0.005625 0.38
+N B.fm 65 0.0945 0 0.441
+N B.sub 53 0.1365 0 0.3465
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.02 0.7
 T 3 17 36 2 2 17 0 0 0 default | A 0 0 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 18 37 3 2 18 0 0 0 default | A 0 1 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 1 1 | move,pulse,collision
+N A.main 81 0.13851 0 0.77
+N A.ping 84 0.03375 0.005625 0.308
+N B.fm 65 0.0945 0 0.441
+N B.sub 53 0.1365 0 0.3465
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
+N fx.collision 43 0.08 0.02 0.7
 T 3 18 38 3 2 18 0 0 0 default | A 0 1 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 19 39 4 2 19 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 1 | turn,pulse,wait
+N A.main 81 0.2064825 0 0.3315
+N A.ping 84 0.03375 0.005625 0.1326
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 3 19 40 4 2 19 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 20 41 5 2 20 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 1 0 1 | wait,pulse,wait
+N A.main 81 0.0731025 0 0.1235
+N B.fm 65 0.06733125 0 0.09975
+N B.sub 53 0.09725625 0 0.078375
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 3 20 42 5 2 20 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 21 43 6 2 21 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 E 0 4 0 | 0 0 | 0 0 1 | collision,pulse,turn
+N A.main 81 0.294975 0 0.442
+N A.ping 84 0.03375 0.005625 0.1768
+N B.fm 65 0.11221875 0 0.33915
+N B.sub 53 0.16209375 0 0.266475
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.pulse 84 0.06 0.01 0.4
 T 3 21 44 6 2 21 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 E 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 22 45 7 2 22 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 E 0 4 0 | 0 0 | 0 1 1 | wait,wait
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 3 22 46 7 2 22 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 E 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 23 47 8 2 23 0 0 0 default | A 0 1 N 0 1 0 | B 3 4 N 0 4 0 | 0 0 | 0 0 1 | turn,pulse,move,rotator
+N A.main 81 0.1346625 0 0.6
+N A.ping 84 0.03375 0.005625 0.24
+N B.fm 72 0.03645 0 0.5145
+N B.sub 60 0.05265 0 0.40425
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
+N fx.rotator 81 0.04 0.03 0.45
 T 3 23 48 8 2 23 0 0 0 default | A 0 1 N 0 1 0 | B 3 4 N 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 24 49 9 2 24 0 0 0 default | A 0 1 N 0 1 0 | B 3 4 N 0 4 0 | 0 0 | 1 0 1 | wait,wait
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 3 24 50 9 2 24 0 0 0 default | A 0 1 N 0 1 0 | B 3 4 N 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 25 51 10 2 25 0 0 0 default | A 0 1 N 0 1 0 | B 3 4 N 0 4 0 | 0 0 | 0 0 1 | wait,turn,rotator
+N B.fm 72 0.02835 0 0.441
+N B.sub 60 0.04095 0 0.3465
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 3 25 52 10 2 25 0 0 0 default | A 0 1 N 0 1 0 | B 3 4 N 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 26 53 11 2 26 0 0 0 default | A 0 1 N 0 1 0 | B 3 3 N 0 4 0 | 0 0 | 0 1 1 | wait,pulse,move
+N A.main 77 0.066369375 0 0.17
+N B.fm 72 0.0405 0 0.588
+N B.sub 60 0.0585 0 0.462
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 3 26 54 11 2 26 0 0 0 default | A 0 1 N 0 1 0 | B 3 3 N 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 27 55 12 2 27 0 0 0 default | A 0 1 N 0 1 0 | B 3 3 W 0 4 0 | 0 0 | 0 0 1 | wait,pulse,turn
+N A.main 77 0.0577125 0 0.2
+N B.fm 72 0.0756 0 0.3003
+N B.sub 60 0.1092 0 0.23595
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 3 27 56 12 2 27 0 0 0 default | A 0 1 N 0 1 0 | B 3 3 W 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 28 57 13 2 28 0 0 0 default | A 0 1 E 0 1 0 | B 3 3 N 0 4 0 | 0 0 | 1 0 1 | turn,pulse,turn
+N A.main 77 0.17955 0 0.561
+N A.ping 81 0.03375 0.005625 0.2244
+N B.fm 72 0.08150625 0 0.357
+N B.sub 60 0.11773125 0 0.2805
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 3 28 58 13 2 28 0 0 0 default | A 0 1 E 0 1 0 | B 3 3 N 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 29 59 14 2 29 0 0 0 default | A 0 1 S 0 1 0 | B 3 1 N 0 4 0 | 0 0 | 0 0 1 | turn,pulse,move,move
+N A.main 77 0.361344375 0 0.3825
+N A.ping 81 0.03375 0.005625 0.153
+N B.fm 72 0.02025 0 0.7
+N B.sub 60 0.02925 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 3 29 60 14 2 29 0 0 0 default | A 0 1 S 0 1 0 | B 3 1 N 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 30 61 15 2 30 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 1 1 | move,move,collision,rotator
+N A.main 77 0.089775 0 0.55125
+N A.ping 81 0.03375 0.005625 0.2205
+N B.fm 72 0.084375 0 0.595
+N B.sub 60 0.121875 0 0.4675
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.02 0.7
+N fx.rotator 81 0.04 0.03 0.45
 T 3 30 62 15 2 30 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 31 63 0 2 31 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 3 31 64 0 2 31 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 32 65 1 3 0 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 1 0 1 | collision,wait
+N A.main 81 0.213215625 0 0.49875
+N A.ping 84 0.03375 0.005625 0.1995
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
 T 3 32 66 1 3 0 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 33 67 2 3 1 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 W 0 4 0 | 0 0 | 0 0 1 | wait,turn,rotator
+N B.fm 64 0.108675 0 0.23205
+N B.sub 52 0.156975 0 0.182325
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 3 33 68 2 3 1 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 W 0 4 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 34 69 3 3 2 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 W 1 4 0 | 0 0 | 0 1 1 | ping,move,zap
+N A.main 81 0.14214375 0 0.64125
+N A.ping 84 0.03375 0.005625 0.2565
+N B.fm 65 0.027 0 0.412776
+N B.sub 53 0.039 0 0.324324
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 3 34 70 3 3 2 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 W 1 4 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.2597
+N B.sub 53 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 3 35 71 4 3 3 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 W 2 4 0 | 0 0 | 0 0 1 | wait,move,move,belt,zap
+N B.fm 67 0.01875 0 0.443352
+N B.sub 55 0.078 0 0.348348
+N B.fm 67 0.10125 0.0225 0.253344
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 3 35 72 4 3 3 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 W 2 4 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2744
+N B.sub 55 0.03375 0 0.196
+N B.fm 67 0.0328125 0.009375 0.1568
+N drum.hihat -1 0.02 0 0.25
 T 3 36 73 5 3 4 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 N 3 4 0 | 0 0 | 1 0 1 | wait,turn,zap
+N B.fm 67 0.02835 0 0.57288
+N B.sub 55 0.04095 0 0.45012
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 3 36 74 5 3 4 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 N 3 4 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2744
+N B.sub 55 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 3 37 75 6 3 5 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 N 4 4 0 | 0 0 | 0 0 1 | wait,wait,zap
+N B.fm 67 0.014428125 0 0.17556
+N B.sub 55 0.020840625 0 0.13794
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 3 37 76 6 3 5 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 N 4 4 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2744
+N B.sub 55 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 3 38 77 7 3 6 0 0 0 default | A 0 0 W 0 1 0 | B 2 0 W 5 4 0 | 0 0 | 0 1 1 | turn,turn,zap
+N A.main 81 0.0947625 0 0.3705
+N A.ping 84 0.03375 0.005625 0.1482
+N B.fm 67 0.0448875 0 0.36309
+N B.sub 55 0.0648375 0 0.285285
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 3 38 78 7 3 6 0 0 0 default | A 0 0 W 0 1 0 | B 2 0 W 5 4 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2744
+N B.sub 55 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 3 39 79 8 3 7 0 0 0 default | A 0 0 W 0 1 0 | B 2 0 W 6 4 1 | 0 0 | 0 0 1 | collision,move,move,belt,zap,zap
+N A.main 81 0.057 0 0.546
+N A.ping 84 0.03375 0.005625 0.2184
+N B.fm 67 0.01875 0 0.53508
+N B.sub 55 0.078 0 0.42042
+N B.fm 67 0.10125 0.0225 0.30576
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.belt -1 0.04 0.03 0.35
 T 3 39 80 8 3 7 0 0 0 default | A 0 0 W 0 1 0 | B 2 0 W 6 4 1 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 67 0.02109375 0 0.2744
+N B.sub 55 0.03375 0 0.196
+N B.fm 67 0.0328125 0.009375 0.1568
+N drum.hihat -1 0.02 0 0.25
 T 3 40 81 9 3 8 0 0 0 default | A 0 0 W 0 1 0 | B 1 4 W 0 5 0 | 0 0 | 1 0 1 | death,ping,move
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 84 0.0855 0 0.585
+N A.ping 76 0.03375 0.005625 0.234
+N B.fm 72 0.0486 0 0.334425
+N B.sub 60 0.0702 0 0.2627625
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 3 40 82 9 3 8 0 0 0 default | A 0 0 W 0 1 0 | B 1 4 W 0 5 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 41 83 10 3 9 0 0 0 default | A 0 0 N 0 1 0 | B 1 4 W 0 5 0 | 0 0 | 0 0 1 | turn,wait
+N A.main 81 0.071071875 0 0.57
+N A.ping 84 0.03375 0.005625 0.228
+N drum.hihat -1 0.03 0 0.5
 T 3 41 84 10 3 9 0 0 0 default | A 0 0 N 0 1 0 | B 1 4 W 0 5 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 42 85 11 3 10 0 0 0 default | A 0 0 N 0 1 0 | B 1 4 N 0 5 0 | 0 0 | 0 1 1 | ping,turn
+N A.main 81 0.02565 0 0.945
+N A.ping 84 0.03375 0.005625 0.378
+N B.fm 72 0.02835 0 0.441
+N B.sub 60 0.04095 0 0.3465
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 3 42 86 11 3 10 0 0 0 default | A 0 0 N 0 1 0 | B 1 4 N 0 5 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 43 87 12 3 11 0 0 0 default | A 0 0 W 0 1 0 | B 1 3 N 0 5 0 | 0 0 | 0 0 1 | turn,move
+N A.main 81 0.0798 0 0.429
+N A.ping 84 0.03375 0.005625 0.1716
+N B.fm 72 0.0405 0 0.588
+N B.sub 60 0.0585 0 0.462
+N drum.hihat -1 0.03 0 0.5
 T 3 43 88 12 3 11 0 0 0 default | A 0 0 W 0 1 0 | B 1 3 N 0 5 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 44 89 13 3 12 0 0 0 default | A 2 0 W 1 1 0 | B 1 3 W 0 5 0 | 0 0 | 1 0 1 | move,move,belt,zap,turn
+N A.main 74 0.013125 0 0.46683
+N A.ping 77 0.03375 0.005625 0.186732
+N A.main 74 0.091875 0.015 0.2100735
+N A.main 76 0.185625 0.10875 0.1980735
+N B.fm 64 0.0756 0 0.3003
+N B.sub 52 0.1092 0 0.23595
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 3 44 90 13 3 12 0 0 0 default | A 2 0 W 1 1 0 | B 1 3 W 0 5 0 | 0 0 | 0 0 0 | -
+N A.ping 77 0.0253125 0 0.371
+N A.main 81 0.04134375 0.009375 0.1855
+N A.main 77 0.0328125 0.0515625 0.1735
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 45 91 14 3 13 0 0 0 default | A 2 0 W 1 1 0 | B 1 3 N 0 5 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 64 0.08150625 0 0.357
+N B.sub 52 0.11773125 0 0.2805
+N drum.hihat -1 0.03 0 0.5
 T 3 45 92 14 3 13 0 0 0 default | A 2 0 W 1 1 0 | B 1 3 N 0 5 0 | 0 0 | 0 0 0 | -
+N A.ping 77 0.0253125 0 0.371
+N A.main 81 0.04134375 0.009375 0.1855
+N A.main 77 0.0328125 0.0515625 0.1735
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 46 93 15 3 14 0 0 0 default | A 2 0 W 2 1 0 | B 1 3 N 0 5 0 | 0 0 | 0 1 1 | ping,zap,wait
+N A.main 79 0.0406125 0 0.64467
+N A.ping 83 0.03375 0.005625 0.257868
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 3 46 94 15 3 14 0 0 0 default | A 2 0 W 2 1 0 | B 1 3 N 0 5 0 | 0 0 | 0 0 0 | -
+N A.ping 83 0.0253125 0 0.392
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 47 95 0 3 15 0 0 0 default | A 2 0 W 3 1 0 | B 1 1 N 0 5 0 | 0 0 | 0 0 1 | ping,zap,move,move
+N A.main 79 0.0406125 0 0.68913
+N A.ping 83 0.03375 0.005625 0.275652
+N B.fm 64 0.050625 0 0.7
+N B.sub 52 0.073125 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 3 47 96 0 3 15 0 0 0 default | A 2 0 W 3 1 0 | B 1 1 N 0 5 0 | 0 0 | 0 0 0 | -
+N A.ping 83 0.0253125 0 0.392
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 48 97 1 3 16 0 0 0 default | A 0 0 W 3 1 0 | B 1 1 N 0 5 0 | 0 0 | 1 0 1 | move,move,ping
+N A.main 76 0.057 0 0.8866
+N A.ping 79 0.03375 0.005625 0.35464
+N B.fm 72 0.0698625 0 0.5355
+N B.sub 60 0.1009125 0 0.42075
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 3 48 98 1 3 16 0 0 0 default | A 0 0 W 3 1 0 | B 1 1 N 0 5 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0253125 0 0.392
+N B.fm 72 0.02109375 0 0.245
+N B.sub 60 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 49 99 2 3 17 0 0 0 default | A 0 0 W 3 1 0 | B 2 0 N 1 5 0 | 0 0 | 0 0 1 | ping,move,collision,move,belt,zap
+N A.main 76 0.0342 0 0.76167
+N A.ping 79 0.03375 0.005625 0.304668
+N B.fm 65 0.01875 0 0.7
+N B.sub 53 0.0585 0 0.55
+N B.fm 65 0.135 0.0225 0.4
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.02 0.7
 T 3 49 100 2 3 17 0 0 0 default | A 0 0 W 3 1 0 | B 2 0 N 1 5 0 | 0 0 | 0 0 0 | -
+N A.ping 76 0.0253125 0 0.392
+N B.fm 65 0.02109375 0 0.2597
+N B.sub 53 0.03375 0 0.1855
+N B.fm 65 0.0328125 0.009375 0.1484
+N drum.hihat -1 0.02 0 0.25
 T 3 50 101 3 3 18 0 0 0 default | A 2 0 W 4 1 0 | B 2 0 N 1 5 0 | 0 1 | 0 1 1 | move,move,belt,zap,wait
+N A.main 76 0.013125 0 0.6006
+N A.ping 79 0.03375 0.005625 0.24024
+N A.main 76 0.091875 0.015 0.27027
+N A.main 77 0.091875 0.10875 0.25827
+N A.main 79 0.16875 0.2025 0.24627
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 3 50 102 3 3 18 0 0 0 default | A 2 0 W 4 1 0 | B 2 0 N 1 5 0 | 0 1 | 0 0 0 | -
+N A.ping 79 0.0253125 0 0.392
+N A.main 83 0.04134375 0.009375 0.196
+N A.main 79 0.0328125 0.0515625 0.184
+N B.fm 69 0.02109375 0 0.2597
+N B.sub 57 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 3 51 103 4 3 19 0 0 0 default | A 2 0 W 5 1 0 | B 2 0 N 2 5 0 | 0 2 | 0 0 1 | move,move,belt,zap,collision,zap,love
+N A.main 76 0.013125 0 0.6188
+N A.ping 79 0.03375 0.005625 0.24752
+N A.main 76 0.091875 0.015 0.27846
+N A.main 77 0.091875 0.10875 0.26646
+N A.main 79 0.219375 0.2025 0.25446
+N B.fm 71 0.02025 0 0.68208
+N B.sub 59 0.02925 0 0.53592
+N coin 83 0.06 0 0.7
+N coin 88 0.08 0.07 0.8
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 3 51 104 4 3 19 0 0 0 default | A 2 0 W 5 1 0 | B 2 0 N 2 5 0 | 0 2 | 0 0 0 | -
+N A.ping 79 0.0253125 0 0.392
+N A.main 83 0.04134375 0.009375 0.196
+N A.main 79 0.0328125 0.0515625 0.184
+N B.fm 71 0.02109375 0 0.2744
+N B.sub 59 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 3 52 105 5 3 20 0 0 0 default | A 2 0 W 6 1 1 | B 2 0 N 3 5 0 | 0 0 | 1 0 1 | ping,zap,zap,collision,zap
+N A.main 76 0.0171 0 0.85995
+N A.ping 79 0.03375 0.005625 0.34398
+N B.fm 71 0.02025 0 0.7
+N B.sub 59 0.02925 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 3 52 106 5 3 20 0 0 0 default | A 2 0 W 6 1 1 | B 2 0 N 3 5 0 | 0 0 | 0 0 0 | -
+N A.ping 79 0.0253125 0 0.392
+N B.fm 71 0.02109375 0 0.2744
+N B.sub 59 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 3 53 107 6 3 21 0 0 0 default | A 1 4 E 0 2 0 | B 2 0 E 4 5 0 | 0 0 | 0 0 1 | death,move,turn,zap
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 59 0.07125 0 0.714
+N A.ping 62 0.03375 0.005625 0.2856
+N B.fm 69 0.04725 0 0.518364
+N B.sub 57 0.06825 0 0.407286
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 3 53 108 6 3 21 0 0 0 default | A 1 4 E 0 2 0 | B 2 0 E 4 5 0 | 0 0 | 0 0 0 | -
+N A.ping 62 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.2744
+N B.sub 57 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 3 54 109 7 3 22 0 0 0 default | A 2 4 E 0 2 0 | B 2 0 E 5 5 0 | 0 0 | 0 1 1 | move,wait,zap
+N A.main 60 0.178125 0 0.68
+N A.ping 64 0.03375 0.005625 0.272
+N B.fm 71 0.024046875 0 0.15827
+N B.sub 59 0.034734375 0 0.124355
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 3 54 110 7 3 22 0 0 0 default | A 2 4 E 0 2 0 | B 2 0 E 5 5 0 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2744
+N B.sub 59 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 3 55 111 8 3 23 0 0 0 default | A 2 4 E 0 2 0 | B 2 0 N 6 5 1 | 0 0 | 0 0 1 | ping,turn,zap,zap
+N A.main 60 0.10153125 0 0.72675
+N A.ping 64 0.03375 0.005625 0.2907
+N B.fm 71 0.033665625 0 0.5586
+N B.sub 59 0.048628125 0 0.4389
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 3 55 112 8 3 23 0 0 0 default | A 2 4 E 0 2 0 | B 2 0 N 6 5 1 | 0 0 | 0 0 0 | -
+N A.ping 64 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2744
+N B.sub 59 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 3 56 113 9 3 24 0 0 0 default | A 2 4 E 0 2 0 | B 0 4 W 0 6 0 | 0 0 | 1 0 1 | death,wait,wait
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 3 56 114 9 3 24 0 0 0 default | A 2 4 E 0 2 0 | B 0 4 W 0 6 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0253125 0 0.35
+N B.fm 48 0.02109375 0 0.245
+N B.sub 36 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 57 115 10 3 25 0 0 0 default | A 2 4 E 0 2 0 | B 0 4 W 0 6 0 | 0 0 | 0 0 1 | ping,wait
+N A.main 64 0.10153125 0 0.72675
+N A.ping 67 0.03375 0.005625 0.2907
+N drum.hihat -1 0.03 0 0.5
 T 3 57 116 10 3 25 0 0 0 default | A 2 4 E 0 2 0 | B 0 4 W 0 6 0 | 0 0 | 0 0 0 | -
+N A.ping 67 0.0253125 0 0.35
+N B.fm 48 0.02109375 0 0.245
+N B.sub 36 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 58 117 11 3 26 0 0 0 default | A 4 4 E 0 2 0 | B 0 4 W 0 6 0 | 0 0 | 0 1 1 | move,move,collision,collision
+N A.main 67 0.084609375 0 0.8075
+N A.ping 71 0.03375 0.005625 0.323
+N B.fm 52 0.054 0 0.5005
+N B.sub 40 0.078 0 0.39325
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.02 0.7
+N fx.collision 43 0.08 0.03 0.7
 T 3 58 118 11 3 26 0 0 0 default | A 4 4 E 0 2 0 | B 0 4 W 0 6 0 | 0 0 | 0 0 0 | -
+N A.ping 71 0.0253125 0 0.35
+N B.fm 52 0.02109375 0 0.245
+N B.sub 40 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 59 119 12 3 27 0 0 0 default | A 4 4 E 0 2 0 | B 0 4 N 0 6 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 52 0.02835 0 0.441
+N B.sub 40 0.04095 0 0.3465
+N drum.hihat -1 0.03 0 0.5
 T 3 59 120 12 3 27 0 0 0 default | A 4 4 E 0 2 0 | B 0 4 N 0 6 0 | 0 0 | 0 0 0 | -
+N A.ping 71 0.0253125 0 0.35
+N B.fm 52 0.02109375 0 0.245
+N B.sub 40 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 60 121 13 3 28 0 0 0 default | A 4 4 N 0 2 0 | B 0 2 N 0 6 0 | 0 0 | 1 0 1 | turn,move,move,belt
+N A.main 67 0.086034375 0 0.51
+N A.ping 71 0.03375 0.005625 0.204
+N B.fm 64 0.01875 0 0.588
+N B.sub 52 0.0585 0 0.462
+N B.fm 64 0.10125 0.0225 0.336
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 3 60 122 13 3 28 0 0 0 default | A 4 4 N 0 2 0 | B 0 2 N 0 6 0 | 0 0 | 0 0 0 | -
+N A.ping 71 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N B.fm 64 0.0328125 0.009375 0.14
+N drum.hihat -1 0.02 0 0.25
 T 3 61 123 14 3 29 0 0 0 default | A 4 4 N 0 2 0 | B 0 2 W 0 6 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 64 0.0756 0 0.3003
+N B.sub 52 0.1092 0 0.23595
+N drum.hihat -1 0.03 0 0.5
 T 3 61 124 14 3 29 0 0 0 default | A 4 4 N 0 2 0 | B 0 2 W 0 6 0 | 0 0 | 0 0 0 | -
+N A.ping 71 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 62 125 15 3 30 0 0 0 default | A 4 4 N 0 2 0 | B 0 2 N 0 6 0 | 0 0 | 0 1 1 | wait,turn
+N B.fm 64 0.08150625 0 0.357
+N B.sub 52 0.11773125 0 0.2805
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 3 62 126 15 3 30 0 0 0 default | A 4 4 N 0 2 0 | B 0 2 N 0 6 0 | 0 0 | 0 0 0 | -
+N A.ping 71 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 3 63 127 0 3 31 0 0 0 default | A 4 4 N 0 2 0 | B 0 0 N 0 6 0 | 0 0 | 0 0 1 | wait,move,move
+N B.fm 64 0.02025 0 0.7
+N B.sub 52 0.02925 0 0.55
+N drum.hihat -1 0.03 0 0.5
 T 3 63 128 0 3 31 0 0 0 default | A 4 4 N 0 2 0 | B 0 0 N 0 6 0 | 0 0 | 0 0 0 | -
+N A.ping 71 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 0 1 1 0 0 0 0 0 default | A 0 4 E 0 2 0 | B 4 0 W 0 6 0 | 0 0 | 1 0 1 | reset
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
+N A.ping 57 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 76 0.07 0 0.42
+N fx.pulse 81 0.07 0.07 0.4
+N fx.pulse 84 0.06 0.14 0.36
 T 4 0 2 1 0 0 0 0 0 default | A 0 4 E 0 2 0 | B 4 0 W 0 6 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 1 3 2 0 1 0 0 0 default | A 0 4 E 0 2 0 | B 3 0 N 0 6 0 | 0 0 | 0 0 1 | ping,move,rotator
+N A.main 53 0.04275 0 0.80325
+N A.ping 57 0.03375 0.005625 0.3213
+N B.fm 69 0.0405 0 0.588
+N B.sub 57 0.0585 0 0.462
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 4 1 4 2 0 1 0 0 0 default | A 0 4 E 0 2 0 | B 3 0 N 0 6 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 2 5 3 0 2 0 0 0 default | A 0 4 E 0 2 0 | B 3 0 S 0 6 0 | 0 0 | 0 1 1 | wait,turn,rotator
+N B.fm 69 0.1323 0 0.3465
+N B.sub 57 0.1911 0 0.27225
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 4 2 6 3 0 2 0 0 0 default | A 0 4 E 0 2 0 | B 3 0 S 0 6 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 3 7 4 0 3 0 0 0 default | A 0 4 E 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 0 0 1 | collision,wait,rotator
+N A.main 50 0.152296875 0 0.56525
+N A.ping 53 0.03375 0.005625 0.2261
+N B.fm 69 0.038475 0 0.08645
+N B.sub 57 0.055575 0 0.067925
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.rotator 81 0.04 0.02 0.45
 T 4 3 8 4 0 3 0 0 0 default | A 0 4 E 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 4 9 5 0 4 0 0 0 default | A 0 4 N 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 1 0 1 | turn,turn,rotator
+N A.main 50 0.071071875 0 0.57
+N A.ping 53 0.03375 0.005625 0.228
+N B.fm 69 0.089775 0 0.25935
+N B.sub 57 0.129675 0 0.203775
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 4 4 10 5 0 4 0 0 0 default | A 0 4 N 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 5 11 6 0 5 0 0 0 default | A 0 4 N 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 4 5 12 6 0 5 0 0 0 default | A 0 4 N 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 6 13 7 0 6 0 0 0 default | A 0 4 N 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 0 1 1 | ping,wait
+N A.main 50 0.06091875 0 0.855
+N A.ping 53 0.03375 0.005625 0.342
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 4 6 14 7 0 6 0 0 0 default | A 0 4 N 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.245
+N B.sub 57 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 7 15 8 0 7 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 W 1 6 0 | 0 0 | 0 0 1 | move,move,move,move,move,belt,zap
+N A.main 62 0.04275 0 1
+N A.ping 65 0.03375 0.005625 0.4
+N B.fm 71 0.01875 0 0.54054
+N B.sub 59 0.078 0 0.42471
+N B.fm 71 0.135 0.0225 0.30888
+N drum.hihat -1 0.03 0 0.5
 T 4 7 16 8 0 7 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 W 1 6 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N B.fm 71 0.0328125 0.009375 0.1484
+N drum.hihat -1 0.02 0 0.25
 T 4 8 17 9 0 8 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 N 2 6 0 | 0 0 | 1 0 1 | ping,turn,zap
+N A.main 62 0.02565 0 0.945
+N A.ping 65 0.03375 0.005625 0.378
+N B.fm 72 0.014175 0 0.51156
+N B.sub 60 0.020475 0 0.40194
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 4 8 18 9 0 8 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 N 2 6 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 4 9 19 10 0 9 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 N 3 6 0 | 0 0 | 0 0 1 | move,move,belt,collision,zap
+N A.main 62 0.013125 0 0.7
+N A.ping 65 0.03375 0.005625 0.28
+N A.main 62 0.091875 0.015 0.315
+N A.main 65 0.16875 0.10875 0.303
+N B.fm 72 0.02025 0 0.7
+N B.sub 60 0.02925 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.collision 43 0.08 0.03 0.7
 T 4 9 20 10 0 9 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 N 3 6 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N A.main 72 0.04134375 0.009375 0.175
+N A.main 69 0.0328125 0.0515625 0.163
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 4 10 21 11 0 10 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 W 4 6 0 | 0 0 | 0 1 1 | wait,turn,zap
+N B.fm 72 0.0378 0 0.396396
+N B.sub 60 0.0546 0 0.311454
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 4 10 22 11 0 10 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 W 4 6 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N A.main 72 0.04134375 0.009375 0.175
+N A.main 69 0.0328125 0.0515625 0.163
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 4 11 23 12 0 11 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 N 5 6 0 | 0 0 | 0 0 1 | ping,turn,zap
+N A.main 62 0.02565 0 0.945
+N A.ping 65 0.03375 0.005625 0.378
+N B.fm 72 0.040753125 0 0.4998
+N B.sub 60 0.058865625 0 0.3927
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 4 11 24 12 0 11 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 N 5 6 0 | 0 0 | 0 0 0 | -
+N A.ping 65 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 4 12 25 13 0 12 0 0 0 default | A 0 1 N 0 2 0 | B 2 0 N 5 6 0 | 0 0 | 1 0 1 | move,pulse,wait
+N A.main 74 0.07695 0 0.84
+N A.ping 77 0.03375 0.005625 0.336
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.pulse 84 0.06 0.01 0.4
 T 4 12 26 13 0 12 0 0 0 default | A 0 1 N 0 2 0 | B 2 0 N 5 6 0 | 0 0 | 0 0 0 | -
+N A.ping 77 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 4 13 27 14 0 13 0 0 0 default | A 0 0 N 0 2 0 | B 2 0 N 6 6 1 | 0 0 | 0 0 1 | move,collision,collision,zap,zap
+N A.main 74 0.106875 0 0.8
+N A.ping 77 0.03375 0.005625 0.32
+N B.fm 72 0.0253125 0 0.7
+N B.sub 60 0.0365625 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
+N fx.zap -1 0.06 0.03 0.6
 T 4 13 28 14 0 13 0 0 0 default | A 0 0 N 0 2 0 | B 2 0 N 6 6 1 | 0 0 | 0 0 0 | -
+N A.ping 77 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2744
+N B.sub 60 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 4 14 29 15 0 14 0 0 0 default | A 0 0 N 0 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 1 1 | death,ping,ping
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 77 0.06091875 0 0.855
+N A.ping 81 0.03375 0.005625 0.342
+N B.fm 62 0.09315 0 0.348075
+N B.sub 50 0.13455 0 0.2734875
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
 T 4 14 30 15 0 14 0 0 0 default | A 0 0 N 0 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 15 31 0 0 15 0 0 0 default | A 0 0 E 0 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 1 | turn,collision,collision
+N A.main 77 0.049875 0 0.5355
+N A.ping 81 0.03375 0.005625 0.2142
+N B.fm 62 0.054 0 0.5005
+N B.sub 50 0.078 0 0.39325
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 4 15 32 0 0 15 0 0 0 default | A 0 0 E 0 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 16 33 1 0 16 0 0 0 default | A 0 0 E 0 2 0 | B 0 4 W 0 7 0 | 0 0 | 1 0 1 | ping,wait
+N A.main 77 0.10153125 0 0.72675
+N A.ping 81 0.03375 0.005625 0.2907
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 4 16 34 1 0 16 0 0 0 default | A 0 0 E 0 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 81 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 17 35 2 0 17 0 0 0 default | A 2 0 E 1 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 1 | move,move,zap,collision
+N A.main 81 0.0423046875 0 0.8721
+N A.ping 84 0.03375 0.005625 0.34884
+N B.fm 67 0.054 0 0.3822
+N B.sub 55 0.078 0 0.3003
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
+N fx.collision 43 0.08 0.03 0.7
 T 4 17 36 2 0 17 0 0 0 default | A 2 0 E 1 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 84 0.0253125 0 0.371
+N B.fm 67 0.02109375 0 0.245
+N B.sub 55 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 18 37 3 0 18 0 0 0 default | A 2 0 E 2 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 1 1 | move,move,belt,zap,collision
+N A.main 83 0.013125 0 0.75922
+N A.ping 74 0.03375 0.005625 0.303688
+N A.main 74 0.091875 0.015 0.341649
+N A.main 77 0.135 0.10875 0.329649
+N B.fm 67 0.054 0 0.3822
+N B.sub 55 0.078 0 0.3003
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.02 0.35
+N fx.zap -1 0.06 0.03 0.6
 T 4 18 38 3 0 18 0 0 0 default | A 2 0 E 2 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 74 0.0253125 0 0.392
+N A.main 84 0.04134375 0.009375 0.196
+N A.main 83 0.0328125 0.0515625 0.184
+N B.fm 67 0.02109375 0 0.245
+N B.sub 55 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 19 39 4 0 19 0 0 0 default | A 2 0 N 3 2 0 | B 0 4 N 0 7 0 | 0 0 | 0 0 1 | turn,zap,turn
+N A.main 83 0.0430171875 0 0.6324
+N A.ping 74 0.03375 0.005625 0.25296
+N B.fm 67 0.0567 0 0.462
+N B.sub 55 0.0819 0 0.363
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 4 19 40 4 0 19 0 0 0 default | A 2 0 N 3 2 0 | B 0 4 N 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 74 0.0253125 0 0.392
+N B.fm 67 0.02109375 0 0.245
+N B.sub 55 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 20 41 5 0 20 0 0 0 default | A 2 0 N 4 2 0 | B 0 4 N 0 7 0 | 0 0 | 1 0 1 | wait,zap,wait
+N A.main 83 0.0152296875 0 0.2508
+N B.fm 67 0.02885625 0 0.133
+N B.sub 55 0.04168125 0 0.1045
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.01 0.6
 T 4 20 42 5 0 20 0 0 0 default | A 2 0 N 4 2 0 | B 0 4 N 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 74 0.0253125 0 0.392
+N B.fm 67 0.02109375 0 0.245
+N B.sub 55 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 21 43 6 0 21 0 0 0 default | A 2 0 N 5 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 1 | collision,zap,turn
+N A.main 83 0.061453125 0 0.952
+N A.ping 74 0.03375 0.005625 0.3808
+N B.fm 67 0.089775 0 0.25935
+N B.sub 55 0.129675 0 0.203775
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.zap -1 0.06 0.01 0.6
 T 4 21 44 6 0 21 0 0 0 default | A 2 0 N 5 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 74 0.0253125 0 0.392
+N B.fm 67 0.02109375 0 0.245
+N B.sub 55 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 22 45 7 0 22 0 0 0 default | A 2 0 N 5 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 1 1 | wait,collision
+N B.fm 67 0.054 0 0.3822
+N B.sub 55 0.078 0 0.3003
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
 T 4 22 46 7 0 22 0 0 0 default | A 2 0 N 5 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 74 0.0253125 0 0.392
+N B.fm 67 0.02109375 0 0.245
+N B.sub 55 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 23 47 8 0 23 0 0 0 default | A 2 0 N 5 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 4 23 48 8 0 23 0 0 0 default | A 2 0 N 5 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 74 0.0253125 0 0.392
+N B.fm 67 0.02109375 0 0.245
+N B.sub 55 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 24 49 9 0 24 0 0 0 default | A 2 0 N 6 2 1 | B 0 4 W 0 7 0 | 0 0 | 1 0 1 | collision,collision,zap,zap,collision,collision
+N A.main 83 0.02671875 0 1
+N A.ping 74 0.03375 0.005625 0.4
+N B.fm 67 0.054 0 0.5005
+N B.sub 55 0.078 0 0.39325
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0 0.7
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
+N fx.zap -1 0.06 0.03 0.6
 T 4 24 50 9 0 24 0 0 0 default | A 2 0 N 6 2 1 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 74 0.0253125 0 0.392
+N B.fm 67 0.02109375 0 0.245
+N B.sub 55 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 25 51 10 0 25 0 0 0 default | A 0 4 E 0 3 0 | B 0 4 N 0 7 0 | 0 1 | 0 0 1 | death,wait,turn
+N ex.thump 24 0.4 0 0.95
+N ex.noise -1 0.35 0 0.9
+N ex.crackle -1 0.18 0.04 0.6
+N A.main 53 0.050765625 0 0.1615
+N B.fm 38 0.02835 0 0.441
+N B.sub 38 0.04095 0 0.3465
+N drum.hihat -1 0.03 0 0.5
 T 4 25 52 10 0 25 0 0 0 default | A 0 4 E 0 3 0 | B 0 4 N 0 7 0 | 0 1 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 38 0.02109375 0 0.245
+N B.sub 38 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 26 53 11 0 26 0 0 0 default | A 0 4 E 0 3 0 | B 0 2 N 0 7 0 | 0 0 | 0 1 1 | wait,move,move,belt
+N B.fm 50 0.01875 0 0.588
+N B.sub 38 0.0585 0 0.462
+N B.fm 62 0.10125 0.0225 0.336
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 4 26 54 11 0 26 0 0 0 default | A 0 4 E 0 3 0 | B 0 2 N 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 50 0.02109375 0 0.245
+N B.sub 38 0.03375 0 0.175
+N B.fm 62 0.0328125 0.009375 0.14
+N drum.hihat -1 0.02 0 0.25
 T 4 27 55 12 0 27 0 0 0 default | A 0 4 E 0 3 0 | B 0 2 W 0 7 0 | 0 0 | 0 0 1 | wait,turn
+N A.main 53 0.0534375 0 0.17
+N B.fm 50 0.0756 0 0.3003
+N B.sub 38 0.1092 0 0.23595
+N drum.hihat -1 0.03 0 0.5
 T 4 27 56 12 0 27 0 0 0 default | A 0 4 E 0 3 0 | B 0 2 W 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 50 0.02109375 0 0.245
+N B.sub 38 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 28 57 13 0 28 0 0 0 default | A 0 4 S 0 3 0 | B 0 2 N 0 7 0 | 0 0 | 1 0 1 | turn,turn
+N A.main 53 0.13965 0 0.495
+N A.ping 57 0.03375 0.005625 0.198
+N B.fm 50 0.08150625 0 0.357
+N B.sub 38 0.11773125 0 0.2805
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 4 28 58 13 0 28 0 0 0 default | A 0 4 S 0 3 0 | B 0 2 N 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 50 0.02109375 0 0.245
+N B.sub 38 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 29 59 14 0 29 0 0 0 default | A 0 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 0 0 1 | turn,move,move
+N A.main 53 0.1147125 0 0.3315
+N A.ping 57 0.03375 0.005625 0.1326
+N B.fm 62 0.02025 0 0.7
+N B.sub 50 0.02925 0 0.55
+N drum.hihat -1 0.03 0 0.5
 T 4 29 60 14 0 29 0 0 0 default | A 0 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 57 0.0253125 0 0.35
+N B.fm 62 0.02109375 0 0.245
+N B.sub 50 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 30 61 15 0 30 0 0 0 default | A 1 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 0 1 1 | move,collision,collision
+N A.main 57 0.0513 0 0.47775
+N A.ping 60 0.03375 0.005625 0.1911
+N B.fm 65 0.050625 0 0.7
+N B.sub 53 0.073125 0 0.55
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 4 30 62 15 0 30 0 0 0 default | A 1 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 31 63 0 0 31 0 0 0 default | A 1 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 4 31 64 0 0 31 0 0 0 default | A 1 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 60 0.0253125 0 0.35
+N B.fm 65 0.02109375 0 0.245
+N B.sub 53 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 32 65 1 1 0 0 0 0 default | A 2 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 1 0 1 | move,collision,collision
+N A.main 55 0.1218375 0 0.43225
+N A.ping 59 0.03375 0.005625 0.1729
+N B.fm 64 0.0405 0 0.7
+N B.sub 52 0.0585 0 0.55
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.collision 43 0.08 0.02 0.7
 T 4 32 66 1 1 0 0 0 0 default | A 2 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 33 67 2 1 1 0 0 0 default | A 2 4 W 0 3 0 | B 0 0 E 0 7 0 | 0 0 | 0 0 1 | wait,turn
+N B.fm 64 0.13584375 0 0.30345
+N B.sub 52 0.19621875 0 0.238425
+N drum.hihat -1 0.03 0 0.5
 T 4 33 68 2 1 1 0 0 0 default | A 2 4 W 0 3 0 | B 0 0 E 0 7 0 | 0 0 | 0 0 0 | -
+N A.ping 59 0.0253125 0 0.35
+N B.fm 64 0.02109375 0 0.245
+N B.sub 52 0.03375 0 0.175
+N drum.hihat -1 0.02 0 0.25
 T 4 34 69 3 1 2 0 0 0 default | A 2 4 W 0 3 0 | B 2 0 E 1 7 0 | 0 0 | 0 1 1 | wait,move,move,belt,zap
+N B.fm 72 0.01875 0 0.539784
+N B.sub 60 0.0975 0 0.424116
+N B.fm 72 0.10125 0.0225 0.308448
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.belt -1 0.04 0.03 0.35
 T 4 34 70 3 1 2 0 0 0 default | A 2 4 W 0 3 0 | B 2 0 E 1 7 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N B.fm 72 0.0328125 0.009375 0.1484
+N drum.hihat -1 0.02 0 0.25
 T 4 35 71 4 1 3 0 0 0 default | A 2 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 0 0 1 | ping,move,rotator
+N A.main 52 0.098325 0 0.49725
+N A.ping 55 0.03375 0.005625 0.1989
+N B.fm 72 0.0945 0 0.47628
+N B.sub 60 0.1365 0 0.37422
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 4 35 72 4 1 3 0 0 0 default | A 2 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 0 0 0 | -
+N A.ping 55 0.0253125 0 0.35
+N B.fm 72 0.02109375 0 0.2597
+N B.sub 60 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 4 36 73 5 1 4 0 0 0 default | A 1 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 1 0 1 | move,wait
+N A.main 50 0.114 0 0.572
+N A.ping 53 0.03375 0.005625 0.2288
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
 T 4 36 74 5 1 4 0 0 0 default | A 1 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 4 37 75 6 1 5 0 0 0 default | A 1 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 0 0 1 | wait,wait
+N drum.hihat -1 0.03 0 0.5
 T 4 37 76 6 1 5 0 0 0 default | A 1 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 4 38 77 7 1 6 0 0 0 default | A 1 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 0 1 1 | wait,turn,rotator
+N B.fm 71 0.15710625 0 0.32319
+N B.sub 59 0.22693125 0 0.253935
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 4 38 78 7 1 6 0 0 0 default | A 1 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 0 0 0 | -
+N A.ping 53 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2597
+N B.sub 59 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 4 39 79 8 1 7 0 0 0 default | A 0 4 W 0 3 0 | B 3 1 S 1 7 0 | 0 0 | 0 0 1 | move,move
+N A.main 48 0.057 0 0.546
+N A.ping 52 0.03375 0.005625 0.2184
+N B.fm 69 0.0945 0 0.47628
+N B.sub 57 0.1365 0 0.37422
+N drum.hihat -1 0.03 0 0.5
 T 4 39 80 8 1 7 0 0 0 default | A 0 4 W 0 3 0 | B 3 1 S 1 7 0 | 0 0 | 0 0 0 | -
+N A.ping 52 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.2597
+N B.sub 57 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 4 40 81 9 1 8 0 0 0 default | A 0 4 W 0 3 0 | B 3 0 W 1 7 0 | 0 0 | 1 0 1 | wait,move,rotator
+N B.fm 69 0.0486 0 0.361179
+N B.sub 57 0.0702 0 0.2837835
+N drum.kick 24 0.18 0 1
+N drum.hihat -1 0.03 0 0.5
+N fx.rotator 81 0.04 0.02 0.45
 T 4 40 82 9 1 8 0 0 0 default | A 0 4 W 0 3 0 | B 3 0 W 1 7 0 | 0 0 | 0 0 0 | -
+N A.ping 52 0.0253125 0 0.35
+N B.fm 69 0.02109375 0 0.2597
+N B.sub 57 0.03375 0 0.1855
+N drum.hihat -1 0.02 0 0.25
 T 4 41 83 10 1 9 0 0 0 default | A 0 4 W 0 3 0 | B 2 0 W 2 7 0 | 0 0 | 0 0 1 | wait,move,move,move,belt,zap
+N B.fm 71 0.01875 0 0.58058
+N B.sub 59 0.078 0 0.45617
+N B.fm 71 0.135 0.0225 0.33176
+N drum.hihat -1 0.03 0 0.5
 T 4 41 84 10 1 9 0 0 0 default | A 0 4 W 0 3 0 | B 2 0 W 2 7 0 | 0 0 | 0 0 0 | -
+N A.ping 52 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2744
+N B.sub 59 0.03375 0 0.196
+N B.fm 71 0.0328125 0.009375 0.1568
+N drum.hihat -1 0.02 0 0.25
 T 4 42 85 11 1 10 0 0 0 default | A 0 4 W 0 3 0 | B 2 0 N 3 7 0 | 0 0 | 0 1 1 | ping,turn,zap
+N A.main 48 0.0342 0 0.61425
+N A.ping 52 0.03375 0.005625 0.2457
+N B.fm 71 0.014175 0 0.54684
+N B.sub 59 0.020475 0 0.42966
+N drum.snare -1 0.1 0 0.7
+N drum.hihat -1 0.03 0 0.5
+N fx.zap -1 0.06 0.02 0.6
 T 4 42 86 11 1 10 0 0 0 default | A 0 4 W 0 3 0 | B 2 0 N 3 7 0 | 0 0 | 0 0 0 | -
+N A.ping 52 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2744
+N B.sub 59 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25
 T 4 43 87 12 1 11 0 0 0 default | A 0 4 W 0 3 0 | B 2 0 N 4 7 0 | 0 0 | 0 0 1 | wait,collision,zap
+N B.fm 71 0.02025 0 0.7
+N B.sub 59 0.02925 0 0.55
+N drum.hihat -1 0.03 0 0.5
+N fx.collision 43 0.08 0.01 0.7
+N fx.zap -1 0.06 0.02 0.6
 T 4 43 88 12 1 11 0 0 0 default | A 0 4 W 0 3 0 | B 2 0 N 4 7 0 | 0 0 | 0 0 0 | -
+N A.ping 52 0.0253125 0 0.35
+N B.fm 71 0.02109375 0 0.2744
+N B.sub 59 0.03375 0 0.196
+N drum.hihat -1 0.02 0 0.25

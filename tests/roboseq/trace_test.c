@@ -3,6 +3,7 @@
  * tests/golden/traces (made by tools/trace/gen.mjs from the HTML's own script) is set up the same way, run, and each
  * tick's line is compared with the HTML's. Then rs_chance against the HTML's seededChance for 1024 loops.
  *   trace_test [tests/golden]     exit 0: all equal */
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -33,6 +34,29 @@ static void line_of(const struct rs_state *s, const struct rs_tick_out *o, char 
     for (int i = 0; i < o->nevents; i++) k += snprintf(buf + k, n - k, "%s%s", i ? "," : "", rs_event_name[o->events[i]]);
 }
 
+static long notes_checked;
+
+/* an "N voice midi duration offset velocity" line against the C score's next note (host only: float here is fine) */
+static int check_note(const char *path, long tick, const char *line, const struct rs_tick_out *o, int *ni)
+{
+    char voice[32];
+    int midi;
+    double dur, at, vel;
+    if (sscanf(line, "N %31s %d %lf %lf %lf", voice, &midi, &dur, &at, &vel) != 5) { printf("%s: bad line %s\n", path, line); return 1; }
+    if (*ni >= o->nnotes) { printf("%s: tick %ld: the HTML plays more notes, the next: %s\n", path, tick, line); return 1; }
+    const struct rs_note *n = &o->notes[(*ni)++];
+    double cd = n->dur / (256.0 * RS_SR), ca = n->at / (256.0 * RS_SR), cv = n->vel / 32768.0;
+    /* within rounding: 1.5 samples, a velocity step of 1e-4 */
+    if (strcmp(voice, rs_voice_name[n->voice]) || midi != n->midi || fabs(cd - dur) > 3.4e-5 || fabs(ca - at) > 3.4e-5 ||
+        fabs(cv - vel) > 1e-4) {
+        printf("%s: tick %ld, note %d differs\n  html %s\n  c    N %s %d %.9g %.9g %.6g\n", path, tick, *ni - 1, line,
+               rs_voice_name[n->voice], n->midi, cd, ca, cv);
+        return 1;
+    }
+    notes_checked++;
+    return 0;
+}
+
 static int run_trace(const char *path)
 {
     FILE *f = fopen(path, "r");
@@ -41,15 +65,28 @@ static int run_trace(const char *path)
     rs_default(&s);
     char line[1024], want[1024], got[1024];
     long tick = 0, ticks = -1, lineno = 0;
+    static struct rs_tick_out o;
+    int ni = 0, have = 0;
     while (fgets(line, sizeof line, f)) {
         lineno++;
         line[strcspn(line, "\n")] = 0;
         char a[32] = "", b[32] = "", c[32] = "", d[32] = "", e[32] = "";
         if (line[0] == '#' || !line[0]) continue;
+        if (line[0] == 'N') {
+            if (!have || check_note(path, tick - 1, line, &o, &ni)) { fclose(f); return 1; }
+            continue;
+        }
+        if (line[0] == 'T' && have && ni != o.nnotes) {
+            printf("%s: tick %ld: C plays %d notes, the HTML %d; the first extra: %s %d\n", path, tick - 1, o.nnotes, ni,
+                   rs_voice_name[o.notes[ni].voice], o.notes[ni].midi);
+            fclose(f);
+            return 1;
+        }
         if (line[0] != 'T') {
             sscanf(line, "%31s %31s %31s %31s %31s", a, b, c, d, e);
             if (!strcmp(a, "board")) { s.playing = 0; rs_load_board(&s, (uint8_t)board_id(b)); }
             else if (!strcmp(a, "loop")) s.loop_len = (uint8_t)atoi(b);
+            else if (!strcmp(a, "bpm")) { s.bpm = (uint16_t)atoi(b); s.quarter = (uint8_t)atoi(c); s.transpose_root = (uint8_t)atoi(d); }
             else if (!strcmp(a, "tpm")) s.tpm = (uint8_t)atoi(b);
             else if (!strcmp(a, "vmtrigger")) s.vm_manual = !strcmp(b, "manual");
             else if (!strcmp(a, "vmfreq")) s.vm_freq4 = (uint8_t)atoi(b);
@@ -74,8 +111,8 @@ static int run_trace(const char *path)
             } else { printf("%s:%ld: what is \"%s\"\n", path, lineno, a); fclose(f); return 1; }
             continue;
         }
-        struct rs_tick_out o;
         rs_tick(&s, &o);
+        have = 1, ni = 0;
         line_of(&s, &o, got, sizeof got);
         snprintf(want, sizeof want, "%s", line);
         if (strcmp(got, want)) {
@@ -86,6 +123,7 @@ static int run_trace(const char *path)
         tick++;
     }
     fclose(f);
+    if (have && ni != o.nnotes) { printf("%s: the last tick: C plays %d notes, the HTML %d\n", path, o.nnotes, ni); return 1; }
     if (tick != ticks) { printf("%s: %ld ticks of %ld\n", path, tick, ticks); return 1; }
     return 0;
 }
@@ -131,7 +169,7 @@ int main(int argc, char **argv)
         n++;
     }
     fclose(idx);
-    printf("traces: %d scenarios, %d differ from the HTML\n", n, failed);
+    printf("traces: %d scenarios, %d differ from the HTML (%ld notes checked)\n", n, failed, notes_checked);
     snprintf(path, sizeof path, "%s/chance.txt", dir);
     failed += chance_test(path);
     printf("selfcheck: %08x (the firmware computes the same at boot: make emu)\n", (unsigned)rs_selfcheck());
