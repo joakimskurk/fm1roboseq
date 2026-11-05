@@ -24,7 +24,7 @@ enum rs_event {
     RS_EV_WAIT, RS_EV_PING, RS_EV_DEATH, RS_EV_LOVE, RS_NEVENTS
 };
 enum rs_board_id { RS_B_DEFAULT, RS_B_CORRIDOR, RS_B_GARDEN, RS_B_GAUNTLET, RS_B_SPINNER, RS_B_MAZE, RS_NBOARDS,
-                   RS_B_NONE = 0xFF };   /* (seq 2: "--") */
+                   RS_B_RANDOM = RS_NBOARDS, RS_B_USER, RS_B_NONE = 0xFF };   /* (none: seq 2's "--") */
 enum rs_drum_id { RS_D_FOUR, RS_D_BREAK, RS_D_HALF, RS_D_OFFBEAT, RS_D_TRIPLET, RS_D_MINIMAL, RS_NDRUMS,
                   RS_D_NONE = 0xFF };
 enum rs_scale { RS_SC_CHROMATIC, RS_SC_MAJOR, RS_SC_MINOR, RS_SC_DORIAN, RS_SC_PHRYGIAN, RS_SC_LYDIAN,
@@ -49,6 +49,8 @@ struct rs_seq2_step { uint8_t board, drums, regswap; };
 
 struct rs_state {
     /* the settings */
+    uint16_t bpm;                                               /* 80 */
+    uint8_t quarter, scale, transpose_root;                     /* 1/4 speed; the scale (unused by the HTML's notes) */
     uint8_t loop_len, tpm;                                      /* 8..64; ticks per move 1, 2, 4 */
     uint8_t vm_manual, vm_freq4;                                /* Voice Mod: LOOP or MANUAL; its frequency x 4 (1..16) */
     uint8_t bassmod_len;                                        /* 4 or 8 */
@@ -58,10 +60,14 @@ struct rs_state {
     uint8_t seq2_active, seq2_pending;
     int8_t seq2_index;
     struct rs_seq2_step seq2[RS_SEQ2_STEPS];
+    uint8_t seq2_rnd[2];                                        /* roll bot A's / B's register when seq 2 wraps */
     uint8_t swapped;                                            /* the registers: A low, B high */
     struct rs_prog prog[2];
-    struct rs_board board;
+    struct rs_board board, pending_tiles, user_board;
     uint8_t board_id, pending_board;                            /* RS_B_NONE: no change waiting for the loop */
+    uint8_t density;                                            /* the random board's: 30, 45 or 60 (%) */
+    uint32_t rng;                                               /* the randomizers' (xorshift32; the HTML's Math.random) */
+    uint8_t rnd_due;                                            /* bit 0 / 1: seq 2 wrapped, roll that register after the tick */
     /* the run */
     uint8_t playing;
     int16_t step;                                               /* currentStep: -1 before the first tick */
@@ -88,12 +94,13 @@ struct rs_tick_out {
 extern const char *const rs_action_name[RS_NACTIONS];
 extern const char *const rs_modifier_name[RS_NMODIFIERS];
 extern const char *const rs_event_name[RS_NEVENTS];
-extern const char *const rs_board_name[RS_NBOARDS];
+extern const char *const rs_board_name[RS_NBOARDS + 2];   /* the presets, then random, user */
 extern const char *const rs_drum_name[RS_NDRUMS];
 extern const char rs_dir_name[4];
 
 void rs_default(struct rs_state *s);                            /* buildDefaultState() */
 void rs_load_board(struct rs_state *s, uint8_t id);             /* applyBoardPreset(): now, or queued while playing */
+void rs_set_board(struct rs_state *s, const struct rs_board *b, uint8_t id);   /* any board, the same way */
 void rs_set_drums(struct rs_state *s, uint8_t id);              /* a drum preset at the loop's drum length */
 uint8_t rs_drum_steps(uint8_t loop_len);                        /* getDrumSteps(): 12 or 16 */
 void rs_reset(struct rs_state *s);                              /* resetBoardState() */
@@ -101,6 +108,33 @@ void rs_start(struct rs_state *s);                              /* resetBoardSta
 void rs_stop(struct rs_state *s);                               /* stopPlayback()'s state */
 void rs_tick(struct rs_state *s, struct rs_tick_out *o);        /* advanceSequence() */
 void rs_advance_voice_mod(struct rs_state *s);                  /* advanceVoiceMod(): MANUAL's tap, LOOP's count */
+
+/* editing, as the HTML's controls do it */
+void rs_set_loop_len(struct rs_state *s, uint8_t len);          /* setLoopLength(): caps the programs, stops */
+void rs_set_prog_len(struct rs_state *s, int bot, uint8_t len); /* setProgramLength(): at most the loop's */
+void rs_cycle_action(struct rs_state *s, int bot, int i);       /* cycleAction() */
+void rs_cycle_modifier(struct rs_state *s, int bot, int i);     /* cycleModifier() */
+void rs_cycle_prob(struct rs_state *s, int bot, int i);         /* cycleProbability(): 100 -> 75 -> 50 */
+void rs_cycle_bassmod(struct rs_state *s, int i, int field, int dir);   /* cycleBassModStepValue(): 0 scale, 1 root, 2 semitone */
+void rs_save_user_board(struct rs_state *s);                    /* saveUserBoard() */
+void rs_load_user_board(struct rs_state *s);                    /* loadUserBoard() */
+void rs_cycle_density(struct rs_state *s);                      /* cycleBoardDensity(): 30 -> 45 -> 60 */
+
+/* the randomizers (Math.random in the HTML: the same rules, the firmware's own numbers), each undoable */
+void rs_randomize_steps(struct rs_state *s, int bot);           /* randomizeSteps() */
+void rs_randomize_all(struct rs_state *s);                      /* randomizeAllSteps() */
+void rs_clear_steps(struct rs_state *s);                        /* resetAllSteps() */
+void rs_randomize_board(struct rs_state *s);                    /* randomizeBoard() (not undoable, as the HTML) */
+void rs_randomize_bassmod(struct rs_state *s);                  /* randomizeBassMod() */
+void rs_randomize_seq2(struct rs_state *s);                     /* randomizeSeq2() */
+uint32_t rs_random(struct rs_state *s, uint32_t n);             /* 0..n-1 */
+
+/* undo (UNDO_MAX 20): the registers, Seq 1, the tempo, the loop, the scale, Voice Mod's trigger, the drums */
+#define RS_UNDO_MAX 20
+void rs_push_undo(const struct rs_state *s);                    /* pushUndo() */
+int rs_pop_undo(struct rs_state *s);                            /* popUndo(): 0 when there was nothing */
+int rs_undo_depth(void);
+void rs_undo_clear(void);
 
 /* seededChance(bot, step, cycle, repeat) > prob / 100, without float (rs_chance.c, docs/roboseq/DECISIONS.md D6) */
 uint32_t rs_chance_q32(int bot, uint32_t step, uint32_t cycle, uint32_t repeat);   /* the chance, Q32 */

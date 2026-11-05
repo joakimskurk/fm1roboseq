@@ -8,7 +8,8 @@ const char *const rs_action_name[RS_NACTIONS] = {"move", "back", "turnL", "turnR
 const char *const rs_modifier_name[RS_NMODIFIERS] = {"steady", "bright", "low", "wobble", "glitch"};
 const char *const rs_event_name[RS_NEVENTS] = {"reset", "collision", "move", "belt", "rotator", "zap",
                                                "pulse", "turn", "wait", "ping", "death", "love"};
-const char *const rs_board_name[RS_NBOARDS] = {"default", "corridor", "garden", "gauntlet", "spinner", "maze"};
+const char *const rs_board_name[RS_NBOARDS + 2] = {"default", "corridor", "garden", "gauntlet", "spinner", "maze",
+                                                   "random", "user"};
 const char *const rs_drum_name[RS_NDRUMS] = {"four", "break", "half", "offbeat", "triplet", "minimal"};
 const char rs_dir_name[4] = {'N', 'E', 'S', 'W'};
 
@@ -143,6 +144,7 @@ void rs_default(struct rs_state *s)                     /* buildDefaultState() *
                                                  {RS_SC_MAJOR, 9, 0}};
     uint8_t *p = (uint8_t *)s;
     for (unsigned i = 0; i < sizeof *s; i++) p[i] = 0;
+    s->bpm = 80, s->scale = RS_SC_MAJOR, s->transpose_root = 1, s->density = 45, s->rng = 0x2545F491u;
     s->loop_len = 16, s->tpm = 1, s->vm_manual = 0, s->vm_freq4 = 4, s->bassmod_len = 4;
     for (int i = 0; i < RS_BASSMOD_MAX; i++) s->bassmod[i] = i < 4 ? BM[i] : (struct rs_bassmod_step){RS_SC_MAJOR, 0, 0};
     s->drums_on = 1;
@@ -166,13 +168,20 @@ void rs_reset(struct rs_state *s)                       /* resetBoardState() */
     s->step = -1, s->move_tick = 0, s->drum_tick = 0, s->vm_index = 0, s->vm_count = 0, s->cycle = 0;
 }
 
-void rs_load_board(struct rs_state *s, uint8_t id)      /* applyBoardPreset() */
+void rs_set_board(struct rs_state *s, const struct rs_board *b, uint8_t id)
 {
-    if (id >= RS_NBOARDS) return;
-    if (s->playing) { s->pending_board = id; return; }  /* queued for the next loop reset */
-    board_from_preset(&s->board, id);
+    if (s->playing) { s->pending_tiles = *b; s->pending_board = id; return; }   /* queued for the next loop reset */
+    s->board = *b;
     s->board_id = id;
     rs_reset(s);
+}
+
+void rs_load_board(struct rs_state *s, uint8_t id)      /* applyBoardPreset() */
+{
+    struct rs_board b;
+    if (id >= RS_NBOARDS) return;
+    board_from_preset(&b, id);
+    rs_set_board(s, &b, id);
 }
 
 void rs_start(struct rs_state *s) { rs_reset(s); s->playing = 1; }
@@ -282,12 +291,15 @@ static void execute_step(struct rs_state *s, int b, const struct rs_step *st, st
 
 static void advance_seq2(struct rs_state *s)            /* advanceSeq2() */
 {
+    int8_t prev = s->seq2_index;
     s->seq2_index = (int8_t)((s->seq2_index + 1) % RS_SEQ2_STEPS);
     const struct rs_seq2_step *st = &s->seq2[s->seq2_index];
-    if (st->board != RS_B_NONE) rs_load_board(s, st->board);
+    if (st->board == RS_B_USER) rs_load_user_board(s);
+    else if (st->board != RS_B_NONE) rs_load_board(s, st->board);
     if (st->drums != RS_D_NONE) rs_set_drums(s, st->drums);
     s->swapped = st->regswap ? 1 : 0;                   /* (every step sets it: the HTML's regSwap is a boolean) */
-    /* the bots' registers rolled when seq 2 wraps (rndBotA / rndBotB): not yet (ROADMAP phase 1) */
+    if (s->seq2_index == 0 && prev != 0)               /* wrapped: the flagged registers roll after this tick (setTimeout) */
+        s->rnd_due = (uint8_t)((s->seq2_rnd[0] ? 1 : 0) | (s->seq2_rnd[1] ? 2 : 0));
 }
 
 void rs_advance_voice_mod(struct rs_state *s)           /* advanceVoiceMod() */
@@ -324,7 +336,7 @@ void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
             o->loop_reset = 1;
             for (int b = 0; b < 2; b++) process_death(s, b, o);
             if (s->pending_board != RS_B_NONE) {
-                board_from_preset(&s->board, s->pending_board);
+                s->board = s->pending_tiles;
                 s->board_id = s->pending_board, s->pending_board = RS_B_NONE;
             }
             uint16_t da = s->bot[0].deaths, db = s->bot[1].deaths;
@@ -380,7 +392,193 @@ void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
         o->drum_ghost = 1;
     }
     s->move_tick++;
+    if (s->rnd_due) {                                   /* seq 2's rolls, after the tick as the HTML's setTimeout */
+        uint8_t due = s->rnd_due;
+        s->rnd_due = 0;
+        if (due & 1) rs_randomize_steps(s, 0);
+        if (due & 2) rs_randomize_steps(s, 1);
+    }
 }
+
+/* ---- editing (the HTML's controls) */
+void rs_set_loop_len(struct rs_state *s, uint8_t len)  /* setLoopLength() */
+{
+    uint8_t prev = rs_drum_steps(s->loop_len);
+    if (len < 1 || len > RS_MAX_STEPS) return;
+    s->loop_len = len;
+    for (int b = 0; b < 2; b++)
+        if ((s->prog[b].len ? s->prog[b].len : len) > len) s->prog[b].len = len;
+    if (rs_drum_steps(len) != prev) { rs_set_drums(s, s->drum_preset); s->drum_tick = 0; }
+    rs_stop(s);
+    rs_reset(s);
+}
+
+void rs_set_prog_len(struct rs_state *s, int bot, uint8_t len)   /* setProgramLength() */
+{
+    s->prog[bot & 1].len = len < s->loop_len ? len : s->loop_len;
+}
+
+void rs_cycle_action(struct rs_state *s, int bot, int i)
+{
+    struct rs_step *st = &s->prog[bot & 1].s[i & 63];
+    st->action = (uint8_t)((st->action + 1) % RS_NACTIONS);
+}
+
+void rs_cycle_modifier(struct rs_state *s, int bot, int i)
+{
+    struct rs_step *st = &s->prog[bot & 1].s[i & 63];
+    st->modifier = (uint8_t)((st->modifier + 1) % RS_NMODIFIERS);
+}
+
+void rs_cycle_prob(struct rs_state *s, int bot, int i)  /* PROB_OPTIONS [1, 0.75, 0.5]; another value starts at 1 */
+{
+    struct rs_step *st = &s->prog[bot & 1].s[i & 63];
+    st->prob = st->prob == 100 ? 75 : st->prob == 75 ? 50 : 100;
+}
+
+/* SCALE_OPTIONS: the scales Seq 1 cycles through and the randomizer picks from */
+static const uint8_t SCALE_OPTIONS[6] = {RS_SC_MAJOR, RS_SC_MINOR, RS_SC_PENTATONIC, RS_SC_DORIAN, RS_SC_MIXOLYDIAN,
+                                         RS_SC_CHROMATIC};
+
+void rs_cycle_bassmod(struct rs_state *s, int i, int field, int dir)   /* cycleBassModStepValue() */
+{
+    struct rs_bassmod_step *st = &s->bassmod[i & 7];
+    dir = dir < 0 ? -1 : 1;
+    if (field == 0) {
+        int at = 0;
+        for (int k = 0; k < 6; k++)
+            if (SCALE_OPTIONS[k] == st->scale) at = k;
+        st->scale = SCALE_OPTIONS[(at + dir + 6) % 6];
+    } else if (field == 1) {
+        st->root = (uint8_t)((st->root + dir + 12) % 12);
+    } else {                                            /* BASS_INTERVAL_OPTIONS: -12..12, wrapping */
+        int at = st->semitone + 12;
+        if (at < 0 || at > 24) at = 0;
+        st->semitone = (int8_t)((at + dir + 25) % 25 - 12);
+    }
+}
+
+void rs_save_user_board(struct rs_state *s) { s->user_board = s->board; s->board_id = RS_B_USER; }
+void rs_load_user_board(struct rs_state *s) { rs_set_board(s, &s->user_board, RS_B_USER); }
+
+void rs_cycle_density(struct rs_state *s)               /* [0.3, 0.45, 0.6]; another value starts at 0.3 */
+{
+    s->density = s->density == 30 ? 45 : s->density == 45 ? 60 : 30;
+}
+
+/* ---- the randomizers */
+uint32_t rs_random(struct rs_state *s, uint32_t n)      /* Math.floor(Math.random() * n), from xorshift32 */
+{
+    uint32_t x = s->rng ? s->rng : 0x2545F491u;
+    x ^= x << 13, x ^= x >> 17, x ^= x << 5;
+    s->rng = x;
+    return (uint32_t)(((uint64_t)x * n) >> 32);
+}
+
+void rs_randomize_steps(struct rs_state *s, int bot)    /* randomizeSteps() */
+{
+    static const uint8_t EARLY[8] = {RS_MOVE, RS_MOVE, RS_MOVE, RS_MOVE, RS_DASH, RS_DASH, RS_TURNL, RS_TURNR};
+    rs_push_undo(s);
+    for (int i = 0; i < RS_MAX_STEPS; i++) {            /* the draws in the HTML's order: action, chance, modifier */
+        struct rs_step *st = &s->prog[bot & 1].s[i];
+        st->action = i < 3 ? EARLY[rs_random(s, 8)] : (uint8_t)rs_random(s, RS_NACTIONS);
+        st->prob = rs_random(s, 10) == 0 ? 75 : 100;   /* Math.random() < 0.1 */
+        st->modifier = (uint8_t)rs_random(s, RS_NMODIFIERS);
+    }
+}
+
+void rs_randomize_all(struct rs_state *s) { rs_randomize_steps(s, 0); rs_randomize_steps(s, 1); }
+
+void rs_clear_steps(struct rs_state *s)                 /* resetAllSteps(): every step idle, steady, certain */
+{
+    rs_push_undo(s);
+    for (int b = 0; b < 2; b++)
+        for (int i = 0; i < RS_MAX_STEPS; i++) s->prog[b].s[i] = (struct rs_step){RS_WAIT, RS_STEADY, 100};
+}
+
+void rs_randomize_board(struct rs_state *s)             /* randomizeBoard() */
+{
+    static const uint8_t TYPES[6] = {RS_T_BELT, RS_T_ZAP, RS_T_PULSE, RS_T_ROTL, RS_T_ROTR, RS_T_BLOCK};
+    struct rs_board b;
+    uint32_t density = s->density < 25 ? 25 : s->density > 70 ? 70 : s->density;
+    int max_blocks = density >= 60 ? 5 : density >= 45 ? 4 : 3, blocks = 0;
+    for (int i = 0; i < RS_ROWS * RS_COLS; i++) b.t[i].type = RS_T_NONE, b.t[i].dir = 0;
+    for (int y = 0; y < RS_ROWS; y++)
+        for (int x = 0; x < RS_COLS; x++) {
+            if ((x == START[0].x && y == START[0].y) || (x == START[1].x && y == START[1].y)) continue;
+            if (rs_random(s, 100) >= density) continue;   /* Math.random() < density */
+            uint8_t type = TYPES[rs_random(s, 6)], dir = 0;
+            if (type == RS_T_BELT) dir = (uint8_t)rs_random(s, 4);   /* (the belt draws its direction as it is made) */
+            if (type == RS_T_BLOCK && blocks >= max_blocks) continue;
+            if (type == RS_T_BLOCK) blocks++;
+            b.t[y * RS_COLS + x].type = type, b.t[y * RS_COLS + x].dir = dir;
+        }
+    rs_set_board(s, &b, RS_B_RANDOM);
+}
+
+void rs_randomize_bassmod(struct rs_state *s)           /* randomizeBassMod() */
+{
+    rs_push_undo(s);
+    for (int i = 0; i < s->bassmod_len; i++) {
+        s->bassmod[i].scale = SCALE_OPTIONS[rs_random(s, 6)];
+        s->bassmod[i].root = (uint8_t)rs_random(s, 12);
+        s->bassmod[i].semitone = (int8_t)((int)rs_random(s, 7) - 3);
+    }
+}
+
+void rs_randomize_seq2(struct rs_state *s)              /* randomizeSeq2(): "--" or a preset; a swap 30 % */
+{
+    rs_push_undo(s);
+    for (int i = 0; i < RS_SEQ2_STEPS; i++) {
+        uint32_t b = rs_random(s, RS_NBOARDS + 1), d = rs_random(s, RS_NDRUMS + 1);
+        s->seq2[i].board = b ? (uint8_t)(b - 1) : RS_B_NONE;
+        s->seq2[i].drums = d ? (uint8_t)(d - 1) : RS_D_NONE;
+        s->seq2[i].regswap = rs_random(s, 10) < 3;
+    }
+}
+
+/* ---- undo: what pushUndo() keeps, in a ring of 20 (the oldest goes) */
+struct rs_snapshot {
+    struct rs_prog prog[2];
+    uint8_t bassmod_len;
+    struct rs_bassmod_step bassmod[RS_BASSMOD_MAX];
+    uint16_t bpm;
+    uint8_t loop_len, scale, vm_manual, vm_freq4, drums_on, drum_preset;
+    uint8_t drum_k[RS_MAX_STEPS], drum_s[RS_MAX_STEPS], drum_h[RS_MAX_STEPS];
+};
+static struct rs_snapshot undo_ring[RS_UNDO_MAX];
+static int undo_top, undo_n;
+
+void rs_push_undo(const struct rs_state *s)
+{
+    struct rs_snapshot *u = &undo_ring[undo_top];
+    u->prog[0] = s->prog[0], u->prog[1] = s->prog[1];
+    u->bassmod_len = s->bassmod_len;
+    for (int i = 0; i < RS_BASSMOD_MAX; i++) u->bassmod[i] = s->bassmod[i];
+    u->bpm = s->bpm, u->loop_len = s->loop_len, u->scale = s->scale, u->vm_manual = s->vm_manual;
+    u->vm_freq4 = s->vm_freq4, u->drums_on = s->drums_on, u->drum_preset = s->drum_preset;
+    for (int i = 0; i < RS_MAX_STEPS; i++) u->drum_k[i] = s->drum_k[i], u->drum_s[i] = s->drum_s[i], u->drum_h[i] = s->drum_h[i];
+    undo_top = (undo_top + 1) % RS_UNDO_MAX;
+    if (undo_n < RS_UNDO_MAX) undo_n++;
+}
+
+int rs_pop_undo(struct rs_state *s)
+{
+    if (!undo_n) return 0;
+    undo_top = (undo_top + RS_UNDO_MAX - 1) % RS_UNDO_MAX;
+    undo_n--;
+    const struct rs_snapshot *u = &undo_ring[undo_top];
+    s->prog[0] = u->prog[0], s->prog[1] = u->prog[1];
+    s->bassmod_len = u->bassmod_len;
+    for (int i = 0; i < RS_BASSMOD_MAX; i++) s->bassmod[i] = u->bassmod[i];
+    s->bpm = u->bpm, s->loop_len = u->loop_len, s->scale = u->scale, s->vm_manual = u->vm_manual;
+    s->vm_freq4 = u->vm_freq4, s->drums_on = u->drums_on, s->drum_preset = u->drum_preset;
+    for (int i = 0; i < RS_MAX_STEPS; i++) s->drum_k[i] = u->drum_k[i], s->drum_s[i] = u->drum_s[i], s->drum_h[i] = u->drum_h[i];
+    return 1;
+}
+
+int rs_undo_depth(void) { return undo_n; }
+void rs_undo_clear(void) { undo_top = undo_n = 0; }
 
 /* ---- a fingerprint of the model: the default state's first 400 ticks (tests/golden/traces/default.trace) and the
  * chance of 64 steps x 32 loops for both bots, hashed (FNV-1a). The same on any machine that runs the model right:

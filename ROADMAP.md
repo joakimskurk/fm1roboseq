@@ -46,7 +46,10 @@ The HTML's game, bit for bit, in C with host tests; no sound and no screen yet.
       tick: all equal, and a deliberate bug in the model fails them
 - [x] The model on the chip: built into the firmware, its fingerprint at boot read back from fm1-emu equals the
       host's (`make emu`)
-- [ ] The randomizers (registers, board, bass mod, seq 2's rolls) and undo (20), with the firmware's own RNG
+- [x] The randomizers (registers, board and its density, Seq 1, seq 2 and its rolls of the registers), the user
+      board, the HTML's edits (loop and program lengths, the cycles of action, modifier, chance, Seq 1's fields) and
+      undo (20), with the firmware's own xorshift32: tests/roboseq/edit_test.c holds the HTML's rules for each
+- [ ] Later, with phase 3: the undo ring (12 KB of RAM's 96) into POOL if RAM gets short
 
 - The state: two bots (A at 0,4 facing E; B at 4,0 facing W), programs of up to 64 steps (action, modifier,
   probability 1 / 0.75 / 0.5, repeats), loop lengths 8-64, BPM (80 default), scale and root, ticks per move
