@@ -1,0 +1,744 @@
+# random-19: reference/roboseq.html run by tools/trace/gen.mjs
+board corridor
+loop 48
+tpm 4
+vmtrigger loop
+vmfreq 16
+bassmodlen 8
+drums 1 break
+seq2 0 0
+seq2step 0 -- -- 0
+seq2step 1 -- -- 0
+seq2step 2 -- -- 0
+seq2step 3 -- -- 0
+prog A 41
+step A 0 dash low 75
+step A 1 turnR low 75
+step A 2 back glitch 100
+step A 3 back low 100
+step A 4 ping wobble 75
+step A 5 ping glitch 75
+step A 6 back wobble 100
+step A 7 turnL bright 75
+step A 8 turnR wobble 100
+step A 9 dash steady 100
+step A 10 move glitch 100
+step A 11 wait glitch 75
+step A 12 ping low 50
+step A 13 dash wobble 50
+step A 14 wait low 100
+step A 15 dash low 50
+step A 16 turnL steady 100
+step A 17 turnL glitch 50
+step A 18 dash glitch 50
+step A 19 turnL glitch 75
+step A 20 back wobble 50
+step A 21 back steady 50
+step A 22 turnR bright 50
+step A 23 turnL wobble 75
+step A 24 back wobble 50
+step A 25 move wobble 50
+step A 26 dash low 50
+step A 27 dash bright 100
+step A 28 ping steady 100
+step A 29 turnL bright 50
+step A 30 ping glitch 100
+step A 31 turnR low 75
+step A 32 wait wobble 50
+step A 33 back glitch 100
+step A 34 ping steady 75
+step A 35 wait wobble 75
+step A 36 dash bright 75
+step A 37 move steady 50
+step A 38 back steady 75
+step A 39 move wobble 75
+step A 40 turnR wobble 100
+step A 41 wait bright 75
+step A 42 turnR bright 100
+step A 43 wait low 50
+step A 44 turnL steady 100
+step A 45 ping steady 100
+step A 46 wait glitch 50
+step A 47 move steady 75
+step A 48 move bright 75
+step A 49 dash wobble 75
+step A 50 wait low 100
+step A 51 move steady 50
+step A 52 turnL low 100
+step A 53 dash wobble 50
+step A 54 wait bright 75
+step A 55 turnL low 100
+step A 56 back wobble 75
+step A 57 turnL glitch 50
+step A 58 move glitch 75
+step A 59 turnL wobble 75
+step A 60 turnL glitch 75
+step A 61 turnR bright 100
+step A 62 dash glitch 100
+step A 63 ping wobble 100
+prog B 25
+step B 0 move glitch 100
+step B 1 turnL bright 100
+step B 2 wait wobble 100
+step B 3 move wobble 75
+step B 4 back low 50
+step B 5 back steady 100
+step B 6 ping wobble 50
+step B 7 turnR bright 100
+step B 8 back low 100
+step B 9 turnR low 75
+step B 10 move low 50
+step B 11 back bright 50
+step B 12 turnL steady 75
+step B 13 dash glitch 75
+step B 14 dash low 100
+step B 15 move glitch 50
+step B 16 dash low 75
+step B 17 move wobble 75
+step B 18 back glitch 75
+step B 19 move low 50
+step B 20 wait steady 100
+step B 21 ping wobble 50
+step B 22 back glitch 100
+step B 23 turnR bright 50
+step B 24 turnL glitch 75
+step B 25 ping glitch 50
+step B 26 turnL wobble 50
+step B 27 dash glitch 50
+step B 28 ping low 75
+step B 29 turnR glitch 75
+step B 30 wait bright 75
+step B 31 wait wobble 100
+step B 32 move low 50
+step B 33 move wobble 100
+step B 34 turnL glitch 50
+step B 35 turnR wobble 50
+step B 36 wait bright 50
+step B 37 ping steady 50
+step B 38 move low 75
+step B 39 wait wobble 50
+step B 40 wait glitch 75
+step B 41 ping bright 100
+step B 42 move low 75
+step B 43 wait low 100
+step B 44 back low 100
+step B 45 ping steady 100
+step B 46 dash bright 50
+step B 47 ping low 75
+step B 48 move wobble 50
+step B 49 dash glitch 100
+step B 50 dash glitch 75
+step B 51 move glitch 100
+step B 52 move steady 100
+step B 53 wait wobble 75
+step B 54 move wobble 100
+step B 55 turnL bright 50
+step B 56 wait bright 50
+step B 57 ping glitch 100
+step B 58 dash steady 100
+step B 59 wait steady 75
+step B 60 wait glitch 75
+step B 61 dash glitch 100
+step B 62 move wobble 75
+step B 63 turnR bright 50
+ticks 600
+T 0 0 1 1 0 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | -
+T 0 0 2 1 0 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 0 3 1 0 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 0 4 1 0 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 1 5 2 0 1 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 0 1 6 2 0 1 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 1 7 2 0 1 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 1 8 2 0 1 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 2 9 3 0 2 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 1 1 | collision,wait
+T 0 2 10 3 0 2 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 2 11 3 0 2 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 2 12 3 0 2 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 3 13 4 0 3 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 1 0 0 | collision,move
+T 0 3 14 4 0 3 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 3 15 4 0 3 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 3 16 4 0 3 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 4 17 5 0 4 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | ping,move
+T 0 4 18 5 0 4 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 4 19 5 0 4 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 4 20 5 0 4 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 5 21 6 0 5 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 1 0 | ping,collision
+T 0 5 22 6 0 5 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 5 23 6 0 5 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 5 24 6 0 5 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 6 25 7 0 6 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 1 0 1 | collision,wait
+T 0 6 26 7 0 6 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 6 27 7 0 6 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 6 28 7 0 6 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 7 29 8 0 7 0 0 0 corridor | A 0 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,turn
+T 0 7 30 8 0 7 0 0 0 corridor | A 0 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 7 31 8 0 7 0 0 0 corridor | A 0 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 7 32 8 0 7 0 0 0 corridor | A 0 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 8 33 9 0 8 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | turn,collision
+T 0 8 34 9 0 8 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 8 35 9 0 8 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 8 36 9 0 8 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 9 37 10 0 9 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,move,turn
+T 0 9 38 10 0 9 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 9 39 10 0 9 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 9 40 10 0 9 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 10 41 11 0 10 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 1 | move,move,belt,wait
+T 0 10 42 11 0 10 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 10 43 11 0 10 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 10 44 11 0 10 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 11 45 0 0 11 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 1 0 0 | wait,move
+T 0 11 46 0 0 11 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 11 47 0 0 11 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 11 48 0 0 11 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 12 49 1 0 12 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 1 0 1 | ping,wait
+T 0 12 50 1 0 12 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 12 51 1 0 12 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 12 52 1 0 12 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 13 53 2 0 13 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | move,move,move,belt,move,belt,wait
+T 0 13 54 2 0 13 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 13 55 2 0 13 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 13 56 2 0 13 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 14 57 3 0 14 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 1 | wait,move,collision
+T 0 14 58 3 0 14 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 14 59 3 0 14 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 14 60 3 0 14 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 15 61 4 0 15 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 0 | move,move,move,belt,move,belt,wait
+T 0 15 62 4 0 15 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 15 63 4 0 15 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 15 64 4 0 15 0 0 0 corridor | A 2 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 16 65 5 0 16 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | turn,collision,collision
+T 0 16 66 5 0 16 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 16 67 5 0 16 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 16 68 5 0 16 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 17 69 6 0 17 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 0 | wait,wait
+T 0 17 70 6 0 17 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 17 71 6 0 17 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 17 72 6 0 17 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 18 73 7 0 18 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 1 0 1 | wait,move
+T 0 18 74 7 0 18 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 18 75 7 0 18 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 18 76 7 0 18 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 19 77 8 0 19 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 0 19 78 8 0 19 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 19 79 8 0 19 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 19 80 8 0 19 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 20 81 9 0 20 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 1 0 1 | move,move,belt,wait
+T 0 20 82 9 0 20 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 20 83 9 0 20 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 20 84 9 0 20 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 21 85 10 0 21 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 0 21 86 10 0 21 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 21 87 10 0 21 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 21 88 10 0 21 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 22 89 11 0 22 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 1 1 | turn,move,pulse
+T 0 22 90 11 0 22 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 22 91 11 0 22 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 22 92 11 0 22 0 0 0 corridor | A 2 4 N 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 23 93 0 0 23 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 1 0 0 | turn,wait
+T 0 23 94 0 0 23 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 23 95 0 0 23 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 23 96 0 0 23 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 24 97 1 0 24 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 1 0 1 | wait,turn,pulse
+T 0 24 98 1 0 24 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 24 99 1 0 24 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 24 100 1 0 24 0 0 0 corridor | A 2 4 W 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 25 101 2 0 25 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,collision,pulse
+T 0 25 102 2 0 25 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 25 103 2 0 25 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 25 104 2 0 25 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 26 105 3 0 26 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 1 1 | move,collision,turn,pulse
+T 0 26 106 3 0 26 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 26 107 3 0 26 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 26 108 3 0 26 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 27 109 4 0 27 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 1 0 0 | collision,collision,wait,pulse
+T 0 27 110 4 0 27 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 27 111 4 0 27 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 27 112 4 0 27 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 28 113 5 0 28 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 1 | ping,wait
+T 0 28 114 5 0 28 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 28 115 5 0 28 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 28 116 5 0 28 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 29 117 6 0 29 0 0 0 corridor | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 1 0 | turn,wait
+T 0 29 118 6 0 29 0 0 0 corridor | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 29 119 6 0 29 0 0 0 corridor | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 29 120 6 0 29 0 0 0 corridor | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 30 121 7 0 30 0 0 0 corridor | A 0 4 S 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 1 0 1 | ping,move
+T 0 30 122 7 0 30 0 0 0 corridor | A 0 4 S 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 30 123 7 0 30 0 0 0 corridor | A 0 4 S 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 30 124 7 0 30 0 0 0 corridor | A 0 4 S 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 31 125 8 0 31 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 0 31 126 8 0 31 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 31 127 8 0 31 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 31 128 8 0 31 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 32 129 9 0 32 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 1 0 1 | wait,turn
+T 0 32 130 9 0 32 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 32 131 9 0 32 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 32 132 9 0 32 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 33 133 10 0 33 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | move,collision
+T 0 33 134 10 0 33 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 33 135 10 0 33 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 33 136 10 0 33 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 34 137 11 0 34 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 1 1 | ping,turn
+T 0 34 138 11 0 34 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 34 139 11 0 34 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 34 140 11 0 34 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 35 141 0 0 35 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 0 | wait,move
+T 0 35 142 0 0 35 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 35 143 0 0 35 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 35 144 0 0 35 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 36 145 1 0 36 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 1 | move,collision,wait
+T 0 36 146 1 0 36 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 36 147 1 0 36 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 36 148 1 0 36 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 37 149 2 0 37 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,turn
+T 0 37 150 2 0 37 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 37 151 2 0 37 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 37 152 2 0 37 0 0 0 corridor | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 38 153 3 0 38 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,wait
+T 0 38 154 3 0 38 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 38 155 3 0 38 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 38 156 3 0 38 0 0 0 corridor | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 39 157 4 0 39 0 0 0 corridor | A 0 4 W 0 0 0 | B 2 2 W 1 0 0 | 0 0 | 1 0 0 | move,move,move,move,belt,move,belt,zap
+T 0 39 158 4 0 39 0 0 0 corridor | A 0 4 W 0 0 0 | B 2 2 W 1 0 0 | 0 0 | 0 0 0 | -
+T 0 39 159 4 0 39 0 0 0 corridor | A 0 4 W 0 0 0 | B 2 2 W 1 0 0 | 0 0 | 0 0 0 | -
+T 0 39 160 4 0 39 0 0 0 corridor | A 0 4 W 0 0 0 | B 2 2 W 1 0 0 | 0 0 | 0 0 0 | -
+T 0 40 161 5 0 40 0 0 0 corridor | A 0 4 N 0 0 0 | B 2 2 W 1 0 0 | 0 0 | 0 0 1 | turn,wait
+T 0 40 162 5 0 40 0 0 0 corridor | A 0 4 N 0 0 0 | B 2 2 W 1 0 0 | 0 0 | 0 0 0 | -
+T 0 40 163 5 0 40 0 0 0 corridor | A 0 4 N 0 0 0 | B 2 2 W 1 0 0 | 0 0 | 0 0 0 | -
+T 0 40 164 5 0 40 0 0 0 corridor | A 0 4 N 0 0 0 | B 2 2 W 1 0 0 | 0 0 | 0 0 0 | -
+T 0 41 165 6 0 41 0 0 0 corridor | A 0 4 N 0 0 0 | B 2 2 W 2 0 0 | 0 0 | 0 1 0 | wait,collision,collision,zap
+T 0 41 166 6 0 41 0 0 0 corridor | A 0 4 N 0 0 0 | B 2 2 W 2 0 0 | 0 0 | 0 0 0 | -
+T 0 41 167 6 0 41 0 0 0 corridor | A 0 4 N 0 0 0 | B 2 2 W 2 0 0 | 0 0 | 0 0 0 | -
+T 0 41 168 6 0 41 0 0 0 corridor | A 0 4 N 0 0 0 | B 2 2 W 2 0 0 | 0 0 | 0 0 0 | -
+T 0 42 169 7 0 42 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 2 0 0 | 0 0 | 1 0 1 | turn,wait
+T 0 42 170 7 0 42 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 2 0 0 | 0 0 | 0 0 0 | -
+T 0 42 171 7 0 42 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 2 0 0 | 0 0 | 0 0 0 | -
+T 0 42 172 7 0 42 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 2 0 0 | 0 0 | 0 0 0 | -
+T 0 43 173 8 0 43 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 3 0 0 | 0 0 | 0 0 0 | collision,collision,zap
+T 0 43 174 8 0 43 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 3 0 0 | 0 0 | 0 0 0 | -
+T 0 43 175 8 0 43 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 3 0 0 | 0 0 | 0 0 0 | -
+T 0 43 176 8 0 43 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 3 0 0 | 0 0 | 0 0 0 | -
+T 0 44 177 9 0 44 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 3 0 0 | 0 0 | 1 0 1 | collision,wait
+T 0 44 178 9 0 44 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 3 0 0 | 0 0 | 0 0 0 | -
+T 0 44 179 9 0 44 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 3 0 0 | 0 0 | 0 0 0 | -
+T 0 44 180 9 0 44 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 3 0 0 | 0 0 | 0 0 0 | -
+T 0 45 181 10 0 45 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 4 0 0 | 0 0 | 0 0 0 | ping,wait,zap
+T 0 45 182 10 0 45 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 4 0 0 | 0 0 | 0 0 0 | -
+T 0 45 183 10 0 45 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 4 0 0 | 0 0 | 0 0 0 | -
+T 0 45 184 10 0 45 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 4 0 0 | 0 0 | 0 0 0 | -
+T 0 46 185 11 0 46 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 4 0 0 | 0 0 | 0 1 1 | wait,wait
+T 0 46 186 11 0 46 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 4 0 0 | 0 0 | 0 0 0 | -
+T 0 46 187 11 0 46 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 4 0 0 | 0 0 | 0 0 0 | -
+T 0 46 188 11 0 46 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 4 0 0 | 0 0 | 0 0 0 | -
+T 0 47 189 0 0 47 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 5 0 0 | 0 0 | 1 0 0 | collision,collision,zap
+T 0 47 190 0 0 47 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 5 0 0 | 0 0 | 0 0 0 | -
+T 0 47 191 0 0 47 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 5 0 0 | 0 0 | 0 0 0 | -
+T 0 47 192 0 0 47 0 0 0 corridor | A 0 4 E 0 0 0 | B 2 2 W 5 0 0 | 0 0 | 0 0 0 | -
+T 1 0 1 1 0 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 1 0 2 1 0 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 0 3 1 0 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 0 4 1 0 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 1 5 2 0 1 0 0 0 corridor | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,turn
+T 1 1 6 2 0 1 0 0 0 corridor | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 1 7 2 0 1 0 0 0 corridor | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 1 8 2 0 1 0 0 0 corridor | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 2 9 3 0 2 0 0 0 corridor | A 0 3 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 1 1 | move,wait
+T 1 2 10 3 0 2 0 0 0 corridor | A 0 3 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 2 11 3 0 2 0 0 0 corridor | A 0 3 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 2 12 3 0 2 0 0 0 corridor | A 0 3 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 3 13 4 0 3 0 0 0 corridor | A 0 2 S 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 1 0 0 | move,pulse,move
+T 1 3 14 4 0 3 0 0 0 corridor | A 0 2 S 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 3 15 4 0 3 0 0 0 corridor | A 0 2 S 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 3 16 4 0 3 0 0 0 corridor | A 0 2 S 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 4 17 5 0 4 0 0 0 corridor | A 0 2 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | ping,pulse,move
+T 1 4 18 5 0 4 0 0 0 corridor | A 0 2 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 4 19 5 0 4 0 0 0 corridor | A 0 2 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 4 20 5 0 4 0 0 0 corridor | A 0 2 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 5 21 6 0 5 0 0 0 corridor | A 0 2 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 1 0 | ping,pulse,collision
+T 1 5 22 6 0 5 0 0 0 corridor | A 0 2 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 5 23 6 0 5 0 0 0 corridor | A 0 2 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 5 24 6 0 5 0 0 0 corridor | A 0 2 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 6 25 7 0 6 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 1 0 1 | move,ping
+T 1 6 26 7 0 6 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 6 27 7 0 6 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 6 28 7 0 6 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 7 29 8 0 7 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 1 7 30 8 0 7 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 7 31 8 0 7 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 7 32 8 0 7 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 8 33 9 0 8 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | turn,collision
+T 1 8 34 9 0 8 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 8 35 9 0 8 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 8 36 9 0 8 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 9 37 10 0 9 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,collision,turn
+T 1 9 38 10 0 9 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 9 39 10 0 9 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 9 40 10 0 9 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 10 41 11 0 10 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 1 | collision,collision
+T 1 10 42 11 0 10 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 10 43 11 0 10 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 10 44 11 0 10 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 11 45 0 0 11 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 0 | wait,wait
+T 1 11 46 0 0 11 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 11 47 0 0 11 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 11 48 0 0 11 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 12 49 1 0 12 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 1 | wait,wait
+T 1 12 50 1 0 12 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 12 51 1 0 12 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 12 52 1 0 12 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 13 53 2 0 13 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,collision,wait
+T 1 13 54 2 0 13 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 13 55 2 0 13 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 13 56 2 0 13 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 14 57 3 0 14 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 1 | wait,collision,collision
+T 1 14 58 3 0 14 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 14 59 3 0 14 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 14 60 3 0 14 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 15 61 4 0 15 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 1 0 0 | wait,collision
+T 1 15 62 4 0 15 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 15 63 4 0 15 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 15 64 4 0 15 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 16 65 5 0 16 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 1 | turn,collision,collision
+T 1 16 66 5 0 16 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 16 67 5 0 16 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 16 68 5 0 16 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 17 69 6 0 17 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 1 0 | wait,wait
+T 1 17 70 6 0 17 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 17 71 6 0 17 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 17 72 6 0 17 0 0 0 corridor | A 0 1 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 18 73 7 0 18 0 0 0 corridor | A 0 3 S 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 1 0 1 | move,move,move
+T 1 18 74 7 0 18 0 0 0 corridor | A 0 3 S 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 18 75 7 0 18 0 0 0 corridor | A 0 3 S 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 18 76 7 0 18 0 0 0 corridor | A 0 3 S 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 19 77 8 0 19 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 1 19 78 8 0 19 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 19 79 8 0 19 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 19 80 8 0 19 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 20 81 9 0 20 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 1 0 1 | wait,wait
+T 1 20 82 9 0 20 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 20 83 9 0 20 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 20 84 9 0 20 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 21 85 10 0 21 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 1 21 86 10 0 21 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 21 87 10 0 21 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 21 88 10 0 21 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 22 89 11 0 22 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 1 1 | wait,move,pulse
+T 1 22 90 11 0 22 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 22 91 11 0 22 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 22 92 11 0 22 0 0 0 corridor | A 0 3 E 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 23 93 0 0 23 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 1 0 0 | turn,wait
+T 1 23 94 0 0 23 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 23 95 0 0 23 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 23 96 0 0 23 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 24 97 1 0 24 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 1 0 1 | wait,turn,pulse
+T 1 24 98 1 0 24 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 24 99 1 0 24 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 24 100 1 0 24 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 25 101 2 0 25 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | wait,collision,pulse
+T 1 25 102 2 0 25 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 25 103 2 0 25 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 25 104 2 0 25 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 26 105 3 0 26 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 1 1 | wait,turn,pulse
+T 1 26 106 3 0 26 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 26 107 3 0 26 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 26 108 3 0 26 0 0 0 corridor | A 0 3 N 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 27 109 4 0 27 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 1 0 0 | move,move,wait,pulse
+T 1 27 110 4 0 27 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 27 111 4 0 27 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 27 112 4 0 27 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 28 113 5 0 28 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 3 S 0 0 0 | 0 0 | 0 0 1 | ping,move
+T 1 28 114 5 0 28 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 3 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 28 115 5 0 28 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 3 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 28 116 5 0 28 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 3 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 29 117 6 0 29 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 1 0 | turn,move,pulse
+T 1 29 118 6 0 29 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 29 119 6 0 29 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 29 120 6 0 29 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 30 121 7 0 30 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 1 0 1 | ping,move
+T 1 30 122 7 0 30 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 30 123 7 0 30 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 30 124 7 0 30 0 0 0 corridor | A 0 1 W 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 31 125 8 0 31 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 1 31 126 8 0 31 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 31 127 8 0 31 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 31 128 8 0 31 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 32 129 9 0 32 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 1 0 1 | wait,turn
+T 1 32 130 9 0 32 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 32 131 9 0 32 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 32 132 9 0 32 0 0 0 corridor | A 0 1 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 33 133 10 0 33 0 0 0 corridor | A 0 2 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,collision
+T 1 33 134 10 0 33 0 0 0 corridor | A 0 2 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 33 135 10 0 33 0 0 0 corridor | A 0 2 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 33 136 10 0 33 0 0 0 corridor | A 0 2 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 34 137 11 0 34 0 0 0 corridor | A 0 2 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 1 1 | wait,turn
+T 1 34 138 11 0 34 0 0 0 corridor | A 0 2 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 34 139 11 0 34 0 0 0 corridor | A 0 2 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 34 140 11 0 34 0 0 0 corridor | A 0 2 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 35 141 0 0 35 0 0 0 corridor | A 0 2 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 1 0 0 | wait,pulse,wait
+T 1 35 142 0 0 35 0 0 0 corridor | A 0 2 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 35 143 0 0 35 0 0 0 corridor | A 0 2 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 35 144 0 0 35 0 0 0 corridor | A 0 2 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 36 145 1 0 36 0 0 0 corridor | A 2 1 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 1 0 1 | move,move,move,belt,move,belt,move,belt,wait
+T 1 36 146 1 0 36 0 0 0 corridor | A 2 1 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 36 147 1 0 36 0 0 0 corridor | A 2 1 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 36 148 1 0 36 0 0 0 corridor | A 2 1 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 37 149 2 0 37 0 0 0 corridor | A 2 2 N 1 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | move,move,belt,move,belt,zap,turn
+T 1 37 150 2 0 37 0 0 0 corridor | A 2 2 N 1 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 37 151 2 0 37 0 0 0 corridor | A 2 2 N 1 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 37 152 2 0 37 0 0 0 corridor | A 2 2 N 1 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 38 153 3 0 38 0 0 0 corridor | A 2 2 N 2 0 0 | B 2 2 W 1 0 0 | 0 1 | 0 1 1 | move,move,belt,zap,move,move,move,belt,zap
+T 1 38 154 3 0 38 0 0 0 corridor | A 2 2 N 2 0 0 | B 2 2 W 1 0 0 | 0 1 | 0 0 0 | -
+T 1 38 155 3 0 38 0 0 0 corridor | A 2 2 N 2 0 0 | B 2 2 W 1 0 0 | 0 1 | 0 0 0 | -
+T 1 38 156 3 0 38 0 0 0 corridor | A 2 2 N 2 0 0 | B 2 2 W 1 0 0 | 0 1 | 0 0 0 | -
+T 1 39 157 4 0 39 0 0 0 corridor | A 2 2 N 5 0 0 | B 2 2 W 2 0 0 | 7 0 | 1 0 0 | move,move,belt,zap,collision,collision,zap,zap
+T 1 39 158 4 0 39 0 0 0 corridor | A 2 2 N 5 0 0 | B 2 2 W 2 0 0 | 7 0 | 0 0 0 | -
+T 1 39 159 4 0 39 0 0 0 corridor | A 2 2 N 5 0 0 | B 2 2 W 2 0 0 | 7 0 | 0 0 0 | -
+T 1 39 160 4 0 39 0 0 0 corridor | A 2 2 N 5 0 0 | B 2 2 W 2 0 0 | 7 0 | 0 0 0 | -
+T 1 40 161 5 0 40 0 0 0 corridor | A 2 2 E 6 0 1 | B 2 2 W 2 0 0 | 6 0 | 0 0 1 | turn,zap,zap,wait
+T 1 40 162 5 0 40 0 0 0 corridor | A 2 2 E 6 0 1 | B 2 2 W 2 0 0 | 6 0 | 0 0 0 | -
+T 1 40 163 5 0 40 0 0 0 corridor | A 2 2 E 6 0 1 | B 2 2 W 2 0 0 | 6 0 | 0 0 0 | -
+T 1 40 164 5 0 40 0 0 0 corridor | A 2 2 E 6 0 1 | B 2 2 W 2 0 0 | 6 0 | 0 0 0 | -
+T 1 41 165 6 0 41 0 0 0 corridor | A 2 2 E 3 1 0 | B 2 2 W 3 0 0 | 7 0 | 0 1 0 | death,move,move,move,belt,move,belt,zap,collision,collision,zap,zap
+T 1 41 166 6 0 41 0 0 0 corridor | A 2 2 E 3 1 0 | B 2 2 W 3 0 0 | 7 0 | 0 0 0 | -
+T 1 41 167 6 0 41 0 0 0 corridor | A 2 2 E 3 1 0 | B 2 2 W 3 0 0 | 7 0 | 0 0 0 | -
+T 1 41 168 6 0 41 0 0 0 corridor | A 2 2 E 3 1 0 | B 2 2 W 3 0 0 | 7 0 | 0 0 0 | -
+T 1 42 169 7 0 42 0 0 0 corridor | A 2 2 S 4 1 0 | B 2 2 W 3 0 0 | 6 0 | 1 0 1 | turn,zap,wait
+T 1 42 170 7 0 42 0 0 0 corridor | A 2 2 S 4 1 0 | B 2 2 W 3 0 0 | 6 0 | 0 0 0 | -
+T 1 42 171 7 0 42 0 0 0 corridor | A 2 2 S 4 1 0 | B 2 2 W 3 0 0 | 6 0 | 0 0 0 | -
+T 1 42 172 7 0 42 0 0 0 corridor | A 2 2 S 4 1 0 | B 2 2 W 3 0 0 | 6 0 | 0 0 0 | -
+T 1 43 173 8 0 43 0 0 0 corridor | A 2 2 S 5 1 0 | B 2 2 W 4 0 0 | 5 0 | 0 0 0 | move,move,belt,zap,collision,zap
+T 1 43 174 8 0 43 0 0 0 corridor | A 2 2 S 5 1 0 | B 2 2 W 4 0 0 | 5 0 | 0 0 0 | -
+T 1 43 175 8 0 43 0 0 0 corridor | A 2 2 S 5 1 0 | B 2 2 W 4 0 0 | 5 0 | 0 0 0 | -
+T 1 43 176 8 0 43 0 0 0 corridor | A 2 2 S 5 1 0 | B 2 2 W 4 0 0 | 5 0 | 0 0 0 | -
+T 1 44 177 9 0 44 0 0 0 corridor | A 2 2 S 6 1 1 | B 2 2 W 4 0 0 | 4 0 | 1 0 1 | move,move,belt,zap,zap,wait
+T 1 44 178 9 0 44 0 0 0 corridor | A 2 2 S 6 1 1 | B 2 2 W 4 0 0 | 4 0 | 0 0 0 | -
+T 1 44 179 9 0 44 0 0 0 corridor | A 2 2 S 6 1 1 | B 2 2 W 4 0 0 | 4 0 | 0 0 0 | -
+T 1 44 180 9 0 44 0 0 0 corridor | A 2 2 S 6 1 1 | B 2 2 W 4 0 0 | 4 0 | 0 0 0 | -
+T 1 45 181 10 0 45 0 0 0 corridor | A 2 1 E 0 2 0 | B 2 2 W 5 0 0 | 3 0 | 0 0 0 | death,ping,move,belt,move,belt,move,belt,wait,zap
+T 1 45 182 10 0 45 0 0 0 corridor | A 2 1 E 0 2 0 | B 2 2 W 5 0 0 | 3 0 | 0 0 0 | -
+T 1 45 183 10 0 45 0 0 0 corridor | A 2 1 E 0 2 0 | B 2 2 W 5 0 0 | 3 0 | 0 0 0 | -
+T 1 45 184 10 0 45 0 0 0 corridor | A 2 1 E 0 2 0 | B 2 2 W 5 0 0 | 3 0 | 0 0 0 | -
+T 1 46 185 11 0 46 0 0 0 corridor | A 2 2 E 1 2 0 | B 2 2 W 5 0 0 | 2 0 | 0 1 1 | ping,move,belt,zap,wait
+T 1 46 186 11 0 46 0 0 0 corridor | A 2 2 E 1 2 0 | B 2 2 W 5 0 0 | 2 0 | 0 0 0 | -
+T 1 46 187 11 0 46 0 0 0 corridor | A 2 2 E 1 2 0 | B 2 2 W 5 0 0 | 2 0 | 0 0 0 | -
+T 1 46 188 11 0 46 0 0 0 corridor | A 2 2 E 1 2 0 | B 2 2 W 5 0 0 | 2 0 | 0 0 0 | -
+T 1 47 189 0 0 47 0 0 0 corridor | A 2 2 E 2 2 0 | B 2 2 W 6 0 1 | 1 0 | 1 0 0 | collision,zap,collision,zap,zap
+T 1 47 190 0 0 47 0 0 0 corridor | A 2 2 E 2 2 0 | B 2 2 W 6 0 1 | 1 0 | 0 0 0 | -
+T 1 47 191 0 0 47 0 0 0 corridor | A 2 2 E 2 2 0 | B 2 2 W 6 0 1 | 1 0 | 0 0 0 | -
+T 1 47 192 0 0 47 0 0 0 corridor | A 2 2 E 2 2 0 | B 2 2 W 6 0 1 | 1 0 | 0 0 0 | -
+T 2 0 1 1 0 0 0 0 0 corridor | A 0 4 E 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 1 0 1 | death,reset
+T 2 0 2 1 0 0 0 0 0 corridor | A 0 4 E 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 0 3 1 0 0 0 0 0 corridor | A 0 4 E 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 0 4 1 0 0 0 0 0 corridor | A 0 4 E 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 1 5 2 0 1 0 0 0 corridor | A 0 4 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | turn,turn
+T 2 1 6 2 0 1 0 0 0 corridor | A 0 4 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 1 7 2 0 1 0 0 0 corridor | A 0 4 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 1 8 2 0 1 0 0 0 corridor | A 0 4 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 2 9 3 0 2 0 0 0 corridor | A 0 3 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 1 1 | move,wait
+T 2 2 10 3 0 2 0 0 0 corridor | A 0 3 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 2 11 3 0 2 0 0 0 corridor | A 0 3 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 2 12 3 0 2 0 0 0 corridor | A 0 3 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 3 13 4 0 3 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 1 0 0 | move,pulse,wait
+T 2 3 14 4 0 3 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 3 15 4 0 3 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 3 16 4 0 3 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 4 17 5 0 4 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 1 | ping,pulse,collision
+T 2 4 18 5 0 4 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 4 19 5 0 4 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 4 20 5 0 4 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 5 21 6 0 5 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 1 0 | wait,collision
+T 2 5 22 6 0 5 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 5 23 6 0 5 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 5 24 6 0 5 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 6 25 7 0 6 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 1 0 1 | move,ping
+T 2 6 26 7 0 6 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 6 27 7 0 6 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 6 28 7 0 6 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 7 29 8 0 7 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | wait,turn
+T 2 7 30 8 0 7 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 7 31 8 0 7 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 7 32 8 0 7 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 8 33 9 0 8 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 1 0 1 | turn,collision
+T 2 8 34 9 0 8 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 8 35 9 0 8 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 8 36 9 0 8 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 9 37 10 0 9 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | collision,collision,turn
+T 2 9 38 10 0 9 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 9 39 10 0 9 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 9 40 10 0 9 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 10 41 11 0 10 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 1 1 | collision,collision
+T 2 10 42 11 0 10 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 10 43 11 0 10 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 10 44 11 0 10 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 11 45 0 0 11 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 1 0 0 | wait,wait
+T 2 11 46 0 0 11 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 11 47 0 0 11 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 11 48 0 0 11 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 12 49 1 0 12 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 1 0 1 | ping,wait
+T 2 12 50 1 0 12 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 12 51 1 0 12 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 12 52 1 0 12 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 13 53 2 0 13 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | collision,collision,collision,collision
+T 2 13 54 2 0 13 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 13 55 2 0 13 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 13 56 2 0 13 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 14 57 3 0 14 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 1 1 | wait,collision,collision
+T 2 14 58 3 0 14 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 14 59 3 0 14 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 14 60 3 0 14 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 15 61 4 0 15 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 1 0 0 | wait,collision
+T 2 15 62 4 0 15 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 15 63 4 0 15 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 15 64 4 0 15 0 0 0 corridor | A 0 1 W 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 16 65 5 0 16 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 1 | turn,collision,collision
+T 2 16 66 5 0 16 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 16 67 5 0 16 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 16 68 5 0 16 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 17 69 6 0 17 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 1 0 | wait,collision
+T 2 17 70 6 0 17 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 17 71 6 0 17 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 17 72 6 0 17 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 18 73 7 0 18 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 1 0 1 | wait,move
+T 2 18 74 7 0 18 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 18 75 7 0 18 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 18 76 7 0 18 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 19 77 8 0 19 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | wait,wait
+T 2 19 78 8 0 19 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 19 79 8 0 19 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 19 80 8 0 19 0 0 0 corridor | A 0 1 S 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 20 81 9 0 20 0 0 0 corridor | A 2 1 S 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 1 0 1 | move,move,belt,move,belt,move,belt,wait
+T 2 20 82 9 0 20 0 0 0 corridor | A 2 1 S 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 20 83 9 0 20 0 0 0 corridor | A 2 1 S 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 20 84 9 0 20 0 0 0 corridor | A 2 1 S 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 21 85 10 0 21 0 0 0 corridor | A 2 2 S 1 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | move,move,belt,move,belt,zap,ping
+T 2 21 86 10 0 21 0 0 0 corridor | A 2 2 S 1 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 21 87 10 0 21 0 0 0 corridor | A 2 2 S 1 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 21 88 10 0 21 0 0 0 corridor | A 2 2 S 1 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 22 89 11 0 22 0 0 0 corridor | A 2 2 W 2 2 0 | B 4 2 N 0 1 0 | 0 0 | 0 1 1 | turn,zap,move,pulse
+T 2 22 90 11 0 22 0 0 0 corridor | A 2 2 W 2 2 0 | B 4 2 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 22 91 11 0 22 0 0 0 corridor | A 2 2 W 2 2 0 | B 4 2 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 22 92 11 0 22 0 0 0 corridor | A 2 2 W 2 2 0 | B 4 2 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 23 93 0 0 23 0 0 0 corridor | A 2 2 S 3 2 0 | B 4 2 N 0 1 0 | 0 0 | 1 0 0 | turn,zap,wait
+T 2 23 94 0 0 23 0 0 0 corridor | A 2 2 S 3 2 0 | B 4 2 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 23 95 0 0 23 0 0 0 corridor | A 2 2 S 3 2 0 | B 4 2 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 23 96 0 0 23 0 0 0 corridor | A 2 2 S 3 2 0 | B 4 2 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 24 97 1 0 24 0 0 0 corridor | A 2 2 S 4 2 0 | B 4 2 W 0 1 0 | 0 0 | 1 0 1 | move,move,belt,zap,turn,pulse
+T 2 24 98 1 0 24 0 0 0 corridor | A 2 2 S 4 2 0 | B 4 2 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 24 99 1 0 24 0 0 0 corridor | A 2 2 S 4 2 0 | B 4 2 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 24 100 1 0 24 0 0 0 corridor | A 2 2 S 4 2 0 | B 4 2 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 25 101 2 0 25 0 0 0 corridor | A 2 2 S 5 2 0 | B 4 2 W 0 1 0 | 0 0 | 0 0 0 | move,move,belt,zap,collision,pulse
+T 2 25 102 2 0 25 0 0 0 corridor | A 2 2 S 5 2 0 | B 4 2 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 25 103 2 0 25 0 0 0 corridor | A 2 2 S 5 2 0 | B 4 2 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 25 104 2 0 25 0 0 0 corridor | A 2 2 S 5 2 0 | B 4 2 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 26 105 3 0 26 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 2 S 0 1 0 | 0 0 | 0 1 1 | move,move,turn,pulse
+T 2 26 106 3 0 26 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 2 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 26 107 3 0 26 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 2 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 26 108 3 0 26 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 2 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 27 109 4 0 27 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 2 S 0 1 0 | 0 0 | 1 0 0 | collision,collision,wait,pulse
+T 2 27 110 4 0 27 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 2 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 27 111 4 0 27 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 2 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 27 112 4 0 27 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 2 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 28 113 5 0 28 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 3 S 0 1 0 | 0 0 | 0 0 1 | ping,move
+T 2 28 114 5 0 28 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 3 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 28 115 5 0 28 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 3 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 28 116 5 0 28 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 3 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 29 117 6 0 29 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 2 S 0 1 0 | 0 0 | 0 1 0 | wait,move,pulse
+T 2 29 118 6 0 29 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 2 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 29 119 6 0 29 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 2 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 29 120 6 0 29 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 2 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 30 121 7 0 30 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 1 S 0 1 0 | 0 0 | 1 0 1 | ping,move
+T 2 30 122 7 0 30 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 1 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 30 123 7 0 30 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 1 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 30 124 7 0 30 0 0 0 corridor | A 2 4 S 5 2 0 | B 4 1 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 31 125 8 0 31 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 S 0 1 0 | 0 0 | 0 0 0 | turn,wait
+T 2 31 126 8 0 31 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 31 127 8 0 31 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 31 128 8 0 31 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 S 0 1 0 | 0 0 | 0 0 0 | -
+T 2 32 129 9 0 32 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 W 0 1 0 | 0 0 | 1 0 1 | wait,turn
+T 2 32 130 9 0 32 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 32 131 9 0 32 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 32 132 9 0 32 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 33 133 10 0 33 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 W 0 1 0 | 0 0 | 0 0 0 | move,move,belt,collision
+T 2 33 134 10 0 33 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 33 135 10 0 33 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 33 136 10 0 33 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 W 0 1 0 | 0 0 | 0 0 0 | -
+T 2 34 137 11 0 34 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 1 1 | ping,turn
+T 2 34 138 11 0 34 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 34 139 11 0 34 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 34 140 11 0 34 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 35 141 0 0 35 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 1 0 0 | wait,move
+T 2 35 142 0 0 35 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 35 143 0 0 35 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 35 144 0 0 35 0 0 0 corridor | A 2 4 W 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 36 145 1 0 36 0 0 0 corridor | A 0 4 W 5 2 0 | B 4 1 N 0 1 0 | 0 0 | 1 0 1 | move,move,move
+T 2 36 146 1 0 36 0 0 0 corridor | A 0 4 W 5 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 36 147 1 0 36 0 0 0 corridor | A 0 4 W 5 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 36 148 1 0 36 0 0 0 corridor | A 0 4 W 5 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 37 149 2 0 37 0 0 0 corridor | A 0 4 W 5 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | wait,wait
+T 2 37 150 2 0 37 0 0 0 corridor | A 0 4 W 5 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 37 151 2 0 37 0 0 0 corridor | A 0 4 W 5 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 37 152 2 0 37 0 0 0 corridor | A 0 4 W 5 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 38 153 3 0 38 0 0 0 corridor | A 1 4 W 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 1 1 | move,move,collision
+T 2 38 154 3 0 38 0 0 0 corridor | A 1 4 W 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 38 155 3 0 38 0 0 0 corridor | A 1 4 W 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 38 156 3 0 38 0 0 0 corridor | A 1 4 W 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 39 157 4 0 39 0 0 0 corridor | A 0 4 W 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 1 0 0 | move,collision,collision
+T 2 39 158 4 0 39 0 0 0 corridor | A 0 4 W 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 39 159 4 0 39 0 0 0 corridor | A 0 4 W 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 39 160 4 0 39 0 0 0 corridor | A 0 4 W 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 40 161 5 0 40 0 0 0 corridor | A 0 4 N 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 1 | turn,collision
+T 2 40 162 5 0 40 0 0 0 corridor | A 0 4 N 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 40 163 5 0 40 0 0 0 corridor | A 0 4 N 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 40 164 5 0 40 0 0 0 corridor | A 0 4 N 5 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 41 165 6 0 41 0 0 0 corridor | A 0 2 N 4 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 1 0 | move,move,pulse,wait
+T 2 41 166 6 0 41 0 0 0 corridor | A 0 2 N 4 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 41 167 6 0 41 0 0 0 corridor | A 0 2 N 4 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 41 168 6 0 41 0 0 0 corridor | A 0 2 N 4 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 42 169 7 0 42 0 0 0 corridor | A 0 2 E 3 2 0 | B 4 0 N 0 1 0 | 0 0 | 1 0 1 | turn,pulse,wait
+T 2 42 170 7 0 42 0 0 0 corridor | A 0 2 E 3 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 42 171 7 0 42 0 0 0 corridor | A 0 2 E 3 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 42 172 7 0 42 0 0 0 corridor | A 0 2 E 3 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 43 173 8 0 43 0 0 0 corridor | A 0 2 E 2 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | collision,pulse,move
+T 2 43 174 8 0 43 0 0 0 corridor | A 0 2 E 2 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 43 175 8 0 43 0 0 0 corridor | A 0 2 E 2 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 43 176 8 0 43 0 0 0 corridor | A 0 2 E 2 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 44 177 9 0 44 0 0 0 corridor | A 0 2 E 1 2 0 | B 4 0 N 0 1 0 | 0 0 | 1 0 1 | collision,pulse,move
+T 2 44 178 9 0 44 0 0 0 corridor | A 0 2 E 1 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 44 179 9 0 44 0 0 0 corridor | A 0 2 E 1 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 44 180 9 0 44 0 0 0 corridor | A 0 2 E 1 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 45 181 10 0 45 0 0 0 corridor | A 0 2 E 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | ping,pulse,wait
+T 2 45 182 10 0 45 0 0 0 corridor | A 0 2 E 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 45 183 10 0 45 0 0 0 corridor | A 0 2 E 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 45 184 10 0 45 0 0 0 corridor | A 0 2 E 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 46 185 11 0 46 0 0 0 corridor | A 0 2 E 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 1 1 | ping,pulse,ping
+T 2 46 186 11 0 46 0 0 0 corridor | A 0 2 E 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 46 187 11 0 46 0 0 0 corridor | A 0 2 E 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 46 188 11 0 46 0 0 0 corridor | A 0 2 E 0 2 0 | B 4 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 47 189 0 0 47 0 0 0 corridor | A 0 2 E 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 1 0 0 | collision,pulse,move
+T 2 47 190 0 0 47 0 0 0 corridor | A 0 2 E 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 47 191 0 0 47 0 0 0 corridor | A 0 2 E 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 2 47 192 0 0 47 0 0 0 corridor | A 0 2 E 0 2 0 | B 4 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 3 0 1 1 0 0 0 0 0 corridor | A 0 4 E 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 1 0 1 | reset
+T 3 0 2 1 0 0 0 0 0 corridor | A 0 4 E 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | -
+T 3 0 3 1 0 0 0 0 0 corridor | A 0 4 E 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | -
+T 3 0 4 1 0 0 0 0 0 corridor | A 0 4 E 0 2 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | -
+T 3 1 5 2 0 1 0 0 0 corridor | A 0 4 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | turn,turn
+T 3 1 6 2 0 1 0 0 0 corridor | A 0 4 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 3 1 7 2 0 1 0 0 0 corridor | A 0 4 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 3 1 8 2 0 1 0 0 0 corridor | A 0 4 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 3 2 9 3 0 2 0 0 0 corridor | A 0 3 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 1 1 | move,wait
+T 3 2 10 3 0 2 0 0 0 corridor | A 0 3 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 3 2 11 3 0 2 0 0 0 corridor | A 0 3 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 3 2 12 3 0 2 0 0 0 corridor | A 0 3 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 3 3 13 4 0 3 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 1 S 0 1 0 | 0 0 | 1 0 0 | move,pulse,move
+T 3 3 14 4 0 3 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 1 S 0 1 0 | 0 0 | 0 0 0 | -
+T 3 3 15 4 0 3 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 1 S 0 1 0 | 0 0 | 0 0 0 | -
+T 3 3 16 4 0 3 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 1 S 0 1 0 | 0 0 | 0 0 0 | -
+T 3 4 17 5 0 4 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 1 S 0 1 0 | 0 0 | 0 0 1 | wait,wait
+T 3 4 18 5 0 4 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 1 S 0 1 0 | 0 0 | 0 0 0 | -
+T 3 4 19 5 0 4 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 1 S 0 1 0 | 0 0 | 0 0 0 | -
+T 3 4 20 5 0 4 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 1 S 0 1 0 | 0 0 | 0 0 0 | -
+T 3 5 21 6 0 5 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 1 0 | ping,pulse,move
+T 3 5 22 6 0 5 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 3 5 23 6 0 5 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -
+T 3 5 24 6 0 5 0 0 0 corridor | A 0 2 S 0 2 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | -

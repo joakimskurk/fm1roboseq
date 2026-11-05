@@ -20,5 +20,5 @@ jobs:
     with:
       build: |
         if [ "$GITHUB_REF_TYPE" = tag ]; then ./build.sh --release "${GITHUB_REF_NAME#v}"; else ./build.sh; fi
-      test: sh tests/run_host.sh && sh tests/run_tests.sh
+      test: sh tests/run_roboseq.sh && sh tests/run_host.sh && sh tests/run_tests.sh
       packages: build/roboseq*.fwsc

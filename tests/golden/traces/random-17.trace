@@ -1,0 +1,744 @@
+# random-17: reference/roboseq.html run by tools/trace/gen.mjs
+board maze
+loop 24
+tpm 1
+vmtrigger manual
+vmfreq 4
+bassmodlen 8
+drums 0 minimal
+seq2 0 0
+seq2step 0 -- -- 0
+seq2step 1 -- -- 0
+seq2step 2 -- -- 0
+seq2step 3 -- -- 0
+prog A 41
+step A 0 turnR steady 100
+step A 1 back steady 50
+step A 2 turnL glitch 100
+step A 3 back steady 100
+step A 4 wait bright 75
+step A 5 turnR wobble 100
+step A 6 turnR bright 50
+step A 7 move steady 75
+step A 8 dash low 50
+step A 9 move glitch 50
+step A 10 ping steady 100
+step A 11 move steady 50
+step A 12 back wobble 75
+step A 13 back glitch 50
+step A 14 ping bright 100
+step A 15 ping glitch 100
+step A 16 dash wobble 75
+step A 17 back bright 100
+step A 18 ping glitch 75
+step A 19 ping wobble 100
+step A 20 move wobble 75
+step A 21 dash wobble 75
+step A 22 move glitch 75
+step A 23 wait wobble 75
+step A 24 wait steady 75
+step A 25 move steady 50
+step A 26 wait glitch 50
+step A 27 turnL steady 75
+step A 28 ping wobble 50
+step A 29 back steady 75
+step A 30 dash wobble 75
+step A 31 turnR wobble 75
+step A 32 ping glitch 50
+step A 33 turnR glitch 100
+step A 34 turnL bright 75
+step A 35 back bright 100
+step A 36 ping bright 100
+step A 37 move low 50
+step A 38 dash glitch 75
+step A 39 turnL steady 75
+step A 40 wait steady 50
+step A 41 dash bright 75
+step A 42 turnL wobble 75
+step A 43 turnR steady 100
+step A 44 move glitch 50
+step A 45 dash glitch 50
+step A 46 turnR steady 50
+step A 47 turnR bright 100
+step A 48 dash wobble 50
+step A 49 move low 100
+step A 50 back steady 100
+step A 51 turnR wobble 75
+step A 52 ping wobble 100
+step A 53 move bright 100
+step A 54 dash bright 50
+step A 55 turnR wobble 50
+step A 56 dash low 75
+step A 57 move low 100
+step A 58 move wobble 75
+step A 59 back wobble 75
+step A 60 turnR steady 50
+step A 61 dash low 75
+step A 62 move wobble 100
+step A 63 ping wobble 75
+prog B 29
+step B 0 turnL glitch 50
+step B 1 wait steady 100
+step B 2 move steady 50
+step B 3 wait bright 100
+step B 4 wait steady 75
+step B 5 ping glitch 100
+step B 6 ping low 50
+step B 7 back low 50
+step B 8 wait low 50
+step B 9 turnL bright 75
+step B 10 wait low 75
+step B 11 dash wobble 50
+step B 12 dash steady 100
+step B 13 ping wobble 75
+step B 14 ping steady 100
+step B 15 turnR low 100
+step B 16 ping glitch 75
+step B 17 ping wobble 50
+step B 18 turnR low 75
+step B 19 turnR wobble 75
+step B 20 dash wobble 75
+step B 21 turnR steady 75
+step B 22 wait steady 50
+step B 23 ping glitch 100
+step B 24 move low 100
+step B 25 back low 50
+step B 26 turnR bright 50
+step B 27 dash steady 75
+step B 28 move wobble 100
+step B 29 move low 100
+step B 30 turnR low 50
+step B 31 dash bright 100
+step B 32 turnR wobble 50
+step B 33 turnL steady 100
+step B 34 back bright 50
+step B 35 turnR low 50
+step B 36 turnL steady 100
+step B 37 ping bright 75
+step B 38 turnR bright 50
+step B 39 back bright 50
+step B 40 move wobble 100
+step B 41 back glitch 75
+step B 42 ping glitch 100
+step B 43 move low 75
+step B 44 ping wobble 100
+step B 45 turnL bright 100
+step B 46 ping steady 100
+step B 47 ping glitch 75
+step B 48 turnR steady 100
+step B 49 back steady 100
+step B 50 dash bright 100
+step B 51 dash wobble 75
+step B 52 back low 50
+step B 53 wait steady 100
+step B 54 dash low 50
+step B 55 turnL glitch 100
+step B 56 back glitch 75
+step B 57 turnR glitch 100
+step B 58 dash wobble 100
+step B 59 turnL steady 75
+step B 60 turnL bright 75
+step B 61 move bright 100
+step B 62 turnL bright 75
+step B 63 back bright 50
+ticks 600
+T 0 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 0 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision
+T 0 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 0 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 0 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 0 6 7 7 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 0 7 8 8 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,wait
+T 0 8 9 9 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 0 9 10 10 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 0 10 11 11 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,pulse,wait
+T 0 11 12 0 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,move,move
+T 0 12 13 1 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | move,move,move
+T 0 13 14 2 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 0 14 15 3 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 4 S 1 0 0 | 0 0 | 0 0 0 | zap,ping
+T 0 15 16 4 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 4 W 2 0 0 | 0 0 | 0 0 0 | zap,turn
+T 0 16 17 5 0 0 0 0 0 maze | A 2 4 E 1 0 0 | B 4 4 W 2 0 0 | 0 0 | 0 0 0 | move,move,zap
+T 0 17 18 6 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 4 W 2 0 0 | 0 0 | 0 0 0 | move,pulse,wait
+T 0 18 19 7 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 4 N 2 0 0 | 0 0 | 0 0 0 | wait,turn
+T 0 19 20 8 0 0 0 0 0 maze | A 1 4 E 0 0 0 | B 4 4 E 3 0 0 | 0 0 | 0 0 0 | zap,pulse,turn
+T 0 20 21 9 0 0 0 0 0 maze | A 2 4 E 0 0 0 | B 4 4 E 3 0 0 | 0 0 | 0 0 0 | move,collision,collision
+T 0 21 22 10 0 0 0 0 0 maze | A 4 4 E 0 0 0 | B 4 4 S 5 0 0 | 7 0 | 0 0 0 | move,move,zap,turn
+T 0 22 23 11 0 0 0 0 0 maze | A 4 4 E 0 0 0 | B 4 4 S 5 0 0 | 6 0 | 0 0 0 | collision,wait
+T 0 23 24 0 0 0 0 0 0 maze | A 4 4 E 0 0 0 | B 4 4 S 5 0 0 | 5 0 | 0 0 0 | wait,ping
+T 1 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 1 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 1 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 1 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 1 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 1 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 1 6 7 7 0 0 0 0 0 maze | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 1 7 8 8 0 0 0 0 0 maze | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,collision
+T 1 8 9 9 0 0 0 0 0 maze | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 1 9 10 10 0 0 0 0 0 maze | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 1 10 11 11 0 0 0 0 0 maze | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 1 11 12 0 0 0 0 0 0 maze | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 1 12 13 1 0 0 0 0 0 maze | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,move,move
+T 1 13 14 2 0 0 0 0 0 maze | A 0 3 S 1 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,zap,wait
+T 1 14 15 3 0 0 0 0 0 maze | A 0 3 S 2 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | ping,zap,ping
+T 1 15 16 4 0 0 0 0 0 maze | A 0 3 S 3 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 1 16 17 5 0 0 0 0 0 maze | A 0 4 S 3 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,collision,ping
+T 1 17 18 6 0 0 0 0 0 maze | A 0 3 S 4 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,zap,wait
+T 1 18 19 7 0 0 0 0 0 maze | A 0 3 S 5 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 1 19 20 8 0 0 0 0 0 maze | A 0 3 S 6 0 1 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,zap,zap,wait
+T 1 20 21 9 0 0 0 0 0 maze | A 4 0 E 2 1 0 | B 4 0 N 0 0 0 | 7 0 | 0 0 0 | death,wait,move,move,zap
+T 1 21 22 10 0 0 0 0 0 maze | A 4 0 E 2 1 0 | B 4 0 N 0 0 0 | 6 0 | 0 0 0 | wait,wait
+T 1 22 23 11 0 0 0 0 0 maze | A 4 0 E 2 1 0 | B 4 0 N 0 0 0 | 5 0 | 0 0 0 | collision,wait
+T 1 23 24 0 0 0 0 0 0 maze | A 4 0 E 2 1 0 | B 4 0 N 0 0 0 | 4 0 | 0 0 0 | wait,ping
+T 2 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 2 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 2 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision
+T 2 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 2 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 2 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 2 6 7 7 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 2 7 8 8 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,collision
+T 2 8 9 9 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 2 9 10 10 0 0 0 0 0 maze | A 1 4 E 0 1 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,pulse,turn
+T 2 10 11 11 0 0 0 0 0 maze | A 1 4 E 0 1 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,pulse,wait
+T 2 11 12 0 0 0 0 0 0 maze | A 2 4 E 0 1 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 2 12 13 1 0 0 0 0 0 maze | A 1 4 E 0 1 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,pulse,move,move
+T 2 13 14 2 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 2 14 15 3 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | ping,ping
+T 2 15 16 4 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 2 16 17 5 0 0 0 0 0 maze | A 2 4 E 0 1 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,move,ping
+T 2 17 18 6 0 0 0 0 0 maze | A 1 4 E 0 1 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,ping
+T 2 18 19 7 0 0 0 0 0 maze | A 1 4 E 0 1 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,pulse,turn
+T 2 19 20 8 0 0 0 0 0 maze | A 1 4 E 0 1 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,pulse,wait
+T 2 20 21 9 0 0 0 0 0 maze | A 2 4 E 0 1 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,move,move
+T 2 21 22 10 0 0 0 0 0 maze | A 4 4 E 0 1 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | move,move,turn
+T 2 22 23 11 0 0 0 0 0 maze | A 4 4 E 0 1 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 2 23 24 0 0 0 0 0 0 maze | A 4 4 E 0 1 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 3 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 3 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 3 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 3 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 3 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 3 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 3 6 7 7 0 0 0 0 0 maze | A 0 4 S 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 3 7 8 8 0 0 0 0 0 maze | A 0 4 S 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,collision
+T 3 8 9 9 0 0 0 0 0 maze | A 0 4 S 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,collision,wait
+T 3 9 10 10 0 0 0 0 0 maze | A 0 4 S 0 1 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 3 10 11 11 0 0 0 0 0 maze | A 0 4 S 0 1 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 3 11 12 0 0 0 0 0 0 maze | A 0 4 S 0 1 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 3 12 13 1 0 0 0 0 0 maze | A 0 3 S 1 1 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,zap,move,move
+T 3 13 14 2 0 0 0 0 0 maze | A 0 3 S 1 1 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 3 14 15 3 0 0 0 0 0 maze | A 0 3 S 2 1 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | ping,zap,ping
+T 3 15 16 4 0 0 0 0 0 maze | A 0 3 S 3 1 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 3 16 17 5 0 0 0 0 0 maze | A 0 4 S 3 1 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,collision,wait
+T 3 17 18 6 0 0 0 0 0 maze | A 0 3 S 4 1 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,zap,ping
+T 3 18 19 7 0 0 0 0 0 maze | A 0 3 S 5 1 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 3 19 20 8 0 0 0 0 0 maze | A 0 3 S 6 1 1 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,zap,zap,wait
+T 3 20 21 9 0 0 0 0 0 maze | A 4 0 E 2 2 0 | B 4 0 N 0 0 0 | 7 0 | 0 0 0 | death,collision,move,move,zap
+T 3 21 22 10 0 0 0 0 0 maze | A 4 0 E 2 2 0 | B 4 0 E 2 0 0 | 7 0 | 0 0 0 | collision,collision,zap,turn
+T 3 22 23 11 0 0 0 0 0 maze | A 4 0 E 2 2 0 | B 4 0 E 2 0 0 | 6 0 | 0 0 0 | wait,wait
+T 3 23 24 0 0 0 0 0 0 maze | A 4 0 E 2 2 0 | B 4 0 E 2 0 0 | 5 0 | 0 0 0 | wait,ping
+T 4 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 4 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 4 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 4 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 4 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 4 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 4 6 7 7 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 4 7 8 8 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 4 8 9 9 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 4 9 10 10 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 4 10 11 11 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 4 11 12 0 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,collision,collision
+T 4 12 13 1 0 0 0 0 0 maze | A 0 3 S 1 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,zap,collision,collision
+T 4 13 14 2 0 0 0 0 0 maze | A 0 2 S 1 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 4 14 15 3 0 0 0 0 0 maze | A 0 2 S 1 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | ping,ping
+T 4 15 16 4 0 0 0 0 0 maze | A 0 2 S 1 2 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 4 16 17 5 0 0 0 0 0 maze | A 0 4 S 1 2 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,move,ping
+T 4 17 18 6 0 0 0 0 0 maze | A 0 3 S 2 2 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,zap,ping
+T 4 18 19 7 0 0 0 0 0 maze | A 0 3 S 3 2 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 4 19 20 8 0 0 0 0 0 maze | A 0 3 S 4 2 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 4 20 21 9 0 0 0 0 0 maze | A 0 4 S 4 2 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,move,move
+T 4 21 22 10 0 0 0 0 0 maze | A 0 4 S 4 2 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,collision,wait
+T 4 22 23 11 0 0 0 0 0 maze | A 0 4 S 4 2 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 4 23 24 0 0 0 0 0 0 maze | A 0 4 S 4 2 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 5 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 5 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 5 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 5 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 5 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 5 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 5 6 7 7 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 5 7 8 8 0 0 0 0 0 maze | A 1 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,wait
+T 5 8 9 9 0 0 0 0 0 maze | A 1 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 5 9 10 10 0 0 0 0 0 maze | A 1 4 E 0 2 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 5 10 11 11 0 0 0 0 0 maze | A 1 4 E 0 2 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,pulse,wait
+T 5 11 12 0 0 0 0 0 0 maze | A 2 4 E 0 2 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 5 12 13 1 0 0 0 0 0 maze | A 1 4 E 0 2 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,pulse,move,move
+T 5 13 14 2 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 5 14 15 3 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | ping,ping
+T 5 15 16 4 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 5 16 17 5 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 5 17 18 6 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 5 18 19 7 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 5 19 20 8 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 5 20 21 9 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 5 21 22 10 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 5 22 23 11 0 0 0 0 0 maze | A 1 4 E 0 2 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | move,pulse,wait
+T 5 23 24 0 0 0 0 0 0 maze | A 1 4 E 0 2 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | wait,pulse,ping
+T 6 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 6 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 6 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision
+T 6 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 6 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 6 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 6 6 7 7 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 6 7 8 8 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,collision
+T 6 8 9 9 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,collision,wait
+T 6 9 10 10 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,turn
+T 6 10 11 11 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 6 11 12 0 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 6 12 13 1 0 0 0 0 0 maze | A 0 3 S 1 2 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,zap,move,move
+T 6 13 14 2 0 0 0 0 0 maze | A 0 2 S 1 2 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 6 14 15 3 0 0 0 0 0 maze | A 0 2 S 1 2 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | ping,ping
+T 6 15 16 4 0 0 0 0 0 maze | A 0 2 S 1 2 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 6 16 17 5 0 0 0 0 0 maze | A 0 2 S 1 2 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 6 17 18 6 0 0 0 0 0 maze | A 0 2 S 1 2 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,move,belt,wait
+T 6 18 19 7 0 0 0 0 0 maze | A 0 2 S 1 2 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 6 19 20 8 0 0 0 0 0 maze | A 0 2 S 1 2 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 6 20 21 9 0 0 0 0 0 maze | A 0 3 S 2 2 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | move,zap,collision,collision
+T 6 21 22 10 0 0 0 0 0 maze | A 0 4 S 2 2 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,collision,turn
+T 6 22 23 11 0 0 0 0 0 maze | A 0 4 S 2 2 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 6 23 24 0 0 0 0 0 0 maze | A 0 4 S 2 2 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 7 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 7 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 7 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision
+T 7 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 7 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 7 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 7 6 7 7 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 7 7 8 8 0 0 0 0 0 maze | A 1 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,wait
+T 7 8 9 9 0 0 0 0 0 maze | A 3 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,move,pulse,wait
+T 7 9 10 10 0 0 0 0 0 maze | A 3 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 7 10 11 11 0 0 0 0 0 maze | A 3 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | ping,pulse,wait
+T 7 11 12 0 0 0 0 0 0 maze | A 4 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,collision,collision
+T 7 12 13 1 0 0 0 0 0 maze | A 3 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,collision,collision
+T 7 13 14 2 0 0 0 0 0 maze | A 2 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 7 14 15 3 0 0 0 0 0 maze | A 2 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | ping,ping
+T 7 15 16 4 0 0 0 0 0 maze | A 2 4 E 0 2 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 7 16 17 5 0 0 0 0 0 maze | A 2 4 E 0 2 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 7 17 18 6 0 0 0 0 0 maze | A 1 4 E 0 2 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,pulse,wait
+T 7 18 19 7 0 0 0 0 0 maze | A 1 4 E 0 2 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | ping,pulse,turn
+T 7 19 20 8 0 0 0 0 0 maze | A 1 4 E 0 2 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | ping,pulse,wait
+T 7 20 21 9 0 0 0 0 0 maze | A 2 4 E 0 2 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 7 21 22 10 0 0 0 0 0 maze | A 4 4 E 0 2 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,move,turn
+T 7 22 23 11 0 0 0 0 0 maze | A 4 4 E 0 2 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 7 23 24 0 0 0 0 0 0 maze | A 4 4 E 1 2 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,zap
+T 8 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 8 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 8 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision
+T 8 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 8 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 8 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 8 6 7 7 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 8 7 8 8 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 8 8 9 9 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 8 9 10 10 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 8 10 11 11 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 8 11 12 0 0 0 0 0 0 maze | A 0 4 S 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 8 12 13 1 0 0 0 0 0 maze | A 0 3 S 1 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,zap,collision,collision
+T 8 13 14 2 0 0 0 0 0 maze | A 0 3 S 1 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 8 14 15 3 0 0 0 0 0 maze | A 0 3 S 2 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | ping,zap,ping
+T 8 15 16 4 0 0 0 0 0 maze | A 0 3 S 3 2 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 8 16 17 5 0 0 0 0 0 maze | A 0 4 S 3 2 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,collision,ping
+T 8 17 18 6 0 0 0 0 0 maze | A 0 3 S 4 2 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,zap,ping
+T 8 18 19 7 0 0 0 0 0 maze | A 0 3 S 5 2 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 8 19 20 8 0 0 0 0 0 maze | A 0 3 S 6 2 1 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,zap,zap,turn
+T 8 20 21 9 0 0 0 0 0 maze | A 4 0 E 0 3 0 | B 4 0 S 0 0 0 | 0 1 | 0 0 0 | death,collision,wait
+T 8 21 22 10 0 0 0 0 0 maze | A 4 0 E 0 3 0 | B 4 0 S 2 0 0 | 7 0 | 0 0 0 | collision,collision,zap,wait
+T 8 22 23 11 0 0 0 0 0 maze | A 4 0 E 0 3 0 | B 4 0 S 2 0 0 | 6 0 | 0 0 0 | collision,wait
+T 8 23 24 0 0 0 0 0 0 maze | A 4 0 E 0 3 0 | B 4 0 S 2 0 0 | 5 0 | 0 0 0 | wait,ping
+T 9 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 9 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 9 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision
+T 9 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 9 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 9 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 9 6 7 7 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 9 7 8 8 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,collision
+T 9 8 9 9 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,collision,wait
+T 9 9 10 10 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,turn
+T 9 10 11 11 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 9 11 12 0 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,move,move
+T 9 12 13 1 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | wait,move,move
+T 9 13 14 2 0 0 0 0 0 maze | A 0 3 S 1 3 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | move,zap,ping
+T 9 14 15 3 0 0 0 0 0 maze | A 0 3 S 2 3 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | ping,zap,ping
+T 9 15 16 4 0 0 0 0 0 maze | A 0 3 S 3 3 0 | B 4 4 W 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 9 16 17 5 0 0 0 0 0 maze | A 0 3 S 3 3 0 | B 4 4 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 9 17 18 6 0 0 0 0 0 maze | A 0 2 S 3 3 0 | B 4 4 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 9 18 19 7 0 0 0 0 0 maze | A 0 2 S 3 3 0 | B 4 4 N 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 9 19 20 8 0 0 0 0 0 maze | A 0 2 S 3 3 0 | B 4 4 E 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 9 20 21 9 0 0 0 0 0 maze | A 0 3 S 4 3 0 | B 4 4 E 0 0 0 | 0 0 | 0 0 0 | move,zap,collision,collision
+T 9 21 22 10 0 0 0 0 0 maze | A 0 4 S 4 3 0 | B 4 4 E 0 0 0 | 0 0 | 0 0 0 | move,collision,wait
+T 9 22 23 11 0 0 0 0 0 maze | A 0 4 S 4 3 0 | B 4 4 E 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 9 23 24 0 0 0 0 0 0 maze | A 0 4 S 4 3 0 | B 4 4 E 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 10 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 10 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 10 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 10 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 10 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 10 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 10 6 7 7 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 10 7 8 8 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 10 8 9 9 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,collision,wait
+T 10 9 10 10 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 10 10 11 11 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 10 11 12 0 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 10 12 13 1 0 0 0 0 0 maze | A 0 3 S 1 3 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,zap,move,move
+T 10 13 14 2 0 0 0 0 0 maze | A 0 2 S 1 3 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 10 14 15 3 0 0 0 0 0 maze | A 0 2 S 1 3 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | ping,ping
+T 10 15 16 4 0 0 0 0 0 maze | A 0 2 S 1 3 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 10 16 17 5 0 0 0 0 0 maze | A 0 4 S 1 3 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,move,ping
+T 10 17 18 6 0 0 0 0 0 maze | A 0 3 S 2 3 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,zap,wait
+T 10 18 19 7 0 0 0 0 0 maze | A 0 3 S 2 3 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 10 19 20 8 0 0 0 0 0 maze | A 0 3 S 3 3 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,zap,wait
+T 10 20 21 9 0 0 0 0 0 maze | A 0 4 S 3 3 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 10 21 22 10 0 0 0 0 0 maze | A 0 4 S 3 3 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | collision,collision,turn
+T 10 22 23 11 0 0 0 0 0 maze | A 0 4 S 3 3 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 10 23 24 0 0 0 0 0 0 maze | A 0 4 S 3 3 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 11 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 11 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 11 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision
+T 11 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 11 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 11 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 11 6 7 7 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 11 7 8 8 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,collision
+T 11 8 9 9 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,move,pulse,wait
+T 11 9 10 10 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 11 10 11 11 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | ping,pulse,wait
+T 11 11 12 0 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 11 12 13 1 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,collision,collision
+T 11 13 14 2 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,ping
+T 11 14 15 3 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | ping,pulse,ping
+T 11 15 16 4 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | ping,pulse,turn
+T 11 16 17 5 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,move,pulse,ping
+T 11 17 18 6 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 11 18 19 7 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 11 19 20 8 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 11 20 21 9 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,pulse,wait
+T 11 21 22 10 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,collision,turn
+T 11 22 23 11 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 11 23 24 0 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 12 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 12 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 12 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 12 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 12 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 12 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 12 6 7 7 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 12 7 8 8 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,wait
+T 12 8 9 9 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,move,pulse,wait
+T 12 9 10 10 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 12 10 11 11 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 12 11 12 0 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 12 12 13 1 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,collision,collision
+T 12 13 14 2 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 12 14 15 3 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | ping,ping
+T 12 15 16 4 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 12 16 17 5 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,move,ping
+T 12 17 18 6 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,pulse,ping
+T 12 18 19 7 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | ping,pulse,turn
+T 12 19 20 8 0 0 0 0 0 maze | A 3 4 E 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,pulse,turn
+T 12 20 21 9 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,move,move
+T 12 21 22 10 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 12 22 23 11 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 12 23 24 0 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 13 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 13 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 13 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 13 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 13 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 13 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 13 6 7 7 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 13 7 8 8 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,wait
+T 13 8 9 9 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 13 9 10 10 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 13 10 11 11 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | ping,pulse,wait
+T 13 11 12 0 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 13 12 13 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,collision,collision
+T 13 13 14 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 13 14 15 3 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | ping,ping
+T 13 15 16 4 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 13 16 17 5 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,move,ping
+T 13 17 18 6 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,pulse,ping
+T 13 18 19 7 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | ping,pulse,turn
+T 13 19 20 8 0 0 0 0 0 maze | A 1 4 E 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,pulse,turn
+T 13 20 21 9 0 0 0 0 0 maze | A 2 4 E 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 13 21 22 10 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,move,turn
+T 13 22 23 11 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 13 23 24 0 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 14 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 14 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 14 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 14 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 14 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 14 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 14 6 7 7 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 14 7 8 8 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 14 8 9 9 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,collision,wait
+T 14 9 10 10 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,turn
+T 14 10 11 11 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 14 11 12 0 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,move,move
+T 14 12 13 1 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | wait,move,move
+T 14 13 14 2 0 0 0 0 0 maze | A 0 3 S 1 3 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | move,zap,wait
+T 14 14 15 3 0 0 0 0 0 maze | A 0 3 S 2 3 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | ping,zap,ping
+T 14 15 16 4 0 0 0 0 0 maze | A 0 3 S 3 3 0 | B 4 4 W 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 14 16 17 5 0 0 0 0 0 maze | A 0 3 S 3 3 0 | B 4 4 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 14 17 18 6 0 0 0 0 0 maze | A 0 2 S 3 3 0 | B 4 4 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 14 18 19 7 0 0 0 0 0 maze | A 0 2 S 3 3 0 | B 4 4 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 14 19 20 8 0 0 0 0 0 maze | A 0 2 S 3 3 0 | B 4 4 N 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 14 20 21 9 0 0 0 0 0 maze | A 0 2 S 3 3 0 | B 4 4 N 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 14 21 22 10 0 0 0 0 0 maze | A 0 4 S 3 3 0 | B 4 4 E 0 0 0 | 0 0 | 0 0 0 | move,move,turn
+T 14 22 23 11 0 0 0 0 0 maze | A 0 4 S 3 3 0 | B 4 4 E 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 14 23 24 0 0 0 0 0 0 maze | A 0 4 S 3 3 0 | B 4 4 E 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 15 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 15 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 15 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision
+T 15 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 15 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 15 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 15 6 7 7 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 15 7 8 8 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,collision
+T 15 8 9 9 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 15 9 10 10 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,turn
+T 15 10 11 11 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 15 11 12 0 0 0 0 0 0 maze | A 0 4 S 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 15 12 13 1 0 0 0 0 0 maze | A 0 3 S 1 3 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,zap,move,move
+T 15 13 14 2 0 0 0 0 0 maze | A 0 3 S 1 3 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 15 14 15 3 0 0 0 0 0 maze | A 0 3 S 2 3 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | ping,zap,ping
+T 15 15 16 4 0 0 0 0 0 maze | A 0 3 S 3 3 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 15 16 17 5 0 0 0 0 0 maze | A 0 4 S 3 3 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,collision,ping
+T 15 17 18 6 0 0 0 0 0 maze | A 0 3 S 4 3 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,zap,ping
+T 15 18 19 7 0 0 0 0 0 maze | A 0 3 S 5 3 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 15 19 20 8 0 0 0 0 0 maze | A 0 3 S 6 3 1 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | ping,zap,zap,turn
+T 15 20 21 9 0 0 0 0 0 maze | A 4 0 E 0 4 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | death,collision,wait
+T 15 21 22 10 0 0 0 0 0 maze | A 4 0 E 0 4 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,collision,turn
+T 15 22 23 11 0 0 0 0 0 maze | A 4 0 E 0 4 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 15 23 24 0 0 0 0 0 0 maze | A 4 0 E 0 4 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 16 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 4 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 16 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 4 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 16 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 4 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 16 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 4 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 16 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 4 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 16 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 4 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 16 6 7 7 0 0 0 0 0 maze | A 0 4 S 0 4 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 16 7 8 8 0 0 0 0 0 maze | A 0 4 S 0 4 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 16 8 9 9 0 0 0 0 0 maze | A 0 4 S 0 4 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,collision,wait
+T 16 9 10 10 0 0 0 0 0 maze | A 0 4 S 0 4 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 16 10 11 11 0 0 0 0 0 maze | A 0 4 S 0 4 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 16 11 12 0 0 0 0 0 0 maze | A 0 4 S 0 4 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 16 12 13 1 0 0 0 0 0 maze | A 0 3 S 1 4 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,zap,move,move
+T 16 13 14 2 0 0 0 0 0 maze | A 0 3 S 1 4 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 16 14 15 3 0 0 0 0 0 maze | A 0 3 S 2 4 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | ping,zap,ping
+T 16 15 16 4 0 0 0 0 0 maze | A 0 3 S 3 4 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 16 16 17 5 0 0 0 0 0 maze | A 0 4 S 3 4 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,collision,ping
+T 16 17 18 6 0 0 0 0 0 maze | A 0 3 S 4 4 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,zap,ping
+T 16 18 19 7 0 0 0 0 0 maze | A 0 3 S 5 4 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 16 19 20 8 0 0 0 0 0 maze | A 0 3 S 6 4 1 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,zap,zap,wait
+T 16 20 21 9 0 0 0 0 0 maze | A 4 0 E 2 5 0 | B 4 0 N 0 0 0 | 7 0 | 0 0 0 | death,collision,move,move,zap
+T 16 21 22 10 0 0 0 0 0 maze | A 4 0 E 2 5 0 | B 4 0 E 2 0 0 | 7 0 | 0 0 0 | collision,collision,zap,turn
+T 16 22 23 11 0 0 0 0 0 maze | A 4 0 E 2 5 0 | B 4 0 E 2 0 0 | 6 0 | 0 0 0 | collision,wait
+T 16 23 24 0 0 0 0 0 0 maze | A 4 0 E 2 5 0 | B 4 0 E 2 0 0 | 5 0 | 0 0 0 | wait,ping
+T 17 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 17 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 17 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision
+T 17 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 17 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 17 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 17 6 7 7 0 0 0 0 0 maze | A 0 4 S 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 17 7 8 8 0 0 0 0 0 maze | A 0 4 S 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 17 8 9 9 0 0 0 0 0 maze | A 0 4 S 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 17 9 10 10 0 0 0 0 0 maze | A 0 4 S 0 5 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,turn
+T 17 10 11 11 0 0 0 0 0 maze | A 0 4 S 0 5 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 17 11 12 0 0 0 0 0 0 maze | A 0 4 S 0 5 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 17 12 13 1 0 0 0 0 0 maze | A 0 4 S 0 5 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,move,move
+T 17 13 14 2 0 0 0 0 0 maze | A 0 3 S 1 5 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,zap,ping
+T 17 14 15 3 0 0 0 0 0 maze | A 0 3 S 2 5 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | ping,zap,ping
+T 17 15 16 4 0 0 0 0 0 maze | A 0 3 S 3 5 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 17 16 17 5 0 0 0 0 0 maze | A 0 4 S 3 5 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,collision,wait
+T 17 17 18 6 0 0 0 0 0 maze | A 0 3 S 4 5 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,zap,ping
+T 17 18 19 7 0 0 0 0 0 maze | A 0 3 S 5 5 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 17 19 20 8 0 0 0 0 0 maze | A 0 3 S 6 5 1 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | ping,zap,zap,turn
+T 17 20 21 9 0 0 0 0 0 maze | A 4 0 E 0 6 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | death,collision,wait
+T 17 21 22 10 0 0 0 0 0 maze | A 4 0 E 0 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 17 22 23 11 0 0 0 0 0 maze | A 4 0 E 0 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 17 23 24 0 0 0 0 0 0 maze | A 4 0 E 0 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 18 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 18 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 18 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision
+T 18 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 18 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 18 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 18 6 7 7 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 18 7 8 8 0 0 0 0 0 maze | A 1 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,collision
+T 18 8 9 9 0 0 0 0 0 maze | A 3 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,move,pulse,wait
+T 18 9 10 10 0 0 0 0 0 maze | A 4 4 E 0 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,turn
+T 18 10 11 11 0 0 0 0 0 maze | A 4 4 E 0 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 18 11 12 0 0 0 0 0 0 maze | A 4 4 E 0 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,move,move
+T 18 12 13 1 0 0 0 0 0 maze | A 4 4 E 2 6 0 | B 4 4 S 0 0 0 | 7 0 | 0 0 0 | wait,move,move,zap
+T 18 13 14 2 0 0 0 0 0 maze | A 4 4 E 2 6 0 | B 4 4 S 0 0 0 | 6 0 | 0 0 0 | wait,ping
+T 18 14 15 3 0 0 0 0 0 maze | A 4 4 E 2 6 0 | B 4 4 S 0 0 0 | 5 0 | 0 0 0 | ping,ping
+T 18 15 16 4 0 0 0 0 0 maze | A 4 4 E 2 6 0 | B 4 4 W 0 0 0 | 4 0 | 0 0 0 | ping,turn
+T 18 16 17 5 0 0 0 0 0 maze | A 4 4 E 2 6 0 | B 4 4 W 2 0 0 | 7 0 | 0 0 0 | collision,collision,zap,ping
+T 18 17 18 6 0 0 0 0 0 maze | A 3 4 E 2 6 0 | B 4 4 W 2 0 0 | 6 0 | 0 0 0 | move,pulse,zap
+T 18 18 19 7 0 0 0 0 0 maze | A 3 4 E 2 6 0 | B 4 4 W 2 0 0 | 5 0 | 0 0 0 | wait,wait
+T 18 19 20 8 0 0 0 0 0 maze | A 3 4 E 1 6 0 | B 4 4 W 3 0 0 | 4 0 | 0 0 0 | zap,pulse,wait
+T 18 20 21 9 0 0 0 0 0 maze | A 4 4 E 1 6 0 | B 2 4 W 3 0 0 | 3 0 | 0 0 0 | move,move,move
+T 18 21 22 10 0 0 0 0 0 maze | A 4 4 E 1 6 0 | B 2 4 W 3 0 0 | 2 0 | 0 0 0 | wait,wait
+T 18 22 23 11 0 0 0 0 0 maze | A 4 4 E 1 6 0 | B 2 4 W 3 0 0 | 1 0 | 0 0 0 | collision,wait
+T 18 23 24 0 0 0 0 0 0 maze | A 4 4 E 1 6 0 | B 2 4 W 3 0 0 | 0 0 | 0 0 0 | wait,ping
+T 19 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 19 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 19 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision
+T 19 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 19 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 19 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 19 6 7 7 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 19 7 8 8 0 0 0 0 0 maze | A 1 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,collision
+T 19 8 9 9 0 0 0 0 0 maze | A 3 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,move,pulse,wait
+T 19 9 10 10 0 0 0 0 0 maze | A 4 4 E 0 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,turn
+T 19 10 11 11 0 0 0 0 0 maze | A 4 4 E 0 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 19 11 12 0 0 0 0 0 0 maze | A 4 4 E 0 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,move,move
+T 19 12 13 1 0 0 0 0 0 maze | A 3 4 E 0 6 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | move,pulse,move,move
+T 19 13 14 2 0 0 0 0 0 maze | A 2 4 E 0 6 0 | B 4 4 S 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 19 14 15 3 0 0 0 0 0 maze | A 2 4 E 0 6 0 | B 4 4 S 1 0 0 | 0 0 | 0 0 0 | zap,ping
+T 19 15 16 4 0 0 0 0 0 maze | A 2 4 E 0 6 0 | B 4 4 W 2 0 0 | 0 0 | 0 0 0 | zap,turn
+T 19 16 17 5 0 0 0 0 0 maze | A 2 4 E 0 6 0 | B 4 4 W 2 0 0 | 0 0 | 0 0 0 | wait,wait
+T 19 17 18 6 0 0 0 0 0 maze | A 1 4 E 1 6 0 | B 4 4 W 2 0 0 | 0 0 | 0 0 0 | move,pulse,zap
+T 19 18 19 7 0 0 0 0 0 maze | A 1 4 E 1 6 0 | B 4 4 N 2 0 0 | 0 0 | 0 0 0 | wait,turn
+T 19 19 20 8 0 0 0 0 0 maze | A 1 4 E 0 6 0 | B 4 4 E 3 0 0 | 0 0 | 0 0 0 | zap,pulse,turn
+T 19 20 21 9 0 0 0 0 0 maze | A 2 4 E 0 6 0 | B 4 4 E 3 0 0 | 0 0 | 0 0 0 | move,collision,collision
+T 19 21 22 10 0 0 0 0 0 maze | A 2 4 E 0 6 0 | B 4 4 E 3 0 0 | 0 0 | 0 0 0 | wait,wait
+T 19 22 23 11 0 0 0 0 0 maze | A 2 4 E 0 6 0 | B 4 4 E 3 0 0 | 0 0 | 0 0 0 | wait,wait
+T 19 23 24 0 0 0 0 0 0 maze | A 2 4 E 0 6 0 | B 4 4 E 3 0 0 | 0 0 | 0 0 0 | wait,ping
+T 20 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 20 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 20 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 20 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 20 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 20 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 20 6 7 7 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 20 7 8 8 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,collision
+T 20 8 9 9 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,collision,wait
+T 20 9 10 10 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 20 10 11 11 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 20 11 12 0 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 20 12 13 1 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,collision,collision
+T 20 13 14 2 0 0 0 0 0 maze | A 0 3 S 1 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,zap,ping
+T 20 14 15 3 0 0 0 0 0 maze | A 0 3 S 2 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | ping,zap,ping
+T 20 15 16 4 0 0 0 0 0 maze | A 0 3 S 3 6 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 20 16 17 5 0 0 0 0 0 maze | A 0 4 S 3 6 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,collision,ping
+T 20 17 18 6 0 0 0 0 0 maze | A 0 3 S 4 6 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,zap,wait
+T 20 18 19 7 0 0 0 0 0 maze | A 0 3 S 4 6 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 20 19 20 8 0 0 0 0 0 maze | A 0 3 S 5 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 20 20 21 9 0 0 0 0 0 maze | A 0 4 S 5 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 20 21 22 10 0 0 0 0 0 maze | A 0 4 S 5 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 20 22 23 11 0 0 0 0 0 maze | A 0 4 S 5 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 20 23 24 0 0 0 0 0 0 maze | A 0 4 S 5 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 21 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 21 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 21 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision
+T 21 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 21 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 21 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 21 6 7 7 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 21 7 8 8 0 0 0 0 0 maze | A 1 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,wait
+T 21 8 9 9 0 0 0 0 0 maze | A 3 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,move,pulse,wait
+T 21 9 10 10 0 0 0 0 0 maze | A 3 4 E 0 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 21 10 11 11 0 0 0 0 0 maze | A 3 4 E 0 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,pulse,wait
+T 21 11 12 0 0 0 0 0 0 maze | A 3 4 E 0 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 21 12 13 1 0 0 0 0 0 maze | A 2 4 E 0 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,move,move
+T 21 13 14 2 0 0 0 0 0 maze | A 2 4 E 0 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 21 14 15 3 0 0 0 0 0 maze | A 2 4 E 0 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | ping,ping
+T 21 15 16 4 0 0 0 0 0 maze | A 2 4 E 0 6 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 21 16 17 5 0 0 0 0 0 maze | A 4 4 E 0 6 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,move,wait
+T 21 17 18 6 0 0 0 0 0 maze | A 3 4 E 0 6 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,pulse,wait
+T 21 18 19 7 0 0 0 0 0 maze | A 3 4 E 0 6 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,pulse,turn
+T 21 19 20 8 0 0 0 0 0 maze | A 3 4 E 0 6 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | ping,pulse,turn
+T 21 20 21 9 0 0 0 0 0 maze | A 4 4 E 0 6 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 21 21 22 10 0 0 0 0 0 maze | A 4 4 E 0 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,collision,turn
+T 21 22 23 11 0 0 0 0 0 maze | A 4 4 E 0 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 21 23 24 0 0 0 0 0 0 maze | A 4 4 E 1 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,zap
+T 22 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 22 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 22 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision
+T 22 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 22 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 22 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 22 6 7 7 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 22 7 8 8 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,collision
+T 22 8 9 9 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,collision,wait
+T 22 9 10 10 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 22 10 11 11 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 22 11 12 0 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 22 12 13 1 0 0 0 0 0 maze | A 0 3 S 1 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,zap,move,move
+T 22 13 14 2 0 0 0 0 0 maze | A 0 2 S 1 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 22 14 15 3 0 0 0 0 0 maze | A 0 2 S 1 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | ping,ping
+T 22 15 16 4 0 0 0 0 0 maze | A 0 2 S 1 6 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 22 16 17 5 0 0 0 0 0 maze | A 0 4 S 1 6 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,move,ping
+T 22 17 18 6 0 0 0 0 0 maze | A 0 3 S 2 6 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,zap,ping
+T 22 18 19 7 0 0 0 0 0 maze | A 0 3 S 3 6 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 22 19 20 8 0 0 0 0 0 maze | A 0 3 S 4 6 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,zap,wait
+T 22 20 21 9 0 0 0 0 0 maze | A 0 3 S 4 6 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,move,move
+T 22 21 22 10 0 0 0 0 0 maze | A 0 3 S 4 6 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 22 22 23 11 0 0 0 0 0 maze | A 0 3 S 4 6 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 22 23 24 0 0 0 0 0 0 maze | A 0 3 S 5 6 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,zap,ping
+T 23 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 23 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 23 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision
+T 23 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 23 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 23 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 23 6 7 7 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 23 7 8 8 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 23 8 9 9 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 23 9 10 10 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 23 10 11 11 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 23 11 12 0 0 0 0 0 0 maze | A 0 4 S 0 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 23 12 13 1 0 0 0 0 0 maze | A 0 3 S 1 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,zap,move,move
+T 23 13 14 2 0 0 0 0 0 maze | A 0 3 S 1 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 23 14 15 3 0 0 0 0 0 maze | A 0 3 S 2 6 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | ping,zap,ping
+T 23 15 16 4 0 0 0 0 0 maze | A 0 3 S 3 6 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 23 16 17 5 0 0 0 0 0 maze | A 0 4 S 3 6 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,collision,ping
+T 23 17 18 6 0 0 0 0 0 maze | A 0 3 S 4 6 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,zap,ping
+T 23 18 19 7 0 0 0 0 0 maze | A 0 3 S 5 6 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | ping,zap,wait
+T 23 19 20 8 0 0 0 0 0 maze | A 0 3 S 6 6 1 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | ping,zap,zap,turn
+T 23 20 21 9 0 0 0 0 0 maze | A 4 0 E 2 7 0 | B 4 0 N 0 0 0 | 7 0 | 0 0 0 | death,collision,move,move,zap
+T 23 21 22 10 0 0 0 0 0 maze | A 4 0 E 2 7 0 | B 4 0 N 2 0 0 | 7 0 | 0 0 0 | collision,collision,zap,wait
+T 23 22 23 11 0 0 0 0 0 maze | A 4 0 E 2 7 0 | B 4 0 N 2 0 0 | 6 0 | 0 0 0 | collision,wait
+T 23 23 24 0 0 0 0 0 0 maze | A 4 0 E 2 7 0 | B 4 0 N 2 0 0 | 5 0 | 0 0 0 | wait,ping
+T 24 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 7 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 24 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 7 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 24 2 3 3 0 0 0 0 0 maze | A 0 4 N 0 7 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,collision
+T 24 3 4 4 0 0 0 0 0 maze | A 0 4 N 0 7 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 24 4 5 5 0 0 0 0 0 maze | A 0 4 N 0 7 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 24 5 6 6 0 0 0 0 0 maze | A 0 4 E 0 7 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 24 6 7 7 0 0 0 0 0 maze | A 0 4 S 0 7 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,ping
+T 24 7 8 8 0 0 0 0 0 maze | A 0 4 S 0 7 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 24 8 9 9 0 0 0 0 0 maze | A 0 4 S 0 7 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 24 9 10 10 0 0 0 0 0 maze | A 0 4 S 0 7 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 24 10 11 11 0 0 0 0 0 maze | A 0 4 S 0 7 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,wait
+T 24 11 12 0 0 0 0 0 0 maze | A 0 4 S 0 7 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 24 12 13 1 0 0 0 0 0 maze | A 0 3 S 1 7 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,zap,move,move
+T 24 13 14 2 0 0 0 0 0 maze | A 0 2 S 1 7 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 24 14 15 3 0 0 0 0 0 maze | A 0 2 S 1 7 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | ping,ping
+T 24 15 16 4 0 0 0 0 0 maze | A 0 2 S 1 7 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 24 16 17 5 0 0 0 0 0 maze | A 0 4 S 1 7 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,move,ping
+T 24 17 18 6 0 0 0 0 0 maze | A 0 3 S 2 7 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | move,zap,wait
+T 24 18 19 7 0 0 0 0 0 maze | A 0 3 S 2 7 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 24 19 20 8 0 0 0 0 0 maze | A 0 3 S 3 7 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 24 20 21 9 0 0 0 0 0 maze | A 0 3 S 3 7 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | wait,collision,collision
+T 24 21 22 10 0 0 0 0 0 maze | A 0 3 S 3 7 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 24 22 23 11 0 0 0 0 0 maze | A 0 4 S 3 7 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 24 23 24 0 0 0 0 0 0 maze | A 0 4 S 3 7 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,ping

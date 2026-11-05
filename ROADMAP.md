@@ -38,6 +38,16 @@ music.
 
 The HTML's game, bit for bit, in C with host tests; no sound and no screen yet.
 
+- [x] `firmware/src/rs_model.c`: the state, the boards and their presets, the actions, collisions, tiles, heat,
+      death and respawn, the love check, the loop reset, Voice Mod, seq 2, the drum presets (2026-11-05)
+- [x] `rs_chance.c`: seededChance without float (DECISIONS.md D6)
+- [x] Golden traces: `tools/trace` runs the HTML's own script in Node (no browser), 33 scenarios (every board,
+      24 random ones over the loop lengths, tpm 1/2/4, Voice Mod rates; seq 2; deaths), `make test` compares every
+      tick: all equal, and a deliberate bug in the model fails them
+- [x] The model on the chip: built into the firmware, its fingerprint at boot read back from fm1-emu equals the
+      host's (`make emu`)
+- [ ] The randomizers (registers, board, bass mod, seq 2's rolls) and undo (20), with the firmware's own RNG
+
 - The state: two bots (A at 0,4 facing E; B at 4,0 facing W), programs of up to 64 steps (action, modifier,
   probability 1 / 0.75 / 0.5, repeats), loop lengths 8-64, BPM (80 default), scale and root, ticks per move
 - The 5 x 5 board and its tiles: belt (N/E/S/W), zap, rotate L/R, pulse pad, crate; the board presets and the random

@@ -1,0 +1,744 @@
+# random-06: reference/roboseq.html run by tools/trace/gen.mjs
+board default
+loop 64
+tpm 2
+vmtrigger loop
+vmfreq 2
+bassmodlen 4
+drums 1 four
+seq2 0 0
+seq2step 0 -- -- 0
+seq2step 1 -- -- 0
+seq2step 2 -- -- 0
+seq2step 3 -- -- 0
+prog A 41
+step A 0 turnR wobble 50
+step A 1 ping glitch 50
+step A 2 turnL bright 75
+step A 3 back wobble 75
+step A 4 turnL wobble 75
+step A 5 ping wobble 50
+step A 6 ping wobble 50
+step A 7 dash bright 100
+step A 8 ping glitch 100
+step A 9 back steady 75
+step A 10 move low 75
+step A 11 ping glitch 100
+step A 12 move glitch 50
+step A 13 move steady 75
+step A 14 ping wobble 100
+step A 15 turnR glitch 50
+step A 16 ping wobble 100
+step A 17 dash wobble 75
+step A 18 back bright 75
+step A 19 turnL low 100
+step A 20 wait wobble 50
+step A 21 move low 75
+step A 22 turnR bright 50
+step A 23 turnR steady 50
+step A 24 dash steady 75
+step A 25 wait wobble 50
+step A 26 wait low 50
+step A 27 wait steady 100
+step A 28 turnR bright 50
+step A 29 turnR low 100
+step A 30 back glitch 50
+step A 31 turnL bright 50
+step A 32 back wobble 100
+step A 33 turnL steady 50
+step A 34 ping wobble 75
+step A 35 ping low 50
+step A 36 move bright 75
+step A 37 move low 50
+step A 38 turnR wobble 50
+step A 39 move glitch 100
+step A 40 ping steady 50
+step A 41 turnL steady 50
+step A 42 turnR steady 100
+step A 43 ping low 100
+step A 44 turnL steady 75
+step A 45 back steady 50
+step A 46 turnR bright 50
+step A 47 wait glitch 100
+step A 48 turnR low 100
+step A 49 wait steady 75
+step A 50 move bright 50
+step A 51 turnL wobble 50
+step A 52 turnR bright 100
+step A 53 turnR low 75
+step A 54 wait bright 50
+step A 55 turnL steady 100
+step A 56 move wobble 50
+step A 57 turnR low 50
+step A 58 dash low 50
+step A 59 wait bright 100
+step A 60 turnL steady 50
+step A 61 back glitch 100
+step A 62 dash wobble 100
+step A 63 wait wobble 100
+prog B 17
+step B 0 move glitch 100
+step B 1 move glitch 100
+step B 2 turnR bright 75
+step B 3 wait wobble 75
+step B 4 turnL wobble 100
+step B 5 move glitch 50
+step B 6 back glitch 50
+step B 7 dash bright 75
+step B 8 turnR glitch 100
+step B 9 move glitch 100
+step B 10 turnL bright 100
+step B 11 turnR low 75
+step B 12 dash glitch 50
+step B 13 dash steady 75
+step B 14 ping low 50
+step B 15 dash bright 50
+step B 16 turnR low 50
+step B 17 move wobble 75
+step B 18 turnR steady 50
+step B 19 wait low 75
+step B 20 turnR glitch 75
+step B 21 back glitch 100
+step B 22 turnL steady 100
+step B 23 turnR glitch 100
+step B 24 wait bright 75
+step B 25 turnL bright 50
+step B 26 ping low 75
+step B 27 ping steady 75
+step B 28 ping wobble 50
+step B 29 turnL bright 50
+step B 30 turnR low 100
+step B 31 move steady 50
+step B 32 move low 100
+step B 33 back bright 75
+step B 34 wait wobble 75
+step B 35 back low 50
+step B 36 turnL low 100
+step B 37 back steady 50
+step B 38 back steady 75
+step B 39 turnR wobble 75
+step B 40 turnL bright 100
+step B 41 dash steady 75
+step B 42 ping steady 100
+step B 43 turnL steady 50
+step B 44 dash bright 50
+step B 45 wait wobble 100
+step B 46 dash low 50
+step B 47 move steady 100
+step B 48 wait low 100
+step B 49 move wobble 100
+step B 50 move steady 75
+step B 51 turnL low 100
+step B 52 turnL glitch 75
+step B 53 turnR low 50
+step B 54 ping glitch 100
+step B 55 move low 100
+step B 56 turnR low 100
+step B 57 wait low 75
+step B 58 move glitch 50
+step B 59 wait low 50
+step B 60 turnR wobble 50
+step B 61 dash steady 100
+step B 62 wait wobble 75
+step B 63 move glitch 100
+ticks 600
+T 0 0 1 1 0 0 0 0 0 default | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | -
+T 0 0 2 1 0 0 0 0 0 default | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 1 3 2 0 1 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 1 | wait,move,rotator
+T 0 1 4 2 0 1 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 2 5 3 0 2 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 1 1 | turn,turn,rotator
+T 0 2 6 3 0 2 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 3 7 4 0 3 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait,rotator
+T 0 3 8 4 0 3 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 4 9 5 0 4 0 0 0 default | A 0 4 W 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 1 0 1 | turn,turn,rotator
+T 0 4 10 5 0 4 0 0 0 default | A 0 4 W 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 5 11 6 0 5 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 0 0 | 0 0 | 0 0 1 | ping,move,zap
+T 0 5 12 6 0 5 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 0 0 | 0 0 | 0 0 0 | -
+T 0 6 13 7 0 6 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 0 0 | 0 0 | 0 1 1 | wait,wait
+T 0 6 14 7 0 6 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 0 0 | 0 0 | 0 0 0 | -
+T 0 7 15 8 0 7 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 0 0 | 0 0 | 0 0 1 | collision,collision,wait
+T 0 7 16 8 0 7 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 0 0 | 0 0 | 0 0 0 | -
+T 0 8 17 9 0 8 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 2 0 0 | 0 0 | 1 0 1 | ping,turn,zap
+T 0 8 18 9 0 8 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 2 0 0 | 0 0 | 0 0 0 | -
+T 0 9 19 10 0 9 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 3 0 0 | 0 0 | 0 0 1 | wait,collision,zap
+T 0 9 20 10 0 9 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 3 0 0 | 0 0 | 0 0 0 | -
+T 0 10 21 11 0 10 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 4 0 0 | 0 0 | 0 1 1 | collision,turn,zap
+T 0 10 22 11 0 10 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 4 0 0 | 0 0 | 0 0 0 | -
+T 0 11 23 12 0 11 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 0 0 | 0 0 | 0 0 1 | ping,turn,zap
+T 0 11 24 12 0 11 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 0 0 | 0 0 | 0 0 0 | -
+T 0 12 25 13 0 12 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 0 0 | 0 0 | 1 0 1 | collision,wait
+T 0 12 26 13 0 12 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 0 0 | 0 0 | 0 0 0 | -
+T 0 13 27 14 0 13 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 0 0 | 0 0 | 0 0 1 | collision,wait
+T 0 13 28 14 0 13 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 0 0 | 0 0 | 0 0 0 | -
+T 0 14 29 15 0 14 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 6 0 1 | 0 0 | 0 1 1 | ping,ping,zap,zap
+T 0 14 30 15 0 14 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 6 0 1 | 0 0 | 0 0 0 | -
+T 0 15 31 0 0 15 0 0 0 default | A 0 4 N 0 0 0 | B 0 4 W 0 1 0 | 0 1 | 0 0 1 | death,turn,wait
+T 0 15 32 0 0 15 0 0 0 default | A 0 4 N 0 0 0 | B 0 4 W 0 1 0 | 0 1 | 0 0 0 | -
+T 0 16 33 1 0 16 0 0 0 default | A 0 4 N 0 0 0 | B 0 4 N 0 1 0 | 0 2 | 1 0 1 | ping,turn
+T 0 16 34 1 0 16 0 0 0 default | A 0 4 N 0 0 0 | B 0 4 N 0 1 0 | 0 2 | 0 0 0 | -
+T 0 17 35 2 0 17 0 0 0 default | A 0 2 N 0 0 0 | B 0 2 N 0 1 0 | 0 3 | 0 0 1 | move,move,move,move,belt
+T 0 17 36 2 0 17 0 0 0 default | A 0 2 N 0 0 0 | B 0 2 N 0 1 0 | 0 3 | 0 0 0 | -
+T 0 18 37 3 0 18 0 0 0 default | A 0 2 N 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 1 1 | wait,move,pulse
+T 0 18 38 3 0 18 0 0 0 default | A 0 2 N 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 0 19 39 4 0 19 0 0 0 default | A 0 2 W 0 0 0 | B 0 1 E 0 1 0 | 0 0 | 0 0 1 | turn,turn,pulse
+T 0 19 40 4 0 19 0 0 0 default | A 0 2 W 0 0 0 | B 0 1 E 0 1 0 | 0 0 | 0 0 0 | -
+T 0 20 41 5 0 20 0 0 0 default | A 0 2 W 0 0 0 | B 0 1 E 0 1 0 | 0 0 | 1 0 1 | wait,wait,pulse
+T 0 20 42 5 0 20 0 0 0 default | A 0 2 W 0 0 0 | B 0 1 E 0 1 0 | 0 0 | 0 0 0 | -
+T 0 21 43 6 0 21 0 0 0 default | A 0 2 W 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 0 1 | collision,turn,pulse
+T 0 21 44 6 0 21 0 0 0 default | A 0 2 W 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 0 22 45 7 0 22 0 0 0 default | A 0 2 N 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 1 1 | turn,wait
+T 0 22 46 7 0 22 0 0 0 default | A 0 2 N 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 0 23 47 8 0 23 0 0 0 default | A 0 2 N 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 0 1 | wait,wait
+T 0 23 48 8 0 23 0 0 0 default | A 0 2 N 0 0 0 | B 0 1 N 0 1 0 | 0 0 | 0 0 0 | -
+T 0 24 49 9 0 24 0 0 0 default | A 0 2 N 0 0 0 | B 0 0 N 0 1 0 | 0 0 | 1 0 1 | wait,move,collision
+T 0 24 50 9 0 24 0 0 0 default | A 0 2 N 0 0 0 | B 0 0 N 0 1 0 | 0 0 | 0 0 0 | -
+T 0 25 51 10 0 25 0 0 0 default | A 0 2 N 0 0 0 | B 0 0 E 0 1 0 | 0 0 | 0 0 1 | wait,turn
+T 0 25 52 10 0 25 0 0 0 default | A 0 2 N 0 0 0 | B 0 0 E 0 1 0 | 0 0 | 0 0 0 | -
+T 0 26 53 11 0 26 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 E 1 1 0 | 0 0 | 0 1 1 | wait,move,move,belt,zap
+T 0 26 54 11 0 26 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 E 1 1 0 | 0 0 | 0 0 0 | -
+T 0 27 55 12 0 27 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 2 1 0 | 0 0 | 0 0 1 | wait,turn,zap
+T 0 27 56 12 0 27 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 2 1 0 | 0 0 | 0 0 0 | -
+T 0 28 57 13 0 28 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 2 1 0 | 0 0 | 1 0 1 | wait,wait
+T 0 28 58 13 0 28 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 2 1 0 | 0 0 | 0 0 0 | -
+T 0 29 59 14 0 29 0 0 0 default | A 0 2 E 0 0 0 | B 2 0 N 2 1 0 | 0 0 | 0 0 1 | turn,wait
+T 0 29 60 14 0 29 0 0 0 default | A 0 2 E 0 0 0 | B 2 0 N 2 1 0 | 0 0 | 0 0 0 | -
+T 0 30 61 15 0 30 0 0 0 default | A 0 2 E 0 0 0 | B 2 0 N 3 1 0 | 0 0 | 0 1 1 | wait,collision,collision,zap
+T 0 30 62 15 0 30 0 0 0 default | A 0 2 E 0 0 0 | B 2 0 N 3 1 0 | 0 0 | 0 0 0 | -
+T 0 31 63 0 0 31 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 3 1 0 | 0 0 | 0 0 1 | turn,wait
+T 0 31 64 0 0 31 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 3 1 0 | 0 0 | 0 0 0 | -
+T 0 32 65 1 1 0 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 4 1 0 | 0 0 | 1 0 1 | move,move,belt,collision,collision,zap
+T 0 32 66 1 1 0 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 4 1 0 | 0 0 | 0 0 0 | -
+T 0 33 67 2 1 1 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 4 1 0 | 0 0 | 0 0 1 | wait,wait
+T 0 33 68 2 1 1 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 4 1 0 | 0 0 | 0 0 0 | -
+T 0 34 69 3 1 2 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 5 1 0 | 0 0 | 0 1 1 | ping,collision,zap
+T 0 34 70 3 1 2 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 5 1 0 | 0 0 | 0 0 0 | -
+T 0 35 71 4 1 3 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 6 1 1 | 0 0 | 0 0 1 | wait,collision,zap,zap
+T 0 35 72 4 1 3 0 0 0 default | A 0 2 N 0 0 0 | B 2 0 N 6 1 1 | 0 0 | 0 0 0 | -
+T 0 36 73 5 1 4 0 0 0 default | A 0 1 N 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 1 0 1 | death,move,pulse,turn
+T 0 36 74 5 1 4 0 0 0 default | A 0 1 N 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 0 0 0 | -
+T 0 37 75 6 1 5 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 0 0 1 | move,wait
+T 0 37 76 6 1 5 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 0 0 0 | -
+T 0 38 77 7 1 6 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 0 1 1 | wait,turn
+T 0 38 78 7 1 6 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 0 0 0 | -
+T 0 39 79 8 1 7 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 0 0 1 | collision,collision
+T 0 39 80 8 1 7 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 0 0 0 | -
+T 0 40 81 9 1 8 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 1 0 1 | ping,wait
+T 0 40 82 9 1 8 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 0 0 0 | -
+T 0 41 83 10 1 9 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 0 0 1 | wait,collision,collision
+T 0 41 84 10 1 9 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 W 0 2 0 | 0 0 | 0 0 0 | -
+T 0 42 85 11 1 10 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 0 1 1 | ping,turn
+T 0 42 86 11 1 10 0 0 0 default | A 0 0 N 0 0 0 | B 0 4 N 0 2 0 | 0 0 | 0 0 0 | -
+T 0 43 87 12 1 11 0 0 0 default | A 0 0 W 0 0 0 | B 0 2 N 0 2 0 | 0 0 | 0 0 1 | turn,move,move,belt
+T 0 43 88 12 1 11 0 0 0 default | A 0 0 W 0 0 0 | B 0 2 N 0 2 0 | 0 0 | 0 0 0 | -
+T 0 44 89 13 1 12 0 0 0 default | A 0 0 W 0 0 0 | B 0 2 W 0 2 0 | 0 0 | 1 0 1 | wait,turn
+T 0 44 90 13 1 12 0 0 0 default | A 0 0 W 0 0 0 | B 0 2 W 0 2 0 | 0 0 | 0 0 0 | -
+T 0 45 91 14 1 13 0 0 0 default | A 0 0 S 0 0 0 | B 0 2 N 0 2 0 | 0 0 | 0 0 1 | turn,turn
+T 0 45 92 14 1 13 0 0 0 default | A 0 0 S 0 0 0 | B 0 2 N 0 2 0 | 0 0 | 0 0 0 | -
+T 0 46 93 15 1 14 0 0 0 default | A 0 0 S 0 0 0 | B 0 2 N 0 2 0 | 0 0 | 0 1 1 | wait,wait
+T 0 46 94 15 1 14 0 0 0 default | A 0 0 S 0 0 0 | B 0 2 N 0 2 0 | 0 0 | 0 0 0 | -
+T 0 47 95 0 1 15 0 0 0 default | A 0 0 S 0 0 0 | B 0 2 N 1 2 0 | 0 0 | 0 0 1 | zap,wait
+T 0 47 96 0 1 15 0 0 0 default | A 0 0 S 0 0 0 | B 0 2 N 1 2 0 | 0 0 | 0 0 0 | -
+T 0 48 97 1 1 16 0 0 0 default | A 0 2 S 0 0 0 | B 0 2 N 3 2 0 | 7 0 | 1 0 1 | move,move,zap,wait
+T 0 48 98 1 1 16 0 0 0 default | A 0 2 S 0 0 0 | B 0 2 N 3 2 0 | 7 0 | 0 0 0 | -
+T 0 49 99 2 1 17 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 N 3 2 0 | 6 0 | 0 0 1 | ping,move,move
+T 0 49 100 2 1 17 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 N 3 2 0 | 6 0 | 0 0 0 | -
+T 0 50 101 3 1 18 0 0 0 default | A 0 1 S 0 0 0 | B 0 0 N 3 2 0 | 5 0 | 0 1 1 | move,pulse,wait
+T 0 50 102 3 1 18 0 0 0 default | A 0 1 S 0 0 0 | B 0 0 N 3 2 0 | 5 0 | 0 0 0 | -
+T 0 51 103 4 1 19 0 0 0 default | A 0 1 S 0 0 0 | B 0 0 N 3 2 0 | 4 0 | 0 0 1 | wait,collision
+T 0 51 104 4 1 19 0 0 0 default | A 0 1 S 0 0 0 | B 0 0 N 3 2 0 | 4 0 | 0 0 0 | -
+T 0 52 105 5 1 20 0 0 0 default | A 0 1 S 0 0 0 | B 0 0 N 3 2 0 | 3 0 | 1 0 1 | ping,pulse,collision
+T 0 52 106 5 1 20 0 0 0 default | A 0 1 S 0 0 0 | B 0 0 N 3 2 0 | 3 0 | 0 0 0 | -
+T 0 53 107 6 1 21 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 N 3 2 0 | 2 0 | 0 0 1 | move,wait
+T 0 53 108 6 1 21 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 N 3 2 0 | 2 0 | 0 0 0 | -
+T 0 54 109 7 1 22 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 N 3 2 0 | 1 0 | 0 1 1 | wait,wait
+T 0 54 110 7 1 22 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 N 3 2 0 | 1 0 | 0 0 0 | -
+T 0 55 111 8 1 23 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 1 | ping,turn
+T 0 55 112 8 1 23 0 0 0 default | A 0 2 S 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 0 | -
+T 0 56 113 9 1 24 0 0 0 default | A 0 2 W 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 1 0 1 | turn,wait
+T 0 56 114 9 1 24 0 0 0 default | A 0 2 W 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 0 | -
+T 0 57 115 10 1 25 0 0 0 default | A 0 2 W 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 1 | ping,wait
+T 0 57 116 10 1 25 0 0 0 default | A 0 2 W 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 0 | -
+T 0 58 117 11 1 26 0 0 0 default | A 0 2 W 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 1 1 | wait,collision,collision
+T 0 58 118 11 1 26 0 0 0 default | A 0 2 W 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 0 | -
+T 0 59 119 12 1 27 0 0 0 default | A 1 2 S 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 0 0 1 | move,rotator,turn
+T 0 59 120 12 1 27 0 0 0 default | A 1 2 S 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 0 0 0 | -
+T 0 60 121 13 1 28 0 0 0 default | A 1 2 N 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 1 0 1 | turn,rotator,collision
+T 0 60 122 13 1 28 0 0 0 default | A 1 2 N 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 0 0 0 | -
+T 0 61 123 14 1 29 0 0 0 default | A 1 2 N 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 1 | wait,turn
+T 0 61 124 14 1 29 0 0 0 default | A 1 2 N 0 0 0 | B 0 0 W 3 2 0 | 0 0 | 0 0 0 | -
+T 0 62 125 15 1 30 0 0 0 default | A 1 1 N 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 0 1 1 | move,turn
+T 0 62 126 15 1 30 0 0 0 default | A 1 1 N 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 0 0 0 | -
+T 0 63 127 0 1 31 0 0 0 default | A 1 1 N 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 0 0 1 | wait,wait
+T 0 63 128 0 1 31 0 0 0 default | A 1 1 N 0 0 0 | B 0 0 N 3 2 0 | 0 0 | 0 0 0 | -
+T 1 0 1 1 2 0 0 0 0 default | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 1 | reset
+T 1 0 2 1 2 0 0 0 0 default | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | -
+T 1 1 3 2 2 1 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 2 0 | 0 0 | 0 0 1 | ping,move,rotator
+T 1 1 4 2 2 1 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 2 0 | 0 0 | 0 0 0 | -
+T 1 2 5 3 2 2 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 2 0 | 0 0 | 0 1 1 | wait,wait
+T 1 2 6 3 2 2 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 2 0 | 0 0 | 0 0 0 | -
+T 1 3 7 4 2 3 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 E 0 2 0 | 0 0 | 0 0 1 | collision,wait,rotator
+T 1 3 8 4 2 3 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 E 0 2 0 | 0 0 | 0 0 0 | -
+T 1 4 9 5 2 4 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 E 0 2 0 | 0 0 | 1 0 1 | turn,turn,rotator
+T 1 4 10 5 2 4 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 E 0 2 0 | 0 0 | 0 0 0 | -
+T 1 5 11 6 2 5 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 E 0 2 0 | 0 0 | 0 0 1 | ping,wait
+T 1 5 12 6 2 5 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 E 0 2 0 | 0 0 | 0 0 0 | -
+T 1 6 13 7 2 6 0 0 0 default | A 0 4 N 0 0 0 | B 2 0 E 1 2 0 | 0 0 | 0 1 1 | ping,move,zap
+T 1 6 14 7 2 6 0 0 0 default | A 0 4 N 0 0 0 | B 2 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 7 15 8 2 7 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | move,move,move,move
+T 1 7 16 8 2 7 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 8 17 9 2 8 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 S 1 2 0 | 0 0 | 1 0 1 | ping,turn
+T 1 8 18 9 2 8 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 S 1 2 0 | 0 0 | 0 0 0 | -
+T 1 9 19 10 2 9 0 0 0 default | A 0 2 N 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 1 | move,move,belt,move,move,belt
+T 1 9 20 10 2 9 0 0 0 default | A 0 2 N 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 0 | -
+T 1 10 21 11 2 10 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 1 1 | move,pulse,turn
+T 1 10 22 11 2 10 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 11 23 12 2 11 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 1 | ping,pulse,wait
+T 1 11 24 12 2 11 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 12 25 13 2 12 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 1 0 1 | wait,wait
+T 1 12 26 13 2 12 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 13 27 14 2 13 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 1 | move,wait
+T 1 13 28 14 2 13 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 14 29 15 2 14 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 1 1 | ping,ping
+T 1 14 30 15 2 14 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 15 31 0 2 15 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 1 | wait,collision,collision
+T 1 15 32 0 2 15 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 16 33 1 2 16 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 1 0 1 | ping,wait
+T 1 16 34 1 2 16 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 17 35 2 2 17 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 1 | collision,collision,collision
+T 1 17 36 2 2 17 0 0 0 default | A 0 0 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 18 37 3 2 18 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 1 1 | move,pulse,collision
+T 1 18 38 3 2 18 0 0 0 default | A 0 1 N 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 19 39 4 2 19 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 1 | turn,pulse,wait
+T 1 19 40 4 2 19 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 20 41 5 2 20 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 1 0 1 | wait,wait
+T 1 20 42 5 2 20 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 21 43 6 2 21 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 1 | wait,turn
+T 1 21 44 6 2 21 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 0 | -
+T 1 22 45 7 2 22 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 1 1 | wait,move,move,belt
+T 1 22 46 7 2 22 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 0 | -
+T 1 23 47 8 2 23 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 1 | wait,wait
+T 1 23 48 8 2 23 0 0 0 default | A 0 1 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 0 | -
+T 1 24 49 9 2 24 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 1 0 1 | collision,collision,pulse,move,move
+T 1 24 50 9 2 24 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 0 0 0 | -
+T 1 25 51 10 2 25 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | wait,turn
+T 1 25 52 10 2 25 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 26 53 11 2 26 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 1 1 | wait,collision
+T 1 26 54 11 2 26 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 27 55 12 2 27 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 0 0 1 | wait,pulse,turn
+T 1 27 56 12 2 27 0 0 0 default | A 0 1 W 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 0 0 0 | -
+T 1 28 57 13 2 28 0 0 0 default | A 0 1 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 1 0 1 | turn,pulse,turn
+T 1 28 58 13 2 28 0 0 0 default | A 0 1 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 29 59 14 2 29 0 0 0 default | A 0 1 E 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | turn,pulse,collision,collision
+T 1 29 60 14 2 29 0 0 0 default | A 0 1 E 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 30 61 15 2 30 0 0 0 default | A 0 1 E 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 1 1 | wait,collision,collision
+T 1 30 62 15 2 30 0 0 0 default | A 0 1 E 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 31 63 0 2 31 0 0 0 default | A 0 1 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | turn,pulse,wait
+T 1 31 64 0 2 31 0 0 0 default | A 0 1 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 32 65 1 3 0 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 1 0 1 | move,collision,collision
+T 1 32 66 1 3 0 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 33 67 2 3 1 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 S 1 2 0 | 0 0 | 0 0 1 | turn,turn
+T 1 33 68 2 3 1 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 S 1 2 0 | 0 0 | 0 0 0 | -
+T 1 34 69 3 3 2 0 0 0 default | A 0 2 W 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 1 1 | wait,move,move,belt
+T 1 34 70 3 3 2 0 0 0 default | A 0 2 W 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 0 | -
+T 1 35 71 4 3 3 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 W 1 2 0 | 0 0 | 0 0 1 | ping,move,rotator
+T 1 35 72 4 3 3 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 W 1 2 0 | 0 0 | 0 0 0 | -
+T 1 36 73 5 3 4 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 W 1 2 0 | 0 0 | 1 0 1 | collision,wait
+T 1 36 74 5 3 4 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 W 1 2 0 | 0 0 | 0 0 0 | -
+T 1 37 75 6 3 5 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 N 1 2 0 | 0 0 | 0 0 1 | collision,wait,rotator
+T 1 37 76 6 3 5 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 N 1 2 0 | 0 0 | 0 0 0 | -
+T 1 38 77 7 3 6 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 N 1 2 0 | 0 0 | 0 1 1 | wait,turn,rotator
+T 1 38 78 7 3 6 0 0 0 default | A 0 2 W 0 0 0 | B 4 3 N 1 2 0 | 0 0 | 0 0 0 | -
+T 1 39 79 8 3 7 0 0 0 default | A 0 2 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 1 | collision,move
+T 1 39 80 8 3 7 0 0 0 default | A 0 2 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 0 | -
+T 1 40 81 9 3 8 0 0 0 default | A 0 2 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 1 0 1 | ping,wait
+T 1 40 82 9 3 8 0 0 0 default | A 0 2 W 0 0 0 | B 4 2 N 1 2 0 | 0 0 | 0 0 0 | -
+T 1 41 83 10 3 9 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 0 0 1 | turn,move,move
+T 1 41 84 10 3 9 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 0 0 0 | -
+T 1 42 85 11 3 10 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 1 1 | wait,turn
+T 1 42 86 11 3 10 0 0 0 default | A 0 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 43 87 12 3 11 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | turn,collision
+T 1 43 88 12 3 11 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 44 89 13 3 12 0 0 0 default | A 1 2 S 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 1 0 1 | move,rotator,turn
+T 1 44 90 13 3 12 0 0 0 default | A 1 2 S 0 0 0 | B 4 0 N 1 2 0 | 0 0 | 0 0 0 | -
+T 1 45 91 14 3 13 0 0 0 default | A 1 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | turn,rotator,turn
+T 1 45 92 14 3 13 0 0 0 default | A 1 2 N 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 46 93 15 3 14 0 0 0 default | A 1 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 1 1 | ping,rotator,wait
+T 1 46 94 15 3 14 0 0 0 default | A 1 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 47 95 0 3 15 0 0 0 default | A 1 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | wait,wait
+T 1 47 96 0 3 15 0 0 0 default | A 1 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 48 97 1 3 16 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 1 0 1 | move,collision,wait
+T 1 48 98 1 3 16 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 49 99 2 3 17 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 1 | ping,wait
+T 1 49 100 2 3 17 0 0 0 default | A 0 2 W 0 0 0 | B 4 0 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 50 101 3 3 18 0 0 0 default | A 1 2 S 0 0 0 | B 4 0 S 1 2 0 | 0 0 | 0 1 1 | move,rotator,turn
+T 1 50 102 3 3 18 0 0 0 default | A 1 2 S 0 0 0 | B 4 0 S 1 2 0 | 0 0 | 0 0 0 | -
+T 1 51 103 4 3 19 0 0 0 default | A 1 3 S 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 1 | move,move,move,belt
+T 1 51 104 4 3 19 0 0 0 default | A 1 3 S 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 0 | -
+T 1 52 105 5 3 20 0 0 0 default | A 1 3 S 0 0 0 | B 4 3 W 1 2 0 | 0 0 | 1 0 1 | ping,move,rotator
+T 1 52 106 5 3 20 0 0 0 default | A 1 3 S 0 0 0 | B 4 3 W 1 2 0 | 0 0 | 0 0 0 | -
+T 1 53 107 6 3 21 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 E 1 2 0 | 0 0 | 0 0 1 | move,turn,rotator
+T 1 53 108 6 3 21 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 54 109 7 3 22 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 E 1 2 0 | 0 0 | 0 1 1 | wait,wait
+T 1 54 110 7 3 22 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 55 111 8 3 23 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 E 1 2 0 | 0 0 | 0 0 1 | ping,turn,rotator
+T 1 55 112 8 3 23 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 E 1 2 0 | 0 0 | 0 0 0 | -
+T 1 56 113 9 3 24 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 S 1 2 0 | 0 0 | 1 0 1 | wait,collision,rotator
+T 1 56 114 9 3 24 0 0 0 default | A 1 4 S 0 0 0 | B 4 3 S 1 2 0 | 0 0 | 0 0 0 | -
+T 1 57 115 10 3 25 0 0 0 default | A 1 4 S 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 1 | ping,move
+T 1 57 116 10 3 25 0 0 0 default | A 1 4 S 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 0 | -
+T 1 58 117 11 3 26 0 0 0 default | A 1 4 S 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 1 1 | collision,collision,wait
+T 1 58 118 11 3 26 0 0 0 default | A 1 4 S 0 0 0 | B 4 2 S 1 2 0 | 0 0 | 0 0 0 | -
+T 1 59 119 12 3 27 0 0 0 default | A 1 4 S 0 0 0 | B 4 2 W 1 2 0 | 0 0 | 0 0 1 | wait,turn
+T 1 59 120 12 3 27 0 0 0 default | A 1 4 S 0 0 0 | B 4 2 W 1 2 0 | 0 0 | 0 0 0 | -
+T 1 60 121 13 3 28 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 W 2 2 0 | 0 0 | 1 0 1 | turn,move,zap
+T 1 60 122 13 3 28 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 W 2 2 0 | 0 0 | 0 0 0 | -
+T 1 61 123 14 3 29 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 S 3 2 0 | 0 0 | 0 0 1 | wait,turn,zap
+T 1 61 124 14 3 29 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 S 3 2 0 | 0 0 | 0 0 0 | -
+T 1 62 125 15 3 30 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 W 4 2 0 | 0 0 | 0 1 1 | wait,turn,zap
+T 1 62 126 15 3 30 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 W 4 2 0 | 0 0 | 0 0 0 | -
+T 1 63 127 0 3 31 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 W 4 2 0 | 0 0 | 0 0 1 | wait,wait
+T 1 63 128 0 3 31 0 0 0 default | A 1 4 E 0 0 0 | B 3 2 W 4 2 0 | 0 0 | 0 0 0 | -
+T 2 0 1 1 0 0 0 0 0 default | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 1 | reset
+T 2 0 2 1 0 0 0 0 0 default | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | -
+T 2 1 3 2 0 1 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 2 0 | 0 0 | 0 0 1 | ping,move,rotator
+T 2 1 4 2 0 1 0 0 0 default | A 0 4 E 0 0 0 | B 3 0 N 0 2 0 | 0 0 | 0 0 0 | -
+T 2 2 5 3 0 2 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 S 0 2 0 | 0 0 | 0 1 1 | turn,turn,rotator
+T 2 2 6 3 0 2 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 S 0 2 0 | 0 0 | 0 0 0 | -
+T 2 3 7 4 0 3 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 S 0 2 0 | 0 0 | 0 0 1 | collision,wait
+T 2 3 8 4 0 3 0 0 0 default | A 0 4 N 0 0 0 | B 3 0 S 0 2 0 | 0 0 | 0 0 0 | -
+T 2 4 9 5 0 4 0 0 0 default | A 0 4 W 0 0 0 | B 3 0 S 0 2 0 | 0 0 | 1 0 1 | turn,turn,rotator
+T 2 4 10 5 0 4 0 0 0 default | A 0 4 W 0 0 0 | B 3 0 S 0 2 0 | 0 0 | 0 0 0 | -
+T 2 5 11 6 0 5 0 0 0 default | A 0 4 W 0 0 0 | B 3 1 S 0 2 0 | 0 0 | 0 0 1 | wait,move
+T 2 5 12 6 0 5 0 0 0 default | A 0 4 W 0 0 0 | B 3 1 S 0 2 0 | 0 0 | 0 0 0 | -
+T 2 6 13 7 0 6 0 0 0 default | A 0 4 W 0 0 0 | B 3 0 W 0 2 0 | 0 0 | 0 1 1 | wait,move,rotator
+T 2 6 14 7 0 6 0 0 0 default | A 0 4 W 0 0 0 | B 3 0 W 0 2 0 | 0 0 | 0 0 0 | -
+T 2 7 15 8 0 7 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 2 0 | 0 0 | 0 0 1 | collision,collision,move,move,move,belt,zap
+T 2 7 16 8 0 7 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 1 2 0 | 0 0 | 0 0 0 | -
+T 2 8 17 9 0 8 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 2 2 0 | 0 0 | 1 0 1 | ping,turn,zap
+T 2 8 18 9 0 8 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 2 2 0 | 0 0 | 0 0 0 | -
+T 2 9 19 10 0 9 0 0 0 default | A 1 4 W 0 0 0 | B 2 0 N 3 2 0 | 0 0 | 0 0 1 | move,collision,zap
+T 2 9 20 10 0 9 0 0 0 default | A 1 4 W 0 0 0 | B 2 0 N 3 2 0 | 0 0 | 0 0 0 | -
+T 2 10 21 11 0 10 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 4 2 0 | 0 0 | 0 1 1 | move,turn,zap
+T 2 10 22 11 0 10 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 W 4 2 0 | 0 0 | 0 0 0 | -
+T 2 11 23 12 0 11 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 2 0 | 0 0 | 0 0 1 | ping,turn,zap
+T 2 11 24 12 0 11 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 2 0 | 0 0 | 0 0 0 | -
+T 2 12 25 13 0 12 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 2 0 | 0 0 | 1 0 1 | collision,wait
+T 2 12 26 13 0 12 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 5 2 0 | 0 0 | 0 0 0 | -
+T 2 13 27 14 0 13 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 6 2 1 | 0 0 | 0 0 1 | collision,collision,collision,zap,zap
+T 2 13 28 14 0 13 0 0 0 default | A 0 4 W 0 0 0 | B 2 0 N 6 2 1 | 0 0 | 0 0 0 | -
+T 2 14 29 15 0 14 0 0 0 default | A 0 4 W 0 0 0 | B 0 4 W 0 3 0 | 0 1 | 0 1 1 | death,ping,wait
+T 2 14 30 15 0 14 0 0 0 default | A 0 4 W 0 0 0 | B 0 4 W 0 3 0 | 0 1 | 0 0 0 | -
+T 2 15 31 0 0 15 0 0 0 default | A 0 4 W 2 0 0 | B 0 4 W 0 3 0 | 7 0 | 0 0 1 | wait,collision,collision,zap
+T 2 15 32 0 0 15 0 0 0 default | A 0 4 W 2 0 0 | B 0 4 W 0 3 0 | 7 0 | 0 0 0 | -
+T 2 16 33 1 0 16 0 0 0 default | A 0 4 W 2 0 0 | B 0 4 N 0 3 0 | 6 0 | 1 0 1 | ping,turn
+T 2 16 34 1 0 16 0 0 0 default | A 0 4 W 2 0 0 | B 0 4 N 0 3 0 | 6 0 | 0 0 0 | -
+T 2 17 35 2 0 17 0 0 0 default | A 0 4 W 2 0 0 | B 0 2 N 0 3 0 | 5 0 | 0 0 1 | wait,move,move,belt
+T 2 17 36 2 0 17 0 0 0 default | A 0 4 W 2 0 0 | B 0 2 N 0 3 0 | 5 0 | 0 0 0 | -
+T 2 18 37 3 0 18 0 0 0 default | A 1 4 W 2 0 0 | B 0 1 N 0 3 0 | 4 0 | 0 1 1 | move,move,pulse
+T 2 18 38 3 0 18 0 0 0 default | A 1 4 W 2 0 0 | B 0 1 N 0 3 0 | 4 0 | 0 0 0 | -
+T 2 19 39 4 0 19 0 0 0 default | A 1 4 S 2 0 0 | B 0 1 N 0 3 0 | 3 0 | 0 0 1 | turn,wait
+T 2 19 40 4 0 19 0 0 0 default | A 1 4 S 2 0 0 | B 0 1 N 0 3 0 | 3 0 | 0 0 0 | -
+T 2 20 41 5 0 20 0 0 0 default | A 1 4 S 2 0 0 | B 0 1 N 0 3 0 | 2 0 | 1 0 1 | wait,wait,pulse
+T 2 20 42 5 0 20 0 0 0 default | A 1 4 S 2 0 0 | B 0 1 N 0 3 0 | 2 0 | 0 0 0 | -
+T 2 21 43 6 0 21 0 0 0 default | A 1 4 S 2 0 0 | B 0 1 W 0 3 0 | 1 0 | 0 0 1 | collision,turn,pulse
+T 2 21 44 6 0 21 0 0 0 default | A 1 4 S 2 0 0 | B 0 1 W 0 3 0 | 1 0 | 0 0 0 | -
+T 2 22 45 7 0 22 0 0 0 default | A 1 4 W 2 0 0 | B 0 1 W 0 3 0 | 0 0 | 0 1 1 | turn,wait
+T 2 22 46 7 0 22 0 0 0 default | A 1 4 W 2 0 0 | B 0 1 W 0 3 0 | 0 0 | 0 0 0 | -
+T 2 23 47 8 0 23 0 0 0 default | A 1 4 N 2 0 0 | B 0 1 W 0 3 0 | 0 0 | 0 0 1 | turn,wait
+T 2 23 48 8 0 23 0 0 0 default | A 1 4 N 2 0 0 | B 0 1 W 0 3 0 | 0 0 | 0 0 0 | -
+T 2 24 49 9 0 24 0 0 0 default | A 1 2 W 2 0 0 | B 0 1 W 0 3 0 | 0 0 | 1 0 1 | move,move,rotator,collision,collision,pulse
+T 2 24 50 9 0 24 0 0 0 default | A 1 2 W 2 0 0 | B 0 1 W 0 3 0 | 0 0 | 0 0 0 | -
+T 2 25 51 10 0 25 0 0 0 default | A 1 2 S 2 0 0 | B 0 1 N 0 3 0 | 0 0 | 0 0 1 | wait,rotator,turn,pulse
+T 2 25 52 10 0 25 0 0 0 default | A 1 2 S 2 0 0 | B 0 1 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 26 53 11 0 26 0 0 0 default | A 1 2 E 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 1 1 | wait,rotator,move
+T 2 26 54 11 0 26 0 0 0 default | A 1 2 E 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 27 55 12 0 27 0 0 0 default | A 1 2 N 2 0 0 | B 0 0 W 0 3 0 | 0 0 | 0 0 1 | wait,rotator,turn
+T 2 27 56 12 0 27 0 0 0 default | A 1 2 N 2 0 0 | B 0 0 W 0 3 0 | 0 0 | 0 0 0 | -
+T 2 28 57 13 0 28 0 0 0 default | A 1 2 N 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 1 0 1 | wait,turn
+T 2 28 58 13 0 28 0 0 0 default | A 1 2 N 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 29 59 14 0 29 0 0 0 default | A 1 2 N 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 1 | turn,rotator,collision,collision
+T 2 29 60 14 0 29 0 0 0 default | A 1 2 N 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 30 61 15 0 30 0 0 0 default | A 1 3 N 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 1 1 | move,wait
+T 2 30 62 15 0 30 0 0 0 default | A 1 3 N 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 31 63 0 0 31 0 0 0 default | A 1 3 W 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 1 | turn,wait
+T 2 31 64 0 0 31 0 0 0 default | A 1 3 W 2 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 32 65 1 1 0 0 0 0 default | A 2 3 W 1 0 0 | B 0 0 N 0 3 0 | 0 0 | 1 0 1 | move,pulse,collision,collision
+T 2 32 66 1 1 0 0 0 0 default | A 2 3 W 1 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 33 67 2 1 1 0 0 0 default | A 2 3 W 1 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 1 | wait,wait
+T 2 33 68 2 1 1 0 0 0 default | A 2 3 W 1 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 34 69 3 1 2 0 0 0 default | A 2 3 W 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 1 1 | ping,pulse,collision
+T 2 34 70 3 1 2 0 0 0 default | A 2 3 W 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 35 71 4 1 3 0 0 0 default | A 2 3 W 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 1 | ping,pulse,collision
+T 2 35 72 4 1 3 0 0 0 default | A 2 3 W 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 36 73 5 1 4 0 0 0 default | A 1 3 W 0 0 0 | B 0 0 E 0 3 0 | 0 0 | 1 0 1 | move,turn
+T 2 36 74 5 1 4 0 0 0 default | A 1 3 W 0 0 0 | B 0 0 E 0 3 0 | 0 0 | 0 0 0 | -
+T 2 37 75 6 1 5 0 0 0 default | A 1 3 W 0 0 0 | B 0 0 E 0 3 0 | 0 0 | 0 0 1 | wait,wait
+T 2 37 76 6 1 5 0 0 0 default | A 1 3 W 0 0 0 | B 0 0 E 0 3 0 | 0 0 | 0 0 0 | -
+T 2 38 77 7 1 6 0 0 0 default | A 1 3 N 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 1 1 | turn,turn
+T 2 38 78 7 1 6 0 0 0 default | A 1 3 N 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 39 79 8 1 7 0 0 0 default | A 1 2 W 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 1 | move,rotator,collision
+T 2 39 80 8 1 7 0 0 0 default | A 1 2 W 0 0 0 | B 0 0 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 40 81 9 1 8 0 0 0 default | A 1 2 W 0 0 0 | B 0 1 N 0 3 0 | 0 0 | 1 0 1 | wait,move,pulse
+T 2 40 82 9 1 8 0 0 0 default | A 1 2 W 0 0 0 | B 0 1 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 41 83 10 1 9 0 0 0 default | A 1 2 W 0 0 0 | B 0 1 N 0 3 0 | 0 0 | 0 0 1 | turn,rotator,wait
+T 2 41 84 10 1 9 0 0 0 default | A 1 2 W 0 0 0 | B 0 1 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 42 85 11 1 10 0 0 0 default | A 1 2 S 0 0 0 | B 0 1 E 0 3 0 | 0 0 | 0 1 1 | ping,rotator,turn,pulse
+T 2 42 86 11 1 10 0 0 0 default | A 1 2 S 0 0 0 | B 0 1 E 0 3 0 | 0 0 | 0 0 0 | -
+T 2 43 87 12 1 11 0 0 0 default | A 1 2 N 0 0 0 | B 1 1 E 0 3 0 | 0 0 | 0 0 1 | turn,rotator,move
+T 2 43 88 12 1 11 0 0 0 default | A 1 2 N 0 0 0 | B 1 1 E 0 3 0 | 0 0 | 0 0 0 | -
+T 2 44 89 13 1 12 0 0 0 default | A 1 2 N 0 0 0 | B 1 1 N 0 3 0 | 0 0 | 1 0 1 | wait,turn
+T 2 44 90 13 1 12 0 0 0 default | A 1 2 N 0 0 0 | B 1 1 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 45 91 14 1 13 0 0 0 default | A 1 2 S 0 0 0 | B 1 1 N 0 3 0 | 0 0 | 0 0 1 | turn,rotator,wait
+T 2 45 92 14 1 13 0 0 0 default | A 1 2 S 0 0 0 | B 1 1 N 0 3 0 | 0 0 | 0 0 0 | -
+T 2 46 93 15 1 14 0 0 0 default | A 1 2 E 0 0 0 | B 2 0 N 1 3 0 | 0 0 | 0 1 1 | ping,rotator,move,collision,move,belt,zap
+T 2 46 94 15 1 14 0 0 0 default | A 1 2 E 0 0 0 | B 2 0 N 1 3 0 | 0 0 | 0 0 0 | -
+T 2 47 95 0 1 15 0 0 0 default | A 1 2 N 0 0 0 | B 2 0 N 2 3 0 | 0 0 | 0 0 1 | ping,rotator,collision,collision,zap
+T 2 47 96 0 1 15 0 0 0 default | A 1 2 N 0 0 0 | B 2 0 N 2 3 0 | 0 0 | 0 0 0 | -
+T 2 48 97 1 1 16 0 0 0 default | A 2 0 N 1 0 0 | B 2 0 N 3 3 0 | 0 1 | 1 0 1 | move,move,move,belt,zap,ping,zap
+T 2 48 98 1 1 16 0 0 0 default | A 2 0 N 1 0 0 | B 2 0 N 3 3 0 | 0 1 | 0 0 0 | -
+T 2 49 99 2 1 17 0 0 0 default | A 2 0 N 4 0 0 | B 2 0 N 4 3 0 | 7 0 | 0 0 1 | ping,zap,collision,collision,zap,zap
+T 2 49 100 2 1 17 0 0 0 default | A 2 0 N 4 0 0 | B 2 0 N 4 3 0 | 7 0 | 0 0 0 | -
+T 2 50 101 3 1 18 0 0 0 default | A 2 0 N 5 0 0 | B 2 0 E 5 3 0 | 6 0 | 0 1 1 | collision,zap,turn,zap
+T 2 50 102 3 1 18 0 0 0 default | A 2 0 N 5 0 0 | B 2 0 E 5 3 0 | 6 0 | 0 0 0 | -
+T 2 51 103 4 1 19 0 0 0 default | A 2 0 N 6 0 1 | B 3 0 S 5 3 0 | 5 0 | 0 0 1 | collision,zap,zap,move,rotator
+T 2 51 104 4 1 19 0 0 0 default | A 2 0 N 6 0 1 | B 3 0 S 5 3 0 | 5 0 | 0 0 0 | -
+T 2 52 105 5 1 20 0 0 0 default | A 0 4 E 0 1 0 | B 3 1 S 5 3 0 | 4 0 | 1 0 1 | death,ping,move
+T 2 52 106 5 1 20 0 0 0 default | A 0 4 E 0 1 0 | B 3 1 S 5 3 0 | 4 0 | 0 0 0 | -
+T 2 53 107 6 1 21 0 0 0 default | A 0 4 E 0 1 0 | B 3 1 W 5 3 0 | 3 0 | 0 0 1 | wait,turn
+T 2 53 108 6 1 21 0 0 0 default | A 0 4 E 0 1 0 | B 3 1 W 5 3 0 | 3 0 | 0 0 0 | -
+T 2 54 109 7 1 22 0 0 0 default | A 1 4 E 0 1 0 | B 3 1 W 5 3 0 | 2 0 | 0 1 1 | move,wait
+T 2 54 110 7 1 22 0 0 0 default | A 1 4 E 0 1 0 | B 3 1 W 5 3 0 | 2 0 | 0 0 0 | -
+T 2 55 111 8 1 23 0 0 0 default | A 1 4 E 0 1 0 | B 3 1 S 5 3 0 | 1 0 | 0 0 1 | ping,turn
+T 2 55 112 8 1 23 0 0 0 default | A 1 4 E 0 1 0 | B 3 1 S 5 3 0 | 1 0 | 0 0 0 | -
+T 2 56 113 9 1 24 0 0 0 default | A 1 4 E 0 1 0 | B 3 2 S 6 3 1 | 0 0 | 1 0 1 | wait,move,zap,zap
+T 2 56 114 9 1 24 0 0 0 default | A 1 4 E 0 1 0 | B 3 2 S 6 3 1 | 0 0 | 0 0 0 | -
+T 2 57 115 10 1 25 0 0 0 default | A 1 4 E 0 1 0 | B 0 0 W 0 4 0 | 0 0 | 0 0 1 | death,ping,wait
+T 2 57 116 10 1 25 0 0 0 default | A 1 4 E 0 1 0 | B 0 0 W 0 4 0 | 0 0 | 0 0 0 | -
+T 2 58 117 11 1 26 0 0 0 default | A 1 4 E 0 1 0 | B 0 0 W 0 4 0 | 0 0 | 0 1 1 | wait,wait
+T 2 58 118 11 1 26 0 0 0 default | A 1 4 E 0 1 0 | B 0 0 W 0 4 0 | 0 0 | 0 0 0 | -
+T 2 59 119 12 1 27 0 0 0 default | A 0 4 E 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 0 0 1 | move,turn
+T 2 59 120 12 1 27 0 0 0 default | A 0 4 E 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 0 0 0 | -
+T 2 60 121 13 1 28 0 0 0 default | A 0 4 N 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 1 0 1 | turn,collision
+T 2 60 122 13 1 28 0 0 0 default | A 0 4 N 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 0 0 0 | -
+T 2 61 123 14 1 29 0 0 0 default | A 0 4 N 0 1 0 | B 0 0 W 0 4 0 | 0 0 | 0 0 1 | wait,turn
+T 2 61 124 14 1 29 0 0 0 default | A 0 4 N 0 1 0 | B 0 0 W 0 4 0 | 0 0 | 0 0 0 | -
+T 2 62 125 15 1 30 0 0 0 default | A 0 2 N 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 0 1 1 | move,move,belt,turn
+T 2 62 126 15 1 30 0 0 0 default | A 0 2 N 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 0 0 0 | -
+T 2 63 127 0 1 31 0 0 0 default | A 0 2 N 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 0 0 1 | wait,collision,collision
+T 2 63 128 0 1 31 0 0 0 default | A 0 2 N 0 1 0 | B 0 0 N 0 4 0 | 0 0 | 0 0 0 | -
+T 3 0 1 1 2 0 0 0 0 default | A 0 4 E 0 1 0 | B 4 0 W 0 4 0 | 0 0 | 1 0 1 | reset
+T 3 0 2 1 2 0 0 0 0 default | A 0 4 E 0 1 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 0 | -
+T 3 1 3 2 2 1 0 0 0 default | A 0 4 E 0 1 0 | B 3 0 N 0 4 0 | 0 0 | 0 0 1 | ping,move,rotator
+T 3 1 4 2 2 1 0 0 0 default | A 0 4 E 0 1 0 | B 3 0 N 0 4 0 | 0 0 | 0 0 0 | -
+T 3 2 5 3 2 2 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 N 0 4 0 | 0 0 | 0 1 1 | turn,wait
+T 3 2 6 3 2 2 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 N 0 4 0 | 0 0 | 0 0 0 | -
+T 3 3 7 4 2 3 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 1 | collision,wait,rotator
+T 3 3 8 4 2 3 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 0 | -
+T 3 4 9 5 2 4 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 1 0 1 | wait,turn,rotator
+T 3 4 10 5 2 4 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 0 | -
+T 3 5 11 6 2 5 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 1 | wait,wait
+T 3 5 12 6 2 5 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 0 | -
+T 3 6 13 7 2 6 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 1 1 | ping,wait
+T 3 6 14 7 2 6 0 0 0 default | A 0 4 N 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 0 | -
+T 3 7 15 8 2 7 0 0 0 default | A 0 2 N 0 1 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 1 | move,move,move,collision
+T 3 7 16 8 2 7 0 0 0 default | A 0 2 N 0 1 0 | B 4 0 E 0 4 0 | 0 0 | 0 0 0 | -
+T 3 8 17 9 2 8 0 0 0 default | A 0 2 N 0 1 0 | B 4 0 S 0 4 0 | 0 0 | 1 0 1 | ping,turn
+T 3 8 18 9 2 8 0 0 0 default | A 0 2 N 0 1 0 | B 4 0 S 0 4 0 | 0 0 | 0 0 0 | -
+T 3 9 19 10 2 9 0 0 0 default | A 0 2 N 0 1 0 | B 4 2 S 0 4 0 | 0 0 | 0 0 1 | move,move,belt,move,move,belt
+T 3 9 20 10 2 9 0 0 0 default | A 0 2 N 0 1 0 | B 4 2 S 0 4 0 | 0 0 | 0 0 0 | -
+T 3 10 21 11 2 10 0 0 0 default | A 0 2 N 0 1 0 | B 4 2 E 0 4 0 | 0 0 | 0 1 1 | wait,turn
+T 3 10 22 11 2 10 0 0 0 default | A 0 2 N 0 1 0 | B 4 2 E 0 4 0 | 0 0 | 0 0 0 | -
+T 3 11 23 12 2 11 0 0 0 default | A 0 2 N 0 1 0 | B 4 2 S 0 4 0 | 0 0 | 0 0 1 | ping,turn
+T 3 11 24 12 2 11 0 0 0 default | A 0 2 N 0 1 0 | B 4 2 S 0 4 0 | 0 0 | 0 0 0 | -
+T 3 12 25 13 2 12 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 1 0 1 | wait,move,move
+T 3 12 26 13 2 12 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+T 3 13 27 14 2 13 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 1 | wait,collision,collision
+T 3 13 28 14 2 13 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+T 3 14 29 15 2 14 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 1 1 | ping,ping
+T 3 14 30 15 2 14 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+T 3 15 31 0 2 15 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 1 | wait,collision,collision
+T 3 15 32 0 2 15 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+T 3 16 33 1 2 16 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 1 0 1 | ping,wait
+T 3 16 34 1 2 16 0 0 0 default | A 0 2 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+T 3 17 35 2 2 17 0 0 0 default | A 0 0 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 1 | move,move,collision
+T 3 17 36 2 2 17 0 0 0 default | A 0 0 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+T 3 18 37 3 2 18 0 0 0 default | A 0 1 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 1 1 | move,pulse,collision
+T 3 18 38 3 2 18 0 0 0 default | A 0 1 N 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+T 3 19 39 4 2 19 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 1 | turn,pulse,wait
+T 3 19 40 4 2 19 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+T 3 20 41 5 2 20 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 1 0 1 | wait,pulse,wait
+T 3 20 42 5 2 20 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 S 0 4 0 | 0 0 | 0 0 0 | -
+T 3 21 43 6 2 21 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 E 0 4 0 | 0 0 | 0 0 1 | collision,pulse,turn
+T 3 21 44 6 2 21 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 E 0 4 0 | 0 0 | 0 0 0 | -
+T 3 22 45 7 2 22 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 E 0 4 0 | 0 0 | 0 1 1 | wait,wait
+T 3 22 46 7 2 22 0 0 0 default | A 0 1 W 0 1 0 | B 4 4 E 0 4 0 | 0 0 | 0 0 0 | -
+T 3 23 47 8 2 23 0 0 0 default | A 0 1 N 0 1 0 | B 3 4 N 0 4 0 | 0 0 | 0 0 1 | turn,pulse,move,rotator
+T 3 23 48 8 2 23 0 0 0 default | A 0 1 N 0 1 0 | B 3 4 N 0 4 0 | 0 0 | 0 0 0 | -
+T 3 24 49 9 2 24 0 0 0 default | A 0 1 N 0 1 0 | B 3 4 N 0 4 0 | 0 0 | 1 0 1 | wait,wait
+T 3 24 50 9 2 24 0 0 0 default | A 0 1 N 0 1 0 | B 3 4 N 0 4 0 | 0 0 | 0 0 0 | -
+T 3 25 51 10 2 25 0 0 0 default | A 0 1 N 0 1 0 | B 3 4 N 0 4 0 | 0 0 | 0 0 1 | wait,turn,rotator
+T 3 25 52 10 2 25 0 0 0 default | A 0 1 N 0 1 0 | B 3 4 N 0 4 0 | 0 0 | 0 0 0 | -
+T 3 26 53 11 2 26 0 0 0 default | A 0 1 N 0 1 0 | B 3 3 N 0 4 0 | 0 0 | 0 1 1 | wait,pulse,move
+T 3 26 54 11 2 26 0 0 0 default | A 0 1 N 0 1 0 | B 3 3 N 0 4 0 | 0 0 | 0 0 0 | -
+T 3 27 55 12 2 27 0 0 0 default | A 0 1 N 0 1 0 | B 3 3 W 0 4 0 | 0 0 | 0 0 1 | wait,pulse,turn
+T 3 27 56 12 2 27 0 0 0 default | A 0 1 N 0 1 0 | B 3 3 W 0 4 0 | 0 0 | 0 0 0 | -
+T 3 28 57 13 2 28 0 0 0 default | A 0 1 E 0 1 0 | B 3 3 N 0 4 0 | 0 0 | 1 0 1 | turn,pulse,turn
+T 3 28 58 13 2 28 0 0 0 default | A 0 1 E 0 1 0 | B 3 3 N 0 4 0 | 0 0 | 0 0 0 | -
+T 3 29 59 14 2 29 0 0 0 default | A 0 1 S 0 1 0 | B 3 1 N 0 4 0 | 0 0 | 0 0 1 | turn,pulse,move,move
+T 3 29 60 14 2 29 0 0 0 default | A 0 1 S 0 1 0 | B 3 1 N 0 4 0 | 0 0 | 0 0 0 | -
+T 3 30 61 15 2 30 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 1 1 | move,move,collision,rotator
+T 3 30 62 15 2 30 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 0 | -
+T 3 31 63 0 2 31 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 1 | wait,wait
+T 3 31 64 0 2 31 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 0 | -
+T 3 32 65 1 3 0 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 1 0 1 | collision,wait
+T 3 32 66 1 3 0 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 E 0 4 0 | 0 0 | 0 0 0 | -
+T 3 33 67 2 3 1 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 W 0 4 0 | 0 0 | 0 0 1 | wait,turn,rotator
+T 3 33 68 2 3 1 0 0 0 default | A 0 0 S 0 1 0 | B 3 0 W 0 4 0 | 0 0 | 0 0 0 | -
+T 3 34 69 3 3 2 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 W 1 4 0 | 0 0 | 0 1 1 | ping,move,zap
+T 3 34 70 3 3 2 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 W 1 4 0 | 0 0 | 0 0 0 | -
+T 3 35 71 4 3 3 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 W 2 4 0 | 0 0 | 0 0 1 | wait,move,move,belt,zap
+T 3 35 72 4 3 3 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 W 2 4 0 | 0 0 | 0 0 0 | -
+T 3 36 73 5 3 4 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 N 3 4 0 | 0 0 | 1 0 1 | wait,turn,zap
+T 3 36 74 5 3 4 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 N 3 4 0 | 0 0 | 0 0 0 | -
+T 3 37 75 6 3 5 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 N 4 4 0 | 0 0 | 0 0 1 | wait,wait,zap
+T 3 37 76 6 3 5 0 0 0 default | A 0 0 S 0 1 0 | B 2 0 N 4 4 0 | 0 0 | 0 0 0 | -
+T 3 38 77 7 3 6 0 0 0 default | A 0 0 W 0 1 0 | B 2 0 W 5 4 0 | 0 0 | 0 1 1 | turn,turn,zap
+T 3 38 78 7 3 6 0 0 0 default | A 0 0 W 0 1 0 | B 2 0 W 5 4 0 | 0 0 | 0 0 0 | -
+T 3 39 79 8 3 7 0 0 0 default | A 0 0 W 0 1 0 | B 2 0 W 6 4 1 | 0 0 | 0 0 1 | collision,move,move,belt,zap,zap
+T 3 39 80 8 3 7 0 0 0 default | A 0 0 W 0 1 0 | B 2 0 W 6 4 1 | 0 0 | 0 0 0 | -
+T 3 40 81 9 3 8 0 0 0 default | A 0 0 W 0 1 0 | B 1 4 W 0 5 0 | 0 0 | 1 0 1 | death,ping,move
+T 3 40 82 9 3 8 0 0 0 default | A 0 0 W 0 1 0 | B 1 4 W 0 5 0 | 0 0 | 0 0 0 | -
+T 3 41 83 10 3 9 0 0 0 default | A 0 0 N 0 1 0 | B 1 4 W 0 5 0 | 0 0 | 0 0 1 | turn,wait
+T 3 41 84 10 3 9 0 0 0 default | A 0 0 N 0 1 0 | B 1 4 W 0 5 0 | 0 0 | 0 0 0 | -
+T 3 42 85 11 3 10 0 0 0 default | A 0 0 N 0 1 0 | B 1 4 N 0 5 0 | 0 0 | 0 1 1 | ping,turn
+T 3 42 86 11 3 10 0 0 0 default | A 0 0 N 0 1 0 | B 1 4 N 0 5 0 | 0 0 | 0 0 0 | -
+T 3 43 87 12 3 11 0 0 0 default | A 0 0 W 0 1 0 | B 1 3 N 0 5 0 | 0 0 | 0 0 1 | turn,move
+T 3 43 88 12 3 11 0 0 0 default | A 0 0 W 0 1 0 | B 1 3 N 0 5 0 | 0 0 | 0 0 0 | -
+T 3 44 89 13 3 12 0 0 0 default | A 2 0 W 1 1 0 | B 1 3 W 0 5 0 | 0 0 | 1 0 1 | move,move,belt,zap,turn
+T 3 44 90 13 3 12 0 0 0 default | A 2 0 W 1 1 0 | B 1 3 W 0 5 0 | 0 0 | 0 0 0 | -
+T 3 45 91 14 3 13 0 0 0 default | A 2 0 W 1 1 0 | B 1 3 N 0 5 0 | 0 0 | 0 0 1 | wait,turn
+T 3 45 92 14 3 13 0 0 0 default | A 2 0 W 1 1 0 | B 1 3 N 0 5 0 | 0 0 | 0 0 0 | -
+T 3 46 93 15 3 14 0 0 0 default | A 2 0 W 2 1 0 | B 1 3 N 0 5 0 | 0 0 | 0 1 1 | ping,zap,wait
+T 3 46 94 15 3 14 0 0 0 default | A 2 0 W 2 1 0 | B 1 3 N 0 5 0 | 0 0 | 0 0 0 | -
+T 3 47 95 0 3 15 0 0 0 default | A 2 0 W 3 1 0 | B 1 1 N 0 5 0 | 0 0 | 0 0 1 | ping,zap,move,move
+T 3 47 96 0 3 15 0 0 0 default | A 2 0 W 3 1 0 | B 1 1 N 0 5 0 | 0 0 | 0 0 0 | -
+T 3 48 97 1 3 16 0 0 0 default | A 0 0 W 3 1 0 | B 1 1 N 0 5 0 | 0 0 | 1 0 1 | move,move,ping
+T 3 48 98 1 3 16 0 0 0 default | A 0 0 W 3 1 0 | B 1 1 N 0 5 0 | 0 0 | 0 0 0 | -
+T 3 49 99 2 3 17 0 0 0 default | A 0 0 W 3 1 0 | B 2 0 N 1 5 0 | 0 0 | 0 0 1 | ping,move,collision,move,belt,zap
+T 3 49 100 2 3 17 0 0 0 default | A 0 0 W 3 1 0 | B 2 0 N 1 5 0 | 0 0 | 0 0 0 | -
+T 3 50 101 3 3 18 0 0 0 default | A 2 0 W 4 1 0 | B 2 0 N 1 5 0 | 0 1 | 0 1 1 | move,move,belt,zap,wait
+T 3 50 102 3 3 18 0 0 0 default | A 2 0 W 4 1 0 | B 2 0 N 1 5 0 | 0 1 | 0 0 0 | -
+T 3 51 103 4 3 19 0 0 0 default | A 2 0 W 5 1 0 | B 2 0 N 2 5 0 | 0 2 | 0 0 1 | move,move,belt,zap,collision,zap,love
+T 3 51 104 4 3 19 0 0 0 default | A 2 0 W 5 1 0 | B 2 0 N 2 5 0 | 0 2 | 0 0 0 | -
+T 3 52 105 5 3 20 0 0 0 default | A 2 0 W 6 1 1 | B 2 0 N 3 5 0 | 0 0 | 1 0 1 | ping,zap,zap,collision,zap
+T 3 52 106 5 3 20 0 0 0 default | A 2 0 W 6 1 1 | B 2 0 N 3 5 0 | 0 0 | 0 0 0 | -
+T 3 53 107 6 3 21 0 0 0 default | A 1 4 E 0 2 0 | B 2 0 E 4 5 0 | 0 0 | 0 0 1 | death,move,turn,zap
+T 3 53 108 6 3 21 0 0 0 default | A 1 4 E 0 2 0 | B 2 0 E 4 5 0 | 0 0 | 0 0 0 | -
+T 3 54 109 7 3 22 0 0 0 default | A 2 4 E 0 2 0 | B 2 0 E 5 5 0 | 0 0 | 0 1 1 | move,wait,zap
+T 3 54 110 7 3 22 0 0 0 default | A 2 4 E 0 2 0 | B 2 0 E 5 5 0 | 0 0 | 0 0 0 | -
+T 3 55 111 8 3 23 0 0 0 default | A 2 4 E 0 2 0 | B 2 0 N 6 5 1 | 0 0 | 0 0 1 | ping,turn,zap,zap
+T 3 55 112 8 3 23 0 0 0 default | A 2 4 E 0 2 0 | B 2 0 N 6 5 1 | 0 0 | 0 0 0 | -
+T 3 56 113 9 3 24 0 0 0 default | A 2 4 E 0 2 0 | B 0 4 W 0 6 0 | 0 0 | 1 0 1 | death,wait,wait
+T 3 56 114 9 3 24 0 0 0 default | A 2 4 E 0 2 0 | B 0 4 W 0 6 0 | 0 0 | 0 0 0 | -
+T 3 57 115 10 3 25 0 0 0 default | A 2 4 E 0 2 0 | B 0 4 W 0 6 0 | 0 0 | 0 0 1 | ping,wait
+T 3 57 116 10 3 25 0 0 0 default | A 2 4 E 0 2 0 | B 0 4 W 0 6 0 | 0 0 | 0 0 0 | -
+T 3 58 117 11 3 26 0 0 0 default | A 4 4 E 0 2 0 | B 0 4 W 0 6 0 | 0 0 | 0 1 1 | move,move,collision,collision
+T 3 58 118 11 3 26 0 0 0 default | A 4 4 E 0 2 0 | B 0 4 W 0 6 0 | 0 0 | 0 0 0 | -
+T 3 59 119 12 3 27 0 0 0 default | A 4 4 E 0 2 0 | B 0 4 N 0 6 0 | 0 0 | 0 0 1 | wait,turn
+T 3 59 120 12 3 27 0 0 0 default | A 4 4 E 0 2 0 | B 0 4 N 0 6 0 | 0 0 | 0 0 0 | -
+T 3 60 121 13 3 28 0 0 0 default | A 4 4 N 0 2 0 | B 0 2 N 0 6 0 | 0 0 | 1 0 1 | turn,move,move,belt
+T 3 60 122 13 3 28 0 0 0 default | A 4 4 N 0 2 0 | B 0 2 N 0 6 0 | 0 0 | 0 0 0 | -
+T 3 61 123 14 3 29 0 0 0 default | A 4 4 N 0 2 0 | B 0 2 W 0 6 0 | 0 0 | 0 0 1 | wait,turn
+T 3 61 124 14 3 29 0 0 0 default | A 4 4 N 0 2 0 | B 0 2 W 0 6 0 | 0 0 | 0 0 0 | -
+T 3 62 125 15 3 30 0 0 0 default | A 4 4 N 0 2 0 | B 0 2 N 0 6 0 | 0 0 | 0 1 1 | wait,turn
+T 3 62 126 15 3 30 0 0 0 default | A 4 4 N 0 2 0 | B 0 2 N 0 6 0 | 0 0 | 0 0 0 | -
+T 3 63 127 0 3 31 0 0 0 default | A 4 4 N 0 2 0 | B 0 0 N 0 6 0 | 0 0 | 0 0 1 | wait,move,move
+T 3 63 128 0 3 31 0 0 0 default | A 4 4 N 0 2 0 | B 0 0 N 0 6 0 | 0 0 | 0 0 0 | -
+T 4 0 1 1 0 0 0 0 0 default | A 0 4 E 0 2 0 | B 4 0 W 0 6 0 | 0 0 | 1 0 1 | reset
+T 4 0 2 1 0 0 0 0 0 default | A 0 4 E 0 2 0 | B 4 0 W 0 6 0 | 0 0 | 0 0 0 | -
+T 4 1 3 2 0 1 0 0 0 default | A 0 4 E 0 2 0 | B 3 0 N 0 6 0 | 0 0 | 0 0 1 | ping,move,rotator
+T 4 1 4 2 0 1 0 0 0 default | A 0 4 E 0 2 0 | B 3 0 N 0 6 0 | 0 0 | 0 0 0 | -
+T 4 2 5 3 0 2 0 0 0 default | A 0 4 E 0 2 0 | B 3 0 S 0 6 0 | 0 0 | 0 1 1 | wait,turn,rotator
+T 4 2 6 3 0 2 0 0 0 default | A 0 4 E 0 2 0 | B 3 0 S 0 6 0 | 0 0 | 0 0 0 | -
+T 4 3 7 4 0 3 0 0 0 default | A 0 4 E 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 0 0 1 | collision,wait,rotator
+T 4 3 8 4 0 3 0 0 0 default | A 0 4 E 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 0 0 0 | -
+T 4 4 9 5 0 4 0 0 0 default | A 0 4 N 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 1 0 1 | turn,turn,rotator
+T 4 4 10 5 0 4 0 0 0 default | A 0 4 N 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 0 0 0 | -
+T 4 5 11 6 0 5 0 0 0 default | A 0 4 N 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 0 0 1 | wait,wait
+T 4 5 12 6 0 5 0 0 0 default | A 0 4 N 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 0 0 0 | -
+T 4 6 13 7 0 6 0 0 0 default | A 0 4 N 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 0 1 1 | ping,wait
+T 4 6 14 7 0 6 0 0 0 default | A 0 4 N 0 2 0 | B 3 0 W 0 6 0 | 0 0 | 0 0 0 | -
+T 4 7 15 8 0 7 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 W 1 6 0 | 0 0 | 0 0 1 | move,move,move,move,move,belt,zap
+T 4 7 16 8 0 7 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 W 1 6 0 | 0 0 | 0 0 0 | -
+T 4 8 17 9 0 8 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 N 2 6 0 | 0 0 | 1 0 1 | ping,turn,zap
+T 4 8 18 9 0 8 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 N 2 6 0 | 0 0 | 0 0 0 | -
+T 4 9 19 10 0 9 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 N 3 6 0 | 0 0 | 0 0 1 | move,move,belt,collision,zap
+T 4 9 20 10 0 9 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 N 3 6 0 | 0 0 | 0 0 0 | -
+T 4 10 21 11 0 10 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 W 4 6 0 | 0 0 | 0 1 1 | wait,turn,zap
+T 4 10 22 11 0 10 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 W 4 6 0 | 0 0 | 0 0 0 | -
+T 4 11 23 12 0 11 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 N 5 6 0 | 0 0 | 0 0 1 | ping,turn,zap
+T 4 11 24 12 0 11 0 0 0 default | A 0 2 N 0 2 0 | B 2 0 N 5 6 0 | 0 0 | 0 0 0 | -
+T 4 12 25 13 0 12 0 0 0 default | A 0 1 N 0 2 0 | B 2 0 N 5 6 0 | 0 0 | 1 0 1 | move,pulse,wait
+T 4 12 26 13 0 12 0 0 0 default | A 0 1 N 0 2 0 | B 2 0 N 5 6 0 | 0 0 | 0 0 0 | -
+T 4 13 27 14 0 13 0 0 0 default | A 0 0 N 0 2 0 | B 2 0 N 6 6 1 | 0 0 | 0 0 1 | move,collision,collision,zap,zap
+T 4 13 28 14 0 13 0 0 0 default | A 0 0 N 0 2 0 | B 2 0 N 6 6 1 | 0 0 | 0 0 0 | -
+T 4 14 29 15 0 14 0 0 0 default | A 0 0 N 0 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 1 1 | death,ping,ping
+T 4 14 30 15 0 14 0 0 0 default | A 0 0 N 0 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+T 4 15 31 0 0 15 0 0 0 default | A 0 0 E 0 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 1 | turn,collision,collision
+T 4 15 32 0 0 15 0 0 0 default | A 0 0 E 0 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+T 4 16 33 1 0 16 0 0 0 default | A 0 0 E 0 2 0 | B 0 4 W 0 7 0 | 0 0 | 1 0 1 | ping,wait
+T 4 16 34 1 0 16 0 0 0 default | A 0 0 E 0 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+T 4 17 35 2 0 17 0 0 0 default | A 2 0 E 1 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 1 | move,move,zap,collision
+T 4 17 36 2 0 17 0 0 0 default | A 2 0 E 1 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+T 4 18 37 3 0 18 0 0 0 default | A 2 0 E 2 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 1 1 | move,move,belt,zap,collision
+T 4 18 38 3 0 18 0 0 0 default | A 2 0 E 2 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+T 4 19 39 4 0 19 0 0 0 default | A 2 0 N 3 2 0 | B 0 4 N 0 7 0 | 0 0 | 0 0 1 | turn,zap,turn
+T 4 19 40 4 0 19 0 0 0 default | A 2 0 N 3 2 0 | B 0 4 N 0 7 0 | 0 0 | 0 0 0 | -
+T 4 20 41 5 0 20 0 0 0 default | A 2 0 N 4 2 0 | B 0 4 N 0 7 0 | 0 0 | 1 0 1 | wait,zap,wait
+T 4 20 42 5 0 20 0 0 0 default | A 2 0 N 4 2 0 | B 0 4 N 0 7 0 | 0 0 | 0 0 0 | -
+T 4 21 43 6 0 21 0 0 0 default | A 2 0 N 5 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 1 | collision,zap,turn
+T 4 21 44 6 0 21 0 0 0 default | A 2 0 N 5 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+T 4 22 45 7 0 22 0 0 0 default | A 2 0 N 5 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 1 1 | wait,collision
+T 4 22 46 7 0 22 0 0 0 default | A 2 0 N 5 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+T 4 23 47 8 0 23 0 0 0 default | A 2 0 N 5 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 1 | wait,wait
+T 4 23 48 8 0 23 0 0 0 default | A 2 0 N 5 2 0 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+T 4 24 49 9 0 24 0 0 0 default | A 2 0 N 6 2 1 | B 0 4 W 0 7 0 | 0 0 | 1 0 1 | collision,collision,zap,zap,collision,collision
+T 4 24 50 9 0 24 0 0 0 default | A 2 0 N 6 2 1 | B 0 4 W 0 7 0 | 0 0 | 0 0 0 | -
+T 4 25 51 10 0 25 0 0 0 default | A 0 4 E 0 3 0 | B 0 4 N 0 7 0 | 0 1 | 0 0 1 | death,wait,turn
+T 4 25 52 10 0 25 0 0 0 default | A 0 4 E 0 3 0 | B 0 4 N 0 7 0 | 0 1 | 0 0 0 | -
+T 4 26 53 11 0 26 0 0 0 default | A 0 4 E 0 3 0 | B 0 2 N 0 7 0 | 0 0 | 0 1 1 | wait,move,move,belt
+T 4 26 54 11 0 26 0 0 0 default | A 0 4 E 0 3 0 | B 0 2 N 0 7 0 | 0 0 | 0 0 0 | -
+T 4 27 55 12 0 27 0 0 0 default | A 0 4 E 0 3 0 | B 0 2 W 0 7 0 | 0 0 | 0 0 1 | wait,turn
+T 4 27 56 12 0 27 0 0 0 default | A 0 4 E 0 3 0 | B 0 2 W 0 7 0 | 0 0 | 0 0 0 | -
+T 4 28 57 13 0 28 0 0 0 default | A 0 4 S 0 3 0 | B 0 2 N 0 7 0 | 0 0 | 1 0 1 | turn,turn
+T 4 28 58 13 0 28 0 0 0 default | A 0 4 S 0 3 0 | B 0 2 N 0 7 0 | 0 0 | 0 0 0 | -
+T 4 29 59 14 0 29 0 0 0 default | A 0 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 0 0 1 | turn,move,move
+T 4 29 60 14 0 29 0 0 0 default | A 0 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 0 0 0 | -
+T 4 30 61 15 0 30 0 0 0 default | A 1 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 0 1 1 | move,collision,collision
+T 4 30 62 15 0 30 0 0 0 default | A 1 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 0 0 0 | -
+T 4 31 63 0 0 31 0 0 0 default | A 1 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 0 0 1 | wait,wait
+T 4 31 64 0 0 31 0 0 0 default | A 1 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 0 0 0 | -
+T 4 32 65 1 1 0 0 0 0 default | A 2 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 1 0 1 | move,collision,collision
+T 4 32 66 1 1 0 0 0 0 default | A 2 4 W 0 3 0 | B 0 0 N 0 7 0 | 0 0 | 0 0 0 | -
+T 4 33 67 2 1 1 0 0 0 default | A 2 4 W 0 3 0 | B 0 0 E 0 7 0 | 0 0 | 0 0 1 | wait,turn
+T 4 33 68 2 1 1 0 0 0 default | A 2 4 W 0 3 0 | B 0 0 E 0 7 0 | 0 0 | 0 0 0 | -
+T 4 34 69 3 1 2 0 0 0 default | A 2 4 W 0 3 0 | B 2 0 E 1 7 0 | 0 0 | 0 1 1 | wait,move,move,belt,zap
+T 4 34 70 3 1 2 0 0 0 default | A 2 4 W 0 3 0 | B 2 0 E 1 7 0 | 0 0 | 0 0 0 | -
+T 4 35 71 4 1 3 0 0 0 default | A 2 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 0 0 1 | ping,move,rotator
+T 4 35 72 4 1 3 0 0 0 default | A 2 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 0 0 0 | -
+T 4 36 73 5 1 4 0 0 0 default | A 1 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 1 0 1 | move,wait
+T 4 36 74 5 1 4 0 0 0 default | A 1 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 0 0 0 | -
+T 4 37 75 6 1 5 0 0 0 default | A 1 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 0 0 1 | wait,wait
+T 4 37 76 6 1 5 0 0 0 default | A 1 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 0 0 0 | -
+T 4 38 77 7 1 6 0 0 0 default | A 1 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 0 1 1 | wait,turn,rotator
+T 4 38 78 7 1 6 0 0 0 default | A 1 4 W 0 3 0 | B 3 0 S 1 7 0 | 0 0 | 0 0 0 | -
+T 4 39 79 8 1 7 0 0 0 default | A 0 4 W 0 3 0 | B 3 1 S 1 7 0 | 0 0 | 0 0 1 | move,move
+T 4 39 80 8 1 7 0 0 0 default | A 0 4 W 0 3 0 | B 3 1 S 1 7 0 | 0 0 | 0 0 0 | -
+T 4 40 81 9 1 8 0 0 0 default | A 0 4 W 0 3 0 | B 3 0 W 1 7 0 | 0 0 | 1 0 1 | wait,move,rotator
+T 4 40 82 9 1 8 0 0 0 default | A 0 4 W 0 3 0 | B 3 0 W 1 7 0 | 0 0 | 0 0 0 | -
+T 4 41 83 10 1 9 0 0 0 default | A 0 4 W 0 3 0 | B 2 0 W 2 7 0 | 0 0 | 0 0 1 | wait,move,move,move,belt,zap
+T 4 41 84 10 1 9 0 0 0 default | A 0 4 W 0 3 0 | B 2 0 W 2 7 0 | 0 0 | 0 0 0 | -
+T 4 42 85 11 1 10 0 0 0 default | A 0 4 W 0 3 0 | B 2 0 N 3 7 0 | 0 0 | 0 1 1 | ping,turn,zap
+T 4 42 86 11 1 10 0 0 0 default | A 0 4 W 0 3 0 | B 2 0 N 3 7 0 | 0 0 | 0 0 0 | -
+T 4 43 87 12 1 11 0 0 0 default | A 0 4 W 0 3 0 | B 2 0 N 4 7 0 | 0 0 | 0 0 1 | wait,collision,zap
+T 4 43 88 12 1 11 0 0 0 default | A 0 4 W 0 3 0 | B 2 0 N 4 7 0 | 0 0 | 0 0 0 | -

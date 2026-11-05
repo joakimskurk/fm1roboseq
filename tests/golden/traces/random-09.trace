@@ -1,0 +1,744 @@
+# random-09: reference/roboseq.html run by tools/trace/gen.mjs
+board gauntlet
+loop 16
+tpm 1
+vmtrigger loop
+vmfreq 16
+bassmodlen 8
+drums 1 offbeat
+seq2 0 0
+seq2step 0 -- -- 0
+seq2step 1 -- -- 0
+seq2step 2 -- -- 0
+seq2step 3 -- -- 0
+prog A 41
+step A 0 ping wobble 100
+step A 1 ping steady 100
+step A 2 move glitch 75
+step A 3 dash wobble 100
+step A 4 back bright 50
+step A 5 back wobble 75
+step A 6 turnL glitch 75
+step A 7 dash wobble 75
+step A 8 move wobble 75
+step A 9 dash steady 100
+step A 10 turnR bright 100
+step A 11 wait wobble 50
+step A 12 dash low 75
+step A 13 turnL wobble 100
+step A 14 turnL low 100
+step A 15 dash steady 50
+step A 16 ping steady 50
+step A 17 ping steady 50
+step A 18 turnR bright 100
+step A 19 turnL low 50
+step A 20 turnR wobble 100
+step A 21 wait low 75
+step A 22 back wobble 50
+step A 23 turnR low 50
+step A 24 dash glitch 100
+step A 25 turnL steady 50
+step A 26 turnL glitch 100
+step A 27 turnL steady 100
+step A 28 turnL low 50
+step A 29 turnL wobble 100
+step A 30 turnL steady 100
+step A 31 move steady 75
+step A 32 move bright 100
+step A 33 turnR wobble 100
+step A 34 turnR bright 75
+step A 35 dash bright 75
+step A 36 ping glitch 75
+step A 37 move glitch 75
+step A 38 ping bright 100
+step A 39 back wobble 50
+step A 40 dash low 50
+step A 41 turnL wobble 75
+step A 42 move glitch 100
+step A 43 turnR bright 75
+step A 44 wait bright 100
+step A 45 wait wobble 100
+step A 46 wait bright 50
+step A 47 back steady 50
+step A 48 ping glitch 75
+step A 49 ping steady 50
+step A 50 back low 100
+step A 51 dash glitch 100
+step A 52 turnR steady 100
+step A 53 turnR bright 75
+step A 54 turnL glitch 75
+step A 55 move wobble 50
+step A 56 turnR glitch 50
+step A 57 wait wobble 75
+step A 58 ping low 75
+step A 59 wait wobble 100
+step A 60 back steady 50
+step A 61 turnR low 75
+step A 62 turnR wobble 50
+step A 63 ping steady 50
+prog B 44
+step B 0 turnL low 100
+step B 1 back wobble 50
+step B 2 turnL steady 100
+step B 3 turnR glitch 75
+step B 4 ping steady 100
+step B 5 move low 75
+step B 6 turnL low 50
+step B 7 dash bright 75
+step B 8 wait steady 50
+step B 9 move low 75
+step B 10 ping glitch 100
+step B 11 wait low 75
+step B 12 turnL glitch 50
+step B 13 move bright 50
+step B 14 turnR wobble 100
+step B 15 move wobble 75
+step B 16 dash glitch 100
+step B 17 back steady 100
+step B 18 wait steady 50
+step B 19 dash wobble 50
+step B 20 turnR wobble 75
+step B 21 back glitch 50
+step B 22 ping glitch 75
+step B 23 move low 75
+step B 24 turnL bright 100
+step B 25 turnR bright 100
+step B 26 move wobble 100
+step B 27 dash bright 100
+step B 28 wait glitch 50
+step B 29 ping low 50
+step B 30 dash steady 100
+step B 31 turnR wobble 100
+step B 32 wait wobble 75
+step B 33 wait wobble 100
+step B 34 move steady 100
+step B 35 back glitch 75
+step B 36 back wobble 100
+step B 37 turnL glitch 75
+step B 38 move steady 50
+step B 39 move wobble 75
+step B 40 wait steady 75
+step B 41 wait low 100
+step B 42 ping steady 75
+step B 43 wait steady 50
+step B 44 wait steady 50
+step B 45 wait glitch 50
+step B 46 turnL bright 75
+step B 47 turnL low 75
+step B 48 wait bright 50
+step B 49 back glitch 75
+step B 50 dash bright 100
+step B 51 turnL bright 50
+step B 52 back low 50
+step B 53 dash low 75
+step B 54 turnL wobble 100
+step B 55 ping glitch 75
+step B 56 move bright 50
+step B 57 dash bright 100
+step B 58 wait low 75
+step B 59 ping steady 50
+step B 60 wait wobble 75
+step B 61 turnR wobble 100
+step B 62 back steady 75
+step B 63 move steady 50
+ticks 600
+T 0 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 0 | -
+T 0 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
+T 0 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,zap,turn
+T 0 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 0 4 5 5 0 4 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 0 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 3 0 W 1 0 0 | 0 0 | 1 0 1 | move,move,zap
+T 0 6 7 7 0 6 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 3 0 W 1 0 0 | 0 0 | 0 0 0 | wait,wait
+T 0 7 8 8 0 7 0 0 0 gauntlet | A 4 4 E 2 0 0 | B 3 0 W 1 0 0 | 0 0 | 0 1 1 | move,move,wait
+T 0 8 9 9 0 8 0 0 0 gauntlet | A 4 4 E 2 0 0 | B 3 0 W 2 0 0 | 0 0 | 1 0 0 | wait,wait,zap
+T 0 9 10 10 0 9 0 0 0 gauntlet | A 4 4 E 2 0 0 | B 2 0 W 2 0 0 | 0 0 | 0 0 1 | collision,collision,move
+T 0 10 11 11 0 10 0 0 0 gauntlet | A 4 4 S 2 0 0 | B 2 0 W 2 0 0 | 0 0 | 0 0 0 | turn,ping
+T 0 11 12 12 0 11 0 0 0 gauntlet | A 4 4 S 2 0 0 | B 2 0 W 2 0 0 | 0 0 | 0 1 1 | wait,wait
+T 0 12 13 13 0 12 0 0 0 gauntlet | A 4 4 S 2 0 0 | B 2 0 W 2 0 0 | 0 0 | 0 0 0 | collision,collision,wait
+T 0 13 14 14 0 13 0 0 0 gauntlet | A 4 4 E 2 0 0 | B 2 0 W 2 0 0 | 0 0 | 1 0 1 | turn,wait
+T 0 14 15 15 0 14 0 0 0 gauntlet | A 4 4 N 2 0 0 | B 2 0 N 2 0 0 | 0 0 | 0 0 0 | turn,turn
+T 0 15 16 0 0 15 0 0 0 gauntlet | A 4 2 N 2 0 0 | B 2 0 N 2 0 0 | 0 0 | 0 1 1 | move,move,wait
+T 1 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 0 | reset
+T 1 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,collision
+T 1 2 3 3 0 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 1 3 4 4 0 3 0 0 0 gauntlet | A 2 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,move,turn
+T 1 4 5 5 0 4 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,zap,ping
+T 1 5 6 6 0 5 0 0 0 gauntlet | A 0 4 E 1 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | move,wait
+T 1 6 7 7 0 6 0 0 0 gauntlet | A 0 4 N 1 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,turn
+T 1 7 8 8 0 7 0 0 0 gauntlet | A 0 4 N 1 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 1 1 | wait,move,move
+T 1 8 9 9 0 8 0 0 0 gauntlet | A 0 3 W 1 0 0 | B 4 2 S 0 0 0 | 0 0 | 1 0 0 | move,rotator,wait
+T 1 9 10 10 0 9 0 0 0 gauntlet | A 0 3 S 1 0 0 | B 4 3 W 0 0 0 | 0 0 | 0 0 1 | collision,collision,rotator,move,rotator
+T 1 10 11 11 0 10 0 0 0 gauntlet | A 0 3 S 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping,rotator
+T 1 11 12 12 0 11 0 0 0 gauntlet | A 0 3 E 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 0 1 1 | wait,rotator,wait
+T 1 12 13 13 0 12 0 0 0 gauntlet | A 0 3 E 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 1 13 14 14 0 13 0 0 0 gauntlet | A 0 3 W 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 1 0 1 | turn,rotator,wait
+T 1 14 15 15 0 14 0 0 0 gauntlet | A 0 3 E 1 0 0 | B 4 3 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator
+T 1 15 16 0 0 15 0 0 0 gauntlet | A 0 3 E 1 0 0 | B 4 4 S 0 0 0 | 0 0 | 0 1 1 | wait,move
+T 2 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 0 | reset
+T 2 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
+T 2 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,zap,turn
+T 2 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 1 1 | move,move,zap,wait
+T 2 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 2 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 4 1 S 1 0 0 | 0 0 | 1 0 1 | wait,move,zap
+T 2 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 4 1 E 2 0 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 2 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 4 1 E 3 0 0 | 0 0 | 0 1 1 | wait,collision,collision,zap
+T 2 8 9 9 0 8 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 4 1 E 3 0 0 | 0 0 | 1 0 0 | wait,wait
+T 2 9 10 10 0 9 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 4 1 E 4 0 0 | 0 0 | 0 0 1 | collision,collision,collision,zap
+T 2 10 11 11 0 10 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 4 1 E 5 0 0 | 0 0 | 0 0 0 | turn,ping,zap
+T 2 11 12 12 0 11 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 4 1 E 6 0 1 | 0 0 | 0 1 1 | wait,wait,zap,zap
+T 2 12 13 13 0 12 0 0 0 gauntlet | A 4 4 E 2 0 0 | B 0 4 W 0 1 0 | 0 0 | 0 0 0 | death,move,move,wait
+T 2 13 14 14 0 13 0 0 0 gauntlet | A 4 4 N 2 0 0 | B 0 4 W 0 1 0 | 0 0 | 1 0 1 | turn,collision
+T 2 14 15 15 0 14 0 0 0 gauntlet | A 4 4 W 2 0 0 | B 0 4 N 0 1 0 | 0 0 | 0 0 0 | turn,turn
+T 2 15 16 0 0 15 0 0 0 gauntlet | A 4 4 W 2 0 0 | B 0 3 W 0 1 0 | 0 0 | 0 1 1 | wait,move,rotator
+T 3 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 1 0 | 0 0 | 1 0 0 | reset
+T 3 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 1 | ping,collision
+T 3 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | move,zap,turn
+T 3 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 W 0 1 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 3 4 5 5 0 4 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | wait,ping
+T 3 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 3 0 W 1 1 0 | 0 0 | 1 0 1 | move,move,zap
+T 3 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 3 0 W 1 1 0 | 0 0 | 0 0 0 | turn,wait
+T 3 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 1 0 W 2 1 0 | 0 0 | 0 1 1 | collision,collision,move,move,zap
+T 3 8 9 9 0 8 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 1 0 W 2 1 0 | 0 0 | 1 0 0 | collision,wait
+T 3 9 10 10 0 9 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 0 0 W 2 1 0 | 0 0 | 0 0 1 | collision,collision,move
+T 3 10 11 11 0 10 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 0 0 W 2 1 0 | 0 0 | 0 0 0 | turn,ping
+T 3 11 12 12 0 11 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 0 0 W 2 1 0 | 0 0 | 0 1 1 | wait,wait
+T 3 12 13 13 0 12 0 0 0 gauntlet | A 4 4 E 2 0 0 | B 0 0 S 2 1 0 | 0 0 | 0 0 0 | move,move,turn
+T 3 13 14 14 0 13 0 0 0 gauntlet | A 4 4 N 2 0 0 | B 0 1 S 3 1 0 | 0 0 | 1 0 1 | turn,move,zap
+T 3 14 15 15 0 14 0 0 0 gauntlet | A 4 4 W 2 0 0 | B 0 1 W 4 1 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 3 15 16 0 0 15 0 0 0 gauntlet | A 4 4 W 2 0 0 | B 0 1 W 5 1 0 | 0 0 | 0 1 1 | wait,collision,zap
+T 4 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 1 0 | 0 0 | 1 0 0 | reset
+T 4 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 1 | ping,collision
+T 4 2 3 3 0 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | wait,turn
+T 4 3 4 4 0 3 0 0 0 gauntlet | A 2 4 E 0 0 0 | B 4 0 W 0 1 0 | 0 0 | 0 1 1 | move,move,turn
+T 4 4 5 5 0 4 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | move,zap,ping
+T 4 5 6 6 0 5 0 0 0 gauntlet | A 0 4 E 1 0 0 | B 4 0 W 0 1 0 | 0 0 | 1 0 1 | move,wait
+T 4 6 7 7 0 6 0 0 0 gauntlet | A 0 4 N 1 0 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | turn,wait
+T 4 7 8 8 0 7 0 0 0 gauntlet | A 0 4 N 1 0 0 | B 2 0 W 0 1 0 | 0 0 | 0 1 1 | wait,move,move
+T 4 8 9 9 0 8 0 0 0 gauntlet | A 0 3 W 1 0 0 | B 2 0 W 0 1 0 | 0 0 | 1 0 0 | move,rotator,wait
+T 4 9 10 10 0 9 0 0 0 gauntlet | A 0 3 S 1 0 0 | B 2 0 W 0 1 0 | 0 0 | 0 0 1 | collision,collision,rotator,wait
+T 4 10 11 11 0 10 0 0 0 gauntlet | A 0 3 S 1 0 0 | B 2 0 W 0 1 0 | 0 0 | 0 0 0 | turn,rotator,ping
+T 4 11 12 12 0 11 0 0 0 gauntlet | A 0 3 S 1 0 0 | B 2 0 W 0 1 0 | 0 0 | 0 1 1 | wait,wait
+T 4 12 13 13 0 12 0 0 0 gauntlet | A 0 4 S 1 0 0 | B 2 0 W 0 1 0 | 0 0 | 0 0 0 | move,collision,wait
+T 4 13 14 14 0 13 0 0 0 gauntlet | A 0 4 E 1 0 0 | B 1 0 W 1 1 0 | 0 0 | 1 0 1 | turn,move,zap
+T 4 14 15 15 0 14 0 0 0 gauntlet | A 0 4 N 1 0 0 | B 1 0 N 2 1 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 4 15 16 0 0 15 0 0 0 gauntlet | A 0 2 N 1 0 0 | B 1 0 N 3 1 0 | 0 0 | 0 1 1 | move,move,collision,zap
+T 5 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 1 0 | 0 0 | 1 0 0 | reset
+T 5 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 1 | ping,wait
+T 5 2 3 3 0 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 S 0 1 0 | 0 0 | 0 0 0 | wait,turn
+T 5 3 4 4 0 3 0 0 0 gauntlet | A 2 4 E 0 0 0 | B 4 0 W 0 1 0 | 0 0 | 0 1 1 | move,move,turn
+T 5 4 5 5 0 4 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 W 0 1 0 | 0 0 | 0 0 0 | move,zap,ping
+T 5 5 6 6 0 5 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 3 0 W 1 1 0 | 0 0 | 1 0 1 | wait,move,zap
+T 5 6 7 7 0 6 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 3 0 W 1 1 0 | 0 0 | 0 0 0 | wait,wait
+T 5 7 8 8 0 7 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 1 0 W 2 1 0 | 0 0 | 0 1 1 | move,move,zap,move,move,zap
+T 5 8 9 9 0 8 0 0 0 gauntlet | A 4 4 E 2 0 0 | B 1 0 W 3 1 0 | 0 0 | 1 0 0 | move,wait,zap
+T 5 9 10 10 0 9 0 0 0 gauntlet | A 4 4 E 2 0 0 | B 0 0 W 3 1 0 | 0 0 | 0 0 1 | collision,collision,move
+T 5 10 11 11 0 10 0 0 0 gauntlet | A 4 4 S 2 0 0 | B 0 0 W 3 1 0 | 0 0 | 0 0 0 | turn,ping
+T 5 11 12 12 0 11 0 0 0 gauntlet | A 4 4 S 2 0 0 | B 0 0 W 3 1 0 | 0 0 | 0 1 1 | wait,wait
+T 5 12 13 13 0 12 0 0 0 gauntlet | A 4 4 S 2 0 0 | B 0 0 S 3 1 0 | 0 0 | 0 0 0 | collision,collision,turn
+T 5 13 14 14 0 13 0 0 0 gauntlet | A 4 4 E 2 0 0 | B 0 1 S 4 1 0 | 0 0 | 1 0 1 | turn,move,zap
+T 5 14 15 15 0 14 0 0 0 gauntlet | A 4 4 N 2 0 0 | B 0 1 W 5 1 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 5 15 16 0 0 15 0 0 0 gauntlet | A 4 4 N 2 0 0 | B 0 1 W 6 1 1 | 0 0 | 0 1 1 | wait,collision,zap,zap
+T 6 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 0 | death,reset
+T 6 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 1 | ping,wait
+T 6 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | move,zap,turn
+T 6 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 6 4 5 5 0 4 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | wait,ping
+T 6 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 1 | move,wait
+T 6 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | turn,wait
+T 6 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 2 0 W 0 2 0 | 0 0 | 0 1 1 | collision,collision,move,move
+T 6 8 9 9 0 8 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 2 0 W 0 2 0 | 0 0 | 1 0 0 | collision,wait
+T 6 9 10 10 0 9 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 1 0 W 1 2 0 | 0 0 | 0 0 1 | collision,collision,move,zap
+T 6 10 11 11 0 10 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 1 0 W 2 2 0 | 0 0 | 0 0 0 | turn,ping,zap
+T 6 11 12 12 0 11 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 1 0 W 2 2 0 | 0 0 | 0 1 1 | wait,wait
+T 6 12 13 13 0 12 0 0 0 gauntlet | A 4 4 E 2 0 0 | B 1 0 W 2 2 0 | 0 0 | 0 0 0 | move,move,wait
+T 6 13 14 14 0 13 0 0 0 gauntlet | A 4 4 N 2 0 0 | B 1 0 W 2 2 0 | 0 0 | 1 0 1 | turn,wait
+T 6 14 15 15 0 14 0 0 0 gauntlet | A 4 4 W 2 0 0 | B 1 0 N 3 2 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 6 15 16 0 0 15 0 0 0 gauntlet | A 4 4 W 2 0 0 | B 1 0 N 4 2 0 | 0 0 | 0 1 1 | wait,collision,zap
+T 7 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 0 | reset
+T 7 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 1 | ping,collision
+T 7 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | move,zap,turn
+T 7 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 7 4 5 5 0 4 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | wait,ping
+T 7 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 1 | move,wait
+T 7 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | turn,turn
+T 7 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 4 2 S 0 2 0 | 0 0 | 0 1 1 | collision,collision,move,move
+T 7 8 9 9 0 8 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 4 2 S 0 2 0 | 0 0 | 1 0 0 | collision,wait
+T 7 9 10 10 0 9 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 4 2 S 0 2 0 | 0 0 | 0 0 1 | collision,collision,wait
+T 7 10 11 11 0 10 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 4 2 S 0 2 0 | 0 0 | 0 0 0 | turn,ping
+T 7 11 12 12 0 11 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 4 2 S 0 2 0 | 0 0 | 0 1 1 | wait,wait
+T 7 12 13 13 0 12 0 0 0 gauntlet | A 4 4 E 2 0 0 | B 4 2 E 0 2 0 | 0 0 | 0 0 0 | move,move,turn
+T 7 13 14 14 0 13 0 0 0 gauntlet | A 4 4 N 2 0 0 | B 4 2 E 0 2 0 | 0 0 | 1 0 1 | turn,collision
+T 7 14 15 15 0 14 0 0 0 gauntlet | A 4 4 W 2 0 0 | B 4 2 S 0 2 0 | 0 0 | 0 0 0 | turn,turn
+T 7 15 16 0 0 15 0 0 0 gauntlet | A 4 4 W 2 0 0 | B 4 2 S 0 2 0 | 0 0 | 0 1 1 | wait,wait
+T 8 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 0 | reset
+T 8 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 1 | ping,collision
+T 8 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | move,zap,turn
+T 8 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 8 4 5 5 0 4 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | wait,ping
+T 8 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 1 | move,wait
+T 8 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | turn,turn
+T 8 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 1 1 | wait,wait
+T 8 8 9 9 0 8 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 4 0 S 0 2 0 | 0 0 | 1 0 0 | collision,wait
+T 8 9 10 10 0 9 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 1 | collision,collision,wait
+T 8 10 11 11 0 10 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | turn,ping
+T 8 11 12 12 0 11 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 1 1 | wait,wait
+T 8 12 13 13 0 12 0 0 0 gauntlet | A 4 4 E 2 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | move,move,wait
+T 8 13 14 14 0 13 0 0 0 gauntlet | A 4 4 N 2 0 0 | B 4 0 S 0 2 0 | 0 0 | 1 0 1 | turn,wait
+T 8 14 15 15 0 14 0 0 0 gauntlet | A 4 4 W 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | turn,turn
+T 8 15 16 0 0 15 0 0 0 gauntlet | A 4 4 W 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 1 1 | wait,wait
+T 9 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 0 | reset
+T 9 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 1 | ping,collision
+T 9 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | move,zap,turn
+T 9 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 9 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | move,ping
+T 9 5 6 6 0 5 0 0 0 gauntlet | A 1 4 E 3 0 0 | B 3 0 W 1 2 0 | 0 0 | 1 0 1 | move,zap,move,zap
+T 9 6 7 7 0 6 0 0 0 gauntlet | A 1 4 N 4 0 0 | B 3 0 W 1 2 0 | 0 0 | 0 0 0 | turn,zap,wait
+T 9 7 8 8 0 7 0 0 0 gauntlet | A 1 4 N 4 0 0 | B 1 0 W 2 2 0 | 0 0 | 0 1 1 | wait,move,move,zap
+T 9 8 9 9 0 8 0 0 0 gauntlet | A 1 3 N 4 0 0 | B 1 0 W 2 2 0 | 0 0 | 1 0 0 | move,wait
+T 9 9 10 10 0 9 0 0 0 gauntlet | A 1 1 N 4 0 0 | B 0 0 W 2 2 0 | 0 0 | 0 0 1 | move,move,move
+T 9 10 11 11 0 10 0 0 0 gauntlet | A 1 1 E 4 0 0 | B 0 0 W 2 2 0 | 0 0 | 0 0 0 | turn,ping
+T 9 11 12 12 0 11 0 0 0 gauntlet | A 1 1 E 4 0 0 | B 0 0 W 2 2 0 | 0 0 | 0 1 1 | wait,wait
+T 9 12 13 13 0 12 0 0 0 gauntlet | A 1 1 E 4 0 0 | B 0 0 S 2 2 0 | 0 0 | 0 0 0 | wait,turn
+T 9 13 14 14 0 13 0 0 0 gauntlet | A 1 1 N 4 0 0 | B 0 0 S 2 2 0 | 0 0 | 1 0 1 | turn,wait
+T 9 14 15 15 0 14 0 0 0 gauntlet | A 1 1 W 4 0 0 | B 0 0 W 2 2 0 | 0 0 | 0 0 0 | turn,turn
+T 9 15 16 0 0 15 0 0 0 gauntlet | A 0 1 W 5 0 0 | B 0 0 W 2 2 0 | 0 0 | 0 1 1 | move,collision,zap,wait
+T 10 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 0 | reset
+T 10 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 1 | ping,collision
+T 10 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | move,zap,turn
+T 10 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 10 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | move,ping
+T 10 5 6 6 0 5 0 0 0 gauntlet | A 1 4 E 3 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 1 | move,zap,wait
+T 10 6 7 7 0 6 0 0 0 gauntlet | A 1 4 N 4 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | turn,zap,wait
+T 10 7 8 8 0 7 0 0 0 gauntlet | A 1 4 N 4 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 1 1 | wait,wait
+T 10 8 9 9 0 8 0 0 0 gauntlet | A 1 3 N 4 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 0 | move,wait
+T 10 9 10 10 0 9 0 0 0 gauntlet | A 1 1 N 4 0 0 | B 3 0 W 1 2 0 | 0 0 | 0 0 1 | move,move,move,zap
+T 10 10 11 11 0 10 0 0 0 gauntlet | A 1 1 E 4 0 0 | B 3 0 W 2 2 0 | 0 0 | 0 0 0 | turn,ping,zap
+T 10 11 12 12 0 11 0 0 0 gauntlet | A 1 1 E 4 0 0 | B 3 0 W 2 2 0 | 0 0 | 0 1 1 | wait,wait
+T 10 12 13 13 0 12 0 0 0 gauntlet | A 3 1 E 4 0 0 | B 3 0 W 2 2 0 | 0 0 | 0 0 0 | move,move,wait
+T 10 13 14 14 0 13 0 0 0 gauntlet | A 3 1 N 4 0 0 | B 2 0 W 2 2 0 | 0 0 | 1 0 1 | turn,move
+T 10 14 15 15 0 14 0 0 0 gauntlet | A 3 1 W 4 0 0 | B 2 0 N 2 2 0 | 0 0 | 0 0 0 | turn,turn
+T 10 15 16 0 0 15 0 0 0 gauntlet | A 1 1 W 4 0 0 | B 2 0 N 2 2 0 | 0 0 | 0 1 1 | move,move,collision
+T 11 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 0 | reset
+T 11 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 1 | ping,collision
+T 11 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | move,zap,turn
+T 11 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 11 4 5 5 0 4 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | wait,ping
+T 11 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 3 0 W 1 2 0 | 0 0 | 1 0 1 | move,move,zap
+T 11 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 3 0 S 2 2 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 11 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 3 2 S 1 2 0 | 0 0 | 0 1 1 | collision,collision,move,move,pulse
+T 11 8 9 9 0 8 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 3 2 S 0 2 0 | 0 0 | 1 0 0 | collision,wait,pulse
+T 11 9 10 10 0 9 0 0 0 gauntlet | A 2 4 N 2 0 0 | B 3 2 S 0 2 0 | 0 0 | 0 0 1 | collision,collision,wait
+T 11 10 11 11 0 10 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 3 2 S 0 2 0 | 0 0 | 0 0 0 | turn,ping,pulse
+T 11 11 12 12 0 11 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 3 2 S 0 2 0 | 0 0 | 0 1 1 | wait,wait,pulse
+T 11 12 13 13 0 12 0 0 0 gauntlet | A 4 4 E 2 0 0 | B 3 2 S 0 2 0 | 0 0 | 0 0 0 | move,move,wait
+T 11 13 14 14 0 13 0 0 0 gauntlet | A 4 4 N 2 0 0 | B 3 3 S 0 2 0 | 0 0 | 1 0 1 | turn,move
+T 11 14 15 15 0 14 0 0 0 gauntlet | A 4 4 W 2 0 0 | B 3 3 W 0 2 0 | 0 0 | 0 0 0 | turn,turn
+T 11 15 16 0 0 15 0 0 0 gauntlet | A 2 4 W 2 0 0 | B 3 3 W 0 2 0 | 0 0 | 0 1 1 | move,move,collision
+T 12 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 0 | reset
+T 12 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 1 | ping,collision
+T 12 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | move,zap,turn
+T 12 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 12 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | move,ping
+T 12 5 6 6 0 5 0 0 0 gauntlet | A 1 4 E 3 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 1 | move,zap,wait
+T 12 6 7 7 0 6 0 0 0 gauntlet | A 1 4 E 3 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | wait,wait
+T 12 7 8 8 0 7 0 0 0 gauntlet | A 3 4 E 4 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 1 1 | move,move,zap,wait
+T 12 8 9 9 0 8 0 0 0 gauntlet | A 4 4 E 4 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 0 | move,wait
+T 12 9 10 10 0 9 0 0 0 gauntlet | A 4 4 E 4 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 1 | collision,collision,wait
+T 12 10 11 11 0 10 0 0 0 gauntlet | A 4 4 S 4 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | turn,ping
+T 12 11 12 12 0 11 0 0 0 gauntlet | A 4 4 S 4 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 1 1 | wait,wait
+T 12 12 13 13 0 12 0 0 0 gauntlet | A 4 4 S 4 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | collision,collision,wait
+T 12 13 14 14 0 13 0 0 0 gauntlet | A 4 4 E 4 0 0 | B 3 0 W 1 2 0 | 0 0 | 1 0 1 | turn,move,zap
+T 12 14 15 15 0 14 0 0 0 gauntlet | A 4 4 N 4 0 0 | B 3 0 N 2 2 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 12 15 16 0 0 15 0 0 0 gauntlet | A 4 2 N 4 0 0 | B 3 0 N 3 2 0 | 0 0 | 0 1 1 | move,move,collision,zap
+T 13 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 0 | reset
+T 13 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 1 | ping,collision
+T 13 2 3 3 0 2 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | wait,turn
+T 13 3 4 4 0 3 0 0 0 gauntlet | A 2 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 1 1 | move,move,turn
+T 13 4 5 5 0 4 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 0 | move,zap,ping
+T 13 5 6 6 0 5 0 0 0 gauntlet | A 0 4 E 1 0 0 | B 3 0 W 1 2 0 | 0 0 | 1 0 1 | move,move,zap
+T 13 6 7 7 0 6 0 0 0 gauntlet | A 0 4 E 1 0 0 | B 3 0 W 1 2 0 | 0 0 | 0 0 0 | wait,wait
+T 13 7 8 8 0 7 0 0 0 gauntlet | A 2 4 E 1 0 0 | B 1 0 W 2 2 0 | 0 0 | 0 1 1 | move,move,move,move,zap
+T 13 8 9 9 0 8 0 0 0 gauntlet | A 2 4 E 1 0 0 | B 1 0 W 2 2 0 | 0 0 | 1 0 0 | wait,wait
+T 13 9 10 10 0 9 0 0 0 gauntlet | A 4 4 E 1 0 0 | B 1 0 W 2 2 0 | 0 0 | 0 0 1 | move,move,wait
+T 13 10 11 11 0 10 0 0 0 gauntlet | A 4 4 S 1 0 0 | B 1 0 W 3 2 0 | 0 0 | 0 0 0 | turn,ping,zap
+T 13 11 12 12 0 11 0 0 0 gauntlet | A 4 4 S 1 0 0 | B 1 0 W 4 2 0 | 0 0 | 0 1 1 | wait,wait,zap
+T 13 12 13 13 0 12 0 0 0 gauntlet | A 4 4 S 1 0 0 | B 1 0 W 4 2 0 | 0 0 | 0 0 0 | collision,collision,wait
+T 13 13 14 14 0 13 0 0 0 gauntlet | A 4 4 E 1 0 0 | B 0 0 W 4 2 0 | 0 0 | 1 0 1 | turn,move
+T 13 14 15 15 0 14 0 0 0 gauntlet | A 4 4 N 1 0 0 | B 0 0 N 4 2 0 | 0 0 | 0 0 0 | turn,turn
+T 13 15 16 0 0 15 0 0 0 gauntlet | A 4 4 N 1 0 0 | B 0 0 N 4 2 0 | 0 0 | 0 1 1 | wait,collision
+T 14 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 0 | reset
+T 14 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 0 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 1 | ping,collision
+T 14 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | move,zap,turn
+T 14 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 1 1 | move,move,zap,wait
+T 14 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 2 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | move,ping
+T 14 5 6 6 0 5 0 0 0 gauntlet | A 1 4 E 3 0 0 | B 4 0 S 0 2 0 | 0 0 | 1 0 1 | move,zap,wait
+T 14 6 7 7 0 6 0 0 0 gauntlet | A 1 4 N 4 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | turn,zap,wait
+T 14 7 8 8 0 7 0 0 0 gauntlet | A 1 2 N 3 0 0 | B 4 0 S 0 2 0 | 0 0 | 0 1 1 | move,move,pulse,wait
+T 14 8 9 9 0 8 0 0 0 gauntlet | A 1 1 N 3 0 0 | B 4 0 S 0 2 0 | 0 0 | 1 0 0 | move,wait
+T 14 9 10 10 0 9 0 0 0 gauntlet | A 1 0 N 4 0 0 | B 4 1 S 1 2 0 | 0 0 | 0 0 1 | move,collision,zap,move,zap
+T 14 10 11 11 0 10 0 0 0 gauntlet | A 1 0 E 5 0 0 | B 4 1 S 2 2 0 | 0 0 | 0 0 0 | turn,zap,ping,zap
+T 14 11 12 12 0 11 0 0 0 gauntlet | A 1 0 E 6 0 1 | B 4 1 S 3 2 0 | 0 0 | 0 1 1 | wait,zap,zap,wait,zap
+T 14 12 13 13 0 12 0 0 0 gauntlet | A 4 4 E 0 1 0 | B 4 1 E 4 2 0 | 0 0 | 0 0 0 | death,wait,turn,zap
+T 14 13 14 14 0 13 0 0 0 gauntlet | A 4 4 N 0 1 0 | B 4 1 E 4 2 0 | 0 0 | 1 0 1 | turn,wait
+T 14 14 15 15 0 14 0 0 0 gauntlet | A 4 4 W 0 1 0 | B 4 1 S 5 2 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 14 15 16 0 0 15 0 0 0 gauntlet | A 4 4 W 0 1 0 | B 4 2 S 5 2 0 | 0 0 | 0 1 1 | wait,move
+T 15 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 1 0 | B 4 0 W 0 2 0 | 0 0 | 1 0 0 | reset
+T 15 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 1 0 | B 4 0 W 0 2 0 | 0 0 | 0 0 1 | ping,wait
+T 15 2 3 3 0 2 0 0 0 gauntlet | A 0 4 E 0 1 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | wait,turn
+T 15 3 4 4 0 3 0 0 0 gauntlet | A 2 4 E 0 1 0 | B 4 0 S 0 2 0 | 0 0 | 0 1 1 | move,move,wait
+T 15 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 0 1 0 | B 4 0 S 0 2 0 | 0 0 | 0 0 0 | wait,ping
+T 15 5 6 6 0 5 0 0 0 gauntlet | A 1 4 E 1 1 0 | B 4 1 S 1 2 0 | 0 0 | 1 0 1 | move,zap,move,zap
+T 15 6 7 7 0 6 0 0 0 gauntlet | A 1 4 N 2 1 0 | B 4 1 E 2 2 0 | 0 0 | 0 0 0 | turn,zap,turn,zap
+T 15 7 8 8 0 7 0 0 0 gauntlet | A 1 2 N 1 1 0 | B 4 1 E 3 2 0 | 0 0 | 0 1 1 | move,move,pulse,collision,collision,zap
+T 15 8 9 9 0 8 0 0 0 gauntlet | A 1 1 N 1 1 0 | B 4 1 E 4 2 0 | 0 0 | 1 0 0 | move,wait,zap
+T 15 9 10 10 0 9 0 0 0 gauntlet | A 1 0 N 2 1 0 | B 4 1 E 5 2 0 | 0 0 | 0 0 1 | move,collision,zap,collision,zap
+T 15 10 11 11 0 10 0 0 0 gauntlet | A 1 0 E 3 1 0 | B 4 1 E 6 2 1 | 0 0 | 0 0 0 | turn,zap,ping,zap,zap
+T 15 11 12 12 0 11 0 0 0 gauntlet | A 1 0 E 4 1 0 | B 0 4 W 0 3 0 | 0 0 | 0 1 1 | death,wait,zap,wait
+T 15 12 13 13 0 12 0 0 0 gauntlet | A 3 0 E 5 1 0 | B 0 4 W 0 3 0 | 0 0 | 0 0 0 | move,move,zap,wait
+T 15 13 14 14 0 13 0 0 0 gauntlet | A 3 0 N 6 1 1 | B 0 4 W 0 3 0 | 0 0 | 1 0 1 | turn,zap,zap,collision
+T 15 14 15 15 0 14 0 0 0 gauntlet | A 0 4 N 0 2 0 | B 0 4 N 0 3 0 | 0 1 | 0 0 0 | death,turn,turn
+T 15 15 16 0 0 15 0 0 0 gauntlet | A 0 4 N 0 2 0 | B 0 3 W 0 3 0 | 0 0 | 0 1 1 | wait,move,rotator
+T 16 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 2 0 | B 4 0 W 0 3 0 | 0 0 | 1 0 0 | reset
+T 16 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 2 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 1 | ping,wait
+T 16 2 3 3 0 2 0 0 0 gauntlet | A 0 4 E 0 2 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | wait,turn
+T 16 3 4 4 0 3 0 0 0 gauntlet | A 2 4 E 0 2 0 | B 4 0 W 0 3 0 | 0 0 | 0 1 1 | move,move,turn
+T 16 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 0 2 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 0 | wait,ping
+T 16 5 6 6 0 5 0 0 0 gauntlet | A 1 4 E 1 2 0 | B 3 0 W 1 3 0 | 0 0 | 1 0 1 | move,zap,move,zap
+T 16 6 7 7 0 6 0 0 0 gauntlet | A 1 4 N 2 2 0 | B 3 0 W 1 3 0 | 0 0 | 0 0 0 | turn,zap,wait
+T 16 7 8 8 0 7 0 0 0 gauntlet | A 1 2 N 1 2 0 | B 1 0 W 2 3 0 | 0 0 | 0 1 1 | move,move,pulse,move,move,zap
+T 16 8 9 9 0 8 0 0 0 gauntlet | A 1 1 N 1 2 0 | B 1 0 W 2 3 0 | 0 0 | 1 0 0 | move,wait
+T 16 9 10 10 0 9 0 0 0 gauntlet | A 1 0 N 2 2 0 | B 0 0 W 4 3 0 | 7 0 | 0 0 1 | move,collision,zap,zap,move
+T 16 10 11 11 0 10 0 0 0 gauntlet | A 1 0 E 3 2 0 | B 0 0 W 4 3 0 | 6 0 | 0 0 0 | turn,zap,ping
+T 16 11 12 12 0 11 0 0 0 gauntlet | A 1 0 E 3 2 0 | B 0 0 W 4 3 0 | 5 0 | 0 1 1 | wait,wait
+T 16 12 13 13 0 12 0 0 0 gauntlet | A 3 0 E 4 2 0 | B 0 0 W 4 3 0 | 4 0 | 0 0 0 | move,move,zap,wait
+T 16 13 14 14 0 13 0 0 0 gauntlet | A 3 0 N 5 2 0 | B 0 0 W 4 3 0 | 3 0 | 1 0 1 | turn,zap,collision
+T 16 14 15 15 0 14 0 0 0 gauntlet | A 3 0 W 6 2 1 | B 0 0 N 4 3 0 | 2 0 | 0 0 0 | turn,zap,zap,turn
+T 16 15 16 0 0 15 0 0 0 gauntlet | A 0 4 E 0 3 0 | B 0 0 N 4 3 0 | 1 0 | 0 1 1 | death,wait,wait
+T 17 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 3 0 | B 4 0 W 0 3 0 | 0 0 | 1 0 0 | reset
+T 17 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 3 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 1 | ping,wait
+T 17 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 3 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | move,zap,turn
+T 17 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 3 0 | B 4 0 W 0 3 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 17 4 5 5 0 4 0 0 0 gauntlet | A 3 4 E 2 3 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 0 | wait,ping
+T 17 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 3 0 | B 3 0 W 1 3 0 | 0 0 | 1 0 1 | move,move,zap
+T 17 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 3 0 | B 3 0 W 1 3 0 | 0 0 | 0 0 0 | turn,wait
+T 17 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 3 0 | B 1 0 W 2 3 0 | 0 0 | 0 1 1 | collision,collision,move,move,zap
+T 17 8 9 9 0 8 0 0 0 gauntlet | A 2 4 N 2 3 0 | B 1 0 W 2 3 0 | 0 0 | 1 0 0 | wait,wait
+T 17 9 10 10 0 9 0 0 0 gauntlet | A 2 4 N 2 3 0 | B 0 0 W 2 3 0 | 0 0 | 0 0 1 | collision,collision,move
+T 17 10 11 11 0 10 0 0 0 gauntlet | A 2 4 E 2 3 0 | B 0 0 W 2 3 0 | 0 0 | 0 0 0 | turn,ping
+T 17 11 12 12 0 11 0 0 0 gauntlet | A 2 4 E 2 3 0 | B 0 0 W 2 3 0 | 0 0 | 0 1 1 | wait,wait
+T 17 12 13 13 0 12 0 0 0 gauntlet | A 2 4 E 2 3 0 | B 0 0 W 2 3 0 | 0 0 | 0 0 0 | wait,wait
+T 17 13 14 14 0 13 0 0 0 gauntlet | A 2 4 N 2 3 0 | B 0 0 W 2 3 0 | 0 0 | 1 0 1 | turn,collision
+T 17 14 15 15 0 14 0 0 0 gauntlet | A 2 4 W 2 3 0 | B 0 0 N 2 3 0 | 0 0 | 0 0 0 | turn,turn
+T 17 15 16 0 0 15 0 0 0 gauntlet | A 2 4 W 2 3 0 | B 0 0 N 2 3 0 | 0 0 | 0 1 1 | wait,collision
+T 18 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 3 0 | B 4 0 W 0 3 0 | 0 0 | 1 0 0 | reset
+T 18 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 3 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 1 | ping,collision
+T 18 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 3 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | move,zap,turn
+T 18 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 3 0 | B 4 0 W 0 3 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 18 4 5 5 0 4 0 0 0 gauntlet | A 3 4 E 2 3 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 0 | wait,ping
+T 18 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 3 0 | B 3 0 W 1 3 0 | 0 0 | 1 0 1 | move,move,zap
+T 18 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 3 0 | B 3 0 S 2 3 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 18 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 3 0 | B 3 2 S 1 3 0 | 0 0 | 0 1 1 | collision,collision,move,move,pulse
+T 18 8 9 9 0 8 0 0 0 gauntlet | A 2 4 N 2 3 0 | B 3 2 S 0 3 0 | 0 0 | 1 0 0 | collision,wait,pulse
+T 18 9 10 10 0 9 0 0 0 gauntlet | A 2 4 N 2 3 0 | B 3 3 S 0 3 0 | 0 0 | 0 0 1 | collision,collision,move
+T 18 10 11 11 0 10 0 0 0 gauntlet | A 2 4 E 2 3 0 | B 3 3 S 0 3 0 | 0 0 | 0 0 0 | turn,ping
+T 18 11 12 12 0 11 0 0 0 gauntlet | A 2 4 E 2 3 0 | B 3 3 S 0 3 0 | 0 0 | 0 1 1 | wait,wait
+T 18 12 13 13 0 12 0 0 0 gauntlet | A 2 4 E 2 3 0 | B 3 3 E 0 3 0 | 0 0 | 0 0 0 | wait,turn
+T 18 13 14 14 0 13 0 0 0 gauntlet | A 2 4 N 2 3 0 | B 4 3 S 0 3 0 | 0 0 | 1 0 1 | turn,move,rotator
+T 18 14 15 15 0 14 0 0 0 gauntlet | A 2 4 W 2 3 0 | B 4 3 N 0 3 0 | 0 0 | 0 0 0 | turn,turn,rotator
+T 18 15 16 0 0 15 0 0 0 gauntlet | A 0 4 W 2 3 0 | B 4 3 N 0 3 0 | 0 0 | 0 1 1 | move,move,wait
+T 19 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 3 0 | B 4 0 W 0 3 0 | 0 0 | 1 0 0 | reset
+T 19 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 3 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 1 | ping,collision
+T 19 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 3 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | move,zap,turn
+T 19 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 3 0 | B 4 0 W 0 3 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 19 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 2 3 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 0 | move,ping
+T 19 5 6 6 0 5 0 0 0 gauntlet | A 1 4 E 3 3 0 | B 3 0 W 1 3 0 | 0 0 | 1 0 1 | move,zap,move,zap
+T 19 6 7 7 0 6 0 0 0 gauntlet | A 1 4 N 4 3 0 | B 3 0 S 2 3 0 | 0 0 | 0 0 0 | turn,zap,turn,zap
+T 19 7 8 8 0 7 0 0 0 gauntlet | A 1 2 N 3 3 0 | B 3 2 S 1 3 0 | 0 0 | 0 1 1 | move,move,pulse,move,move,pulse
+T 19 8 9 9 0 8 0 0 0 gauntlet | A 1 1 N 3 3 0 | B 3 2 S 0 3 0 | 0 0 | 1 0 0 | move,wait,pulse
+T 19 9 10 10 0 9 0 0 0 gauntlet | A 1 0 N 4 3 0 | B 3 3 S 0 3 0 | 0 0 | 0 0 1 | move,collision,zap,move
+T 19 10 11 11 0 10 0 0 0 gauntlet | A 1 0 E 5 3 0 | B 3 3 S 0 3 0 | 0 0 | 0 0 0 | turn,zap,ping
+T 19 11 12 12 0 11 0 0 0 gauntlet | A 1 0 E 6 3 1 | B 3 3 S 0 3 0 | 0 0 | 0 1 1 | wait,zap,zap,wait
+T 19 12 13 13 0 12 0 0 0 gauntlet | A 4 4 E 0 4 0 | B 3 3 S 0 3 0 | 0 0 | 0 0 0 | death,collision,collision,wait
+T 19 13 14 14 0 13 0 0 0 gauntlet | A 4 4 N 0 4 0 | B 3 3 S 0 3 0 | 0 0 | 1 0 1 | turn,wait
+T 19 14 15 15 0 14 0 0 0 gauntlet | A 4 4 W 0 4 0 | B 3 3 W 0 3 0 | 0 0 | 0 0 0 | turn,turn
+T 19 15 16 0 0 15 0 0 0 gauntlet | A 2 4 W 0 4 0 | B 3 3 W 0 3 0 | 0 0 | 0 1 1 | move,move,collision
+T 20 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 4 0 | B 4 0 W 0 3 0 | 0 0 | 1 0 0 | reset
+T 20 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 4 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 1 | ping,wait
+T 20 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 4 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | move,zap,turn
+T 20 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 4 0 | B 4 0 W 0 3 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 20 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 2 4 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 0 | move,ping
+T 20 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 4 0 | B 3 0 W 1 3 0 | 0 0 | 1 0 1 | wait,move,zap
+T 20 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 4 0 | B 3 0 S 2 3 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 20 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 4 0 | B 3 2 S 1 3 0 | 0 0 | 0 1 1 | collision,collision,move,move,pulse
+T 20 8 9 9 0 8 0 0 0 gauntlet | A 2 4 N 2 4 0 | B 3 2 S 0 3 0 | 0 0 | 1 0 0 | collision,wait,pulse
+T 20 9 10 10 0 9 0 0 0 gauntlet | A 2 4 N 2 4 0 | B 3 2 S 0 3 0 | 0 0 | 0 0 1 | collision,collision,wait
+T 20 10 11 11 0 10 0 0 0 gauntlet | A 2 4 E 2 4 0 | B 3 2 S 0 3 0 | 0 0 | 0 0 0 | turn,ping,pulse
+T 20 11 12 12 0 11 0 0 0 gauntlet | A 2 4 E 2 4 0 | B 3 2 S 0 3 0 | 0 0 | 0 1 1 | wait,wait
+T 20 12 13 13 0 12 0 0 0 gauntlet | A 2 4 E 2 4 0 | B 3 2 S 0 3 0 | 0 0 | 0 0 0 | wait,wait
+T 20 13 14 14 0 13 0 0 0 gauntlet | A 2 4 N 2 4 0 | B 3 3 S 0 3 0 | 0 0 | 1 0 1 | turn,move
+T 20 14 15 15 0 14 0 0 0 gauntlet | A 2 4 W 2 4 0 | B 3 3 W 0 3 0 | 0 0 | 0 0 0 | turn,turn
+T 20 15 16 0 0 15 0 0 0 gauntlet | A 0 4 W 2 4 0 | B 3 3 W 0 3 0 | 0 0 | 0 1 1 | move,move,collision
+T 21 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 4 0 | B 4 0 W 0 3 0 | 0 0 | 1 0 0 | reset
+T 21 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 4 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 1 | ping,wait
+T 21 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 4 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | move,zap,turn
+T 21 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 4 0 | B 4 0 W 0 3 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 21 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 2 4 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 0 | move,ping
+T 21 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 4 0 | B 3 0 W 1 3 0 | 0 0 | 1 0 1 | wait,move,zap
+T 21 6 7 7 0 6 0 0 0 gauntlet | A 2 4 E 2 4 0 | B 3 0 W 1 3 0 | 0 0 | 0 0 0 | wait,wait
+T 21 7 8 8 0 7 0 0 0 gauntlet | A 4 4 E 2 4 0 | B 3 0 W 1 3 0 | 0 0 | 0 1 1 | move,move,wait
+T 21 8 9 9 0 8 0 0 0 gauntlet | A 4 4 E 2 4 0 | B 3 0 W 1 3 0 | 0 0 | 1 0 0 | collision,wait
+T 21 9 10 10 0 9 0 0 0 gauntlet | A 4 4 E 2 4 0 | B 2 0 W 1 3 0 | 0 0 | 0 0 1 | collision,collision,move
+T 21 10 11 11 0 10 0 0 0 gauntlet | A 4 4 S 2 4 0 | B 2 0 W 1 3 0 | 0 0 | 0 0 0 | turn,ping
+T 21 11 12 12 0 11 0 0 0 gauntlet | A 4 4 S 2 4 0 | B 2 0 W 1 3 0 | 0 0 | 0 1 1 | wait,wait
+T 21 12 13 13 0 12 0 0 0 gauntlet | A 4 4 S 2 4 0 | B 2 0 S 1 3 0 | 0 0 | 0 0 0 | collision,collision,turn
+T 21 13 14 14 0 13 0 0 0 gauntlet | A 4 4 E 2 4 0 | B 2 0 S 1 3 0 | 0 0 | 1 0 1 | turn,wait
+T 21 14 15 15 0 14 0 0 0 gauntlet | A 4 4 N 2 4 0 | B 2 0 W 1 3 0 | 0 0 | 0 0 0 | turn,turn
+T 21 15 16 0 0 15 0 0 0 gauntlet | A 4 4 N 2 4 0 | B 2 0 W 1 3 0 | 0 0 | 0 1 1 | wait,wait
+T 22 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 4 0 | B 4 0 W 0 3 0 | 0 0 | 1 0 0 | reset
+T 22 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 4 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 1 | ping,collision
+T 22 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 4 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | move,zap,turn
+T 22 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 4 0 | B 4 0 W 0 3 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 22 4 5 5 0 4 0 0 0 gauntlet | A 3 4 E 2 4 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 0 | wait,ping
+T 22 5 6 6 0 5 0 0 0 gauntlet | A 3 4 E 2 4 0 | B 3 0 W 1 3 0 | 0 0 | 1 0 1 | wait,move,zap
+T 22 6 7 7 0 6 0 0 0 gauntlet | A 3 4 N 3 4 0 | B 3 0 S 2 3 0 | 0 0 | 0 0 0 | turn,zap,turn,zap
+T 22 7 8 8 0 7 0 0 0 gauntlet | A 3 2 N 4 4 0 | B 3 2 S 1 3 0 | 7 0 | 0 1 1 | move,move,pulse,move,move,zap,pulse
+T 22 8 9 9 0 8 0 0 0 gauntlet | A 3 1 N 4 4 0 | B 3 2 S 1 3 0 | 6 0 | 1 0 0 | move,wait
+T 22 9 10 10 0 9 0 0 0 gauntlet | A 3 0 N 5 4 0 | B 3 3 S 1 3 0 | 5 0 | 0 0 1 | move,collision,zap,move
+T 22 10 11 11 0 10 0 0 0 gauntlet | A 3 0 E 6 4 1 | B 3 3 S 1 3 0 | 4 0 | 0 0 0 | turn,zap,zap,ping
+T 22 11 12 12 0 11 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 3 3 S 1 3 0 | 3 0 | 0 1 1 | death,wait,wait
+T 22 12 13 13 0 12 0 0 0 gauntlet | A 2 4 E 0 5 0 | B 3 3 E 1 3 0 | 2 0 | 0 0 0 | move,move,turn
+T 22 13 14 14 0 13 0 0 0 gauntlet | A 2 4 N 0 5 0 | B 3 3 E 1 3 0 | 1 0 | 1 0 1 | turn,wait
+T 22 14 15 15 0 14 0 0 0 gauntlet | A 2 4 W 0 5 0 | B 3 3 S 1 3 0 | 0 0 | 0 0 0 | turn,turn
+T 22 15 16 0 0 15 0 0 0 gauntlet | A 2 4 W 0 5 0 | B 3 4 S 2 3 0 | 0 0 | 0 1 1 | wait,move,zap
+T 23 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 4 0 W 0 3 0 | 0 0 | 1 0 0 | reset
+T 23 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 4 0 W 0 3 0 | 0 0 | 0 0 1 | ping,wait
+T 23 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 5 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | move,zap,turn
+T 23 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 5 0 | B 4 0 S 0 3 0 | 0 0 | 0 1 1 | move,move,zap,wait
+T 23 4 5 5 0 4 0 0 0 gauntlet | A 3 4 E 2 5 0 | B 4 0 S 0 3 0 | 0 0 | 0 0 0 | wait,ping
+T 23 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 5 0 | B 4 1 S 1 3 0 | 0 0 | 1 0 1 | move,move,zap
+T 23 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 4 1 E 2 3 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 23 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 4 1 E 2 3 0 | 0 0 | 0 1 1 | wait,wait
+T 23 8 9 9 0 8 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 4 1 E 3 3 0 | 0 0 | 1 0 0 | wait,wait,zap
+T 23 9 10 10 0 9 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 4 1 E 4 3 0 | 0 0 | 0 0 1 | collision,collision,collision,zap
+T 23 10 11 11 0 10 0 0 0 gauntlet | A 2 4 E 2 5 0 | B 4 1 E 5 3 0 | 0 0 | 0 0 0 | turn,ping,zap
+T 23 11 12 12 0 11 0 0 0 gauntlet | A 2 4 E 2 5 0 | B 4 1 E 5 3 0 | 0 0 | 0 1 1 | wait,wait
+T 23 12 13 13 0 12 0 0 0 gauntlet | A 4 4 E 2 5 0 | B 4 1 N 6 3 1 | 0 0 | 0 0 0 | move,move,turn,zap,zap
+T 23 13 14 14 0 13 0 0 0 gauntlet | A 4 4 N 2 5 0 | B 0 4 W 0 4 0 | 0 0 | 1 0 1 | death,turn,collision
+T 23 14 15 15 0 14 0 0 0 gauntlet | A 4 4 W 2 5 0 | B 0 4 N 0 4 0 | 0 0 | 0 0 0 | turn,turn
+T 23 15 16 0 0 15 0 0 0 gauntlet | A 2 4 W 2 5 0 | B 0 4 N 0 4 0 | 0 0 | 0 1 1 | move,move,wait
+T 24 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 4 0 W 0 4 0 | 0 0 | 1 0 0 | reset
+T 24 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 1 | ping,wait
+T 24 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 5 0 | B 4 0 S 0 4 0 | 0 0 | 0 0 0 | move,zap,turn
+T 24 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 24 4 5 5 0 4 0 0 0 gauntlet | A 3 4 E 2 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 0 | wait,ping
+T 24 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 5 0 | B 3 0 W 1 4 0 | 0 0 | 1 0 1 | move,move,zap
+T 24 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 3 0 S 2 4 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 24 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 3 0 S 2 4 0 | 0 0 | 0 1 1 | collision,collision,wait
+T 24 8 9 9 0 8 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 3 0 S 3 4 0 | 0 0 | 1 0 0 | collision,wait,zap
+T 24 9 10 10 0 9 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 3 1 S 3 4 0 | 0 0 | 0 0 1 | collision,collision,move
+T 24 10 11 11 0 10 0 0 0 gauntlet | A 2 4 E 2 5 0 | B 3 1 S 3 4 0 | 0 0 | 0 0 0 | turn,ping
+T 24 11 12 12 0 11 0 0 0 gauntlet | A 2 4 E 2 5 0 | B 3 1 S 3 4 0 | 0 0 | 0 1 1 | wait,wait
+T 24 12 13 13 0 12 0 0 0 gauntlet | A 4 4 E 2 5 0 | B 3 1 S 3 4 0 | 0 0 | 0 0 0 | move,move,wait
+T 24 13 14 14 0 13 0 0 0 gauntlet | A 4 4 N 2 5 0 | B 3 2 S 2 4 0 | 0 0 | 1 0 1 | turn,move,pulse
+T 24 14 15 15 0 14 0 0 0 gauntlet | A 4 4 W 2 5 0 | B 3 2 W 1 4 0 | 0 0 | 0 0 0 | turn,turn,pulse
+T 24 15 16 0 0 15 0 0 0 gauntlet | A 2 4 W 2 5 0 | B 2 2 W 1 4 0 | 0 0 | 0 1 1 | move,move,move
+T 25 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 4 0 W 0 4 0 | 0 0 | 1 0 0 | reset
+T 25 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 1 | ping,collision
+T 25 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 5 0 | B 4 0 S 0 4 0 | 0 0 | 0 0 0 | move,zap,turn
+T 25 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 25 4 5 5 0 4 0 0 0 gauntlet | A 3 4 E 2 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 0 | wait,ping
+T 25 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 5 0 | B 4 0 W 0 4 0 | 0 0 | 1 0 1 | move,wait
+T 25 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 0 | turn,wait
+T 25 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 2 0 W 0 4 0 | 0 0 | 0 1 1 | collision,collision,move,move
+T 25 8 9 9 0 8 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 2 0 W 0 4 0 | 0 0 | 1 0 0 | collision,wait
+T 25 9 10 10 0 9 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 1 0 W 1 4 0 | 0 0 | 0 0 1 | collision,collision,move,zap
+T 25 10 11 11 0 10 0 0 0 gauntlet | A 2 4 E 2 5 0 | B 1 0 W 2 4 0 | 0 0 | 0 0 0 | turn,ping,zap
+T 25 11 12 12 0 11 0 0 0 gauntlet | A 2 4 E 2 5 0 | B 1 0 W 3 4 0 | 0 0 | 0 1 1 | wait,wait,zap
+T 25 12 13 13 0 12 0 0 0 gauntlet | A 4 4 E 2 5 0 | B 1 0 S 4 4 0 | 0 0 | 0 0 0 | move,move,turn,zap
+T 25 13 14 14 0 13 0 0 0 gauntlet | A 4 4 N 2 5 0 | B 1 1 S 4 4 0 | 0 0 | 1 0 1 | turn,move
+T 25 14 15 15 0 14 0 0 0 gauntlet | A 4 4 W 2 5 0 | B 1 1 W 4 4 0 | 0 0 | 0 0 0 | turn,turn
+T 25 15 16 0 0 15 0 0 0 gauntlet | A 2 4 W 2 5 0 | B 0 1 W 5 4 0 | 0 0 | 0 1 1 | move,move,move,zap
+T 26 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 4 0 W 0 4 0 | 0 0 | 1 0 0 | reset
+T 26 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 1 | ping,wait
+T 26 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 5 0 | B 4 0 S 0 4 0 | 0 0 | 0 0 0 | move,zap,turn
+T 26 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 26 4 5 5 0 4 0 0 0 gauntlet | A 3 4 E 2 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 0 | wait,ping
+T 26 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 5 0 | B 3 0 W 1 4 0 | 0 0 | 1 0 1 | move,move,zap
+T 26 6 7 7 0 6 0 0 0 gauntlet | A 2 4 E 2 5 0 | B 3 0 S 2 4 0 | 0 0 | 0 0 0 | wait,turn,zap
+T 26 7 8 8 0 7 0 0 0 gauntlet | A 4 4 E 2 5 0 | B 3 2 S 1 4 0 | 0 0 | 0 1 1 | move,move,move,move,pulse
+T 26 8 9 9 0 8 0 0 0 gauntlet | A 4 4 E 2 5 0 | B 3 2 S 1 4 0 | 0 0 | 1 0 0 | collision,wait
+T 26 9 10 10 0 9 0 0 0 gauntlet | A 4 4 E 2 5 0 | B 3 3 S 1 4 0 | 0 0 | 0 0 1 | collision,collision,move
+T 26 10 11 11 0 10 0 0 0 gauntlet | A 4 4 S 2 5 0 | B 3 3 S 1 4 0 | 0 0 | 0 0 0 | turn,ping
+T 26 11 12 12 0 11 0 0 0 gauntlet | A 4 4 S 2 5 0 | B 3 3 S 1 4 0 | 0 0 | 0 1 1 | wait,wait
+T 26 12 13 13 0 12 0 0 0 gauntlet | A 4 4 S 2 5 0 | B 3 3 E 1 4 0 | 0 0 | 0 0 0 | collision,collision,turn
+T 26 13 14 14 0 13 0 0 0 gauntlet | A 4 4 E 2 5 0 | B 3 3 E 1 4 0 | 0 0 | 1 0 1 | turn,wait
+T 26 14 15 15 0 14 0 0 0 gauntlet | A 4 4 N 2 5 0 | B 3 3 S 1 4 0 | 0 0 | 0 0 0 | turn,turn
+T 26 15 16 0 0 15 0 0 0 gauntlet | A 4 2 N 2 5 0 | B 3 4 S 2 4 0 | 0 0 | 0 1 1 | move,move,move,zap
+T 27 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 4 0 W 0 4 0 | 0 0 | 1 0 0 | reset
+T 27 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 1 | ping,wait
+T 27 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 5 0 | B 4 0 S 0 4 0 | 0 0 | 0 0 0 | move,zap,turn
+T 27 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 27 4 5 5 0 4 0 0 0 gauntlet | A 3 4 E 2 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 0 | wait,ping
+T 27 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 5 0 | B 3 0 W 1 4 0 | 0 0 | 1 0 1 | move,move,zap
+T 27 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 3 0 S 2 4 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 27 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 3 2 S 1 4 0 | 0 0 | 0 1 1 | wait,move,move,pulse
+T 27 8 9 9 0 8 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 3 2 S 1 4 0 | 0 0 | 1 0 0 | collision,wait
+T 27 9 10 10 0 9 0 0 0 gauntlet | A 2 4 N 2 5 0 | B 3 2 S 1 4 0 | 0 0 | 0 0 1 | collision,collision,wait
+T 27 10 11 11 0 10 0 0 0 gauntlet | A 2 4 E 2 5 0 | B 3 2 S 0 4 0 | 0 0 | 0 0 0 | turn,ping,pulse
+T 27 11 12 12 0 11 0 0 0 gauntlet | A 2 4 E 2 5 0 | B 3 2 S 0 4 0 | 0 0 | 0 1 1 | wait,wait,pulse
+T 27 12 13 13 0 12 0 0 0 gauntlet | A 4 4 E 2 5 0 | B 3 2 S 0 4 0 | 0 0 | 0 0 0 | move,move,wait
+T 27 13 14 14 0 13 0 0 0 gauntlet | A 4 4 N 2 5 0 | B 3 2 S 0 4 0 | 0 0 | 1 0 1 | turn,wait
+T 27 14 15 15 0 14 0 0 0 gauntlet | A 4 4 W 2 5 0 | B 3 2 W 0 4 0 | 0 0 | 0 0 0 | turn,turn,pulse
+T 27 15 16 0 0 15 0 0 0 gauntlet | A 2 4 W 2 5 0 | B 3 2 W 0 4 0 | 0 0 | 0 1 1 | move,move,wait
+T 28 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 4 0 W 0 4 0 | 0 0 | 1 0 0 | reset
+T 28 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 1 | ping,collision
+T 28 2 3 3 0 2 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 4 0 S 0 4 0 | 0 0 | 0 0 0 | wait,turn
+T 28 3 4 4 0 3 0 0 0 gauntlet | A 2 4 E 0 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 1 1 | move,move,turn
+T 28 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 0 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 0 | wait,ping
+T 28 5 6 6 0 5 0 0 0 gauntlet | A 1 4 E 1 5 0 | B 3 0 W 1 4 0 | 0 0 | 1 0 1 | move,zap,move,zap
+T 28 6 7 7 0 6 0 0 0 gauntlet | A 1 4 E 1 5 0 | B 3 0 S 2 4 0 | 0 0 | 0 0 0 | wait,turn,zap
+T 28 7 8 8 0 7 0 0 0 gauntlet | A 1 4 E 1 5 0 | B 3 2 S 1 4 0 | 0 0 | 0 1 1 | wait,move,move,pulse
+T 28 8 9 9 0 8 0 0 0 gauntlet | A 2 4 E 1 5 0 | B 3 2 S 0 4 0 | 0 0 | 1 0 0 | move,wait,pulse
+T 28 9 10 10 0 9 0 0 0 gauntlet | A 4 4 E 1 5 0 | B 3 3 S 0 4 0 | 0 0 | 0 0 1 | move,move,move
+T 28 10 11 11 0 10 0 0 0 gauntlet | A 4 4 S 1 5 0 | B 3 3 S 0 4 0 | 0 0 | 0 0 0 | turn,ping
+T 28 11 12 12 0 11 0 0 0 gauntlet | A 4 4 S 1 5 0 | B 3 3 S 0 4 0 | 0 0 | 0 1 1 | wait,wait
+T 28 12 13 13 0 12 0 0 0 gauntlet | A 4 4 S 1 5 0 | B 3 3 S 0 4 0 | 0 0 | 0 0 0 | collision,collision,wait
+T 28 13 14 14 0 13 0 0 0 gauntlet | A 4 4 E 1 5 0 | B 3 4 S 1 4 0 | 0 0 | 1 0 1 | turn,move,zap
+T 28 14 15 15 0 14 0 0 0 gauntlet | A 4 4 N 1 5 0 | B 3 4 W 2 4 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 28 15 16 0 0 15 0 0 0 gauntlet | A 4 4 N 1 5 0 | B 2 4 W 2 4 0 | 0 0 | 0 1 1 | wait,move
+T 29 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 4 0 W 0 4 0 | 0 0 | 1 0 0 | reset
+T 29 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 1 | ping,collision
+T 29 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 5 0 | B 4 0 S 0 4 0 | 0 0 | 0 0 0 | move,zap,turn
+T 29 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 29 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 2 5 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 0 | move,ping
+T 29 5 6 6 0 5 0 0 0 gauntlet | A 1 4 E 3 5 0 | B 3 0 W 1 4 0 | 0 0 | 1 0 1 | move,zap,move,zap
+T 29 6 7 7 0 6 0 0 0 gauntlet | A 1 4 N 4 5 0 | B 3 0 S 2 4 0 | 0 0 | 0 0 0 | turn,zap,turn,zap
+T 29 7 8 8 0 7 0 0 0 gauntlet | A 1 2 N 3 5 0 | B 3 0 S 2 4 0 | 0 0 | 0 1 1 | move,move,pulse,wait
+T 29 8 9 9 0 8 0 0 0 gauntlet | A 1 1 N 3 5 0 | B 3 0 S 2 4 0 | 0 0 | 1 0 0 | move,wait
+T 29 9 10 10 0 9 0 0 0 gauntlet | A 1 0 N 4 5 0 | B 3 1 S 2 4 0 | 0 0 | 0 0 1 | move,collision,zap,move
+T 29 10 11 11 0 10 0 0 0 gauntlet | A 1 0 E 5 5 0 | B 3 1 S 2 4 0 | 0 0 | 0 0 0 | turn,zap,ping
+T 29 11 12 12 0 11 0 0 0 gauntlet | A 1 0 E 5 5 0 | B 3 1 S 2 4 0 | 0 0 | 0 1 1 | wait,wait
+T 29 12 13 13 0 12 0 0 0 gauntlet | A 3 0 E 6 5 1 | B 3 1 S 2 4 0 | 0 0 | 0 0 0 | move,move,zap,zap,wait
+T 29 13 14 14 0 13 0 0 0 gauntlet | A 0 4 N 0 6 0 | B 3 1 S 2 4 0 | 0 0 | 1 0 1 | death,turn,wait
+T 29 14 15 15 0 14 0 0 0 gauntlet | A 0 4 W 0 6 0 | B 3 1 W 2 4 0 | 0 0 | 0 0 0 | turn,turn
+T 29 15 16 0 0 15 0 0 0 gauntlet | A 0 4 W 0 6 0 | B 2 1 W 3 4 0 | 0 0 | 0 1 1 | collision,collision,move,zap
+T 30 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 6 0 | B 4 0 W 0 4 0 | 0 0 | 1 0 0 | reset
+T 30 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 6 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 1 | ping,collision
+T 30 2 3 3 0 2 0 0 0 gauntlet | A 0 4 E 0 6 0 | B 4 0 S 0 4 0 | 0 0 | 0 0 0 | wait,turn
+T 30 3 4 4 0 3 0 0 0 gauntlet | A 2 4 E 0 6 0 | B 4 0 S 0 4 0 | 0 0 | 0 1 1 | move,move,wait
+T 30 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 0 6 0 | B 4 0 S 0 4 0 | 0 0 | 0 0 0 | wait,ping
+T 30 5 6 6 0 5 0 0 0 gauntlet | A 1 4 E 1 6 0 | B 4 1 S 1 4 0 | 0 0 | 1 0 1 | move,zap,move,zap
+T 30 6 7 7 0 6 0 0 0 gauntlet | A 1 4 N 2 6 0 | B 4 1 S 1 4 0 | 0 0 | 0 0 0 | turn,zap,wait
+T 30 7 8 8 0 7 0 0 0 gauntlet | A 1 2 N 1 6 0 | B 4 3 W 1 4 0 | 0 0 | 0 1 1 | move,move,pulse,move,move,rotator
+T 30 8 9 9 0 8 0 0 0 gauntlet | A 1 1 N 1 6 0 | B 4 3 W 1 4 0 | 0 0 | 1 0 0 | move,wait
+T 30 9 10 10 0 9 0 0 0 gauntlet | A 1 0 N 2 6 0 | B 3 3 W 1 4 0 | 0 0 | 0 0 1 | move,collision,zap,move
+T 30 10 11 11 0 10 0 0 0 gauntlet | A 1 0 E 3 6 0 | B 3 3 W 1 4 0 | 0 0 | 0 0 0 | turn,zap,ping
+T 30 11 12 12 0 11 0 0 0 gauntlet | A 1 0 E 4 6 0 | B 3 3 W 1 4 0 | 0 0 | 0 1 1 | wait,zap,wait
+T 30 12 13 13 0 12 0 0 0 gauntlet | A 3 0 E 5 6 0 | B 3 3 S 1 4 0 | 0 0 | 0 0 0 | move,move,zap,turn
+T 30 13 14 14 0 13 0 0 0 gauntlet | A 3 0 N 6 6 1 | B 3 3 S 1 4 0 | 0 0 | 1 0 1 | turn,zap,zap,wait
+T 30 14 15 15 0 14 0 0 0 gauntlet | A 0 4 N 0 7 0 | B 3 3 W 1 4 0 | 0 0 | 0 0 0 | death,turn,turn
+T 30 15 16 0 0 15 0 0 0 gauntlet | A 0 4 N 0 7 0 | B 3 3 W 1 4 0 | 0 0 | 0 1 1 | wait,wait
+T 31 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 7 0 | B 4 0 W 0 4 0 | 0 0 | 1 0 0 | reset
+T 31 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 7 0 | B 4 0 W 0 4 0 | 0 0 | 0 0 1 | ping,collision
+T 31 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 7 0 | B 4 0 S 0 4 0 | 0 0 | 0 0 0 | move,zap,turn
+T 31 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 7 0 | B 4 0 S 0 4 0 | 0 0 | 0 1 1 | move,move,zap,wait
+T 31 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 2 7 0 | B 4 0 S 0 4 0 | 0 0 | 0 0 0 | move,ping
+T 31 5 6 6 0 5 0 0 0 gauntlet | A 1 4 E 3 7 0 | B 4 1 S 1 4 0 | 0 0 | 1 0 1 | move,zap,move,zap
+T 31 6 7 7 0 6 0 0 0 gauntlet | A 1 4 N 4 7 0 | B 4 1 E 2 4 0 | 0 0 | 0 0 0 | turn,zap,turn,zap
+T 31 7 8 8 0 7 0 0 0 gauntlet | A 1 2 N 3 7 0 | B 4 1 E 3 4 0 | 0 0 | 0 1 1 | move,move,pulse,collision,collision,zap
+T 31 8 9 9 0 8 0 0 0 gauntlet | A 1 1 N 3 7 0 | B 4 1 E 3 4 0 | 0 0 | 1 0 0 | move,wait
+T 31 9 10 10 0 9 0 0 0 gauntlet | A 1 0 N 4 7 0 | B 4 1 E 4 4 0 | 0 0 | 0 0 1 | move,collision,zap,collision,zap
+T 31 10 11 11 0 10 0 0 0 gauntlet | A 1 0 E 5 7 0 | B 4 1 E 5 4 0 | 0 0 | 0 0 0 | turn,zap,ping,zap
+T 31 11 12 12 0 11 0 0 0 gauntlet | A 1 0 E 5 7 0 | B 4 1 E 6 4 1 | 0 0 | 0 1 1 | wait,wait,zap,zap
+T 31 12 13 13 0 12 0 0 0 gauntlet | A 3 0 E 6 7 1 | B 0 4 S 0 5 0 | 0 0 | 0 0 0 | death,move,move,zap,zap,turn
+T 31 13 14 14 0 13 0 0 0 gauntlet | A 0 4 N 0 8 0 | B 0 4 S 0 5 0 | 0 1 | 1 0 1 | death,turn,collision
+T 31 14 15 15 0 14 0 0 0 gauntlet | A 0 4 W 0 8 0 | B 0 4 W 0 5 0 | 0 2 | 0 0 0 | turn,turn
+T 31 15 16 0 0 15 0 0 0 gauntlet | A 0 4 W 0 8 0 | B 0 4 W 0 5 0 | 0 3 | 0 1 1 | wait,collision
+T 32 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 8 0 | B 4 0 W 0 5 0 | 0 0 | 1 0 0 | reset
+T 32 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 8 0 | B 4 0 W 0 5 0 | 0 0 | 0 0 1 | ping,collision
+T 32 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 8 0 | B 4 0 S 0 5 0 | 0 0 | 0 0 0 | move,zap,turn
+T 32 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 8 0 | B 4 0 S 0 5 0 | 0 0 | 0 1 1 | move,move,zap,wait
+T 32 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 2 8 0 | B 4 0 S 0 5 0 | 0 0 | 0 0 0 | move,ping
+T 32 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 8 0 | B 4 0 S 0 5 0 | 0 0 | 1 0 1 | wait,wait
+T 32 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 8 0 | B 4 0 S 0 5 0 | 0 0 | 0 0 0 | turn,wait
+T 32 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 8 0 | B 4 0 S 0 5 0 | 0 0 | 0 1 1 | collision,collision,wait
+T 32 8 9 9 0 8 0 0 0 gauntlet | A 2 4 N 2 8 0 | B 4 0 S 0 5 0 | 0 0 | 1 0 0 | collision,wait
+T 32 9 10 10 0 9 0 0 0 gauntlet | A 2 4 N 2 8 0 | B 4 1 S 1 5 0 | 0 0 | 0 0 1 | collision,collision,move,zap
+T 32 10 11 11 0 10 0 0 0 gauntlet | A 2 4 E 2 8 0 | B 4 1 S 2 5 0 | 0 0 | 0 0 0 | turn,ping,zap
+T 32 11 12 12 0 11 0 0 0 gauntlet | A 2 4 E 2 8 0 | B 4 1 S 2 5 0 | 0 0 | 0 1 1 | wait,wait
+T 32 12 13 13 0 12 0 0 0 gauntlet | A 2 4 E 2 8 0 | B 4 1 E 3 5 0 | 0 0 | 0 0 0 | wait,turn,zap
+T 32 13 14 14 0 13 0 0 0 gauntlet | A 2 4 N 2 8 0 | B 4 1 E 4 5 0 | 0 0 | 1 0 1 | turn,collision,zap
+T 32 14 15 15 0 14 0 0 0 gauntlet | A 2 4 W 2 8 0 | B 4 1 S 5 5 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 32 15 16 0 0 15 0 0 0 gauntlet | A 0 4 W 2 8 0 | B 4 2 S 5 5 0 | 0 0 | 0 1 1 | move,move,move
+T 33 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 8 0 | B 4 0 W 0 5 0 | 0 0 | 1 0 0 | reset
+T 33 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 8 0 | B 4 0 W 0 5 0 | 0 0 | 0 0 1 | ping,collision
+T 33 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 8 0 | B 4 0 S 0 5 0 | 0 0 | 0 0 0 | move,zap,turn
+T 33 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 8 0 | B 4 0 W 0 5 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 33 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 2 8 0 | B 4 0 W 0 5 0 | 0 0 | 0 0 0 | move,ping
+T 33 5 6 6 0 5 0 0 0 gauntlet | A 1 4 E 3 8 0 | B 3 0 W 1 5 0 | 0 0 | 1 0 1 | move,zap,move,zap
+T 33 6 7 7 0 6 0 0 0 gauntlet | A 1 4 E 3 8 0 | B 3 0 W 1 5 0 | 0 0 | 0 0 0 | wait,wait
+T 33 7 8 8 0 7 0 0 0 gauntlet | A 1 4 E 3 8 0 | B 3 0 W 1 5 0 | 0 0 | 0 1 1 | wait,wait
+T 33 8 9 9 0 8 0 0 0 gauntlet | A 1 4 E 3 8 0 | B 3 0 W 2 5 0 | 0 0 | 1 0 0 | wait,wait,zap
+T 33 9 10 10 0 9 0 0 0 gauntlet | A 3 4 E 4 8 0 | B 2 0 W 2 5 0 | 0 0 | 0 0 1 | move,move,zap,move
+T 33 10 11 11 0 10 0 0 0 gauntlet | A 3 4 S 5 8 0 | B 2 0 W 2 5 0 | 0 0 | 0 0 0 | turn,zap,ping
+T 33 11 12 12 0 11 0 0 0 gauntlet | A 3 4 S 6 8 1 | B 2 0 W 2 5 0 | 0 0 | 0 1 1 | wait,zap,zap,wait
+T 33 12 13 13 0 12 0 0 0 gauntlet | A 2 0 E 0 9 0 | B 2 0 W 4 5 0 | 7 0 | 0 0 0 | death,move,move,zap,wait
+T 33 13 14 14 0 13 0 0 0 gauntlet | A 2 0 N 0 9 0 | B 1 0 W 5 5 0 | 6 0 | 1 0 1 | turn,move,zap
+T 33 14 15 15 0 14 0 0 0 gauntlet | A 2 0 W 0 9 0 | B 1 0 N 6 5 1 | 5 0 | 0 0 0 | turn,turn,zap,zap
+T 33 15 16 0 0 15 0 0 0 gauntlet | A 0 0 W 0 9 0 | B 4 4 W 0 6 0 | 4 0 | 0 1 1 | death,move,move,wait
+T 34 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 9 0 | B 4 0 W 0 6 0 | 0 0 | 1 0 0 | reset
+T 34 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 9 0 | B 4 0 W 0 6 0 | 0 0 | 0 0 1 | ping,wait
+T 34 2 3 3 0 2 0 0 0 gauntlet | A 0 4 E 0 9 0 | B 4 0 S 0 6 0 | 0 0 | 0 0 0 | wait,turn
+T 34 3 4 4 0 3 0 0 0 gauntlet | A 2 4 E 0 9 0 | B 4 0 W 0 6 0 | 0 0 | 0 1 1 | move,move,turn
+T 34 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 0 9 0 | B 4 0 W 0 6 0 | 0 0 | 0 0 0 | wait,ping
+T 34 5 6 6 0 5 0 0 0 gauntlet | A 1 4 E 1 9 0 | B 4 0 W 0 6 0 | 0 0 | 1 0 1 | move,zap,wait
+T 34 6 7 7 0 6 0 0 0 gauntlet | A 1 4 N 2 9 0 | B 4 0 W 0 6 0 | 0 0 | 0 0 0 | turn,zap,wait
+T 34 7 8 8 0 7 0 0 0 gauntlet | A 1 4 N 2 9 0 | B 2 0 W 0 6 0 | 0 0 | 0 1 1 | wait,move,move
+T 34 8 9 9 0 8 0 0 0 gauntlet | A 1 3 N 2 9 0 | B 2 0 W 0 6 0 | 0 0 | 1 0 0 | move,wait
+T 34 9 10 10 0 9 0 0 0 gauntlet | A 1 1 N 2 9 0 | B 2 0 W 0 6 0 | 0 0 | 0 0 1 | move,move,wait
+T 34 10 11 11 0 10 0 0 0 gauntlet | A 1 1 E 2 9 0 | B 2 0 W 0 6 0 | 0 0 | 0 0 0 | turn,ping
+T 34 11 12 12 0 11 0 0 0 gauntlet | A 1 1 E 2 9 0 | B 2 0 W 0 6 0 | 0 0 | 0 1 1 | wait,wait
+T 34 12 13 13 0 12 0 0 0 gauntlet | A 1 1 E 2 9 0 | B 2 0 W 0 6 0 | 0 0 | 0 0 0 | wait,wait
+T 34 13 14 14 0 13 0 0 0 gauntlet | A 1 1 N 2 9 0 | B 2 0 W 0 6 0 | 0 0 | 1 0 1 | turn,wait
+T 34 14 15 15 0 14 0 0 0 gauntlet | A 1 1 W 2 9 0 | B 2 0 N 0 6 0 | 0 0 | 0 0 0 | turn,turn
+T 34 15 16 0 0 15 0 0 0 gauntlet | A 0 1 W 3 9 0 | B 2 0 N 0 6 0 | 0 0 | 0 1 1 | move,collision,zap,collision
+T 35 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 9 0 | B 4 0 W 0 6 0 | 0 0 | 1 0 0 | reset
+T 35 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 9 0 | B 4 0 W 0 6 0 | 0 0 | 0 0 1 | ping,wait
+T 35 2 3 3 0 2 0 0 0 gauntlet | A 0 4 E 0 9 0 | B 4 0 S 0 6 0 | 0 0 | 0 0 0 | wait,turn
+T 35 3 4 4 0 3 0 0 0 gauntlet | A 2 4 E 0 9 0 | B 4 0 W 0 6 0 | 0 0 | 0 1 1 | move,move,turn
+T 35 4 5 5 0 4 0 0 0 gauntlet | A 1 4 E 1 9 0 | B 4 0 W 0 6 0 | 0 0 | 0 0 0 | move,zap,ping
+T 35 5 6 6 0 5 0 0 0 gauntlet | A 0 4 E 1 9 0 | B 4 0 W 0 6 0 | 0 0 | 1 0 1 | move,wait
+T 35 6 7 7 0 6 0 0 0 gauntlet | A 0 4 E 1 9 0 | B 4 0 S 0 6 0 | 0 0 | 0 0 0 | wait,turn
+T 35 7 8 8 0 7 0 0 0 gauntlet | A 2 4 E 1 9 0 | B 4 2 S 0 6 0 | 0 0 | 0 1 1 | move,move,move,move
+T 35 8 9 9 0 8 0 0 0 gauntlet | A 2 4 E 1 9 0 | B 4 2 S 0 6 0 | 0 0 | 1 0 0 | wait,wait
+T 35 9 10 10 0 9 0 0 0 gauntlet | A 4 4 E 1 9 0 | B 4 3 W 0 6 0 | 0 0 | 0 0 1 | move,move,move,rotator
+T 35 10 11 11 0 10 0 0 0 gauntlet | A 4 4 S 1 9 0 | B 4 3 N 0 6 0 | 0 0 | 0 0 0 | turn,ping,rotator
+T 35 11 12 12 0 11 0 0 0 gauntlet | A 4 4 S 1 9 0 | B 4 3 E 0 6 0 | 0 0 | 0 1 1 | wait,wait,rotator
+T 35 12 13 13 0 12 0 0 0 gauntlet | A 4 4 S 1 9 0 | B 4 3 E 0 6 0 | 0 0 | 0 0 0 | collision,collision,wait
+T 35 13 14 14 0 13 0 0 0 gauntlet | A 4 4 E 1 9 0 | B 4 3 S 0 6 0 | 0 0 | 1 0 1 | turn,collision,rotator
+T 35 14 15 15 0 14 0 0 0 gauntlet | A 4 4 N 1 9 0 | B 4 3 N 0 6 0 | 0 0 | 0 0 0 | turn,turn,rotator
+T 35 15 16 0 0 15 0 0 0 gauntlet | A 4 2 N 1 9 0 | B 4 2 N 0 6 0 | 0 1 | 0 1 1 | move,move,move
+T 36 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 9 0 | B 4 0 W 0 6 0 | 0 0 | 1 0 0 | reset
+T 36 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 9 0 | B 4 0 W 0 6 0 | 0 0 | 0 0 1 | ping,wait
+T 36 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 9 0 | B 4 0 S 0 6 0 | 0 0 | 0 0 0 | move,zap,turn
+T 36 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 9 0 | B 4 0 S 0 6 0 | 0 0 | 0 1 1 | move,move,zap,wait
+T 36 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 2 9 0 | B 4 0 S 0 6 0 | 0 0 | 0 0 0 | move,ping
+T 36 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 9 0 | B 4 1 S 1 6 0 | 0 0 | 1 0 1 | wait,move,zap
+T 36 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 9 0 | B 4 1 S 1 6 0 | 0 0 | 0 0 0 | turn,wait
+T 36 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 9 0 | B 4 3 W 1 6 0 | 0 0 | 0 1 1 | collision,collision,move,move,rotator
+T 36 8 9 9 0 8 0 0 0 gauntlet | A 2 4 N 2 9 0 | B 4 3 W 1 6 0 | 0 0 | 1 0 0 | wait,wait
+T 36 9 10 10 0 9 0 0 0 gauntlet | A 2 4 N 2 9 0 | B 3 3 W 1 6 0 | 0 0 | 0 0 1 | collision,collision,move
+T 36 10 11 11 0 10 0 0 0 gauntlet | A 2 4 E 2 9 0 | B 3 3 W 1 6 0 | 0 0 | 0 0 0 | turn,ping
+T 36 11 12 12 0 11 0 0 0 gauntlet | A 2 4 E 2 9 0 | B 3 3 W 1 6 0 | 0 0 | 0 1 1 | wait,wait
+T 36 12 13 13 0 12 0 0 0 gauntlet | A 4 4 E 2 9 0 | B 3 3 W 1 6 0 | 0 0 | 0 0 0 | move,move,wait
+T 36 13 14 14 0 13 0 0 0 gauntlet | A 4 4 N 2 9 0 | B 3 3 W 1 6 0 | 0 0 | 1 0 1 | turn,wait
+T 36 14 15 15 0 14 0 0 0 gauntlet | A 4 4 W 2 9 0 | B 3 3 N 1 6 0 | 0 0 | 0 0 0 | turn,turn
+T 36 15 16 0 0 15 0 0 0 gauntlet | A 4 4 W 2 9 0 | B 3 2 N 0 6 0 | 0 0 | 0 1 1 | wait,move,pulse
+T 37 0 1 1 0 0 0 0 0 gauntlet | A 0 4 E 0 9 0 | B 4 0 W 0 6 0 | 0 0 | 1 0 0 | reset
+T 37 1 2 2 0 1 0 0 0 gauntlet | A 0 4 E 0 9 0 | B 4 0 W 0 6 0 | 0 0 | 0 0 1 | ping,collision
+T 37 2 3 3 0 2 0 0 0 gauntlet | A 1 4 E 1 9 0 | B 4 0 S 0 6 0 | 0 0 | 0 0 0 | move,zap,turn
+T 37 3 4 4 0 3 0 0 0 gauntlet | A 3 4 E 2 9 0 | B 4 0 W 0 6 0 | 0 0 | 0 1 1 | move,move,zap,turn
+T 37 4 5 5 0 4 0 0 0 gauntlet | A 2 4 E 2 9 0 | B 4 0 W 0 6 0 | 0 0 | 0 0 0 | move,ping
+T 37 5 6 6 0 5 0 0 0 gauntlet | A 2 4 E 2 9 0 | B 3 0 W 1 6 0 | 0 0 | 1 0 1 | wait,move,zap
+T 37 6 7 7 0 6 0 0 0 gauntlet | A 2 4 N 2 9 0 | B 3 0 S 2 6 0 | 0 0 | 0 0 0 | turn,turn,zap
+T 37 7 8 8 0 7 0 0 0 gauntlet | A 2 4 N 2 9 0 | B 3 2 S 1 6 0 | 0 0 | 0 1 1 | collision,collision,move,move,pulse

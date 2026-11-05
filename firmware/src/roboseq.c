@@ -22,6 +22,8 @@
 static void app_idle(void);
 #define LCD_IDLE app_idle                       /* while the screen's DMA runs: MIDI in (platform.c) */
 #include "platform.c"
+#include "rs_model.c"                         /* the game (phase 1: built in and run once at boot, not yet played) */
+#include "rs_chance.c"
 #if BOARD_SMK37
 #include "smk_wheel.h"
 #endif
@@ -207,6 +209,7 @@ static void app_idle(void)
     if (idle_ok) midi_in();
 }
 
+volatile uint32_t rs_boot_check;               /* rs_selfcheck() at boot: make emu reads it from RAM */
 static void app_main(void)
 {
     uint32_t prev = 0, k, t_change = 0, dirty = 0, lit_drawn = ~0u, note_drawn = ~0u, status_drawn = ~0u;
@@ -221,6 +224,7 @@ static void app_main(void)
     if (settings_load(&set, sizeof set) || (int8_t)set.oct < -2 || (int8_t)set.oct > 2 || set.ch > 16u)
         set.oct = 0, set.ch = 0;
 
+    rs_boot_check = rs_selfcheck();             /* the model on the chip (phase 1): make emu compares it */
     lcd_fill(0, 0, 240, 240, C_BLACK);
     draw_text_box(0, 18, 240, &FONT_L, APP_NAME, C_ACC, 1);
     draw_text_box(0, 52, 240, &FONT_S, "a sine to build on  v" APP_VER, C_OFF, 1);

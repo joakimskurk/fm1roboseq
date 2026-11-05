@@ -1,0 +1,744 @@
+# random-14: reference/roboseq.html run by tools/trace/gen.mjs
+board garden
+loop 8
+tpm 2
+vmtrigger loop
+vmfreq 16
+bassmodlen 4
+drums 1 half
+seq2 0 0
+seq2step 0 -- -- 0
+seq2step 1 -- -- 0
+seq2step 2 -- -- 0
+seq2step 3 -- -- 0
+prog A 41
+step A 0 back steady 100
+step A 1 back glitch 75
+step A 2 dash bright 50
+step A 3 wait steady 100
+step A 4 move low 100
+step A 5 move wobble 100
+step A 6 ping bright 100
+step A 7 move glitch 100
+step A 8 back wobble 75
+step A 9 dash steady 100
+step A 10 turnL steady 100
+step A 11 wait bright 100
+step A 12 dash steady 100
+step A 13 wait steady 100
+step A 14 back low 100
+step A 15 dash wobble 100
+step A 16 turnR steady 100
+step A 17 move steady 50
+step A 18 turnR steady 50
+step A 19 ping wobble 100
+step A 20 turnL wobble 50
+step A 21 dash wobble 100
+step A 22 turnL low 100
+step A 23 wait steady 75
+step A 24 wait bright 50
+step A 25 dash low 50
+step A 26 turnR wobble 75
+step A 27 wait steady 100
+step A 28 move bright 75
+step A 29 turnL steady 50
+step A 30 turnR low 100
+step A 31 ping wobble 100
+step A 32 wait low 50
+step A 33 turnL bright 100
+step A 34 dash wobble 75
+step A 35 turnL low 75
+step A 36 back wobble 50
+step A 37 move steady 100
+step A 38 turnR bright 100
+step A 39 back steady 75
+step A 40 move low 50
+step A 41 dash glitch 50
+step A 42 ping steady 75
+step A 43 ping low 50
+step A 44 dash wobble 100
+step A 45 wait bright 100
+step A 46 wait steady 50
+step A 47 back steady 100
+step A 48 turnL low 75
+step A 49 back low 50
+step A 50 move glitch 75
+step A 51 turnL low 100
+step A 52 wait wobble 100
+step A 53 move low 100
+step A 54 move wobble 100
+step A 55 dash steady 100
+step A 56 turnL bright 100
+step A 57 dash bright 50
+step A 58 wait wobble 75
+step A 59 back bright 75
+step A 60 ping steady 50
+step A 61 turnR glitch 100
+step A 62 move glitch 75
+step A 63 ping bright 50
+prog B 2
+step B 0 back bright 50
+step B 1 ping low 75
+step B 2 back low 100
+step B 3 turnL bright 100
+step B 4 turnR wobble 75
+step B 5 dash bright 75
+step B 6 dash steady 100
+step B 7 move bright 50
+step B 8 turnR bright 100
+step B 9 turnL low 100
+step B 10 turnR wobble 75
+step B 11 move glitch 50
+step B 12 wait steady 100
+step B 13 turnL low 100
+step B 14 move steady 100
+step B 15 move bright 100
+step B 16 dash wobble 50
+step B 17 dash bright 100
+step B 18 move low 75
+step B 19 ping low 50
+step B 20 dash glitch 50
+step B 21 turnR bright 50
+step B 22 turnR bright 100
+step B 23 back low 50
+step B 24 ping low 50
+step B 25 move wobble 75
+step B 26 back steady 50
+step B 27 dash steady 75
+step B 28 ping wobble 100
+step B 29 dash bright 100
+step B 30 turnL wobble 50
+step B 31 back wobble 50
+step B 32 turnR wobble 100
+step B 33 turnR wobble 100
+step B 34 back steady 50
+step B 35 turnL bright 100
+step B 36 turnR glitch 75
+step B 37 dash low 100
+step B 38 dash bright 75
+step B 39 turnR bright 50
+step B 40 turnR glitch 50
+step B 41 ping bright 100
+step B 42 wait glitch 50
+step B 43 turnR bright 50
+step B 44 turnR glitch 100
+step B 45 turnL glitch 75
+step B 46 move bright 100
+step B 47 dash low 50
+step B 48 turnR low 100
+step B 49 wait glitch 50
+step B 50 back steady 75
+step B 51 dash steady 50
+step B 52 back glitch 75
+step B 53 ping steady 75
+step B 54 back wobble 50
+step B 55 dash low 50
+step B 56 turnR bright 50
+step B 57 dash steady 75
+step B 58 ping bright 50
+step B 59 turnL low 100
+step B 60 wait bright 50
+step B 61 move glitch 50
+step B 62 move glitch 50
+step B 63 back steady 50
+ticks 600
+T 0 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | -
+T 0 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 0 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,collision
+T 0 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,ping
+T 0 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 4 9 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 0 4 10 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 5 11 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 0 5 12 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 6 13 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
+T 0 6 14 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 7 15 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 0 7 16 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 1 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 1 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+T 1 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 1 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 1 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 1 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,collision
+T 1 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 1 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 2 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 2 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 2 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 2 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 2 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,collision
+T 2 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 2 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,wait
+T 2 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 2 4 9 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 2 4 10 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 2 5 11 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 2 5 12 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 2 6 13 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,collision
+T 2 6 14 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 2 7 15 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 2 7 16 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 3 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 3 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,wait
+T 3 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,ping
+T 3 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 4 9 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,wait
+T 3 4 10 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 5 11 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 3 5 12 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 6 13 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
+T 3 6 14 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 7 15 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 3 7 16 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 4 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 4 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 4 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 4 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 4 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+T 4 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 4 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 4 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 4 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 4 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 4 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 4 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 4 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,wait
+T 4 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 4 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 4 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 5 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 5 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 5 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 5 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 5 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+T 5 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 5 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 5 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 5 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 5 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 5 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 5 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 5 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,wait
+T 5 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 5 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 5 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 6 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 6 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 6 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 6 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 6 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,collision
+T 6 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 6 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,ping
+T 6 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 6 4 9 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 6 4 10 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 6 5 11 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 6 5 12 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 6 6 13 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
+T 6 6 14 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 6 7 15 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 6 7 16 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 7 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 7 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 7 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 7 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 7 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,collision
+T 7 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 7 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,ping
+T 7 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 7 4 9 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 7 4 10 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 7 5 11 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 7 5 12 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 7 6 13 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,collision
+T 7 6 14 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 7 7 15 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 7 7 16 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 8 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 8 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 8 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 8 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 8 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,collision
+T 8 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 8 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,ping
+T 8 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 8 4 9 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 8 4 10 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 8 5 11 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 8 5 12 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 8 6 13 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,collision
+T 8 6 14 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 8 7 15 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 8 7 16 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 9 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 9 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 9 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 9 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 9 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,collision
+T 9 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 9 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 9 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 9 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,wait
+T 9 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 9 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 9 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 9 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,wait
+T 9 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 9 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 9 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 10 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 10 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+T 10 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 10 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 10 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 10 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,wait
+T 10 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 10 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 11 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 11 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 11 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 11 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 11 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,collision
+T 11 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 11 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,ping
+T 11 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 11 4 9 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 11 4 10 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 11 5 11 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 11 5 12 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 11 6 13 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,collision
+T 11 6 14 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 11 7 15 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 11 7 16 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 12 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 12 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 12 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 12 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 12 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+T 12 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 12 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 12 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 12 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 12 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 12 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 12 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 12 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,wait
+T 12 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 12 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 12 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 13 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 13 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 13 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 13 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 13 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+T 13 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 13 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 13 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 13 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,wait
+T 13 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 13 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 13 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 13 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,wait
+T 13 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 13 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 13 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 14 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 14 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 14 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 14 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 14 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,wait
+T 14 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 14 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,wait
+T 14 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 14 4 9 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 14 4 10 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 14 5 11 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 14 5 12 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 14 6 13 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
+T 14 6 14 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 14 7 15 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 14 7 16 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 15 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 15 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 15 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 15 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 15 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,collision
+T 15 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 15 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 15 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 15 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 15 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 15 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 15 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 15 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,collision
+T 15 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 15 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 15 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 16 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 16 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 16 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 16 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 16 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+T 16 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 16 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 16 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 16 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 16 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 16 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 16 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 16 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,wait
+T 16 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 16 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 16 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 17 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 17 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 17 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 17 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 17 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,collision
+T 17 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 17 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 17 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 17 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,wait
+T 17 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 17 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 17 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 17 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,wait
+T 17 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 17 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 17 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 18 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 18 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 18 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 18 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 18 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,collision
+T 18 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 18 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 18 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 18 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 18 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 18 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 18 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 18 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,collision
+T 18 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 18 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 18 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 19 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 19 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 19 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 19 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 19 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,collision
+T 19 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 19 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 19 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 19 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,wait
+T 19 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 19 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 19 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 19 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,collision
+T 19 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 19 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 19 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 20 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 20 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 20 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 20 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 20 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+T 20 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 20 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 20 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 20 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,wait
+T 20 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 20 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 20 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 20 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,collision
+T 20 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 20 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 20 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 21 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 21 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 21 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 21 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 21 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,collision
+T 21 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 21 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,ping
+T 21 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 21 4 9 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,wait
+T 21 4 10 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 21 5 11 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 21 5 12 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 21 6 13 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
+T 21 6 14 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 21 7 15 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 21 7 16 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 22 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 22 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 22 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 22 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 22 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,collision
+T 22 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 22 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,ping
+T 22 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 22 4 9 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 22 4 10 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 22 5 11 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 22 5 12 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 22 6 13 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,collision
+T 22 6 14 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 22 7 15 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 22 7 16 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 23 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 23 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 23 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 23 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 23 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,collision
+T 23 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 23 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,wait
+T 23 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 23 4 9 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,wait
+T 23 4 10 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 23 5 11 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 23 5 12 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 23 6 13 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,collision
+T 23 6 14 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 23 7 15 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 23 7 16 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 24 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 24 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 24 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 24 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 24 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,collision
+T 24 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 24 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,ping
+T 24 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 24 4 9 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 24 4 10 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 24 5 11 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 24 5 12 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 24 6 13 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,collision
+T 24 6 14 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 24 7 15 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 24 7 16 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 25 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 25 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 25 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 25 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 25 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,wait
+T 25 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 25 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,ping
+T 25 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 25 4 9 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 25 4 10 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 25 5 11 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 25 5 12 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 25 6 13 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
+T 25 6 14 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 25 7 15 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 25 7 16 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 26 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 26 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 26 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 26 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 26 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+T 26 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 26 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 26 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 26 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 26 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 26 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 26 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 26 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,collision
+T 26 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 26 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 26 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 27 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 27 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 27 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 27 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 27 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+T 27 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 27 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 27 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 27 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,wait
+T 27 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 27 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 27 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 27 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,collision
+T 27 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 27 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 27 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 28 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 28 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 28 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 28 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 28 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,collision
+T 28 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 28 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 28 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 28 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 28 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 28 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 28 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 28 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,collision
+T 28 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 28 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 28 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 29 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 29 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 29 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 29 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 29 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+T 29 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 29 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 29 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 29 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,wait
+T 29 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 29 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 29 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 29 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,collision
+T 29 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 29 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 29 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 30 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 30 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 30 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 30 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 30 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+T 30 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 30 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 30 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 30 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,wait
+T 30 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 30 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 30 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 30 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,wait
+T 30 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 30 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 30 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 31 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 31 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 31 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 31 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 31 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+T 31 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 31 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 31 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 31 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,wait
+T 31 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 31 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 31 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 31 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,collision
+T 31 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 31 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 31 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 32 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 32 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 32 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 32 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 32 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,wait
+T 32 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 32 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,wait
+T 32 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 32 4 9 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 32 4 10 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 32 5 11 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 32 5 12 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 32 6 13 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
+T 32 6 14 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 32 7 15 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 32 7 16 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 33 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 33 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 33 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 33 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 33 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+T 33 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 33 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 33 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 33 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 33 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 33 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 33 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 33 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,wait
+T 33 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 33 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 33 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 34 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 34 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 34 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 34 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 34 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
+T 34 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 34 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 34 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 34 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,wait
+T 34 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 34 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 34 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 34 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,wait
+T 34 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 34 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 34 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 35 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 35 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 35 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 35 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 35 2 5 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,collision
+T 35 2 6 3 0 2 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 35 3 7 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 35 3 8 4 0 3 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 35 4 9 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 35 4 10 5 0 4 0 0 0 garden | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 35 5 11 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 35 5 12 6 0 5 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 35 6 13 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,rotator,collision
+T 35 6 14 7 0 6 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 35 7 15 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 35 7 16 8 0 7 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 36 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 36 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 36 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 36 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 36 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,collision
+T 36 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 36 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,wait
+T 36 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 36 4 9 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | move,collision
+T 36 4 10 5 0 4 0 0 0 garden | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 36 5 11 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 36 5 12 6 0 5 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 36 6 13 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
+T 36 6 14 7 0 6 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 36 7 15 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 36 7 16 8 0 7 0 0 0 garden | A 0 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 37 0 1 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 1 0 1 | reset
+T 37 0 2 1 0 0 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 37 1 3 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 37 1 4 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 37 2 5 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,move,rotator,collision
+T 37 2 6 3 0 2 0 0 0 garden | A 2 4 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 37 3 7 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,rotator,ping
+T 37 3 8 4 0 3 0 0 0 garden | A 2 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -

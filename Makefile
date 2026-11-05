@@ -1,5 +1,7 @@
 # RoboSeq: the everyday commands. The firmware itself is built by ./build.sh (docs/DINGHY_README.md: the toolchain).
-#   make test    the host tests (on macOS in Docker: Dinghy's host mode needs ELF sections), seconds, no FM-1
+#   make test    the model against the HTML's traces, then the app on the host (that in Docker on macOS: Dinghy's
+#                host mode needs ELF sections); seconds, no FM-1
+#   make traces  re-make tests/golden from reference/roboseq.html (node)
 #   make fw      the FM-1 package build/roboseq.fwsc (JieLi toolchain in ~/.jieli, SDK in ~/fw-AC79_AIoT_SDK)
 #   make check   everything CI runs: the package, then Dinghy's platform tests on it
 #   make emu     the package on fm1-emu, headless and FM1_STRICT: build/emu/panel.png (EMU=path/to/fm1-live)
@@ -20,10 +22,13 @@ EMU ?= ../fm1-emu/target/release/fm1-live
 EMU_MS ?= 3000
 EMU_KEYS ?= 1500:21,2600:21^,2800:25
 
-.PHONY: test host fw check emu image clean
+.PHONY: test host traces fw check emu image clean
 test: $(IMG)
+	sh tests/run_roboseq.sh
 	$(RUN) sh tests/run_host.sh
 host: test
+traces:
+	node tools/trace/gen.mjs
 fw:
 	PYTHON=$(PY) sh build.sh
 	shasum -a 256 build/roboseq.fwsc
@@ -31,7 +36,9 @@ check: fw $(IMG)
 	$(RUN_SDK) sh tests/run_tests.sh
 emu:             # (a key held from 1.5 s, another from 2.8 s; the panel at the end)
 	mkdir -p build/emu/work
-	cd build/emu && FM1_STRICT=1 FM1_BENCH_KEYS='$(EMU_KEYS)' $(abspath $(EMU)) --fwsc ../roboseq.fwsc --shot $(EMU_MS) | tee emu.log
+	cd build/emu && FM1_STRICT=1 FM1_DUMPRAM=ram.bin FM1_BENCH_KEYS='$(EMU_KEYS)' $(abspath $(EMU)) --fwsc ../roboseq.fwsc --shot $(EMU_MS) | tee emu.log
+	sh tests/run_roboseq.sh >/dev/null
+	$(PY) tools/emu_selfcheck.py build/roboseq.dis build/emu/ram.bin build/test/trace_test
 	$(PY) -c "from PIL import Image; Image.open('build/emu/work/panel.ppm').save('build/emu/panel.png')"
 	@echo "panel -> build/emu/panel.png"
 image:
