@@ -7,10 +7,10 @@ set -e
 cd "$(dirname "$0")/.."
 mkdir -p build/test
 CC=${CC:-cc}
-SRC="tests/roboseq/trace_test.c firmware/src/rs_model.c firmware/src/rs_chance.c firmware/src/rs_score.c"
+SRC="tests/roboseq/trace_test.c firmware/src/rs_model.c firmware/src/rs_chance.c firmware/src/rs_score.c firmware/src/rs_voice.c"
 $CC -std=c11 -O2 -Wall -Wextra -Werror -Ifirmware/src -o build/test/trace_test $SRC -lm
 build/test/trace_test tests/golden
-$CC -std=c11 -O2 -Wall -Wextra -Werror -Ifirmware/src -o build/test/edit_test tests/roboseq/edit_test.c firmware/src/rs_model.c firmware/src/rs_chance.c firmware/src/rs_score.c
+$CC -std=c11 -O2 -Wall -Wextra -Werror -Ifirmware/src -o build/test/edit_test tests/roboseq/edit_test.c firmware/src/rs_model.c firmware/src/rs_chance.c firmware/src/rs_score.c firmware/src/rs_voice.c
 build/test/edit_test
 if $CC -fsanitize=undefined,address -x c -o build/test/san_probe - <<'C' 2>/dev/null; then
 int main(void) { return 0; }
@@ -19,6 +19,15 @@ C
         -Ifirmware/src -o build/test/trace_test_san $SRC -lm
     build/test/trace_test_san tests/golden > /dev/null && echo "trace_test: UBSan + ASan clean"
     $CC -std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=undefined,address -fno-sanitize-recover=undefined \
-        -Ifirmware/src -o build/test/edit_test_san tests/roboseq/edit_test.c firmware/src/rs_model.c firmware/src/rs_chance.c firmware/src/rs_score.c
+        -Ifirmware/src -o build/test/edit_test_san tests/roboseq/edit_test.c firmware/src/rs_model.c firmware/src/rs_chance.c firmware/src/rs_score.c firmware/src/rs_voice.c
     build/test/edit_test_san > /dev/null && echo "edit_test: UBSan + ASan clean"
+fi
+# the C voices against the HTML's Tone.Offline renders (tests/golden/html): where python3 has numpy
+$CC -std=c11 -O2 -Wall -Wextra -Werror -Ifirmware/src -o build/test/parity_render tests/parity/render.c \
+    firmware/src/rs_voice.c firmware/src/rs_score.c firmware/src/rs_model.c firmware/src/rs_chance.c
+if python3 -c "import numpy" 2>/dev/null; then
+    python3 tools/tone-ref/compare.py --check > build/test/parity.txt || { cat build/test/parity.txt; exit 1; }
+    echo "parity: every voice within its tolerances (build/test/parity.txt)"
+else
+    echo "parity: skipped (python3 without numpy)"
 fi

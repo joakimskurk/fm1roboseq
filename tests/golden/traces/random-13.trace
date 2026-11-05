@@ -564,9 +564,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 1 1 2 2 0 1 0 0 0 corridor | A 0 4 S 0 3 0 | B 3 0 W 0 3 0 | 0 0 | 0 0 0 | turn,move
 N A.main 53 0.1745625 0 0.45
 N A.ping 57 0.03375 0.005625 0.18
@@ -968,9 +965,6 @@ T 1 56 57 9 0 56 0 0 0 corridor | A 2 1 E 0 7 0 | B 2 1 W 0 8 0 | 6 0 | 1 0 1 | 
 N ex.thump 24 0.4 0 0.95
 N ex.noise -1 0.35 0 0.9
 N ex.crackle -1 0.18 0.04 0.6
-N ex.thump 24 0.4 0 0.95
-N ex.noise -1 0.35 0 0.9
-N ex.crackle -1 0.18 0.04 0.6
 N A.main 83 0.013125 0 0.595
 N A.ping 74 0.03375 0.005625 0.238
 N A.main 76 0.091875 0.015 0.26775
@@ -1037,9 +1031,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 2 1 2 2 0 1 0 0 0 corridor | A 0 4 S 0 7 0 | B 4 0 W 0 9 0 | 0 0 | 0 0 0 | turn,wait
 N A.main 53 0.1745625 0 0.45
 N A.ping 57 0.03375 0.005625 0.18
@@ -1255,9 +1246,6 @@ N drum.hihat -1 0.03 0 0.5
 N fx.zap -1 0.06 0.01 0.6
 N fx.zap -1 0.06 0.02 0.6
 T 2 35 36 4 0 35 0 0 0 corridor | A 2 1 E 0 8 0 | B 2 1 S 0 11 0 | 0 1 | 1 0 0 | death,death,wait,move,belt,move,belt,move,belt,turn,move,belt,move,belt,move,belt
-N ex.thump 24 0.4 0 0.95
-N ex.noise -1 0.35 0 0.9
-N ex.crackle -1 0.18 0.04 0.6
 N ex.thump 24 0.4 0 0.95
 N ex.noise -1 0.35 0 0.9
 N ex.crackle -1 0.18 0.04 0.6
@@ -1512,9 +1500,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 3 1 2 2 0 1 0 0 0 corridor | A 0 4 S 0 11 0 | B 3 0 W 0 14 0 | 0 0 | 0 0 0 | turn,move
 N A.main 53 0.1745625 0 0.45
 N A.ping 57 0.03375 0.005625 0.18
@@ -1935,9 +1920,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 4 1 2 2 0 1 0 0 0 corridor | A 0 4 S 0 13 0 | B 3 0 W 0 18 0 | 0 0 | 0 0 0 | turn,move
 N A.main 53 0.1745625 0 0.45
 N A.ping 57 0.03375 0.005625 0.18
@@ -2356,9 +2338,6 @@ N ex.noise -1 0.35 0 0.9
 N ex.crackle -1 0.18 0.04 0.6
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 5 1 2 2 0 1 0 0 0 corridor | A 0 4 E 0 14 0 | B 4 0 W 0 22 0 | 0 0 | 0 0 0 | wait,wait
 T 5 2 3 3 0 2 0 0 0 corridor | A 0 4 E 0 14 0 | B 4 0 W 0 22 0 | 0 0 | 0 1 1 | wait,wait
 N drum.snare -1 0.1 0 0.7
@@ -2735,9 +2714,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 6 1 2 2 0 1 0 0 0 corridor | A 0 4 E 0 16 0 | B 4 0 W 0 22 0 | 0 0 | 0 0 0 | wait,wait
 T 6 2 3 3 0 2 0 0 0 corridor | A 2 4 E 0 16 0 | B 4 0 W 0 22 0 | 0 0 | 0 1 1 | move,move,collision
 N A.main 59 0.035625 0 0.8925
@@ -2868,9 +2844,6 @@ T 6 22 23 7 0 22 0 0 0 corridor | A 2 2 E 0 17 0 | B 2 1 S 0 23 0 | 0 0 | 1 0 1 
 N ex.thump 24 0.4 0 0.95
 N ex.noise -1 0.35 0 0.9
 N ex.crackle -1 0.18 0.04 0.6
-N ex.thump 24 0.4 0 0.95
-N ex.noise -1 0.35 0 0.9
-N ex.crackle -1 0.18 0.04 0.6
 N A.main 71 0.013125 0 0.646
 N A.ping 74 0.03375 0.005625 0.2584
 N A.main 71 0.091875 0.015 0.2907
@@ -2984,9 +2957,6 @@ N fx.zap -1 0.06 0.01 0.6
 N fx.zap -1 0.06 0.02 0.6
 N fx.collision 43 0.08 0.03 0.7
 T 6 35 36 4 0 35 0 0 0 corridor | A 2 1 E 0 19 0 | B 2 1 S 0 25 0 | 2 0 | 1 0 0 | death,death,wait,move,belt,move,belt,move,belt,turn,move,belt,move,belt,move,belt
-N ex.thump 24 0.4 0 0.95
-N ex.noise -1 0.35 0 0.9
-N ex.crackle -1 0.18 0.04 0.6
 N ex.thump 24 0.4 0 0.95
 N ex.noise -1 0.35 0 0.9
 N ex.crackle -1 0.18 0.04 0.6
@@ -3224,9 +3194,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 7 1 2 2 0 1 0 0 0 corridor | A 0 4 S 0 21 0 | B 3 0 W 0 27 0 | 0 0 | 0 0 0 | turn,move
 N A.main 53 0.1745625 0 0.45
 N A.ping 57 0.03375 0.005625 0.18
@@ -3637,9 +3604,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 8 1 2 2 0 1 0 0 0 corridor | A 0 4 S 0 24 0 | B 3 0 W 0 28 0 | 0 0 | 0 0 0 | turn,move
 N A.main 53 0.1745625 0 0.45
 N A.ping 57 0.03375 0.005625 0.18
@@ -4007,9 +3971,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 9 1 2 2 0 1 0 0 0 corridor | A 0 4 S 0 24 0 | B 3 0 W 0 30 0 | 0 0 | 0 0 0 | turn,move
 N A.main 53 0.1745625 0 0.45
 N A.ping 57 0.03375 0.005625 0.18

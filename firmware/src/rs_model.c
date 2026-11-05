@@ -3,6 +3,7 @@
  * function names the HTML function it follows; where the HTML has a quirk, this keeps it (the HTML wins,
  * CLAUDE.md), and says so. */
 #include "rs_model.h"
+#include "rs_voice.h"
 
 const char *const rs_action_name[RS_NACTIONS] = {"move", "back", "turnL", "turnR", "dash", "ping", "wait"};
 const char *const rs_modifier_name[RS_NMODIFIERS] = {"steady", "bright", "low", "wobble", "glitch"};
@@ -625,5 +626,16 @@ uint32_t rs_selfcheck(void)
     for (int b = 0; b < 2; b++)
         for (uint32_t c = 0; c < 32; c++)
             for (uint32_t st = 0; st < 64; st++) h = fnv(h, rs_chance_q32(b, st, c, 0));
+    for (uint8_t vd = 0; vd < RS_NVOICES; vd++) {       /* and every voice: a note, 4096 samples */
+        static struct rs_voice v;
+        static int32_t buf[256];
+        rs_voice_init(&v, vd, 12345);
+        rs_voice_note(&v, 64, 2000, 45 + vd, 24000);
+        for (uint32_t t = 0; t < 4096; t += 256) {
+            for (int i = 0; i < 256; i++) buf[i] = 0;
+            rs_voice_render(&v, buf, 256, t);
+            for (int i = 0; i < 256; i += 7) h = fnv(h, (uint32_t)buf[i]);
+        }
+    }
     return h;
 }

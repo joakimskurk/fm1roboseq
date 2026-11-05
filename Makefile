@@ -1,7 +1,9 @@
 # RoboSeq: the everyday commands. The firmware itself is built by ./build.sh (docs/DINGHY_README.md: the toolchain).
 #   make test    the model against the HTML's traces, then the app on the host (that in Docker on macOS: Dinghy's
 #                host mode needs ELF sections); seconds, no FM-1
-#   make traces  re-make tests/golden from reference/roboseq.html (node)
+#   make traces  re-make tests/golden/traces from reference/roboseq.html (node)
+#   make reference  re-render tests/golden/html with Tone.Offline (node, a Chromium)
+#   make parity  the C voices against those renders
 #   make fw      the FM-1 package build/roboseq.fwsc (JieLi toolchain in ~/.jieli, SDK in ~/fw-AC79_AIoT_SDK)
 #   make check   everything CI runs: the package, then Dinghy's platform tests on it
 #   make emu     the package on fm1-emu, headless and FM1_STRICT: build/emu/panel.png (EMU=path/to/fm1-live)
@@ -22,13 +24,18 @@ EMU ?= ../fm1-emu/target/release/fm1-live
 EMU_MS ?= 3000
 EMU_KEYS ?= 1500:21,2600:21^,2800:25
 
-.PHONY: test host traces fw check emu image clean
+.PHONY: test host traces reference parity fw check emu image clean
 test: $(IMG)
 	sh tests/run_roboseq.sh
 	$(RUN) sh tests/run_host.sh
 host: test
 traces:
 	node tools/trace/gen.mjs
+reference:       ## re-render tests/golden/html from the HTML's own buildAudio() (node, a Chromium: Brave here)
+	cd tools/tone-ref && npm ci --no-fund --no-audit && node render.mjs
+parity:          ## the C voices against those renders, voice by voice (numpy)
+	sh tests/run_roboseq.sh >/dev/null
+	python3 tools/tone-ref/compare.py --check
 fw:
 	PYTHON=$(PY) sh build.sh
 	shasum -a 256 build/roboseq.fwsc

@@ -25,6 +25,7 @@ static void app_idle(void);
 #include "rs_model.c"                         /* the game (phase 1: built in and run once at boot, not yet played) */
 #include "rs_chance.c"
 #include "rs_score.c"
+#include "rs_voice.c"
 #if BOARD_SMK37
 #include "smk_wheel.h"
 #endif

@@ -273,9 +273,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 1 1 2 2 1 1 0 0 0 gauntlet | A 2 4 E 0 1 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 55 0.0890625 0 0.85
 N A.ping 59 0.03375 0.005625 0.34
@@ -403,9 +400,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 2 1 2 2 2 1 0 0 0 gauntlet | A 2 4 E 0 2 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 60 0.0890625 0 0.85
 N A.ping 64 0.03375 0.005625 0.34
@@ -533,9 +527,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 3 1 2 2 3 1 0 0 0 gauntlet | A 2 4 E 0 3 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 64 0.0890625 0 0.85
 N A.ping 67 0.03375 0.005625 0.34
@@ -663,9 +654,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 4 1 2 2 0 1 0 0 0 gauntlet | A 2 4 E 0 4 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 59 0.0890625 0 0.85
 N A.ping 62 0.03375 0.005625 0.34
@@ -793,9 +781,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 5 1 2 2 1 1 0 0 0 gauntlet | A 2 4 E 0 5 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 55 0.0890625 0 0.85
 N A.ping 59 0.03375 0.005625 0.34
@@ -923,9 +908,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 6 1 2 2 2 1 0 0 0 gauntlet | A 2 4 E 0 6 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 60 0.0890625 0 0.85
 N A.ping 64 0.03375 0.005625 0.34
@@ -1053,9 +1035,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 7 1 2 2 3 1 0 0 0 gauntlet | A 2 4 E 0 7 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 64 0.0890625 0 0.85
 N A.ping 67 0.03375 0.005625 0.34
@@ -1183,9 +1162,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 8 1 2 2 0 1 0 0 0 gauntlet | A 2 4 E 0 8 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 59 0.0890625 0 0.85
 N A.ping 62 0.03375 0.005625 0.34
@@ -1313,9 +1289,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 9 1 2 2 1 1 0 0 0 gauntlet | A 2 4 E 0 9 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 55 0.0890625 0 0.85
 N A.ping 59 0.03375 0.005625 0.34
@@ -1443,9 +1416,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 10 1 2 2 2 1 0 0 0 gauntlet | A 2 4 E 0 10 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 60 0.0890625 0 0.85
 N A.ping 64 0.03375 0.005625 0.34
@@ -1573,9 +1543,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 11 1 2 2 3 1 0 0 0 gauntlet | A 2 4 E 0 11 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 64 0.0890625 0 0.85
 N A.ping 67 0.03375 0.005625 0.34
@@ -1703,9 +1670,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 12 1 2 2 0 1 0 0 0 gauntlet | A 2 4 E 0 12 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 59 0.0890625 0 0.85
 N A.ping 62 0.03375 0.005625 0.34
@@ -1833,9 +1797,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 13 1 2 2 1 1 0 0 0 gauntlet | A 2 4 E 0 13 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 55 0.0890625 0 0.85
 N A.ping 59 0.03375 0.005625 0.34
@@ -1963,9 +1924,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 14 1 2 2 2 1 0 0 0 gauntlet | A 2 4 E 0 14 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 60 0.0890625 0 0.85
 N A.ping 64 0.03375 0.005625 0.34
@@ -2093,9 +2051,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 15 1 2 2 3 1 0 0 0 gauntlet | A 2 4 E 0 15 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 64 0.0890625 0 0.85
 N A.ping 67 0.03375 0.005625 0.34
@@ -2223,9 +2178,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 16 1 2 2 0 1 0 0 0 gauntlet | A 2 4 E 0 16 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 59 0.0890625 0 0.85
 N A.ping 62 0.03375 0.005625 0.34
@@ -2353,9 +2305,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 17 1 2 2 1 1 0 0 0 gauntlet | A 2 4 E 0 17 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 55 0.0890625 0 0.85
 N A.ping 59 0.03375 0.005625 0.34
@@ -2483,9 +2432,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 18 1 2 2 2 1 0 0 0 gauntlet | A 2 4 E 0 18 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 60 0.0890625 0 0.85
 N A.ping 64 0.03375 0.005625 0.34
@@ -2613,9 +2559,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 19 1 2 2 3 1 0 0 0 gauntlet | A 2 4 E 0 19 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 64 0.0890625 0 0.85
 N A.ping 67 0.03375 0.005625 0.34
@@ -2743,9 +2686,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 20 1 2 2 0 1 0 0 0 gauntlet | A 2 4 E 0 20 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 59 0.0890625 0 0.85
 N A.ping 62 0.03375 0.005625 0.34
@@ -2873,9 +2813,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 21 1 2 2 1 1 0 0 0 gauntlet | A 2 4 E 0 21 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 55 0.0890625 0 0.85
 N A.ping 59 0.03375 0.005625 0.34
@@ -3003,9 +2940,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 22 1 2 2 2 1 0 0 0 gauntlet | A 2 4 E 0 22 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 60 0.0890625 0 0.85
 N A.ping 64 0.03375 0.005625 0.34
@@ -3133,9 +3067,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 23 1 2 2 3 1 0 0 0 gauntlet | A 2 4 E 0 23 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 64 0.0890625 0 0.85
 N A.ping 67 0.03375 0.005625 0.34
@@ -3263,9 +3194,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 24 1 2 2 0 1 0 0 0 gauntlet | A 2 4 E 0 24 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 1 | move,move,turn
 N A.main 59 0.0890625 0 0.85
 N A.ping 62 0.03375 0.005625 0.34

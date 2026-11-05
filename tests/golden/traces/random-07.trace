@@ -321,9 +321,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 1 0 2 1 1 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 59 0.0140625 0 0.28
 N A.main 52 0.00703125 0 0.112
@@ -499,9 +496,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 2 0 2 1 2 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 64 0.0140625 0 0.28
 N A.main 57 0.00703125 0 0.112
@@ -678,9 +672,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 3 0 2 1 3 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 67 0.0140625 0 0.28
 N A.main 60 0.00703125 0 0.112
@@ -853,9 +844,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 4 0 2 1 0 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 60 0.0140625 0 0.28
 N A.main 53 0.00703125 0 0.112
@@ -1028,9 +1016,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 5 0 2 1 1 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 59 0.0140625 0 0.28
 N A.main 52 0.00703125 0 0.112
@@ -1200,9 +1185,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 6 0 2 1 2 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 64 0.0140625 0 0.28
 N A.main 57 0.00703125 0 0.112
@@ -1374,9 +1356,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 7 0 2 1 3 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 67 0.0140625 0 0.28
 N A.main 60 0.00703125 0 0.112
@@ -1553,9 +1532,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 8 0 2 1 0 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 60 0.0140625 0 0.28
 N A.main 53 0.00703125 0 0.112
@@ -1732,9 +1708,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 9 0 2 1 1 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 59 0.0140625 0 0.28
 N A.main 52 0.00703125 0 0.112
@@ -1910,9 +1883,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 10 0 2 1 2 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 64 0.0140625 0 0.28
 N A.main 57 0.00703125 0 0.112
@@ -2083,9 +2053,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 11 0 2 1 3 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 67 0.0140625 0 0.28
 N A.main 60 0.00703125 0 0.112
@@ -2264,9 +2231,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 12 0 2 1 0 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 60 0.0140625 0 0.28
 N A.main 53 0.00703125 0 0.112
@@ -2437,9 +2401,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 13 0 2 1 1 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 59 0.0140625 0 0.28
 N A.main 52 0.00703125 0 0.112
@@ -2611,9 +2572,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 14 0 2 1 2 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 64 0.0140625 0 0.28
 N A.main 57 0.00703125 0 0.112
@@ -2784,9 +2742,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 15 0 2 1 3 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 67 0.0140625 0 0.28
 N A.main 60 0.00703125 0 0.112
@@ -2962,9 +2917,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 16 0 2 1 0 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 60 0.0140625 0 0.28
 N A.main 53 0.00703125 0 0.112
@@ -3137,9 +3089,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 17 0 2 1 1 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 59 0.0140625 0 0.28
 N A.main 52 0.00703125 0 0.112
@@ -3313,9 +3262,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 18 0 2 1 2 0 0 0 0 corridor | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
 N A.ping 64 0.0140625 0 0.28
 N A.main 57 0.00703125 0 0.112

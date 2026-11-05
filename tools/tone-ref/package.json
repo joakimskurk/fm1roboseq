@@ -1,0 +1,13 @@
+{
+  "name": "roboseq-tone-ref",
+  "private": true,
+  "description": "Renders reference/roboseq.html's own audio (buildAudio) with Tone.Offline in headless Chromium, as golden files for the C port",
+  "type": "module",
+  "scripts": {
+    "render": "node render.mjs"
+  },
+  "dependencies": {
+    "puppeteer-core": "23.11.1",
+    "tone": "14.7.77"
+  }
+}

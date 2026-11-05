@@ -33,7 +33,8 @@ function stub(name = "stub") {
     });
 }
 
-export function loadRoboSeq() {
+// the page's script as html.mjs and tools/tone-ref run it: events recorded, internals handed out instead of rendering
+export function roboSeqScript() {
     const html = readFileSync(HTML, "utf8");
     const open = html.indexOf("<script>\n");
     const close = html.lastIndexOf("</script>");
@@ -43,13 +44,19 @@ export function loadRoboSeq() {
     src = src.replace(hook, hook + " if (globalThis.__events) globalThis.__events.push(kind);");
     const end = /renderApp\(\);\s*\}\)\(\);\s*$/;
     if (!end.test(src)) throw new Error("the script's end changed");
+    src = src.replace("hallReverb.generate();", "globalThis.__reverbReady = hallReverb.generate();");
     src = src.replace(end, `globalThis.__rs = {
         get state() { return state; }, BOARD, BOARD_PRESETS, DRUM_PRESETS, ACTIONS, MODIFIERS, SCALES,
         advanceSequence, resetBoardState, applyBoardPreset, seededChance, getDrumSteps, scaleQuantize,
         scaleIntervalShift, buildBotDefaultSteps, buildDefaultState, getStepDurationSeconds, swapRegisters,
-        setAudio(a) { audio = a; },
+        setAudio(a) { audio = a; }, buildAudio,
     };
 })();`);
+    return src;
+}
+
+export function loadRoboSeq() {
+    const src = roboSeqScript();
     const store = new Map();
     let now = 1_700_000_000_000;
     const ctx = {
@@ -84,10 +91,23 @@ export function loadRoboSeq() {
     rs.events = () => { const e = ctx.__events || []; ctx.__events = []; return e; };
     rs.record = () => {                  // a recording audio: every voice's triggerAttackRelease, in call order
         const notes = [];
-        const voice = (name) => ({
-            triggerAttackRelease: (...a) => notes.push([name, ...a]),
-            triggerRelease() {}, releaseAll() {},
-        });
+        // A second start of one voice at the very time of its last makes Tone throw ("Start time must be strictly
+        // greater than previous start time") and the page loses the rest of that tick (the doubled reset jingle,
+        // two deaths at once). DECISIONS.md D10: the second note is dropped, the tick goes on.
+        const sets = [];
+        const voice = (name) => {
+            const starts = new Set();                   // the times this voice starts at this tick (Tone's _state)
+            sets.push(starts);
+            return {
+                triggerAttackRelease: (...a) => {
+                    const time = typeof a[0] === "number" ? a[1] : a[2];
+                    if (starts.has(time)) return;
+                    starts.add(time);
+                    notes.push([name, ...a]);
+                },
+                triggerRelease() {}, releaseAll() {},
+            };
+        };
         const audio = {
             botA: { main: voice("A.main"), ping: voice("A.ping"), arp: voice("A.arp") },
             botB: { fm: voice("B.fm"), sub: voice("B.sub"), arp: voice("B.arp"), noise: voice("B.noise") },
@@ -99,7 +119,7 @@ export function loadRoboSeq() {
             mixer: {},
         };
         rs.setAudio(audio);
-        return () => notes.splice(0);
+        return () => { for (const st of sets) st.clear(); return notes.splice(0); };   // (per tick: times only repeat within one)
     };
     ctx.__events = [];
     return rs;

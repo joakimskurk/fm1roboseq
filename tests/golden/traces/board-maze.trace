@@ -276,9 +276,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 1 1 2 2 1 1 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,pulse,collision
 N A.main 53 0.2565 0 0.748
 N A.ping 57 0.03375 0.005625 0.2992
@@ -409,9 +406,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 2 1 2 2 2 1 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,pulse,collision
 N A.main 59 0.2565 0 0.748
 N A.ping 62 0.03375 0.005625 0.2992
@@ -542,9 +536,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 3 1 2 2 3 1 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,pulse,collision
 N A.main 62 0.2565 0 0.748
 N A.ping 65 0.03375 0.005625 0.2992
@@ -675,9 +666,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 4 1 2 2 0 1 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,pulse,collision
 N A.main 57 0.2565 0 0.748
 N A.ping 60 0.03375 0.005625 0.2992
@@ -808,9 +796,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 5 1 2 2 1 1 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,pulse,collision
 N A.main 53 0.2565 0 0.748
 N A.ping 57 0.03375 0.005625 0.2992
@@ -941,9 +926,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 6 1 2 2 2 1 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,pulse,collision
 N A.main 59 0.2565 0 0.748
 N A.ping 62 0.03375 0.005625 0.2992
@@ -1074,9 +1056,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 7 1 2 2 3 1 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,pulse,collision
 N A.main 62 0.2565 0 0.748
 N A.ping 65 0.03375 0.005625 0.2992
@@ -1204,9 +1183,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 8 1 2 2 0 1 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,pulse,collision
 N A.main 57 0.2565 0 0.748
 N A.ping 60 0.03375 0.005625 0.2992
@@ -1337,9 +1313,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 9 1 2 2 1 1 0 0 0 maze | A 1 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | move,pulse,collision
 N A.main 53 0.2565 0 0.748
 N A.ping 57 0.03375 0.005625 0.2992

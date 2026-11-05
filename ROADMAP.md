@@ -80,12 +80,15 @@ and the limiter.)
 
 ### 2b. The voices: how each one sounds (measured, as SkurkyMello)
 
-- [ ] `tools/tone-ref`: the HTML's own `buildAudio()` in headless Chromium (Brave here) under Tone.Offline, Tone
-      14.7.77 as the page loads it: each voice alone, and whole loops of the default scenario
-- [ ] Find out what the chain really does: fxGain -> reverb send -> reverb -> fxGain is a cycle without a
-      DelayNode, which Web Audio mutes; if so the FX bus and the reverb are silent in the HTML, and the port is too
-- [ ] The C voices: Tone.Synth (square, triangle; Tone's exponential envelope), NoiseSynth (white, brown),
-      MembraneSynth (kick, thump); `make parity` against the renders with tolerances in the tests
+- [x] `tools/tone-ref`: the HTML's own `buildAudio()` in headless Chromium (Brave here) under Tone.Offline, Tone
+      14.7.77 as the page loads it: each voice alone, the buses, 8 s of the default scenario (`make reference`)
+- [x] Find out what the chain really does: the cycle mutes the FX bus and the reverb in the HTML; the product owner
+      chose the musical intent: the reverb's return to the master (D9). Tone's same-time restart throws and loses a
+      tick: the second note is dropped (D10). Chromium's start phase inside a render quantum: not ported (D11)
+- [x] The C voices (`rs_voice.c`): Tone.Synth (PolyBLEP square, triangle), NoiseSynth (white, brown),
+      MembraneSynth (kick, thump), Tone's envelope and its call-order cancelling; `make parity`: every voice within
+      0.15 dB of the HTML's in level, shape and timbre (the noise voices within 1.1 dB, random on both sides); the
+      voices are in the chip's fingerprint (150e92e1 on chip and host)
 
 ### 2c. The mix and the load
 

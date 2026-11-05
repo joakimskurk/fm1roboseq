@@ -207,9 +207,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 1 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -275,9 +272,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 2 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -338,9 +332,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 3 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -409,9 +400,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 4 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -474,9 +462,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 5 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
 N B.fm 62 0.070875 0 0.42
 N B.sub 50 0.102375 0 0.33
@@ -533,9 +518,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 6 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
 N B.fm 62 0.070875 0 0.42
 N B.sub 50 0.102375 0 0.33
@@ -601,9 +583,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 7 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -664,9 +643,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 8 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -730,9 +706,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 9 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -802,9 +775,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 10 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
 N B.fm 62 0.070875 0 0.42
 N B.sub 50 0.102375 0 0.33
@@ -867,9 +837,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 11 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -940,9 +907,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 12 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
 N B.fm 62 0.070875 0 0.42
 N B.sub 50 0.102375 0 0.33
@@ -1004,9 +968,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 13 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
 N B.fm 62 0.070875 0 0.42
 N B.sub 50 0.102375 0 0.33
@@ -1067,9 +1028,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 14 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -1137,9 +1095,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 15 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -1203,9 +1158,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 16 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
 N B.fm 62 0.070875 0 0.42
 N B.sub 50 0.102375 0 0.33
@@ -1266,9 +1218,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 17 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -1331,9 +1280,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 18 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
 N B.fm 62 0.070875 0 0.42
 N B.sub 50 0.102375 0 0.33
@@ -1401,9 +1347,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 19 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -1471,9 +1414,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 20 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -1545,9 +1485,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 21 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -1608,9 +1545,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 22 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
 N B.fm 62 0.070875 0 0.42
 N B.sub 50 0.102375 0 0.33
@@ -1669,9 +1603,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 23 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
 N B.fm 62 0.070875 0 0.42
 N B.sub 50 0.102375 0 0.33
@@ -1726,9 +1657,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 24 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
 N B.fm 62 0.070875 0 0.42
 N B.sub 50 0.102375 0 0.33
@@ -1789,9 +1717,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 25 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -1854,9 +1779,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 26 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -1918,9 +1840,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 27 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -1982,9 +1901,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 28 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -2046,9 +1962,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 29 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -2113,9 +2026,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 30 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
 N B.fm 62 0.070875 0 0.42
 N B.sub 50 0.102375 0 0.33
@@ -2179,9 +2089,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 31 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
 N B.fm 62 0.070875 0 0.42
 N B.sub 50 0.102375 0 0.33
@@ -2241,9 +2148,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 32 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -2295,9 +2199,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 33 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -2359,9 +2260,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 34 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -2426,9 +2324,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 35 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
 N B.fm 62 0.070875 0 0.42
 N B.sub 50 0.102375 0 0.33
@@ -2491,9 +2386,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 36 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -2557,9 +2449,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 37 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -2629,9 +2518,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 38 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -2698,9 +2584,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 39 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -2760,9 +2643,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 40 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -2825,9 +2705,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 41 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
 N B.fm 62 0.070875 0 0.42
 N B.sub 50 0.102375 0 0.33
@@ -2892,9 +2769,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 42 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
 N B.fm 62 0.070875 0 0.42
 N B.sub 50 0.102375 0 0.33
@@ -2956,9 +2830,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 43 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -3026,9 +2897,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 44 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -3091,9 +2959,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 45 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -3158,9 +3023,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 46 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -3226,9 +3088,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 47 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -3293,9 +3152,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 48 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618
@@ -3353,9 +3209,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 49 1 2 2 0 1 0 0 0 garden | A 0 4 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,turn
 N A.main 53 0.12825 0 0.6545
 N A.ping 57 0.03375 0.005625 0.2618

@@ -79,7 +79,7 @@ struct rs_state {
 };
 
 /* a note, as the HTML's triggerAttackRelease(note, duration, time, velocity) on one of its voices */
-enum rs_voice {
+enum rs_voice_id {
     RS_V_A_MAIN, RS_V_A_PING, RS_V_B_FM, RS_V_B_SUB, RS_V_COLLISION, RS_V_BELT, RS_V_ROTATOR, RS_V_ZAP, RS_V_PULSE,
     RS_V_KICK, RS_V_SNARE, RS_V_HIHAT, RS_V_COIN, RS_V_EX_THUMP, RS_V_EX_NOISE, RS_V_EX_CRACKLE, RS_NVOICES
 };

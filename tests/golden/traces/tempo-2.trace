@@ -241,9 +241,6 @@ N ex.noise -1 0.35 0 0.9
 N ex.crackle -1 0.18 0.04 0.6
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 1 1 2 2 1 1 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 52 0.0580178571 0 0.72675
 N A.ping 55 0.0192857143 0.00321428571 0.2907
@@ -333,9 +330,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 2 1 2 2 2 1 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 57 0.0580178571 0 0.72675
 N A.ping 60 0.0192857143 0.00321428571 0.2907
@@ -432,9 +426,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 3 1 2 2 3 1 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 60 0.0580178571 0 0.72675
 N A.ping 64 0.0192857143 0.00321428571 0.2907
@@ -532,9 +523,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 4 1 2 2 0 1 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 53 0.0580178571 0 0.72675
 N A.ping 57 0.0192857143 0.00321428571 0.2907
@@ -629,9 +617,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 5 1 2 2 1 1 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 52 0.0580178571 0 0.72675
 N A.ping 55 0.0192857143 0.00321428571 0.2907
@@ -721,9 +706,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 6 1 2 2 2 1 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 57 0.0580178571 0 0.72675
 N A.ping 60 0.0192857143 0.00321428571 0.2907
@@ -828,9 +810,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 7 1 2 2 3 1 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 60 0.0580178571 0 0.72675
 N A.ping 64 0.0192857143 0.00321428571 0.2907
@@ -930,9 +909,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 8 1 2 2 0 1 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 53 0.0580178571 0 0.72675
 N A.ping 57 0.0192857143 0.00321428571 0.2907
@@ -1030,9 +1006,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 9 1 2 2 1 1 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 52 0.0580178571 0 0.72675
 N A.ping 55 0.0192857143 0.00321428571 0.2907
@@ -1125,9 +1098,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 10 1 2 2 2 1 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 57 0.0580178571 0 0.72675
 N A.ping 60 0.0192857143 0.00321428571 0.2907
@@ -1219,9 +1189,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 11 1 2 2 3 1 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 60 0.0580178571 0 0.72675
 N A.ping 64 0.0192857143 0.00321428571 0.2907
@@ -1320,9 +1287,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 12 1 2 2 0 1 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 53 0.0580178571 0 0.72675
 N A.ping 57 0.0192857143 0.00321428571 0.2907
@@ -1415,9 +1379,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 13 1 2 2 1 1 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 52 0.0580178571 0 0.72675
 N A.ping 55 0.0192857143 0.00321428571 0.2907
@@ -1509,9 +1470,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 14 1 2 2 2 1 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 57 0.0580178571 0 0.72675
 N A.ping 60 0.0192857143 0.00321428571 0.2907
@@ -1603,9 +1561,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 15 1 2 2 3 1 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 60 0.0580178571 0 0.72675
 N A.ping 64 0.0192857143 0.00321428571 0.2907
@@ -1701,9 +1656,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 16 1 2 2 0 1 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 53 0.0580178571 0 0.72675
 N A.ping 57 0.0192857143 0.00321428571 0.2907
@@ -1803,9 +1755,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 17 1 2 2 1 1 0 0 0 maze | A 0 4 E 0 4 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 52 0.0580178571 0 0.72675
 N A.ping 55 0.0192857143 0.00321428571 0.2907
@@ -1890,9 +1839,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 18 1 2 2 2 1 0 0 0 maze | A 0 4 E 0 4 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
 N B.fm 65 0.0219857143 0 0.08645
 N B.sub 53 0.0317571429 0 0.067925
@@ -1993,9 +1939,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 19 1 2 2 3 1 0 0 0 maze | A 0 4 E 0 4 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 60 0.0580178571 0 0.72675
 N A.ping 64 0.0192857143 0.00321428571 0.2907
@@ -2097,9 +2040,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 20 1 2 2 0 1 0 0 0 maze | A 0 4 E 0 4 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 53 0.0580178571 0 0.72675
 N A.ping 57 0.0192857143 0.00321428571 0.2907
@@ -2195,9 +2135,6 @@ N ex.noise -1 0.35 0 0.9
 N ex.crackle -1 0.18 0.04 0.6
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 21 1 2 2 1 1 0 0 0 maze | A 0 4 E 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 52 0.0580178571 0 0.72675
 N A.ping 55 0.0192857143 0.00321428571 0.2907
@@ -2276,9 +2213,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 22 1 2 2 2 1 0 0 0 maze | A 0 4 E 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
 N B.fm 65 0.0219857143 0 0.08645
 N B.sub 53 0.0317571429 0 0.067925
@@ -2371,9 +2305,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 23 1 2 2 3 1 0 0 0 maze | A 0 4 E 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | wait,wait
 N drum.hihat -1 0.03 0 0.5
 T 23 2 3 3 3 2 0 0 0 maze | A 0 4 E 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 1 1 | collision,collision
@@ -2460,9 +2391,6 @@ N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N drum.kick 24 0.18 0 1
 N drum.hihat -1 0.03 0 0.5
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 24 1 2 2 0 1 0 0 0 maze | A 0 4 E 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 1 | ping,wait
 N A.main 53 0.0580178571 0 0.72675
 N A.ping 57 0.0192857143 0.00321428571 0.2907

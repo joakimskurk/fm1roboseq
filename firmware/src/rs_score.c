@@ -23,6 +23,8 @@ static uint32_t mulq(uint32_t a, uint32_t f) { return (uint32_t)(((uint64_t)a * 
 static void note(struct rs_tick_out *o, uint8_t voice, int midi, uint32_t dur, uint32_t at, uint32_t vel_q20)
 {
     if (o->nnotes >= RS_MAX_NOTES) return;
+    for (int i = 0; i < o->nnotes; i++)                /* a voice's second start at a time it starts at: dropped (D10) */
+        if (o->notes[i].voice == voice && o->notes[i].at == at) return;
     struct rs_note *n = &o->notes[o->nnotes++];
     n->voice = voice, n->midi = (int8_t)midi, n->dur = dur, n->at = at;
     n->vel = (uint16_t)((vel_q20 + 16u) >> 5);

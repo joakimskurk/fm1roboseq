@@ -61,3 +61,33 @@ HTML's own script run in Node with a recording `audio` (2a). How each note sound
 noise, membrane, filter, reverb, limiter) is measured against Tone.Offline renders of the HTML's own `buildAudio()`
 in a headless Chromium, with tolerances (2b, 2c), as SkurkyMello learned to. So a difference in the music can't
 hide behind a difference in timbre, and the reverse.
+
+## D9. The FX bus and the reverb sound, as they were meant to (2026-11-06)
+
+In the HTML the reverb's return goes into the FX bus, and the FX bus sends into the reverb: fxGain -> reverb send ->
+reverb -> fxGain, a cycle without a DelayNode, which Web Audio silences. Measured with the HTML's own buildAudio()
+under Tone.Offline (tools/tone-ref/probe_chain.mjs): the collision, rotator, pulse, the reset jingle and the coin
+give no sound at all, and no bus has any reverb. With the return to the master instead, they sound (collision
+-24 dBFS, coin -23 dBFS) and the melody gets its tail. The product owner, 2026-11-06: make it as it should have been,
+musically. So the port's reference is the HTML with that one connection changed (`hallReverb.connect(masterGain)`,
+UNCYCLED in tools/tone-ref); everything else stays the HTML's.
+
+## D10. A voice started twice at one time: the second note goes, the tick goes on (2026-11-06)
+
+Tone.js throws when a source is started again at the very time it already starts at ("Start time must be strictly
+greater than previous start time", Source.start), and in the HTML that exception ends advanceSequence for that
+tick. It happens on every loop reset (playEventSound("reset") runs at once and again among the events: the second
+jingle throws, so the page plays the jingle once) and when both bots burn out in one tick (the second explosion
+throws, and the page then loses the rest of the tick: the bots' steps, the drums, even moveTick's count). The
+first is what the page plays and sounds right; the second is a crash. So, as D9, as meant: a voice's second start
+at a time it already starts at in that tick is dropped (rs_score.c `note()`, the recorder in tools/trace, the
+renders in tools/tone-ref), and the tick always runs to its end.
+
+## D11. A note starts its oscillator at phase 0 (2026-11-06)
+
+Web Audio's oscillators start at phase 0, and so does a Tone voice on every attack (a new OscillatorNode). In
+Chromium a start inside a 128-frame render quantum begins at a phase that depends on where in the quantum and on the
+frequency before it (the first note's: Tone's default 440 Hz); on a quantum's edge it is 0. That is Chromium, not
+Tone or the HTML, and Firefox differs. The C voices start at phase 0; tools/tone-ref puts its voice stimuli's
+starts on quantum edges, so the golden renders show the voices without the artefact (compare.py snaps the same way).
+Whole songs (2c) keep the HTML's own times and with them the artefact, which their tolerances take in.

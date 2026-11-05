@@ -254,9 +254,6 @@ T 1 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 1 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
 N A.main 53 0.1603125 0 0.595
 N A.ping 57 0.03375 0.005625 0.238
@@ -363,9 +360,6 @@ N A.main 84 0.050765625 0 0.18734
 N B.fm 69 0.0243 0 0.6615
 N B.sub 57 0.0351 0 0.51975
 T 2 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
@@ -480,9 +474,6 @@ N A.main 60 0.050765625 0 0.1615
 N B.fm 69 0.0405 0 0.562275
 N B.sub 57 0.0585 0 0.4417875
 T 3 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 1 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
@@ -604,9 +595,6 @@ T 4 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 4 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
 N A.main 53 0.1603125 0 0.595
 N A.ping 57 0.03375 0.005625 0.238
@@ -720,9 +708,6 @@ T 5 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 5 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
@@ -816,9 +801,6 @@ N B.fm 65 0.0405 0 0.562275
 N B.sub 53 0.0585 0 0.4417875
 N fx.pulse 84 0.06 0.01 0.4
 T 6 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
@@ -933,9 +915,6 @@ T 7 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 7 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
 N A.main 53 0.1603125 0 0.595
 N A.ping 57 0.03375 0.005625 0.238
@@ -1045,9 +1024,6 @@ N B.fm 69 0.0567 0 0.496125
 N B.sub 57 0.0819 0 0.3898125
 N fx.zap -1 0.06 0.01 0.6
 T 8 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 2 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
@@ -1169,9 +1145,6 @@ T 9 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 9 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
 N A.main 53 0.1603125 0 0.595
 N A.ping 57 0.03375 0.005625 0.238
@@ -1290,9 +1263,6 @@ T 10 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 10 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
@@ -1390,9 +1360,6 @@ T 10 23 24 0 0 0 0 0 0 maze | A 0 4 S 3 3 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | wait
 N B.fm 62 0.0405 0 0.562275
 N B.sub 50 0.0585 0 0.4417875
 T 11 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
@@ -1515,9 +1482,6 @@ T 12 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 12 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
@@ -1627,9 +1591,6 @@ T 13 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 13 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
@@ -1722,9 +1683,6 @@ T 13 23 24 0 0 0 0 0 0 maze | A 4 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait
 N B.fm 69 0.0324 0 0.429975
 N B.sub 57 0.0468 0 0.3378375
 T 14 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
@@ -1829,9 +1787,6 @@ N A.main 53 0.071071875 0 0.1767
 N B.fm 50 0.0405 0 0.562275
 N B.sub 38 0.0585 0 0.4417875
 T 15 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 3 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
@@ -1966,9 +1921,6 @@ T 16 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 4 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 16 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 4 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
@@ -2086,9 +2038,6 @@ T 17 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 17 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 5 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
 N A.main 53 0.1603125 0 0.595
 N A.ping 57 0.03375 0.005625 0.238
@@ -2200,9 +2149,6 @@ T 18 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 18 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
@@ -2310,9 +2256,6 @@ T 18 23 24 0 0 0 0 0 0 maze | A 4 4 E 1 6 0 | B 2 4 W 3 0 0 | 0 0 | 0 0 0 | wait
 N B.fm 55 0.0324 0 0.533169
 N B.sub 43 0.0468 0 0.4189185
 T 19 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
@@ -2430,9 +2373,6 @@ T 20 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 20 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
 N A.main 53 0.1603125 0 0.595
 N A.ping 57 0.03375 0.005625 0.238
@@ -2546,9 +2486,6 @@ T 21 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 21 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
 N A.main 53 0.1603125 0 0.595
 N A.ping 57 0.03375 0.005625 0.238
@@ -2652,9 +2589,6 @@ N B.fm 69 0.0567 0 0.496125
 N B.sub 57 0.0819 0 0.3898125
 N fx.zap -1 0.06 0.01 0.6
 T 22 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
@@ -2766,9 +2700,6 @@ T 23 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 T 23 1 2 2 0 0 0 0 0 maze | A 0 4 E 0 6 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
@@ -2875,9 +2806,6 @@ T 23 23 24 0 0 0 0 0 0 maze | A 4 0 E 2 7 0 | B 4 0 N 2 0 0 | 5 0 | 0 0 0 | wait
 N B.fm 72 0.0243 0 0.7
 N B.sub 60 0.0351 0 0.55
 T 24 0 1 1 0 0 0 0 0 maze | A 0 4 E 0 7 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
-N fx.pulse 76 0.07 0 0.42
-N fx.pulse 81 0.07 0.07 0.4
-N fx.pulse 84 0.06 0.14 0.36
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
