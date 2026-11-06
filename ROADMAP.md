@@ -109,10 +109,13 @@ and the limiter.)
 
 ## Phase 3: playing it (controls and screen)
 
-- First the control rules (as SkurkyMello's G1-G8) and the playing model (P2 above), tried on the host
-- HOME is the board: 240 x 240 pixel art, the bots, the tiles, the step playing; the registers on the white keys
-- The pages for programs, Voice Mod, drums, mix; the UI map generated from the code (`make screens`)
-- Storage: projects in Dinghy's blobs and slots
+- [ ] The control rules (as SkurkyMello's G1-G8) and the playing model (P2 above), tried on the host
+- [x] HOME is the board: the HTML's renderBoard() as 240 x 240 pixel art (its tile and robot art 1:1 on cells of
+      40 px), the tiles an event lit, the explosion, heart and clash star for as long as the HTML shows them, the step,
+      the cycle and the bots' health; drawn as the step is heard, not when the game computes it (2026-11-06)
+- [ ] The registers on the white keys
+- [ ] The pages for programs, Voice Mod, drums, mix; the UI map generated from the code (`make screens`)
+- [ ] Storage: projects in Dinghy's blobs and slots
 
 ## Phase 4: on the emulator, then hardware
 

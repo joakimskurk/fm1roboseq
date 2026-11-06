@@ -13,6 +13,7 @@
  * Rules of the road (the chip has no FPU and no libgcc): integers only, no float, no 64-bit division.
  * tests/host.c runs this file on a computer: the screen as a PNG, the sound as a WAV.
  * What platform.c offers: docs/API.md. The chip's rules: docs/RULES.md. */
+#define CV_MAX (240u * 240u)                    /* the board: the whole screen in one canvas (in the pool) */
 #define APP_NAME "ROBOSEQ"                      /* the rescue and the crash screen say this */
 #define STORE_MAGIC 0x51455352u                 /* "RSEQ": RoboSeq's settings and blobs, never another fork's */
 static void app_idle(void);
@@ -23,6 +24,7 @@ static void app_idle(void);
 #include "rs_score.c"                         /* what it plays */
 #include "rs_voice.c"                         /* the voices */
 #include "rs_mix.c"                           /* the mix */
+#include "rs_screen.c"                        /* the board */
 #ifndef RING_PUBLISH                            /* (platform.c's, on the chip) */
 #define RING_PUBLISH() __asm__ volatile("" ::: "memory")
 #endif
@@ -72,6 +74,19 @@ static struct rs_state game;
 static struct rs_tick_out tick_out;
 static uint64_t next_q8;                        /* the next step's start on audio_now's clock, 1/256 frame */
 static uint32_t steps_played;
+#define NVIEW 16u                               /* the board after each step, for when it is heard */
+static struct rs_view views[NVIEW];
+static uint32_t view_head;
+
+static void view_of(struct rs_view *v, const struct rs_tick_out *o, uint32_t t0)
+{
+    v->t0 = t0, v->step = game.step, v->loop_len = game.loop_len, v->board_id = game.board_id;
+    v->playing = game.playing, v->cycle = game.cycle, v->bot[0] = game.bot[0], v->bot[1] = game.bot[1];
+    v->board = game.board;
+    v->active = o ? o->active : 0;
+    v->died[0] = o && o->died[0], v->died[1] = o && o->died[1], v->love = o && o->love;
+    v->clash[0] = o && o->clash[0], v->clash[1] = o && o->clash[1];
+}
 
 static void schedule(void)
 {
@@ -93,6 +108,8 @@ static void schedule(void)
         }
         RING_PUBLISH();                         /* the notes before the head that shows them */
         qn_head = h;
+        view_of(&views[view_head % NVIEW], &tick_out, t);
+        view_head++;
         next_q8 += rs_step_q8(&game);
         steps_played++;
     }
@@ -112,57 +129,45 @@ static void stop(void)                          /* stopPlayback() */
 
 static void app_idle(void) { schedule(); }
 
-/* ---- the screen (phase 3 makes it the board): the name, what plays, the step, the ISR's load */
-#define C_ACC RGB(180, 140, 255)
-#define C_OFF RGB(90, 90, 90)
-
-static void put_u(char *p, uint32_t v, uint32_t w)   /* v in w digits, right-aligned, spaces in front */
+/* ---- the screen: the board as it is heard (the newest step whose time has come) */
+static const struct rs_view *view_now(void)
 {
-    uint32_t i;
-    for (i = w; i-- > 0;) { p[i] = v || i == w - 1u ? (char)('0' + v % 10u) : ' '; v /= 10u; }
-}
-
-static void draw_state(void)
-{
-    char s[24] = "STOPPED";
-    if (game.playing) {
-        char t[24] = "STEP      CYCLE     ";
-        put_u(t + 5, (uint32_t)(game.step < 0 ? 0 : game.step + 1), 2);
-        put_u(t + 16, game.cycle + 1u, 4);
-        draw_text_box(0, 120, 240, &FONT_S, t, C_WHITE, 1);
-        draw_text_box(0, 90, 240, &FONT_L, "PLAYING", C_ACC, 1);
-        return;
-    }
-    draw_text_box(0, 120, 240, &FONT_S, "PLAY starts the default song", C_OFF, 1);
-    draw_text_box(0, 90, 240, &FONT_L, s, C_OFF, 1);
-}
-
-static void draw_load(uint32_t us)
-{
-    char s[32] = "audio      us of 5805";
-    put_u(s + 6, us, 5);
-    draw_text_box(0, 212, 240, &FONT_S, s, C_OFF, 1);
+    static struct rs_view idle;
+    uint32_t k, now = audio_now;
+    if (game.playing)
+        for (k = 1; k <= NVIEW && k <= view_head; k++) {
+            const struct rs_view *v = &views[(view_head - k) % NVIEW];
+            if ((int32_t)(v->t0 - now) <= 0) return v;
+        }
+    view_of(&idle, 0, 0);                       /* stopped (or before the first step sounds): the game as it stands */
+    return &idle;
 }
 
 volatile uint32_t rs_boot_check;               /* rs_selfcheck() at boot: make emu reads it from RAM */
 static void app_main(void)
 {
-    uint32_t drawn = ~0u, load_drawn = ~0u, st;
+    static struct rs_fx fx;
+    static struct rs_view last;
+    uint32_t due = 0, shown = ~0u;
     rs_boot_check = rs_selfcheck();             /* the model on the chip: make emu compares it with the computer's */
     rs_mix_init(&mix, 0x5EEDu);
     rs_default(&game);
-    lcd_fill(0, 0, 240, 240, C_BLACK);
-    draw_text_box(0, 18, 240, &FONT_L, APP_NAME, C_ACC, 1);
-    draw_text_box(0, 52, 240, &FONT_S, "the robots' sequencer  v" APP_VER, C_OFF, 1);
-
     for (;;) {
-        uint32_t rel, b;
+        uint32_t rel, b, key;
+        const struct rs_view *v;
         platform_poll();
         b = fm1_input_edges(&rel);
         if (b & (1u << BTN_PLAY)) { if (game.playing) stop(); else play(); }
         schedule();
         fm1_led_key(BTN_PLAY, game.playing);
-        if ((st = (uint32_t)game.playing | (uint32_t)(game.step + 1) << 1 | game.cycle << 8) != drawn) { drawn = st; draw_state(); }
-        if (rs_audio_us_worst / 50u != load_drawn) { load_drawn = rs_audio_us_worst / 50u; draw_load(rs_audio_us_worst); }
+        v = view_now();
+        key = v->t0 ^ (uint32_t)v->playing << 31 ^ (uint32_t)v->step << 20;
+        if (key != shown) {                     /* a new step heard: its effects start now */
+            if (v->playing && shown != ~0u) screen_effects(&fx, &last, v, fm1_ms);
+            last = *v, shown = key;
+            draw_board(v, &fx, fm1_ms), due = fx_due(&fx, fm1_ms);
+        } else if (due && (int32_t)(fm1_ms - due) >= 0) {   /* an effect ran out */
+            draw_board(v, &fx, fm1_ms), due = fx_due(&fx, fm1_ms);
+        }
     }
 }
