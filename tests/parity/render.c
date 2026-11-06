@@ -5,7 +5,7 @@
  *   render build/parity/stimuli.txt build/parity
  * The stimuli:
  *   S name voice seconds    one voice, straight out; then its notes "n midi duration time velocity" (midi -1: noise)
- *   M name seconds          the whole mix (buses, reverb, limiter); then "m voice midi duration time velocity"
+ *   M name seconds          the whole mix in stereo (buses, reverb, limiter); then "m voice midi duration time velocity"
  *   G name seconds          the default song: rs_tick from rs_default(), the score into the mix, as the HTML's
  *                           transport plays advanceSequence() every 16th
  *   L name seconds          the limiter alone on compressor.py's test signal
@@ -17,17 +17,17 @@
 #include <string.h>
 #include "rs_mix.c"
 
-static void wav(const char *path, const float *x, uint32_t n)
+static void wav(const char *path, const float *x, uint32_t n, uint16_t ch)   /* n frames of ch interleaved */
 {
     FILE *f = fopen(path, "wb");
     if (!f) { perror(path); exit(1); }
-    uint32_t data = n * 4, v32;
+    uint32_t data = n * 4 * ch, v32;
     uint16_t v16;
     fwrite("RIFF", 1, 4, f), v32 = 36 + data, fwrite(&v32, 4, 1, f), fwrite("WAVEfmt ", 1, 8, f);
-    v32 = 16, fwrite(&v32, 4, 1, f), v16 = 3, fwrite(&v16, 2, 1, f), v16 = 1, fwrite(&v16, 2, 1, f);
-    v32 = RS_SR, fwrite(&v32, 4, 1, f), v32 = RS_SR * 4, fwrite(&v32, 4, 1, f), v16 = 4, fwrite(&v16, 2, 1, f);
+    v32 = 16, fwrite(&v32, 4, 1, f), v16 = 3, fwrite(&v16, 2, 1, f), fwrite(&ch, 2, 1, f);
+    v32 = RS_SR, fwrite(&v32, 4, 1, f), v32 = RS_SR * 4 * ch, fwrite(&v32, 4, 1, f), v16 = (uint16_t)(4 * ch), fwrite(&v16, 2, 1, f);
     v16 = 32, fwrite(&v16, 2, 1, f), fwrite("data", 1, 4, f), fwrite(&data, 4, 1, f);
-    fwrite(x, 4, n, f);
+    fwrite(x, 4, (size_t)n * ch, f);
     fclose(f);
 }
 
@@ -71,8 +71,9 @@ static void render_one(const char *dir)
     if (!st.name[0]) return;
     uint32_t n = (uint32_t)(st.seconds * RS_SR + 0.5);
     n = (n + RS_MIX_SUB - 1) / RS_MIX_SUB * RS_MIX_SUB;
-    int32_t *acc = calloc(n, sizeof *acc);
-    float *out = malloc(n * sizeof *out);
+    uint16_t ch = st.kind == 'S' || st.kind == 'L' ? 1 : 2;   /* the mix and the reverb in stereo */
+    int32_t *acc = calloc((size_t)n * ch, sizeof *acc);
+    float *out = malloc((size_t)n * ch * sizeof *out);
     rs_mix_init(&mix, 12345);
     if (st.kind == 'S') rs_voice_init(&mix.v[0], (uint8_t)st.voice, 12345);
     static struct rs_state s;
@@ -94,19 +95,23 @@ static void render_one(const char *dir)
                 tick_q8 += rs_step_q8(&s);
             }
         if (st.kind == 'S') rs_voice_render(&mix.v[0], acc + i, len, i);
-        else if (st.kind == 'M' || st.kind == 'G') rs_mix_render(&mix, acc + i, len, i);
+        else if (st.kind == 'M' || st.kind == 'G') rs_mix_render(&mix, acc + 2u * i, len, i);
         else if (st.kind == 'L')
             for (uint32_t f = 0; f < len; f += RS_MIX_SUB) {
                 lim_division(&mix);
-                for (uint32_t k = f; k < f + RS_MIX_SUB; k++) acc[i + k] = limiter(&mix, (int32_t)lrint(test_signal(i + k) * 32768));
+                for (uint32_t k = f; k < f + RS_MIX_SUB; k++) {
+                    int32_t x = (int32_t)lrint(test_signal(i + k) * 32768), o2[2];
+                    limiter(&mix, x, x, o2);
+                    acc[i + k] = o2[0];
+                }
             }
-        else if (st.kind == 'R')                        /* 1.0 in, Q24 out */
-            for (uint32_t k = 0; k < len; k++) acc[i + k] = reverb(&mix, i + k == 0 ? 32768 : 0);
+        else if (st.kind == 'R')                        /* 1.0 in, Q24 out, both channels */
+            for (uint32_t k = 0; k < len; k++) acc[2u * (i + k)] = reverb(&mix, i + k == 0 ? 32768 : 0, &acc[2u * (i + k) + 1u]);
     }
-    for (uint32_t i = 0; i < n; i++) out[i] = (float)acc[i] / (st.kind == 'R' ? 16777216.0f : 32768.0f);
+    for (uint32_t i = 0; i < n * ch; i++) out[i] = (float)acc[i] / (st.kind == 'R' ? 16777216.0f : 32768.0f);
     char path[512];
     snprintf(path, sizeof path, "%s/%s.wav", dir, st.name);
-    wav(path, out, n);
+    wav(path, out, n, ch);
     if (mix.clips) fprintf(stderr, "%s: the reverb's lines were full %u times\n", st.name, mix.clips);
     if (rs_voice_dropped) fprintf(stderr, "%s: the voices' timelines dropped %u events\n", st.name, rs_voice_dropped);
     rs_voice_dropped = 0;

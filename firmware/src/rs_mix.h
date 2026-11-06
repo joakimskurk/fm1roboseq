@@ -27,11 +27,11 @@ struct rs_mix {
     int32_t lp_x1, lp_x2, lp_y1, lp_y2;         /* bot B's low-pass: x Q15, y Q23 */
     /* the reverb: Q24 */
     int32_t pre[REV_PRE];
-    int32_t ap[REV_APS_TOTAL];
+    int32_t ap[REV_APS_TOTAL], ap_r[AP_LR], dr[REV_DR];
     int16_t line[REV_LINES_TOTAL];              /* Q16 */
-    uint16_t pre_i, ap_i[4], line_i[8];
+    uint16_t pre_i, ap_i[4], ap_ri, dr_i, line_i[8];
     /* the limiter: Q30 */
-    int32_t la[RS_LIM_BUF];                     /* Q15 */
+    int32_t la[RS_LIM_BUF], la_r[RS_LIM_BUF];   /* Q15, left and right */
     uint16_t la_i;
     int32_t det, gain, scaled, rate, max_att;   /* max_att: 1/65536 dB, -1 none */
     uint8_t releasing;
@@ -41,8 +41,8 @@ struct rs_mix {
 void rs_mix_init(struct rs_mix *m, uint32_t seed);
 /* triggerAttackRelease on voice `voice` (RS_V_*): rs_voice_note's arguments */
 void rs_mix_note(struct rs_mix *m, uint8_t voice, uint32_t at, uint32_t dur, int midi, uint16_t vel);
-/* n frames (a multiple of RS_MIX_SUB) from sample `now` on, mono, Q15 in int32 (the limiter's output can pass
- * full scale as the HTML's does: the platform clips) */
+/* n frames (a multiple of RS_MIX_SUB) from sample `now` on into out, stereo (L R L R), Q15 in int32 (the limiter's
+ * output can pass full scale as the HTML's does: the platform clips) */
 void rs_mix_render(struct rs_mix *m, int32_t *out, uint32_t n, uint32_t now);
 extern const uint8_t rs_voice_bus[RS_NVOICES];
 #endif

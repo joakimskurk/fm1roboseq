@@ -124,13 +124,16 @@ def check_reverb():
     dt = tau / mix_tables.TAU - 1
     early = 10 * np.log10((h[mix_tables.PRE:t0] ** 2).sum() / e)
     want = 10 * np.log10(1 - np.exp(-2 * 0.025 * SR / mix_tables.TAU))
-    ok = abs(d) < 0.25 and abs(dt) < 0.03 and abs(early - want) < 1.0
-    print(f"reverb_ir      energy {d:+.2f} dB, decay {100 * dt:+.1f} %, first 25 ms {early - want:+.2f} dB"
-          f"{'' if ok else '   <- over 0.25 dB / 3 % / 1 dB'}")
+    hr = load(OUT / "reverb_ir.wav", 1)             # the right: its own, as loud, apart from the left
+    dr = 10 * np.log10(float((hr ** 2).sum()) / mix_tables.ENERGY)
+    corr = float((h * hr).sum() / np.sqrt((h ** 2).sum() * (hr ** 2).sum()))
+    ok = abs(d) < 0.25 and abs(dt) < 0.03 and abs(early - want) < 1.0 and abs(dr) < 0.5 and abs(corr) < 0.1
+    print(f"reverb_ir      energy {d:+.2f} dB (right {dr:+.2f}), decay {100 * dt:+.1f} %, first 25 ms {early - want:+.2f} dB,"
+          f" left and right correlate {corr:+.3f}{'' if ok else '   <- over 0.25 dB / 3 % / 1 dB / 0.5 dB / 0.1'}")
     return ok
 
 
-def load(path):
+def load(path, chan=0):
     b = path.read_bytes()
     assert b[:4] == b"RIFF" and b[8:12] == b"WAVE", path
     pos, ch, fmt, data = 12, 1, 3, None
@@ -143,8 +146,8 @@ def load(path):
             data = b[pos + 8:pos + 8 + size]
         pos += 8 + size + (size & 1)
     if fmt == 1:                                          # 16-bit PCM (the voices' goldens)
-        return np.frombuffer(data, dtype="<i2").reshape(-1, ch)[:, 0].astype(np.float64) / 32768.0
-    return np.frombuffer(data, dtype="<f4").reshape(-1, ch)[:, 0].astype(np.float64)
+        return np.frombuffer(data, dtype="<i2").reshape(-1, ch)[:, min(chan, ch - 1)].astype(np.float64) / 32768.0
+    return np.frombuffer(data, dtype="<f4").reshape(-1, ch)[:, min(chan, ch - 1)].astype(np.float64)
 
 
 def env_db(x, win=int(0.005 * SR)):
@@ -238,13 +241,14 @@ def main():
     for st in SPEC["chains"]:
         if names and st["name"] not in names:
             continue
-        r = measure(load(HTML / f"{st['name']}.wav"), load(OUT / f"{st['name']}.wav"))
-        results[st["name"]] = r
-        tol = TOL_CHAIN[st["name"]]
-        over = [k for k in tol if abs(r[k]) > tol[k]]
-        if over:
-            bad.append(st["name"])
-        print(f"{st['name']:14} {r['level']:+7.2f} {r['env']:6.2f} {r['tone']:6.2f}  {r['worst']}{'   <- ' + ', '.join(over) if over else ''}")
+        for chan, side in ((0, ""), (1, " R")):    # both channels: the HTML's reverb is stereo, and so is ours
+            r = measure(load(HTML / f"{st['name']}.wav", chan), load(OUT / f"{st['name']}.wav", chan))
+            results[st["name"] + side] = r
+            tol = TOL_CHAIN[st["name"]]
+            over = [k for k in tol if abs(r[k]) > tol[k]]
+            if over:
+                bad.append(st["name"] + side)
+            print(f"{(st['name'] + side):14} {r['level']:+7.2f} {r['env']:6.2f} {r['tone']:6.2f}  {r['worst']}{'   <- ' + ', '.join(over) if over else ''}")
     if not names:
         sys.path.insert(0, str(Path(__file__).resolve().parent))
         if not check_limiter():

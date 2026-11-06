@@ -66,11 +66,10 @@ static struct rs_mix mix;
 /* ---- the sound (runs in the audio ISR: keep it short, no flash, no screen) */
 static void app_audio(int32_t *out, uint32_t n)
 {
-    static int32_t mono[HALF_FRAMES];
 #ifndef DINGHY_HOST
     uint32_t t0 = fm1_ticks();
 #endif
-    uint32_t now = audio_now, tail = qn_tail, head = qn_head, i, k;
+    uint32_t now = audio_now, tail = qn_tail, head = qn_head, k;
     if (panic_req != panic_done) {              /* stopPlayback(): what is queued goes, every voice lets go now */
         tail = head;
         for (k = 0; k < RS_NVOICES; k++) rs_voice_release(&mix.v[k], now);
@@ -84,8 +83,7 @@ static void app_audio(int32_t *out, uint32_t n)
         rs_mix_note(&mix, qn[j].voice, qn[j].at, qn[j].dur, qn[j].midi, qn[j].vel);
     }
     qn_tail = tail;
-    rs_mix_render(&mix, mono, n, now);
-    for (i = 0; i < n; i++) out[2u * i] = out[2u * i + 1u] = mono[i];
+    rs_mix_render(&mix, out, n, now);           /* stereo, straight into the platform's buffer */
     audio_now = now + n;
 #ifndef DINGHY_HOST
     rs_audio_us = (fm1_ticks() - t0) / FM1_TICKS_PER_US;

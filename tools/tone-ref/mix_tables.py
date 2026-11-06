@@ -29,7 +29,10 @@ TAU = math.log(2.2) / math.log(200) * SR                # samples
 PRE = int(round(0.01 * SR))
 LINES = [601, 709, 797, 887, 977, 1061, 1151, 1249]     # primes: 7432 samples, a mode every ~6 Hz
 SIGNS = [1, -1, 1, -1, -1, 1, -1, 1]
+SIGNS_R = [1, 1, -1, -1, 1, 1, -1, -1]                  # the right channel: orthogonal to the left (Tone's two noises)
 APS = [89, 131, 197, 263]
+AP_R = 241                                              # the right channel's last all-pass, instead of 263
+R_DELAY = 131                                           # its early part 3 ms after the left's: apart, not one spike
 AP_G = 0.6
 DIRECT = 3.625                                          # the diffused input, straight out: the first 25 ms
 ENERGY = 0.00125893 ** 2 * round(1.21 * SR)             # Chromium's normalized impulse response, a channel
@@ -105,8 +108,12 @@ def build():
           f"#define REV_K{i} {q(math.exp(-d / TAU) / math.sqrt(8), 32)}\n")
     for i, d in enumerate(APS):
         p(f"#define AP_L{i} {d}\n#define AP_O{i} {sum(APS[:i])}\n")
-    terms = "".join(("+ " if sg > 0 else "- ") + f"r{i} " for i, sg in enumerate(SIGNS))
-    p(f"#define REV_TAPS ({terms.lstrip('+ ').strip()})   /* the output: the lines with their signs */\n")
+    p(f"#define AP_LR {AP_R}                      /* the right's own last all-pass (its early part apart from the left's) */\n")
+    p(f"#define REV_DR {R_DELAY}                     /* and 3 ms later than the left's */\n")
+    assert sum(a * b for a, b in zip(SIGNS, SIGNS_R)) == 0
+    for name, sg in (("REV_TAPS", SIGNS), ("REV_TAPS_R", SIGNS_R)):
+        terms = "".join(("+ " if v > 0 else "- ") + f"r{i} " for i, v in enumerate(sg))
+        p(f"#define {name} ({terms.lstrip('+ ').strip()})   /* an output: the lines with their signs */\n")
     p("\n")
 
     # the limiter

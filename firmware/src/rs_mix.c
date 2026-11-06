@@ -1,9 +1,12 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
 /* RoboSeq's mix (rs_mix.h): buildAudio()'s buses, low-pass, hall reverb and limiter, in integers.
  *
- *   voices -> bus x level ---------------------------------------------+-> master x level -> limiter -> out
+ *   voices -> bus x level ---------------------------------------------+-> master x level -> limiter -> out L R
  *             bot B: x level -> low-pass ------------------------------+
- *             melody, percussion, FX: x 0.45 -> reverb ----------------+   (D9: the return to the master)
+ *             melody, percussion, FX: x 0.45 -> reverb, L and R -------+   (D9: the return to the master)
+ *
+ * In stereo as the HTML is: everything dry in the middle, the reverb's two channels apart (Tone's impulse is two
+ * noises), the limiter on the louder of the two for both (Chromium's).
  *
  * The reverb is not Tone's convolution (53361 taps a sample) but what it sounds like: white noise under the same
  * exponential decay with the same energy, from four all-passes and an 8-line feedback delay network
@@ -100,15 +103,27 @@ static inline int32_t mulh(int32_t x, int32_t k) { return (int32_t)(((int64_t)x 
         if (++m->line_i[i] == REV_L##i) m->line_i[i] = 0;                      \
     } while (0)
 
-static int32_t reverb(struct rs_mix *m, int32_t send)
+static int32_t reverb(struct rs_mix *m, int32_t send, int32_t *right)   /* the left out; the right into *right */
 {
     int32_t s = (int32_t)(((int64_t)send * REV_IN) >> 15);                  /* Q24 */
     int32_t x = m->pre[m->pre_i];
     m->pre[m->pre_i] = s;
     if (++m->pre_i == REV_PRE) m->pre_i = 0;
-    AP(0); AP(1); AP(2); AP(3);                                             /* the diffusers */
+    AP(0); AP(1); AP(2);                                                    /* the diffusers */
+    int32_t xr = x;                                                         /* the right: its own last all-pass */
+    {
+        int32_t *c = &m->ap_r[m->ap_ri], v = *c, w = xr + v - mulh(v, AP_G4);
+        *c = w;
+        xr = v - (w - mulh(w, AP_G4));
+        if (++m->ap_ri == AP_LR) m->ap_ri = 0;
+        int32_t late = m->dr[m->dr_i];
+        m->dr[m->dr_i] = xr, xr = late;
+        if (++m->dr_i == REV_DR) m->dr_i = 0;
+    }
+    AP(3);
     TAP(0); TAP(1); TAP(2); TAP(3); TAP(4); TAP(5); TAP(6); TAP(7);
     int32_t y = REV_TAPS + mulq15(x, REV_DIRECT);
+    *right = REV_TAPS_R + mulq15(xr, REV_DIRECT);  /* Tone's reverb is two noises: the right taps the lines otherwise */
     /* the Walsh-Hadamard transform of the eight */
     int32_t a0 = r0 + r1, a1 = r0 - r1, a2 = r2 + r3, a3 = r2 - r3, a4 = r4 + r5, a5 = r4 - r5, a6 = r6 + r7, a7 = r6 - r7;
     int32_t b0 = a0 + a2, b1 = a1 + a3, b2 = a0 - a2, b3 = a1 - a3, b4 = a4 + a6, b5 = a5 + a7, b6 = a4 - a6, b7 = a5 - a7;
@@ -145,12 +160,14 @@ static void lim_division(struct rs_mix *m)
     }
 }
 
-static int32_t limiter(struct rs_mix *m, int32_t x)
+static void limiter(struct rs_mix *m, int32_t x, int32_t xr, int32_t *out)   /* a stereo frame in, out[0], out[1] */
 {
     m->la[(m->la_i + LIM_PRE) & (RS_LIM_BUF - 1)] = x;
-    int32_t xd = m->la[m->la_i];
+    m->la_r[(m->la_i + LIM_PRE) & (RS_LIM_BUF - 1)] = xr;
+    int32_t xd = m->la[m->la_i], xdr = m->la_r[m->la_i];
     m->la_i = (uint16_t)((m->la_i + 1) & (RS_LIM_BUF - 1));
-    uint32_t a = (uint32_t)(x < 0 ? -x : x);
+    uint32_t a = (uint32_t)(x < 0 ? -x : x), ar = (uint32_t)(xr < 0 ? -xr : xr);
+    if (ar > a) a = ar;                                 /* Chromium: the loudest channel drives the gain of both */
     int32_t att, satr;
     if (a < LIM_THRESH) att = M_ONE, satr = LIM_R0;
     else {
@@ -169,8 +186,9 @@ static int32_t limiter(struct rs_mix *m, int32_t x)
     } else
         m->gain += mulq30(m->scaled - m->gain, m->rate);
     uint32_t g = (uint32_t)(m->gain < 0 ? 0 : m->gain);
-    int32_t warp = (g >> 22) >= 256u ? LIM_SIN[256] : lerp16(LIM_SIN, g >> 22, (g >> 6) & 0xFFFFu);
-    return (int32_t)(((int64_t)xd * mulq30(LIM_MAKEUP, warp)) >> 30);
+    int32_t warp = (g >> 22) >= 256u ? LIM_SIN[256] : lerp16(LIM_SIN, g >> 22, (g >> 6) & 0xFFFFu), tg = mulq30(LIM_MAKEUP, warp);
+    out[0] = (int32_t)(((int64_t)xd * tg) >> 30);
+    out[1] = (int32_t)(((int64_t)xdr * tg) >> 30);
 }
 
 void rs_mix_render(struct rs_mix *m, int32_t *out, uint32_t n, uint32_t now)
@@ -200,9 +218,10 @@ void rs_mix_render(struct rs_mix *m, int32_t *out, uint32_t n, uint32_t now)
             int32_t y = (int32_t)(acc >> 30);                           /* Q23 */
             m->lp_x2 = m->lp_x1, m->lp_x1 = bx, m->lp_y2 = m->lp_y1, m->lp_y1 = y;
             int32_t ld = mulq15(m->lead_bus[i], lv[RS_L_LEAD]);   /* the lead: to the reverb as the melody, and out */
-            int32_t rev = (reverb(m, mulq15(mel + perc + fx + ld, SEND)) + 256) >> 9;
-            int32_t master = mulq15(mel + ((y + 128) >> 8) + perc + fx + dr + ld + rev, lv[RS_L_MASTER]);
-            out[f0 + i] = limiter(m, master);
+            int32_t rev_r, rev = (reverb(m, mulq15(mel + perc + fx + ld, SEND), &rev_r) + 256) >> 9;
+            int32_t dry = mel + ((y + 128) >> 8) + perc + fx + dr + ld;
+            limiter(m, mulq15(dry + rev, lv[RS_L_MASTER]), mulq15(dry + ((rev_r + 256) >> 9), lv[RS_L_MASTER]),
+                    out + 2u * (f0 + i));
         }
     }
 }

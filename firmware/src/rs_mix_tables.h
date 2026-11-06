@@ -51,7 +51,10 @@
 #define AP_O2 220
 #define AP_L3 263
 #define AP_O3 417
-#define REV_TAPS (r0 - r1 + r2 - r3 - r4 + r5 - r6 + r7)   /* the output: the lines with their signs */
+#define AP_LR 241                      /* the right's own last all-pass (its early part apart from the left's) */
+#define REV_DR 131                     /* and 3 ms later than the left's */
+#define REV_TAPS (r0 - r1 + r2 - r3 - r4 + r5 - r6 + r7)   /* an output: the lines with their signs */
+#define REV_TAPS_R (r0 + r1 - r2 - r3 + r4 + r5 - r6 - r7)   /* an output: the lines with their signs */
 
 /* the limiter: Chromium's DynamicsCompressorKernel as Tone.Limiter(-6) sets it (compressor.py) */
 #define LIM_PRE 264
