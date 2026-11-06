@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
 /* The board's moments that a song may take a while to reach, drawn straight from a view (rs_screen.c): two bots on
- * one tile after a dash (the clash star over the one hit), in love (the heart over them), apart and steered.
+ * one tile after a dash (the clash star over the one hit), in love (the heart over them), apart.
  *   make scenes     -> build/scenes/clash.png, love.png, apart.png (in Docker on macOS: the pool section) */
 #include <stdint.h>
 #include <stdio.h>
@@ -53,7 +53,7 @@ int main(void)
     fx.heart_until = 1000, fx.heart_x = 2, fx.heart_y = 3;
     draw_board(&v, &fx, &u, 0), ppm("love");
     memset(&fx, 0, sizeof fx);
-    v.bot[1].x = 4, u.steer[0] = RS_DASH + 1, u.steer[1] = RS_PING + 1;
+    v.bot[1].x = 4;
     draw_board(&v, &fx, &u, 0), ppm("apart");
     return 0;
 }

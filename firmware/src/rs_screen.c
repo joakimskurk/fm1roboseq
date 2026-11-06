@@ -317,10 +317,6 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const st
             draw_bot(sx + 1, y + 20, b, 1, C_CELL);
             draw_arrow_at(sx + 10, y + 17, t->dir, b ? C_WARN : C_ACCENT);   /* its facing, over its head */
             if ((int32_t)(fx->clash_until[b] - now_ms) > 0) draw_clash(sx, y + 1, 2);   /* hit: the star over it */
-            if (u->steer[b]) {                  /* steered: what its next move will be, over it */
-                cv_rect(sx + 1, y + 1, 18, 15, b ? C_BOT_B2 : C_BOT_A2);
-                icon(sx + 3, y + 2, u->steer[b] - 1u, C_WHITE);
-            }
         }
         for (b = 0; b < 2; b++)
             if ((int32_t)(fx->boom_until[b] - now_ms) > 0)   /* where it burned out, on its side */

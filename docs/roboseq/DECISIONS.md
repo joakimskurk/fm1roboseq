@@ -155,3 +155,9 @@ at 1 px, the HTML's build), at the foot of the tile, each in its own half, its f
 Two on one tile is then nothing special: both are there, a dash's clash star over the one hit, the love heart over
 the two. (The HTML draws a bot large in its cell and two as minis side by side.)
 
+## D18. No badge over a steered bot: the board stays lovely chaos (2026-11-06)
+
+The product owner: the steps often run fast, and this is meant to be a bit of lovely chaos; an extra icon over the
+robots is not needed. So a steer shows only in what the bot does on its next move, heard and seen there (C5),
+not as a badge beforehand. The facing over a bot's head stays (the HTML's dirArrow).
+
