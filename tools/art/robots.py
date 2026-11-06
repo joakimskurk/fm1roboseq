@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """RoboSeq's robots, Scout-7 and Echo-3, as pixel art 32 x 32 at 1 px (firmware/src/rs_screen.c draws them):
 the HTML's robotPixelArt (the same build, the same colours), with what 1 px gives room for: a dark outline, light
-from the top left (a lit edge on each part, a shaded one below and right), the visor's glint, the grill, the joints.
+from straight above (each part lit on top, shaded at its foot), the grill, the joints; left and right mirror
+images of each other, as the HTML's are.
 Written out as firmware/src/rs_robots.h, a preview at 6x in build/art/robots.png.
 
 Letters (rs_screen.c bot_colour): '.' nothing, 'o' outline, 'm' the bot's colour, 'M' it lit, 'n' it shaded,
@@ -41,14 +42,11 @@ def robot(b):
             left = x > 0 and body[y][x - 1] in "mMn"
             down = y < N - 1 and body[y + 1][x] in "mMn"
             right = x < N - 1 and body[y][x + 1] in "mMn"
-            if not up or not left:
+            if not up:
                 g[y][x] = "M"
-            elif not down or not right:
+            elif not down:
                 g[y][x] = "n"
-    for (x, y) in [(10, 8), (11, 8), (9, 9)]:      # the visor's glint (above the eyes)
-        if g[y][x] == "v":
-            g[y][x] = "w"
-    for x in (14, 16, 18):                          # the grill: slots in the mouth
+    for x in (14, 17):                              # the grill: slots in the mouth
         g[14][x] = "v"
     for (x, y) in [(15, 20), (16, 20)]:             # a seam under the core
         g[y][x] = "n"

@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """RoboSeq's tiles as pixel art, 40 x 40 at 1 px (firmware/src/rs_screen.c draws them 1:1 in a cell; each way a
-belt points and each rotator drawn on its own, so the light stays top left): written out as
+belt points and each rotator drawn on its own, so the light stays above): written out as
 firmware/src/rs_tiles.h, and a preview at 4x (build/art/tiles.png).
 
-The light comes from the top left. A figure gets a dark outline ('k'), a lit edge where it faces up or left ('h') and
-a drop shadow two pixels down and right ('g'); a tile a frame light above and left ('b'), dark below and right ('k').
+The light comes from straight above, so what is symmetric stays so: a figure gets a dark outline ('k'), a lit edge
+where it faces up ('h') and a drop shadow two pixels below it ('g'); a tile a frame light above ('b'), dark below
+('k'), between at the sides ('d').
 The letters are a tile's palette (rs_screen.c tile_colour): '.' ground, 'g' ground in shadow, 'a' the tile's colour,
 'h' it lit, 'b' it dimmed, 'd' it dimmer, 'k' it dark, 'c' a light accent; the crate's are its woods ('n' nails).
 
@@ -24,11 +25,11 @@ def grid(ch="."):
 
 def frame(g):
     for i in range(N):
-        g[0][i] = g[i][0] = "b"
-        g[N - 1][i] = g[i][N - 1] = "k"
+        g[i][0] = g[i][N - 1] = "d"
+    for i in range(N):
+        g[0][i], g[N - 1][i] = "b", "k"
         if 0 < i < N - 1:
-            g[1][i] = g[i][1] = "d" if g[1][i] == "." else g[1][i]
-    g[0][N - 1] = g[N - 1][0] = "d"
+            g[1][i] = "d"
 
 
 def poly(pts):
@@ -70,9 +71,9 @@ def inside(x, y):
 
 
 def shade(g, mask, body="a", lit="h", line="k", shadow="g", ground=".bd"):
-    """a figure, lit from the top left: outline, lit edge, body, its shadow"""
+    """a figure, lit from above: outline, lit top edge, body, its shadow below"""
     for (x, y) in mask:
-        for dx, dy in [(2, 2), (1, 2), (2, 1)]:
+        for dx, dy in [(0, 1), (0, 2)]:
             p = (x + dx, y + dy)
             if p not in mask and inside(*p) and g[p[1]][p[0]] in ground:
                 g[p[1]][p[0]] = shadow
@@ -82,11 +83,11 @@ def shade(g, mask, body="a", lit="h", line="k", shadow="g", ground=".bd"):
             if p not in mask and inside(*p) and g[p[1]][p[0]] in ground + "g":
                 g[p[1]][p[0]] = line
     for (x, y) in mask:
-        g[y][x] = lit if (x, y - 1) not in mask or (x - 1, y) not in mask else body
+        g[y][x] = lit if (x, y - 1) not in mask else body
 
 
 def turn(mask, d):
-    """a shape drawn pointing east, turned to d (N E S W): turned before it is lit, so the light stays top left"""
+    """a shape drawn pointing east, turned to d (N E S W): turned before it is lit, so the light stays above"""
     f = {"E": lambda x, y: (x, y), "W": lambda x, y: (N - 1 - x, y),
          "N": lambda x, y: (y, N - 1 - x), "S": lambda x, y: (N - 1 - y, x)}[d]
     return {f(x, y) for (x, y) in mask}
@@ -96,10 +97,10 @@ def belt(d):
     g = grid()
     frame(g)
     tread = set()
-    for x in range(2, N - 2):                       # the belt's surface: treads that run along it
+    for x in range(2, N - 2):                       # the belt's surface: slats across it, as it runs
         for y0 in (3, 33):
             for k in range(4):
-                tread.add((x, y0 + k, (x - k) % 6 < 3))
+                tread.add((x, y0 + k, (x - 2) % 6 < 3))
     for (x, y, lit) in tread:
         (tx, ty), = turn({(x, y)}, d)
         g[ty][tx] = "b" if lit else "d"
@@ -157,7 +158,7 @@ def pulse():
         g[y][x] = "b"
     pad = rect(14, 14, 12, 12) - {(14, 14), (25, 14), (14, 25), (25, 25)}
     shade(g, pad)
-    for (x, y) in disc(18.0, 18.0, 2.2):
+    for (x, y) in disc(C, 17.0, 2.2):             # its glow, where the light falls
         g[y][x] = "c"
     return g
 

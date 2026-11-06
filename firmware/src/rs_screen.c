@@ -212,24 +212,19 @@ struct rs_ui {
     struct rs_step steps[2][16];                /* the page of each */
 };
 
-static const char *const ACT_GLYPH[RS_NACTIONS + 1][7] = {   /* the HTML's icons (⇧ ⇩ ↺ ↻ ⇶ ✦ ·), 7 x 7 */
-    {"...#...", "..###..", ".#####.", "...#...", "...#...", "...#...", "...#..."},
-    {"...#...", "...#...", "...#...", "...#...", ".#####.", "..###..", "...#..."},
-    {"#.###..", "##...#.", "###...#", "......#", "......#", ".#...#.", "..###.."},
-    {"..###.#", ".#...##", "#...###", "#......", "#......", ".#...#.", "..###.."},
-    {"#..#...", ".#..#..", "..#..#.", "...#..#", "..#..#.", ".#..#..", "#..#..."},
-    {"...#...", "...#...", "..###..", "#######", "..###..", "...#...", "...#..."},
-    {".......", ".......", "..###..", "..###..", "..###..", ".......", "......."},
-    {".#.....", "###....", ".#...#.", ".#...#.", ".#...#.", "....###", ".....#."}};   /* (the last: ⇅, swapped) */
+#include "rs_icons.h"                         /* the step icons (tools/art/icons.py) */
+
 static const uint16_t ACT_COLOUR[RS_NACTIONS] = {   /* renderStepCard's actionColorMap */
     C_PULSE, RGB(0x73, 0xb7, 0xa9), C_ROT, C_BELT, C_DANGER, RGB(0x59, 0xd9, 0xc2), C_MUTED};
 
-static void glyph7(int32_t x, int32_t y, uint32_t g, int32_t px, uint16_t c)
+static void icon(int32_t x, int32_t y, uint32_t i, uint16_t c)   /* a step icon, 14 x 13, in colour c, lit and outlined */
 {
     int32_t r, k;
-    for (r = 0; r < 7; r++)
-        for (k = 0; k < 7; k++)
-            if (ACT_GLYPH[g][r][k] == '#') cv_rect(x + k * px, y + r * px, px, px, c);
+    for (r = 0; r < 13; r++)
+        for (k = 0; k < 14; k++) {
+            char ch = ICON[i][r][k];
+            if (ch != '.') cv_pset(x + k, y + r, ch == 'o' ? RGB(0x08, 0x08, 0x10) : ch == 'h' ? mix565(C_WHITE, c, 115) : c);
+        }
 }
 
 static void draw_strip(const struct rs_ui *u, int b)   /* a register down the board's side: Scout-7 left, Echo-3 right */
@@ -245,7 +240,7 @@ static void draw_strip(const struct rs_ui *u, int b)   /* a register down the bo
             if (st->prob != 100) c = mix565(c, cell, 140);
             if (!on) c = mix565(c, cell, 110);
             cv_rect(x0 + 1, y, 18, 14, cell);
-            glyph7(x0 + 3, y, st->action, 2, c);
+            icon(x0 + 3, y + 1, st->action, c);
             if (i == u->playing_at[b]) frame(x0, y, 20, 15, 1, on ? C_WHITE : C_MUTED);
         } else
             cv_rect(x0 + 9, y + 6, 2, 2, cell); /* past its length */
@@ -321,8 +316,8 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const st
         draw_arrow(x, y, t->dir, b ? C_WARN : C_ACCENT);
         if ((int32_t)(fx->clash_until[b] - now_ms) > 0) draw_clash(x, y);
         if (u->steer[b]) {                      /* steered: what its next move will be, on it */
-            cv_rect(x + 1, y + 1, 16, 16, b ? C_BOT_B : C_BOT_A);
-            glyph7(x + 2, y + 2, u->steer[b] - 1u, 2, C_WHITE);
+            cv_rect(x + 1, y + 1, 17, 16, b ? C_BOT_B2 : C_BOT_A2);
+            icon(x + 3, y + 2, u->steer[b] - 1u, C_WHITE);
         }
     }
     for (b = 0; b < 2; b++)
@@ -333,9 +328,9 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const st
         int32_t x = b ? 122 : 24, hp = 6 - (v->bot[b].heat > 6 ? 6 : v->bot[b].heat < 0 ? 0 : v->bot[b].heat);
         uint16_t c = hp <= 2 ? C_DANGER : hp <= 4 ? C_WARN : C_PULSE;
         int32_t w = cv_text(x, 222, &FONT_S, b ? "ECHO" : "SCOUT", b ? C_BOT_B : C_BOT_A) + 3;
-        cv_rect(w, 228, x + 86 - w, 6, RGB(0x1a, 0x1a, 0x2e));
-        cv_rect(w, 228, (x + 86 - w) * hp / 6, 6, c);
+        cv_rect(w, 228, x + 82 - w, 6, RGB(0x1a, 0x1a, 0x2e));
+        cv_rect(w, 228, (x + 82 - w) * hp / 6, 6, c);
     }
-    if (u->swapped) glyph7(113, 225, RS_NACTIONS, 1, C_TEXT);   /* the registers swapped */
+    if (u->swapped) icon(107, 223, RS_NACTIONS, C_TEXT);        /* the registers swapped */
     cv_blit(0, 0);
 }
