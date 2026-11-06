@@ -204,9 +204,41 @@ static void test_steer(void)                     /* D16: a steer is the next mov
     CHECK(y.swapped == 1, "the registers swap");
 }
 
+static void test_pages(void)                     /* the model's parts of the pages (GLO, SCL, ARP) */
+{
+    static struct rs_state s;
+    static struct rs_tick_out o;
+    rs_default(&s);
+    rs_seq2_toggle(&s);
+    CHECK(s.seq2_active && !s.seq2_pending, "Seq 2 on at once when stopped");
+    rs_seq2_toggle(&s), rs_start(&s), rs_seq2_toggle(&s);
+    CHECK(!s.seq2_active && s.seq2_pending, "queued while playing");
+    for (int k = 0; k < RS_NBOARDS + 2; k++) rs_seq2_cycle(&s, 1, 0, 1);
+    CHECK(s.seq2[1].board == RS_B_NONE, "the boards wrap: --, six presets, user, -- (%d)", s.seq2[1].board);
+    rs_seq2_cycle(&s, 1, 0, -1);
+    CHECK(s.seq2[1].board == RS_B_USER, "back from -- is user");
+    rs_seq2_cycle(&s, 2, 1, -1);
+    CHECK(s.seq2[2].drums == RS_NDRUMS - 1, "the drums wrap back to the last");
+    rs_reset_seq2(&s);
+    CHECK(s.seq2[1].board == RS_B_NONE && s.seq2[2].drums == RS_D_NONE && !s.seq2_pending, "Seq 2 reset");
+    rs_set_voice_mod(&s, 1, 0);
+    CHECK(s.vm_manual && s.vm_freq4 == 4, "MANUAL keeps its frequency");
+    rs_set_voice_mod(&s, 0, 16);
+    CHECK(!s.vm_manual && s.vm_freq4 == 16, "every 4 loops");
+    rs_cycle_bassmod(&s, 0, 1, 1), rs_reset_bassmod(&s);
+    CHECK(s.bassmod[0].root == 3 && s.bassmod_len == 4, "Voice Mod reset to its defaults");
+    rs_default(&s), rs_start(&s);
+    for (int t = 0; t < 5; t++) rs_tick(&s, &o);
+    rs_set_loop_len_live(&s, 32);
+    CHECK(s.playing && s.loop_len == 32 && s.step == 4, "the loop's length changed without a stop");
+    rs_set_loop_len_live(&s, 8);
+    CHECK(s.prog[0].len <= 8 && s.prog[1].len <= 8, "the registers capped to it");
+}
+
 int main(void)
 {
     test_steer();
+    test_pages();
     test_randomize_steps();
     test_randomize_board();
     test_bassmod_seq2();

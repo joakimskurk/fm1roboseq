@@ -162,6 +162,9 @@ void rs_randomize_board(struct rs_state *s);                    /* randomizeBoar
 void rs_randomize_bassmod(struct rs_state *s);                  /* randomizeBassMod() */
 void rs_set_voice_mod(struct rs_state *s, uint8_t manual, uint8_t freq4);   /* its trigger, its loop frequency x 4 */
 void rs_reset_bassmod(struct rs_state *s);                      /* resetBassMod() */
+void rs_seq2_toggle(struct rs_state *s);                        /* Seq 2 on (queued while playing) / off */
+void rs_seq2_cycle(struct rs_state *s, int i, int field, int dir);   /* step i's 0 board, 1 drums (dir), 2 regswap */
+void rs_reset_seq2(struct rs_state *s);                         /* resetSeq2() */
 void rs_randomize_seq2(struct rs_state *s);                     /* randomizeSeq2() */
 uint32_t rs_random(struct rs_state *s, uint32_t n);             /* 0..n-1 */
 

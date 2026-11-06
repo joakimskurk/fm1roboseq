@@ -471,14 +471,15 @@ static void draw_glo(const struct rs_state *g, uint8_t pending_loop)
 
 /* ---- SCL: Voice Mod (the HTML's Seq 1): its four steps as cards, each a scale, a root and a semitone; the step it
  * is on lit, the one the knobs edit framed; when it moves on below; the white keys' words at the foot */
-static void key_labels(const char *const *w, uint32_t first)   /* the white keys' words: four, from white key first */
+static void key_labels(const char *const *w, uint32_t n, uint32_t first)   /* the white keys' words: n from key first */
 {
     uint32_t k;
-    for (k = 0; k < 4u; k++) {
-        int32_t x = (int32_t)k * 60;
-        cv_rect(x + 2, 214, 56, 24, RGB(0x1a, 0x1a, 0x2e));
-        digits(x + 5, 216, first + k, first + k > 9u ? 2u : 1u, C_MUTED);
-        cv_text(x + 30 - text_w(&FONT_S, w[k]) / 2, 221, &FONT_S, w[k], C_TEXT);
+    int32_t cw = 240 / (int32_t)n;
+    for (k = 0; k < n; k++) {
+        int32_t x = (int32_t)k * cw;
+        cv_rect(x + 2, 214, cw - 4, 24, RGB(0x1a, 0x1a, 0x2e));
+        digits(x + 4, 216, first + k, first + k > 9u ? 2u : 1u, C_MUTED);
+        cv_text(x + cw / 2 - text_w(&FONT_S, w[k]) / 2, 222, &FONT_S, w[k], C_TEXT);
     }
 }
 
@@ -515,6 +516,43 @@ static void draw_scl(const struct rs_state *g, uint32_t cursor)
     cv_text(236 - text_w(&FONT_S, g->transpose_root ? "ROOT ON" : "ROOT OFF"), 175, &FONT_S,
             g->transpose_root ? "ROOT ON" : "ROOT OFF", g->transpose_root ? C_ACCENT : C_MUTED);
     cv_text(4, 195, &FONT_S, "K1 SCALE K2 ROOT K3 SEMI", mix565(C_MUTED, C_BG, 160));
-    key_labels(KEYS, 13);
+    key_labels(KEYS, 4, 13);
+    cv_blit(0, 0);
+}
+
+/* ---- ARP: Seq 2 (the HTML's), its four steps as cards: a board, a drum pattern, the registers swapped; on, queued
+ * or off over them; the step it is on lit, the one the knobs edit framed */
+static void draw_arp(const struct rs_state *g, uint32_t cursor)
+{
+    static const char *const KEYS[5] = {"ON", "RNDA", "RNDB", "RST", "RND"};
+    static const char *const BOARD[RS_NBOARDS + 2] = {"DEFLT", "CORR", "GARDN", "GAUNT", "SPIN", "MAZE", "RAND", "USER"};
+    static const char *const DRUM[RS_NDRUMS] = {"FOUR", "BREAK", "HALF", "OFFBT", "TRIPL", "MINI"};
+    uint16_t cell = RGB(0x1a, 0x1a, 0x2e);
+    const char *state = g->seq2_pending ? "QUEUED" : g->seq2_active ? "ON" : "OFF";
+    uint32_t i;
+    cv_begin(240, 240, C_BG);
+    cv_text(4, 0, &FONT_S, "SEQ 2", C_TEXT);
+    cv_text(236 - text_w(&FONT_S, state), 0, &FONT_S, state, g->seq2_pending ? C_WARN : g->seq2_active ? C_ACCENT : C_MUTED);
+    cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
+    for (i = 0; i < RS_SEQ2_STEPS; i++) {
+        const struct rs_seq2_step *st = &g->seq2[i];
+        int32_t x = (int32_t)i * 60, on = g->seq2_active && g->seq2_index == (int8_t)i;
+        const char *bn = st->board == RS_B_NONE ? "--" : BOARD[st->board < RS_NBOARDS + 2 ? st->board : 0];
+        const char *dn = st->drums == RS_D_NONE ? "--" : DRUM[st->drums < RS_NDRUMS ? st->drums : 0];
+        cv_rect(x + 2, 20, 56, 150, on ? mix565(C_ACCENT, cell, 60) : cell);
+        if (i == cursor) frame(x + 2, 20, 56, 150, 2, C_WHITE);
+        digits(x + 27, 25, i + 1u, 1, on ? C_ACCENT : C_MUTED);
+        cv_text(x + 30 - text_w(&FONT_S, "BOARD") / 2, 44, &FONT_S, "BOARD", mix565(C_MUTED, cell, 120));
+        cv_text(x + 30 - text_w(&FONT_S, bn) / 2, 62, &FONT_S, bn, st->board == RS_B_NONE ? C_MUTED : C_TEXT);
+        cv_text(x + 30 - text_w(&FONT_S, "DRUMS") / 2, 92, &FONT_S, "DRUMS", mix565(C_MUTED, cell, 120));
+        cv_text(x + 30 - text_w(&FONT_S, dn) / 2, 110, &FONT_S, dn, st->drums == RS_D_NONE ? C_MUTED : C_TEXT);
+        if (st->regswap) icon(x + 23, 142, RS_NACTIONS, C_TEXT);   /* the registers swapped */
+        else cv_rect(x + 28, 148, 4, 2, mix565(C_MUTED, cell, 120));
+    }
+    cv_text(4, 176, &FONT_S, "K1 BOARD K2 DRUMS K3 SWAP", mix565(C_MUTED, C_BG, 160));
+    cv_text(4, 194, &FONT_S, "ROLL ON WRAP:", mix565(C_MUTED, C_BG, 160));
+    cv_text(124, 194, &FONT_S, "A", g->seq2_rnd[0] ? C_BOT_A : mix565(C_BOT_A, C_BG, 70));
+    cv_text(144, 194, &FONT_S, "B", g->seq2_rnd[1] ? C_BOT_B : mix565(C_BOT_B, C_BG, 70));
+    key_labels(KEYS, 5, 12);
     cv_blit(0, 0);
 }

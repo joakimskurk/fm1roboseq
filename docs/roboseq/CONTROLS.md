@@ -70,3 +70,14 @@ The white keys rest here (no register on the screen); the black keys steer as ev
 | white key 14 | ROOT: the root transposes the sequence, on / off |
 | white keys 15 / 16 | reset / random (random can be undone) |
 
+## ARP (Seq 2)
+
+| Control | Does |
+|---|---|
+| white keys 1-4 | pick a step (framed) |
+| KNOB1 / KNOB2 | the picked step's board / drum pattern ("--": unchanged) |
+| KNOB3 | the registers swapped on that step (clockwise on) |
+| white key 12 | Seq 2 on / off (queued while playing: it starts on Voice Mod's next wrap) |
+| white keys 13 / 14 | roll Scout-7's / Echo-3's register as Seq 2 wraps |
+| white keys 15 / 16 | reset / random |
+

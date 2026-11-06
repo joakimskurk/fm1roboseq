@@ -573,6 +573,39 @@ void rs_reset_bassmod(struct rs_state *s)               /* resetBassMod(): build
     for (int i = 0; i < RS_BASSMOD_MAX; i++) s->bassmod[i] = i < 4 ? BM[i] : (struct rs_bassmod_step){RS_SC_MAJOR, 0, 0};
 }
 
+void rs_seq2_toggle(struct rs_state *s)                 /* seq2-toggle-active: on (queued while playing), off */
+{
+    rs_push_undo(s);
+    if (!s->seq2_active && !s->seq2_pending) {
+        if (s->playing) s->seq2_pending = 1;            /* starts on Seq 1's next wrap */
+        else s->seq2_active = 1;
+    } else
+        s->seq2_active = 0, s->seq2_pending = 0;
+}
+
+void rs_seq2_cycle(struct rs_state *s, int i, int field, int dir)   /* seq2-board / -drum prev, next; -regswap */
+{
+    struct rs_seq2_step *st = &s->seq2[i & 3];
+    rs_push_undo(s);
+    dir = dir < 0 ? -1 : 1;
+    if (field == 0) {                                   /* "--", the presets, "user" */
+        int at = st->board == RS_B_NONE ? 0 : st->board == RS_B_USER ? RS_NBOARDS + 1 : st->board + 1;
+        at = (at + dir + RS_NBOARDS + 2) % (RS_NBOARDS + 2);
+        st->board = (uint8_t)(at == 0 ? RS_B_NONE : at == RS_NBOARDS + 1 ? RS_B_USER : at - 1);
+    } else if (field == 1) {                            /* "--", the drum presets */
+        int at = st->drums == RS_D_NONE ? 0 : st->drums + 1;
+        at = (at + dir + RS_NDRUMS + 1) % (RS_NDRUMS + 1);
+        st->drums = (uint8_t)(at == 0 ? RS_D_NONE : at - 1);
+    } else
+        st->regswap = !st->regswap;
+}
+
+void rs_reset_seq2(struct rs_state *s)                  /* resetSeq2(): its steps "--", back to its first; (pending goes) */
+{
+    s->seq2_index = 0, s->seq2_pending = 0;
+    for (int i = 0; i < RS_SEQ2_STEPS; i++) s->seq2[i] = (struct rs_seq2_step){RS_B_NONE, RS_D_NONE, 0};
+}
+
 void rs_randomize_bassmod(struct rs_state *s)           /* randomizeBassMod() */
 {
     rs_push_undo(s);
