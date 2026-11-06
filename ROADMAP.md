@@ -16,7 +16,8 @@ FM-1 RoboSeq is an instrument to play while it runs, not only a programmer to fi
   but the screen always shows what a key will do, and the result is heard at once (or on the next step, shown).
 - **P4. A rule is a test.** Once decided, P1-P3 hold page by page in host tests, so a new page cannot break them.
 
-Open, for phase 3: the playing model. Ideas to try on the host before deciding: the white keys as a live joystick
+Decided 2026-11-06 (D15): the robots are the instrument; playing is manipulating them and their registers (the
+movement sequencers that decide the music, as in the HTML); a melody layer of its own may come later. Ideas to try on the host before deciding: the white keys as a live joystick
 for one bot (overriding its next step, the program resumes after); "drive mode" where a bot is steered by hand and
 its moves are recorded into its register; tiles placed and turned on the 5 x 5 board while it plays; hazards as
 performance (trigger a zap or a pulse pad by hand); a "chase" of the two bots as a game with a score that changes the

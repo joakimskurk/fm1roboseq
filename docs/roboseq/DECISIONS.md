@@ -125,3 +125,11 @@ scale as the browser does. `tools/tone-ref/compressor.py` is the kernel in float
 test signal; the C is held to it within 0.15 dB over every 5 ms (the choice between attack and release flips on a
 hair at a few points, in Chromium against its own model too).
 
+## D15. The playing model: the robots are the instrument (2026-11-06)
+
+The product owner, 2026-11-06, on how RoboSeq is played on the FM-1: maybe a simple melody with a sequencer over
+it, or something like it, later; perhaps it is enough to manipulate the robots; and the robots' movement sequencers
+(their registers) decide the music, as in the HTML. So phase 3 starts there: playing is reaching into the robots
+and their registers while they run, the music following from where they go, as the HTML's does. A melody layer
+of the FM-1's own is not ruled out but waits; it is taken up step by step, once the robots play well.
+
