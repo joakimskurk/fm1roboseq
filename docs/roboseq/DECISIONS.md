@@ -198,3 +198,13 @@ The product owner: with 2 or 4 ticks per move it gets very fast; 1/2 works bette
 only a playbackRate of 1 or 0.25. GLO's KNOB4 now steps 1/1, 1/2, 1/4 (the model's `quarter`: 0, 2, 1; 1 stays the
 HTML's quarter, so the traces are unchanged), and every step's length follows it as it follows the HTML's quarter.
 
+## D23. The lead, sharper and further back, with its echo (2026-11-06)
+
+The product owner, on D21's lead: more open, a little lower in the mix, more delay, a real sharp SID lead with some
+folding and PWM. So: the pulse and the saw together (the SID's combined waves, more or less), the pulse's width
+sweeping 10-90 % at 1.6 Hz, folded back where it is driven past its edge (drive 1.35, more on each attack); the
+filter open (1.8 kHz plus the note's pitch, up to 4.5 kHz more on the attack, little resonance); a stereo
+ping-pong delay on the lead alone, three steps long (a dotted eighth of the playing tempo, halved until it fits
+0.74 s), feedback 0.45 through a darker one-pole, 0.4 of it heard, gliding to a new tempo as tape does; its level
+0.6, about 17 dB under full scale alone, 2 dB under D21's.
+

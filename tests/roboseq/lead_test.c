@@ -13,12 +13,28 @@ static int32_t buf[44100];
 
 static void run(uint32_t n) { for (uint32_t i = 0; i < n; i++) buf[i] = 0; rs_lead_render(&l, buf, n); }
 
-static double freq(uint32_t n)                  /* rising zero crossings of the filtered pulse over n samples */
-{
-    int c = 0, first = -1, last = -1;
-    for (uint32_t i = 1; i < n; i++)
-        if (buf[i - 1] < 0 && buf[i] >= 0) { if (first < 0) first = (int)i; last = (int)i, c++; }
-    return c > 1 ? 44100.0 * (c - 1) / (last - first) : 0;
+static double freq(uint32_t n)                  /* the pitch over n samples, by autocorrelation (the folded wave */
+{                                               /* crosses zero more than once a cycle) */
+    int best = 0;
+    double bv = -1e300, prev = 0, cur = 0;
+    for (int lag = 20; lag < 900 && lag < (int)n / 2; lag++) {
+        double acc = 0;
+        for (uint32_t i = 0; i + (uint32_t)lag < n; i++) acc += (double)buf[i] * buf[i + lag];
+        acc /= (double)(n - (uint32_t)lag);
+        if (lag > 21 && cur > prev && cur >= acc && cur > bv * 0.9 && (best == 0 || cur > bv)) bv = cur, best = lag - 1;
+        prev = cur, cur = acc;
+        if (best && lag > best * 1.5) break;    /* the first strong peak is the period */
+    }
+    if (!best) return 0;
+    double y0 = 0, y1 = 0, y2 = 0;              /* a parabola through the peak: the lag between samples */
+    for (int d = -1; d <= 1; d++) {
+        double acc = 0;
+        for (uint32_t i = 0; i + (uint32_t)(best + d) < n; i++) acc += (double)buf[i] * buf[i + best + d];
+        acc /= (double)(n - (uint32_t)(best + d));
+        if (d < 0) y0 = acc; else if (d == 0) y1 = acc; else y2 = acc;
+    }
+    double den = y0 - 2 * y1 + y2, off = den != 0 ? 0.5 * (y0 - y2) / den : 0;
+    return 44100.0 / (best + off);
 }
 
 static double spread(uint32_t n, uint32_t win)  /* how much the pitch moves: max - min over windows */
@@ -44,10 +60,10 @@ int main(void)
     double f = freq(8820);
     CHECK(fabs(f - 440) < 3, "A4 at 440 Hz (%.1f)", f);
     run(8820);
-    CHECK(spread(8820, 2205) < 3, "no vibrato in the first 250 ms");
+    CHECK(spread(8820, 2205) < 5, "no vibrato in the first 250 ms (the PWM moves the estimate +-1.5 Hz)");
     run(26460);                                 /* 0.6 s more: the vibrato is in */
     double sp = spread(26460, 2205);
-    CHECK(sp > 6 && sp < 40, "a vibrato once held (it moves %.1f Hz)", sp);
+    CHECK(sp > 8 && sp < 40, "a vibrato once held (it moves %.1f Hz)", sp);
     rs_lead_play(&l, 76, 1, 1);                 /* E5, legato: it glides */
     run(441);
     f = freq(441);

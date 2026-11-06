@@ -21,6 +21,9 @@ struct rs_mix {
     struct rs_voice v[RS_NVOICES];
     struct rs_lead lead;                        /* the player's solo voice (D21), on a bus of its own */
     int32_t lead_bus[RS_MIX_SUB];
+    volatile int32_t dly_target;                /* the lead's delay, samples: three steps (the main loop sets it) */
+    int32_t dly_len, dly_lp;
+    uint32_t dly_w, dly_hold;
     volatile int32_t level[RS_NLEVEL];          /* Q15: DEFAULT_MIXER; the mix page sets them (one writer) */
     int32_t now_level[RS_NLEVEL];               /* where each is on its way there (applyMixer's 50 ms rampTo) */
     int32_t bus[RS_NBUS][RS_MIX_SUB];

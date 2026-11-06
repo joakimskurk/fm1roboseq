@@ -1,8 +1,10 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* RoboSeq's lead: a solo voice to play over the robots on the FM-1's keys (REC: D21). Not the HTML's: a classic
- * SID lead of our own. A pulse wave whose width sweeps slowly (PWM), a vibrato that comes in once a note is held,
- * a glide between notes played legato, the last key held winning (monophonic, as the SID's voices), and a resonant
- * two-pole low-pass that opens with each note and closes again (the SID's filter, a state-variable one here).
+/* RoboSeq's lead: a solo voice to play over the robots on the FM-1's keys (REC: D21, D23). Not the HTML's: a sharp
+ * SID lead of our own. The pulse and the saw together (the SID's combined waves, more or less), the pulse's width
+ * sweeping wide (PWM), folded back where it is driven past its edge (more on the attack), a vibrato that comes in
+ * once a note is held, a glide between notes played legato, the last key held winning (monophonic, as the SID's
+ * voices), and an open two-pole low-pass that opens further with each note (the SID's filter, a state-variable one
+ * here). rs_mix.c adds its ping-pong delay.
  * Runs in the audio interrupt (rs_mix.c renders it); integers only. The main loop asks for notes through `req`
  * (one 32-bit word, one writer). */
 #include "rs_lead.h"
@@ -69,7 +71,7 @@ static int32_t tri_q15(uint32_t ph)             /* a triangle, -32768 .. 32767 o
 #define VIB_RAMP (44100u * 300u / 1000u)
 #define VIB_DEPTH 64                            /* +-1/4 semitone (Q8), 5.5 Hz */
 #define VIB_RATE 535637u                        /* 5.5 / 44100 x 2^32 */
-#define PWM_RATE 68181u                         /* 0.7 Hz: the pulse's width sweeps 20 % .. 80 % */
+#define PWM_RATE 155843u                        /* 1.6 Hz: the pulse's width sweeps 10 % .. 90 % */
 enum { L_IDLE, L_ATTACK, L_DECAY, L_SUSTAIN, L_RELEASE };
 
 void rs_lead_render(struct rs_lead *l, int32_t *out, uint32_t n)
@@ -102,20 +104,28 @@ void rs_lead_render(struct rs_lead *l, int32_t *out, uint32_t n)
         }
         l->vib_ph += VIB_RATE * m, l->pwm_ph += PWM_RATE * m, l->age += m;
         uint32_t inc = lead_inc_of(l->pitch + vib), binv = 0xFFFFFFFFu / ((inc >> 15) ? inc >> 15 : 1u);
-        uint32_t pw = 0x80000000u + (uint32_t)(tri_q15(l->pwm_ph) * 39321);   /* 50 % +- 30 % */
-        /* the filter: 600 Hz plus the note's own pitch and the envelope's up to +3 kHz; f = 2 pi fc / fs, Q15 */
-        int32_t fc = 600 + ((int32_t)(inc >> 16) * 3) / 2 + ((l->fenv * 3000) >> 15);
+        uint32_t pw = 0x80000000u + (uint32_t)(tri_q15(l->pwm_ph) * 52428);   /* 50 % +- 40 % */
+        /* the filter, open: 1.8 kHz plus the note's own pitch and the envelope's up to +4.5 kHz; f = 2 pi fc / fs */
+        int32_t fc = 1800 + ((int32_t)(inc >> 16) * 3) / 2 + ((l->fenv * 4500) >> 15);
         int32_t fq = fc * 4669 / 1000;
-        if (fq > 24000) fq = 24000;
+        if (fq > 26000) fq = 26000;
+        int32_t drive = 22118 + (l->fenv >> 1);     /* the fold's drive, Q14: 1.35, more on the attack */
         l->fenv -= (l->fenv >> 6) + 1;          /* (it closes over ~150 ms) */
         if (l->fenv < 0) l->fenv = 0;
         for (i = 0; i < m; i++) {
             uint32_t ph = l->phase;
-            int32_t s = ph < pw ? 16384 : -16384;   /* the pulse, its two edges smoothed (half scale: the filter's */
-            s += lead_blep(ph, inc, binv) >> 1;     /* resonance needs the room) */
-            s -= lead_blep(ph - pw, inc, binv) >> 1;
+            /* the SID's combined wave, more or less: the pulse and the saw together (each its edges smoothed) */
+            int32_t pul = ph < pw ? 16384 : -16384, b0 = lead_blep(ph, inc, binv);
+            pul += (b0 - lead_blep(ph - pw, inc, binv)) >> 1;
+            int32_t saw = (int32_t)(ph >> 17) - 16384 - (b0 >> 1);
+            int32_t s = ((pul + saw) * 5) >> 3;
+            s = (s * drive) >> 14;                  /* folded back where it runs past the edge: a sharper tone */
+            if (s > 16384) s = 32768 - s;
+            else if (s < -16384) s = -32768 - s;
+            if (s > 16384) s = 16384;
+            else if (s < -16384) s = -16384;
             l->phase = ph + inc;
-            int32_t hp = s - l->lp - ((l->bp * 22938) >> 15);   /* damping 0.7: a resonant edge */
+            int32_t hp = s - l->lp - ((l->bp * 29491) >> 15);   /* damping 0.9: an open filter, a little edge */
             l->bp += (fq * hp) >> 15;
             l->lp += (fq * l->bp) >> 15;
             switch (l->stage) {                 /* the envelope */

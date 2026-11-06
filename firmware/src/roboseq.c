@@ -42,6 +42,7 @@
 #define STORE_MAGIC 0x51455352u                 /* "RSEQ": RoboSeq's settings and blobs, never another fork's */
 static void app_idle(void);
 #define LCD_IDLE app_idle                       /* while the screen's DMA runs: the game keeps ahead (platform.c) */
+#define RS_POOL __attribute__((section(".pool")))   /* the lead's delay (rs_mix.c): big, in the pool */
 #include "platform.c"
 #include "rs_model.c"                         /* the game */
 #include "rs_chance.c"
@@ -437,6 +438,11 @@ static void app_main(void)
             if (bank * 16u >= len) bank = 0;
         }
         schedule();
+        {                                       /* the lead's delay: three steps (a dotted eighth), halved till it fits */
+            uint32_t d = rs_step_q8(&game) * 3u >> 8;
+            while (d >= DLY_MAX) d >>= 1;
+            mix.dly_target = (int32_t)d;
+        }
         fm1_led_key(BTN_PLAY, game.playing);
         fm1_led_key(BTN_HOME, page == PAGE_HOME);
         fm1_led_key(BTN_SEQ, page == PAGE_SEQ);

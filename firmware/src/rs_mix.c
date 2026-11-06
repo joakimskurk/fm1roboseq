@@ -24,8 +24,16 @@ const uint8_t rs_voice_bus[RS_NVOICES] = {      /* where buildAudio() connects e
     [RS_V_KICK] = RS_BUS_DRUMS, [RS_V_SNARE] = RS_BUS_DRUMS, [RS_V_HIHAT] = RS_BUS_DRUMS,
 };
 /* DEFAULT_MIXER: master .9, melody .9, bot B .8, percussion .55, FX .6, drums .7 (Q15); then the lead's */
-static const int32_t DEFAULT_LEVEL[RS_NLEVEL] = {29491, 29491, 26214, 18022, 19661, 22938, 14746};   /* (lead .45: ours) */
+static const int32_t DEFAULT_LEVEL[RS_NLEVEL] = {29491, 29491, 26214, 18022, 19661, 22938, 19661};   /* (lead .6: ours, ~17 dB under full scale alone) */
 #define SEND 14746                              /* the reverb send, 0.45 */
+#ifndef RS_POOL
+#define RS_POOL                                 /* (the firmware puts the delay in the pool: roboseq.c) */
+#endif
+#define DLY_MAX 32768                           /* the lead's delay: up to 0.74 s a side */
+static int16_t lead_dly[2][DLY_MAX] RS_POOL;    /* left, right: a ping-pong */
+#define DLY_FB 14746                            /* the feedback, 0.45 */
+#define DLY_WET 13107                           /* how much of it is heard, 0.4 */
+#define DLY_DAMP 9830                           /* the repeats darker: a one-pole at ~2.5 kHz, Q15 */
 #define M_ONE (1 << 30)
 #define M_NONE (-65536)                           /* max_att: none yet (Chromium's -1 dB) */
 
@@ -76,6 +84,22 @@ void rs_mix_init(struct rs_mix *m, uint32_t seed)
     m->gain = M_ONE;
     m->max_att = M_NONE;
     rs_lead_init(&m->lead);
+    m->dly_len = m->dly_target = 24806;         /* three 16ths at 80 BPM */
+    for (uint32_t i = 0; i < DLY_MAX; i++) lead_dly[0][i] = lead_dly[1][i] = 0;
+}
+
+static void lead_delay(struct rs_mix *m, int32_t in, int32_t *l, int32_t *r)   /* the lead's echo, a stereo ping-pong */
+{
+    uint32_t rd = (m->dly_w - (uint32_t)m->dly_len) & (DLY_MAX - 1);
+    int32_t yl = lead_dly[0][rd], yr = lead_dly[1][rd];
+    m->dly_lp += mulq15(yr - m->dly_lp, DLY_DAMP);  /* what comes back round, darker */
+    int32_t w = in + mulq15(m->dly_lp, DLY_FB);
+    lead_dly[0][m->dly_w] = (int16_t)(w > 32767 ? 32767 : w < -32768 ? -32768 : w);
+    lead_dly[1][m->dly_w] = (int16_t)yl;            /* the left's repeat goes on to the right */
+    m->dly_w = (m->dly_w + 1) & (DLY_MAX - 1);
+    if ((m->dly_w & 7u) == 0 && m->dly_len != m->dly_target)   /* a new tempo: it glides there, as tape */
+        m->dly_len += m->dly_target > m->dly_len ? 1 : -1;
+    *l = mulq15(yl, DLY_WET), *r = mulq15(yr, DLY_WET);
 }
 
 void rs_mix_note(struct rs_mix *m, uint8_t voice, uint32_t at, uint32_t dur, int midi, uint16_t vel)
@@ -218,9 +242,12 @@ void rs_mix_render(struct rs_mix *m, int32_t *out, uint32_t n, uint32_t now)
             int32_t y = (int32_t)(acc >> 30);                           /* Q23 */
             m->lp_x2 = m->lp_x1, m->lp_x1 = bx, m->lp_y2 = m->lp_y1, m->lp_y1 = y;
             int32_t ld = mulq15(m->lead_bus[i], lv[RS_L_LEAD]);   /* the lead: to the reverb as the melody, and out */
+            int32_t el = 0, er = 0;
+            if (ld) m->dly_hold = 8u * RS_SR;  /* the echoes ring out for 8 s after the lead's last sound, then rest */
+            if (m->dly_hold) m->dly_hold--, lead_delay(m, ld, &el, &er);
             int32_t rev_r, rev = (reverb(m, mulq15(mel + perc + fx + ld, SEND), &rev_r) + 256) >> 9;
             int32_t dry = mel + ((y + 128) >> 8) + perc + fx + dr + ld;
-            limiter(m, mulq15(dry + rev, lv[RS_L_MASTER]), mulq15(dry + ((rev_r + 256) >> 9), lv[RS_L_MASTER]),
+            limiter(m, mulq15(dry + el + rev, lv[RS_L_MASTER]), mulq15(dry + er + ((rev_r + 256) >> 9), lv[RS_L_MASTER]),
                     out + 2u * (f0 + i));
         }
     }
