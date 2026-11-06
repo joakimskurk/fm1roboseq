@@ -91,3 +91,37 @@ frequency before it (the first note's: Tone's default 440 Hz); on a quantum's ed
 Tone or the HTML, and Firefox differs. The C voices start at phase 0; tools/tone-ref puts its voice stimuli's
 starts on quantum edges, so the golden renders show the voices without the artefact (compare.py snaps the same way).
 Whole songs (2c) keep the HTML's own times and with them the artefact, which their tolerances take in.
+
+## D12. The game runs 64 ms ahead of the speaker, a step's notes go to the voices at once (2026-11-06)
+
+The HTML schedules with Tone's transport at a look-ahead of 0.25 s (armAudio), which keeps a browser's main thread
+from making the music stumble; it also means what a player does is heard up to a quarter second late. The FM-1's
+main loop stalls far less (the screen's DMA runs `app_idle`, which keeps scheduling), and steering the bots live is
+the point (P2), so the main loop runs rs_tick 64 ms ahead of what the speaker plays, and a stall of a quarter
+second (a flash erase) resumes from now instead of rushing. A step's notes are in the HTML's call order, not in
+time (an arp's late note before an event's 10 ms one), so the audio interrupt gives a step to the voices whole, just
+before it starts, as Tone has every note of a tick from its callback on. Stop is the HTML's: the queued notes go and
+every voice is released at once (panicAudioOutputs).
+
+## D13. The hall reverb: Tone's decay and energy, not its 53,361-tap convolution (2026-11-06)
+
+Tone.Reverb({decay 1.2, preDelay .01}) is a ConvolverNode with white noise under exp(-t / 0.1488 s) (Tone's
+exponentialApproachValueAtTime), normalized by Chromium to 0.00125893^2 x 53361 of energy a channel: measured
+(`make probe`) to the third digit. A convolution of 1.21 s is far beyond the chip, and the impulse is random anyway
+(another seed is another reverb), so the port keeps what is heard: a 10 ms pre-delay, four all-passes to make it
+dense from the start, an 8-line feedback delay network whose lines lose exp(-length / tau) a pass (the same decay
+at every frequency, as white noise has), scaled to the same energy. Its impulse response is held to Tone's in
+`make parity`: energy within 0.25 dB, decay within 3 %, the first 25 ms within 1 dB. The HTML's reverb is stereo
+(two noises); the FM-1 plays mono, the left channel.
+
+## D14. The limiter is Chromium's compressor, makeup gain and soft knee included (2026-11-06)
+
+Tone.Limiter(-6) is a DynamicsCompressorNode at threshold -6 dB, ratio 20, attack 3 ms, release 10 ms and Tone's
+default knee of 30 dB. With that knee it hardly limits: Chromium compresses gently from -6 dB and adds its makeup
+gain (+0.18 dB here), so the HTML's song peaks at +3.9 dBFS, which the browser's output then clips. Not "better":
+the port runs Chromium's DynamicsCompressorKernel step for step (look-ahead 6 ms, the gain every 32 frames, the
+adaptive release, the detector from 0 at the start), its curve and rates as tables, and the platform clips at full
+scale as the browser does. `tools/tone-ref/compressor.py` is the kernel in float, within 0.05 dB of Chromium on a
+test signal; the C is held to it within 0.15 dB over every 5 ms (the choice between attack and release flips on a
+hair at a few points, in Chromium against its own model too).
+

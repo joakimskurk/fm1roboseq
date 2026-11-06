@@ -3,7 +3,9 @@
 #                host mode needs ELF sections); seconds, no FM-1
 #   make traces  re-make tests/golden/traces from reference/roboseq.html (node)
 #   make reference  re-render tests/golden/html with Tone.Offline (node, a Chromium)
-#   make parity  the C voices against those renders
+#   make parity  the C voices, mix and song against those renders
+#   make song    the default song played on the host, PLAY at 0.5 s: build/host/song.wav
+#   make probe   the HTML's mix pieces (limiter, reverb, low-pass) measured in Chromium: build/probe (node)
 #   make fw      the FM-1 package build/roboseq.fwsc (JieLi toolchain in ~/.jieli, SDK in ~/fw-AC79_AIoT_SDK)
 #   make check   everything CI runs: the package, then Dinghy's platform tests on it
 #   make emu     the package on fm1-emu, headless and FM1_STRICT: build/emu/panel.png (EMU=path/to/fm1-live)
@@ -21,8 +23,8 @@ IMG = image
 endif
 
 EMU ?= ../fm1-emu/target/release/fm1-live
-EMU_MS ?= 3000
-EMU_KEYS ?= 1500:21,2600:21^,2800:25
+EMU_MS ?= 6000
+EMU_KEYS ?= 1000:PLAY
 
 .PHONY: test host traces reference parity fw check emu image clean
 test: $(IMG)
@@ -33,15 +35,20 @@ traces:
 	node tools/trace/gen.mjs
 reference:       ## re-render tests/golden/html from the HTML's own buildAudio() (node, a Chromium: Brave here)
 	cd tools/tone-ref && npm ci --no-fund --no-audit && node render.mjs
-parity:          ## the C voices against those renders, voice by voice (numpy)
+parity:          ## the C voices, mix and song against those renders (numpy)
 	sh tests/run_roboseq.sh >/dev/null
 	python3 tools/tone-ref/compare.py --check
+song: $(IMG)
+	$(RUN) sh -c 'cc -O2 -Wall -Wno-unused-function -DDINGHY_HOST -DAPP_VER="\"dev\"" -Ifirmware/hal -Ifirmware/src -Ifirmware/gen -o build/host/roboseq firmware/src/roboseq.c && build/host/roboseq build/host/song tests/roboseq/song.txt'
+probe:
+	cd tools/tone-ref && npm ci --no-fund --no-audit
+	node tools/tone-ref/probe_mix.mjs && python3 tools/tone-ref/compressor.py
 fw:
 	PYTHON=$(PY) sh build.sh
 	shasum -a 256 build/roboseq.fwsc
 check: fw $(IMG)
 	$(RUN_SDK) sh tests/run_tests.sh
-emu:             # (a key held from 1.5 s, another from 2.8 s; the panel at the end)
+emu:             # (PLAY at 1 s: the default song; the panel at the end; the model and the ISR's load checked)
 	mkdir -p build/emu/work
 	cd build/emu && FM1_STRICT=1 FM1_DUMPRAM=ram.bin FM1_BENCH_KEYS='$(EMU_KEYS)' $(abspath $(EMU)) --fwsc ../roboseq.fwsc --shot $(EMU_MS) | tee emu.log
 	sh tests/run_roboseq.sh >/dev/null

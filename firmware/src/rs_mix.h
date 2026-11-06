@@ -1,0 +1,44 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+/* RoboSeq's mix: the HTML's buildAudio() after the voices, for the audio interrupt. The sixteen voices (rs_voice)
+ * on their five buses at DEFAULT_MIXER's levels; bot B's bus through its 1400 Hz low-pass; the melody, percussion
+ * and FX buses sent at 0.45 into the hall reverb, whose return goes to the master (DECISIONS.md D9); the master
+ * through the limiter (Tone.Limiter(-6): Chromium's compressor). Integers only; the tables come from
+ * tools/tone-ref/mix_tables.py. */
+#ifndef RS_MIX_H
+#define RS_MIX_H
+#include <stdint.h>
+#include "rs_voice.h"
+#include "rs_mix_tables.h"
+
+enum rs_bus { RS_BUS_MELODY, RS_BUS_BOTB, RS_BUS_PERC, RS_BUS_FX, RS_BUS_DRUMS, RS_NBUS };
+enum rs_level { RS_L_MASTER, RS_L_MELODY, RS_L_BOTB, RS_L_PERC, RS_L_FX, RS_L_DRUMS, RS_NLEVEL };
+
+#define RS_MIX_SUB 32           /* frames the voices render at a time (the limiter's division) */
+#define RS_LIM_BUF 512          /* the limiter's look-ahead (LIM_PRE frames), a power of two */
+
+struct rs_mix {
+    struct rs_voice v[RS_NVOICES];
+    volatile int32_t level[RS_NLEVEL];          /* Q15: DEFAULT_MIXER; the mix page sets them (one writer) */
+    int32_t bus[RS_NBUS][RS_MIX_SUB];
+    int32_t lp_x1, lp_x2, lp_y1, lp_y2;         /* bot B's low-pass: x Q15, y Q23 */
+    /* the reverb: Q24 */
+    int32_t pre[REV_PRE];
+    int32_t ap[REV_APS_TOTAL];
+    int16_t line[REV_LINES_TOTAL];              /* Q16 */
+    uint16_t pre_i, ap_i[4], line_i[8];
+    /* the limiter: Q30 */
+    int32_t la[RS_LIM_BUF];                     /* Q15 */
+    uint16_t la_i;
+    int32_t det, gain, scaled, rate, max_att;   /* max_att: 1/65536 dB, -1 none */
+    uint8_t releasing;
+    uint32_t clips;                             /* a reverb line was full (tests count them) */
+};
+
+void rs_mix_init(struct rs_mix *m, uint32_t seed);
+/* triggerAttackRelease on voice `voice` (RS_V_*): rs_voice_note's arguments */
+void rs_mix_note(struct rs_mix *m, uint8_t voice, uint32_t at, uint32_t dur, int midi, uint16_t vel);
+/* n frames (a multiple of RS_MIX_SUB) from sample `now` on, mono, Q15 in int32 (the limiter's output can pass
+ * full scale as the HTML's does: the platform clips) */
+void rs_mix_render(struct rs_mix *m, int32_t *out, uint32_t n, uint32_t now);
+extern const uint8_t rs_voice_bus[RS_NVOICES];
+#endif

@@ -1,0 +1,6 @@
+# The default song on the host (make song): PLAY at 0.5 s, the screen while it plays, STOP at 9 s (FM-1: PLAY is 12)
+500 btn 12
+2000 shot
+9000 btn 12
+9500 shot
+10000 end

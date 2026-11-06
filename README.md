@@ -10,8 +10,8 @@ that, the Felucca / SLOOP platform.
 On the FM-1 it is meant to be played, not only programmed: steering the bots live is part of the instrument
 (ROADMAP.md, the playability rules).
 
-> **Status: phase 0.** The repo, the identity and the build are in place; the firmware is still Dinghy's sine demo
-> under RoboSeq's name. Nothing is tested on an FM-1. Every flash can brick a unit: hold OCT- while switching on to
+> **Status: phase 2.** The game, the score and the sound are the HTML's, checked against it: PLAY plays the default
+> song. The controls, the board on the screen and the pages are phase 3. Nothing is tested on an FM-1. Every flash can brick a unit: hold OCT- while switching on to
 > reach the updater.
 
 ## Build

@@ -129,9 +129,10 @@ static void cancel_after(struct rs_voice *v, uint32_t t, int kinds)   /* bit k: 
     v->nq = n;
 }
 
+uint32_t rs_voice_dropped;                                     /* events a full timeline lost (the tests want 0) */
 static void insert(struct rs_voice *v, uint32_t at, uint8_t kind, int midi, uint16_t vel)
 {
-    if (v->nq >= RS_VQ) return;
+    if (v->nq >= RS_VQ) { rs_voice_dropped++; return; }
     uint8_t i = v->nq;
     while (i > 0 && before(at, v->q[i - 1].at)) { v->q[i] = v->q[i - 1]; i--; }   /* (same time: after the earlier) */
     v->q[i].at = at, v->q[i].kind = kind, v->q[i].midi = (int8_t)midi, v->q[i].vel = vel;
@@ -154,6 +155,13 @@ void rs_voice_note(struct rs_voice *v, uint32_t at, uint32_t dur, int midi, uint
     cancel_after(v, rt, ENVK);
     insert(v, rt, EV_RELEASE, 0, 0);
     insert(v, rt + d->r, EV_STOP, 0, 0);
+}
+
+void rs_voice_release(struct rs_voice *v, uint32_t at)  /* triggerRelease(at): the panic's */
+{
+    cancel_after(v, at, ENVK | SRCK);
+    insert(v, at, EV_RELEASE, 0, 0);
+    insert(v, at + VDEF[v->def].r, EV_STOP, 0, 0);
 }
 
 /* ---- the envelope */
@@ -240,10 +248,60 @@ static void env_step(struct rs_voice *v)
     }
 }
 
+/* env_step k times, each sample's level into e: a stage at a time, the same arithmetic as env_step */
+static void env_fill(struct rs_voice *v, int32_t *e, uint32_t k)
+{
+    const struct rs_vdef *d = &VDEF[v->def];
+    uint32_t j = 0, c, u;
+    while (j < k) {
+        int32_t env = v->env;
+        switch (v->stage) {
+        case ST_ATTACK_LIN:
+        case ST_ATTACK_EXP_END:
+        case ST_DECAY_END:
+        case ST_REL_END: {                                      /* linear: env += step, the last one lands on target */
+            int32_t st = v->step;
+            c = v->left < k - j ? v->left : k - j;
+            for (u = 0; u < c; u++) env += st, e[j++] = env;
+            v->env = env, v->left -= c;
+            if (v->left == 0) {
+                if (v->stage == ST_DECAY_END) v->env = v->target, v->stage = ST_SUSTAIN;
+                else if (v->stage == ST_REL_END) v->env = 0, v->stage = ST_IDLE;
+                else v->env = v->target, v->stage = ST_ATTACK_END;
+                e[j - 1] = v->env;
+            }
+            break;
+        }
+        case ST_ATTACK_EXP:
+        case ST_DECAY_EXP:
+        case ST_REL_EXP: {                                      /* toward target, x step (Q30) a sample */
+            int32_t tg = v->target, st = v->step;
+            c = v->left == 0 ? 1 : v->left < k - j ? v->left : k - j;   /* (an attack of no length: one step) */
+            for (u = 0; u < c; u++) env += (int32_t)(((int64_t)(tg - env) * st) >> 30), e[j++] = env;
+            v->env = env;
+            if (v->left) v->left -= c;
+            if (v->left == 0) {
+                if (v->stage == ST_ATTACK_EXP) lin(v, ST_ATTACK_EXP_END, tg, d->a - d->a * 9 / 10);
+                else if (v->stage == ST_DECAY_EXP) lin(v, ST_DECAY_END, tg, d->d - d->d * 9 / 10);
+                else lin(v, ST_REL_END, 0, d->r - d->r * 9 / 10);
+            }
+            break;
+        }
+        case ST_ATTACK_END:                                     /* a sample to turn to the decay */
+            env_step(v);
+            e[j++] = v->env;
+            break;
+        default:                                                /* sustain, idle: level */
+            while (j < k) e[j++] = env;
+            break;
+        }
+    }
+}
+
 /* ---- the sources */
 #define SQUARE_GAIN 27787                                       /* 0.848 x 32768: Web Audio's square, normalised */
 
-static int32_t blep(uint32_t t, uint32_t dt, uint32_t inv)      /* the PolyBLEP correction, Q15, both sides of t = 0 */
+static inline int32_t blep(uint32_t t, uint32_t dt, uint32_t inv)      /* the PolyBLEP correction, Q15, both sides of t = 0 */
 {                                                               /* inv: 2^47 / dt, so x = t / dt in Q15 */
     if (t < dt) {
         int32_t x = (int32_t)((uint64_t)(t >> 15) * inv >> 17);
@@ -302,21 +360,64 @@ static int32_t source(struct rs_voice *v)                       /* one sample, Q
     return s;
 }
 
+/* the source times the envelope into out, k samples without an event: a loop for each kind of source */
+static inline int32_t vlevel(int32_t s, int32_t env) { return (int32_t)(((int64_t)(s * 4) * env) >> 32); }   /* s env / 2^30 */
+static void voice_play(struct rs_voice *v, int32_t *out, const int32_t *e, uint32_t k)
+{
+    const struct rs_vdef *d = &VDEF[v->def];
+    uint32_t j, ph = v->phase, inc = v->inc;
+    switch (d->osc) {
+    case RS_OSC_SQUARE: {
+        uint32_t inv = v->binv;
+        for (j = 0; j < k; j++, ph += inc) {
+            int32_t s = ph < 0x80000000u ? 32767 : -32767;
+            s += blep(ph, inc, inv);                            /* the rising edge at 0 */
+            s -= blep(ph ^ 0x80000000u, inc, inv);              /* the falling edge at 1/2 */
+            out[j] += vlevel((s * SQUARE_GAIN) >> 15, e[j]);
+        }
+        break;
+    }
+    case RS_OSC_TRIANGLE:
+        for (j = 0; j < k; j++, ph += inc) {                    /* 0 rising to 1 at 1/4, -1 at 3/4 */
+            int32_t x = (int32_t)(ph >> 15);
+            out[j] += vlevel(x < 32768 ? x : x < 98304 ? 65536 - x : x - 131072, e[j]);
+        }
+        break;
+    case RS_OSC_MEMBRANE:
+        for (j = 0; j < k; j++) {
+            out[j] += vlevel(sine_q15(ph), e[j]);
+            ph += inc;
+            if (v->glide_left) {
+                inc = (uint32_t)(((uint64_t)inc * v->glide_k) >> 30);
+                if (--v->glide_left == 0) inc = v->inc_end;
+            }
+        }
+        v->inc = inc;
+        break;
+    default:
+        for (j = 0; j < k; j++) out[j] += vlevel(source(v), e[j]);   /* the noises */
+        return;
+    }
+    v->phase = ph;
+}
+
 void rs_voice_render(struct rs_voice *v, int32_t *out, uint32_t n, uint32_t now)
 {
-    for (uint32_t i = 0; i < n; i++, now++) {
-        while (v->nq && !before(now, v->q[0].at)) {             /* the events due now (and any missed) */
-            struct rs_vev e = v->q[0];
-            for (uint8_t k = 1; k < v->nq; k++) v->q[k - 1] = v->q[k];
+    int32_t e[32];
+    uint32_t i = 0;
+    if (!v->running && v->stage == ST_IDLE && (!v->nq || !before(v->q[0].at, now + n)))
+        return;                                                 /* silent, and nothing due in this block */
+    while (i < n) {
+        uint32_t t = now + i, k = n - i < 32u ? n - i : 32u;
+        while (v->nq && !before(t, v->q[0].at)) {               /* the events due now (and any missed) */
+            struct rs_vev ev = v->q[0];
+            for (uint8_t q = 1; q < v->nq; q++) v->q[q - 1] = v->q[q];
             v->nq--;
-            apply(v, &e);
+            apply(v, &ev);
         }
-        if (!v->running) {                                      /* the source stopped; Tone's envelope goes on */
-            if (v->stage != ST_IDLE) env_step(v);
-            continue;
-        }
-        int32_t s = source(v);
-        env_step(v);
-        out[i] += (int32_t)(((int64_t)s * v->env) >> 30);
+        if (v->nq && v->q[0].at - t < k) k = v->q[0].at - t;   /* up to the next event */
+        if (v->running) env_fill(v, e, k), voice_play(v, out + i, e, k);
+        else if (v->stage != ST_IDLE) env_fill(v, e, k);        /* the source stopped; Tone's envelope goes on */
+        i += k;
     }
 }

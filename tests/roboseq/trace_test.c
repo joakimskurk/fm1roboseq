@@ -2,12 +2,15 @@
 /* The C model (firmware/src/rs_model.c) against reference/roboseq.html, tick by tick: every scenario in
  * tests/golden/traces (made by tools/trace/gen.mjs from the HTML's own script) is set up the same way, run, and each
  * tick's line is compared with the HTML's. Then rs_chance against the HTML's seededChance for 1024 loops.
- *   trace_test [tests/golden]     exit 0: all equal */
+ * With --voices, every tick's notes also go into the voices (rs_voice.c) at the tick's start, as the firmware gives
+ * them, and the voices play the tick: no voice's timeline may run full.
+ *   trace_test [tests/golden] [--voices]     exit 0: all equal */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "rs_model.h"
+#include "rs_voice.h"
 
 static int find(const char *const *names, int n, const char *w)
 {
@@ -57,8 +60,26 @@ static int check_note(const char *path, long tick, const char *line, const struc
     return 0;
 }
 
+static int with_voices, voice_peak;
+static struct rs_voice voices[RS_NVOICES];
+static void play_tick(const struct rs_state *s, const struct rs_tick_out *o, uint64_t *t_q8)
+{
+    static int32_t out[256];
+    for (int k = 0; k < o->nnotes; k++) {
+        const struct rs_note *e = &o->notes[k];
+        rs_voice_note(&voices[e->voice], (uint32_t)((*t_q8 + e->at + 128) >> 8), (e->dur + 128) >> 8, e->midi, e->vel);
+    }
+    for (int k = 0; k < RS_NVOICES; k++)
+        if (voices[k].nq > voice_peak) voice_peak = voices[k].nq;
+    uint32_t a = (uint32_t)(*t_q8 >> 8), b = (uint32_t)((*t_q8 += rs_step_q8(s)) >> 8);
+    for (uint32_t t = a; t < b; t += 256)
+        for (int k = 0; k < RS_NVOICES; k++) rs_voice_render(&voices[k], out, b - t < 256 ? b - t : 256, t);
+}
+
 static int run_trace(const char *path)
 {
+    uint64_t t_q8 = 0;
+    for (int k = 0; k < RS_NVOICES; k++) rs_voice_init(&voices[k], (uint8_t)k, 1u + (uint32_t)k);
     FILE *f = fopen(path, "r");
     if (!f) { printf("%s: cannot open\n", path); return 1; }
     static struct rs_state s;
@@ -112,6 +133,7 @@ static int run_trace(const char *path)
             continue;
         }
         rs_tick(&s, &o);
+        if (with_voices) play_tick(&s, &o, &t_q8);
         have = 1, ni = 0;
         line_of(&s, &o, got, sizeof got);
         snprintf(want, sizeof want, "%s", line);
@@ -155,7 +177,10 @@ static int chance_test(const char *path)
 
 int main(int argc, char **argv)
 {
-    const char *dir = argc > 1 ? argv[1] : "tests/golden";
+    const char *dir = "tests/golden";
+    for (int i = 1; i < argc; i++)
+        if (!strcmp(argv[i], "--voices")) with_voices = 1;
+        else dir = argv[i];
     char path[512], name[128];
     snprintf(path, sizeof path, "%s/traces/INDEX", dir);
     FILE *idx = fopen(path, "r");
@@ -170,6 +195,11 @@ int main(int argc, char **argv)
     }
     fclose(idx);
     printf("traces: %d scenarios, %d differ from the HTML (%ld notes checked)\n", n, failed, notes_checked);
+    if (with_voices) {
+        printf("voices: every note played, the fullest timeline %d of %d, %u events lost\n", voice_peak, RS_VQ,
+               (unsigned)rs_voice_dropped);
+        failed += rs_voice_dropped != 0;
+    }
     snprintf(path, sizeof path, "%s/chance.txt", dir);
     failed += chance_test(path);
     printf("selfcheck: %08x (the firmware computes the same at boot: make emu)\n", (unsigned)rs_selfcheck());

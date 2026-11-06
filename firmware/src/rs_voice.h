@@ -36,6 +36,10 @@ struct rs_voice {
 void rs_voice_init(struct rs_voice *v, uint8_t def, uint32_t seed);
 /* triggerAttackRelease(midi, duration, time, velocity): start and length in samples (absolute), velocity Q15 */
 void rs_voice_note(struct rs_voice *v, uint32_t at, uint32_t dur, int midi, uint16_t vel);
+/* triggerRelease(at): what stopPlayback()'s panic does to each voice (and a future attack goes, as Tone's
+ * cancelAndHold takes it off the envelope) */
+void rs_voice_release(struct rs_voice *v, uint32_t at);
+extern uint32_t rs_voice_dropped;                              /* events a full timeline lost */
 /* adds n samples from sample `now` on into out (Q15 in int32), the voice's own level (Tone's output, 1 = 32768) */
 void rs_voice_render(struct rs_voice *v, int32_t *out, uint32_t n, uint32_t now);
 #endif

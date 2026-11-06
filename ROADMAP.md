@@ -92,9 +92,20 @@ and the limiter.)
 
 ### 2c. The mix and the load
 
-- [ ] The buses and their levels (DEFAULT_MIXER), bot B's 1400 Hz low-pass, the reverb as the renders show it, the
-      limiter at -6 dB; voice allocation as Tone's monophonic Synths (a new note cuts the last)
-- [ ] In the audio interrupt; the load measured in fm1-emu under FM1_STRICT, the worst block under half the budget
+- [x] The buses at DEFAULT_MIXER's levels, bot B's 1400 Hz low-pass (Chromium's biquad, to 4e-9), the reverb's
+      send and its return to the master (D9), the limiter (`rs_mix.c`, its tables from `tools/tone-ref/mix_tables.py`);
+      each voice monophonic as Tone's Synths (2026-11-06)
+- [x] Each piece measured in Chromium on its own (`make probe`): the limiter is Chromium's compressor step for step
+      (`compressor.py`, within 0.05 dB of Chromium; the C within 0.1 dB of it, D14), the reverb an 8-line network
+      with Tone's decay and energy (D13); `make parity`: the bus chain and 8 s of the default song within what the
+      HTML is to itself with another seed (the song's level within 0.02 dB, timbre 0.27 dB); deliberate faults (no
+      reverb, no low-pass, no makeup gain, a wrong level, a wrong send) fail it
+- [x] In the audio interrupt: the game 64 ms ahead in the main loop, a step's notes at once through a ring (D12);
+      PLAY starts and stops it (the HTML's panic release); every note of all 36 scenarios played into the voices
+      without a full timeline (14 of 24 at most)
+- [x] The load in fm1-emu under FM1_STRICT: the worst block 1305 us of 5805 on the default song, 1828 us with all
+      sixteen voices at once over it (`make emu` fails at half the budget); the voices render a run between events,
+      the reverb unrolled (from 2423 us)
 
 ## Phase 3: playing it (controls and screen)
 

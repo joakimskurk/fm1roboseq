@@ -11,7 +11,8 @@ import { openBrowser, openPage, render, SR } from "./page.mjs";
 import { HTML } from "../trace/html.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const out = join(here, "..", "..", "tests", "golden", "html");
+const out = process.env.RS_OUT || join(here, "..", "..", "tests", "golden", "html");   // RS_OUT, RS_SEED: another take
+const seed = Number(process.env.RS_SEED || 12345);
 const spec = JSON.parse(readFileSync(join(here, "stimuli.json"), "utf8"));
 const only = process.argv.slice(2);
 const D9 = (src) => src.replace("hallReverb.connect(fxGain);", "hallReverb.connect(masterGain);");
@@ -96,7 +97,7 @@ try {
     let version = "";
     for (const st of [...spec.voices, ...spec.chains]) {
         if (only.length && !only.includes(st.name)) continue;
-        const page = await openPage(browser, 12345, D9);
+        const page = await openPage(browser, seed, D9);
         version = await page.evaluate(() => Tone.version);
         const isVoice = !!st.voice;
         const [L, R] = await render(page, isVoice ? voiceBody(st) : chainBody(st), st.seconds);
@@ -108,7 +109,7 @@ try {
         made.push(st.name);
         await page.close();
     }
-    if (!only.length)
+    if (!only.length && !process.env.RS_OUT)
         writeFileSync(join(out, "VERSION"), `Tone ${version}, reference/roboseq.html ${html}, D9 (the reverb to the master)\n`);
 } finally {
     await browser.close();
