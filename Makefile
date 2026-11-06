@@ -26,8 +26,8 @@ IMG = image
 endif
 
 EMU ?= ../fm1-emu/target/release/fm1-live
-EMU_MS ?= 6000
-EMU_KEYS ?= 1000:PLAY
+EMU_MS ?= 8000
+EMU_KEYS ?= 5000:PLAY
 
 .PHONY: test host traces reference parity fw check emu image clean
 test: $(IMG)
@@ -60,7 +60,7 @@ fw:
 	shasum -a 256 build/roboseq.fwsc
 check: fw $(IMG)
 	$(RUN_SDK) sh tests/run_tests.sh
-emu:             # (PLAY at 1 s: the default song; the panel at the end; the model and the ISR's load checked)
+emu:             # (PLAY at 5 s, after the boot and the splash: the default song; the panel at the end; the model and the ISR's load checked)
 	mkdir -p build/emu/work
 	cd build/emu && FM1_STRICT=1 FM1_DUMPRAM=ram.bin FM1_BENCH_KEYS='$(EMU_KEYS)' $(abspath $(EMU)) --fwsc ../roboseq.fwsc --shot $(EMU_MS) | tee emu.log
 	sh tests/run_roboseq.sh >/dev/null

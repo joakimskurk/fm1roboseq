@@ -1,5 +1,7 @@
 # A solo with the lead over the default song (make lead): PLAY, REC, a phrase with legato glides and a held
 # note for the vibrato, OCT+ for the last bar (FM-1: PLAY 12, REC 13, OCT+ 1; key k = bit k = MIDI 53 + k)
+# (a button at 0.1 s skips the splash)
+100 btn 8
 500 btn 12
 1500 btn 13
 1600 keys 0x800

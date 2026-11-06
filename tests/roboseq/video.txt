@@ -1,3 +1,5 @@
 # The default song as the HTML plays it: PLAY, then nothing but the robots
+# (a button at 0.1 s skips the splash)
+100 btn 8
 500 btn 12
 20500 end
