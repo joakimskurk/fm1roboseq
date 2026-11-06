@@ -670,45 +670,57 @@ void rs_randomize_bassmod(struct rs_state *s)           /* randomizeBassMod() */
     }
 }
 
-/* PLUS's Voice Mod roll (D33): a progression in one key, not four random keys. Each step is a chord of the key
- * as its mode (the board's x then starts on the chord's root, so 0 / 2 / 4 are its chord tones), all inside the
- * key: I major, ii dorian, iii phrygian, IV lydian, V mixolydian, vi minor; or, a third of the time, each as its
- * pentatonic (the gentlest). Or, a fifth of the time, the default song's kind: one quality moving by thirds and
- * fourths. SCL turns all of these in PLUS. */
-static const uint8_t KEY_PC[7] = {0, 2, 4, 5, 7, 9, 11};
-static const uint8_t MODE_OF[6] = {RS_SC_MAJOR, RS_SC_DORIAN, RS_SC_PHRYGIAN, RS_SC_LYDIAN, RS_SC_MIXOLYDIAN, RS_SC_MINOR};
-static const uint8_t PENTA_OF[6] = {RS_SC_PENTATONIC, RS_SC_MINPENTA, RS_SC_MINPENTA, RS_SC_PENTATONIC, RS_SC_PENTATONIC,
-                                    RS_SC_MINPENTA};
-static const uint8_t PROG[15][4] = {                    /* degrees of the key, 0 = I */
-    {0, 4, 5, 3}, {5, 3, 0, 4}, {0, 5, 3, 4}, {0, 3, 5, 4}, {1, 4, 0, 5},   /* I V vi IV, vi IV I V, I vi IV V, ... */
-    {3, 4, 2, 5}, {0, 2, 3, 4}, {5, 1, 2, 5}, {5, 4, 3, 4}, {5, 3, 4, 5},   /* IV V iii vi, ..., i iv v i, i VII VI VII */
-    {0, 3, 0, 4}, {1, 4, 1, 4}, {4, 3, 4, 3}, {3, 4, 3, 4}, {5, 2, 3, 0}};  /* ..., the dorian, mixolydian, lydian vamps */
+/* PLUS's Voice Mod roll (D33a): a progression, not four random steps. In the HTML every note is quantized to the
+ * step's scale on C, and the root only shifts the board's degrees before that (rs_score.c: the chord a step sounds
+ * is the scale's triad on its note nearest the root). So a key is one scale for every step, and a chord is a root
+ * on one of its notes: I V vi IV of major is roots C G A F. The roll draws a scale (major most, then minor, dorian,
+ * mixolydian and the two pentatonics) and one of its progressions; or, a fifth of the time, the default song's kind:
+ * one scale, the roots moving by thirds and fourths (Eb C F A major sounds Dm C F Am). */
+struct prog_set { uint8_t sc, n; const uint8_t (*p)[4]; };
+static const uint8_t P_MAJ[11][4] = {{0, 4, 5, 3}, {5, 3, 0, 4}, {0, 5, 3, 4}, {0, 3, 5, 4}, {1, 4, 0, 5}, {3, 4, 2, 5},
+                                     {0, 2, 3, 4}, {0, 3, 0, 4}, {5, 2, 3, 0}, {0, 4, 3, 4}, {3, 0, 4, 5}};
+static const uint8_t P_MIN[7][4] = {{0, 5, 2, 6}, {0, 3, 4, 0}, {0, 6, 5, 6}, {0, 5, 6, 0}, {0, 3, 6, 2}, {0, 2, 6, 5},
+                                    {0, 5, 3, 4}};
+static const uint8_t P_DOR[4][4] = {{0, 3, 0, 3}, {0, 1, 3, 0}, {0, 6, 3, 0}, {0, 3, 6, 0}};
+static const uint8_t P_MIX[4][4] = {{0, 6, 3, 0}, {0, 6, 0, 6}, {0, 4, 6, 3}, {0, 3, 6, 0}};
+static const uint8_t P_PEN[5][4] = {{0, 3, 4, 3}, {0, 4, 3, 0}, {4, 3, 0, 3}, {0, 1, 3, 4}, {0, 3, 1, 4}};
+static const struct prog_set PROGS[6] = {{RS_SC_MAJOR, 11, P_MAJ}, {RS_SC_MINOR, 7, P_MIN}, {RS_SC_DORIAN, 4, P_DOR},
+                                         {RS_SC_MIXOLYDIAN, 4, P_MIX}, {RS_SC_PENTATONIC, 5, P_PEN}, {RS_SC_MINPENTA, 5, P_PEN}};
+static const uint8_t PROG_W[20] = {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5};   /* the scales' odds */
 static const int8_t MEDIANT[6] = {3, -3, 4, -4, 5, 7};   /* the default song's moves (Eb C F A: -3 +5 +4) */
+
+static uint8_t scale_degree_pc(uint8_t sc, uint32_t d)  /* the scale's d-th note on C, a pitch class */
+{
+    uint16_t m = SCALE_MASK[sc];
+    for (uint8_t k = 0; k < 12; k++)
+        if (m >> k & 1) { if (!d) return k; d--; }
+    return 0;
+}
 
 void rs_compose_bassmod(struct rs_state *s)
 {
-    uint32_t key, family, penta, p, q, i;
+    uint32_t family, set, p, q, i;
     rs_push_undo(s);
-    key = rs_random(s, 12);
-    family = rs_random(s, 5);                           /* 0: the mediants; else a progression of the key */
-    penta = rs_random(s, 3);                            /* 0: pentatonic all through (the gentlest) */
-    p = rs_random(s, 15);
-    q = rs_random(s, 15);                               /* (an 8-step Voice Mod: a second progression after it) */
+    family = rs_random(s, 5);                           /* 0: the default song's kind; else a progression */
+    set = PROG_W[rs_random(s, 20)];
+    p = rs_random(s, PROGS[set].n);
+    q = rs_random(s, PROGS[set].n);                     /* (an 8-step Voice Mod: a second progression after it) */
     if (family == 0) {
-        uint32_t quality = rs_random(s, 3);             /* major, minor, or the two in turn */
-        int root = (int)key;
+        uint8_t sc = set == 1 || set == 2 || set == 5 ? RS_SC_MINOR : RS_SC_MAJOR;
+        int root = (int)rs_random(s, 12);
         for (i = 0; i < s->bassmod_len; i++) {
             uint32_t m = rs_random(s, 6);
-            uint8_t sc = quality == 0 ? RS_SC_MAJOR : quality == 1 ? RS_SC_MINOR : (i & 1u) ? RS_SC_MINOR : RS_SC_MAJOR;
-            s->bassmod[i] = (struct rs_bassmod_step){penta == 0 ? (sc == RS_SC_MAJOR ? RS_SC_PENTATONIC : RS_SC_MINPENTA) : sc,
-                                                     (uint8_t)root, 0};
+            s->bassmod[i] = (struct rs_bassmod_step){sc, (uint8_t)root, 0};
             root = ((root + MEDIANT[m]) % 12 + 12) % 12;
         }
-    } else
+    } else {
+        const struct prog_set *ps = &PROGS[set];
+        uint32_t len = ps->sc == RS_SC_PENTATONIC || ps->sc == RS_SC_MINPENTA ? 5u : 7u;
         for (i = 0; i < s->bassmod_len; i++) {
-            uint8_t d = PROG[i < 4u ? p : q][i % 4u];
-            s->bassmod[i] = (struct rs_bassmod_step){penta == 0 ? PENTA_OF[d] : MODE_OF[d], (uint8_t)((key + KEY_PC[d]) % 12u), 0};
+            uint8_t d = ps->p[i < 4u ? p : q][i % 4u];
+            s->bassmod[i] = (struct rs_bassmod_step){ps->sc, scale_degree_pc(ps->sc, d % len), 0};
         }
+    }
     s->transpose_root = 1;                              /* (the roots are the progression: they must move the notes) */
 }
 

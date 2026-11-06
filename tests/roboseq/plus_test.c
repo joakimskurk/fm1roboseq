@@ -8,18 +8,10 @@
 static int fails;
 #define CHECK(c, ...) do { if (!(c)) { fails++; printf("FAIL %s:%d: ", __FILE__, __LINE__); printf(__VA_ARGS__); printf("\n"); } } while (0)
 
-static uint16_t pcs(const struct rs_bassmod_step *b)    /* the pitch classes a step plays: its scale on its root */
-{
-    uint16_t m = SCALE_MASK[b->scale], r = 0;
-    for (int k = 0; k < 12; k++)
-        if (m >> k & 1) r |= (uint16_t)(1u << ((k + b->root) % 12));
-    return r;
-}
-
-static void test_compose(void)                          /* the Voice Mod roll: a progression in a key */
+static void test_compose(void)                          /* the Voice Mod roll: one scale, a progression of its chords */
 {
     static struct rs_state s;
-    int keyed = 0, mediant = 0, distinct = 0;
+    int on_notes = 0, distinct = 0;
     static uint8_t seen[1u << 16];
     for (int r = 0; r < 4000; r++) {
         rs_default(&s);
@@ -27,30 +19,22 @@ static void test_compose(void)                          /* the Voice Mod roll: a
         s.bassmod_len = (r & 1) ? 8 : 4;
         rs_compose_bassmod(&s);
         CHECK(s.transpose_root == 1, "roll %d: the roots move the notes", r);
-        int in_key = 0;
-        for (int k = 0; k < 12 && !in_key; k++) {       /* every step inside one major key? */
-            uint16_t key = 0;
-            for (int d = 0; d < 7; d++) key |= (uint16_t)(1u << ((k + KEY_PC[d]) % 12));
-            int all = 1;
-            for (int i = 0; i < s.bassmod_len; i++) all &= (pcs(&s.bassmod[i]) & ~key) == 0;
-            in_key = all;
-        }
-        int same_kind = 1;                              /* else the mediants: one quality (or two in turn), no other */
+        int all_on = 1;
         for (int i = 0; i < s.bassmod_len; i++) {
             uint8_t sc = s.bassmod[i].scale;
-            same_kind &= sc == RS_SC_MAJOR || sc == RS_SC_MINOR || sc == RS_SC_PENTATONIC || sc == RS_SC_MINPENTA;
-            CHECK(sc != RS_SC_CHROMATIC && sc != RS_SC_DIMINISHED && sc != RS_SC_WHOLETONE && sc != RS_SC_AUGMENTED,
-                  "roll %d step %d: a scale of the key, not %d", r, i, sc);
+            CHECK(sc == s.bassmod[0].scale, "roll %d step %d: one scale all through (a key), not %d and %d", r, i, sc, s.bassmod[0].scale);
+            CHECK(sc == RS_SC_MAJOR || sc == RS_SC_MINOR || sc == RS_SC_DORIAN || sc == RS_SC_MIXOLYDIAN || sc == RS_SC_PENTATONIC ||
+                  sc == RS_SC_MINPENTA, "roll %d step %d: a scale to play in, not %d", r, i, sc);
             CHECK(s.bassmod[i].root < 12 && s.bassmod[i].semitone == 0, "roll %d step %d: root, no semitone", r, i);
+            all_on &= SCALE_MASK[sc] >> s.bassmod[i].root & 1;
         }
-        keyed += in_key, mediant += !in_key;
-        CHECK(in_key || same_kind, "roll %d: in a key, or the mediants' one quality", r);
-        uint32_t h = 0;
-        for (int i = 0; i < 4; i++) h = h * 31u + (uint32_t)((s.bassmod[i].root - s.bassmod[0].root + 12) % 12) * 16u + s.bassmod[i].scale;
+        on_notes += all_on;
+        uint32_t h = s.bassmod[0].scale;
+        for (int i = 0; i < 4; i++) h = h * 31u + s.bassmod[i].root;
         if (!seen[h & 0xFFFFu]) seen[h & 0xFFFFu] = 1, distinct++;
     }
-    CHECK(keyed > 2600 && mediant > 500, "the families: %d in a key, %d mediants", keyed, mediant);
-    CHECK(distinct > 60, "many progressions, not a few (%d)", distinct);
+    CHECK(on_notes > 3000, "four in five: every root a note of the scale (%d of 4000)", on_notes);
+    CHECK(distinct > 40, "many progressions, not a few (%d)", distinct);
     {                                                   /* undoable, as the HTML's roll */
         rs_default(&s);
         s.music = RS_MUSIC_PLUS;
@@ -60,7 +44,7 @@ static void test_compose(void)                          /* the Voice Mod roll: a
         rs_pop_undo(&s);
         CHECK(!memcmp(&before, &s.bassmod[0], sizeof before), "undo brings the Voice Mod back");
     }
-    {                                                   /* PLUS's SCL turns every mode the roll uses */
+    {                                                   /* PLUS's SCL turns every mode */
         rs_default(&s);
         s.music = RS_MUSIC_PLUS, s.bassmod[0].scale = RS_SC_LYDIAN;
         rs_cycle_bassmod(&s, 0, 0, +1);
@@ -68,6 +52,68 @@ static void test_compose(void)                          /* the Voice Mod roll: a
         s.music = RS_MUSIC_CLASSIC, s.bassmod[0].scale = RS_SC_MAJOR;
         rs_cycle_bassmod(&s, 0, 0, +1);
         CHECK(s.bassmod[0].scale == RS_SC_MINOR, "CLASSIC: the HTML's order, major -> minor");
+    }
+}
+
+static int out_of_scale(const struct rs_state *s, const struct rs_tick_out *o, int *pitched)   /* the tick's wrong notes */
+{
+    uint8_t sc = s->bassmod[s->vm_index % s->bassmod_len].scale;
+    int bad = 0;
+    for (int i = 0; i < o->nnotes; i++) {
+        const struct rs_note *n = &o->notes[i];
+        if (n->voice > RS_V_B_SUB && n->voice != RS_V_COIN) continue;
+        if (n->midi == RS_NOISE || !n->vel) continue;
+        (*pitched)++;
+        bad += !(SCALE_MASK[sc] >> (((n->midi % 12) + 12) % 12) & 1);
+    }
+    return bad;
+}
+
+static int rubs(const struct rs_tick_out *o, int *pairs)   /* a semitone, major 7th or tritone struck together */
+{
+    int r = 0;
+    for (int i = 0; i < o->nnotes; i++)
+        for (int j = i + 1; j < o->nnotes; j++) {
+            const struct rs_note *a = &o->notes[i], *b = &o->notes[j];
+            if (a->voice > RS_V_B_SUB || b->voice > RS_V_B_SUB || a->at != b->at || !a->vel || !b->vel) continue;
+            if (a->voice == RS_V_A_PING || b->voice == RS_V_A_PING) continue;
+            int ic = ((a->midi - b->midi) % 12 + 12) % 12;
+            (*pairs)++, r += ic == 1 || ic == 11 || ic == 6;
+        }
+    return r;
+}
+
+static void test_in_scale(void)                         /* no note outside the scale (CLASSIC's own too), no rubs in PLUS */
+{
+    static struct rs_state s;
+    static struct rs_tick_out o;
+    for (int mode = 0; mode < 2; mode++) {
+        int bad = 0, pitched = 0, rub = 0, pairs = 0;
+        for (int setup = 0; setup < 24; setup++) {
+            rs_default(&s);
+            if (setup % 3 == 1) rs_load_board(&s, RS_B_MAZE);
+            if (setup % 3 == 2) rs_load_board(&s, (uint8_t)(setup % RS_NBOARDS));
+            if (setup >= 2) s.music = RS_MUSIC_PLUS, s.rng = 1234u + (uint32_t)setup * 77u, s.bassmod_len = setup & 4 ? 8 : 4,
+                            rs_compose_bassmod(&s);
+            s.tpm = setup % 5 == 3 ? 2 : setup % 7 == 4 ? 4 : 1;
+            if (setup % 6 == 5) rs_set_loop_len(&s, 12);
+            s.music = (uint8_t)mode;
+            rs_start(&s);
+            for (int t = 0; t < 900; t++) {
+                rs_tick(&s, &o);
+                bad += out_of_scale(&s, &o, &pitched);
+                rub += rubs(&o, &pairs);
+                for (int i = 0; i < o.nnotes && mode; i++)   /* B's answer: never a tritone over Scout-7's note */
+                    if (o.notes[i].voice == RS_V_A_PING && o.notes[i].at == rs_step_q8(&s) / 2u)
+                        for (int j = 0; j < o.nnotes; j++)
+                            if (o.notes[j].voice == RS_V_A_MAIN && o.notes[j].at == 0)
+                                CHECK(((o.notes[i].midi - o.notes[j].midi) % 12 + 12) % 12 != 6, "the answer: no tritone");
+            }
+        }
+        if (mode) CHECK(rub == 0, "PLUS: %d of %d notes struck together rub (a semitone, a 7th, a tritone)", rub, pairs);
+        else printf("plus_test: CLASSIC's own rubs, for comparison: %d of %d\n", rub, pairs);
+        CHECK(bad == 0, "%s: %d of %d pitched notes outside their step's scale", mode ? "PLUS" : "CLASSIC", bad, pitched);
+        CHECK(pitched > 20000, "%s: enough notes checked (%d)", mode ? "PLUS" : "CLASSIC", pitched);
     }
 }
 
@@ -91,16 +137,16 @@ static void test_harmony(void)                          /* the bots on the chord
                   "tick %d: PLUS plays the same game", t);
             if ((!o.move_tick && !o.loop_reset) || s.step < 0) continue;
             const struct rs_bassmod_step *ms = &s.bassmod[s.vm_index % s.bassmod_len];
-            int root = ms->root % 12, p = s.step % 16;
+            int root = chord_root(&s, ms, ms->scale), p = s.step % 16;
             for (int i = 0; i < o.nnotes; i++) {
                 const struct rs_note *n = &o.notes[i];
                 if (p % 4 == 0 && n->at == 0 && (n->voice == RS_V_A_MAIN || n->voice == RS_V_B_FM)) {
                     int pc = ((n->midi - root) % 12 + 12) % 12;
-                    CHECK(chord_tone(pc, ms->scale), "tick %d: voice %d on a beat: %d over the root is no chord tone", t, n->voice, pc);
+                    CHECK(chord_tone(n->midi, root, ms->scale), "tick %d: voice %d on a beat: %d over the root is no chord tone", t, n->voice, pc);
                     ones++;
                 }
                 if (p == 0 && n->voice == RS_V_B_SUB) {
-                    CHECK((n->midi - root) % 12 == 0 && n->midi >= 31 && n->midi <= 52, "tick %d: the bass on the one is the root, low (%d)", t, n->midi);
+                    CHECK(((n->midi - root) % 12 + 12) % 12 == 0 && n->midi >= 31 && n->midi <= 52, "tick %d: the bass on the one is the root, low (%d)", t, n->midi);
                     roots++;
                 }
             }
@@ -177,6 +223,7 @@ static void test_drums(void)                            /* the fills, the crashe
 int main(void)
 {
     test_compose();
+    test_in_scale();
     test_harmony();
     test_drums();
     printf("plus_test: %s\n", fails ? "FAILED" : "all pass");

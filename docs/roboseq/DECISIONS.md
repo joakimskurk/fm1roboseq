@@ -332,24 +332,28 @@ only changes how what they play is voiced, accented and accompanied. Each part o
 here what it does. The selfcheck fingerprint is CLASSIC's.
 
 **D33a. Voice Mod's roll (SCL's 16) in PLUS: a progression in a key.** The HTML's roll draws each step's scale and
-root alone, so four steps are four unrelated keys. PLUS's draws a key and then, four times in five, one of fifteen
-progressions of it (I V vi IV, vi IV I V, I vi IV V, I IV vi V, ii V I vi, IV V iii vi, I iii IV V, i iv v i, i VII VI
-VII, i VI VII i, I IV I V, vi iii IV I, and the dorian, mixolydian and lydian vamps), each chord its mode on its
-root (I major, ii dorian, iii phrygian, IV lydian, V mixolydian, vi minor; a third of the time their pentatonics):
-the board's x then starts on the chord's root, its 0, 2 and 4 the chord's tones, and every note stays in the key. An
-8-step Voice Mod gets a second progression of the key after it. The fifth time it is the default song's own kind
-(Eb C F A: one quality moving by thirds and fourths). ROOT is switched on (the roots are the progression). SCL in
-PLUS turns all the modes the roll uses (lydian and phrygian, minor pentatonic too). tests/roboseq/plus_test.c.
+root alone. In the HTML every note is quantized to the step's scale on C (scaleQuantize works on pitch classes from
+C), and the root only shifts the board's degrees before that; so a key is one scale for all the steps, and a chord is
+a root on one of the scale's notes (the default song's Eb C F A major sounds Dm C F Am: ii I IV vi of C). PLUS's
+roll draws a scale (major most, then minor, dorian, mixolydian and the two pentatonics) and, four times in five, one
+of its progressions (major: I V vi IV, vi IV I V, I vi IV V, I IV vi V, ii V I vi, IV V iii vi, I iii IV V ...;
+minor: i VI III VII, i iv v i, i VII VI VII, i VI VII i ...; the dorian and mixolydian vamps; pentatonic ones), each
+root a note of the scale; the fifth time the default song's kind (one scale, the roots moving by thirds and
+fourths). An 8-step Voice Mod gets a second progression after it. ROOT is switched on. SCL in PLUS also turns
+lydian, phrygian and minor pentatonic. (Its first version, 9c994b2, changed the scale with every chord: see D33e.)
 
 **D33b. The harmony, the bass and the pulse in PLUS.** After the HTML's score of a tick, PLUS voices it on the
-chord Voice Mod is on (rs_score_plus; the game itself is untouched, plus_test holds it tick for tick): on the beats
-(every 4th step of a 16-step bar, 3rd of a 12) Scout-7's and Echo-3's notes land on the chord's nearest 1, 3 or 5
-(down first); in between they move as the board has them. Echo-3's sub becomes a bass under them, G1 to E3: the
-root on the one (the loop's reset tick, where the bots stand at their pads and only the drums played: now the new
-chord's root lands with the kick), the fifth on three, a chord tone on the other beats, and on the step before
-Voice Mod changes a step into the next root (a semitone under it or a whole tone over, the nearer); when Echo-3 sits
-out the one or three the bass plays anyway. And the bar breathes: the one 1.18, three 1.14, the other beats 1.08,
-the off-sixteenths 0.82 of their velocity.
+chord the step really sounds (D33a: its scale's triad on the scale's note nearest the root; rs_score_plus; the game
+itself is untouched, plus_test holds it tick for tick): on the beats (every 4th step of a 16-step bar, 3rd of a 12)
+Scout-7's and Echo-3's notes land on the chord's nearest 1, 3 or 5 (down first); in between they move as the board
+has them. Echo-3's sub becomes a bass under them, G1 to E3: the root on the one (the loop's reset tick, where the
+bots stand at their pads and only the drums played: now the new chord's root lands with the kick), the fifth on
+three, a chord tone on the other beats, and on the step before Voice Mod changes a scale step into the next root
+(the nearer one that does not rub the bots' notes, else the root itself); when Echo-3 sits out the one or three
+the bass plays anyway. Nothing struck together rubs: where the HTML's harmony puts Echo-3 a semitone, a major
+seventh or a tritone from Scout-7, Echo-3 moves a scale step (or two) off it, and the bass off both, on the moves
+and on the ghost ticks between them. And the bar breathes: the one 1.18, three 1.14, the other beats 1.08, the
+off-sixteenths 0.82 of their velocity.
 
 **D33c. The drums in PLUS: the player's pattern, played by a drummer.** The pattern stays what the player set (a
 preset, their own, or CLEAR: then PLUS adds nothing, nor with the drums off); PLUS plays it with dynamics and
@@ -368,4 +372,13 @@ breathe with the harmony and open up in the phrase's second half (they glide the
 answered on the and of each beat: its note a fifth up in its scale, half a step later, a third as loud, on its ping
 voice. (A swing was tried in thought and left out: the lead's arp steps with the straight grid, and the robots'
 tight feel is the HTML's.)
+
+**D33e. What went wrong in PLUS's first version (2026-11-07).** The product owner heard many wrong notes and
+dissonance in the first PLUS renders. The cause: D33a and D33b took Voice Mod's root as the chord's pitch, so the
+bass played Eb and Bb under melodies the HTML had quantized to C major, the beats were pulled to those notes, and
+the roll changed the scale (on C) with every chord. 8.3 % of PLUS's pitched notes were outside their step's scale.
+Now every root, chord tone, bass note and lead-in is a note of the step's scale as the HTML quantizes it, and the
+answer in B is a third where a fifth up would be a tritone. plus_test holds both the scale and the rubs, over 24
+setups (boards, rolled progressions of 4 and 8, ticks per move 1, 2 and 4, a 12-step loop): 0 notes outside the
+scale, and 0 of 54,223 notes struck together a semitone, a major seventh or a tritone apart (CLASSIC's own: 686).
 
