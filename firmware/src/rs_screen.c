@@ -746,13 +746,16 @@ static void draw_editor(const struct rs_view *v, const struct rs_state *g, int32
         cv_rect(x - 2, y + CELL, 8, 2, C_WARN), cv_rect(x - 2, y + CELL - 6, 2, 8, C_WARN);
         cv_rect(x + CELL - 6, y + CELL, 8, 2, C_WARN), cv_rect(x + CELL, y + CELL - 6, 2, 8, C_WARN);
     }
-    {                                           /* the header: the board's name (* edited), queued, the fullness */
-        const char *n = NAME[g->board_id < RS_NBOARDS + 2 ? g->board_id : 0];
+    {                                           /* the header: the board's name (* edited), or "> " the one coming (D32) */
+        int coming = g->pending_board != RS_B_NONE;
+        uint8_t id = coming ? g->pending_board : g->board_id;
+        const char *n = NAME[id < RS_NBOARDS + 2 ? id : 0];
         uint32_t k = 0, dens = g->density >= 60 ? 2u : g->density >= 45 ? 1u : 0u;
+        if (coming) name[k++] = '>', name[k++] = ' ';
         while (*n && k < 12u) name[k++] = *n++;
-        if (edited) name[k++] = '*';
+        if (edited && !coming) name[k++] = '*';
         name[k] = 0;
-        cv_text(24, 0, &FONT_S, name, g->pending_board != RS_B_NONE ? C_WARN : C_TEXT);
+        cv_text(24, 0, &FONT_S, name, coming ? C_WARN : C_TEXT);
         cv_text(216 - text_w(&FONT_S, DENS[dens]), 0, &FONT_S, DENS[dens], C_MUTED);
     }
     keys[EK_LEFT] = keys[EK_UP] = keys[EK_DOWN] = keys[EK_RIGHT] = C_TEXT;   /* the cursor */

@@ -318,6 +318,6 @@ at a quarter, every 4th pixel), the one playing framed in mint (with its edits, 
 the loop in yellow and blinking (the HTML's pending), a reroll shown once rolled; the ninth card the keys 9 SAVE, 10
 CLEAR the user board, 11 RESET (the bots to their pads), as phase 3's page had them. The black keys steer there (it
 is not a builder: P1, C3). ENV pressed again is the builder, as SCL pressed again is Seq 2; KNOB1 and KNOB2 do the
-same on both. `rs_preset_board()` gives a preset's tiles to look at, without loading it (edit_test holds that they
+same on both, and the builder's header names the board coming ("> SPINNER", yellow) while it waits. `rs_preset_board()` gives a preset's tiles to look at, without loading it (edit_test holds that they
 are the ones loading gives).
 
