@@ -48,149 +48,180 @@ static uint16_t mix565(uint16_t a, uint16_t b, uint32_t a256)   /* a over b, a25
     return (uint16_t)(r << 11 | g << 5 | bl);
 }
 
-/* ---- shapes the SVGs use */
-static void poly(int32_t ox, int32_t oy, const int8_t *xy, uint32_t n, uint16_t c)   /* filled, nonzero (SVG's rule) */
-{
-    int32_t y, ymin = 127, ymax = -128;
-    uint32_t i;
-    for (i = 0; i < n; i++) {
-        if (xy[2 * i + 1] < ymin) ymin = xy[2 * i + 1];
-        if (xy[2 * i + 1] > ymax) ymax = xy[2 * i + 1];
-    }
-    for (y = ymin; y < ymax; y++) {             /* the pixel row y covers y .. y+1: cut it at its middle */
-        int32_t xs[8], ws[8], k = 0, a, b, wind = 0;
-        for (i = 0; i < n && k < 8; i++) {
-            int32_t x0 = xy[2 * i], y0 = xy[2 * i + 1], x1 = xy[2 * ((i + 1) % n)], y1 = xy[2 * ((i + 1) % n) + 1];
-            int32_t yc2 = 2 * y + 1;                                    /* 2 x (y + 0.5) */
-            if ((2 * y0 <= yc2) == (2 * y1 <= yc2)) continue;
-            xs[k] = (2 * x0 * (y1 - y0) + (x1 - x0) * (yc2 - 2 * y0)) / (2 * (y1 - y0));
-            ws[k++] = y1 > y0 ? 1 : -1;
-        }
-        for (a = 1; a < k; a++)                 /* sort (a few) */
-            for (b = a; b > 0 && xs[b - 1] > xs[b]; b--) {
-                int32_t t = xs[b]; xs[b] = xs[b - 1]; xs[b - 1] = t;
-                t = ws[b]; ws[b] = ws[b - 1]; ws[b - 1] = t;
-            }
-        for (a = 0; a + 1 < k; a++) {           /* inside where the winding is not 0 */
-            wind += ws[a];
-            if (wind) cv_rect(ox + xs[a], oy + y, xs[a + 1] - xs[a], 1, c);
-        }
-    }
-}
-
-static void ring(int32_t cx, int32_t cy, int32_t r, uint16_t c)  /* a circle's outline, 1 px */
-{
-    int32_t x, y;
-    for (y = -r - 1; y <= r + 1; y++)
-        for (x = -r - 1; x <= r + 1; x++) {
-            int32_t d = x * x + y * y;
-            if (d >= (r - 1) * r + 1 && d <= r * (r + 1)) cv_pset(cx + x, cy + y, c);
-        }
-}
-
-static void disc(int32_t cx, int32_t cy, int32_t r, uint16_t c)
-{
-    int32_t x, y;
-    for (y = -r; y <= r; y++)
-        for (x = -r; x <= r; x++)
-            if (x * x + y * y <= r * r + r / 2) cv_pset(cx + x, cy + y, c);
-}
-
-static void thick(int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint16_t c)   /* stroke-width 2 */
-{
-    cv_line(x0, y0, x1, y1, c);
-    if (x0 == x1) cv_line(x0 - 1, y0, x1 - 1, y1, c);
-    else cv_line(x0, y0 - 1, x1, y1 - 1, c);
-}
-
 static void frame(int32_t x, int32_t y, int32_t w, int32_t h, int32_t t, uint16_t c)
 {
     cv_rect(x, y, w, t, c), cv_rect(x, y + h - t, w, t, c), cv_rect(x, y, t, h, c), cv_rect(x + w - t, y, t, h, c);
 }
 
-/* ---- the tiles (tilePixelArt and the cells' CSS) */
+/* ---- the tiles: pixel art of RoboSeq's own on a 20 x 20 grid of 2 px (the robots' and the effects' rhythm), after
+ * the HTML's tilePixelArt: the belt's arrow, the rotator's gear and its turn, the zap's bolt, the pulse's rings, the
+ * crate. A letter is a colour of the tile's palette ('.' its ground, 'a' its colour, 'b' and 'd' that dimmed, 'c'
+ * a light one; the crate its woods). The belt is drawn pointing east and turned; the right rotator is the left
+ * one mirrored. */
+static const char ART_BELT[20][21] = {
+    "bbbbbbbbbbbbbbbbbbbb",
+    "b..................b",
+    "b.bbbbbbbbbbbbbbbb.b",
+    "b..................b",
+    "b.........a........b",
+    "b.........aa.......b",
+    "b.........aaa......b",
+    "b.........aaaa.....b",
+    "b..aaaaaaaaaaaa....b",
+    "b..aaaaaaaaaaaaa...b",
+    "b..aaaaaaaaaaaaa...b",
+    "b..aaaaaaaaaaaa....b",
+    "b.........aaaa.....b",
+    "b.........aaa......b",
+    "b.........aa.......b",
+    "b.........a........b",
+    "b..................b",
+    "b.bbbbbbbbbbbbbbbb.b",
+    "b..................b",
+    "bbbbbbbbbbbbbbbbbbbb"};
+static const char ART_ROTL[20][21] = {
+    "bbbbbbbbbbbbbbbbbbbb",
+    "b.......aaaa.......b",
+    "b.......aaaa.......b",
+    "b..aa...aaaa...aa..b",
+    "b..aa..aaaaaa..aa..b",
+    "b.....aa....aa.....b",
+    "b....aa......aa....b",
+    "b...aa...cc...aa...b",
+    "baaaa...cccc...aaaab",
+    "baaaa..c....c..aaaab",
+    "baaaa..c....c..aaaab",
+    "baaaa.ccc......aaaab",
+    "b...aa.c......aa...b",
+    "b....aa......aa....b",
+    "b.....aa....aa.....b",
+    "b..aa..aaaaaa..aa..b",
+    "b..aa...aaaa...aa..b",
+    "b.......aaaa.......b",
+    "b.......aaaa.......b",
+    "bbbbbbbbbbbbbbbbbbbb"};
+static const char ART_ZAP[20][21] = {
+    "bbbbbbbbbbbbbbbbbbbb",
+    "b..................b",
+    "b..c........aaaaa..b",
+    "b..........aaaaa...b",
+    "b.........aaaaa....b",
+    "b........aaaaa.....b",
+    "b.......aaaaa......b",
+    "b......aaaaaaaaaa..b",
+    "b......aaaaaaaaaa..b",
+    "b..........aaaaa...b",
+    "b.........aaaaa....b",
+    "b........aaaaa.....b",
+    "b.......aaaa.......b",
+    "b......aaa.........b",
+    "b.....aa...........b",
+    "b.....a............b",
+    "b...............c..b",
+    "b..................b",
+    "b..................b",
+    "bbbbbbbbbbbbbbbbbbbb"};
+static const char ART_PULSE[20][21] = {
+    "bbbbbbbbbbbbbbbbbbbb",
+    "b..................b",
+    "b......dddddd......b",
+    "b....dd......dd....b",
+    "b...d..........d...b",
+    "b...d...bbbb...d...b",
+    "b..d...b....b...d..b",
+    "b..d..b......b..d..b",
+    "b..d..b.aaaa.b..d..b",
+    "b..d..b.aaaa.b..d..b",
+    "b..d..b.aaaa.b..d..b",
+    "b..d..b.aaaa.b..d..b",
+    "b..d..b......b..d..b",
+    "b..d...b....b...d..b",
+    "b...d...bbbb...d...b",
+    "b...d..........d...b",
+    "b....dd......dd....b",
+    "b......dddddd......b",
+    "b..................b",
+    "bbbbbbbbbbbbbbbbbbbb"};
+static const char ART_BLOCK[20][21] = {
+    "....................",
+    ".cccccccccccccccccc.",
+    ".cnaaaaaaaaaaaaaanc.",
+    ".caeaaaaaaaaaaaaeac.",
+    ".caaeaaaaaaaaaaeaac.",
+    ".caaaeaaaaaaaaeaaac.",
+    ".caaaaeaaaaaaeaaaac.",
+    ".csssssessssesssssc.",
+    ".cbbbbbbebbebbbbbbc.",
+    ".cbbbbbbbnnbbbbbbbc.",
+    ".cbbbbbbbnnbbbbbbbc.",
+    ".cbbbbbbebbebbbbbbc.",
+    ".csssssessssesssssc.",
+    ".caaaaeaaaaaaeaaaac.",
+    ".caaaeaaaaaaaaeaaac.",
+    ".caaeaaaaaaaaaaeaac.",
+    ".caeaaaaaaaaaaaaeac.",
+    ".cnaaaaaaaaaaaaaanc.",
+    ".cccccccccccccccccc.",
+    "...................."};
+
+static uint16_t tile_colour(uint32_t type, char ch)
+{
+    uint16_t ground, main, light = C_WHITE;
+    switch (type) {
+    case RS_T_BELT: ground = RGB(0x00, 0x1a, 0x2e), main = C_BELT; break;
+    case RS_T_ROTL:
+    case RS_T_ROTR: ground = RGB(0x1a, 0x14, 0x00), main = C_ROT, light = RGB(0xff, 0xf3, 0xb0); break;
+    case RS_T_ZAP: ground = RGB(0x1a, 0x00, 0x12), main = C_ZAP, light = RGB(0xff, 0xb3, 0xc6); break;
+    case RS_T_PULSE: ground = RGB(0x00, 0x1a, 0x00), main = C_PULSE; break;
+    default:                                    /* the crate */
+        switch (ch) {
+        case 'a': return RGB(0x6e, 0x4b, 0x28);
+        case 'b': return RGB(0x5c, 0x3d, 0x1e);
+        case 'e': return RGB(0x8b, 0x69, 0x39);
+        case 'n': return RGB(0xaa, 0xaa, 0xaa);
+        case 'c':
+        case 's': return RGB(0x4a, 0x2e, 0x14);
+        default: return RGB(0x1a, 0x1a, 0x2e);
+        }
+    }
+    switch (ch) {
+    case 'a': return main;
+    case 'b': return mix565(main, ground, 115);
+    case 'd': return mix565(main, ground, 64);
+    case 'c': return light;
+    default: return ground;
+    }
+}
+
 static void draw_tile(int32_t x, int32_t y, const struct rs_tile_t *t)
 {
-    static const int8_t ARROW[4][14] = {        /* the belt's arrow, N E S W */
-        {20, 8, 14, 18, 17, 18, 17, 28, 23, 28, 23, 18, 26, 18},
-        {32, 20, 22, 14, 22, 17, 12, 17, 12, 23, 22, 23, 22, 26},
-        {20, 32, 14, 22, 17, 22, 17, 12, 23, 12, 23, 22, 26, 22},
-        {8, 20, 18, 14, 18, 17, 28, 17, 28, 23, 18, 23, 18, 26}};
-    static const int8_t BOLT1[16] = {14, 10, 16, 14, 12, 18, 16, 20, 10, 30, 18, 24, 14, 26, 20, 12};
-    static const int8_t BOLT2[16] = {24, 12, 26, 16, 22, 20, 26, 22, 20, 32, 28, 26, 24, 28, 30, 14};
-    static const int8_t DIA_L[8] = {20, 14, 16, 20, 20, 26, 24, 20}, DIA_R[8] = {20, 14, 24, 20, 20, 26, 16, 20};
-    int32_t i;
+    const char (*art)[21] = 0;
+    int32_t gx, gy;
     switch (t->type) {
-    case RS_T_BELT: {
-        uint16_t bg = RGB(0x00, 0x1a, 0x2e);
-        cv_rect(x, y, CELL, CELL, bg);
-        frame(x, y, CELL, CELL, 1, C_BELT);
-        if (t->dir == RS_N || t->dir == RS_S) cv_rect(x + 7, y + 2, 2, 36, C_BELT), cv_rect(x + 31, y + 2, 2, 36, C_BELT);
-        else cv_rect(x + 2, y + 7, 36, 2, C_BELT), cv_rect(x + 2, y + 31, 36, 2, C_BELT);
-        poly(x, y, ARROW[t->dir & 3], 7, C_BELT);
-        break;
-    }
+    case RS_T_BELT: art = ART_BELT; break;
     case RS_T_ROTL:
-    case RS_T_ROTR: {
-        cv_rect(x, y, CELL, CELL, RGB(0x1a, 0x14, 0x00));
-        frame(x, y, CELL, CELL, 1, C_ROT);
-        thick(x + 20, y + 1, x + 20, y + 6, C_ROT), thick(x + 20, y + 34, x + 20, y + 39, C_ROT);
-        thick(x + 1, y + 20, x + 6, y + 20, C_ROT), thick(x + 34, y + 20, x + 39, y + 20, C_ROT);
-        thick(x + 34, y + 6, x + 30, y + 10, C_ROT), thick(x + 34, y + 34, x + 30, y + 30, C_ROT);
-        thick(x + 6, y + 34, x + 10, y + 30, C_ROT), thick(x + 6, y + 6, x + 10, y + 10, C_ROT);
-        disc(x + 20, y + 20, 5, C_ROT);
-        poly(x, y, t->type == RS_T_ROTL ? DIA_L : DIA_R, 4, C_PANEL);
-        break;
-    }
-    case RS_T_ZAP: {
-        uint16_t bg = RGB(0x1a, 0x00, 0x12);
-        cv_rect(x, y, CELL, CELL, bg);
-        frame(x, y, CELL, CELL, 1, C_ZAP);
-        for (i = 10; i <= 30; i += 10) cv_rect(x + i, y + 4, 1, 32, mix565(C_ZAP, bg, 128));
-        poly(x, y, BOLT1, 8, C_ZAP);
-        poly(x, y, BOLT2, 8, mix565(C_ZAP, bg, 179));
-        cv_rect(x + 31, y + 7, 2, 2, C_ZAP), cv_rect(x + 7, y + 33, 2, 2, C_ZAP);
-        break;
-    }
-    case RS_T_PULSE: {
-        uint16_t bg = RGB(0x00, 0x1a, 0x00);
-        cv_rect(x, y, CELL, CELL, bg);
-        frame(x, y, CELL, CELL, 1, C_PULSE);
-        ring(x + 20, y + 20, 4, C_PULSE);
-        ring(x + 20, y + 20, 8, mix565(C_PULSE, bg, 154));
-        ring(x + 20, y + 20, 12, mix565(C_PULSE, bg, 77));
-        cv_rect(x + 16, y + 16, 8, 8, C_PULSE);
-        cv_rect(x + 8, y + 8, 3, 3, mix565(C_PULSE, bg, 128)), cv_rect(x + 29, y + 29, 3, 3, mix565(C_PULSE, bg, 128));
-        break;
-    }
-    case RS_T_BLOCK: {
-        int32_t k;
-        for (k = 0; k < CELL; k++)              /* the cell's 45-degree stripes */
-            for (i = 0; i < CELL; i++)
-                cv_pset(x + i, y + k, ((i + k) / 6) & 1 ? RGB(0x1a, 0x1a, 0x2e) : RGB(0x22, 0x22, 0x38));
-        cv_rect(x + 4, y + 4, 32, 32, RGB(0x5c, 0x3d, 0x1e));
-        cv_rect(x + 4, y + 4, 32, 6, RGB(0x6e, 0x4b, 0x28)), cv_rect(x + 4, y + 17, 32, 6, RGB(0x6e, 0x4b, 0x28));
-        cv_rect(x + 4, y + 30, 32, 6, RGB(0x6e, 0x4b, 0x28));
-        for (i = 0; i < 4; i++) cv_rect(x + 4, y + (i == 0 ? 10 : i == 1 ? 17 : i == 2 ? 23 : 30), 32, 1, RGB(0x4a, 0x2e, 0x14));
-        for (i = 0; i < 29; i++) {              /* the cross braces */
-            cv_rect(x + 6 + i, y + 6 + i, 2, 1, RGB(0x8b, 0x69, 0x39));
-            cv_rect(x + 33 - i, y + 6 + i, 2, 1, RGB(0x8b, 0x69, 0x39));
-        }
-        frame(x + 4, y + 4, 32, 32, 2, RGB(0x4a, 0x2e, 0x14));
-        cv_rect(x + 7, y + 7, 2, 2, RGB(0xaa, 0xaa, 0xaa)), cv_rect(x + 31, y + 7, 2, 2, RGB(0xaa, 0xaa, 0xaa));
-        cv_rect(x + 7, y + 31, 2, 2, RGB(0xaa, 0xaa, 0xaa)), cv_rect(x + 31, y + 31, 2, 2, RGB(0xaa, 0xaa, 0xaa));
-        cv_rect(x + 19, y + 19, 2, 2, RGB(0xaa, 0xaa, 0xaa));
-        break;
-    }
-    default:                                    /* open: the dither, the line */
+    case RS_T_ROTR: art = ART_ROTL; break;
+    case RS_T_ZAP: art = ART_ZAP; break;
+    case RS_T_PULSE: art = ART_PULSE; break;
+    case RS_T_BLOCK: art = ART_BLOCK; break;
+    default:                                    /* open: the ground, a dot every 8 px, a line above and left */
         cv_rect(x, y, CELL, CELL, C_CELL);
-        frame(x, y, CELL, CELL, 1, C_CELL_LINE);
-        for (i = 4; i < CELL; i += 8) {
-            int32_t k;
-            for (k = 4; k < CELL; k += 8) cv_pset(x + i, y + k, C_DITHER);
-        }
-        break;
+        cv_rect(x, y, CELL, 2, C_CELL_LINE), cv_rect(x, y, 2, CELL, C_CELL_LINE);
+        for (gy = 2; gy < 20; gy += 4)
+            for (gx = 2; gx < 20; gx += 4) cv_rect(x + 2 * gx, y + 2 * gy, 2, 2, C_DITHER);
+        return;
     }
+    for (gy = 0; gy < 20; gy++)
+        for (gx = 0; gx < 20; gx++) {
+            int32_t sx = gx, sy = gy;           /* where in the art this grid cell comes from */
+            if (t->type == RS_T_BELT) {
+                if (t->dir == RS_N) sx = 19 - gy, sy = gx;
+                else if (t->dir == RS_S) sx = gy, sy = 19 - gx;
+                else if (t->dir == RS_W) sx = 19 - gx;
+            } else if (t->type == RS_T_ROTR)
+                sx = 19 - gx;
+            cv_rect(x + 2 * gx, y + 2 * gy, 2, 2, tile_colour(t->type, art[sy][sx]));
+        }
 }
 
 /* ---- the bots (robotPixelArt: Scout-7 and Echo-3, 32 x 32) */
@@ -226,10 +257,16 @@ static void draw_bot(int32_t x, int32_t y, int b, uint32_t half, uint16_t under)
     else sprite_rects(x, y, ANT_A, 2, pal, half);
 }
 
-static void draw_arrow(int32_t x, int32_t y, uint32_t dir, uint16_t c)   /* the facing: a triangle at the cell's edge */
+static void draw_arrow(int32_t x, int32_t y, uint32_t dir, uint16_t c)   /* the facing: a 3-step wedge at the cell's edge */
 {
-    static const int8_t T[4][6] = {{20, 1, 16, 5, 24, 5}, {39, 20, 35, 16, 35, 24}, {20, 39, 16, 35, 24, 35}, {1, 20, 5, 16, 5, 24}};
-    poly(x, y, T[dir & 3], 3, c);
+    int32_t k;
+    for (k = 0; k < 3; k++) {                   /* row k of the wedge: 2 (3 - k) grid cells wide, k from the edge */
+        int32_t w = 2 * (3 - k) * 2, o = 20 - (3 - k) * 2;   /* px */
+        if (dir == RS_N) cv_rect(x + o, y + 2 * k, w, 2, c);
+        else if (dir == RS_S) cv_rect(x + o, y + CELL - 2 - 2 * k, w, 2, c);
+        else if (dir == RS_W) cv_rect(x + 2 * k, y + o, 2, w, c);
+        else cv_rect(x + CELL - 2 - 2 * k, y + o, 2, w, c);
+    }
 }
 
 /* ---- the effects (explosionPixelArt 16 x 16 at 2 px, heartPixelArt, clashPixelArt) */
@@ -373,7 +410,7 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const st
     for (b = 0; b < 2; b++) {                   /* the launch pads' marks (the HTML's trails never grow past them) */
         int32_t x = BX + START[b].x * CELL, y = BY + START[b].y * CELL;
         if (v->bot[b].x == START[b].x && v->bot[b].y == START[b].y) continue;
-        disc(b ? x + 34 : x + 5, y + 34, 2, mix565(b ? C_BOT_B : C_BOT_A, C_CELL, 64));
+        cv_rect(b ? x + 32 : x + 4, y + 32, 4, 4, mix565(b ? C_BOT_B : C_BOT_A, C_CELL, 64));
     }
     for (b = 0; b < 2; b++) {
         const struct rs_bot *t = &v->bot[b];
