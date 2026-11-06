@@ -14,7 +14,7 @@ robots are the instrument; D16 says how the keys reach them. A rule here is a te
 | C5 | **The result is heard on the next step**, never later: the game runs 64 ms ahead (D12), so an edit or a steer lands on the next step the game computes. |
 | C6 | **EDIT picks whose register** is on the white keys (lit: Echo-3's), on every page with a register. |
 | C7 | **SELECT picks which part of a step** the white keys turn: its ACTION, MODIFIER or CHANCE (the HTML's step card's three buttons), named over the board in the picked bot's colour; the register on the keys shows that part, the other its actions. |
-| C9 | **REC turns the keys into the lead** (D21) on every page: all 27 play it, OCT- / OCT+ its octave, K1-K4 its cutoff, echo, arp and bite (D26, shown at the foot as they turn); LEAD shows top right. REC again gives the keys and knobs back. |
+| C9 | **REC turns the keys into the lead** (D21) on every page: all 27 play it, OCT- / OCT+ its octave, K1-K4 its cutoff, echo, arp and bite (D26), shown as four faders in the header line. REC again gives the keys and knobs back. |
 | C8 | **The knobs never stop the music.** KNOB1 is the picked register's length (8, 12, 16 ... up to the loop's). What the HTML does only by stopping (the loop's length) waits for a page of its own. |
 
 ## The pages (D19)

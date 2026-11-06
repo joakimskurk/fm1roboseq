@@ -236,6 +236,8 @@ So, on every page while REC is lit: K1 the cutoff (a quarter to 2.5 times D23's,
 (heard 0-0.8, fed back 0.25-0.7); K3 the arp, off in the middle, turned right it climbs, left it falls, further
 more notes (2-7), in thirds of the scale Voice Mod is on (its root under it), one note each step the robots take
 (the main loop hands the lead each step's time), the filter plucked on each, the key's own note again when off;
-K4 the bite, the one more: how hard the wave is folded and how wide the PWM swings. Their values show at the foot
-for two seconds after a turn. The pages' own knobs wait while REC is on.
+K4 the bite, the one more: how hard the wave is folded and how wide the PWM swings. While REC is on the four are
+faders in the page's own header line (between the registers on the board), their names on them in white over a
+muted teal fill and a dark empty part, so nothing lies over the board (the product owner: no overlapping; the LEAD
+badge went with it, REC's light says it). The pages' own knobs wait while REC is on.
 

@@ -20,8 +20,8 @@ struct rs_view {
 #include "rs_icons.h"                         /* the step icons, the heart, the digits (tools/art/icons.py) */
 
 static int8_t lead_badge = -99;                 /* the keys play the lead (D21): its octave, else -99 */
-static int lead_panel;                          /* a knob turned just now: the lead's four values at the foot (D26) */
-static int8_t lead_panel_v[4];
+static int8_t lead_panel_v[4];                  /* the lead's knobs (D26): shown in the header while REC is on */
+static int hdr_board;                           /* the page drawn is the board: its header sits between the registers */
 static void screen_out(void);                   /* (every page ends with it: the lead's badge, then to the screen) */
 
 #define BX 20                                   /* the board's corner on the screen */
@@ -322,8 +322,9 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const st
     draw_strip(u, 0), draw_strip(u, 1);
     put_num(top + 5, (uint32_t)(v->step < 0 ? 0 : v->step + 1), 2);   /* the loop's step, the cycle */
     put_num(top + 8, v->loop_len, 2);
-    cv_text(24, 2, &FONT_S, top, v->playing ? C_TEXT : C_MUTED);
-    cv_text(216 - text_w(&FONT_S, LAYER[u->layer % RS_NLAYERS]), 2, &FONT_S, LAYER[u->layer % RS_NLAYERS],
+    hdr_board = 1;
+    cv_text(24, 0, &FONT_S, top, v->playing ? C_TEXT : C_MUTED);
+    cv_text(216 - text_w(&FONT_S, LAYER[u->layer % RS_NLAYERS]), 0, &FONT_S, LAYER[u->layer % RS_NLAYERS],
             u->sel ? C_BOT_B : C_BOT_A);       /* what the white keys turn, in the colour of whose */
     /* the board */
     for (i = 0; i < RS_ROWS * RS_COLS; i++) {
@@ -681,37 +682,35 @@ static void draw_boards(const struct rs_state *g)
     screen_out();
 }
 
-static void screen_out(void)                    /* the lead's badge over any page, then the canvas to the screen */
+static void screen_out(void)                    /* while REC is on the header is the lead's; then to the screen */
 {
-    if (lead_badge > -99) {
-        char t[8] = "LEAD  ";
-        t[4] = lead_badge < 0 ? '-' : lead_badge > 0 ? '+' : ' ';
-        t[5] = (char)('0' + (lead_badge < 0 ? -lead_badge : lead_badge));
-        if (!lead_badge) t[4] = 0;
-        cv_rect(178, 0, 62, 15, C_ACCENT);
-        cv_text(182, 0, &FONT_S, t, RGB(0x05, 0x05, 0x0c));
-    }
-    if (lead_panel) {                           /* K1 CUT, K2 ECHO, K3 ARP, K4 BITE: the lead's knobs as they are */
+    if (lead_badge > -99) {                     /* four faders across the page's header: K1 CUT, K2 ECHO, K3 ARP, K4 BITE */
         static const char *const NAME[4] = {"CUT", "ECHO", "ARP", "BITE"};
-        uint32_t k;
-        cv_rect(0, 200, 240, 40, RGB(0x05, 0x14, 0x14));
-        cv_rect(0, 200, 240, 1, C_ACCENT);
-        for (k = 0; k < 4u; k++) {
-            int32_t x = (int32_t)k * 60, v = lead_panel_v[k];
-            knob_tag(x + 3, 204, k + 1u);
-            cv_text(x + 21, 202, &FONT_S, NAME[k], C_TEXT);
-            if (k == 2u) {                      /* the arp: off, or up / down and how many notes */
-                if (!v) cv_text(x + 6, 221, &FONT_S, "OFF", C_MUTED);
-                else {
-                    icon(x + 4, 222, v > 0 ? RS_MOVE : RS_BACK, C_ACCENT);
-                    digits(x + 22, 225, (uint32_t)(v < 0 ? -v : v) + 1u, 1, C_TEXT);
-                }
-            } else {                            /* a bar, 0 .. 20 */
-                cv_rect(x + 6, 226, 48, 6, RGB(0x1a, 0x1a, 0x2e));
-                cv_rect(x + 6, 226, 48 * v / 20, 6, C_ACCENT);
-                cv_rect(x + 30, 224, 1, 10, C_MUTED);   /* (the middle: as it sounded before) */
+        uint16_t empty = RGB(0x1a, 0x1a, 0x2e), full = RGB(0x2f, 0x6a, 0x63);   /* white reads on both */
+        int32_t x0 = hdr_board ? 20 : 0, w = hdr_board ? 50 : 60, k;
+        cv_rect(x0, 0, 4 * w, SEQ_TOP, C_BG);
+        for (k = 0; k < 4; k++) {
+            int32_t x = x0 + k * w, v = lead_panel_v[k], fw = w - 2;
+            char t[8];
+            cv_rect(x + 1, 0, fw, 15, empty);
+            if (k == 2) {                       /* the arp: from the middle, right up, left down */
+                int32_t mid = x + 1 + fw / 2, len = (fw / 2) * (v < 0 ? -v : v) / 6;
+                cv_rect(v < 0 ? mid - len : mid, 0, len, 15, full);
+                cv_rect(mid, 0, 1, 15, C_MUTED);
+            } else
+                cv_rect(x + 1, 0, fw * v / 20, 15, full);
+            t[0] = 0;
+            {
+                const char *s0 = NAME[k];
+                int32_t n = 0;
+                while (*s0) t[n++] = *s0++;
+                if (k == 2 && v) t[n++] = v > 0 ? '+' : '-', t[n++] = (char)('1' + (v < 0 ? -v : v));   /* notes */
+                t[n] = 0;
             }
+            cv_text(x + w / 2 - text_w(&FONT_S, t) / 2, 0, &FONT_S, t, C_TEXT);
         }
+        cv_rect(x0, SEQ_TOP - 1, 4 * w, 1, C_ACCENT);
     }
+    hdr_board = 0;
     cv_blit(0, 0);
 }

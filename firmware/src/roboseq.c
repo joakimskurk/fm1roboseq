@@ -29,7 +29,8 @@
  *   REC        the keys play the lead instead (D21): a SID-style solo over the robots, all 27 keys from F3, the last
  *              held winning, legato gliding; OCT- / OCT+ its octave (-2 .. +2); REC lit and LEAD on the screen;
  *              the knobs play it too (D26): K1 its cutoff, K2 its echo, K3 an arp in the scale (right up, left
- *              down, further more notes; a note each step), K4 its bite (the fold and the PWM)
+ *              down, further more notes; a note each step), K4 its bite (the fold and the PWM); the four as faders
+ *              in the page's header while REC is on
  *   MASTER     the volume (platform.c)
  *
  * How the sound runs: the main loop plays the game (rs_tick, a step at a time, LOOKAHEAD ahead of the speaker, as
@@ -396,7 +397,6 @@ static void app_main(void)
             uint32_t was = lead_knob_ms;
             lead_knobs();
             if (lead_knob_ms != was) dirty = 1;
-            if (lead_knob_ms && fm1_ms - lead_knob_ms > 2000u && fm1_ms - lead_knob_ms < 2050u) dirty = 1;   /* (the values go) */
         }
         if (b & (1u << BTN_PLAY)) { if (game.playing) stop(); else play(); }
         if (b & (1u << BTN_HOME) && page != PAGE_HOME) page = PAGE_HOME, dirty = 1;
@@ -540,7 +540,6 @@ static void app_main(void)
             dirty = 1;
         if (dirty) {
             lead_badge = lead_on ? lead_oct : -99;
-            lead_panel = lead_on && lead_knob_ms && fm1_ms - lead_knob_ms < 2000u;
             lead_panel_v[0] = lead_knob[0], lead_panel_v[1] = lead_knob[1], lead_panel_v[2] = lead_knob[2], lead_panel_v[3] = lead_knob[3];
             ui_of(&ui, v);
             if (page == PAGE_SEQ) draw_seq(v, &ui, &game, seq_scroll, keys_top());
