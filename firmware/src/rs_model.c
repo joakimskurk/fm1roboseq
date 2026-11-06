@@ -423,6 +423,7 @@ void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
         rs_score_event(s, o->events[i], (uint32_t)at * 112896u, o);   /* 10 ms: 441 samples x 256 */
         at++;
     }
+    if (s->music) rs_score_plus(s, o);                  /* PLUS: RoboSeq's own on top of the HTML's score (D33) */
     if (s->rnd_due) {                                   /* seq 2's rolls, after the tick as the HTML's setTimeout */
         uint8_t due = s->rnd_due;
         s->rnd_due = 0;

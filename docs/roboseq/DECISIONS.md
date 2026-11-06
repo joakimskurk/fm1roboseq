@@ -341,3 +341,13 @@ the board's x then starts on the chord's root, its 0, 2 and 4 the chord's tones,
 (Eb C F A: one quality moving by thirds and fourths). ROOT is switched on (the roots are the progression). SCL in
 PLUS turns all the modes the roll uses (lydian and phrygian, minor pentatonic too). tests/roboseq/plus_test.c.
 
+**D33b. The harmony, the bass and the pulse in PLUS.** After the HTML's score of a tick, PLUS voices it on the
+chord Voice Mod is on (rs_score_plus; the game itself is untouched, plus_test holds it tick for tick): on the beats
+(every 4th step of a 16-step bar, 3rd of a 12) Scout-7's and Echo-3's notes land on the chord's nearest 1, 3 or 5
+(down first); in between they move as the board has them. Echo-3's sub becomes a bass under them, G1 to E3: the
+root on the one (the loop's reset tick, where the bots stand at their pads and only the drums played: now the new
+chord's root lands with the kick), the fifth on three, a chord tone on the other beats, and on the step before
+Voice Mod changes a step into the next root (a semitone under it or a whole tone over, the nearer); when Echo-3 sits
+out the one or three the bass plays anyway. And the bar breathes: the one 1.18, three 1.14, the other beats 1.08,
+the off-sixteenths 0.82 of their velocity.
+

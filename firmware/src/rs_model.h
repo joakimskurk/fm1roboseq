@@ -142,6 +142,7 @@ void rs_score_event(const struct rs_state *s, uint8_t kind, uint32_t at, struct 
 void rs_score_drums(const struct rs_state *s, uint8_t i, struct rs_tick_out *o);   /* playDrumStep() */
 void rs_score_ghost_hat(const struct rs_state *s, int phase, struct rs_tick_out *o);
 void rs_score_coin(const struct rs_state *s, struct rs_tick_out *o);   /* the love check's chime */
+void rs_score_plus(const struct rs_state *s, struct rs_tick_out *o);   /* PLUS (D33): the tick's score, made more musical */
 void rs_advance_voice_mod(struct rs_state *s);                  /* advanceVoiceMod(): MANUAL's tap, LOOP's count */
 
 /* editing, as the HTML's controls do it */

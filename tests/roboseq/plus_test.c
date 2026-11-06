@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "rs_model.c"                                   /* (its tables: SCALE_MASK) */
+#include "rs_score.c"                                   /* (PLUS's chord_tone) */
 
 static int fails;
 #define CHECK(c, ...) do { if (!(c)) { fails++; printf("FAIL %s:%d: ", __FILE__, __LINE__); printf(__VA_ARGS__); printf("\n"); } } while (0)
@@ -70,9 +71,54 @@ static void test_compose(void)                          /* the Voice Mod roll: a
     }
 }
 
+static void test_harmony(void)                          /* the bots on the chord, the bass under it, the game the same */
+{
+    static struct rs_state c, s;
+    static struct rs_tick_out oc, o;
+    int ones = 0, roots = 0, louder = 0, quieter = 0;
+    for (int run = 0; run < 2; run++) {
+        rs_default(&c), rs_default(&s);
+        if (run) {                                      /* and a rolled progression, MAZE */
+            s.music = RS_MUSIC_PLUS, s.rng = 77, rs_compose_bassmod(&s), s.music = 0;
+            c.bassmod_len = s.bassmod_len, memcpy(c.bassmod, s.bassmod, sizeof c.bassmod), c.transpose_root = 1;
+            rs_load_board(&c, RS_B_MAZE), rs_load_board(&s, RS_B_MAZE);
+        }
+        s.music = RS_MUSIC_PLUS;
+        rs_start(&c), rs_start(&s);
+        for (int t = 0; t < 600; t++) {
+            rs_tick(&c, &oc), rs_tick(&s, &o);
+            CHECK(!memcmp(c.bot, s.bot, sizeof c.bot) && c.step == s.step && c.vm_index == s.vm_index,
+                  "tick %d: PLUS plays the same game", t);
+            if ((!o.move_tick && !o.loop_reset) || s.step < 0) continue;
+            const struct rs_bassmod_step *ms = &s.bassmod[s.vm_index % s.bassmod_len];
+            int root = ms->root % 12, p = s.step % 16;
+            for (int i = 0; i < o.nnotes; i++) {
+                const struct rs_note *n = &o.notes[i];
+                if (p % 4 == 0 && n->at == 0 && (n->voice == RS_V_A_MAIN || n->voice == RS_V_B_FM)) {
+                    int pc = ((n->midi - root) % 12 + 12) % 12;
+                    CHECK(chord_tone(pc, ms->scale), "tick %d: voice %d on a beat: %d over the root is no chord tone", t, n->voice, pc);
+                    ones++;
+                }
+                if (p == 0 && n->voice == RS_V_B_SUB) {
+                    CHECK((n->midi - root) % 12 == 0 && n->midi >= 31 && n->midi <= 52, "tick %d: the bass on the one is the root, low (%d)", t, n->midi);
+                    roots++;
+                }
+            }
+            for (int i = 0; i < o.nnotes && i < oc.nnotes; i++)   /* the pulse: the one louder, the off-16ths softer */
+                if (o.notes[i].voice == RS_V_A_MAIN && oc.notes[i].voice == RS_V_A_MAIN && o.notes[i].at == 0) {
+                    if (p % 4 == 0) louder += o.notes[i].vel > oc.notes[i].vel || o.notes[i].vel == 32767;
+                    if (p & 1) quieter += o.notes[i].vel < oc.notes[i].vel;
+                }
+        }
+    }
+    CHECK(ones > 40 && roots > 40, "checked enough ones (%d notes, %d bass roots)", ones, roots);
+    CHECK(louder > 20 && quieter > 100, "the pulse: %d beats louder, %d off-16ths softer", louder, quieter);
+}
+
 int main(void)
 {
     test_compose();
+    test_harmony();
     printf("plus_test: %s\n", fails ? "FAILED" : "all pass");
     return fails != 0;
 }

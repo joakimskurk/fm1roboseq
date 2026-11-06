@@ -339,3 +339,90 @@ void rs_score_coin(const struct rs_state *s, struct rs_tick_out *o)
     note(o, RS_V_COIN, lo, SEC(0.06), 0, F(0.7));
     note(o, RS_V_COIN, hi, SEC(0.08), SEC(0.07), F(0.8));
 }
+
+/* ---- PLUS (D33): RoboSeq's own, on top of the tick's score as the HTML made it (CLASSIC never comes here). The
+ * robots still choose the notes; this voices them on the harmony Voice Mod is on, and gives the bar a pulse. */
+static int bar_len(const struct rs_state *s) { return s->loop_len % 3 == 0 && s->loop_len % 4 != 0 ? 12 : 16; }
+static int beat_len(const struct rs_state *s) { return bar_len(s) / 4; }
+
+static int chord_root(const struct rs_state *s, const struct rs_bassmod_step *ms)   /* the chord's root, a pitch class */
+{
+    return s->transpose_root ? ms->root % 12 : 0;
+}
+
+static int chord_tone(int pc, uint8_t sc)               /* pc above the root: is it the chord's 1, 3 or 5? */
+{
+    uint16_t m = 0;
+    for (int i = 0; i < SCALE_LEN[sc]; i++) m |= (uint16_t)(1u << SCALE_LIST[sc][i]);
+    if (pc == 0) return 1;
+    if (pc == 3 || pc == 4) return (m >> pc & 1) && !(pc == 3 && (m >> 4 & 1));   /* its third: major's, else minor's */
+    if (pc == 7) return m >> 7 & 1;
+    if (pc == 6 || pc == 8) return (m >> pc & 1) && !(m >> 7 & 1);                  /* no fifth: the one it has */
+    return 0;
+}
+
+static int snap_chord(int m, int root, uint8_t sc, struct range r)   /* the nearest chord tone, down first */
+{
+    for (int d = 0; d <= 6; d++) {
+        if (chord_tone(mod12(m - d - root), sc) && m - d >= r.min) return m - d;
+        if (chord_tone(mod12(m + d - root), sc) && m + d <= r.max) return m + d;
+    }
+    return m;
+}
+
+static uint16_t scale_vel(uint16_t v, uint32_t f)       /* a velocity times f (Q20), at most 1 */
+{
+    uint32_t x = mulq(v, f);
+    return (uint16_t)(x > 32767u ? 32767u : x);
+}
+
+void rs_score_plus(const struct rs_state *s, struct rs_tick_out *o)
+{
+    /* (the moves and the loop's reset tick, its one: the bots stand at their pads there, the drums and now the bass
+     * play; the ghost ticks stay the HTML's) */
+    if ((!o->move_tick && !o->loop_reset) || s->step < 0) return;
+    const struct rs_bassmod_step *ms = mod_step(s);
+    uint8_t sc = scale_of(s);
+    int root = chord_root(s, ms), bar = bar_len(s), beat = beat_len(s), p = s->step % bar;
+    struct range bass = {31, 52};                       /* G1 .. E3: under the bots */
+    int thr = s->vm_freq4 * s->loop_len / 4, change = !s->vm_manual && s->vm_count + 1 >= (thr < 1 ? 1 : thr);
+    int has_sub = 0;
+    /* the harmony: on the beats the bots land on the chord's tones (the one is the reset's, but in a loop longer
+     * than the bar), in between they move as the board has them */
+    for (int i = 0; i < o->nnotes; i++) {
+        struct rs_note *n = &o->notes[i];
+        if (n->at != 0) continue;
+        if (n->voice == RS_V_A_MAIN || n->voice == RS_V_B_FM || n->voice == RS_V_A_PING) {
+            struct range r = range_of(s, n->voice == RS_V_B_FM);
+            int m = n->midi;
+            if (p % beat == 0) m = snap_chord(m, root, sc, r);
+            n->midi = (int8_t)m;
+        }
+        if (n->voice == RS_V_B_SUB) {                   /* the bass: the root on one, the fifth on three, a lead-in */
+            int m = fold(n->midi, bass);
+            if (p == 0) m = fold(48 + root, bass);
+            else if (p == bar / 2) m = fold(48 + root + (chord_tone(7, sc) ? 7 : 0), bass);
+            else if (p % beat == 0) m = snap_chord(m, root, sc, bass);
+            if (change && thr >= 4) {                   /* the step before the chord changes: a step into its root */
+                const struct rs_bassmod_step *nx = &s->bassmod[(s->vm_index + 1) % (s->bassmod_len ? s->bassmod_len : 1)];
+                int to = fold(48 + chord_root(s, nx), bass), below = to - 1, above = to + 2;
+                m = (m - below < 0 ? below - m : m - below) <= (above - m < 0 ? m - above : above - m) ? below : above;
+                m = fold(m, bass);
+            }
+            n->midi = (int8_t)m, has_sub = 1;
+        }
+    }
+    if (!has_sub && (p == 0 || p == bar / 2)) {         /* the reset's one, or Echo-3 sat it out: the bass anyway */
+        uint32_t step = rs_step_q8(s) * (uint32_t)(s->tpm ? s->tpm : 1);
+        note(o, RS_V_B_SUB, fold(48 + root + (p ? (chord_tone(7, sc) ? 7 : 0) : 0), bass), step * 2u, 0, p ? F(0.42) : F(0.55));
+    }
+    /* the pulse: the one leans in, the beats a little, the off-sixteenths fall back */
+    {
+        uint32_t f = p == 0 ? F(1.18) : p == bar / 2 ? F(1.14) : p % beat == 0 ? F(1.08) : (p & 1) ? F(0.82) : F(0.95);
+        for (int i = 0; i < o->nnotes; i++) {
+            struct rs_note *n = &o->notes[i];
+            if (n->voice <= RS_V_B_SUB && n->at < rs_step_q8(s)) n->vel = scale_vel(n->vel, f);
+        }
+    }
+}
+
