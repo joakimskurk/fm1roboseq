@@ -20,7 +20,10 @@
  *              CLEAR), KNOB4 on / off
  *   FX         the mix: white keys 1-7 pick master, a bus or the lead, KNOB1 its level; KNOB2 how much the board's
  *              tiles colour the whole sound (its room, send, tilt, drive: D24; 0 % is the HTML's)
- *   ENV        the board builder (D28): A W S D a cursor, a key a tile, reroll, the user board; KNOB1 the presets
+ *   ENV        the boards (D32): all of them at a glance, white keys 1-6 the presets, 7 a reroll, 8 the user board,
+ *              9 save it, 10 clear it, 11 the bots to their pads (queued while playing, the coming one blinking);
+ *              pressed again the board builder (D28): A W S D a cursor, a key a tile, reroll, the user board;
+ *              on both KNOB1 the presets, KNOB2 a reroll's fullness
  *   EDIT       whose register is on the white keys: Scout-7 or Echo-3 (lit: Echo-3)
  *   OCT- OCT+  the register's 16 steps before / after (a register is up to 64)
  *   black keys steer the bots by hand: the next move is this one (D16). F# G# A# C# D# from F3: Scout-7's TURN L,
@@ -276,7 +279,7 @@ static void lead_keys(uint32_t down, uint32_t up)   /* the last key held wins; l
     if (held_n) rs_lead_play(&mix.lead, 53 + 12 * lead_oct + held[held_n - 1u], 1, pressed);   /* (ARP: its notes over it) */
     else rs_lead_play(&mix.lead, 53 + 12 * lead_oct, 0, 0);
 }
-enum { PAGE_HOME, PAGE_SEQ, PAGE_GLO, PAGE_SCL, PAGE_ARP, PAGE_LFO, PAGE_FX, PAGE_ENV };   /* the pages (D19) */
+enum { PAGE_HOME, PAGE_SEQ, PAGE_GLO, PAGE_SCL, PAGE_ARP, PAGE_LFO, PAGE_FX, PAGE_ENV, PAGE_BOARDS };   /* the pages (D19, D32) */
 static uint8_t page, scl_cursor, arp_cursor, drum_row, mix_cursor;
 static int32_t seq_scroll, seq_target;          /* the sequence page's scroll, px, and where it is going */
 
@@ -400,6 +403,17 @@ static int keys(uint32_t down)                  /* what the keys pressed now do;
             changed = 1;
         }
     }
+    if (page == PAGE_BOARDS)                    /* the boards (D32): 1-6 the presets, 7 roll, 8 user, 9 save, 10 clear, 11 reset */
+        for (k = 0; k < 11u; k++) {
+            if (!(down >> white_key[k] & 1u)) continue;
+            if (k < RS_NBOARDS) rs_push_undo(&game), rs_load_board(&game, (uint8_t)k), env_edited = 0;
+            else if (k == 6u) rs_push_undo(&game), rs_randomize_board(&game), env_edited = 0;
+            else if (k == 7u) rs_push_undo(&game), rs_load_user_board(&game), env_edited = 0;
+            else if (k == 8u) rs_push_undo(&game), rs_save_user_board(&game), env_edited = 0;
+            else if (k == 9u) rs_clear_user_board(&game);
+            else rs_reset(&game);
+            changed = 1;
+        }
     if (page == PAGE_FX)                        /* the mix: white keys 1-6 pick a fader */
         for (k = 0; k < RS_NLEVEL; k++)
             if (down >> white_key[k] & 1u) mix_cursor = (uint8_t)k, changed = 1;
@@ -495,7 +509,8 @@ static void app_main(void)
         }
         if (b & (1u << BTN_LFO) && page != PAGE_LFO) page = PAGE_LFO, dirty = 1;
         if (b & (1u << BTN_FX) && page != PAGE_FX) page = PAGE_FX, dirty = 1;
-        if (b & (1u << BTN_ENV) && page != PAGE_ENV) page = PAGE_ENV, dirty = 1;
+        if (b & (1u << BTN_ENV))                /* ENV: the boards, pressed again the builder (D32) */
+            page = page == PAGE_BOARDS ? PAGE_ENV : PAGE_BOARDS, dirty = 1;
         if (b & (1u << BTN_EDIT)) {             /* whose register is on the white keys (and SEQ's cursor) */
             sel_bot ^= 1u, bank = 0, dirty = 1;
             if (page == PAGE_SEQ) seq_cursor_to((int32_t)seq_cursor);
@@ -563,7 +578,7 @@ static void app_main(void)
             }
             if ((e = fm1_enc_take(ENC_KNOB4)) != 0) game.drums_on = e > 0, dirty = 1;
             (void)fm1_enc_take(ENC_KNOB2), (void)fm1_enc_take(ENC_KNOB3);
-        } else if (page == PAGE_ENV) {          /* KNOB1 the presets (queued while playing), KNOB2 a reroll's fullness */
+        } else if (page == PAGE_ENV || page == PAGE_BOARDS) {   /* KNOB1 the presets (queued while playing), KNOB2 a reroll's fullness */
             if ((e = fm1_enc_take(ENC_KNOB1)) != 0) {
                 int32_t at = game.pending_board != RS_B_NONE && game.pending_board < RS_NBOARDS ? game.pending_board :
                              game.board_id < RS_NBOARDS ? game.board_id : 0;
@@ -620,7 +635,7 @@ static void app_main(void)
         fm1_led_key(BTN_ARP, arp_mode);
         fm1_led_key(BTN_LFO, page == PAGE_LFO);
         fm1_led_key(BTN_FX, page == PAGE_FX);
-        fm1_led_key(BTN_ENV, page == PAGE_ENV);
+        fm1_led_key(BTN_ENV, page == PAGE_ENV || page == PAGE_BOARDS);
         fm1_led_key(BTN_EDIT, sel_bot);         /* lit: Echo-3's register */
         fm1_led_key(BTN_REC, lead_on);
         if (lead_on) fm1_led_key(BTN_OCT_DOWN, lead_oct < 0), fm1_led_key(BTN_OCT_UP, lead_oct > 0);
@@ -630,7 +645,8 @@ static void app_main(void)
         }
         {                                       /* ENV's cursor blinks */
             static uint32_t blink_was;
-            if (page == PAGE_ENV && fm1_ms / 300u != blink_was) blink_was = fm1_ms / 300u, dirty = 1;
+            if ((page == PAGE_ENV || (page == PAGE_BOARDS && game.pending_board != RS_B_NONE)) && fm1_ms / 300u != blink_was)
+                blink_was = fm1_ms / 300u, dirty = 1;   /* (the builder's cursor; the board coming, on the boards) */
         }
         v = view_now();
         key = v->t0 ^ (uint32_t)v->playing << 31 ^ (uint32_t)v->step << 20;
@@ -653,6 +669,7 @@ static void app_main(void)
             else if (page == PAGE_LFO) draw_drums(v, &game, drum_row);
             else if (page == PAGE_FX) draw_mix(mix.level, mix_cursor, colour_amt);
             else if (page == PAGE_ENV) draw_editor(v, &game, env_cx, env_cy, (fm1_ms / 300u) & 1u, env_edited);
+            else if (page == PAGE_BOARDS) draw_boards(&game, (fm1_ms / 300u) & 1u, env_edited);
             else draw_board(v, &fx, &ui, fm1_ms);
             due = fx_due(&fx, fm1_ms);
         }

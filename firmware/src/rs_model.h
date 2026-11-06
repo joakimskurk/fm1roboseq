@@ -122,6 +122,7 @@ extern const char *const rs_voice_name[RS_NVOICES];
 
 void rs_default(struct rs_state *s);                            /* buildDefaultState() */
 void rs_load_board(struct rs_state *s, uint8_t id);             /* applyBoardPreset(): now, or queued while playing */
+void rs_preset_board(struct rs_board *b, uint8_t id);           /* a preset's tiles, to look at (the port's: D32) */
 void rs_set_board(struct rs_state *s, const struct rs_board *b, uint8_t id);   /* any board, the same way */
 void rs_set_drums(struct rs_state *s, uint8_t id);              /* a drum preset at the loop's drum length */
 uint8_t rs_drum_steps(uint8_t loop_len);                        /* getDrumSteps(): 12 or 16 */

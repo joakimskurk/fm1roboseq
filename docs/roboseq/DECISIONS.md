@@ -308,3 +308,16 @@ resume an interrupted install for. One identity for every build, dev and release
 name and same identity is fine"): the version is only in the text (`--release X.Y`), so a release can never drift
 onto another firmware's number. The SMK-37 packages follow: `SMK-37 Pro_965`, `SMK-37 Elite_965`, `MKE-P37_965`.
 
+## D32. ENV shows every board; pressed again it builds one (2026-11-06)
+
+The product owner missed the overview of all the boards (phase 3's ENV page, gone with D28's builder, which left
+the presets on KNOB1 and only the playing board's name over the board: while playing, a preset turned in waited for
+the loop with nothing on the screen saying which). ENV now opens the boards, as the HTML's Battle Board panel lists
+them: the six presets, a reroll and the user board, each a card with its white key and its tiles small (the tile art
+at a quarter, every 4th pixel), the one playing framed in mint (with its edits, * when edited), the one coming with
+the loop in yellow and blinking (the HTML's pending), a reroll shown once rolled; the ninth card the keys 9 SAVE, 10
+CLEAR the user board, 11 RESET (the bots to their pads), as phase 3's page had them. The black keys steer there (it
+is not a builder: P1, C3). ENV pressed again is the builder, as SCL pressed again is Seq 2; KNOB1 and KNOB2 do the
+same on both. `rs_preset_board()` gives a preset's tiles to look at, without loading it (edit_test holds that they
+are the ones loading gives).
+

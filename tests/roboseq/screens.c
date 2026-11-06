@@ -80,6 +80,8 @@ int main(void)
     draw_seq(&v, &u, &g, 0, 3), shot("seq");
     rs_place_tile(&g, 0, 2, RS_T_BELT, RS_E), rs_place_tile(&g, 1, 2, RS_T_BELT, RS_E);
     view_ui(), draw_editor(&v, &g, 2, 2, 1, 1), shot("builder");
+    rs_default(&g), rs_start(&g), rs_load_board(&g, RS_B_SPINNER);   /* the boards: DEFAULT playing, SPINNER coming */
+    draw_boards(&g, 1, 0), shot("boards");
     rs_default(&g), rs_start(&g);
     draw_glo(&g, 32), shot("glo");
     rs_cycle_bassmod(&g, 1, 0, 1), rs_cycle_bassmod(&g, 1, 2, -1);

@@ -177,6 +177,11 @@ void rs_set_board(struct rs_state *s, const struct rs_board *b, uint8_t id)
     rs_reset(s);
 }
 
+void rs_preset_board(struct rs_board *b, uint8_t id)    /* a preset's tiles, for the boards' overview (D32) */
+{
+    if (id < RS_NBOARDS) board_from_preset(b, id);
+}
+
 void rs_load_board(struct rs_state *s, uint8_t id)      /* applyBoardPreset() */
 {
     struct rs_board b;

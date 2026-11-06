@@ -160,6 +160,14 @@ static void test_editing(void)
     rs_load_board(&s, RS_B_GARDEN);
     rs_load_user_board(&s);
     CHECK(s.board_id == RS_B_USER && s.board.t[2 * RS_COLS + 2].type == RS_T_ZAP, "the user board comes back");
+    /* the boards' overview (D32): each preset's tiles as loading it gives them, and the state untouched */
+    for (uint8_t id = 0; id < RS_NBOARDS; id++) {
+        struct rs_board look, before = s.board;
+        rs_preset_board(&look, id);
+        CHECK(!memcmp(&before, &s.board, sizeof before), "looking at preset %d leaves the board alone", id);
+        rs_load_board(&s, id);
+        CHECK(!memcmp(&look, &s.board, sizeof look), "preset %d looks as it loads", id);
+    }
 }
 
 static void test_seq2_rolls(void)

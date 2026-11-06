@@ -63,7 +63,8 @@ The screens, drawn by the firmware itself (`make screens`): what you see, and wh
 | <img src="docs/screens/home-playing.png" width="240" alt="HOME, playing"> | **PLAY.** The robots move a step at a time. The tiles they set off light up, each program frames the step it plays, and a robot that runs too hot burns out and comes back in a far corner. PLAY again stops. |
 | <img src="docs/screens/home-love.png" width="240" alt="Two robots on one tile"> | **When they meet.** Two on one tile simply stand side by side. Linger together and a heart appears and a coin chimes; dash into the other and a star flashes over the one hit. |
 | <img src="docs/screens/seq.png" width="240" alt="SEQ"> | **SEQ: the programs**, as step cards: number, move, modifier, chance; the card playing is framed in its robot's colour. SELECT moves the cursor (white), EDIT picks the robot. Type a program in with **W A S D** at the bottom of the keyboard (move, turn left, back, turn right) and the keys round them (idle, dash, ping): each move lands at the cursor and the cursor goes on, so you drive the program in. The coloured keyboard at the foot says what each key does. |
-| <img src="docs/screens/builder.png" width="240" alt="ENV, the board builder"> | **ENV: build a board.** W A S D move the cursor; further up a key for each tile (belt, rotator left and right, zap, pulse, crate), and the black key between S and D clears. A belt points the way you last moved; press it again to turn it. The robots meet your tiles on their next step. KNOB1 runs through the six preset boards. |
+| <img src="docs/screens/boards.png" width="240" alt="ENV: the boards"> | **ENV: the boards**, all at a glance: the six presets, a random roll and your own board, each small with its white key. Press a key and that board comes in (while playing, as the loop comes round: framed yellow, blinking, until it arrives); the one playing is framed in mint. 9 saves the board as yours, 10 clears yours, 11 puts the robots back on their pads. The black keys steer as on HOME. |
+| <img src="docs/screens/builder.png" width="240" alt="ENV again, the board builder"> | **ENV again: build a board.** W A S D move the cursor; further up a key for each tile (belt, rotator left and right, zap, pulse, crate), and the black key between S and D clears. A belt points the way you last moved; press it again to turn it. The robots meet your tiles on their next step. KNOB1 runs through the six preset boards. |
 | <img src="docs/screens/home-lead.png" width="240" alt="REC: the lead"> | **REC: play solo.** The keys become a SID-style lead over the robots, the knobs its CUT, ECHO, BITE and OCT, shown as faders across the top. **ARP** arpeggiates a chord you hold, a note each step: K4 its pattern, SELECT how fast. REC again gives the keys back. |
 | <img src="docs/screens/glo.png" width="240" alt="GLO"> | **GLO: tempo and time.** The tempo, how often the robots move (every 1, 2 or 4 ticks), the loop's length (it changes as the loop comes round, never stopping the music) and the speed (1/1, 1/2, 1/4). |
 | <img src="docs/screens/voicemod.png" width="240" alt="SCL: Voice Mod"> | **SCL: Voice Mod**, the harmony: four steps of scale, root and semitone that the music moves through, every so many loops or by hand (NEXT). White keys 1-4 pick a step, K1-K3 change it. |
@@ -78,14 +79,14 @@ The FM-1's panel is printed, so its names are the firmware's names. What each co
 | Control | What it is |
 |---|---|
 | **PLAY** | Start the board from its beginning; stop. It flashes the beat while playing. |
-| **HOME, SEQ, SEL (SCL), LFO, FX, ENV, GLO** | The pages: the board, the programs, Voice Mod and (pressed again) Seq 2, the drums, the mix, the board builder, the global settings. The page's button is lit. |
+| **HOME, SEQ, SEL (SCL), LFO, FX, ENV, GLO** | The pages: the board, the programs, Voice Mod and (pressed again) Seq 2, the drums, the mix, the boards and (pressed again) the board builder, the global settings. The page's button is lit. |
 | **EDIT** | Whose program the keys edit: Scout-7 or Echo-3 (lit: Echo-3). |
 | **REC** | The keys and knobs play the lead (lit). Again: back. |
 | **ARP** | The keys a chord, arpeggiated (lit; it brings the lead with it). |
 | **SELECT** (encoder) | On HOME what a white key changes (a step's move, modifier or chance); on SEQ the cursor; on the drums the row; with ARP on, how fast the arp runs (1-4 notes a step). |
 | **K1-K4** | The page's values; with REC on, the lead's CUT, ECHO, BITE and OCT (with ARP on, K4 the arp's pattern). They never stop the music. |
 | **White keys** | Positions where a page has steps; on SEQ and ENV a game controller (W A S D and the keys above them). |
-| **Black keys** | Steer the robots, on every page but SEQ and ENV (below). |
+| **Black keys** | Steer the robots, on every page but the two builders, SEQ and ENV's second page (below). |
 | **OCT- / OCT+** | The next 16 steps of a long program (HOME), the cursor 8 steps (SEQ), the lead's octave (REC). |
 | **MASTER** (the knob) | The volume. |
 
@@ -105,8 +106,8 @@ side of the board: a key turns the step to its next move (or, with SELECT, its m
 same programs are cards you type into with W A S D, the cursor moving on as you go, like driving the robot through
 its moves; undo, roll a program, roll both, swap or clear them on the top keys.
 
-**Change their world.** On ENV you build the board under them, tile by tile, while they walk it; KNOB1 drops in a
-preset (it arrives as the loop comes round) and C5 rolls a random board. Seq 2 can change the board and the drums
+**Change their world.** ENV shows every board: a white key drops one in (it arrives as the loop comes round). ENV
+again builds the board under them, tile by tile, while they walk it; on both KNOB1 runs through the presets. Seq 2 can change the board and the drums
 for you, a step each time Voice Mod comes round.
 
 **Play over them.** REC turns the keyboard into a lead: a sharp SID voice (pulse and saw together, a wide sweeping

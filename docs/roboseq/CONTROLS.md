@@ -19,8 +19,8 @@ robots are the instrument; D16 says how the keys reach them. A rule here is a te
 
 ## The pages (D19)
 
-HOME the board, SEQ the sequence, SCL Voice Mod and, pressed again, Seq 2 (D27), LFO the drums, FX the mix, ENV the boards, GLO the
-global settings; the page's button is lit.
+HOME the board, SEQ the sequence, SCL Voice Mod and, pressed again, Seq 2 (D27), LFO the drums, FX the mix, ENV the boards and,
+pressed again, the board builder (D32), GLO the global settings; the page's button is lit.
 
 ## HOME (the board)
 
@@ -103,7 +103,22 @@ The white keys rest here (no register on the screen); the black keys steer as ev
 | KNOB1 | its level, 0-100 % (2 % a detent; it glides there, as the HTML's 50 ms ramp) |
 | KNOB2 | how much the board's tiles colour the whole sound: room, send, tilt, drive (D24); 0 % the HTML's |
 
-## ENV (the board builder, D28)
+## ENV (the boards, D32)
+
+Every board as a card with its tiles small: the one playing framed in mint, the one coming with the loop in yellow,
+blinking.
+
+| Control | Does |
+|---|---|
+| white keys 1-6 | the presets: default, corridor, garden, gauntlet, spinner, maze (queued while playing) |
+| white key 7 / 8 | a reroll / the user board |
+| white keys 9 / 10 / 11 | save the board as the user's / clear the user board / the bots to their pads |
+| black keys | steer the bots (C3) |
+| KNOB1 | the presets, one by one |
+| KNOB2 | a reroll's fullness: sparse, balanced, chaos |
+| ENV | the board builder |
+
+## ENV pressed again (the board builder, D28)
 
 | Control | Does |
 |---|---|

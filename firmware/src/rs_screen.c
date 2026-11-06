@@ -103,18 +103,25 @@ static uint16_t tile_colour(uint32_t type, char ch)
     }
 }
 
+typedef const char (*tile_art_t)[41];
+static tile_art_t tile_art(const struct rs_tile_t *t)   /* a tile's picture (none: open ground) */
+{
+    switch (t->type) {
+    case RS_T_BELT: return t->dir == RS_N ? ART_BELT_N : t->dir == RS_S ? ART_BELT_S : t->dir == RS_W ? ART_BELT_W : ART_BELT_E;
+    case RS_T_ROTL: return ART_ROTL;
+    case RS_T_ROTR: return ART_ROTR;
+    case RS_T_ZAP: return ART_ZAP;
+    case RS_T_PULSE: return ART_PULSE;
+    case RS_T_BLOCK: return ART_BLOCK;
+    default: return 0;
+    }
+}
+
 static void draw_tile(int32_t x, int32_t y, const struct rs_tile_t *t)
 {
-    const char (*art)[41] = 0;
+    tile_art_t art = tile_art(t);
     int32_t gx, gy;
-    switch (t->type) {
-    case RS_T_BELT: art = t->dir == RS_N ? ART_BELT_N : t->dir == RS_S ? ART_BELT_S : t->dir == RS_W ? ART_BELT_W : ART_BELT_E; break;
-    case RS_T_ROTL: art = ART_ROTL; break;
-    case RS_T_ROTR: art = ART_ROTR; break;
-    case RS_T_ZAP: art = ART_ZAP; break;
-    case RS_T_PULSE: art = ART_PULSE; break;
-    case RS_T_BLOCK: art = ART_BLOCK; break;
-    default:                                    /* open: the ground, a dot every 8 px, a line above and left */
+    if (!art) {                                 /* open: the ground, a dot every 8 px, a line above and left */
         cv_rect(x, y, CELL, CELL, C_CELL);
         cv_rect(x, y, CELL, 1, C_CELL_LINE), cv_rect(x, y, 1, CELL, C_CELL_LINE);
         for (gy = 4; gy < CELL; gy += 8)
@@ -758,5 +765,82 @@ static void draw_editor(const struct rs_view *v, const struct rs_state *g, int32
         }
     keys[EK_ROLL] = C_WARN, keys[EK_USER] = C_ACCENT, keys[EK_SAVE] = C_ACCENT, keys[EK_CLEAR] = C_DANGER, keys[EK_RESET] = C_BOT_A;
     draw_keymap(222, keys);
+    screen_out();
+}
+
+/* ---- ENV's first page (D32): every board at a glance, as the HTML's Battle Board panel lists them: the presets, a
+ * reroll and the user board each a card with its white key, its tiles small (the art at a quarter: every 4th
+ * pixel), the one playing framed in mint, the one coming with the loop in yellow, blinking; the last card SAVE,
+ * CLEAR and RESET. KNOB1 runs through the presets, KNOB2 a reroll's fullness, as on the builder. */
+static void mini_board(int32_t x, int32_t y, const struct rs_board *bd)   /* 5 x 5 tiles of 10 px */
+{
+    int32_t i, gx, gy;
+    for (i = 0; i < RS_ROWS * RS_COLS; i++) {
+        const struct rs_tile_t *t = &bd->t[i];
+        tile_art_t art = tile_art(t);
+        int32_t cx = x + (i % RS_COLS) * 10, cy = y + (i / RS_COLS) * 10;
+        if (!art) {                             /* open: the ground, a line above and left */
+            cv_rect(cx, cy, 10, 10, C_CELL);
+            cv_rect(cx, cy, 10, 1, C_CELL_LINE), cv_rect(cx, cy, 1, 10, C_CELL_LINE);
+            continue;
+        }
+        for (gy = 0; gy < 10; gy++)
+            for (gx = 0; gx < 10; gx++) cv_pset(cx + gx, cy + gy, tile_colour(t->type, art[gy * 4 + 2][gx * 4 + 2]));
+    }
+}
+
+static void draw_boards(const struct rs_state *g, int blink, int edited)
+{
+    static const char *const NAME[8] = {"DEFAULT", "CORRIDOR", "GARDEN", "GAUNTLET", "SPINNER", "MAZE", "ROLL", "USER"};
+    static const char *const DENS[3] = {"SPARSE", "BALANCED", "CHAOS"};
+    static const char *const ACT[3] = {"SAVE", "CLEAR", "RESET"};
+    uint16_t card = RGB(0x12, 0x12, 0x24), act_c[3] = {C_ACCENT, C_DANGER, C_TEXT};
+    uint32_t k, dens = g->density >= 60 ? 2u : g->density >= 45 ? 1u : 0u;
+    cv_begin(240, 240, C_BG);
+    cv_text(4, 0, &FONT_S, "BOARDS", C_TEXT);
+    knob_tag(56, 2, 1);
+    cv_text(236 - text_w(&FONT_S, DENS[dens]), 0, &FONT_S, DENS[dens], C_MUTED);
+    knob_tag(232 - text_w(&FONT_S, DENS[dens]) - 15, 2, 2);
+    cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
+    for (k = 0; k < 9u; k++) {
+        int32_t x = (int32_t)(k % 3u) * 80 + 1, y = 18 + (int32_t)(k / 3u) * 74;
+        cv_rect(x, y, 78, 72, card);
+        if (k == 8u) {                          /* 9 SAVE (the board as the user's), 10 CLEAR it, 11 RESET (bots to pads) */
+            uint32_t a;
+            for (a = 0; a < 3u; a++) {
+                digits(x + 4, y + 9 + (int32_t)a * 22, 9u + a, 9u + a > 9u ? 2u : 1u, C_MUTED);
+                cv_text(x + 22, y + 4 + (int32_t)a * 22, &FONT_S, ACT[a], act_c[a]);
+            }
+            continue;
+        }
+        {
+            uint8_t id = (uint8_t)(k < RS_NBOARDS ? k : k == 6u ? RS_B_RANDOM : RS_B_USER);
+            int on = g->board_id == id, queued = g->pending_board == id;
+            int32_t bx = x + 14, by = y + 3;
+            struct rs_board look;
+            const struct rs_board *bd = &look;
+            char name[12];
+            const char *n = NAME[k];
+            uint32_t c = 0;
+            if (queued) bd = &g->pending_tiles;   /* what is coming, what plays (with its edits), else the preset */
+            else if (on) bd = &g->board;
+            else if (id == RS_B_USER) bd = &g->user_board;
+            else if (id < RS_NBOARDS) rs_preset_board(&look, id);
+            else bd = 0;                        /* a reroll not yet rolled: a question */
+            if (bd) mini_board(bx, by, bd);
+            else {
+                static const struct rs_board empty;
+                mini_board(bx, by, &empty);
+                cv_text(bx + 25 - text_w(&FONT_L, "?") / 2, by + 9, &FONT_L, "?", mix565(C_WARN, C_CELL, 150));
+            }
+            while (*n && c < 9u) name[c++] = *n++;
+            if (on && edited) name[c++] = '*';
+            name[c] = 0;
+            digits(x + 4, y + 5, k + 1u, 1, on ? C_ACCENT : C_MUTED);
+            cv_text(x + 39 - text_w(&FONT_S, name) / 2, y + 55, &FONT_S, name, queued ? C_WARN : on ? C_ACCENT : C_TEXT);
+            if (on) frame(x, y, 78, 72, 2, C_ACCENT);
+            if (queued) frame(x, y, 78, 72, 2, blink ? C_WARN : mix565(C_WARN, card, 90));
+        }
+    }
     screen_out();
 }
