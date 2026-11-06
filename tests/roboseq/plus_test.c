@@ -2,6 +2,7 @@
 /* PLUS, RoboSeq's own music on top of the HTML's (D33): what each part promises. CLASSIC is held by the traces. */
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "rs_model.c"                                   /* (its tables: SCALE_MASK) */
 #include "rs_score.c"                                   /* (PLUS's chord_tone) */
 
@@ -121,7 +122,7 @@ static void test_harmony(void)                          /* the bots on the chord
 {
     static struct rs_state c, s;
     static struct rs_tick_out oc, o;
-    int ones = 0, roots = 0, louder = 0, quieter = 0;
+    int ones = 0, roots = 0;
     for (int run = 0; run < 2; run++) {
         rs_default(&c), rs_default(&s);
         if (run) {                                      /* and a rolled progression, MAZE */
@@ -150,15 +151,9 @@ static void test_harmony(void)                          /* the bots on the chord
                     roots++;
                 }
             }
-            for (int i = 0; i < o.nnotes && i < oc.nnotes; i++)   /* the pulse: the one louder, the off-16ths softer */
-                if (o.notes[i].voice == RS_V_A_MAIN && oc.notes[i].voice == RS_V_A_MAIN && o.notes[i].at == 0) {
-                    if (p % 4 == 0) louder += o.notes[i].vel > oc.notes[i].vel || o.notes[i].vel == 32767;
-                    if (p & 1) quieter += o.notes[i].vel < oc.notes[i].vel;
-                }
         }
     }
     CHECK(ones > 40 && roots > 40, "checked enough ones (%d notes, %d bass roots)", ones, roots);
-    CHECK(louder > 20 && quieter > 100, "the pulse: %d beats louder, %d off-16ths softer", louder, quieter);
 }
 
 static void test_drums(void)                            /* the fills, the crashes, quiet when cleared, the same each time */
@@ -188,19 +183,6 @@ static void test_drums(void)                            /* the fills, the crashe
         if (hat && hat->dur > SEC(0.1) && hat->dur < SEC(0.3)) opens++;
     }
     CHECK(quiet_hats_ok, "no hats under a fill");
-    {                                                   /* B: the answers a fifth up; A: none */
-        int in_a = 0, in_b = 0;
-        rs_default(&s), s.music = RS_MUSIC_PLUS, rs_start(&s);
-        for (int k = 0; k < 16 * 16; k++) {
-            rs_tick(&s, &o);
-            for (int i = 0; i < o.nnotes; i++)
-                if (o.notes[i].voice == RS_V_A_PING && o.notes[i].at == rs_step_q8(&s) / 2u) {
-                    if (rs_plus_section(&s)) in_b++;
-                    else in_a++;
-                }
-        }
-        CHECK(in_a == 0 && in_b > 10, "the answers: %d in B, %d in A", in_b, in_a);
-    }
     CHECK(fills >= 9, "a fill ends each phrase, its last snare loudest (%d of 10)", fills);
     CHECK(crashes >= 9, "a crash starts each phrase (%d of 9)", crashes);
     CHECK(ghosts > 5 && opens > 5, "ghost snares (%d) and open hats (%d)", ghosts, opens);
@@ -220,8 +202,50 @@ static void test_drums(void)                            /* the fills, the crashe
     }
 }
 
+static void test_lines(void)                            /* lines that walk, a first half sparser, a bass on the beats */
+{
+    static struct rs_state c, s;
+    static struct rs_tick_out oc, o;
+    for (int board = 0; board < RS_NBOARDS; board++) {
+        long jumps_c = 0, jumps_p = 0, nc = 0, np = 0, in_a = 0, in_b = 0, beats = 0, bassed = 0, big = 0;
+        int last_c = 0, last_p = 0;
+        rs_default(&c), rs_default(&s);
+        rs_load_board(&c, (uint8_t)board), rs_load_board(&s, (uint8_t)board);
+        s.music = RS_MUSIC_PLUS;
+        rs_start(&c), rs_start(&s);
+        for (int t = 0; t < 16 * 32; t++) {
+            rs_tick(&c, &oc), rs_tick(&s, &o);
+            for (int i = 0; i < oc.nnotes; i++)
+                if (oc.notes[i].voice == RS_V_A_MAIN && oc.notes[i].at == 0) {
+                    if (last_c) jumps_c += abs(oc.notes[i].midi - last_c), nc++;
+                    last_c = oc.notes[i].midi;
+                }
+            int dash = o.acted[0] && o.played[0].action == RS_DASH, has_bass = 0;
+            for (int i = 0; i < o.nnotes; i++) {
+                if (o.notes[i].voice == RS_V_A_MAIN && o.notes[i].at == 0) {
+                    if (last_p) {
+                        jumps_p += abs(o.notes[i].midi - last_p), np++;
+                        big += abs(o.notes[i].midi - last_p) > 12 && !dash;
+                    }
+                    last_p = o.notes[i].midi;
+                    if (rs_plus_section(&s)) in_b++;
+                    else in_a++;
+                }
+                has_bass |= o.notes[i].voice == RS_V_B_SUB;
+            }
+            if ((o.move_tick || o.loop_reset) && s.step % 4 == 0) beats++, bassed += has_bass;
+        }
+        printf("plus_test: board %d: Scout-7 moves %.1f semitones a note (the HTML's %.1f)\n", board, (double)jumps_p / (double)np, (double)jumps_c / (double)nc);
+        CHECK(np > 50 && jumps_p * 10 <= 35 * np, "board %d: Scout-7's line walks (%.1f semitones a note)", board, (double)jumps_p / (double)np);
+        CHECK(big == 0, "board %d: no leap past an octave but a dash's (%ld)", board, big);
+        CHECK(in_a * 10 < in_b * 8, "board %d: the first half sparser (%ld notes in A, %ld in B)", board, in_a, in_b);
+        CHECK(bassed * 10 >= beats * 9, "board %d: a bass on the beats (%ld of %ld)", board, bassed, beats);
+    }
+}
+
 int main(void)
 {
+    test_lines();
     test_compose();
     test_in_scale();
     test_harmony();

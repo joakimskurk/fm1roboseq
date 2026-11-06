@@ -516,68 +516,184 @@ static void unrub(const struct rs_state *s, struct rs_tick_out *o, int root, uin
     }
 }
 
-void rs_score_plus(const struct rs_state *s, struct rs_tick_out *o)
+/* ---- PLUS's own music (D34): the same game, the same voices, a new way from the one to the other. The HTML gives
+ * each bot a note from where it stands, every step. Here each bot is a musician: Scout-7 sings a line that walks to
+ * where it stands, Echo-3 harmonises it on the beats and answers when it rests, and Echo-3's low voice walks a bass
+ * under them; all in the chord Voice Mod is on, all in its scale. The HTML's notes for these four voices are
+ * dropped; the tiles' and events' sounds stay, in tune with the chord; the drums are D33c's drummer. */
+static int iabs(int x) { return x < 0 ? -x : x; }   /* (no libc on the chip) */
+static int fdiv(int a, int n) { return a >= 0 ? a / n : -((n - 1 - a) / n); }
+static int note_of(int idx, uint8_t sc)                 /* the scale's idx-th note from C0 */
 {
-    if (s->step < 0) return;
-    const struct rs_bassmod_step *ms = mod_step(s);
-    uint8_t sc = scale_of(s);
-    int root = chord_root(s, ms, sc), fifth = fifth_of(root, sc), bar = bar_len(s), beat = beat_len(s), p = s->step % bar;
-    struct range bass = {31, 52};                       /* G1 .. E3: under the bots */
-    /* (the moves and the loop's reset tick, its one: the bots stand at their pads there, the drums and now the bass
-     * play; the ghost ticks between moves only lose their rubs) */
-    if (!o->move_tick && !o->loop_reset) { unrub(s, o, root, sc, bass); return; }
-    int thr = s->vm_freq4 * s->loop_len / 4, change = !s->vm_manual && s->vm_count + 1 >= (thr < 1 ? 1 : thr);
-    int has_sub = 0;
-    /* the harmony: on the beats the bots land on the chord's tones (the one is the reset's, but in a loop longer
-     * than the bar), in between they move as the board has them */
+    int n = SCALE_LEN[sc], o = fdiv(idx, n);
+    return 12 * o + SCALE_LIST[sc][idx - o * n];
+}
+static int idx_of(int midi, uint8_t sc)                 /* a note's place in the scale (quantized first) */
+{
+    int q = rs_scale_quantize(midi, sc), o = fdiv(q, 12), pc = q - 12 * o, n = SCALE_LEN[sc];
+    for (int i = 0; i < n; i++)
+        if (SCALE_LIST[sc][i] == pc) return o * n + i;
+    return o * n;
+}
+static int snap_idx(int idx, int root, uint8_t sc)      /* the nearest chord tone, in scale steps (down first) */
+{
+    static const int8_t D[5] = {0, -1, 1, -2, 2};
+    for (int k = 0; k < 5; k++)
+        if (chord_tone(note_of(idx + D[k], sc), root, sc)) return idx + D[k];
+    return idx;
+}
+static int keep_in(int idx, uint8_t sc, int lo, int hi)  /* an octave at a time into [lo, hi] (midi) */
+{
+    int n = SCALE_LEN[sc];
+    while (note_of(idx, sc) > hi) idx -= n;
+    while (note_of(idx, sc) < lo) idx += n;
+    return idx;
+}
+static void drop_lines(struct rs_tick_out *o)           /* the HTML's notes for the bots' four voices go */
+{
+    int k = 0;
+    for (int i = 0; i < o->nnotes; i++)
+        if (o->notes[i].voice > RS_V_B_SUB) o->notes[k++] = o->notes[i];
+    o->nnotes = (uint8_t)k;
+}
+static void tune_sfx(struct rs_tick_out *o, int root, uint8_t sc)   /* the tiles' and events' pitches: chord tones */
+{
     for (int i = 0; i < o->nnotes; i++) {
         struct rs_note *n = &o->notes[i];
-        if (n->at != 0) continue;
-        if (n->voice == RS_V_A_MAIN || n->voice == RS_V_B_FM || n->voice == RS_V_A_PING) {
-            struct range r = range_of(s, n->voice == RS_V_B_FM);
-            int m = n->midi;
-            if (p % beat == 0) m = snap_chord(m, root, sc, r);
-            n->midi = (int8_t)m;
-        }
-        if (n->voice == RS_V_B_SUB) {                   /* the bass: the root on one, the fifth on three, a lead-in */
-            int m = fold(n->midi, bass);
-            if (p == 0) m = fold(48 + root, bass);
-            else if (p == bar / 2) m = fold(48 + root + (fifth > 0 ? fifth : 0), bass);
-            else if (p % beat == 0) m = snap_chord(m, root, sc, bass);
-            if (change && thr >= 4) {                   /* the step before the chord changes: a scale step into its root */
-                const struct rs_bassmod_step *nx = &s->bassmod[(s->vm_index + 1) % (s->bassmod_len ? s->bassmod_len : 1)];
-                uint8_t nsc = nx->scale < RS_NSCALES ? nx->scale : RS_SC_MAJOR;
-                int to = fold(48 + chord_root(s, nx, nsc), bass);
-                int c[3] = {fold(rs_scale_shift(to, sc, -1), bass), fold(rs_scale_shift(to, sc, 1), bass), to};
-                if ((c[1] - m < 0 ? m - c[1] : c[1] - m) < (c[0] - m < 0 ? m - c[0] : c[0] - m)) c[0] ^= c[1], c[1] ^= c[0], c[0] ^= c[1];
-                for (int k = 0; k < 3; k++)             /* the nearer step, else the other, else the root itself, */
-                    if (!clashes(o, c[k])) { m = c[k]; break; }   /* never a semitone or a tritone against the bots */
-            }
-            n->midi = (int8_t)m, has_sub = 1;
-        }
-    }
-    unrub(s, o, root, sc, bass);
-    if (!has_sub && (p == 0 || p == bar / 2)) {         /* the reset's one, or Echo-3 sat it out: the bass anyway */
-        uint32_t step = rs_step_q8(s) * (uint32_t)(s->tpm ? s->tpm : 1);
-        note(o, RS_V_B_SUB, fold(48 + root + (p && fifth > 0 ? fifth : 0), bass), step * 2u, 0, p ? F(0.42) : F(0.55));
-    }
-    plus_drums(s, o, bar, beat);
-    if (rs_plus_section(s) && p % beat == beat / 2) {   /* B: Scout-7's note answered a fifth up, softly, on the and */
-        const struct rs_note *a = find_note(o, RS_V_A_MAIN);
-        if (a) {
-            uint32_t step = rs_step_q8(s);
-            int e = safe_shift(a->midi, sc, 4, range_of(s, 0));
-            if (mod12(e - a->midi) == 6) e = safe_shift(a->midi, sc, 2, range_of(s, 0));   /* (no tritone: a third) */
-            note(o, RS_V_A_PING, e, mulq(step, F(0.6)), step / 2u, (uint32_t)a->vel * 11u);   /* (Q15 x 11: 0.34) */
-        }
-    }
-    /* the pulse: the one leans in, the beats a little, the off-sixteenths fall back */
-    {
-        uint32_t f = p == 0 ? F(1.18) : p == bar / 2 ? F(1.14) : p % beat == 0 ? F(1.08) : (p & 1) ? F(0.82) : F(0.95);
-        for (int i = 0; i < o->nnotes; i++) {
-            struct rs_note *n = &o->notes[i];
-            if (n->voice <= RS_V_B_SUB && n->at < rs_step_q8(s)) n->vel = scale_vel(n->vel, f);
+        if (n->midi == RS_NOISE || n->voice <= RS_V_B_SUB || n->voice == RS_V_BELT || n->voice == RS_V_ZAP) continue;
+        for (int d = 0; d <= 6; d++) {
+            if (chord_tone(n->midi - d, root, sc)) { n->midi = (int8_t)(n->midi - d); break; }
+            if (chord_tone(n->midi + d, root, sc)) { n->midi = (int8_t)(n->midi + d); break; }
         }
     }
 }
 
+void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
+{
+    if (s->step < 0) return;
+    const struct rs_bassmod_step *ms = mod_step(s);
+    uint8_t sc = scale_of(s);
+    int n = SCALE_LEN[sc], root = chord_root(s, ms, sc), fifth = fifth_of(root, sc);
+    int bar = bar_len(s), beat = beat_len(s), p = s->step % bar, on_beat = p % beat == 0, sec_b = rs_plus_section(s);
+    int tpm = s->tpm ? s->tpm : 1;
+    uint32_t q = rs_step_q8(s), step = q * (uint32_t)tpm;   /* a tick, a move */
+    struct range bass = {31, 52};
+    drop_lines(o);
+    tune_sfx(o, root, sc);
+    if (!o->move_tick && !o->loop_reset) {              /* a ghost tick: Scout-7's line glints on the and, softly */
+        if (s->plus_lead && o->ghost_phase == tpm / 2 && !(s->bot[0].dying)) {
+            int i = snap_idx(idx_of(s->plus_lead, sc) + n, root, sc);
+            note(o, RS_V_A_PING, note_of(keep_in(i, sc, 60, 88), sc), q / 2u, 0, F(0.16));
+        }
+        plus_drums(s, o, bar, beat);
+        return;
+    }
+    int thr = s->vm_freq4 * s->loop_len / 4, change = !s->vm_manual && thr >= 4 && s->vm_count + 1 >= thr;
+    int lead_played = 0, lead_note = 0;
+    if (o->loop_reset) {                                /* the one: the bots at their pads, the new chord's root below */
+        int b = fold(48 + root, bass);
+        note(o, RS_V_B_SUB, b, step * 4u, 0, F(0.6));
+        s->plus_bass = (int8_t)b;
+    }
+    /* Scout-7: the line. Where it stands is where the line wants to go (x the chord's degree, the rows an octave);
+     * a step walks it there a scale step or two at a time, a dash leaps, a turn is a neighbour, a ping repeats with
+     * a glint above, a wait rests. In a phrase's first half (A) it sings on the eighths, in B on every step. */
+    if (o->move_tick && o->acted[0] && !s->bot[0].dying) {
+        const struct rs_bot *a = &s->bot[0];
+        const struct rs_step *st = &o->played[0];
+        int oct = a->y <= 1 ? 1 : a->y == 2 ? 0 : -1;
+        int target = keep_in(idx_of(60 + root, sc) + a->x + n * (1 + oct), sc, 57, 86);
+        int prev = s->plus_lead ? idx_of(s->plus_lead, sc) : target, next = prev, near = target;
+        for (int k = -1; k <= 1; k += 2)                /* the target in the octave nearest the last note */
+            if (iabs(target + k * n - prev) < iabs(near - prev)) near = target + k * n;
+        uint32_t dur = mulq(step, F(0.9)), vel = on_beat ? F(0.78) : p % 2 == 0 ? F(0.62) : F(0.5);
+        int sound = st->action != RS_WAIT && (sec_b || p % 2 == 0 || st->action == RS_DASH);
+        switch (st->action) {
+        case RS_MOVE:
+        case RS_BACK: next = near; break;              /* where it stands: a cell is a scale step */
+        case RS_TURNL: next = prev - 1, dur = mulq(step, F(0.45)); break;
+        case RS_TURNR: next = prev + 1, dur = mulq(step, F(0.45)); break;
+        case RS_DASH: next = near == prev ? near + 2 : near, dur = mulq(step, F(1.7)), vel = mulq(vel, F(1.25)); break;
+        case RS_PING: dur = mulq(step, F(0.6)); break;
+        default: break;
+        }
+        if (on_beat) next = snap_idx(next, root, sc);   /* the beats: the chord's own tones */
+        next = keep_in(next, sc, 57, 86);
+        if (st->modifier == RS_BRIGHT) vel = mulq(vel, F(1.15));
+        else if (st->modifier == RS_LOW) vel = mulq(vel, F(0.8));
+        else if (st->modifier == RS_GLITCH) dur = mulq(dur, F(0.4));
+        if (s->board.t[a->y * RS_COLS + a->x].type == RS_T_PULSE) dur = mulq(dur, F(1.6));
+        if (vel > ONE) vel = ONE;
+        s->plus_lead = (int8_t)note_of(next, sc);
+        if (sound) {
+            lead_note = note_of(next, sc), lead_played = 1;
+            note(o, RS_V_A_MAIN, lead_note, dur, 0, vel);
+            if (st->action == RS_PING)                  /* the glint: a chord tone an octave up */
+                note(o, RS_V_A_PING, note_of(keep_in(snap_idx(next + n, root, sc), sc, 60, 90), sc), q, q / 4u, mulq(vel, F(0.5)));
+            if (a->stepped_tile == RS_T_BELT) {         /* riding a belt: the chord rolls up or down after it */
+                int up = a->stepped_dir == RS_N || a->stepped_dir == RS_E, i = snap_idx(next + (up ? 2 : -2), root, sc);
+                note(o, RS_V_A_PING, note_of(keep_in(i, sc, 60, 90), sc), q / 2u, step / 2u, mulq(vel, F(0.45)));
+            }
+        }
+    }
+    /* Echo-3: the second voice. While Scout-7 sings it holds the harmony on the beats, a third or a sixth under it;
+     * when Scout-7 rests it answers with a line of its own, walking to where it stands, an octave lower. */
+    if (o->move_tick && o->acted[1] && !s->bot[1].dying && o->played[1].action != RS_WAIT) {
+        const struct rs_bot *b = &s->bot[1];
+        int e = 0;
+        uint32_t vel = F(0.5), dur = mulq(step, F(0.85));
+        int scout_rest = !o->acted[0] || o->played[0].action == RS_WAIT || s->bot[0].dying;
+        if (lead_played && (on_beat || o->played[1].action == RS_DASH)) {
+            int under = idx_of(lead_note, sc) - (b->x & 1 ? 5 : 2);   /* a sixth or a third under Scout-7 */
+            e = note_of(keep_in(snap_idx(under, root, sc), sc, 45, 74), sc), vel = F(0.46);
+        } else if (scout_rest || (!lead_played && p % 4 == 3)) {   /* (in A, once a beat, on its last sixteenth) */
+            int oct = b->y <= 1 ? 1 : b->y == 2 ? 0 : -1;
+            int target = keep_in(idx_of(48 + root, sc) + b->x + n * (1 + oct), sc, 45, 74);
+            int prev = s->plus_echo ? idx_of(s->plus_echo, sc) : target, next = target;
+            for (int k = -1; k <= 1; k += 2)
+                if (iabs(target + k * n - prev) < iabs(next - prev)) next = target + k * n;
+            if (on_beat) next = snap_idx(next, root, sc);
+            e = note_of(keep_in(next, sc, 45, 74), sc), vel = on_beat ? F(0.58) : F(0.48);
+        }
+        if (e) {
+            note(o, RS_V_B_FM, e, dur, 0, vel), s->plus_echo = (int8_t)e;
+            if (b->stepped_tile == RS_T_BELT && !(lead_played && s->bot[0].stepped_tile == RS_T_BELT))
+                note(o, RS_V_B_FM, fold(e + 12, (struct range){45, 79}), q / 2u, step / 2u, mulq(vel, F(0.6)));
+        }
+    }
+    /* the bass: the root on the one (above), the fifth on three, a chord tone on the other beats; on the eighths
+     * between, while Echo-3 moves, a walk to the next; before the chord changes a step into its root */
+    int echo_moves = o->acted[1] && o->played[1].action != RS_WAIT && !s->bot[1].dying;
+    if (o->move_tick && (on_beat || (p % 2 == 0 && echo_moves) || change)) {
+        int last = s->plus_bass ? s->plus_bass : fold(48 + root, bass), b;
+        if (p == 0) b = fold(48 + root, bass);          /* (a loop longer than the bar: its one again) */
+        else if (change) {
+            const struct rs_bassmod_step *nx = &s->bassmod[(s->vm_index + 1) % (s->bassmod_len ? s->bassmod_len : 1)];
+            uint8_t nsc = nx->scale < RS_NSCALES ? nx->scale : RS_SC_MAJOR;
+            int to = fold(48 + chord_root(s, nx, nsc), bass);
+            int c0 = fold(rs_scale_shift(to, sc, -1), bass), c1 = fold(rs_scale_shift(to, sc, 1), bass);
+            b = (c0 - last < 0 ? last - c0 : c0 - last) <= (c1 - last < 0 ? last - c1 : c1 - last) ? c0 : c1;
+        } else if (p == bar / 2) b = fold(48 + root + (fifth > 0 ? fifth : 0), bass);
+        else if (on_beat) {
+            static const int8_t TONE[3] = {0, 2, 4};    /* by where Echo-3 stands: the root, the third, the fifth */
+            int ri = idx_of(48 + root, sc);
+            b = fold(note_of(snap_idx(ri + TONE[s->bot[1].x % 3], root, sc), sc), bass);
+            if (o->acted[1] && o->played[1].action == RS_DASH) b = fold(b + 12, (struct range){31, 64});   /* a dash: up the octave */
+        } else {                                        /* a walk: a scale step from the last toward the next beat's */
+            int to = fold(48 + root + (p < bar / 2 && fifth > 0 ? fifth : 0), bass), li = idx_of(last, sc), ti = idx_of(to, sc);
+            b = fold(note_of(li + (ti > li ? 1 : ti < li ? -1 : 1), sc), bass);
+        }
+        if (!clashes(o, b) || on_beat) {
+            uint32_t hold = on_beat && !echo_moves ? step * (uint32_t)beat : step * 2u;   /* (Echo-3 still: it holds) */
+            note(o, RS_V_B_SUB, b, mulq(hold, F(0.92)), 0, on_beat ? F(0.55) : F(0.44));
+            s->plus_bass = (int8_t)b;
+        }
+    }
+    unrub(s, o, root, sc, bass);
+    plus_drums(s, o, bar, beat);
+    {                                                   /* the bar breathes: the one and three lean in */
+        uint32_t f = p == 0 ? F(1.12) : p == bar / 2 ? F(1.1) : on_beat ? F(1.04) : F(0.96);
+        for (int i = 0; i < o->nnotes; i++)
+            if (o->notes[i].voice <= RS_V_B_SUB) o->notes[i].vel = scale_vel(o->notes[i].vel, f);
+    }
+}

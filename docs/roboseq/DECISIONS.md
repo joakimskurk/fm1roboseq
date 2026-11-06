@@ -342,7 +342,7 @@ root a note of the scale; the fifth time the default song's kind (one scale, the
 fourths). An 8-step Voice Mod gets a second progression after it. ROOT is switched on. SCL in PLUS also turns
 lydian, phrygian and minor pentatonic. (Its first version, 9c994b2, changed the scale with every chord: see D33e.)
 
-**D33b. The harmony, the bass and the pulse in PLUS.** After the HTML's score of a tick, PLUS voices it on the
+**D33b. The harmony, the bass and the pulse in PLUS.** (Superseded by D34: PLUS no longer rewrites the HTML's notes.) After the HTML's score of a tick, PLUS voices it on the
 chord the step really sounds (D33a: its scale's triad on the scale's note nearest the root; rs_score_plus; the game
 itself is untouched, plus_test holds it tick for tick): on the beats (every 4th step of a 16-step bar, 3rd of a 12)
 Scout-7's and Echo-3's notes land on the chord's nearest 1, 3 or 5 (down first); in between they move as the board
@@ -366,7 +366,7 @@ rising snare roll, or kick-snare-kick-snare; the next phrase starts with a crash
 choice is a hash of the loop and the step, so the same loop sounds the same each time, and nothing is drawn from
 the game's random (the game stays the HTML's).
 
-**D33d. The sound over the song in PLUS.** While it plays, each Voice Mod step gives the board's colour (D24) its
+**D33d. The sound over the song in PLUS.** (The answer in B is D34's Echo-3 now.) While it plays, each Voice Mod step gives the board's colour (D24) its
 own shade (0.84 to 1.22 of FX's amount) and section B adds 0.45 more, so the room, the send, the tilt and the drive
 breathe with the harmony and open up in the phrase's second half (they glide there, as D24's do). In B Scout-7 is
 answered on the and of each beat: its note a fifth up in its scale, half a step later, a third as loud, on its ping
@@ -381,4 +381,32 @@ Now every root, chord tone, bass note and lead-in is a note of the step's scale 
 answer in B is a third where a fifth up would be a tritone. plus_test holds both the scale and the rubs, over 24
 setups (boards, rolled progressions of 4 and 8, ticks per move 1, 2 and 4, a 12-step loop): 0 notes outside the
 scale, and 0 of 54,223 notes struck together a semitone, a major seventh or a tritone apart (CLASSIC's own: 686).
+
+## D34. PLUS writes its own music from the game (2026-11-07)
+
+The product owner, on the corrected D33b: a little better, but held back by keeping the old; a new algorithm, with
+the sound kept. So PLUS no longer voices the HTML's notes: for the bots' four voices (Scout-7's main and ping,
+Echo-3's FM and sub) the HTML's score is dropped and rs_score_plus writes the music anew from the same game, each
+bot a musician (the voices, the mix, the drums of D33c, the room of D33d and Voice Mod's roll of D33a stay):
+
+- **Scout-7 sings the line.** Where it stands is where the line goes: x a degree from the chord's root, the rows the
+  register (the top higher), in the octave nearest its last note (a cell is a scale step, a row no octave leap). A
+  move or a back goes there, a dash leaps there (louder, longer), a turn is the neighbour below or above (short), a
+  ping repeats the note with a glint an octave up, a wait rests. On the beats it lands on the chord's tones. In a
+  phrase's first half (A) it sings on the eighths (a dash anywhere), in B on every step: verse and chorus. Riding a
+  belt the chord rolls up or down after it; a pulse pad holds the note longer; BRIGHT, LOW and GLITCH colour it.
+- **Echo-3 is the second voice.** While Scout-7 sings it holds the harmony on the beats, a third or a sixth under
+  it (by its column); when Scout-7 rests (a wait, a hesitation, death) it answers with a line of its own, walking
+  to where it stands, an octave lower; in A once a beat besides.
+- **The bass walks.** The root on the one (the reset tick, with the kick), the fifth on three, on the other beats
+  the root, third or fifth by Echo-3's column (up the octave when it dashes), on the eighths between, while Echo-3
+  moves, a scale step towards the next; before Voice Mod changes a scale step into the next root; when Echo-3 stands
+  still the beat's note holds.
+- **The ghost ticks** (2 or 4 ticks a move) glint softly on the and. **The tiles' and events' pitches** (the
+  rotator, the pulse pad, the reset's chime, the collision, the coin, the thump) are moved to the nearest chord tone,
+  so they are in key in every scale.
+
+plus_test holds it: the game the same as CLASSIC's tick for tick, 0 notes outside the scale and 0 rubs over 24
+setups, chord tones on the beats and the root on the one, Scout-7's line 2.1 to 3.3 semitones a note on the six
+boards (the HTML's 1.4 to 4.4) with no leap past an octave but a dash's, A sparser than B, a bass on the beats.
 

@@ -190,7 +190,7 @@ void rs_load_board(struct rs_state *s, uint8_t id)      /* applyBoardPreset() */
     rs_set_board(s, &b, id);
 }
 
-void rs_start(struct rs_state *s) { rs_reset(s); s->playing = 1; s->steer[0] = s->steer[1] = 0; }
+void rs_start(struct rs_state *s) { rs_reset(s); s->playing = 1; s->steer[0] = s->steer[1] = 0; s->plus_lead = s->plus_echo = s->plus_bass = 0; }
 
 void rs_stop(struct rs_state *s)                        /* stopPlayback() */
 {
@@ -423,7 +423,7 @@ void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
         rs_score_event(s, o->events[i], (uint32_t)at * 112896u, o);   /* 10 ms: 441 samples x 256 */
         at++;
     }
-    if (s->music) rs_score_plus(s, o);                  /* PLUS: RoboSeq's own on top of the HTML's score (D33) */
+    if (s->music) rs_score_plus(s, o);                  /* PLUS: RoboSeq's own music from the same game (D34) */
     if (s->rnd_due) {                                   /* seq 2's rolls, after the tick as the HTML's setTimeout */
         uint8_t due = s->rnd_due;
         s->rnd_due = 0;

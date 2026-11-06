@@ -132,13 +132,15 @@ plays; Voice Mod's scale and root keep them in key.
 
 ## The sound
 
-RoboSeq has two kinds of music, picked with SELECT on GLO. **PLUS**, where it starts, is RoboSeq's own on top of
-the original's: the same robots choose the same notes, and PLUS plays them as a band would. On every beat the robots
-land on the chord's tones, Echo-3's low voice becomes a bass line (the root on the one, the fifth on three, a step
-into the next chord before it changes), and the bar breathes in its accents. The drums keep your pattern but get a
-drummer: dynamics, ghost notes, a kick pushing into four every other loop, open and busier hats in the second half
+RoboSeq has two kinds of music, picked with SELECT on GLO. **PLUS**, where it starts, is RoboSeq's own music from the
+same game and the same sounds, each robot a musician. Scout-7 sings the line: where it stands is where the melody
+goes, a step walks there, a dash leaps, a turn is a neighbour note, a wait a rest, and on the beats it lands on the
+chord. Echo-3 harmonises it a third or a sixth below and answers when Scout-7 rests, and its low voice walks a bass
+under them (the root on the one, the fifth on three, a step into each new chord). The first half of each phrase is
+sparser than the second, like a verse and a chorus, and the tiles' sounds are tuned to the chord. The drums keep
+your pattern but get a drummer: dynamics, ghost notes, a kick pushing into four every other loop, open and busier hats in the second half
 of each phrase, a fill at its end and a crash on the next. The room shades with each chord and opens in the second
-half, where a soft answer to Scout-7 joins on the off-beats. And Voice Mod's random (SCL, 16) writes a progression
+half. And Voice Mod's random (SCL, 16) writes a progression
 in a key, such as I V vi IV, ii V I vi, i VI VII i or a modal vamp, instead of four unrelated keys.
 
 **CLASSIC** is the browser original's music, note for note: the same game and the same score, checked against the
