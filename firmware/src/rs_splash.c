@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
 /* RoboSeq's splash at boot, after the product owner's draft (2026-11-06), animated: the letters drop in one by one,
- * the star over them twinkles, the robots come in from the sides and bob, the pulse pad between them sends its
- * rings out, the dots fill as it starts. About 2.6 s; a key or a button skips it. Main loop (rs_screen.c's canvas);
+ * the star over them twinkles, the robots come in from the sides and bob, the board's pulse tile between them
+ * sends its rings out, the dots fill as it starts. About 2.6 s; a key or a button skips it. Main loop (rs_screen.c's canvas);
  * the art from tools/art (splash.py: the lettering; robots.py: the robots, drawn twice the size). */
 #include "rs_splash_art.h"
 
@@ -80,18 +80,18 @@ static void draw_splash(uint32_t t)
     {
         int32_t cx = 120, cy = 158;
         for (k = 0; k < 3; k++) {
-            int32_t r = (int32_t)((t / 12u + (uint32_t)k * 18u) % 54u) + 10;
-            uint16_t c = mix565(C_PULSE, bg, (uint32_t)(220 - r * 3));
+            int32_t r = (int32_t)((t / 12u + (uint32_t)k * 18u) % 46u) + 22;   /* (from the tile's edge out) */
+            uint16_t c = mix565(C_PULSE, bg, (uint32_t)(250 - r * 3));
             for (y = -r; y <= r; y++)
                 for (x = -r; x <= r; x++) {
                     int32_t d = x * x + y * y;
                     if (d >= (r - 1) * (r - 1) && d < r * r && cy + y < 196) cv_pset(cx + x, cy + y, c);
                 }
         }
-        cv_rect(cx - 9, cy - 9, 18, 18, RGB(0x05, 0x14, 0x14));
-        cv_rect(cx - 8, cy - 8, 16, 16, C_PULSE);
-        cv_rect(cx - 8, cy - 8, 16, 2, mix565(C_WHITE, C_PULSE, 120));
-        cv_rect(cx - 1, cy - 5, 2, 10, C_WHITE), cv_rect(cx - 5, cy - 1, 10, 2, C_WHITE);
+        {                                       /* the board's own pulse tile, its rings going out from it */
+            static const struct rs_tile_t PAD = {RS_T_PULSE, 0};
+            draw_tile(cx - CELL / 2, cy - CELL / 2, &PAD);
+        }
     }
     /* the floor */
     cv_rect(14, 196, 212, 2, line);

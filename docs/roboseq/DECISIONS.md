@@ -221,7 +221,7 @@ board). It changes with the board, as the board changes with the loop, gliding t
 ## D25. A splash at boot, animated, after the product owner's draft (2026-11-06)
 
 The product owner drew a splash (the RoboSeq lettering in mint with a star over it and three red strokes under,
-Scout-7 and Echo-3 either side of a pulse pad and its rings, a floor, a row of dots, coloured corners) and asked for
+Scout-7 and Echo-3 either side of a pulse pad and its rings (the board's own pulse tile), a floor, a row of dots, coloured corners) and asked for
 it animated. rs_splash.c draws it from our art (tools/art/splash.py's lettering, the robots twice the size): the
 letters drop in one after the other, the star twinkles, the robots come in from the sides and bob, the pad's rings
 go out, the dots fill as it starts. About 2.6 s; any key or button skips it (and is not also a press on the board).
