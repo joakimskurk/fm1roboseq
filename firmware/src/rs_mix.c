@@ -85,6 +85,8 @@ void rs_mix_init(struct rs_mix *m, uint32_t seed)
     m->max_att = M_NONE;
     rs_lead_init(&m->lead);
     m->dly_len = m->dly_target = 24806;         /* three 16ths at 80 BPM */
+    for (uint32_t i = 0; i < 8; i++) m->rev_k[i] = REV_KT[8 + i];   /* the HTML's room, no colour */
+    m->send_t = m->send_n = SEND;
     for (uint32_t i = 0; i < DLY_MAX; i++) lead_dly[0][i] = lead_dly[1][i] = 0;
 }
 
@@ -100,6 +102,30 @@ static void lead_delay(struct rs_mix *m, int32_t in, int32_t *l, int32_t *r)   /
     if ((m->dly_w & 7u) == 0 && m->dly_len != m->dly_target)   /* a new tempo: it glides there, as tape */
         m->dly_len += m->dly_target > m->dly_len ? 1 : -1;
     *l = mulq15(yl, DLY_WET), *r = mulq15(yr, DLY_WET);
+}
+
+void rs_mix_colour(struct rs_mix *m, const struct rs_board *bd, uint32_t amount)   /* the board's colour (D24) */
+{
+    int32_t n[7] = {0}, a = amount > 100u ? 100 : (int32_t)amount, i;
+    for (i = 0; i < RS_ROWS * RS_COLS; i++) n[bd->t[i].type % 7u]++;
+    int32_t rot = n[RS_T_ROTL] + n[RS_T_ROTR], nb = n[RS_T_BELT], nz = n[RS_T_ZAP], np = n[RS_T_PULSE];
+    int32_t nk = n[RS_T_BLOCK], ne = n[RS_T_NONE];
+    /* the room, -1 .. 1 (x 1000): an open board a bigger room, crates a smaller one; the default board's is 0 */
+    int32_t room = (ne - 13) * 250 - (nk - 1) * 333;
+    room = (room < -1000 ? -1000 : room > 1000 ? 1000 : room) * a / 100;
+    for (i = 0; i < 8; i++) {                   /* between the room 0.75, 1 and 1.35 times as long */
+        int32_t k0 = REV_KT[8 + i], k1 = room < 0 ? REV_KT[i] : REV_KT[16 + i], w = room < 0 ? -room : room;
+        m->rev_k[i] = k0 + (int32_t)(((int64_t)(k1 - k0) * w) / 1000);   /* (main loop: a division is fine) */
+    }
+    /* the send: pulse pads cool it (more room), zap rails dry it; the tilt: zaps and belts brighter, pulses warmer;
+     * the drive: zaps and rotators. Each times the amount: 0 % is the HTML's sound */
+    int32_t send = 1000 + 120 * (np - nz), tilt = 60 * nz + 30 * nb - 60 * np, drive = 40 * nz + 20 * rot;
+    send = send < 500 ? 500 : send > 1500 ? 1500 : send;
+    tilt = tilt < -350 ? -350 : tilt > 350 ? 350 : tilt;
+    drive = drive > 400 ? 400 : drive;
+    m->send_t = SEND + (SEND * (send - 1000) / 1000) * a / 100;
+    m->tilt_t = 32768 * tilt / 1000 * a / 100;
+    m->drive_t = 32768 * drive / 1000 * a / 100;
 }
 
 void rs_mix_note(struct rs_mix *m, uint8_t voice, uint32_t at, uint32_t dur, int midi, uint16_t vel)
@@ -120,7 +146,7 @@ static inline int32_t mulh(int32_t x, int32_t k) { return (int32_t)(((int64_t)x 
 #define TAP(i) int32_t r##i = (int32_t)m->line[REV_O##i + m->line_i[i]] * 256
 #define FEED(i, h)                                                             \
     do {                                                                       \
-        int32_t v = (mulh(h, REV_K##i) + x + 128) >> 8;                        \
+        int32_t v = (mulh(h, m->rev_k[i]) + x + 128) >> 8;                     \
         if (v > 32767) v = 32767, m->clips++;                                  \
         else if (v < -32768) v = -32768, m->clips++;                           \
         m->line[REV_O##i + m->line_i[i]] = (int16_t)v;                         \
@@ -231,6 +257,13 @@ void rs_mix_render(struct rs_mix *m, int32_t *out, uint32_t n, uint32_t now)
         for (uint32_t i = 0; i < RS_MIX_SUB; i++) m->lead_bus[i] = 0;
         rs_lead_render(&m->lead, m->lead_bus, RS_MIX_SUB);
         lim_division(m);
+        {                                               /* the board's colour glides to its new one (D24) */
+            int32_t d = m->send_t - m->send_n;
+            m->send_n += d / 8 ? d / 8 : d;
+            d = m->tilt_t - m->tilt_n, m->tilt_n += d / 8 ? d / 8 : d;
+            d = m->drive_t - m->drive_n, m->drive_n += d / 8 ? d / 8 : d;
+        }
+        int32_t drive3 = m->drive_n / 3;                /* (the drive's d / 3, once a block: no 64-bit division) */
         for (uint32_t i = 0; i < RS_MIX_SUB; i++) {
             int32_t mel = mulq15(m->bus[RS_BUS_MELODY][i], lv[RS_L_MELODY]);
             int32_t perc = mulq15(m->bus[RS_BUS_PERC][i], lv[RS_L_PERC]);
@@ -245,10 +278,22 @@ void rs_mix_render(struct rs_mix *m, int32_t *out, uint32_t n, uint32_t now)
             int32_t el = 0, er = 0;
             if (ld) m->dly_hold = 8u * RS_SR;  /* the echoes ring out for 8 s after the lead's last sound, then rest */
             if (m->dly_hold) m->dly_hold--, lead_delay(m, ld, &el, &er);
-            int32_t rev_r, rev = (reverb(m, mulq15(mel + perc + fx + ld, SEND), &rev_r) + 256) >> 9;
+            int32_t rev_r, rev = (reverb(m, mulq15(mel + perc + fx + ld, m->send_n), &rev_r) + 256) >> 9;
             int32_t dry = mel + ((y + 128) >> 8) + perc + fx + dr + ld;
-            limiter(m, mulq15(dry + el + rev, lv[RS_L_MASTER]), mulq15(dry + er + ((rev_r + 256) >> 9), lv[RS_L_MASTER]),
-                    out + 2u * (f0 + i));
+            int32_t mo[2] = {mulq15(dry + el + rev, lv[RS_L_MASTER]), mulq15(dry + er + ((rev_r + 256) >> 9), lv[RS_L_MASTER])};
+            if (m->tilt_n || m->drive_n)                /* the board's colour (D24): a tilt, then a soft drive */
+                for (uint32_t c = 0; c < 2; c++) {
+                    int32_t x = mo[c];
+                    m->tlp[c] += mulq15(x - m->tlp[c], 4357);   /* a one-pole at ~1 kHz: above it is tilted */
+                    x += mulq15(x - m->tlp[c], m->tilt_n);
+                    if (m->drive_n) {                   /* x - d x^3 / 3, within +-1.3 of full scale */
+                        int32_t xc = x > 42598 ? 42598 : x < -42598 ? -42598 : x;
+                        int32_t x3 = (int32_t)(((((int64_t)xc * xc) >> 15) * xc) >> 15);
+                        x = xc - (int32_t)(((int64_t)x3 * drive3) >> 15);
+                    }
+                    mo[c] = x;
+                }
+            limiter(m, mo[0], mo[1], out + 2u * (f0 + i));
         }
     }
 }

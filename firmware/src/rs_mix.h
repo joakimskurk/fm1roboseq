@@ -21,6 +21,9 @@ struct rs_mix {
     struct rs_voice v[RS_NVOICES];
     struct rs_lead lead;                        /* the player's solo voice (D21), on a bus of its own */
     int32_t lead_bus[RS_MIX_SUB];
+    volatile int32_t rev_k[8];                  /* the reverb's line gains, Q32 (the board's room: D24) */
+    volatile int32_t send_t, tilt_t, drive_t;   /* the board's colour (D24), Q15: the send, a tilt (+ brighter), a drive */
+    int32_t send_n, tilt_n, drive_n, tlp[2];    /* where they are on their way; the tilt's low-pass, L and R */
     volatile int32_t dly_target;                /* the lead's delay, samples: three steps (the main loop sets it) */
     int32_t dly_len, dly_lp;
     uint32_t dly_w, dly_hold;
@@ -42,6 +45,9 @@ struct rs_mix {
 };
 
 void rs_mix_init(struct rs_mix *m, uint32_t seed);
+/* the board colours the whole sound (D24): its tiles into the reverb's room and send, a tilt and a drive, amount %
+ * of the way (0: the HTML's sound); main loop, when the board or the amount changes */
+void rs_mix_colour(struct rs_mix *m, const struct rs_board *bd, uint32_t amount);
 /* triggerAttackRelease on voice `voice` (RS_V_*): rs_voice_note's arguments */
 void rs_mix_note(struct rs_mix *m, uint8_t voice, uint32_t at, uint32_t dur, int midi, uint16_t vel);
 /* n frames (a multiple of RS_MIX_SUB) from sample `now` on into out, stereo (L R L R), Q15 in int32 (the limiter's

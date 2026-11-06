@@ -97,6 +97,7 @@ The white keys rest here (no register on the screen); the black keys steer as ev
 |---|---|
 | white keys 1-7 | pick master, melody, bot B, percussion, FX, drums or the lead |
 | KNOB1 | its level, 0-100 % (2 % a detent; it glides there, as the HTML's 50 ms ramp) |
+| KNOB2 | how much the board's tiles colour the whole sound: room, send, tilt, drive (D24); 0 % the HTML's |
 
 ## ENV (the boards)
 

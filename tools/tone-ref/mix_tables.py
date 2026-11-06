@@ -108,6 +108,8 @@ def build():
           f"#define REV_K{i} {q(math.exp(-d / TAU) / math.sqrt(8), 32)}\n")
     for i, d in enumerate(APS):
         p(f"#define AP_L{i} {d}\n#define AP_O{i} {sum(APS[:i])}\n")
+    p("/* the lines' gains for a room 0.75, 1 and 1.35 times as long (the board's colour, D24), Q32 */\n")
+    p(table("REV_KT", "int32_t", [q(math.exp(-d / (TAU * f)) / math.sqrt(8), 32) for f in (0.75, 1.0, 1.35) for d in LINES], 8))
     p(f"#define AP_LR {AP_R}                      /* the right's own last all-pass (its early part apart from the left's) */\n")
     p(f"#define REV_DR {R_DELAY}                     /* and 3 ms later than the left's */\n")
     assert sum(a * b for a, b in zip(SIGNS, SIGNS_R)) == 0

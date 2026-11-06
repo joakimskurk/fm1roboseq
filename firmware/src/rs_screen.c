@@ -595,7 +595,7 @@ static void draw_drums(const struct rs_view *v, const struct rs_state *g, uint32
 }
 
 /* ---- FX: the mix (the HTML's MIX panel): master, the five buses and the lead as faders, the one on KNOB1 framed */
-static void draw_mix(const volatile int32_t *level, uint32_t cursor)
+static void draw_mix(const volatile int32_t *level, uint32_t cursor, uint32_t colour)
 {
     static const char *const NAME[RS_NLEVEL] = {"MAST", "MEL", "BOTB", "PERC", "FX", "DRUM", "LEAD"};
     uint16_t cell = RGB(0x1a, 0x1a, 0x2e);
@@ -604,16 +604,21 @@ static void draw_mix(const volatile int32_t *level, uint32_t cursor)
     cv_text(120 - text_w(&FONT_S, "MIX") / 2, 0, &FONT_S, "MIX", C_TEXT);
     cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
     for (k = 0; k < RS_NLEVEL; k++) {
-        int32_t x = (int32_t)k * 34 + 1, pct = (level[k] * 100 + 16384) >> 15, h = pct * 140 / 100;
+        int32_t x = (int32_t)k * 34 + 1, pct = (level[k] * 100 + 16384) >> 15, h = pct * 128 / 100;
         uint16_t c = k == 0 ? C_TEXT : k == 1 ? C_BOT_A : k == 2 ? C_BOT_B : k == 3 ? C_PULSE : k == 4 ? C_BELT : k == 5 ? C_DANGER : C_ACCENT;
-        cv_rect(x + 10, 40, 14, 140, cell);
+        cv_rect(x + 10, 52, 14, 128, cell);
         cv_rect(x + 10, 180 - h, 14, h, k == cursor ? c : mix565(c, cell, 140));
-        if (k == cursor) frame(x + 8, 38, 18, 144, 1, C_WHITE);
+        if (k == cursor) frame(x + 8, 50, 18, 132, 1, C_WHITE);
         digits(x + 17 - (pct >= 100 ? 9 : pct >= 10 ? 6 : 3), 186, (uint32_t)pct, pct >= 100 ? 3u : pct >= 10 ? 2u : 1u, C_TEXT);
-        cv_text(x + 17 - text_w(&FONT_S, NAME[k]) / 2, 18, &FONT_S, NAME[k], k == cursor ? C_TEXT : C_MUTED);
-        digits(x + 14, 222, k + 1u, 1, C_MUTED);   /* its white key */
+        cv_text(x + 17 - text_w(&FONT_S, NAME[k]) / 2, k & 1u ? 33 : 17, &FONT_S, NAME[k], k == cursor ? C_TEXT : C_MUTED);   /* (staggered) */
     }
-    cv_text(4, 200, &FONT_S, "KEYS 1-7 PICK  K1 LEVEL", mix565(C_MUTED, C_BG, 160));
+    {
+        char t[24] = "K2 BOARD COLOUR    %";
+        uint32_t c = colour > 100u ? 100u : colour;
+        t[16] = c >= 100u ? '1' : ' ', t[17] = c >= 10u ? (char)('0' + c / 10u % 10u) : ' ', t[18] = (char)('0' + c % 10u);
+        cv_text(4, 200, &FONT_S, "KEYS 1-7 PICK  K1 LEVEL", mix565(C_MUTED, C_BG, 160));
+        cv_text(4, 222, &FONT_S, t, colour ? C_ACCENT : C_MUTED);
+    }
     screen_out();
 }
 

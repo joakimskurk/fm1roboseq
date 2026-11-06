@@ -51,6 +51,11 @@
 #define AP_O2 220
 #define AP_L3 263
 #define AP_O3 417
+/* the lines' gains for a room 0.75, 1 and 1.35 times as long (the board's colour, D24), Q32 */
+static const int32_t REV_KT[24] = {
+    1343956545, 1314788127, 1291489960, 1268089257, 1245112556, 1224043398, 1201864770, 1178171489,
+    1385615194, 1362999031, 1344844257, 1326526971, 1308459174, 1291817992, 1274222944, 1255336333,
+    1418907081, 1401715306, 1387861318, 1373834087, 1359948630, 1347115518, 1333500108, 1318830896};
 #define AP_LR 241                      /* the right's own last all-pass (its early part apart from the left's) */
 #define REV_DR 131                     /* and 3 ms later than the left's */
 #define REV_TAPS (r0 - r1 + r2 - r3 - r4 + r5 - r6 + r7)   /* an output: the lines with their signs */

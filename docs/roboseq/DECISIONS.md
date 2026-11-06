@@ -208,3 +208,13 @@ ping-pong delay on the lead alone, three steps long (a dotted eighth of the play
 0.74 s), feedback 0.45 through a darker one-pole, 0.4 of it heard, gliding to a new tempo as tape does; its level
 0.6, about 17 dB under full scale alone, 2 dB under D21's.
 
+## D24. The board colours the whole sound, a little (2026-11-06)
+
+The product owner: a parameter by which the board's layout does a tiny bit to the whole sound, so that not
+everything is quite the same. rs_mix_colour counts the tiles: an open board makes the reverb's room longer (up to
+1.35 times), crates shorter (down to 0.75); pulse pads send more to it (they cool), zap rails less (drier); zaps
+and belts tilt the master brighter, pulses warmer (a tilt around 1 kHz, up to +-35 %); zaps and rotators drive it
+a little (a soft cubic, up to 0.4). The default board's room and send are the HTML's. FX's KNOB2 sets how far of
+the way it goes, 0-100 % (40 % at start); at 0 % the sound is the HTML's exactly (colour_test holds it for every
+board). It changes with the board, as the board changes with the loop, gliding there.
+

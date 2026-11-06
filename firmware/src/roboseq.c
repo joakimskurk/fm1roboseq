@@ -18,7 +18,8 @@
  *              on / off (queued while playing), roll A's / B's register on its wrap, reset, random
  *   LFO        the drums: SELECT picks kick, snare or hihat, a white key turns its step; KNOB1 the patterns (then
  *              CLEAR), KNOB4 on / off
- *   FX         the mix: white keys 1-7 pick master, a bus or the lead, KNOB1 its level
+ *   FX         the mix: white keys 1-7 pick master, a bus or the lead, KNOB1 its level; KNOB2 how much the board's
+ *              tiles colour the whole sound (its room, send, tilt, drive: D24; 0 % is the HTML's)
  *   ENV        the boards: white keys 1-6 the presets, 7 reroll, 8 the user board, 9 save it, 10 clear it, 11 reset
  *              (the bots to their pads); KNOB1 how full a reroll is; while playing a board comes with the next loop
  *   EDIT       whose register is on the white keys: Scout-7 or Echo-3 (lit: Echo-3)
@@ -179,6 +180,18 @@ static uint8_t white_key[16], black_key[11];    /* key index (0 = F3) of the k-t
 static uint8_t sel_bot, bank, layer;
 static uint8_t lead_on, held_n, held[27];       /* REC: the keys play the lead (D21); the keys held, in the order pressed */
 static int8_t lead_oct;                         /* its octave, -2 .. +2 (OCT- / OCT+ while it is on) */
+
+static uint8_t colour_amt = 40;                 /* how much the board colours the sound (D24), % (FX's KNOB2) */
+static uint32_t colour_sig = ~0u;
+
+static void board_colour(void)                  /* the board's tiles colour the sound (D24), when they or the amount change */
+{
+    uint32_t n[7] = {0}, i, sig;
+    for (i = 0; i < RS_ROWS * RS_COLS; i++) n[game.board.t[i].type % 7u]++;
+    sig = n[RS_T_BELT] | n[RS_T_ZAP] << 5 | (n[RS_T_ROTL] + n[RS_T_ROTR]) << 10 | n[RS_T_PULSE] << 15 |
+          n[RS_T_BLOCK] << 20 | (uint32_t)colour_amt << 25;
+    if (sig != colour_sig) colour_sig = sig, rs_mix_colour(&mix, &game.board, colour_amt);
+}
 
 static void lead_keys(uint32_t down, uint32_t up)   /* the last key held wins; let go, the one held before it again */
 {
@@ -413,7 +426,11 @@ static void app_main(void)
                 mix.level[mix_cursor] = l < 0 ? 0 : l > 32768 ? 32768 : l;
                 dirty = 1;
             }
-            (void)fm1_enc_take(ENC_KNOB2), (void)fm1_enc_take(ENC_KNOB3), (void)fm1_enc_take(ENC_KNOB4);
+            if ((e = fm1_enc_take(ENC_KNOB2)) != 0) {   /* how much the board colours the sound, 5 % a detent */
+                int32_t c = colour_amt + 5 * e;
+                colour_amt = (uint8_t)(c < 0 ? 0 : c > 100 ? 100 : c), dirty = 1;
+            }
+            (void)fm1_enc_take(ENC_KNOB3), (void)fm1_enc_take(ENC_KNOB4);
         } else if ((e = fm1_enc_take(ENC_KNOB1)) != 0) turn_length(e), dirty = 1;
         len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len;
         if (page != PAGE_HOME && page != PAGE_SEQ) {
@@ -438,6 +455,7 @@ static void app_main(void)
             if (bank * 16u >= len) bank = 0;
         }
         schedule();
+        board_colour();
         {                                       /* the lead's delay: three steps (a dotted eighth), halved till it fits */
             uint32_t d = rs_step_q8(&game) * 3u >> 8;
             while (d >= DLY_MAX) d >>= 1;
@@ -474,7 +492,7 @@ static void app_main(void)
             else if (page == PAGE_SCL) draw_scl(&game, scl_cursor);
             else if (page == PAGE_ARP) draw_arp(&game, arp_cursor);
             else if (page == PAGE_LFO) draw_drums(v, &game, drum_row);
-            else if (page == PAGE_FX) draw_mix(mix.level, mix_cursor);
+            else if (page == PAGE_FX) draw_mix(mix.level, mix_cursor, colour_amt);
             else if (page == PAGE_ENV) draw_boards(&game);
             else draw_board(v, &fx, &ui, fm1_ms);
             due = fx_due(&fx, fm1_ms);
