@@ -10,7 +10,8 @@ its newer MIDI; the hardware risk is known and stays in ROADMAP phase 4.
 
 `FM-1_960` for dev builds, `FM-1_96N` for release 0.N. Not in Dinghy's list of taken ones (900, 91N, 93N, 97N, 98N,
 99N), not fm1-dock's (921) or the 95N fm1-dock found taken. SkurkyMello and APSIS both carry 970, so RoboSeq does not.
-The Firmware Hub's public page shows no identities: to be checked there before the first release.
+The Firmware Hub's public page shows no identities: to be checked there before the first release. (Superseded by
+D31: 960 is taken.)
 
 ## D3. The HTML is the reference (2026-11-05)
 
@@ -296,3 +297,14 @@ only while ARP is lit; outside ARP, SELECT does what the page has it do and the 
 ARP, K4 is the lead's octave, -2 .. +2 as OCT- / OCT+ (the product owner's first wish for K4 was "octave, or an arp
 up or down"), its fader from the middle; and an octave moved, by the knob or the buttons, takes the key held with it
 at once, gliding there, rather than on the next key. D26's scale arp is gone.
+
+## D31. The identity FM-1_965, one for every build (2026-11-06)
+
+The Firmware Hub's catalogue (thefirmwarehub.com/catalog.json, read 2026-11-06) shows D2's `FM-1_960` taken by
+SID-1 (putchdev) and matched by Makohai, and release 0.N's `FM-1_96N` mostly taken too (961 FOMAJAM, 964 SIDOU, 966
+GR!MM, 968 RUPTURE, 969 Demake and Kitten Synths). With a shared identity the hub cannot tell which firmware an
+FM-1 runs. The product owner chose `FM-1_965`: free there, and of the form `FM-1_9NN` the hub and the web installers
+resume an interrupted install for. One identity for every build, dev and release, as the hub allows ("same asset
+name and same identity is fine"): the version is only in the text (`--release X.Y`), so a release can never drift
+onto another firmware's number. The SMK-37 packages follow: `SMK-37 Pro_965`, `SMK-37 Elite_965`, `MKE-P37_965`.
+

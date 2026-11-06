@@ -52,12 +52,11 @@ done
 $CC -DBOARD_SMK37=1 -o "$OUT/ldr_test_smk" tests/ldr_test.c
 run "update loader, SMK-37: app area 0x4000-0x9CFFF, protected ranges untouched" "$OUT/ldr_test_smk" "$OUT/smk_old.fwsc" "$OUT/smk_new.fwsc"
 found=0
-for m in ":SMK-37 Pro_96" "-elite:SMK-37 Elite_96" "-mke:MKE-P37_96"; do
+for m in ":SMK-37 Pro_965" "-elite:SMK-37 Elite_965" "-mke:MKE-P37_965"; do   # one identity for every build (D31)
     for f in build/roboseq*-smk37${m%%:*}.fwsc; do
         [ -f "$f" ] || continue
         found=1
-        v=$(echo "$f" | sed -n 's/.*roboseq-[0-9]\.\([0-9]\).*/\1/p'); v=${v:-0}
-        run "SMK-37 package $f: layout, identity ${m#*:}$v, the loader marker" python3 tests/smk_pkg_test.py "$f" "${m#*:}$v"
+        run "SMK-37 package $f: layout, identity ${m#*:}, the loader marker" python3 tests/smk_pkg_test.py "$f" "${m#*:}"
     done
 done
 [ "$found" = 1 ] || echo "(no SMK-37 packages in build/: BOARD=smk37 sh build.sh first)"

@@ -17,10 +17,10 @@ Kept small, so a later Dinghy can be merged by diffing these files.
 | file | change |
 | --- | --- |
 | `firmware/src/dinghy.c` | renamed `roboseq.c`: the app; `APP_NAME "ROBOSEQ"`, `STORE_MAGIC` "RSEQ" |
-| `tools/build.py` | compiles `roboseq.c`; outputs `roboseq.*`; identity `FM-1_96N`; loader screen "ROBOSEQ" in mint `0x8FFA`; data family `ROBOSEQ` |
+| `tools/build.py` | compiles `roboseq.c`; outputs `roboseq.*`; identity `FM-1_965` for every build (D31); loader screen "ROBOSEQ" in mint `0x8FFA`; data family `ROBOSEQ` |
 | `build.sh` | a comment |
 | `tests/run_host.sh` | builds `roboseq.c` as `build/host/roboseq` |
-| `tests/run_tests.sh` | `roboseq.*` names; the SMK-37 packages' identities `_96N` |
+| `tests/run_tests.sh` | `roboseq.*` names; the SMK-37 packages' identities `_965` |
 | `tests/install_test.py` | `roboseq.*` names |
 | `README.md` | moved to `docs/DINGHY_README.md`; RoboSeq's README in its place |
 | `.github/workflows/release.yml` | replaced by `build.yml` (zvenson/fm1-build, as SkurkyMello) |

@@ -26,13 +26,14 @@ music.
 ## Phase 0: the foundation (2026-11-05)
 
 - [x] Dinghy 0.4 imported unchanged (`22acb91`), then RoboSeq's name and identity: `roboseq.c`, `ROBOSEQ`,
-      `FM-1_960`, store magic `RSEQ`, the loader's screen in RoboSeq mint
+      `FM-1_960` (now `FM-1_965`: D31), store magic `RSEQ`, the loader's screen in RoboSeq mint
 - [x] `reference/roboseq.html` as the reference (SHA-256 in reference/README.md), the April handoff beside it
 - [x] CLAUDE.md, README.md, PLATFORM.md, DECISIONS.md, this roadmap
 - [x] Makefile (`make test`, `make host`, `make fw`), CI on every push (zvenson/fm1-build, like SkurkyMello)
 - [x] The first CI run green (2026-11-05, `6b78aa4`; its package byte-identical to `make fw`), and that `.fwsc`
       (still Dinghy's sine) boots in fm1-emu 0.4.0 under FM1_STRICT: ROBOSEQ on the screen, a key plays (`make emu`)
-- [ ] Check `FM-1_96N` against the Firmware Hub's list (not verifiable from its public page, 2026-11-05)
+- [x] Check the identity against the Firmware Hub's list: 960 was SID-1's, so `FM-1_965` for every build (D31,
+      2026-11-06, from the hub's catalog.json)
 - [ ] RoboSeq's own logo for `assets/` (Dinghy's is designburg's, not under the GPL)
 
 ## Phase 1: model and simulation (host only)

@@ -49,8 +49,8 @@ python3 tools/fm1_install.py --info        # what the FM-1 runs now
 ```
 
 The same package plays in `fm1-emu` on a computer and in its web emulator. Back to another firmware with the
-[FM-1 Firmware Hub](https://thefirmwarehub.com) in Chrome or Edge. RoboSeq identifies itself as `FM-1_960`, which is
-not yet checked against the Hub's list.
+[FM-1 Firmware Hub](https://thefirmwarehub.com) in Chrome or Edge. RoboSeq identifies itself as `FM-1_965`, free on the
+Hub (checked 2026-11-06), the same for every version.
 
 ## A first tour
 
