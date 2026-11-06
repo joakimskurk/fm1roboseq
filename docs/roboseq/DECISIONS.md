@@ -141,7 +141,9 @@ The product owner chose both ways of reaching the robots. The white keys are the
 modifier kept, so it sounds like the step it replaces), then its register goes on. Five per bot: TURN L, MOVE,
 TURN R (left, ahead, right under the hand), DASH and PING; BACK and WAIT stay in the registers. The eleventh swaps the
 registers, as the HTML's REG SWAP. The steer is the player's, not the HTML's: with none the game is the HTML's tick
-for tick (the traces hold that). The step framed on the top row is the one the register plays (step mod its
+for tick (the traces hold that). Both registers run down the board's sides, Scout-7's left and Echo-3's right, top to bottom as the white keys
+left to right (the product owner, 2026-11-06: one row alone confused); the one on the keys bright. The step framed
+is the one the register plays (step mod its
 length); the HTML frames the step's number, which is off the card when the register is shorter than the loop.
 docs/roboseq/CONTROLS.md has the rules (C1-C6).
 

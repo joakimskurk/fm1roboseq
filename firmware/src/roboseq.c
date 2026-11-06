@@ -4,7 +4,8 @@
  *
  *   PLAY       starts the default song from its start, and stops it (the HTML's PLAY and STOP)
  *   white keys the 16 steps of a bot's register (its movement sequencer): a key turns its step to the next action,
- *              as the HTML's step cards do (on the screen's top row; the step playing framed)
+ *              as the HTML's step cards do (the registers down the screen's sides, Scout-7 left, Echo-3 right,
+ *              the one on the keys bright; the step playing framed)
  *   SEQ        whose register is on the white keys: Scout-7 or Echo-3
  *   OCT- OCT+  the register's next 16 steps (a register is up to 64)
  *   black keys steer the bots by hand: the next move is this one (D16). F# G# A# C# D# from F3: Scout-7's TURN L,
@@ -181,11 +182,15 @@ static int keys(uint32_t down)                  /* what the keys pressed now do;
 
 static void ui_of(struct rs_ui *u, const struct rs_view *v)
 {
-    uint32_t k, len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len;
-    u->sel = sel_bot, u->bank = bank, u->len = (uint8_t)len, u->swapped = game.swapped;
-    u->playing_at = v->playing && v->step >= 0 ? (int16_t)(v->step % (int16_t)len) : -1;
-    u->steer[0] = game.steer[0], u->steer[1] = game.steer[1];
-    for (k = 0; k < 16u; k++) u->steps[k] = game.prog[sel_bot].s[(bank * 16u + k) & 63u];
+    uint32_t k, b;
+    u->sel = sel_bot, u->bank = bank, u->swapped = game.swapped;
+    for (b = 0; b < 2; b++) {
+        uint32_t len = game.prog[b].len ? game.prog[b].len : game.loop_len;
+        u->len[b] = (uint8_t)len;
+        u->playing_at[b] = v->playing && v->step >= 0 ? (int16_t)(v->step % (int16_t)len) : -1;
+        u->steer[b] = game.steer[b];
+        for (k = 0; k < 16u; k++) u->steps[b][k] = game.prog[b].s[(bank * 16u + k) & 63u];
+    }
 }
 
 static void app_main(void)

@@ -2,7 +2,8 @@
 /* RoboSeq's board on the FM-1's 240 x 240 screen: the HTML's renderBoard() as pixel art. The 5 x 5 board in cells
  * of 40 px (the HTML's tile art is drawn on a 40 x 40 grid, so it comes over 1:1), the bots on a 32 x 32 grid as
  * the HTML's robotPixelArt, the tiles an event lit, the explosion, the heart and the clash star for as long as the
- * HTML shows them; above it the register on the white keys, below it the bots' health as the HTML's status cards.
+ * HTML shows them; down its sides the two registers (Scout-7 left, Echo-3 right), above it the step and the cycle,
+ * below it the bots' health as the HTML's status cards.
  * Main loop only (it draws into the canvas, gfx.c). Colours are the HTML's CSS. */
 
 /* ---- what the screen shows: the game as it is heard (roboseq.c keeps one a step, for when it sounds) */
@@ -269,10 +270,11 @@ static void draw_clash(int32_t x, int32_t y)
 
 /* ---- the keys' side (D16): the register on the white keys, the steering on the black ones */
 struct rs_ui {
-    uint8_t sel, bank, len, swapped;            /* the bot on the white keys, its 16-step page, its register's length */
-    int16_t playing_at;                         /* the step of the register playing now (-1: none) */
+    uint8_t sel, bank, swapped;                 /* the bot on the white keys, the 16-step page shown */
+    uint8_t len[2];                             /* each register's length */
+    int16_t playing_at[2];                      /* the step of each register playing now (-1: none) */
     uint8_t steer[2];                           /* a bot's next move, by hand (action + 1) */
-    struct rs_step steps[16];                   /* the page */
+    struct rs_step steps[2][16];                /* the page of each */
 };
 
 static const char *const ACT_GLYPH[RS_NACTIONS + 1][7] = {   /* the HTML's icons (⇧ ⇩ ↺ ↻ ⇶ ✦ ·), 7 x 7 */
@@ -295,21 +297,25 @@ static void glyph7(int32_t x, int32_t y, uint32_t g, int32_t px, uint16_t c)
             if (ACT_GLYPH[g][r][k] == '#') cv_rect(x + k * px, y + r * px, px, px, c);
 }
 
-static void draw_strip(const struct rs_ui *u)   /* the white keys: 16 steps of the picked bot's register */
+static void draw_strip(const struct rs_ui *u, int b)   /* a register down the board's side: Scout-7 left, Echo-3 right */
 {
     uint32_t k;
-    uint16_t bot = u->sel ? C_BOT_B : C_BOT_A;
+    int32_t x0 = b ? 220 : 0, on = u->sel == b;  /* the one on the white keys bright, the other dimmed */
+    uint16_t bot = b ? C_BOT_B : C_BOT_A, cell = RGB(0x1a, 0x1a, 0x2e);
     for (k = 0; k < 16; k++) {
-        int32_t x = (int32_t)k * 15, i = (int32_t)(u->bank * 16u + k);
-        if (i < u->len) {
-            cv_rect(x + 1, 1, 13, 17, RGB(0x1a, 0x1a, 0x2e));
-            glyph7(x + 1, 3, u->steps[k].action, 2, u->steps[k].prob == 100 ? ACT_COLOUR[u->steps[k].action]
-                                                     : mix565(ACT_COLOUR[u->steps[k].action], RGB(0x1a, 0x1a, 0x2e), 140));
-            if (i == u->playing_at) frame(x, 0, 15, 19, 1, C_WHITE);
+        int32_t y = (int32_t)k * 15, i = (int32_t)(u->bank * 16u + k);
+        const struct rs_step *st = &u->steps[b][k];
+        if (i < u->len[b]) {
+            uint16_t c = ACT_COLOUR[st->action];
+            if (st->prob != 100) c = mix565(c, cell, 140);
+            if (!on) c = mix565(c, cell, 110);
+            cv_rect(x0 + 1, y, 18, 14, cell);
+            glyph7(x0 + 3, y, st->action, 2, c);
+            if (i == u->playing_at[b]) frame(x0, y, 20, 15, 1, on ? C_WHITE : C_MUTED);
         } else
-            cv_rect(x + 6, 8, 3, 3, RGB(0x1a, 0x1a, 0x2e));   /* past its length */
+            cv_rect(x0 + 9, y + 6, 2, 2, cell); /* past its length */
     }
-    cv_rect(0, 18, 240, 1, bot);                /* whose register: its colour under it */
+    if (on) cv_rect(b ? 219 : 20, 0, 1, 240, bot);   /* on the white keys: its colour along the board */
 }
 
 /* ---- the whole screen */
@@ -342,11 +348,22 @@ static uint32_t fx_due(const struct rs_fx *fx, uint32_t now_ms)   /* when the ne
     return best;
 }
 
+static void put_num(char *p, uint32_t v, uint32_t w)   /* v in w digits, zeros in front */
+{
+    while (w--) p[w] = (char)('0' + v % 10u), v /= 10u;
+}
+
 static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const struct rs_ui *u, uint32_t now_ms)
 {
     int32_t i, b;
+    char top[32] = "STEP 00/00", cyc[8] = "C0000";
     cv_begin(240, 240, C_BG);
-    draw_strip(u);
+    draw_strip(u, 0), draw_strip(u, 1);
+    put_num(top + 5, (uint32_t)(v->step < 0 ? 0 : v->step + 1), 2);   /* the loop's step, the cycle */
+    put_num(top + 8, v->loop_len, 2);
+    put_num(cyc + 1, (v->cycle + 1u) % 10000u, 4);
+    cv_text(24, 2, &FONT_S, top, v->playing ? C_TEXT : C_MUTED);
+    cv_text(216 - text_w(&FONT_S, cyc), 2, &FONT_S, cyc, C_MUTED);
     /* the board */
     for (i = 0; i < RS_ROWS * RS_COLS; i++) {
         int32_t x = BX + (i % RS_COLS) * CELL, y = BY + (i / RS_COLS) * CELL;
@@ -377,12 +394,12 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const st
     if ((int32_t)(fx->heart_until - now_ms) > 0) draw_heart(BX + fx->heart_x * CELL, BY + fx->heart_y * CELL);
     /* the bots' health (the status cards): 6 less the heat */
     for (b = 0; b < 2; b++) {
-        int32_t x = b ? 124 : 4, hp = 6 - (v->bot[b].heat > 6 ? 6 : v->bot[b].heat < 0 ? 0 : v->bot[b].heat);
+        int32_t x = b ? 122 : 24, hp = 6 - (v->bot[b].heat > 6 ? 6 : v->bot[b].heat < 0 ? 0 : v->bot[b].heat);
         uint16_t c = hp <= 2 ? C_DANGER : hp <= 4 ? C_WARN : C_PULSE;
-        int32_t w = cv_text(x, 222, &FONT_S, b ? "ECHO-3" : "SCOUT-7", u->sel == b ? (b ? C_BOT_B : C_BOT_A) : C_MUTED) + 4;
-        cv_rect(w, 228, x + 104 - w, 6, RGB(0x1a, 0x1a, 0x2e));
-        cv_rect(w, 228, (x + 104 - w) * hp / 6, 6, c);
+        int32_t w = cv_text(x, 222, &FONT_S, b ? "ECHO" : "SCOUT", b ? C_BOT_B : C_BOT_A) + 3;
+        cv_rect(w, 228, x + 86 - w, 6, RGB(0x1a, 0x1a, 0x2e));
+        cv_rect(w, 228, (x + 86 - w) * hp / 6, 6, c);
     }
-    if (u->swapped) glyph7(229, 224, RS_NACTIONS, 1, C_TEXT);   /* the registers swapped */
+    if (u->swapped) glyph7(113, 225, RS_NACTIONS, 1, C_TEXT);   /* the registers swapped */
     cv_blit(0, 0);
 }
