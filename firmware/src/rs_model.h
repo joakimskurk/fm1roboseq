@@ -145,6 +145,8 @@ void rs_set_loop_len(struct rs_state *s, uint8_t len);          /* setLoopLength
 void rs_set_loop_len_live(struct rs_state *s, uint8_t len);      /* the loop's length without a stop (D20) */
 void rs_set_prog_len(struct rs_state *s, int bot, uint8_t len); /* setProgramLength(): at most the loop's */
 void rs_cycle_action(struct rs_state *s, int bot, int i);       /* cycleAction() */
+void rs_set_step(struct rs_state *s, int bot, int i, int action, int modifier, int prob);   /* updateStep(), -1 keeps */
+void rs_place_tile(struct rs_state *s, int x, int y, uint8_t type, uint8_t dir);   /* a tile by hand (D28) */
 void rs_steer(struct rs_state *s, int bot, uint8_t action);    /* the bot's next move does this, once (D16) */
 void rs_swap_registers(struct rs_state *s);                     /* swapRegisters() */
 void rs_cycle_modifier(struct rs_state *s, int bot, int i);     /* cycleModifier() */

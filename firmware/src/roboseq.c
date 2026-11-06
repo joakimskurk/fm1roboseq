@@ -9,7 +9,7 @@
  *   SELECT     what a white key turns: the step's ACTION, its MODIFIER (steady, bright, low, wobble, glitch) or its
  *              CHANCE (100, 75, 50 %), as the HTML's step card's three buttons (named over the board)
  *   KNOB1      the picked register's length: 8, 12, 16 ... up to the loop's (the HTML's program length)
- *   HOME       the board                SEQ   the sequence: both registers as one list, scrolled by KNOB2
+ *   HOME       the board                SEQ   the sequence: the registers as step cards, programmed with WASD (D28)
  *   GLO        the tempo (KNOB1), how often the bots move (KNOB2), the loop's length (KNOB3: as the loop comes round,
  *              D20), the speed 1/1, 1/2, 1/4 (KNOB4)
  *   SCL (SEL)  Seq 1, pressed again Seq 2 (D27). Voice Mod (Seq 1): white keys 1-4 pick a step, KNOB1-3 its scale, root, semitone, KNOB4 when it moves on;
@@ -20,8 +20,7 @@
  *              CLEAR), KNOB4 on / off
  *   FX         the mix: white keys 1-7 pick master, a bus or the lead, KNOB1 its level; KNOB2 how much the board's
  *              tiles colour the whole sound (its room, send, tilt, drive: D24; 0 % is the HTML's)
- *   ENV        the boards: white keys 1-6 the presets, 7 reroll, 8 the user board, 9 save it, 10 clear it, 11 reset
- *              (the bots to their pads); KNOB1 how full a reroll is; while playing a board comes with the next loop
+ *   ENV        the board builder (D28): A W S D a cursor, a key a tile, reroll, the user board; KNOB1 the presets
  *   EDIT       whose register is on the white keys: Scout-7 or Echo-3 (lit: Echo-3)
  *   OCT- OCT+  the register's 16 steps before / after (a register is up to 64)
  *   black keys steer the bots by hand: the next move is this one (D16). F# G# A# C# D# from F3: Scout-7's TURN L,
@@ -279,17 +278,75 @@ static void lead_keys(uint32_t down, uint32_t up)   /* the last key held wins; l
 enum { PAGE_HOME, PAGE_SEQ, PAGE_GLO, PAGE_SCL, PAGE_ARP, PAGE_LFO, PAGE_FX, PAGE_ENV };   /* the pages (D19) */
 static uint8_t page, scl_cursor, arp_cursor, drum_row, mix_cursor;
 static int32_t seq_scroll, seq_target;          /* the sequence page's scroll, px, and where it is going */
-static uint32_t seq_touched;                    /* when the player last scrolled it (fm1_ms): it follows the step after */
 
-static uint32_t keys_top(void)                  /* the step on the first white key */
-{
-    return page == PAGE_SEQ ? (uint32_t)((seq_target + SEQ_ROW / 2) / SEQ_ROW) : bank * 16u;
-}
+static uint32_t keys_top(void) { return bank * 16u; }   /* the board's: the step on the first white key */
+static uint32_t seq_cursor;                     /* SEQ: the step the keys type into (D28) */
+static int32_t env_cx = 2, env_cy = 2;          /* ENV: the cursor on the board, the way it last moved, edited */
+static uint8_t env_dir = RS_E, env_edited;
 
 static void seq_scroll_to(int32_t row)          /* the sequence page's target, rows, within the list */
 {
-    int32_t max = game.loop_len > 16 ? (int32_t)game.loop_len - 16 : 0;
+    int32_t max = game.loop_len > SEQ_ROWS ? (int32_t)game.loop_len - SEQ_ROWS : 0;
     seq_target = (row < 0 ? 0 : row > max ? max : row) * SEQ_ROW;
+}
+
+static void seq_cursor_to(int32_t c)            /* the cursor, within the picked register; the list keeps it in view */
+{
+    int32_t len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len, top = seq_target / SEQ_ROW;
+    c = c < 0 ? 0 : c >= len ? len - 1 : c;
+    seq_cursor = (uint32_t)c;
+    if (c < top + 1) seq_scroll_to(c - 1);
+    else if (c > top + SEQ_ROWS - 2) seq_scroll_to(c - SEQ_ROWS + 2);
+}
+
+static int keys_seq(uint32_t down)              /* SEQ: the keys program the picked register, a game's way (D28) */
+{
+    uint32_t k, len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len;
+    int changed = 0;
+    for (k = 0; k < 27u; k++) {
+        if (!(down >> k & 1u)) continue;
+        changed = 1;
+        if (SEQ_KEY_ACT[k] >= 0) {              /* an action at the cursor, and on to the next step: typed in */
+            rs_set_step(&game, sel_bot, (int)seq_cursor, SEQ_KEY_ACT[k], -1, -1);
+            seq_cursor_to((int32_t)((seq_cursor + 1u) % len));
+        } else if (SEQ_KEY_MOD[k] >= 0) rs_set_step(&game, sel_bot, (int)seq_cursor, -1, SEQ_KEY_MOD[k], -1);
+        else if (SEQ_KEY_PROB[k]) rs_set_step(&game, sel_bot, (int)seq_cursor, -1, -1, SEQ_KEY_PROB[k]);
+        else if (k == SK_UNDO) rs_pop_undo(&game);
+        else if (k == SK_RND) rs_randomize_steps(&game, sel_bot);
+        else if (k == SK_RNDALL) rs_randomize_all(&game);
+        else if (k == SK_SWAP) rs_swap_registers(&game);
+        else if (k == SK_CLEAR) rs_clear_steps(&game);
+        else changed = 0;
+    }
+    return changed;
+}
+
+static int keys_env(uint32_t down)              /* ENV: build the board, a game's way (D28) */
+{
+    static const int8_t MX[5] = {-1, 0, 0, 0, 1}, MY[5] = {0, -1, 1, 0, 0};
+    static const uint8_t MD[5] = {RS_W, RS_N, RS_S, 0, RS_E};
+    uint32_t k;
+    int changed = 0;
+    for (k = 0; k < 27u; k++) {
+        if (!(down >> k & 1u)) continue;
+        changed = 1;
+        if (k <= EK_RIGHT && k != EK_ERASE) {  /* A W S D: the cursor, and the way a belt will point */
+            int32_t x = env_cx + MX[k], y = env_cy + MY[k];
+            env_cx = x < 0 ? 0 : x >= RS_COLS ? RS_COLS - 1 : x, env_cy = y < 0 ? 0 : y >= RS_ROWS ? RS_ROWS - 1 : y;
+            env_dir = MD[k];
+        } else if (k == EK_ERASE) rs_place_tile(&game, env_cx, env_cy, RS_T_NONE, 0), env_edited = 1;
+        else if (ENV_KEY_TILE[k]) {
+            const struct rs_tile_t *t = &game.board.t[env_cy * RS_COLS + env_cx];
+            uint8_t dir = ENV_KEY_TILE[k] == RS_T_BELT && t->type == RS_T_BELT ? (uint8_t)((t->dir + 1) & 3) : env_dir;
+            rs_place_tile(&game, env_cx, env_cy, ENV_KEY_TILE[k], dir), env_edited = 1;   /* (a belt on a belt turns) */
+        } else if (k == EK_ROLL) rs_push_undo(&game), rs_randomize_board(&game), env_edited = 0;
+        else if (k == EK_USER) rs_push_undo(&game), rs_load_user_board(&game), env_edited = 0;
+        else if (k == EK_SAVE) rs_push_undo(&game), rs_save_user_board(&game), env_edited = 0;
+        else if (k == EK_CLEAR) rs_clear_user_board(&game);
+        else if (k == EK_RESET) rs_reset(&game);
+        else changed = 0;
+    }
+    return changed;
 }
 static const uint8_t LENGTHS[7] = {8, 12, 16, 24, 32, 48, 64};   /* LOOP_OPTIONS: a register's lengths, up to the loop's */
 
@@ -316,6 +373,8 @@ static void keys_init(void)
 
 static int keys(uint32_t down)                  /* what the keys pressed now do; 1 when the screen should show it */
 {
+    if (page == PAGE_SEQ) return keys_seq(down);   /* (the builders' keys are their own: no steering there) */
+    if (page == PAGE_ENV) return keys_env(down);
     uint32_t k, len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len;
     int changed = 0;
     if (page == PAGE_SCL) {                     /* Voice Mod: 1-4 pick a step, 13 NEXT, 14 ROOT, 15 reset, 16 random */
@@ -340,24 +399,13 @@ static int keys(uint32_t down)                  /* what the keys pressed now do;
             changed = 1;
         }
     }
-    if (page == PAGE_ENV)                       /* the boards: 1-6 the presets, 7 reroll, 8 user, 9 save it, 10 clear it, 11 reset */
-        for (k = 0; k < 11u; k++) {
-            if (!(down >> white_key[k] & 1u)) continue;
-            if (k < 6u) rs_push_undo(&game), rs_load_board(&game, (uint8_t)k);   /* (queued while playing) */
-            else if (k == 6u) rs_push_undo(&game), rs_randomize_board(&game);
-            else if (k == 7u) rs_push_undo(&game), rs_load_user_board(&game);
-            else if (k == 8u) rs_push_undo(&game), rs_save_user_board(&game);
-            else if (k == 9u) rs_clear_user_board(&game);
-            else rs_reset(&game);               /* the HTML's reset (bots to their pads, the loop from its start) */
-            changed = 1;
-        }
     if (page == PAGE_FX)                        /* the mix: white keys 1-6 pick a fader */
         for (k = 0; k < RS_NLEVEL; k++)
             if (down >> white_key[k] & 1u) mix_cursor = (uint8_t)k, changed = 1;
     if (page == PAGE_LFO)                       /* the drums: a white key turns its step of the row SELECT picked */
         for (k = 0; k < 16u; k++)
             if (down >> white_key[k] & 1u && k < rs_drum_steps(game.loop_len)) rs_drum_toggle(&game, drum_row, (int)k), changed = 1;
-    for (k = 0; k < 16u && (page == PAGE_HOME || page == PAGE_SEQ); k++)   /* (the white keys: the register, where it is shown) */
+    for (k = 0; k < 16u && page == PAGE_HOME; k++)   /* (the white keys: the register, where it is shown) */
         if (down >> white_key[k] & 1u && keys_top() + k < len) {
             int i = (int)(keys_top() + k);
             if (layer == RS_LAYER_MODIFIER) rs_cycle_modifier(&game, sel_bot, i);
@@ -433,7 +481,7 @@ static void app_main(void)
         }
         if (b & (1u << BTN_PLAY)) { if (game.playing) stop(); else play(); }
         if (b & (1u << BTN_HOME) && page != PAGE_HOME) page = PAGE_HOME, dirty = 1;
-        if (b & (1u << BTN_SEQ) && page != PAGE_SEQ) page = PAGE_SEQ, seq_scroll_to((int32_t)keys_top()), dirty = 1;
+        if (b & (1u << BTN_SEQ) && page != PAGE_SEQ) page = PAGE_SEQ, seq_cursor_to((int32_t)seq_cursor), dirty = 1;
         if (b & (1u << BTN_GLO) && page != PAGE_GLO) page = PAGE_GLO, dirty = 1;
         if (b & (1u << BTN_SEL))                /* SCL: Seq 1 (Voice Mod), pressed again Seq 2 (D27) */
             page = page == PAGE_SCL ? PAGE_ARP : PAGE_SCL, dirty = 1;
@@ -444,9 +492,13 @@ static void app_main(void)
         if (b & (1u << BTN_LFO) && page != PAGE_LFO) page = PAGE_LFO, dirty = 1;
         if (b & (1u << BTN_FX) && page != PAGE_FX) page = PAGE_FX, dirty = 1;
         if (b & (1u << BTN_ENV) && page != PAGE_ENV) page = PAGE_ENV, dirty = 1;
-        if (b & (1u << BTN_EDIT)) sel_bot ^= 1u, bank = 0, dirty = 1;   /* whose register is on the white keys */
+        if (b & (1u << BTN_EDIT)) {             /* whose register is on the white keys (and SEQ's cursor) */
+            sel_bot ^= 1u, bank = 0, dirty = 1;
+            if (page == PAGE_SEQ) seq_cursor_to((int32_t)seq_cursor);
+        }
         if ((e = fm1_enc_take(ENC_SELECT)) != 0) {        /* SELECT: what the white keys turn */
             if (page == PAGE_LFO) drum_row = (uint8_t)(((int32_t)drum_row + e % 3 + 3) % 3);
+            else if (page == PAGE_SEQ) seq_cursor_to((int32_t)seq_cursor + e);   /* SEQ: the cursor up and down (D28) */
             else layer = (uint8_t)(((int32_t)layer + e % RS_NLAYERS + RS_NLAYERS) % RS_NLAYERS);
             dirty = 1;
         }
@@ -504,13 +556,19 @@ static void app_main(void)
             }
             if ((e = fm1_enc_take(ENC_KNOB4)) != 0) game.drums_on = e > 0, dirty = 1;
             (void)fm1_enc_take(ENC_KNOB2), (void)fm1_enc_take(ENC_KNOB3);
-        } else if (page == PAGE_ENV) {          /* KNOB1 how full a rerolled board is: sparse, balanced, chaos */
+        } else if (page == PAGE_ENV) {          /* KNOB1 the presets (queued while playing), KNOB2 a reroll's fullness */
             if ((e = fm1_enc_take(ENC_KNOB1)) != 0) {
+                int32_t at = game.pending_board != RS_B_NONE && game.pending_board < RS_NBOARDS ? game.pending_board :
+                             game.board_id < RS_NBOARDS ? game.board_id : 0;
+                at += e, at = at < 0 ? 0 : at >= RS_NBOARDS ? RS_NBOARDS - 1 : at;
+                rs_push_undo(&game), rs_load_board(&game, (uint8_t)at), env_edited = 0, dirty = 1;
+            }
+            if ((e = fm1_enc_take(ENC_KNOB2)) != 0) {
                 static const uint8_t D[3] = {30, 45, 60};
                 int32_t at = game.density >= 60 ? 2 : game.density >= 45 ? 1 : 0;
                 at += e, game.density = D[at < 0 ? 0 : at > 2 ? 2 : at], dirty = 1;
             }
-            (void)fm1_enc_take(ENC_KNOB2), (void)fm1_enc_take(ENC_KNOB3), (void)fm1_enc_take(ENC_KNOB4);
+            (void)fm1_enc_take(ENC_KNOB3), (void)fm1_enc_take(ENC_KNOB4);
         } else if (page == PAGE_FX) {           /* KNOB1 the picked level, 2 % a detent (the HTML's 0..1) */
             if ((e = fm1_enc_take(ENC_KNOB1)) != 0) {
                 int32_t l = mix.level[mix_cursor] + e * 655;
@@ -525,15 +583,10 @@ static void app_main(void)
         } else if ((e = fm1_enc_take(ENC_KNOB1)) != 0) turn_length(e), dirty = 1;
         len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len;
         if (page != PAGE_HOME && page != PAGE_SEQ) {
-        } else if (page == PAGE_SEQ) {                 /* KNOB2 scrolls row by row, OCT- / OCT+ by 16; then it follows */
-            if ((e = fm1_enc_take(ENC_KNOB2)) != 0) seq_scroll_to(seq_target / SEQ_ROW + e), seq_touched = fm1_ms;
-            if (b & (1u << BTN_OCT_DOWN)) seq_scroll_to(seq_target / SEQ_ROW - 16), seq_touched = fm1_ms;
-            if (b & (1u << BTN_OCT_UP)) seq_scroll_to(seq_target / SEQ_ROW + 16), seq_touched = fm1_ms;
-            if (game.playing && fm1_ms - seq_touched > 3000u && game.step >= 0) {   /* the step playing in view */
-                const struct rs_view *w = view_now();
-                int32_t at = w->step >= 0 ? w->step : 0, top = seq_target / SEQ_ROW;
-                if (at < top + 1 || at > top + 14) seq_scroll_to(at - 1);
-            }
+        } else if (page == PAGE_SEQ) {          /* OCT- / OCT+ the cursor 8 steps; the list glides after it */
+            if (b & (1u << BTN_OCT_DOWN)) seq_cursor_to((int32_t)seq_cursor - SEQ_ROWS), dirty = 1;
+            if (b & (1u << BTN_OCT_UP)) seq_cursor_to((int32_t)seq_cursor + SEQ_ROWS), dirty = 1;
+            (void)fm1_enc_take(ENC_KNOB2);
             if (seq_scroll != seq_target) {     /* glide there: a third of the way a frame */
                 int32_t d = (seq_target - seq_scroll) / 3;
                 seq_scroll += d ? d : seq_target > seq_scroll ? 1 : -1;
@@ -565,8 +618,12 @@ static void app_main(void)
         fm1_led_key(BTN_REC, lead_on);
         if (lead_on) fm1_led_key(BTN_OCT_DOWN, lead_oct < 0), fm1_led_key(BTN_OCT_UP, lead_oct > 0);
         else {
-            fm1_led_key(BTN_OCT_DOWN, page == PAGE_SEQ ? seq_target > 0 : bank > 0);
-            fm1_led_key(BTN_OCT_UP, page == PAGE_SEQ ? seq_target < ((int32_t)game.loop_len - 16) * SEQ_ROW : (bank + 1u) * 16u < len);
+            fm1_led_key(BTN_OCT_DOWN, page == PAGE_SEQ ? seq_cursor > 0 : bank > 0);
+            fm1_led_key(BTN_OCT_UP, page == PAGE_SEQ ? seq_cursor + 1u < len : (bank + 1u) * 16u < len);
+        }
+        {                                       /* ENV's cursor blinks */
+            static uint32_t blink_was;
+            if (page == PAGE_ENV && fm1_ms / 300u != blink_was) blink_was = fm1_ms / 300u, dirty = 1;
         }
         v = view_now();
         key = v->t0 ^ (uint32_t)v->playing << 31 ^ (uint32_t)v->step << 20;
@@ -580,13 +637,13 @@ static void app_main(void)
             lead_panel_v[0] = lead_knob[0], lead_panel_v[1] = lead_knob[1], lead_panel_v[2] = lead_knob[2], lead_panel_v[3] = lead_knob[3];
             lead_panel_arp = arp_mode ? (int8_t)arp_kind : -1;
             ui_of(&ui, v);
-            if (page == PAGE_SEQ) draw_seq(v, &ui, &game, seq_scroll, keys_top());
+            if (page == PAGE_SEQ) draw_seq(v, &ui, &game, seq_scroll, seq_cursor);
             else if (page == PAGE_GLO) draw_glo(&game, pending_loop);
             else if (page == PAGE_SCL) draw_scl(&game, scl_cursor);
             else if (page == PAGE_ARP) draw_arp(&game, arp_cursor);
             else if (page == PAGE_LFO) draw_drums(v, &game, drum_row);
             else if (page == PAGE_FX) draw_mix(mix.level, mix_cursor, colour_amt);
-            else if (page == PAGE_ENV) draw_boards(&game);
+            else if (page == PAGE_ENV) draw_editor(v, &game, env_cx, env_cy, (fm1_ms / 300u) & 1u, env_edited);
             else draw_board(v, &fx, &ui, fm1_ms);
             due = fx_due(&fx, fm1_ms);
         }

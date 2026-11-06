@@ -9,8 +9,8 @@ robots are the instrument; D16 says how the keys reach them. A rule here is a te
 |---|---|
 | C1 | **PLAY is the transport**, on every page: start from the board's start, stop with the HTML's panic. Nothing else. |
 | C2 | **The white keys are positions.** Where a page has steps (a register, Voice Mod, the drums) the 16 white keys are its steps, OCT- / OCT+ the next 16. A key turns its step to its next value, as the HTML's buttons cycle. |
-| C3 | **The black keys steer the bots**, on every page while it plays (P1): the first five Scout-7's TURN L, MOVE, TURN R, DASH, PING, the next five Echo-3's, the last swaps the registers. A steer is the bot's next move, once. |
-| C4 | **What a key does is on the screen** (P3): both registers down the board's sides (Scout-7 left, Echo-3 right, top to bottom = white keys left to right), the one on the white keys bright, the step playing framed; the registers swapped shows. The FM-1's keys have no lights, so the screen is the only place. |
+| C3 | **The black keys steer the bots**, on every page but the two builders, SEQ and ENV (D28), while it plays (P1): the first five Scout-7's TURN L, MOVE, TURN R, DASH, PING, the next five Echo-3's, the last swaps the registers. A steer is the bot's next move, once. |
+| C4 | **What a key does is on the screen** (P3); on the builders a little keyboard at the foot in each key's colour (D28): both registers down the board's sides (Scout-7 left, Echo-3 right, top to bottom = white keys left to right), the one on the white keys bright, the step playing framed; the registers swapped shows. The FM-1's keys have no lights, so the screen is the only place. |
 | C5 | **The result is heard on the next step**, never later: the game runs 64 ms ahead (D12), so an edit or a steer lands on the next step the game computes. |
 | C6 | **EDIT picks whose register** is on the white keys (lit: Echo-3's), on every page with a register. |
 | C7 | **SELECT picks which part of a step** the white keys turn: its ACTION, MODIFIER or CHANCE (the HTML's step card's three buttons), named over the board in the picked bot's colour; the register on the keys shows that part, the other its actions. |
@@ -37,17 +37,21 @@ global settings; the page's button is lit.
 | OCT- / OCT+ | the register's 16 steps before / after (lit where there are more) |
 | MASTER | the volume |
 
-## SEQ (the sequence)
+## SEQ (the sequence: the movement registers, D28)
 
-Both registers as one list, Scout-7 left and Echo-3 right, each step its action, modifier and chance, the step
-each plays framed. The white keys, SELECT, EDIT, KNOB1 and the black keys as on HOME; the bar on the left edge marks
-the 16 rows on the white keys.
+Scout-7's and Echo-3's registers as two columns of step cards, the HTML's planner; the cursor on the picked one.
 
 | Control | Does |
 |---|---|
-| KNOB2 | scroll a row (it glides) |
-| OCT- / OCT+ | scroll 16 rows |
-| (let go 3 s) | it follows the step playing |
+| SELECT | the cursor up / down (the list glides after it) |
+| OCT- / OCT+ | the cursor 8 steps |
+| EDIT | Scout-7's or Echo-3's register |
+| A W S D (F3 F#3 G3 A3) | type TURN L, MOVE, BACK, TURN R at the cursor, and on to the next step |
+| G#3 / A#3 / B3 | type WAIT / DASH / PING, and on |
+| C4 D4 E4 F4 G4 | the cursor's modifier: steady, bright, low, wobble, glitch |
+| A4 B4 C5 | its chance: 100, 75, 50 % |
+| C#5 / D5 / E5 / F5 / G5 | undo / roll this register / roll both / swap the registers / clear them |
+| KNOB1 | the picked register's length |
 
 ## GLO (the global settings)
 
@@ -99,16 +103,14 @@ The white keys rest here (no register on the screen); the black keys steer as ev
 | KNOB1 | its level, 0-100 % (2 % a detent; it glides there, as the HTML's 50 ms ramp) |
 | KNOB2 | how much the board's tiles colour the whole sound: room, send, tilt, drive (D24); 0 % the HTML's |
 
-## ENV (the boards)
+## ENV (the board builder, D28)
 
 | Control | Does |
 |---|---|
-| white keys 1-6 | the presets: default, corridor, garden, gauntlet, spinner, maze |
-| white key 7 | reroll: a random board |
-| white key 8 | the user board |
-| white keys 9 / 10 | save the board as the user's / clear the user board |
-| white key 11 | reset: the bots back to their pads, the loop from its start |
-| KNOB1 | how full a reroll is: sparse, balanced, chaos |
-
-While playing, a board comes with the next loop (shown beside the board now, framed in yellow).
-
+| A W S D (F3 F#3 G3 A3) | move the cursor (and set the way a belt will point) |
+| G#3 | clear the tile |
+| C4 | a belt (pointing the way the cursor last moved; on a belt: turn it) |
+| D4 / E4 / F4 / G4 / A4 | rotator left / rotator right / zap / pulse pad / crate |
+| C5 / D5 / E5 / F5 / G5 | reroll / the user board / save the board as the user's / clear the user board / bots to their pads |
+| KNOB1 | the presets (queued while playing) |
+| KNOB2 | a reroll's fullness: sparse, balanced, chaos |

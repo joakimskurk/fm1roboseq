@@ -257,6 +257,21 @@ static void test_pages(void)                     /* the model's parts of the pag
     int empty = 1;
     for (int i = 0; i < RS_ROWS * RS_COLS; i++) empty &= s.board.t[i].type == RS_T_NONE && s.user_board.t[i].type == RS_T_NONE;
     CHECK(empty, "the user board cleared, and the board with it while it is on");
+    rs_default(&s);                             /* D28: steps typed in, tiles placed by hand */
+    rs_set_step(&s, 1, 3, RS_DASH, -1, -1);
+    CHECK(s.prog[1].s[3].action == RS_DASH && s.prog[1].s[3].prob == 100, "an action typed in, the rest kept");
+    rs_set_step(&s, 1, 3, -1, RS_GLITCH, 50);
+    CHECK(s.prog[1].s[3].action == RS_DASH && s.prog[1].s[3].modifier == RS_GLITCH && s.prog[1].s[3].prob == 50, "its modifier and chance");
+    rs_pop_undo(&s);
+    CHECK(s.prog[1].s[3].modifier != RS_GLITCH, "a typed step undone");
+    rs_clear_steps(&s);
+    CHECK(s.prog[0].s[0].action == RS_WAIT && s.prog[1].s[15].action == RS_WAIT, "the registers cleared to wait");
+    rs_place_tile(&s, 2, 2, RS_T_BELT, RS_W);
+    CHECK(s.board.t[12].type == RS_T_BELT && s.board.t[12].dir == RS_W, "a belt placed, pointing west");
+    rs_place_tile(&s, 2, 2, RS_T_NONE, 0);
+    CHECK(s.board.t[12].type == RS_T_NONE, "and erased");
+    rs_place_tile(&s, 5, 0, RS_T_ZAP, 0);
+    CHECK(1, "off the board: nothing (no crash)");
 }
 
 int main(void)

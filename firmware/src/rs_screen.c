@@ -368,12 +368,32 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const st
     screen_out();
 }
 
-/* ---- SEQ: the sequence, both registers as one list (the HTML's planner, the step cards side by side), 16 rows of
- * 14 px on the screen and the rest a smooth scroll away. Scout-7's steps left, Echo-3's right, the step's number
- * between: each step its action, its modifier and its chance; the step each register plays framed; a bar along
- * the left edge marks the rows on the white keys. */
+/* ---- the keys' map: a little keyboard at the foot, each key in the colour of what it does (D28): the screen says
+ * what a key does (P3) where the keyboard is a page's own tool */
+static void draw_keymap(int32_t y, const uint16_t *col)   /* col[27]: a key's colour, 0 it rests */
+{
+    uint32_t k, w = 0;
+    for (k = 0; k < 27u; k++)                   /* the white keys, 15 px */
+        if (!((0x54Au >> ((53u + k) % 12u)) & 1u)) {
+            cv_rect((int32_t)w * 15, y, 14, 18, col[k] ? col[k] : RGB(0x2a, 0x3c, 0x3a));
+            w++;
+        }
+    for (k = 0, w = 0; k < 27u; k++)            /* the black ones over the lines between */
+        if ((0x54Au >> ((53u + k) % 12u)) & 1u) {
+            int32_t x = (int32_t)w * 15 - 5;
+            cv_rect(x - 1, y, 11, 11, RGB(0x05, 0x10, 0x10));
+            cv_rect(x, y, 9, 10, col[k] ? col[k] : RGB(0x10, 0x1c, 0x1c));
+        } else
+            w++;
+}
+
+/* ---- SEQ: the sequence, the HTML's Program Registers (D28): Scout-7's register and Echo-3's as two columns of step
+ * cards, each its number, its action (icon and word, in the action's colour), its modifier and its chance; the
+ * card a register plays bordered in its bot's colour; a cursor on the picked register that SELECT moves (the list
+ * glides after it). The keys program it, a game's way: WASD and the ones round it type actions in. */
 #define SEQ_TOP 16
-#define SEQ_ROW 14
+#define SEQ_ROW 25
+#define SEQ_ROWS 8
 
 static void digits(int32_t x, int32_t y, uint32_t v, uint32_t w, uint16_t c)   /* v in w digits of 5 x 7, 6 px apart */
 {
@@ -386,57 +406,68 @@ static void digits(int32_t x, int32_t y, uint32_t v, uint32_t w, uint16_t c)   /
     }
 }
 
-static void chance_bars(int32_t x, int32_t y, uint8_t prob, uint16_t under, int on)   /* one to three bars, 12 x 10 */
+static const char *const ACT_WORD[RS_NACTIONS] = {"FWD", "REV", "LEFT", "RGHT", "DASH", "PING", "IDLE"};   /* the HTML's */
+static uint16_t prob_colour(uint8_t p) { return p >= 100 ? C_ACCENT : p >= 75 ? C_WARN : C_DANGER; }   /* probColor */
+
+/* the programming keys (roboseq.c keys_seq): A W S D = turn L, move, back, turn R; between and after them wait, dash,
+ * ping; C4-G4 the modifiers; A4 B4 C5 the chances; C#5 undo, D5 random, E5 random both, F5 swap, G5 clear */
+static const int8_t SEQ_KEY_ACT[27] = {RS_TURNL, RS_MOVE, RS_BACK, RS_WAIT, RS_TURNR, RS_DASH, RS_PING,
+                                       -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+static const int8_t SEQ_KEY_MOD[27] = {-1, -1, -1, -1, -1, -1, -1, RS_STEADY, -1, RS_BRIGHT, -1, RS_LOW, RS_WOBBLE, -1,
+                                       RS_GLITCH, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+static const uint8_t SEQ_KEY_PROB[27] = {[16] = 100, [18] = 75, [19] = 50};
+enum { SK_UNDO = 20, SK_RND = 21, SK_RNDALL = 23, SK_SWAP = 24, SK_CLEAR = 26 };
+
+static void step_card(int32_t x, int32_t y, uint32_t i, const struct rs_step *st, int on, int playing, int cursor,
+                      uint16_t bot)
 {
-    uint32_t n = prob >= 100 ? 3u : prob >= 75 ? 2u : 1u, k;
-    uint16_t c = n == 3u ? C_ACCENT : n == 2u ? C_WARN : C_DANGER;
-    if (!on) c = mix565(c, under, 110);
-    for (k = 0; k < 3u; k++) {
-        int32_t h = 4 + 3 * (int32_t)k;
-        cv_rect(x + 4 * (int32_t)k, y + 10 - h, 3, h, k < n ? c : mix565(C_MUTED, under, 50));
-    }
+    uint16_t panel = RGB(0x0e, 0x2f, 0x2c), line = RGB(0x2f, 0x6a, 0x63);
+    uint16_t ac = ACT_COLOUR[st->action % RS_NACTIONS], mc = MOD_COLOUR[st->modifier % RS_NMODIFIERS], pc = prob_colour(st->prob);
+    if (!on) ac = mix565(ac, panel, 120), mc = mix565(mc, panel, 120), pc = mix565(pc, panel, 120);
+    cv_rect(x + 2, y + 2, 116, SEQ_ROW - 2, RGB(0x00, 0x00, 0x00));   /* its hard shadow */
+    cv_rect(x, y, 116, SEQ_ROW - 2, panel);
+    frame(x, y, 116, SEQ_ROW - 2, 2, playing ? bot : on ? line : mix565(line, panel, 120));
+    cv_rect(x + 3, y + 4, 17, 15, cursor ? C_WHITE : RGB(0x10, 0x38, 0x36));   /* the number; white where the cursor is */
+    digits(x + 6, y + 8, i + 1u, 2, cursor ? RGB(0x05, 0x05, 0x0c) : C_MUTED);
+    icon(x + 22, y + 5, st->action % RS_NACTIONS, ac);
+    cv_text(x + 38, y + 3, &FONT_S, ACT_WORD[st->action % RS_NACTIONS], ac);
+    icon(x + 76, y + 5, 8u + st->modifier % RS_NMODIFIERS, mc);
+    digits(x + 93 + (st->prob >= 100 ? 0 : 3), y + 9, st->prob, st->prob >= 100 ? 3u : 2u, pc);
+    if (cursor) frame(x - 1, y - 1, 118, SEQ_ROW, 1, C_WHITE);
 }
 
 static void draw_seq(const struct rs_view *v, const struct rs_ui *u, const struct rs_state *g, int32_t scroll,
-                     uint32_t keys_top)
+                     uint32_t cursor)
 {
-    static const char *const LAYER[RS_NLAYERS] = {"ACTION", "MODIFIER", "CHANCE"};
-    uint16_t cell = RGB(0x1a, 0x1a, 0x2e);
     int32_t rows = g->loop_len, first = scroll / SEQ_ROW, off = scroll % SEQ_ROW, r, b;
+    uint16_t keys[27];
     cv_begin(240, 240, C_BG);
-    for (r = 0; r <= 16; r++) {
-        int32_t i = first + r, y = SEQ_TOP + r * SEQ_ROW - off;
-        if (i >= rows) break;
-        uint16_t num = v->playing && v->step == i ? C_TEXT : mix565(C_MUTED, C_BG, 150);
-        digits(108, y + 3, (uint32_t)i + 1u, 2, num);
+    for (r = 0; r <= SEQ_ROWS; r++) {
+        int32_t i = first + r, y = SEQ_TOP + 2 + r * SEQ_ROW - off;
+        if (i >= rows || y >= 216) break;
         for (b = 0; b < 2; b++) {
-            int32_t len = g->prog[b].len ? g->prog[b].len : g->loop_len, x = b ? 132 : 4, on = u->sel == b;
-            const struct rs_step *st = &g->prog[b].s[i & 63];
-            if (i >= len) { cv_rect(x + 50, y + 6, 2, 2, cell); continue; }   /* past its length */
-            cv_rect(x, y, 104, SEQ_ROW - 1, cell);
-            cv_rect(b ? x + 102 : x, y, 2, SEQ_ROW - 1, mix565(ACT_COLOUR[st->action], cell, on ? 200 : 90));   /* its colour at the edge */
-            icon(x + 6, y, st->action, on ? ACT_COLOUR[st->action] : mix565(ACT_COLOUR[st->action], cell, 110));
-            icon(x + 24, y, 8u + st->modifier % RS_NMODIFIERS,
-                 on ? MOD_COLOUR[st->modifier % RS_NMODIFIERS] : mix565(MOD_COLOUR[st->modifier % RS_NMODIFIERS], cell, 110));
-            chance_bars(x + 44, y + 2, st->prob, cell, on);
-            if (on && u->layer != RS_LAYER_ACTION)  /* what the white keys turn: underlined */
-                cv_rect(x + (u->layer == RS_LAYER_MODIFIER ? 24 : 42), y + SEQ_ROW - 2, 15, 1, C_WHITE);
-            else if (on)
-                cv_rect(x + 6, y + SEQ_ROW - 2, 14, 1, C_WHITE);
-            if (v->playing && v->step >= 0 && v->step % len == i)   /* the step it plays */
-                frame(x, y, 104, SEQ_ROW - 1, 1, on ? C_WHITE : C_MUTED);
+            int32_t len = g->prog[b].len ? g->prog[b].len : g->loop_len, x = b ? 122 : 2;
+            if (i >= len) { cv_rect(x + 56, y + 10, 3, 3, RGB(0x1a, 0x3a, 0x38)); continue; }   /* past its length */
+            step_card(x, y, (uint32_t)i, &g->prog[b].s[i & 63], u->sel == b,
+                      v->playing && v->step >= 0 && v->step % len == i, u->sel == b && (uint32_t)i == cursor,
+                      b ? C_BOT_B : C_BOT_A);
         }
-        if ((uint32_t)i >= keys_top && (uint32_t)i < keys_top + 16u)   /* on the white keys */
-            cv_rect(0, y, 2, SEQ_ROW - 1, u->sel ? C_BOT_B : C_BOT_A);
     }
-    if (rows > 16) {                            /* where in the list: a thumb at the right edge */
-        int32_t h = 224 * 16 / rows, y = SEQ_TOP + (224 - h) * scroll / ((rows - 16) * SEQ_ROW);
-        cv_rect(238, y, 2, h, C_MUTED);
+    cv_rect(0, 216, 240, 24, C_BG);             /* (the foot, over what scrolled into it) */
+    for (r = 0; r < 27; r++) {                  /* the keys: what each types in */
+        keys[r] = SEQ_KEY_ACT[r] >= 0 ? ACT_COLOUR[SEQ_KEY_ACT[r]] : SEQ_KEY_MOD[r] >= 0 ? MOD_COLOUR[SEQ_KEY_MOD[r]] :
+                  SEQ_KEY_PROB[r] ? prob_colour(SEQ_KEY_PROB[r]) : 0;
+    }
+    keys[SK_UNDO] = C_TEXT, keys[SK_RND] = C_WARN, keys[SK_RNDALL] = C_WARN, keys[SK_SWAP] = C_BELT, keys[SK_CLEAR] = C_DANGER;
+    draw_keymap(220, keys);
+    if (rows > SEQ_ROWS) {                      /* where in the list */
+        int32_t h = 200 * SEQ_ROWS / rows, y = SEQ_TOP + (200 - h) * scroll / ((rows - SEQ_ROWS) * SEQ_ROW);
+        cv_rect(119, y, 2, h, C_MUTED);
     }
     cv_rect(0, 0, 240, SEQ_TOP, C_BG);          /* the header, over what scrolled under it */
-    cv_text(4, 0, &FONT_S, "SCOUT", u->sel ? mix565(C_BOT_A, C_BG, 120) : C_BOT_A);
-    cv_text(236 - text_w(&FONT_S, "ECHO"), 0, &FONT_S, "ECHO", u->sel ? C_BOT_B : mix565(C_BOT_B, C_BG, 120));
-    cv_text(120 - text_w(&FONT_S, LAYER[u->layer % RS_NLAYERS]) / 2, 0, &FONT_S, LAYER[u->layer % RS_NLAYERS], C_TEXT);
+    cv_text(4, 0, &FONT_S, "SCOUT-7", u->sel ? mix565(C_BOT_A, C_BG, 120) : C_BOT_A);
+    cv_text(236 - text_w(&FONT_S, "ECHO-3"), 0, &FONT_S, "ECHO-3", u->sel ? C_BOT_B : mix565(C_BOT_B, C_BG, 120));
+    digits(108, 4, cursor + 1u, 2, C_TEXT);     /* the cursor's step */
     cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
     screen_out();
 }
@@ -636,53 +667,6 @@ static void draw_mix(const volatile int32_t *level, uint32_t cursor, uint32_t co
     screen_out();
 }
 
-/* ---- ENV: the boards (the HTML's board panel): the board now and the one queued for the next loop, small; the
- * presets, a reroll, the user board and its saving and clearing, the bots back to their pads, on the white keys */
-static void mini_board(int32_t x, int32_t y, const struct rs_board *bd)   /* 5 x 5 of 16 px */
-{
-    int32_t i;
-    for (i = 0; i < RS_ROWS * RS_COLS; i++) {
-        const struct rs_tile_t *t = &bd->t[i];
-        int32_t cx = x + (i % RS_COLS) * 16, cy = y + (i / RS_COLS) * 16;
-        uint16_t c = t->type == RS_T_BELT ? C_BELT : t->type == RS_T_ROTL || t->type == RS_T_ROTR ? C_ROT :
-                     t->type == RS_T_ZAP ? C_ZAP : t->type == RS_T_PULSE ? C_PULSE : t->type == RS_T_BLOCK ? RGB(0x8b, 0x69, 0x39) : C_CELL;
-        cv_rect(cx, cy, 15, 15, t->type == RS_T_NONE ? C_CELL : mix565(c, C_CELL, 150));
-        if (t->type == RS_T_BELT) {             /* the way it runs: a stub from the middle */
-            int32_t dx = t->dir == RS_E ? 1 : t->dir == RS_W ? -1 : 0, dy = t->dir == RS_S ? 1 : t->dir == RS_N ? -1 : 0, k;
-            for (k = 0; k < 6; k++) cv_rect(cx + 6 + dx * k, cy + 6 + dy * k, 3, 3, C_WHITE);
-        }
-    }
-}
-
-static void draw_boards(const struct rs_state *g)
-{
-    static const char *const KEY[11] = {"DFLT", "CORR", "GARD", "GAUN", "SPIN", "MAZE", "ROLL", "USER", "SAVE", "CLR", "RSET"};
-    static const char *const DENS[3] = {"SPARSE", "BALANCED", "CHAOS"};
-    uint16_t cell = RGB(0x1a, 0x1a, 0x2e);
-    uint32_t k, dens = g->density >= 60 ? 2u : g->density >= 45 ? 1u : 0u;
-    cv_begin(240, 240, C_BG);
-    cv_text(4, 0, &FONT_S, "BOARDS", C_TEXT);
-    cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
-    mini_board(8, 22, &g->board);
-    if (g->pending_board != RS_B_NONE) {        /* queued: it comes with the next loop */
-        cv_text(96, 44, &FONT_S, ">", C_WARN);
-        mini_board(112, 22, &g->pending_tiles);
-        frame(110, 20, 84, 84, 1, C_WARN);
-    }
-    knob_tag(200, 24, 1);
-    cv_text(236 - text_w(&FONT_S, DENS[dens]), 40, &FONT_S, DENS[dens], C_MUTED);
-    for (k = 0; k < 11u; k++) {
-        int32_t x = (int32_t)(k % 6u) * 40, y = 112 + (int32_t)(k / 6u) * 60;
-        uint32_t id = k < 6u ? k : k == 6u ? RS_B_RANDOM : k == 7u ? RS_B_USER : 0xFFu;
-        int on = id != 0xFFu && g->board_id == id, queued = id != 0xFFu && g->pending_board == id;
-        cv_rect(x + 2, y, 36, 52, queued ? mix565(C_WARN, cell, 70) : on ? mix565(C_ACCENT, cell, 70) : cell);
-        if (on) frame(x + 2, y, 36, 52, 1, C_ACCENT);
-        digits(x + 5, y + 4, k + 1u, k + 1u > 9u ? 2u : 1u, C_MUTED);
-        cv_text(x + 20 - text_w(&FONT_S, KEY[k]) / 2, y + 26, &FONT_S, KEY[k], k >= 8u ? C_WARN : C_TEXT);
-    }
-    screen_out();
-}
-
 static void screen_out(void)                    /* while REC is on the header is the lead's; then to the screen */
 {
     if (lead_badge > -99) {                     /* four faders across the page's header: K1 CUT, K2 ECHO, K3 ARP, K4 BITE */
@@ -717,4 +701,59 @@ static void screen_out(void)                    /* while REC is on the header is
     }
     hdr_board = 0;
     cv_blit(0, 0);
+}
+
+/* ---- ENV: the board builder (D28): the board as it plays, a cursor on it that A W S D move, a key for each tile
+ * further up (a belt points the way the cursor last moved; on a belt it turns it), the black key between S and D
+ * clears; above them a reroll, the user board, saving and clearing it, the bots back to their pads. The preset on
+ * KNOB1, a reroll's fullness on KNOB2. */
+static const uint8_t ENV_KEY_TILE[27] = {[7] = RS_T_BELT, [9] = RS_T_ROTL, [11] = RS_T_ROTR, [12] = RS_T_ZAP,
+                                         [14] = RS_T_PULSE, [16] = RS_T_BLOCK};
+enum { EK_LEFT = 0, EK_UP = 1, EK_DOWN = 2, EK_ERASE = 3, EK_RIGHT = 4, EK_ROLL = 19, EK_USER = 21, EK_SAVE = 23,
+       EK_CLEAR = 24, EK_RESET = 26 };
+
+static void draw_editor(const struct rs_view *v, const struct rs_state *g, int32_t cx, int32_t cy, int blink,
+                        int edited)
+{
+    static const char *const NAME[RS_NBOARDS + 2] = {"DEFAULT", "CORRIDOR", "GARDEN", "GAUNTLET", "SPINNER", "MAZE",
+                                                     "RANDOM", "USER"};
+    static const char *const DENS[3] = {"SPARSE", "BALANCED", "CHAOS"};
+    uint16_t keys[27] = {0};
+    int32_t i, b;
+    char name[16];
+    cv_begin(240, 240, C_BG);
+    for (i = 0; i < RS_ROWS * RS_COLS; i++) draw_tile(BX + (i % RS_COLS) * CELL, BY + (i / RS_COLS) * CELL, &g->board.t[i]);
+    for (b = 0; b < 2; b++) {                   /* the bots where they stand, each on its side */
+        const struct rs_bot *t = &v->bot[b];
+        int32_t x = BX + t->x * CELL + (b ? 20 : 0), y = BY + t->y * CELL;
+        draw_bot(x + 1, y + 20, b, 1, C_CELL);
+    }
+    {                                           /* the cursor: white, its corners yellow, blinking */
+        int32_t x = BX + cx * CELL, y = BY + cy * CELL;
+        frame(x, y, CELL, CELL, 2, blink ? C_WHITE : C_WARN);
+        cv_rect(x - 2, y - 2, 8, 2, C_WARN), cv_rect(x - 2, y - 2, 2, 8, C_WARN);
+        cv_rect(x + CELL - 6, y - 2, 8, 2, C_WARN), cv_rect(x + CELL, y - 2, 2, 8, C_WARN);
+        cv_rect(x - 2, y + CELL, 8, 2, C_WARN), cv_rect(x - 2, y + CELL - 6, 2, 8, C_WARN);
+        cv_rect(x + CELL - 6, y + CELL, 8, 2, C_WARN), cv_rect(x + CELL, y + CELL - 6, 2, 8, C_WARN);
+    }
+    {                                           /* the header: the board's name (* edited), queued, the fullness */
+        const char *n = NAME[g->board_id < RS_NBOARDS + 2 ? g->board_id : 0];
+        uint32_t k = 0, dens = g->density >= 60 ? 2u : g->density >= 45 ? 1u : 0u;
+        while (*n && k < 12u) name[k++] = *n++;
+        if (edited) name[k++] = '*';
+        name[k] = 0;
+        cv_text(24, 0, &FONT_S, name, g->pending_board != RS_B_NONE ? C_WARN : C_TEXT);
+        cv_text(216 - text_w(&FONT_S, DENS[dens]), 0, &FONT_S, DENS[dens], C_MUTED);
+    }
+    keys[EK_LEFT] = keys[EK_UP] = keys[EK_DOWN] = keys[EK_RIGHT] = C_TEXT;   /* the cursor */
+    keys[EK_ERASE] = RGB(0x5a, 0x5a, 0x7a);
+    for (i = 0; i < 27; i++)
+        if (ENV_KEY_TILE[i]) {
+            uint8_t t = ENV_KEY_TILE[i];
+            keys[i] = t == RS_T_BELT ? C_BELT : t == RS_T_ZAP ? C_ZAP : t == RS_T_PULSE ? C_PULSE :
+                      t == RS_T_BLOCK ? RGB(0x8b, 0x69, 0x39) : C_ROT;
+        }
+    keys[EK_ROLL] = C_WARN, keys[EK_USER] = C_ACCENT, keys[EK_SAVE] = C_ACCENT, keys[EK_CLEAR] = C_DANGER, keys[EK_RESET] = C_BOT_A;
+    draw_keymap(222, keys);
+    screen_out();
 }

@@ -251,3 +251,29 @@ note each step the robots take, as K4 lays them: up, down, up and down, up over 
 cut, K2 echo, K3 bite, K4 arp. Seq 2, which had the ARP button, is SCL pressed again: SCL toggles Seq 1 (Voice
 Mod) and Seq 2, the HTML's two small sequencers side by side (D19 amended).
 
+## D28. The builders: the sequence and the board, built a game's way with WASD (2026-11-06)
+
+The product owner: the movement sequencer more as in the HTML, scrolled up and down with SELECT; a custom board
+built with the first keys as WASD and a key for each kind of tile further up, more like a game; the same way for
+the movement sequencer. Thought through, as follows.
+
+SEQ is the HTML's Program Registers: Scout-7's register and Echo-3's as two columns of step cards (the step's
+number, its action as icon and word in the action's colour, its modifier, its chance in the HTML's probColor; the
+card a register plays bordered in its bot's colour, as `.step-card.current`), eight on the screen. SELECT moves a
+cursor on the picked register (EDIT picks it) and the list glides after it; OCT- / OCT+ move it eight. The keys type
+the program in: A W S D (F3 F#3 G3 A3, the black key W over the white A S D as on a computer's keys) turn left,
+move, back, turn right; G#3 wait, A#3 dash, B3 ping; each action lands at the cursor and the cursor goes on, so a
+register is driven in. C4-G4 set the step's modifier, A4 B4 C5 its chance; C#5 undoes, D5 rolls the picked
+register, E5 both, F5 swaps the registers, G5 clears them (the HTML's planner buttons). KNOB1 its length.
+
+ENV builds the board: the board as it plays with a cursor, A W S D move it; G#3 (between S and D) clears the
+tile; C4 a belt (it points the way the cursor last moved; on a belt it turns it), D4 E4 the rotators, F4 a zap,
+G4 a pulse pad, A4 a crate; C5 rerolls, D5 the user board, E5 saves the board as the user's, F5 clears that, G5
+the bots back to their pads. KNOB1 runs through the presets (queued while playing), KNOB2 a reroll's fullness. A
+tile placed changes the board at once, so the robots meet it on their next step; the HTML has no tile editor, so
+this is ours (rs_place_tile).
+
+On both pages a little keyboard at the foot shows each key in the colour of what it does (P3). On these two the
+keys are the builder's, so the black keys do not steer there (C3 now: everywhere else). Building while the robots
+play is playing: it is heard on the next step or loop (P1).
+

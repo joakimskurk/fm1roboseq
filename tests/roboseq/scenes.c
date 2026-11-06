@@ -61,7 +61,10 @@ int main(void)
     g.loop_len = 32, g.prog[0].len = 32, g.prog[1].len = 24;   /* the sequence page, a 32-step loop, scrolled */
     rs_randomize_all(&g);
     v.step = 21, u.sel = 1, u.layer = RS_LAYER_MODIFIER;
-    draw_seq(&v, &u, &g, 9 * SEQ_ROW + 5, 9), ppm("seq");
+    draw_seq(&v, &u, &g, 9 * SEQ_ROW + 5, 13), ppm("seq");
+    rs_default(&g), v.board = g.board, v.bot[0] = g.bot[0], v.bot[1] = g.bot[1];
+    rs_place_tile(&g, 1, 1, RS_T_BELT, RS_E), rs_place_tile(&g, 2, 1, RS_T_BELT, RS_E);
+    draw_editor(&v, &g, 3, 1, 1, 1), ppm("builder");     /* the board builder, belts laid east, the cursor on */
     draw_splash(250), ppm("splash-0250");             /* the splash: the letters dropping, then all in */
     draw_splash(2000), ppm("splash-2000");
     draw_splash(1630), ppm("splash-beat");               /* (on a beat) */

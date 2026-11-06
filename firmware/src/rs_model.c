@@ -470,6 +470,21 @@ void rs_steer(struct rs_state *s, int bot, uint8_t action)
 
 void rs_swap_registers(struct rs_state *s) { s->swapped = !s->swapped; }
 
+void rs_set_step(struct rs_state *s, int bot, int i, int action, int modifier, int prob)   /* updateStep(): -1 keeps */
+{
+    struct rs_step *st = &s->prog[bot & 1].s[i & 63];
+    rs_push_undo(s);                                    /* (typed in a key at a time: each one can be undone) */
+    if (action >= 0 && action < RS_NACTIONS) st->action = (uint8_t)action;
+    if (modifier >= 0 && modifier < RS_NMODIFIERS) st->modifier = (uint8_t)modifier;
+    if (prob == 100 || prob == 75 || prob == 50) st->prob = (uint8_t)prob;
+}
+
+void rs_place_tile(struct rs_state *s, int x, int y, uint8_t type, uint8_t dir)   /* (D28) the board built by hand */
+{
+    if (x < 0 || y < 0 || x >= RS_COLS || y >= RS_ROWS || type > RS_T_BLOCK) return;
+    s->board.t[y * RS_COLS + x] = (struct rs_tile_t){type, (uint8_t)(type == RS_T_BELT ? dir & 3 : 0)};
+}
+
 void rs_cycle_modifier(struct rs_state *s, int bot, int i)
 {
     struct rs_step *st = &s->prog[bot & 1].s[i & 63];

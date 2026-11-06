@@ -31,6 +31,16 @@
 5100 enc 2 -1
 5300 shot
 5400 btn 11
+5420 keys 0x2
+5440 keys 0
+5460 keys 0x2
+5480 keys 0
+5500 keys 0x1
+5520 keys 0
+5540 keys 0x20
+5560 keys 0
+5570 keys 0x200
+5580 keys 0
 5600 shot
 5700 btn 7
 5800 enc 2 20
@@ -73,8 +83,17 @@
 12900 shot
 13000 btn 4
 13100 keys 0x10
-13200 keys 0
-13300 enc 2 2
+13150 keys 0
+13200 keys 0x80
+13250 keys 0
+13300 keys 0x10
+13350 keys 0
+13400 keys 0x80
+13450 keys 0
+13460 keys 0x4
+13470 keys 0
+13480 keys 0x1000
+13490 keys 0
 13500 shot
 13600 btn 8
 13700 end
