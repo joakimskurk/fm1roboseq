@@ -78,7 +78,10 @@ struct rs_state {
     uint8_t clash_cooldown, love_steps;
     /* the player's (D16): not the HTML's, 0 there */
     uint8_t steer[2];                                           /* bot A / B's next move is this action + 1 (0: its register's) */
+    uint8_t music;                                              /* RS_MUSIC_CLASSIC (the HTML's, rs_default) or _PLUS (D33) */
 };
+
+enum { RS_MUSIC_CLASSIC, RS_MUSIC_PLUS };                     /* the music: the HTML's, or RoboSeq's own on top (D33) */
 
 /* a note, as the HTML's triggerAttackRelease(note, duration, time, velocity) on one of its voices */
 enum rs_voice_id {

@@ -321,3 +321,13 @@ is not a builder: P1, C3). ENV pressed again is the builder, as SCL pressed agai
 same on both, and the builder's header names the board coming ("> SPINNER", yellow) while it waits. `rs_preset_board()` gives a preset's tiles to look at, without loading it (edit_test holds that they
 are the ones loading gives).
 
+## D33. PLUS: RoboSeq's own music on top of the HTML's, CLASSIC one turn away (2026-11-06)
+
+The product owner loves what plays when the app starts (DEFAULT and MAZE most) and wants more musicality and more
+variation, harmonically, in the sound and in the drums, and a much smarter random for Voice Mod, with the old system
+kept as a backup. So the music has two modes, on GLO's SELECT (shown at the top right): **CLASSIC** is the HTML's,
+note for note as the traces and the parity hold it (rs_default's, so every HTML test runs on it), and **PLUS**,
+where the app starts, adds RoboSeq's own on top of the same game: the robots still decide the music (D15), PLUS
+only changes how what they play is voiced, accented and accompanied. Each part of PLUS is its own commit and says
+here what it does. The selfcheck fingerprint is CLASSIC's.
+

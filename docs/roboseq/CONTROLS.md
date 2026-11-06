@@ -61,6 +61,7 @@ Scout-7's and Echo-3's registers as two columns of step cards, the HTML's planne
 | KNOB2 | the bots move every 1, 2 or 4 ticks |
 | KNOB3 | the loop's length (8 ... 64): at once when stopped, else as the loop comes round (D20) |
 | KNOB4 | the speed: 1/1, 1/2, 1/4 (D22) |
+| SELECT | the music: PLUS (RoboSeq's own, where it starts) or CLASSIC (the HTML's) (D33) |
 
 The white keys rest here (no register on the screen); the black keys steer as everywhere.
 

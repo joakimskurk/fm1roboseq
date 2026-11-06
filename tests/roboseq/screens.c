@@ -83,7 +83,7 @@ int main(void)
     rs_default(&g), rs_start(&g), rs_load_board(&g, RS_B_SPINNER);   /* the boards: DEFAULT playing, SPINNER coming */
     draw_boards(&g, 1, 0), shot("boards");
     rs_default(&g), rs_start(&g);
-    draw_glo(&g, 32), shot("glo");
+    g.music = RS_MUSIC_PLUS, draw_glo(&g, 32), shot("glo");   /* (the app starts in PLUS: D33) */
     rs_cycle_bassmod(&g, 1, 0, 1), rs_cycle_bassmod(&g, 1, 2, -1);
     draw_scl(&g, 1), shot("voicemod");
     g.seq2[0] = (struct rs_seq2_step){RS_B_GARDEN, RS_D_BREAK, 0}, g.seq2[2] = (struct rs_seq2_step){RS_B_MAZE, RS_D_NONE, 1};

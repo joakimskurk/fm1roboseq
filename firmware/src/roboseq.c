@@ -459,6 +459,7 @@ static void app_main(void)
     rs_boot_check = rs_selfcheck();             /* the model on the chip: make emu compares it with the computer's */
     rs_mix_init(&mix, 0x5EEDu);
     rs_default(&game);
+    game.music = RS_MUSIC_PLUS;                 /* RoboSeq's own music; CLASSIC (the HTML's) on GLO's SELECT (D33) */
     keys_init();
     {                                           /* the splash: ~2.6 s, a frame every 33 ms; a key or a button skips it */
         uint32_t t0 = fm1_ms, drawn = ~0u, rel;
@@ -521,6 +522,7 @@ static void app_main(void)
                 arp_rate = (uint8_t)(r < 1 ? 1 : r > 4 ? 4 : r);
             } else if (page == PAGE_LFO) drum_row = (uint8_t)(((int32_t)drum_row + e % 3 + 3) % 3);
             else if (page == PAGE_SEQ) seq_cursor_to((int32_t)seq_cursor + e);   /* SEQ: the cursor up and down (D28) */
+            else if (page == PAGE_GLO) game.music = e > 0 ? RS_MUSIC_PLUS : RS_MUSIC_CLASSIC;   /* GLO: the music (D33) */
             else layer = (uint8_t)(((int32_t)layer + e % RS_NLAYERS + RS_NLAYERS) % RS_NLAYERS);
             dirty = 1;
         }

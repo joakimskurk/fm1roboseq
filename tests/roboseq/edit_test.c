@@ -282,8 +282,15 @@ static void test_pages(void)                     /* the model's parts of the pag
     CHECK(1, "off the board: nothing (no crash)");
 }
 
+static void test_music_default(void)            /* the HTML's state is the HTML's music: the traces run on it (D33) */
+{
+    rs_default(&s);
+    CHECK(s.music == RS_MUSIC_CLASSIC, "rs_default: the classic music");
+}
+
 int main(void)
 {
+    test_music_default();
     test_steer();
     test_pages();
     test_randomize_steps();
