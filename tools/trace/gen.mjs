@@ -73,7 +73,13 @@ function run(rs, sc) {
     for (let t = 0; t < sc.ticks; t++) {
         const drumTick = st.drumTick, isMove = st.moveTick % (st.ticksPerMove || 1) === 0;
         const t0 = t * rs.getStepDurationSeconds();
+        const clashes0 = (st.boardState.clashes || []).length;
         rs.advanceSequence(t0);
+        // the tiles the tick's events lit (activeKeys, "x,y") as bits y * 5 + x, and who was dashed into
+        let lit = 0;
+        for (const key of st.boardState.activeKeys || []) { const [x, y] = key.split(",").map(Number); lit |= 1 << (y * 5 + x); }
+        const hit = { A: 0, B: 0 };
+        for (const c of (st.boardState.clashes || []).slice(clashes0)) hit[c.attacker === "A" ? "B" : "A"] = 1;
         const ev = rs.events();
         const notes = take();
         // the drum step that played this tick: the pattern at the drum tick before it advanced (a reset tick plays 0)
@@ -86,7 +92,8 @@ function run(rs, sc) {
         const b = (id) => { const o = st.boardState[id]; return `${o.x} ${o.y} ${o.dir} ${o.heat} ${o.deaths} ${o.dying ? 1 : 0}`; };
         lines.push(`T ${st.cycle} ${st.currentStep} ${st.moveTick} ${st.drumTick} ${st.voiceModIndex} ${st.voiceModStepCount} ` +
             `${st.seq2.index} ${st.seq2.active ? 1 : 0} ${st.registersSwapped ? 1 : 0} ${st.activeBoardId} | A ${b("A")} | B ${b("B")} | ` +
-            `${st.boardState.clashCooldown} ${st.boardState.loveSteps || 0} | ${k} ${s} ${h} | ${ev.join(",") || "-"}`);
+            `${st.boardState.clashCooldown} ${st.boardState.loveSteps || 0} | ${k} ${s} ${h} | ${ev.join(",") || "-"} | ` +
+            `${(lit >>> 0).toString(16)} ${hit.A}${hit.B}`);
         for (const n of notes) {
             const [voice, ...a] = n;
             const noise = typeof a[0] === "number";

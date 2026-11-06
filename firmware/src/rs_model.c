@@ -200,15 +200,21 @@ static void ev(struct rs_tick_out *o, uint8_t kind)
 
 static uint8_t tile_at(const struct rs_state *s, int x, int y) { return s->board.t[y * RS_COLS + x].type; }
 static int inside(int x, int y) { return x >= 0 && y >= 0 && x < RS_COLS && y < RS_ROWS; }
+static void evk(struct rs_tick_out *o, uint8_t kind, int x, int y)   /* pushEvent() with a tile: it lights up */
+{
+    ev(o, kind);
+    if (inside(x, y)) o->active |= 1u << (y * RS_COLS + x);
+}
 static int blocked(const struct rs_state *s, int x, int y) { return tile_at(s, x, y) == RS_T_BLOCK; }
 
 static int attempt_move(struct rs_state *s, int b, int heading, struct rs_tick_out *o)   /* attemptMove() */
 {
     struct rs_bot *bot = &s->bot[b];
     int nx = bot->x + DX[heading], ny = bot->y + DY[heading];
-    if (!inside(nx, ny) || blocked(s, nx, ny)) { ev(o, RS_EV_COLLISION); return 0; }   /* the wall, a crate */
+    if (!inside(nx, ny)) { evk(o, RS_EV_COLLISION, bot->x, bot->y); return 0; }        /* the wall */
+    if (blocked(s, nx, ny)) { evk(o, RS_EV_COLLISION, nx, ny); return 0; }             /* a crate */
     bot->x = (int8_t)nx, bot->y = (int8_t)ny;           /* bots can share a tile */
-    ev(o, RS_EV_MOVE);
+    evk(o, RS_EV_MOVE, nx, ny);
     return 1;
 }
 
@@ -217,10 +223,10 @@ static void perform_ping(struct rs_state *s, int b, struct rs_tick_out *o)   /* 
     struct rs_bot *bot = &s->bot[b], *other = &s->bot[!b];
     int x = bot->x + DX[bot->dir], y = bot->y + DY[bot->dir];
     while (inside(x, y) && !blocked(s, x, y)) {
-        if (other->x == x && other->y == y) { other->heat += 1; ev(o, RS_EV_ZAP); return; }
+        if (other->x == x && other->y == y) { other->heat += 1; evk(o, RS_EV_ZAP, x, y); return; }
         x += DX[bot->dir], y += DY[bot->dir];
     }
-    ev(o, RS_EV_PING);
+    evk(o, RS_EV_PING, bot->x, bot->y);
 }
 
 static void check_death(struct rs_state *s, int b, struct rs_tick_out *o)   /* checkDeath(): dies on the next move */
@@ -255,15 +261,15 @@ static void apply_tile_effects(struct rs_state *s, int b, struct rs_tick_out *o)
         switch (t->type) {
         case RS_T_BELT: {
             int moved = attempt_move(s, b, t->dir, o);
-            ev(o, RS_EV_BELT);
+            evk(o, RS_EV_BELT, bot->x, bot->y);
             if (!moved) return;
             safety++;
             continue;
         }
-        case RS_T_ROTL: bot->dir = (uint8_t)((bot->dir + 3) & 3); ev(o, RS_EV_ROTATOR); return;
-        case RS_T_ROTR: bot->dir = (uint8_t)((bot->dir + 1) & 3); ev(o, RS_EV_ROTATOR); return;
-        case RS_T_ZAP: bot->heat = (int16_t)(bot->heat + 1 < 6 ? bot->heat + 1 : 6); ev(o, RS_EV_ZAP); return;   /* (a cap of 6) */
-        case RS_T_PULSE: bot->heat = (int16_t)(bot->heat - 1 > 0 ? bot->heat - 1 : 0); ev(o, RS_EV_PULSE); return;
+        case RS_T_ROTL: bot->dir = (uint8_t)((bot->dir + 3) & 3); evk(o, RS_EV_ROTATOR, bot->x, bot->y); return;
+        case RS_T_ROTR: bot->dir = (uint8_t)((bot->dir + 1) & 3); evk(o, RS_EV_ROTATOR, bot->x, bot->y); return;
+        case RS_T_ZAP: bot->heat = (int16_t)(bot->heat + 1 < 6 ? bot->heat + 1 : 6); evk(o, RS_EV_ZAP, bot->x, bot->y); return;   /* (a cap of 6) */
+        case RS_T_PULSE: bot->heat = (int16_t)(bot->heat - 1 > 0 ? bot->heat - 1 : 0); evk(o, RS_EV_PULSE, bot->x, bot->y); return;
         default: return;                                /* nothing, or a crate */
         }
     }
@@ -275,19 +281,20 @@ static void execute_step(struct rs_state *s, int b, const struct rs_step *st, st
     switch (st->action) {
     case RS_MOVE: attempt_move(s, b, bot->dir, o); return;
     case RS_BACK: attempt_move(s, b, (bot->dir + 2) & 3, o); return;
-    case RS_TURNL: bot->dir = (uint8_t)((bot->dir + 3) & 3); ev(o, RS_EV_TURN); return;
-    case RS_TURNR: bot->dir = (uint8_t)((bot->dir + 1) & 3); ev(o, RS_EV_TURN); return;
+    case RS_TURNL: bot->dir = (uint8_t)((bot->dir + 3) & 3); evk(o, RS_EV_TURN, bot->x, bot->y); return;
+    case RS_TURNR: bot->dir = (uint8_t)((bot->dir + 1) & 3); evk(o, RS_EV_TURN, bot->x, bot->y); return;
     case RS_DASH:
         attempt_move(s, b, bot->dir, o);
         attempt_move(s, b, bot->dir, o);                /* (the second even when the first was stopped) */
         if (bot->x == other->x && bot->y == other->y) {
             other->heat += 2;
             s->clash_cooldown = 8;
-            ev(o, RS_EV_ZAP);
+            o->clash[!b] = 1;                           /* the one hit (the clash star) */
+            evk(o, RS_EV_ZAP, bot->x, bot->y);
         }
         return;
     case RS_PING: perform_ping(s, b, o); return;
-    default: ev(o, RS_EV_WAIT); return;
+    default: evk(o, RS_EV_WAIT, bot->x, bot->y); return;
     }
 }
 
@@ -360,7 +367,7 @@ void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
         for (int b = 0; b < 2; b++) {
             if (s->bot[b].dying) continue;
             const struct rs_step *st = &s->prog[b].s[si % (s->prog[b].len ? s->prog[b].len : s->loop_len)];
-            if (rs_skips(b, (uint32_t)si, s->cycle, st->prob)) { ev(o, RS_EV_WAIT); continue; }   /* hesitated */
+            if (rs_skips(b, (uint32_t)si, s->cycle, st->prob)) { evk(o, RS_EV_WAIT, s->bot[b].x, s->bot[b].y); continue; }   /* hesitated */
             execute_step(s, b, st, o);
             s->bot[b].stepped_tile = tile_at(s, s->bot[b].x, s->bot[b].y);
             s->bot[b].stepped_dir = s->board.t[s->bot[b].y * RS_COLS + s->bot[b].x].dir;
@@ -378,7 +385,7 @@ void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
                 int ni = (si + 1) % s->loop_len;
                 const struct rs_step *na = &s->prog[0].s[ni % (s->prog[0].len ? s->prog[0].len : s->loop_len)];
                 const struct rs_step *nb = &s->prog[1].s[ni % (s->prog[1].len ? s->prog[1].len : s->loop_len)];
-                if (na->action != RS_DASH && nb->action != RS_DASH) { ev(o, RS_EV_LOVE); o->love = 1; rs_score_coin(s, o); }
+                if (na->action != RS_DASH && nb->action != RS_DASH) { evk(o, RS_EV_LOVE, a->x, a->y); o->love = 1; rs_score_coin(s, o); }
             }
         } else {
             s->love_steps = 0;

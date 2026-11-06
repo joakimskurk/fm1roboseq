@@ -104,6 +104,8 @@ struct rs_tick_out {
     uint8_t love;                                               /* the coin chime */
     uint8_t ghost, ghost_phase;                                 /* tpm > 1, a ghost tick (playGhostTick) and its phase */
     uint8_t drum_k, drum_s, drum_h, drum_ghost;                 /* the drum step played, or a ghost hihat */
+    uint32_t active;                                            /* bit y * RS_COLS + x: the tiles an event lit (activeKeys) */
+    uint8_t clash[2];                                           /* bot A / B was dashed into (the clash star) */
     uint8_t nnotes;
     struct rs_note notes[RS_MAX_NOTES];                         /* the score of this tick, in the HTML's call order */
 };

@@ -35,6 +35,7 @@ static void line_of(const struct rs_state *s, const struct rs_tick_out *o, char 
                   o->drum_h);
     if (!o->nevents) k += snprintf(buf + k, n - k, "-");
     for (int i = 0; i < o->nevents; i++) k += snprintf(buf + k, n - k, "%s%s", i ? "," : "", rs_event_name[o->events[i]]);
+    k += snprintf(buf + k, n - k, " | %x %u%u", (unsigned)o->active, o->clash[0], o->clash[1]);   /* what lit up, who was hit */
 }
 
 static long notes_checked;

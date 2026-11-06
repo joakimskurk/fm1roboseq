@@ -143,41 +143,41 @@ step B 61 wait low 75
 step B 62 turnR glitch 100
 step B 63 dash steady 50
 ticks 600
-T 0 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 0 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 0 1 3 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 0 1 3 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait | 100010 00
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
-T 0 1 4 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 1 4 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 0 2 5 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 0 2 5 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn | 100010 00
 N A.main 53 0.04275 0 0.187
 N B.fm 62 0.1323 0 0.3465
 N B.sub 50 0.1911 0 0.27225
-T 0 2 6 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 2 6 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 0 3 7 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,move,rotator
+T 0 3 7 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,move,rotator | 200200 00
 N A.main 57 0.0855 0 0.88
 N A.ping 60 0.03375 0.005625 0.352
 N B.fm 65 0.15525 0 0.3094
 N B.sub 53 0.22425 0 0.2431
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 0 3 8 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 3 8 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 0 4 9 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | collision,rotator,wait,rotator
+T 0 4 9 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | collision,rotator,wait,rotator | 200200 00
 N A.main 57 0.1218375 0 0.43225
 N A.ping 60 0.03375 0.005625 0.1729
 N B.fm 65 0.02885625 0 0.133
@@ -185,129 +185,129 @@ N B.sub 53 0.04168125 0 0.1045
 N fx.collision 43 0.08 0 0.7
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 0 4 10 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 4 10 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 0 5 11 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping,rotator
+T 0 5 11 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping,rotator | 200200 00
 N A.main 57 0.118453125 0 0.4845
 N A.ping 60 0.03375 0.005625 0.1938
 N B.fm 65 0.10125 0 0.5355
 N B.sub 53 0.14625 0 0.42075
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 0 5 12 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 0 5 12 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 0 6 13 7 1 0 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | wait,wait
-T 0 6 14 7 1 0 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 0 6 13 7 1 0 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | wait,wait | 200200 00
+T 0 6 14 7 1 0 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 0 7 15 8 1 1 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator
+T 0 7 15 8 1 1 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator | 200200 00
 N A.main 53 0.0947625 0 0.3705
 N A.ping 57 0.03375 0.005625 0.1482
 N B.fm 62 0.11221875 0 0.33915
 N B.sub 50 0.16209375 0 0.266475
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 0 7 16 8 1 1 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 0 7 16 8 1 1 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 0 8 17 9 1 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | wait,collision,rotator
+T 0 8 17 9 1 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | wait,collision,rotator | 200200 00
 N B.fm 62 0.23625 0 0.42
 N B.sub 50 0.34125 0 0.33
 N fx.collision 43 0.08 0.01 0.7
 N fx.rotator 81 0.04 0.02 0.45
-T 0 8 18 9 1 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 8 18 9 1 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 0 9 19 10 1 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,move
+T 0 9 19 10 1 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,move | 200010 00
 N B.fm 62 0.212625 0 0.3675
 N B.sub 50 0.307125 0 0.28875
-T 0 9 20 10 1 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 9 20 10 1 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 0 10 21 11 1 4 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,collision,move,move
+T 0 10 21 11 1 4 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,collision,move,move | 104200 00
 N A.main 52 0.057 0 0.715
 N A.ping 55 0.03375 0.005625 0.286
 N B.fm 60 0.13584375 0 0.44625
 N B.sub 48 0.19621875 0 0.350625
 N fx.collision 43 0.08 0.01 0.7
-T 0 10 22 11 1 4 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 10 22 11 1 4 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 55 0.0253125 0 0.35
 N B.fm 60 0.02109375 0 0.245
 N B.sub 48 0.03375 0 0.175
-T 0 11 23 0 1 5 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 0 11 23 0 1 5 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,wait | 104000 00
 N B.fm 60 0.070875 0 0.105
 N B.sub 48 0.102375 0 0.0825
-T 0 11 24 0 1 5 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 11 24 0 1 5 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 55 0.0253125 0 0.35
 N B.fm 60 0.02109375 0 0.245
 N B.sub 48 0.03375 0 0.175
-T 0 12 25 1 2 0 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 0 12 25 1 2 0 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | turn,wait | 104000 00
 N A.main 57 0.200746875 0 0.3825
 N A.ping 60 0.03375 0.005625 0.153
-T 0 12 26 1 2 0 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 12 26 1 2 0 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 0 13 27 2 2 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 0 13 27 2 2 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,wait | 104000 00
 N A.main 57 0.23690625 0 0.57
 N A.ping 60 0.03375 0.005625 0.228
 N fx.collision 43 0.08 0 0.7
-T 0 13 28 2 2 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 13 28 2 2 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 0 14 29 3 2 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 0 14 29 3 2 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,wait | 104000 00
 N A.main 57 0.0748125 0 0.15
 N B.fm 65 0.06733125 0 0.09975
 N B.sub 53 0.09725625 0 0.078375
-T 0 14 30 3 2 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 14 30 3 2 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 0 15 31 4 2 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 0 15 31 4 2 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,ping | 104000 00
 N A.main 57 0.23690625 0 0.57
 N A.ping 60 0.03375 0.005625 0.228
 N B.fm 65 0.14175 0 0.4725
 N B.sub 53 0.20475 0 0.37125
 N fx.collision 43 0.08 0 0.7
-T 0 15 32 4 2 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 15 32 4 2 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 0 16 33 5 2 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | move,rotator,turn
+T 0 16 33 5 2 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | move,rotator,turn | c000 00
 N A.main 69 0.1026 0 0.5005
 N A.ping 72 0.03375 0.005625 0.2002
 N B.fm 65 0.118125 0 0.357
 N B.sub 53 0.170625 0 0.2805
 N fx.rotator 81 0.04 0.01 0.45
-T 0 16 34 5 2 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | -
+T 0 16 34 5 2 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 72 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 0 17 35 6 2 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 0 17 35 6 2 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | wait,turn | c000 00
 N B.fm 65 0.06733125 0 0.399
 N B.sub 53 0.09725625 0 0.3135
-T 0 17 36 6 2 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | -
+T 0 17 36 6 2 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 72 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 0 18 37 7 3 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | wait,move,rotator
+T 0 18 37 7 3 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | wait,move,rotator | 8200 00
 N B.fm 69 0.16875 0 0.476
 N B.sub 57 0.24375 0 0.374
 N fx.rotator 81 0.04 0.02 0.45
-T 0 18 38 7 3 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 0 18 38 7 3 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 0 19 39 8 3 1 0 0 0 spinner | A 0 3 N 0 0 0 | B 3 1 E 0 0 0 | 0 0 | 0 0 0 | collision,collision,rotator,move
+T 0 19 39 8 3 1 0 0 0 spinner | A 0 3 N 0 0 0 | B 3 1 E 0 0 0 | 0 0 | 0 0 0 | collision,collision,rotator,move | 8100 00
 N A.main 72 0.0534375 0 1
 N A.ping 76 0.03375 0.005625 0.4
 N B.fm 64 0.151875 0 0.4165
@@ -315,345 +315,345 @@ N B.sub 52 0.219375 0 0.32725
 N fx.collision 43 0.08 0 0.7
 N fx.collision 43 0.08 0.01 0.7
 N fx.rotator 81 0.04 0.02 0.45
-T 0 19 40 8 3 1 0 0 0 spinner | A 0 3 N 0 0 0 | B 3 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 0 19 40 8 3 1 0 0 0 spinner | A 0 3 N 0 0 0 | B 3 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 72 0.0253125 0 0.35
 N B.fm 64 0.02109375 0 0.245
 N B.sub 52 0.03375 0 0.175
-T 0 20 41 9 3 2 0 0 0 spinner | A 0 2 N 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | move,move,collision,rotator
+T 0 20 41 9 3 2 0 0 0 spinner | A 0 2 N 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | move,move,collision,rotator | 600 00
 N A.main 69 0.10153125 0 0.76
 N A.ping 72 0.03375 0.005625 0.304
 N B.fm 69 0.13584375 0 0.44625
 N B.sub 57 0.19621875 0 0.350625
 N fx.collision 43 0.08 0.02 0.7
 N fx.rotator 81 0.04 0.03 0.45
-T 0 20 42 9 3 2 0 0 0 spinner | A 0 2 N 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 0 20 42 9 3 2 0 0 0 spinner | A 0 2 N 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 0 21 43 10 3 3 0 0 0 spinner | A 0 2 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | turn,wait,rotator
+T 0 21 43 10 3 3 0 0 0 spinner | A 0 2 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | turn,wait,rotator | 600 00
 N A.main 72 0.09975 0 0.39
 N A.ping 76 0.03375 0.005625 0.156
 N B.fm 69 0.0405 0 0.091
 N B.sub 57 0.0585 0 0.0715
 N fx.rotator 81 0.04 0.02 0.45
-T 0 21 44 10 3 3 0 0 0 spinner | A 0 2 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 21 44 10 3 3 0 0 0 spinner | A 0 2 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 0 22 45 11 3 4 0 0 0 spinner | A 0 2 S 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 0 22 45 11 3 4 0 0 0 spinner | A 0 2 S 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | turn,wait | 600 00
 N A.main 72 0.200746875 0 0.3825
 N A.ping 76 0.03375 0.005625 0.153
-T 0 22 46 11 3 4 0 0 0 spinner | A 0 2 S 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 22 46 11 3 4 0 0 0 spinner | A 0 2 S 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 0 23 47 0 3 5 0 0 0 spinner | A 0 1 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 0 23 47 0 3 5 0 0 0 spinner | A 0 1 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait | 220 00
 N A.main 84 0.1603125 0 0.595
 N A.ping 76 0.03375 0.005625 0.238
 N fx.rotator 81 0.04 0.01 0.45
-T 0 23 48 0 3 5 0 0 0 spinner | A 0 1 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 0 23 48 0 3 5 0 0 0 spinner | A 0 1 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 1 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 1 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset | 0 00
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 1 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 1 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 1 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait | 100010 00
 N A.main 53 0.069825 0 0.4725
 N A.ping 57 0.03375 0.005625 0.189
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
-T 1 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 1 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
-T 1 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait | 100010 00
+T 1 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 1 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 1 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait | 100010 00
 N A.main 53 0.1995 0 0.66
 N A.ping 57 0.03375 0.005625 0.264
 N fx.collision 43 0.08 0 0.7
-T 1 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 1 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 1 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait | 8010 00
 N A.main 65 0.1218375 0 0.43225
 N A.ping 69 0.03375 0.005625 0.1729
 N B.fm 62 0.038475 0 0.08645
 N B.sub 50 0.055575 0 0.067925
 N fx.rotator 81 0.04 0.01 0.45
-T 1 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 1 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping
+T 1 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping | 8010 00
 N A.main 65 0.0947625 0 0.3705
 N A.ping 69 0.03375 0.005625 0.1482
 N B.fm 62 0.081 0 0.4095
 N B.sub 50 0.117 0 0.32175
 N fx.rotator 81 0.04 0.01 0.45
-T 1 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 1 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn
+T 1 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn | 8010 00
 N A.main 64 0.1147125 0 0.3315
 N A.ping 67 0.03375 0.005625 0.1326
 N B.fm 72 0.165375 0 0.315
 N B.sub 60 0.238875 0 0.2475
 N fx.rotator 81 0.04 0.01 0.45
-T 1 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 1 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 1 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,turn | 8010 00
 N B.fm 72 0.11221875 0 0.33915
 N B.sub 60 0.16209375 0 0.266475
-T 1 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 1 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 1 8 17 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision
+T 1 8 17 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision | 8010 00
 N A.main 64 0.09975 0 0.561
 N A.ping 67 0.03375 0.005625 0.2244
 N B.fm 72 0.16875 0 0.476
 N B.sub 60 0.24375 0 0.374
 N fx.rotator 81 0.04 0.01 0.45
 N fx.collision 43 0.08 0.02 0.7
-T 1 8 18 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 1 8 18 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 1 9 19 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | wait,move,rotator
+T 1 9 19 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | wait,move,rotator | 8008 00
 N B.fm 67 0.091125 0 0.49
 N B.sub 55 0.131625 0 0.385
 N fx.rotator 81 0.04 0.02 0.45
-T 1 9 20 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 9 20 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 64 0.0253125 0 0.35
 N B.fm 67 0.02109375 0 0.245
 N B.sub 55 0.03375 0 0.175
-T 1 10 21 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | wait,collision,collision,rotator
+T 1 10 21 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | wait,collision,collision,rotator | 8008 00
 N B.fm 67 0.077625 0 0.38675
 N B.sub 55 0.112125 0 0.303875
 N fx.collision 43 0.08 0.01 0.7
 N fx.collision 43 0.08 0.02 0.7
 N fx.rotator 81 0.04 0.03 0.45
-T 1 10 22 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 10 22 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 64 0.0253125 0 0.35
 N B.fm 67 0.02109375 0 0.245
 N B.sub 55 0.03375 0 0.175
-T 1 11 23 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait,rotator
+T 1 11 23 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait,rotator | 8008 00
 N A.main 60 0.118453125 0 0.4845
 N A.ping 64 0.03375 0.005625 0.1938
 N B.fm 67 0.070875 0 0.105
 N B.sub 55 0.102375 0 0.0825
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 1 11 24 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 11 24 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 64 0.0253125 0 0.35
 N B.fm 67 0.02109375 0 0.245
 N B.sub 55 0.03375 0 0.175
-T 1 12 25 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
-T 1 12 26 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 12 25 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | wait,wait | 8008 00
+T 1 12 26 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 1 13 27 2 2 1 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 1 13 27 2 2 1 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | move,wait | 10008 00
 N A.main 67 0.16921875 0 0.646
 N A.ping 71 0.03375 0.005625 0.2584
-T 1 13 28 2 2 1 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 13 28 2 2 1 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 1 14 29 3 2 2 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | wait,wait,rotator
+T 1 14 29 3 2 2 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | wait,wait,rotator | 10008 00
 N A.main 67 0.0534375 0 0.17
 N B.fm 62 0.04809375 0 0.11305
 N B.sub 50 0.06946875 0 0.088825
 N fx.rotator 81 0.04 0.02 0.45
-T 1 14 30 3 2 2 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 1 14 30 3 2 2 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 1 15 31 4 2 3 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | move,ping,rotator
+T 1 15 31 4 2 3 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | move,ping,rotator | 20008 00
 N A.main 69 0.16921875 0 0.646
 N A.ping 72 0.03375 0.005625 0.2584
 N B.fm 64 0.06075 0 0.63
 N B.sub 52 0.08775 0 0.495
 N fx.rotator 81 0.04 0.02 0.45
-T 1 15 32 4 2 3 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 15 32 4 2 3 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 72 0.0253125 0 0.35
 N B.fm 64 0.02109375 0 0.245
 N B.sub 52 0.03375 0 0.175
-T 1 16 33 5 2 4 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | move,turn,rotator
+T 1 16 33 5 2 4 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | move,turn,rotator | 10008 00
 N A.main 67 0.12825 0 0.6545
 N A.ping 71 0.03375 0.005625 0.2618
 N B.fm 62 0.165375 0 0.315
 N B.sub 50 0.238875 0 0.2475
 N fx.rotator 81 0.04 0.02 0.45
-T 1 16 34 5 2 4 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 1 16 34 5 2 4 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 1 17 35 6 2 5 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator
+T 1 17 35 6 2 5 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator | 10008 00
 N B.fm 62 0.06733125 0 0.399
 N B.sub 50 0.09725625 0 0.3135
 N fx.rotator 81 0.04 0.02 0.45
-T 1 17 36 6 2 5 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 17 36 6 2 5 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 1 18 37 7 3 0 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | wait,collision,rotator
+T 1 18 37 7 3 0 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | wait,collision,rotator | 10008 00
 N A.main 71 0.04275 0 0.187
 N B.fm 65 0.135 0 0.364
 N B.sub 53 0.195 0 0.286
 N fx.collision 43 0.08 0.01 0.7
 N fx.rotator 81 0.04 0.02 0.45
-T 1 18 38 7 3 0 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 18 38 7 3 0 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 74 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 1 19 39 8 3 1 0 0 0 spinner | A 3 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | move,move,wait
+T 1 19 39 8 3 1 0 0 0 spinner | A 3 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | move,move,wait | 60008 00
 N A.main 74 0.0890625 0 0.85
 N A.ping 77 0.03375 0.005625 0.34
-T 1 19 40 8 3 1 0 0 0 spinner | A 3 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 1 19 40 8 3 1 0 0 0 spinner | A 3 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 77 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 1 20 41 9 3 2 0 0 0 spinner | A 3 3 E 0 0 0 | B 1 0 N 0 0 0 | 0 0 | 0 0 0 | wait,move,move,rotator
+T 1 20 41 9 3 2 0 0 0 spinner | A 3 3 E 0 0 0 | B 1 0 N 0 0 0 | 0 0 | 0 0 0 | wait,move,move,rotator | 40006 00
 N B.fm 65 0.05821875 0 0.595
 N B.sub 53 0.08409375 0 0.4675
 N fx.rotator 81 0.04 0.03 0.45
-T 1 20 42 9 3 2 0 0 0 spinner | A 3 3 E 0 0 0 | B 1 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 1 20 42 9 3 2 0 0 0 spinner | A 3 3 E 0 0 0 | B 1 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 77 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 1 21 43 10 3 3 0 0 0 spinner | A 3 3 N 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | turn,wait,rotator
+T 1 21 43 10 3 3 0 0 0 spinner | A 3 3 N 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | turn,wait,rotator | 40002 00
 N A.main 74 0.0748125 0 0.6
 N A.ping 77 0.03375 0.005625 0.24
 N B.fm 65 0.050625 0 0.119
 N B.sub 53 0.073125 0 0.0935
 N fx.rotator 81 0.04 0.02 0.45
-T 1 21 44 10 3 3 0 0 0 spinner | A 3 3 N 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 1 21 44 10 3 3 0 0 0 spinner | A 3 3 N 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 77 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 1 22 45 11 3 4 0 0 0 spinner | A 3 3 W 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | turn,turn,rotator
+T 1 22 45 11 3 4 0 0 0 spinner | A 3 3 W 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | turn,turn,rotator | 40002 00
 N A.main 74 0.1147125 0 0.3315
 N A.ping 77 0.03375 0.005625 0.1326
 N B.fm 65 0.0945 0 0.3927
 N B.sub 53 0.1365 0 0.30855
 N fx.rotator 81 0.04 0.02 0.45
-T 1 22 46 11 3 4 0 0 0 spinner | A 3 3 W 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 1 22 46 11 3 4 0 0 0 spinner | A 3 3 W 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 77 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 1 23 47 0 3 5 0 0 0 spinner | A 4 3 S 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 1 23 47 0 3 5 0 0 0 spinner | A 4 3 S 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait | 80002 00
 N A.main 76 0.2244375 0 0.525
 N A.ping 79 0.03375 0.005625 0.21
 N fx.rotator 81 0.04 0.01 0.45
-T 1 23 48 0 3 5 0 0 0 spinner | A 4 3 S 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 1 23 48 0 3 5 0 0 0 spinner | A 4 3 S 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.35
 N B.fm 67 0.02109375 0 0.245
 N B.sub 55 0.03375 0 0.175
-T 2 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 2 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset | 0 00
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 2 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 2 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 2 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 2 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait | 100010 00
 N A.main 53 0.069825 0 0.4725
 N A.ping 57 0.03375 0.005625 0.189
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
-T 2 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 2 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 2 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 2 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn | 100010 00
 N A.main 53 0.05985 0 0.165
 N B.fm 62 0.1323 0 0.3465
 N B.sub 50 0.1911 0 0.27225
-T 2 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 2 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 2 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 2 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,wait | 100010 00
 N A.main 53 0.1995 0 0.66
 N A.ping 57 0.03375 0.005625 0.264
 N fx.collision 43 0.08 0 0.7
-T 2 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 2 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 2 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 2 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait | 8010 00
 N A.main 65 0.1218375 0 0.43225
 N A.ping 69 0.03375 0.005625 0.1729
 N B.fm 62 0.06733125 0 0.09975
 N B.sub 50 0.09725625 0 0.078375
 N fx.rotator 81 0.04 0.01 0.45
-T 2 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 2 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 2 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 2 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,ping | 8010 00
 N B.fm 62 0.14175 0 0.4725
 N B.sub 50 0.20475 0 0.37125
-T 2 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 2 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 2 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 2 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,turn | 8010 00
 N B.fm 72 0.118125 0 0.357
 N B.sub 60 0.170625 0 0.2805
-T 2 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 2 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 2 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 2 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn | 8010 00
 N B.fm 72 0.06733125 0 0.399
 N B.sub 60 0.09725625 0 0.3135
-T 2 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 2 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 2 8 17 9 1 2 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,collision
+T 2 8 17 9 1 2 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,collision | 8010 00
 N B.fm 72 0.10125 0 0.56
 N B.sub 60 0.14625 0 0.44
 N fx.collision 43 0.08 0.01 0.7
-T 2 8 18 9 1 2 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 2 8 18 9 1 2 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 2 9 19 10 1 3 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,move,rotator
+T 2 9 19 10 1 3 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,move,rotator | 8200 00
 N A.main 64 0.0947625 0 0.3705
 N A.ping 67 0.03375 0.005625 0.1482
 N B.fm 72 0.151875 0 0.4165
 N B.sub 60 0.219375 0 0.32725
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 2 9 20 10 1 3 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 2 9 20 10 1 3 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 2 10 21 11 1 4 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | collision,collision,rotator,collision,collision,rotator
+T 2 10 21 11 1 4 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | collision,collision,rotator,collision,collision,rotator | 8200 00
 N A.main 64 0.04275 0 1
 N A.ping 67 0.03375 0.005625 0.4
 N B.fm 72 0.13584375 0 0.44625
@@ -662,515 +662,515 @@ N fx.collision 43 0.08 0 0.7
 N fx.collision 43 0.08 0.01 0.7
 N fx.rotator 81 0.04 0.02 0.45
 N fx.collision 43 0.08 0.03 0.7
-T 2 10 22 11 1 4 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 2 10 22 11 1 4 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 2 11 23 0 1 5 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait,rotator
+T 2 11 23 0 1 5 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait,rotator | 8200 00
 N A.main 64 0.071071875 0 0.57
 N A.ping 67 0.03375 0.005625 0.228
 N B.fm 72 0.0405 0 0.091
 N B.sub 60 0.0585 0 0.0715
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 2 11 24 0 1 5 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 2 11 24 0 1 5 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 2 12 25 1 2 0 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait
+T 2 12 25 1 2 0 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait | 8200 00
 N A.main 69 0.086034375 0 0.51
 N A.ping 72 0.03375 0.005625 0.204
 N fx.rotator 81 0.04 0.01 0.45
-T 2 12 26 1 2 0 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 2 12 26 1 2 0 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 72 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 2 13 27 2 2 1 0 0 0 spinner | A 0 2 N 0 0 0 | B 3 1 W 0 0 0 | 0 0 | 0 0 0 | move,move
+T 2 13 27 2 2 1 0 0 0 spinner | A 0 2 N 0 0 0 | B 3 1 W 0 0 0 | 0 0 | 0 0 0 | move,move | 500 00
 N A.main 69 0.10153125 0 0.76
 N A.ping 72 0.03375 0.005625 0.304
 N B.fm 72 0.15525 0 0.3094
 N B.sub 60 0.22425 0 0.2431
-T 2 13 28 2 2 1 0 0 0 spinner | A 0 2 N 0 0 0 | B 3 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 2 13 28 2 2 1 0 0 0 spinner | A 0 2 N 0 0 0 | B 3 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 2 14 29 3 2 2 0 0 0 spinner | A 0 2 N 0 0 0 | B 3 1 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 2 14 29 3 2 2 0 0 0 spinner | A 0 2 N 0 0 0 | B 3 1 W 0 0 0 | 0 0 | 0 0 0 | wait,wait | 500 00
 N A.main 65 0.0320625 0 0.2
-T 2 14 30 3 2 2 0 0 0 spinner | A 0 2 N 0 0 0 | B 3 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 2 14 30 3 2 2 0 0 0 spinner | A 0 2 N 0 0 0 | B 3 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 2 15 31 4 2 3 0 0 0 spinner | A 0 1 W 1 0 0 | B 3 1 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,zap
+T 2 15 31 4 2 3 0 0 0 spinner | A 0 1 W 1 0 0 | B 3 1 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,zap | 20 00
 N A.main 77 0.135375 0 0.494
 N A.ping 81 0.03375 0.005625 0.1976
 N B.fm 72 0.081 0 0.4095
 N B.sub 60 0.117 0 0.32175
 N fx.rotator 81 0.04 0.01 0.45
 N fx.zap -1 0.06 0.02 0.6
-T 2 15 32 4 2 3 0 0 0 spinner | A 0 1 W 1 0 0 | B 3 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 2 15 32 4 2 3 0 0 0 spinner | A 0 1 W 1 0 0 | B 3 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 83 0.0253125 0 0.371
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 2 16 33 5 2 4 0 0 0 spinner | A 1 1 W 1 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | move,turn
+T 2 16 33 5 2 4 0 0 0 spinner | A 1 1 W 1 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | move,turn | 140 00
 N A.main 81 0.1026 0 0.54054
 N A.ping 84 0.03375 0.005625 0.216216
 N B.fm 62 0.165375 0 0.315
 N B.sub 50 0.238875 0 0.2475
-T 2 16 34 5 2 4 0 0 0 spinner | A 1 1 W 1 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 2 16 34 5 2 4 0 0 0 spinner | A 1 1 W 1 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 84 0.0253125 0 0.371
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 2 17 35 6 2 5 0 0 0 spinner | A 1 1 W 1 0 0 | B 3 1 E 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 2 17 35 6 2 5 0 0 0 spinner | A 1 1 W 1 0 0 | B 3 1 E 0 0 0 | 0 0 | 0 0 0 | wait,turn | 140 00
 N B.fm 62 0.11221875 0 0.33915
 N B.sub 50 0.16209375 0 0.266475
-T 2 17 36 6 2 5 0 0 0 spinner | A 1 1 W 1 0 0 | B 3 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 2 17 36 6 2 5 0 0 0 spinner | A 1 1 W 1 0 0 | B 3 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 84 0.0253125 0 0.371
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 2 18 37 7 3 0 0 0 0 spinner | A 1 1 W 1 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | wait,move,rotator
+T 2 18 37 7 3 0 0 0 0 spinner | A 1 1 W 1 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | wait,move,rotator | 240 00
 N A.main 84 0.0342 0 0.15444
 N B.fm 71 0.23625 0 0.42
 N B.sub 59 0.34125 0 0.33
 N fx.rotator 81 0.04 0.02 0.45
-T 2 18 38 7 3 0 0 0 0 spinner | A 1 1 W 1 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 2 18 38 7 3 0 0 0 0 spinner | A 1 1 W 1 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.371
 N B.fm 71 0.02109375 0 0.245
 N B.sub 59 0.03375 0 0.175
-T 2 19 39 8 3 1 0 0 0 spinner | A 1 1 W 1 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
-T 2 19 40 8 3 1 0 0 0 spinner | A 1 1 W 1 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 2 19 39 8 3 1 0 0 0 spinner | A 1 1 W 1 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | wait,wait | 240 00
+T 2 19 40 8 3 1 0 0 0 spinner | A 1 1 W 1 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.371
 N B.fm 71 0.02109375 0 0.245
 N B.sub 59 0.03375 0 0.175
-T 2 20 41 9 3 2 0 0 0 spinner | A 0 1 S 1 0 0 | B 4 3 E 0 0 0 | 0 0 | 0 0 0 | move,rotator,move,move,rotator
+T 2 20 41 9 3 2 0 0 0 spinner | A 0 1 S 1 0 0 | B 4 3 E 0 0 0 | 0 0 | 0 0 0 | move,rotator,move,move,rotator | 84020 00
 N A.main 83 0.23690625 0 0.6156
 N A.ping 74 0.03375 0.005625 0.24624
 N B.fm 69 0.09703125 0 0.50575
 N B.sub 57 0.14015625 0 0.397375
 N fx.rotator 81 0.04 0.01 0.45
-T 2 20 42 9 3 2 0 0 0 spinner | A 0 1 S 1 0 0 | B 4 3 E 0 0 0 | 0 0 | 0 0 0 | -
+T 2 20 42 9 3 2 0 0 0 spinner | A 0 1 S 1 0 0 | B 4 3 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 74 0.0253125 0 0.371
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 2 21 43 10 3 3 0 0 0 spinner | A 0 1 N 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait,rotator
+T 2 21 43 10 3 3 0 0 0 spinner | A 0 1 N 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait,rotator | 80020 00
 N A.main 83 0.0748125 0 0.648
 N A.ping 74 0.03375 0.005625 0.2592
 N B.fm 69 0.030375 0 0.14
 N B.sub 57 0.043875 0 0.11
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 2 21 44 10 3 3 0 0 0 spinner | A 0 1 N 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 0 0 0 | -
+T 2 21 44 10 3 3 0 0 0 spinner | A 0 1 N 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 74 0.0253125 0 0.371
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 2 22 45 11 3 4 0 0 0 spinner | A 0 1 S 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait
+T 2 22 45 11 3 4 0 0 0 spinner | A 0 1 S 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait | 80020 00
 N A.main 83 0.200746875 0 0.4131
 N A.ping 74 0.03375 0.005625 0.16524
 N fx.rotator 81 0.04 0.01 0.45
-T 2 22 46 11 3 4 0 0 0 spinner | A 0 1 S 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 0 0 0 | -
+T 2 22 46 11 3 4 0 0 0 spinner | A 0 1 S 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 74 0.0253125 0 0.371
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 2 23 47 0 3 5 0 0 0 spinner | A 0 0 S 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 2 23 47 0 3 5 0 0 0 spinner | A 0 0 S 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 0 0 0 | move,wait | 80001 00
 N A.main 83 0.2244375 0 0.567
 N A.ping 74 0.03375 0.005625 0.2268
-T 2 23 48 0 3 5 0 0 0 spinner | A 0 0 S 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 0 0 0 | -
+T 2 23 48 0 3 5 0 0 0 spinner | A 0 0 S 1 0 0 | B 4 3 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 74 0.0253125 0 0.371
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 3 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 3 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset | 0 00
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 3 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 3 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 3 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait | 100010 00
 N A.main 53 0.069825 0 0.4725
 N A.ping 57 0.03375 0.005625 0.189
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
-T 3 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 3 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 3 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait | 100010 00
 N A.main 53 0.05985 0 0.165
-T 3 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 3 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 3 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | collision,wait | 100010 00
 N A.main 53 0.1995 0 0.66
 N A.ping 57 0.03375 0.005625 0.264
 N fx.collision 43 0.08 0 0.7
-T 3 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 3 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 3 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait | 8010 00
 N A.main 65 0.1218375 0 0.43225
 N A.ping 69 0.03375 0.005625 0.1729
 N B.fm 62 0.038475 0 0.08645
 N B.sub 50 0.055575 0 0.067925
 N fx.rotator 81 0.04 0.01 0.45
-T 3 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 3 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 3 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,ping | 8010 00
 N B.fm 62 0.081 0 0.4095
 N B.sub 50 0.117 0 0.32175
-T 3 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 3 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait
+T 3 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait | 8010 00
 N A.main 64 0.1147125 0 0.3315
 N A.ping 67 0.03375 0.005625 0.1326
 N fx.rotator 81 0.04 0.01 0.45
-T 3 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 3 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn
+T 3 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn | 8010 00
 N A.main 64 0.0947625 0 0.3705
 N A.ping 67 0.03375 0.005625 0.1482
 N B.fm 72 0.15710625 0 0.29925
 N B.sub 60 0.22693125 0 0.235125
 N fx.rotator 81 0.04 0.01 0.45
-T 3 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 3 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 3 8 17 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,move,rotator
+T 3 8 17 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,move,rotator | 8200 00
 N A.main 64 0.09975 0 0.561
 N A.ping 67 0.03375 0.005625 0.2244
 N B.fm 72 0.135 0 0.364
 N B.sub 60 0.195 0 0.286
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 3 8 18 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 8 18 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 3 9 19 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | wait,collision,rotator
+T 3 9 19 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | wait,collision,rotator | 8200 00
 N B.fm 72 0.091125 0 0.49
 N B.sub 60 0.131625 0 0.385
 N fx.collision 43 0.08 0.01 0.7
 N fx.rotator 81 0.04 0.02 0.45
-T 3 9 20 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 3 9 20 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 3 10 21 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,move,collision
+T 3 10 21 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,move,collision | 8010 00
 N B.fm 72 0.05821875 0 0.595
 N B.sub 60 0.08409375 0 0.4675
 N fx.collision 43 0.08 0.02 0.7
-T 3 10 22 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 3 10 22 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 3 11 23 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait
+T 3 11 23 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait | 8010 00
 N A.main 64 0.118453125 0 0.4845
 N A.ping 67 0.03375 0.005625 0.1938
 N B.fm 72 0.030375 0 0.14
 N B.sub 60 0.043875 0 0.11
 N fx.rotator 81 0.04 0.01 0.45
-T 3 11 24 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 3 11 24 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 3 12 25 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn
+T 3 12 25 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn | 8010 00
 N A.main 69 0.143390625 0 0.4335
 N A.ping 72 0.03375 0.005625 0.1734
 N B.fm 65 0.0756 0 0.3003
 N B.sub 53 0.1092 0 0.23595
 N fx.rotator 81 0.04 0.01 0.45
-T 3 12 26 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 3 12 26 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 72 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 3 13 27 2 2 1 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | wait,move,rotator
+T 3 13 27 2 2 1 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | wait,move,rotator | 8008 00
 N B.fm 72 0.2716875 0 0.357
 N B.sub 60 0.3924375 0 0.2805
 N fx.rotator 81 0.04 0.02 0.45
-T 3 13 28 2 2 1 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 3 13 28 2 2 1 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 3 14 29 3 2 2 0 0 0 spinner | A 0 3 S 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | wait,rotator,wait,rotator
+T 3 14 29 3 2 2 0 0 0 spinner | A 0 3 S 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | wait,rotator,wait,rotator | 8008 00
 N A.main 65 0.0748125 0 0.15
 N B.fm 72 0.04809375 0 0.11305
 N B.sub 60 0.06946875 0 0.088825
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 3 14 30 3 2 2 0 0 0 spinner | A 0 3 S 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 3 14 30 3 2 2 0 0 0 spinner | A 0 3 S 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 3 15 31 4 2 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | move,ping,rotator
+T 3 15 31 4 2 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | move,ping,rotator | 100008 00
 N A.main 53 0.23690625 0 0.57
 N A.ping 57 0.03375 0.005625 0.228
 N B.fm 72 0.06075 0 0.63
 N B.sub 60 0.08775 0 0.495
 N fx.rotator 81 0.04 0.02 0.45
-T 3 15 32 4 2 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 3 15 32 4 2 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 3 16 33 5 2 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 3 16 33 5 2 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait | 8008 00
 N A.main 65 0.1026 0 0.5005
 N A.ping 69 0.03375 0.005625 0.2002
 N fx.rotator 81 0.04 0.01 0.45
-T 3 16 34 5 2 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 3 16 34 5 2 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 3 17 35 6 2 5 0 0 0 spinner | A 0 3 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | ping,rotator,turn,rotator
+T 3 17 35 6 2 5 0 0 0 spinner | A 0 3 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | ping,rotator,turn,rotator | 8008 00
 N A.main 65 0.02565 0 0.945
 N A.ping 69 0.03375 0.005625 0.378
 N B.fm 72 0.15710625 0 0.29925
 N B.sub 60 0.22693125 0 0.235125
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 3 17 36 6 2 5 0 0 0 spinner | A 0 3 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 3 17 36 6 2 5 0 0 0 spinner | A 0 3 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 3 18 37 7 3 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | wait,rotator,move
+T 3 18 37 7 3 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | wait,rotator,move | 8100 00
 N A.main 69 0.04275 0 0.187
 N B.fm 64 0.23625 0 0.42
 N B.sub 52 0.34125 0 0.33
 N fx.rotator 81 0.04 0.01 0.45
-T 3 18 38 7 3 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 3 18 38 7 3 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 72 0.0253125 0 0.35
 N B.fm 64 0.02109375 0 0.245
 N B.sub 52 0.03375 0 0.175
-T 3 19 39 8 3 1 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | move,move,wait
+T 3 19 39 8 3 1 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | move,move,wait | 30100 00
 N A.main 72 0.0890625 0 0.85
 N A.ping 76 0.03375 0.005625 0.34
-T 3 19 40 8 3 1 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 3 19 40 8 3 1 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 67 0.02109375 0 0.245
 N B.sub 55 0.03375 0 0.175
-T 3 20 41 9 3 2 0 0 0 spinner | A 3 3 E 2 0 0 | B 3 3 S 0 0 0 | 7 0 | 0 0 0 | move,move,move,zap
+T 3 20 41 9 3 2 0 0 0 spinner | A 3 3 E 2 0 0 | B 3 3 S 0 0 0 | 7 0 | 0 0 0 | move,move,move,zap | 42000 10
 N A.main 74 0.16921875 0 0.646
 N A.ping 77 0.03375 0.005625 0.2584
 N B.fm 69 0.13584375 0 0.44625
 N B.sub 57 0.19621875 0 0.350625
 N fx.zap -1 0.06 0.03 0.6
-T 3 20 42 9 3 2 0 0 0 spinner | A 3 3 E 2 0 0 | B 3 3 S 0 0 0 | 7 0 | 0 0 0 | -
+T 3 20 42 9 3 2 0 0 0 spinner | A 3 3 E 2 0 0 | B 3 3 S 0 0 0 | 7 0 | 0 0 0 | - | 0 00
 N A.ping 81 0.0253125 0 0.392
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 3 21 43 10 3 3 0 0 0 spinner | A 3 3 N 2 0 0 | B 3 3 S 0 0 0 | 6 0 | 0 0 0 | turn,wait
+T 3 21 43 10 3 3 0 0 0 spinner | A 3 3 N 2 0 0 | B 3 3 S 0 0 0 | 6 0 | 0 0 0 | turn,wait | 40000 00
 N A.main 77 0.0748125 0 0.696
 N A.ping 81 0.03375 0.005625 0.2784
 N B.fm 69 0.070875 0 0.105
 N B.sub 57 0.102375 0 0.0825
-T 3 21 44 10 3 3 0 0 0 spinner | A 3 3 N 2 0 0 | B 3 3 S 0 0 0 | 6 0 | 0 0 0 | -
+T 3 21 44 10 3 3 0 0 0 spinner | A 3 3 N 2 0 0 | B 3 3 S 0 0 0 | 6 0 | 0 0 0 | - | 0 00
 N A.ping 81 0.0253125 0 0.392
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 3 22 45 11 3 4 0 0 0 spinner | A 3 3 N 2 0 0 | B 3 3 S 0 0 0 | 5 0 | 0 0 0 | wait,wait
-T 3 22 46 11 3 4 0 0 0 spinner | A 3 3 N 2 0 0 | B 3 3 S 0 0 0 | 5 0 | 0 0 0 | -
+T 3 22 45 11 3 4 0 0 0 spinner | A 3 3 N 2 0 0 | B 3 3 S 0 0 0 | 5 0 | 0 0 0 | wait,wait | 40000 00
+T 3 22 46 11 3 4 0 0 0 spinner | A 3 3 N 2 0 0 | B 3 3 S 0 0 0 | 5 0 | 0 0 0 | - | 0 00
 N A.ping 81 0.0253125 0 0.392
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 3 23 47 0 3 5 0 0 0 spinner | A 3 4 E 2 0 0 | B 3 4 W 0 0 0 | 4 0 | 0 0 0 | move,rotator,move,rotator
+T 3 23 47 0 3 5 0 0 0 spinner | A 3 4 E 2 0 0 | B 3 4 W 0 0 0 | 4 0 | 0 0 0 | move,rotator,move,rotator | 800000 00
 N A.main 65 0.1603125 0 0.6902
 N A.ping 69 0.03375 0.005625 0.27608
 N B.fm 57 0.15525 0 0.3094
 N B.sub 45 0.22425 0 0.2431
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 3 23 48 0 3 5 0 0 0 spinner | A 3 4 E 2 0 0 | B 3 4 W 0 0 0 | 4 0 | 0 0 0 | -
+T 3 23 48 0 3 5 0 0 0 spinner | A 3 4 E 2 0 0 | B 3 4 W 0 0 0 | 4 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.392
 N B.fm 57 0.02109375 0 0.245
 N B.sub 45 0.03375 0 0.175
-T 4 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 4 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset | 0 00
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 4 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 4 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 4 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 4 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait | 100010 00
 N A.main 53 0.069825 0 0.4725
 N A.ping 57 0.03375 0.005625 0.189
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
-T 4 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 4 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 4 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
-T 4 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 4 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait | 100010 00
+T 4 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 4 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | collision,move,rotator
+T 4 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | collision,move,rotator | 100008 00
 N A.main 53 0.1995 0 0.66
 N A.ping 57 0.03375 0.005625 0.264
 N B.fm 69 0.2716875 0 0.357
 N B.sub 57 0.3924375 0 0.2805
 N fx.collision 43 0.08 0 0.7
 N fx.rotator 81 0.04 0.02 0.45
-T 4 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 4 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 53 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 4 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait,rotator
+T 4 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait,rotator | 8008 00
 N A.main 62 0.1218375 0 0.43225
 N A.ping 65 0.03375 0.005625 0.1729
 N B.fm 69 0.04809375 0 0.11305
 N B.sub 57 0.06946875 0 0.088825
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 4 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 4 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 65 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 4 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | wait,ping,rotator
+T 4 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | wait,ping,rotator | 8008 00
 N B.fm 69 0.06075 0 0.63
 N B.sub 57 0.08775 0 0.495
 N fx.rotator 81 0.04 0.02 0.45
-T 4 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 4 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 65 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 4 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait
+T 4 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait | 8008 00
 N A.main 60 0.1147125 0 0.3315
 N A.ping 64 0.03375 0.005625 0.1326
 N fx.rotator 81 0.04 0.01 0.45
-T 4 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 4 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 64 0.0253125 0 0.35
 N B.fm 67 0.02109375 0 0.245
 N B.sub 55 0.03375 0 0.175
-T 4 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator
+T 4 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator | 8008 00
 N B.fm 67 0.15710625 0 0.29925
 N B.sub 55 0.22693125 0 0.235125
 N fx.rotator 81 0.04 0.02 0.45
-T 4 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 4 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 64 0.0253125 0 0.35
 N B.fm 67 0.02109375 0 0.245
 N B.sub 55 0.03375 0 0.175
-T 4 8 17 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,move
+T 4 8 17 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,move | 8100 00
 N A.main 60 0.09975 0 0.561
 N A.ping 64 0.03375 0.005625 0.2244
 N B.fm 67 0.23625 0 0.42
 N B.sub 55 0.34125 0 0.33
 N fx.rotator 81 0.04 0.01 0.45
-T 4 8 18 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 4 8 18 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 64 0.0253125 0 0.35
 N B.fm 67 0.02109375 0 0.245
 N B.sub 55 0.03375 0 0.175
-T 4 9 19 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait
+T 4 9 19 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait | 8100 00
 N A.main 60 0.118453125 0 0.4845
 N A.ping 64 0.03375 0.005625 0.1938
 N fx.rotator 81 0.04 0.01 0.45
-T 4 9 20 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 4 9 20 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 64 0.0253125 0 0.35
 N B.fm 67 0.02109375 0 0.245
 N B.sub 55 0.03375 0 0.175
-T 4 10 21 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 3 S 0 0 0 | 0 0 | 0 0 0 | wait,move,move
+T 4 10 21 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 3 S 0 0 0 | 0 0 | 0 0 0 | wait,move,move | 4a000 00
 N B.fm 67 0.13584375 0 0.44625
 N B.sub 55 0.19621875 0 0.350625
-T 4 10 22 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 3 S 0 0 0 | 0 0 | 0 0 0 | -
+T 4 10 22 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 3 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 64 0.0253125 0 0.35
 N B.fm 67 0.02109375 0 0.245
 N B.sub 55 0.03375 0 0.175
-T 4 11 23 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 3 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 4 11 23 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 3 S 0 0 0 | 0 0 | 0 0 0 | wait,wait | 48000 00
 N B.fm 67 0.070875 0 0.105
 N B.sub 55 0.102375 0 0.0825
-T 4 11 24 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 3 S 0 0 0 | 0 0 | 0 0 0 | -
+T 4 11 24 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 3 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 64 0.0253125 0 0.35
 N B.fm 67 0.02109375 0 0.245
 N B.sub 55 0.03375 0 0.175
-T 4 12 25 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 3 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait
+T 4 12 25 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 3 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait | 48000 00
 N A.main 65 0.143390625 0 0.4335
 N A.ping 69 0.03375 0.005625 0.1734
 N fx.rotator 81 0.04 0.01 0.45
-T 4 12 26 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 3 S 0 0 0 | 0 0 | 0 0 0 | -
+T 4 12 26 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 3 3 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 4 13 27 2 2 1 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 W 0 0 0 | 0 0 | 0 0 0 | move,move,rotator
+T 4 13 27 2 2 1 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 W 0 0 0 | 0 0 | 0 0 0 | move,move,rotator | 810000 00
 N A.main 67 0.16921875 0 0.646
 N A.ping 71 0.03375 0.005625 0.2584
 N B.fm 62 0.15525 0 0.3094
 N B.sub 50 0.22425 0 0.2431
 N fx.rotator 81 0.04 0.02 0.45
-T 4 13 28 2 2 1 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 W 0 0 0 | 0 0 | 0 0 0 | -
+T 4 13 28 2 2 1 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 4 14 29 3 2 2 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | wait,wait,rotator
+T 4 14 29 3 2 2 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | wait,wait,rotator | 810000 00
 N A.main 67 0.0534375 0 0.17
 N B.fm 62 0.02885625 0 0.133
 N B.sub 50 0.04168125 0 0.1045
 N fx.rotator 81 0.04 0.02 0.45
-T 4 14 30 3 2 2 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | -
+T 4 14 30 3 2 2 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 4 15 31 4 2 3 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 4 E 0 0 0 | 0 0 | 0 0 0 | move,ping,rotator
+T 4 15 31 4 2 3 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 4 E 0 0 0 | 0 0 | 0 0 0 | move,ping,rotator | 820000 00
 N A.main 69 0.16921875 0 0.646
 N A.ping 72 0.03375 0.005625 0.2584
 N B.fm 64 0.10125 0 0.5355
 N B.sub 52 0.14625 0 0.42075
 N fx.rotator 81 0.04 0.02 0.45
-T 4 15 32 4 2 3 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 4 E 0 0 0 | 0 0 | 0 0 0 | -
+T 4 15 32 4 2 3 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 4 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 72 0.0253125 0 0.35
 N B.fm 64 0.02109375 0 0.245
 N B.sub 52 0.03375 0 0.175
-T 4 16 33 5 2 4 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 E 0 0 0 | 0 0 | 0 0 0 | move,turn,rotator
+T 4 16 33 5 2 4 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 E 0 0 0 | 0 0 | 0 0 0 | move,turn,rotator | 810000 00
 N A.main 67 0.12825 0 0.6545
 N A.ping 71 0.03375 0.005625 0.2618
 N B.fm 62 0.118125 0 0.357
 N B.sub 50 0.170625 0 0.2805
 N fx.rotator 81 0.04 0.02 0.45
-T 4 16 34 5 2 4 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 E 0 0 0 | 0 0 | 0 0 0 | -
+T 4 16 34 5 2 4 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 4 17 35 6 2 5 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 E 0 0 0 | 0 0 | 0 0 0 | ping,turn,rotator
+T 4 17 35 6 2 5 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 E 0 0 0 | 0 0 | 0 0 0 | ping,turn,rotator | 810000 00
 N A.main 67 0.04275 0 0.80325
 N A.ping 71 0.03375 0.005625 0.3213
 N B.fm 62 0.11221875 0 0.33915
 N B.sub 50 0.16209375 0 0.266475
 N fx.rotator 81 0.04 0.02 0.45
-T 4 17 36 6 2 5 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 E 0 0 0 | 0 0 | 0 0 0 | -
+T 4 17 36 6 2 5 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 4 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 4 18 37 7 3 0 0 0 0 spinner | A 1 3 E 0 0 0 | B 4 4 E 0 0 0 | 0 0 | 0 0 0 | wait,move
+T 4 18 37 7 3 0 0 0 0 spinner | A 1 3 E 0 0 0 | B 4 4 E 0 0 0 | 0 0 | 0 0 0 | wait,move | 1010000 00
 N A.main 71 0.04275 0 0.187
 N B.fm 71 0.16875 0 0.476
 N B.sub 59 0.24375 0 0.374
-T 4 18 38 7 3 0 0 0 0 spinner | A 1 3 E 0 0 0 | B 4 4 E 0 0 0 | 0 0 | 0 0 0 | -
+T 4 18 38 7 3 0 0 0 0 spinner | A 1 3 E 0 0 0 | B 4 4 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 77 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.245
 N B.sub 59 0.03375 0 0.175
-T 4 19 39 8 3 1 0 0 0 spinner | A 3 3 E 0 0 0 | B 3 4 S 0 0 0 | 0 0 | 0 0 0 | move,move,move,rotator
+T 4 19 39 8 3 1 0 0 0 spinner | A 3 3 E 0 0 0 | B 3 4 S 0 0 0 | 0 0 | 0 0 0 | move,move,move,rotator | 860000 00
 N A.main 77 0.0890625 0 0.85
 N A.ping 81 0.03375 0.005625 0.34
 N B.fm 69 0.212625 0 0.3675
 N B.sub 57 0.307125 0 0.28875
 N fx.rotator 81 0.04 0.03 0.45
-T 4 19 40 8 3 1 0 0 0 spinner | A 3 3 E 0 0 0 | B 3 4 S 0 0 0 | 0 0 | 0 0 0 | -
+T 4 19 40 8 3 1 0 0 0 spinner | A 3 3 E 0 0 0 | B 3 4 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 77 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 4 20 41 9 3 2 0 0 0 spinner | A 4 3 N 0 0 0 | B 3 4 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,collision,collision,rotator
+T 4 20 41 9 3 2 0 0 0 spinner | A 4 3 N 0 0 0 | B 3 4 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,collision,collision,rotator | 880000 00
 N A.main 76 0.10153125 0 0.76
 N A.ping 79 0.03375 0.005625 0.304
 N B.fm 71 0.077625 0 0.38675
@@ -1178,74 +1178,74 @@ N B.sub 59 0.112125 0 0.303875
 N fx.rotator 81 0.04 0.01 0.45
 N fx.collision 43 0.08 0.02 0.7
 N fx.collision 43 0.08 0.03 0.7
-T 4 20 42 9 3 2 0 0 0 spinner | A 4 3 N 0 0 0 | B 3 4 W 0 0 0 | 0 0 | 0 0 0 | -
+T 4 20 42 9 3 2 0 0 0 spinner | A 4 3 N 0 0 0 | B 3 4 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.245
 N B.sub 59 0.03375 0 0.175
-T 4 21 43 10 3 3 0 0 0 spinner | A 4 3 S 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait,rotator
+T 4 21 43 10 3 3 0 0 0 spinner | A 4 3 S 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait,rotator | 880000 00
 N A.main 76 0.1745625 0 0.45
 N A.ping 79 0.03375 0.005625 0.18
 N B.fm 71 0.030375 0 0.14
 N B.sub 59 0.043875 0 0.11
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 4 21 44 10 3 3 0 0 0 spinner | A 4 3 S 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | -
+T 4 21 44 10 3 3 0 0 0 spinner | A 4 3 S 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.245
 N B.sub 59 0.03375 0 0.175
-T 4 22 45 11 3 4 0 0 0 spinner | A 4 3 N 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator
+T 4 22 45 11 3 4 0 0 0 spinner | A 4 3 N 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator | 880000 00
 N A.main 76 0.086034375 0 0.51
 N A.ping 79 0.03375 0.005625 0.204
 N B.fm 71 0.0567 0 0.462
 N B.sub 59 0.0819 0 0.363
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 4 22 46 11 3 4 0 0 0 spinner | A 4 3 N 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | -
+T 4 22 46 11 3 4 0 0 0 spinner | A 4 3 N 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.245
 N B.sub 59 0.03375 0 0.175
-T 4 23 47 0 3 5 0 0 0 spinner | A 4 4 N 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 4 23 47 0 3 5 0 0 0 spinner | A 4 4 N 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | move,wait | 1800000 00
 N A.main 64 0.0961875 0 0.7
 N A.ping 67 0.03375 0.005625 0.28
-T 4 23 48 0 3 5 0 0 0 spinner | A 4 4 N 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | -
+T 4 23 48 0 3 5 0 0 0 spinner | A 4 4 N 0 0 0 | B 3 4 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 59 0.02109375 0 0.245
 N B.sub 47 0.03375 0 0.175
-T 5 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 5 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset | 0 00
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 5 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 5 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 5 1 3 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 5 1 3 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait | 100010 00
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
-T 5 1 4 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 5 1 4 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 5 2 5 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
-T 5 2 6 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 5 2 5 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait | 100010 00
+T 5 2 6 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 5 3 7 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,move,rotator
+T 5 3 7 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,move,rotator | 200008 00
 N A.main 57 0.0855 0 0.88
 N A.ping 60 0.03375 0.005625 0.352
 N B.fm 72 0.2716875 0 0.357
 N B.sub 60 0.3924375 0 0.2805
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 5 3 8 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 5 3 8 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 5 4 9 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | collision,rotator,wait,rotator
+T 5 4 9 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | collision,rotator,wait,rotator | 200008 00
 N A.main 53 0.1218375 0 0.43225
 N A.ping 57 0.03375 0.005625 0.1729
 N B.fm 72 0.04809375 0 0.11305
@@ -1253,83 +1253,83 @@ N B.sub 60 0.06946875 0 0.088825
 N fx.collision 43 0.08 0 0.7
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 5 4 10 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 5 4 10 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 5 5 11 6 0 5 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | wait,ping,rotator
+T 5 5 11 6 0 5 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | wait,ping,rotator | 200008 00
 N B.fm 72 0.06075 0 0.63
 N B.sub 60 0.08775 0 0.495
 N fx.rotator 81 0.04 0.02 0.45
-T 5 5 12 6 0 5 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 5 5 12 6 0 5 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 5 6 13 7 1 0 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | wait,wait
-T 5 6 14 7 1 0 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 5 6 13 7 1 0 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | wait,wait | 200008 00
+T 5 6 14 7 1 0 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 53 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 5 7 15 8 1 1 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator
+T 5 7 15 8 1 1 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator | 200008 00
 N A.main 50 0.118453125 0 0.4845
 N A.ping 53 0.03375 0.005625 0.1938
 N B.fm 69 0.15710625 0 0.29925
 N B.sub 57 0.22693125 0 0.235125
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 5 7 16 8 1 1 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 5 7 16 8 1 1 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 53 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 5 8 17 9 1 2 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,move
+T 5 8 17 9 1 2 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,move | 200100 00
 N A.main 50 0.09975 0 0.561
 N A.ping 53 0.03375 0.005625 0.2244
 N B.fm 69 0.23625 0 0.42
 N B.sub 57 0.34125 0 0.33
 N fx.rotator 81 0.04 0.01 0.45
-T 5 8 18 9 1 2 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 5 8 18 9 1 2 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 53 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 5 9 19 10 1 3 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | wait,move,rotator
+T 5 9 19 10 1 3 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | wait,move,rotator | 200008 00
 N B.fm 69 0.151875 0 0.4165
 N B.sub 57 0.219375 0 0.32725
 N fx.rotator 81 0.04 0.02 0.45
-T 5 9 20 10 1 3 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 5 9 20 10 1 3 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 53 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 5 10 21 11 1 4 0 0 0 spinner | A 3 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | move,move,rotator,move,collision
+T 5 10 21 11 1 4 0 0 0 spinner | A 3 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | move,move,rotator,move,collision | c00010 00
 N A.main 53 0.09975 0 0.825
 N A.ping 57 0.03375 0.005625 0.33
 N B.fm 65 0.09703125 0 0.50575
 N B.sub 53 0.14015625 0 0.397375
 N fx.rotator 81 0.04 0.02 0.45
-T 5 10 22 11 1 4 0 0 0 spinner | A 3 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 5 10 22 11 1 4 0 0 0 spinner | A 3 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 5 11 23 0 1 5 0 0 0 spinner | A 3 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait
+T 5 11 23 0 1 5 0 0 0 spinner | A 3 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait | 800010 00
 N A.main 57 0.165834375 0 0.4275
 N A.ping 60 0.03375 0.005625 0.171
 N B.fm 65 0.050625 0 0.119
 N B.sub 53 0.073125 0 0.0935
 N fx.rotator 81 0.04 0.01 0.45
-T 5 11 24 0 1 5 0 0 0 spinner | A 3 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 5 11 24 0 1 5 0 0 0 spinner | A 3 4 S 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 5 12 25 1 2 0 0 0 0 spinner | A 3 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn
+T 5 12 25 1 2 0 0 0 0 spinner | A 3 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn | 800010 00
 N A.main 60 0.200746875 0 0.3825
 N A.ping 64 0.03375 0.005625 0.153
 N B.fm 69 0.0567 0 0.462
 N B.sub 57 0.0819 0 0.363
 N fx.rotator 81 0.04 0.01 0.45
-T 5 12 26 1 2 0 0 0 0 spinner | A 3 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 5 12 26 1 2 0 0 0 0 spinner | A 3 4 S 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 64 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 5 13 27 2 2 1 0 0 0 spinner | A 3 4 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,rotator,collision
+T 5 13 27 2 2 1 0 0 0 spinner | A 3 4 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | collision,rotator,collision | 800010 00
 N A.main 60 0.135375 0 0.494
 N A.ping 64 0.03375 0.005625 0.1976
 N B.fm 69 0.1164375 0 0.476
@@ -1337,128 +1337,128 @@ N B.sub 57 0.1681875 0 0.374
 N fx.collision 43 0.08 0 0.7
 N fx.rotator 81 0.04 0.01 0.45
 N fx.collision 43 0.08 0.02 0.7
-T 5 13 28 2 2 1 0 0 0 spinner | A 3 4 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 5 13 28 2 2 1 0 0 0 spinner | A 3 4 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 64 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 5 14 29 3 2 2 0 0 0 spinner | A 3 4 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,rotator,wait
+T 5 14 29 3 2 2 0 0 0 spinner | A 3 4 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,rotator,wait | 800010 00
 N A.main 60 0.0320625 0 0.2
 N B.fm 69 0.02885625 0 0.133
 N B.sub 57 0.04168125 0 0.1045
 N fx.rotator 81 0.04 0.01 0.45
-T 5 14 30 3 2 2 0 0 0 spinner | A 3 4 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 5 14 30 3 2 2 0 0 0 spinner | A 3 4 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 64 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 5 15 31 4 2 3 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 5 15 31 4 2 3 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,ping | 40010 00
 N A.main 72 0.10153125 0 0.76
 N A.ping 76 0.03375 0.005625 0.304
 N B.fm 69 0.06075 0 0.63
 N B.sub 57 0.08775 0 0.495
-T 5 15 32 4 2 3 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 5 15 32 4 2 3 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 5 16 33 5 2 4 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 5 16 33 5 2 4 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,turn | 40010 00
 N B.fm 69 0.0945 0 0.273
 N B.sub 57 0.1365 0 0.2145
-T 5 16 34 5 2 4 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 5 16 34 5 2 4 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 5 17 35 6 2 5 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 5 17 35 6 2 5 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,turn | 40010 00
 N A.main 72 0.02565 0 0.945
 N A.ping 76 0.03375 0.005625 0.378
 N B.fm 69 0.15710625 0 0.29925
 N B.sub 57 0.22693125 0 0.235125
-T 5 17 36 6 2 5 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 5 17 36 6 2 5 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 5 18 37 7 3 0 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | wait,move,rotator
+T 5 18 37 7 3 0 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | wait,move,rotator | 40200 00
 N A.main 77 0.02565 0 0.22
 N B.fm 62 0.135 0 0.364
 N B.sub 50 0.195 0 0.286
 N fx.rotator 81 0.04 0.02 0.45
-T 5 18 38 7 3 0 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 5 18 38 7 3 0 0 0 0 spinner | A 3 3 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 81 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 5 19 39 8 3 1 0 0 0 spinner | A 3 1 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | move,move,wait
+T 5 19 39 8 3 1 0 0 0 spinner | A 3 1 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | move,move,wait | 2300 00
 N A.main 77 0.0534375 0 1
 N A.ping 81 0.03375 0.005625 0.4
-T 5 19 40 8 3 1 0 0 0 spinner | A 3 1 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 5 19 40 8 3 1 0 0 0 spinner | A 3 1 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 81 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 5 20 41 9 3 2 0 0 0 spinner | A 3 1 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
-T 5 20 42 9 3 2 0 0 0 spinner | A 3 1 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 5 20 41 9 3 2 0 0 0 spinner | A 3 1 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | wait,wait | 300 00
+T 5 20 42 9 3 2 0 0 0 spinner | A 3 1 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 81 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 5 21 43 10 3 3 0 0 0 spinner | A 3 1 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | turn,wait,rotator
+T 5 21 43 10 3 3 0 0 0 spinner | A 3 1 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | turn,wait,rotator | 300 00
 N A.main 77 0.09975 0 0.39
 N A.ping 81 0.03375 0.005625 0.156
 N B.fm 62 0.030375 0 0.14
 N B.sub 50 0.043875 0 0.11
 N fx.rotator 81 0.04 0.02 0.45
-T 5 21 44 10 3 3 0 0 0 spinner | A 3 1 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 5 21 44 10 3 3 0 0 0 spinner | A 3 1 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 81 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 5 22 45 11 3 4 0 0 0 spinner | A 3 1 S 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 5 22 45 11 3 4 0 0 0 spinner | A 3 1 S 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | turn,wait | 300 00
 N A.main 77 0.200746875 0 0.3825
 N A.ping 81 0.03375 0.005625 0.153
-T 5 22 46 11 3 4 0 0 0 spinner | A 3 1 S 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 5 22 46 11 3 4 0 0 0 spinner | A 3 1 S 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 81 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 5 23 47 0 3 5 0 0 0 spinner | A 3 0 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 5 23 47 0 3 5 0 0 0 spinner | A 3 0 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait | 208 00
 N A.main 77 0.1603125 0 0.595
 N A.ping 81 0.03375 0.005625 0.238
 N fx.rotator 81 0.04 0.01 0.45
-T 5 23 48 0 3 5 0 0 0 spinner | A 3 0 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 5 23 48 0 3 5 0 0 0 spinner | A 3 0 E 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 81 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 6 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 6 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset | 0 00
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 6 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 6 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 6 1 3 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 6 1 3 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait | 100010 00
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
-T 6 1 4 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 6 1 4 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 6 2 5 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 6 2 5 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn | 100010 00
 N A.main 53 0.04275 0 0.187
 N B.fm 62 0.1323 0 0.3465
 N B.sub 50 0.1911 0 0.27225
-T 6 2 6 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 6 2 6 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 6 3 7 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,move,rotator
+T 6 3 7 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | move,rotator,move,rotator | 200200 00
 N A.main 57 0.0855 0 0.88
 N A.ping 60 0.03375 0.005625 0.352
 N B.fm 65 0.15525 0 0.3094
 N B.sub 53 0.22425 0 0.2431
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 6 3 8 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 6 3 8 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 6 4 9 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | collision,rotator,wait,rotator
+T 6 4 9 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | collision,rotator,wait,rotator | 200200 00
 N A.main 57 0.1218375 0 0.43225
 N A.ping 60 0.03375 0.005625 0.1729
 N B.fm 65 0.02885625 0 0.133
@@ -1466,44 +1466,44 @@ N B.sub 53 0.04168125 0 0.1045
 N fx.collision 43 0.08 0 0.7
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 6 4 10 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 6 4 10 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 6 5 11 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping,rotator
+T 6 5 11 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping,rotator | 200200 00
 N A.main 57 0.118453125 0 0.4845
 N A.ping 60 0.03375 0.005625 0.1938
 N B.fm 65 0.10125 0 0.5355
 N B.sub 53 0.14625 0 0.42075
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 6 5 12 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 6 5 12 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 6 6 13 7 1 0 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator
+T 6 6 13 7 1 0 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator | 200200 00
 N A.main 53 0.1147125 0 0.3315
 N A.ping 57 0.03375 0.005625 0.1326
 N B.fm 62 0.118125 0 0.357
 N B.sub 50 0.170625 0 0.2805
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 6 6 14 7 1 0 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 6 6 14 7 1 0 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 6 7 15 8 1 1 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator
+T 6 7 15 8 1 1 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator | 200200 00
 N A.main 53 0.118453125 0 0.4845
 N A.ping 57 0.03375 0.005625 0.1938
 N B.fm 62 0.11221875 0 0.33915
 N B.sub 50 0.16209375 0 0.266475
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 6 7 16 8 1 1 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 6 7 16 8 1 1 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 6 8 17 9 1 2 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision,rotator
+T 6 8 17 9 1 2 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision,rotator | 200200 00
 N A.main 53 0.09975 0 0.561
 N A.ping 57 0.03375 0.005625 0.2244
 N B.fm 62 0.23625 0 0.42
@@ -1511,641 +1511,641 @@ N B.sub 50 0.34125 0 0.33
 N fx.rotator 81 0.04 0.01 0.45
 N fx.collision 43 0.08 0.02 0.7
 N fx.rotator 81 0.04 0.03 0.45
-T 6 8 18 9 1 2 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 6 8 18 9 1 2 0 0 0 spinner | A 1 4 E 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 6 9 19 10 1 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,move
+T 6 9 19 10 1 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,move | 200010 00
 N A.main 53 0.0947625 0 0.3705
 N A.ping 57 0.03375 0.005625 0.1482
 N B.fm 62 0.212625 0 0.3675
 N B.sub 50 0.307125 0 0.28875
 N fx.rotator 81 0.04 0.01 0.45
-T 6 9 20 10 1 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 6 9 20 10 1 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 6 10 21 11 1 4 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,collision,move,move
+T 6 10 21 11 1 4 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,collision,move,move | 104200 00
 N A.main 52 0.057 0 0.715
 N A.ping 55 0.03375 0.005625 0.286
 N B.fm 60 0.13584375 0 0.44625
 N B.sub 48 0.19621875 0 0.350625
 N fx.collision 43 0.08 0.01 0.7
-T 6 10 22 11 1 4 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 6 10 22 11 1 4 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 55 0.0253125 0 0.35
 N B.fm 60 0.02109375 0 0.245
 N B.sub 48 0.03375 0 0.175
-T 6 11 23 0 1 5 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 6 11 23 0 1 5 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,wait | 104000 00
 N B.fm 60 0.070875 0 0.105
 N B.sub 48 0.102375 0 0.0825
-T 6 11 24 0 1 5 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 6 11 24 0 1 5 0 0 0 spinner | A 0 4 W 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 55 0.0253125 0 0.35
 N B.fm 60 0.02109375 0 0.245
 N B.sub 48 0.03375 0 0.175
-T 6 12 25 1 2 0 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 6 12 25 1 2 0 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | turn,wait | 104000 00
 N A.main 57 0.200746875 0 0.3825
 N A.ping 60 0.03375 0.005625 0.153
-T 6 12 26 1 2 0 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 6 12 26 1 2 0 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 6 13 27 2 2 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 6 13 27 2 2 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,wait | 104000 00
 N A.main 57 0.23690625 0 0.57
 N A.ping 60 0.03375 0.005625 0.228
 N fx.collision 43 0.08 0 0.7
-T 6 13 28 2 2 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 6 13 28 2 2 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 6 14 29 3 2 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 6 14 29 3 2 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,wait | 104000 00
 N A.main 57 0.0748125 0 0.15
 N B.fm 65 0.06733125 0 0.09975
 N B.sub 53 0.09725625 0 0.078375
-T 6 14 30 3 2 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 6 14 30 3 2 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 6 15 31 4 2 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,ping
+T 6 15 31 4 2 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | collision,ping | 104000 00
 N A.main 57 0.23690625 0 0.57
 N A.ping 60 0.03375 0.005625 0.228
 N B.fm 65 0.14175 0 0.4725
 N B.sub 53 0.20475 0 0.37125
 N fx.collision 43 0.08 0 0.7
-T 6 15 32 4 2 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 6 15 32 4 2 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 6 16 33 5 2 4 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
-T 6 16 34 5 2 4 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 6 16 33 5 2 4 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,wait | 104000 00
+T 6 16 34 5 2 4 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 6 17 35 6 2 5 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | ping,turn
+T 6 17 35 6 2 5 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | ping,turn | 104000 00
 N A.main 57 0.05985 0 0.70875
 N A.ping 60 0.03375 0.005625 0.2835
 N B.fm 65 0.11221875 0 0.33915
 N B.sub 53 0.16209375 0 0.266475
-T 6 17 36 6 2 5 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | -
+T 6 17 36 6 2 5 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 6 18 37 7 3 0 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | wait,collision
+T 6 18 37 7 3 0 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | wait,collision | 104000 00
 N B.fm 69 0.16875 0 0.476
 N B.sub 57 0.24375 0 0.374
 N fx.collision 43 0.08 0.01 0.7
-T 6 18 38 7 3 0 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | -
+T 6 18 38 7 3 0 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 64 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 6 19 39 8 3 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 2 2 E 1 0 0 | 0 0 | 0 0 0 | wait,move,move,belt,zap
+T 6 19 39 8 3 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 2 2 E 1 0 0 | 0 0 | 0 0 0 | wait,move,move,belt,zap | 103000 00
 N B.fm 65 0.01875 0 0.44982
 N B.sub 53 0.219375 0 0.35343
 N B.fm 65 0.16875 0.0225 0.25704
 N fx.belt -1 0.04 0.03 0.35
-T 6 19 40 8 3 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 2 2 E 1 0 0 | 0 0 | 0 0 0 | -
+T 6 19 40 8 3 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 2 2 E 1 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.2597
 N B.sub 53 0.03375 0 0.1855
 N B.fm 65 0.0328125 0.009375 0.1484
-T 6 20 41 9 3 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | collision,move,move
+T 6 20 41 9 3 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | collision,move,move | 106000 00
 N A.main 57 0.23690625 0 0.57
 N A.ping 60 0.03375 0.005625 0.228
 N B.fm 71 0.09703125 0 0.54621
 N B.sub 59 0.14015625 0 0.429165
 N fx.collision 43 0.08 0 0.7
-T 6 20 42 9 3 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | -
+T 6 20 42 9 3 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.2597
 N B.sub 59 0.03375 0 0.1855
-T 6 21 43 10 3 3 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | turn,wait
+T 6 21 43 10 3 3 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | turn,wait | 104000 00
 N A.main 57 0.1246875 0 0.51
 N A.ping 60 0.03375 0.005625 0.204
 N B.fm 71 0.050625 0 0.12852
 N B.sub 59 0.073125 0 0.10098
-T 6 21 44 10 3 3 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | -
+T 6 21 44 10 3 3 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.2597
 N B.sub 59 0.03375 0 0.1855
-T 6 22 45 11 3 4 0 0 0 spinner | A 0 4 N 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | turn,wait
+T 6 22 45 11 3 4 0 0 0 spinner | A 0 4 N 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | turn,wait | 104000 00
 N A.main 57 0.086034375 0 0.51
 N A.ping 60 0.03375 0.005625 0.204
-T 6 22 46 11 3 4 0 0 0 spinner | A 0 4 N 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | -
+T 6 22 46 11 3 4 0 0 0 spinner | A 0 4 N 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.2597
 N B.sub 59 0.03375 0 0.1855
-T 6 23 47 0 3 5 0 0 0 spinner | A 0 4 N 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | collision,collision
+T 6 23 47 0 3 5 0 0 0 spinner | A 0 4 N 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | collision,collision | 104000 00
 N A.main 57 0.0961875 0 0.7
 N A.ping 60 0.03375 0.005625 0.28
 N B.fm 71 0.1940625 0 0.436968
 N B.sub 59 0.2803125 0 0.343332
 N fx.collision 43 0.08 0 0.7
 N fx.collision 43 0.08 0.01 0.7
-T 6 23 48 0 3 5 0 0 0 spinner | A 0 4 N 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | -
+T 6 23 48 0 3 5 0 0 0 spinner | A 0 4 N 0 0 0 | B 4 2 E 1 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.2597
 N B.sub 59 0.03375 0 0.1855
-T 7 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 7 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset | 0 00
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 7 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 7 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 7 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 7 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait | 100010 00
 N A.main 53 0.069825 0 0.4725
 N A.ping 57 0.03375 0.005625 0.189
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
-T 7 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 7 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 7 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 7 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn | 100010 00
 N A.main 53 0.05985 0 0.165
 N B.fm 62 0.1323 0 0.3465
 N B.sub 50 0.1911 0 0.27225
-T 7 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 7 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 7 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 7 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,wait | 100010 00
 N A.main 53 0.1995 0 0.66
 N A.ping 57 0.03375 0.005625 0.264
 N fx.collision 43 0.08 0 0.7
-T 7 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 7 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 7 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 7 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait | 8010 00
 N A.main 65 0.1218375 0 0.43225
 N A.ping 69 0.03375 0.005625 0.1729
 N B.fm 62 0.06733125 0 0.09975
 N B.sub 50 0.09725625 0 0.078375
 N fx.rotator 81 0.04 0.01 0.45
-T 7 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 7 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 7 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,ping
+T 7 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,ping | 8010 00
 N B.fm 62 0.14175 0 0.4725
 N B.sub 50 0.20475 0 0.37125
-T 7 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 7 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 7 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 7 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,turn | 8010 00
 N B.fm 72 0.118125 0 0.357
 N B.sub 60 0.170625 0 0.2805
-T 7 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 7 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 7 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn
+T 7 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn | 8010 00
 N A.main 64 0.0947625 0 0.3705
 N A.ping 67 0.03375 0.005625 0.1482
 N B.fm 72 0.06733125 0 0.399
 N B.sub 60 0.09725625 0 0.3135
 N fx.rotator 81 0.04 0.01 0.45
-T 7 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 7 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 7 8 17 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision
+T 7 8 17 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision | 8010 00
 N A.main 64 0.09975 0 0.561
 N A.ping 67 0.03375 0.005625 0.2244
 N B.fm 72 0.10125 0 0.56
 N B.sub 60 0.14625 0 0.44
 N fx.rotator 81 0.04 0.01 0.45
 N fx.collision 43 0.08 0.02 0.7
-T 7 8 18 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 7 8 18 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 7 9 19 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,wait
-T 7 9 20 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 7 9 19 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,wait | 8010 00
+T 7 9 20 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 7 10 21 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,collision,collision
+T 7 10 21 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,collision,collision | 8010 00
 N B.fm 72 0.05821875 0 0.595
 N B.sub 60 0.08409375 0 0.4675
 N fx.collision 43 0.08 0.01 0.7
 N fx.collision 43 0.08 0.02 0.7
-T 7 10 22 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 7 10 22 11 1 4 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 7 11 23 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait
+T 7 11 23 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait | 8010 00
 N A.main 64 0.118453125 0 0.4845
 N A.ping 67 0.03375 0.005625 0.1938
 N B.fm 72 0.030375 0 0.14
 N B.sub 60 0.043875 0 0.11
 N fx.rotator 81 0.04 0.01 0.45
-T 7 11 24 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 7 11 24 0 1 5 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 7 12 25 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn
+T 7 12 25 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn | 8010 00
 N A.main 69 0.143390625 0 0.4335
 N A.ping 72 0.03375 0.005625 0.1734
 N B.fm 65 0.0756 0 0.3003
 N B.sub 53 0.1092 0 0.23595
 N fx.rotator 81 0.04 0.01 0.45
-T 7 12 26 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 7 12 26 1 2 0 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 72 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 7 13 27 2 2 1 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | move,move,rotator
+T 7 13 27 2 2 1 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | move,move,rotator | 10008 00
 N A.main 71 0.16921875 0 0.646
 N A.ping 74 0.03375 0.005625 0.2584
 N B.fm 62 0.2716875 0 0.357
 N B.sub 50 0.3924375 0 0.2805
 N fx.rotator 81 0.04 0.02 0.45
-T 7 13 28 2 2 1 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 7 13 28 2 2 1 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 7 14 29 3 2 2 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | wait,wait,rotator
+T 7 14 29 3 2 2 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | wait,wait,rotator | 10008 00
 N A.main 67 0.0534375 0 0.17
 N B.fm 62 0.04809375 0 0.11305
 N B.sub 50 0.06946875 0 0.088825
 N fx.rotator 81 0.04 0.02 0.45
-T 7 14 30 3 2 2 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 7 14 30 3 2 2 0 0 0 spinner | A 1 3 E 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 7 15 31 4 2 3 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | move,ping,rotator
+T 7 15 31 4 2 3 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | move,ping,rotator | 20008 00
 N A.main 69 0.16921875 0 0.646
 N A.ping 72 0.03375 0.005625 0.2584
 N B.fm 64 0.06075 0 0.63
 N B.sub 52 0.08775 0 0.495
 N fx.rotator 81 0.04 0.02 0.45
-T 7 15 32 4 2 3 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 7 15 32 4 2 3 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 72 0.0253125 0 0.35
 N B.fm 64 0.02109375 0 0.245
 N B.sub 52 0.03375 0 0.175
-T 7 16 33 5 2 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator
+T 7 16 33 5 2 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator | 20008 00
 N B.fm 64 0.165375 0 0.315
 N B.sub 52 0.238875 0 0.2475
 N fx.rotator 81 0.04 0.02 0.45
-T 7 16 34 5 2 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 7 16 34 5 2 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 72 0.0253125 0 0.35
 N B.fm 64 0.02109375 0 0.245
 N B.sub 52 0.03375 0 0.175
-T 7 17 35 6 2 5 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator
+T 7 17 35 6 2 5 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator | 20008 00
 N B.fm 64 0.06733125 0 0.399
 N B.sub 52 0.09725625 0 0.3135
 N fx.rotator 81 0.04 0.02 0.45
-T 7 17 36 6 2 5 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 7 17 36 6 2 5 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 72 0.0253125 0 0.35
 N B.fm 64 0.02109375 0 0.245
 N B.sub 52 0.03375 0 0.175
-T 7 18 37 7 3 0 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | wait,collision,rotator
+T 7 18 37 7 3 0 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | wait,collision,rotator | 20008 00
 N A.main 72 0.04275 0 0.187
 N B.fm 67 0.135 0 0.364
 N B.sub 55 0.195 0 0.286
 N fx.collision 43 0.08 0.01 0.7
 N fx.rotator 81 0.04 0.02 0.45
-T 7 18 38 7 3 0 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 7 18 38 7 3 0 0 0 0 spinner | A 2 3 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 67 0.02109375 0 0.245
 N B.sub 55 0.03375 0 0.175
-T 7 19 39 8 3 1 0 0 0 spinner | A 4 3 N 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | move,move,rotator,wait
+T 7 19 39 8 3 1 0 0 0 spinner | A 4 3 N 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | move,move,rotator,wait | c0008 00
 N A.main 76 0.0534375 0 1
 N A.ping 79 0.03375 0.005625 0.4
 N fx.rotator 81 0.04 0.02 0.45
-T 7 19 40 8 3 1 0 0 0 spinner | A 4 3 N 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 7 19 40 8 3 1 0 0 0 spinner | A 4 3 N 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.245
 N B.sub 59 0.03375 0 0.175
-T 7 20 41 9 3 2 0 0 0 spinner | A 4 2 N 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 7 20 41 9 3 2 0 0 0 spinner | A 4 2 N 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | move,wait | 4008 00
 N A.main 76 0.10153125 0 0.76
 N A.ping 79 0.03375 0.005625 0.304
-T 7 20 42 9 3 2 0 0 0 spinner | A 4 2 N 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 7 20 42 9 3 2 0 0 0 spinner | A 4 2 N 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.245
 N B.sub 59 0.03375 0 0.175
-T 7 21 43 10 3 3 0 0 0 spinner | A 4 2 W 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | turn,wait,rotator
+T 7 21 43 10 3 3 0 0 0 spinner | A 4 2 W 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | turn,wait,rotator | 4008 00
 N A.main 76 0.09975 0 0.39
 N A.ping 79 0.03375 0.005625 0.156
 N B.fm 71 0.070875 0 0.105
 N B.sub 59 0.102375 0 0.0825
 N fx.rotator 81 0.04 0.02 0.45
-T 7 21 44 10 3 3 0 0 0 spinner | A 4 2 W 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 7 21 44 10 3 3 0 0 0 spinner | A 4 2 W 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.245
 N B.sub 59 0.03375 0 0.175
-T 7 22 45 11 3 4 0 0 0 spinner | A 4 2 S 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 7 22 45 11 3 4 0 0 0 spinner | A 4 2 S 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | turn,wait | 4008 00
 N A.main 76 0.200746875 0 0.3825
 N A.ping 79 0.03375 0.005625 0.153
-T 7 22 46 11 3 4 0 0 0 spinner | A 4 2 S 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 7 22 46 11 3 4 0 0 0 spinner | A 4 2 S 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.245
 N B.sub 59 0.03375 0 0.175
-T 7 23 47 0 3 5 0 0 0 spinner | A 4 1 W 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,move
+T 7 23 47 0 3 5 0 0 0 spinner | A 4 1 W 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,move | 300 00
 N A.main 76 0.12825 0 0.455
 N A.ping 79 0.03375 0.005625 0.182
 N B.fm 71 0.2716875 0 0.357
 N B.sub 59 0.3924375 0 0.2805
 N fx.rotator 81 0.04 0.01 0.45
-T 7 23 48 0 3 5 0 0 0 spinner | A 4 1 W 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 7 23 48 0 3 5 0 0 0 spinner | A 4 1 W 0 0 0 | B 3 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.245
 N B.sub 59 0.03375 0 0.175
-T 8 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 8 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset | 0 00
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 8 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 8 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 8 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 8 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait | 100010 00
 N A.main 53 0.069825 0 0.4725
 N A.ping 57 0.03375 0.005625 0.189
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
-T 8 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 8 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 8 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 8 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn | 100010 00
 N A.main 53 0.05985 0 0.165
 N B.fm 62 0.1323 0 0.3465
 N B.sub 50 0.1911 0 0.27225
-T 8 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 8 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 8 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 8 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,wait | 100010 00
 N A.main 53 0.1995 0 0.66
 N A.ping 57 0.03375 0.005625 0.264
 N fx.collision 43 0.08 0 0.7
-T 8 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 8 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 8 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 8 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait | 8010 00
 N A.main 65 0.1218375 0 0.43225
 N A.ping 69 0.03375 0.005625 0.1729
 N B.fm 62 0.06733125 0 0.09975
 N B.sub 50 0.09725625 0 0.078375
 N fx.rotator 81 0.04 0.01 0.45
-T 8 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 8 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 8 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping
+T 8 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping | 8010 00
 N A.main 65 0.0947625 0 0.3705
 N A.ping 69 0.03375 0.005625 0.1482
 N B.fm 62 0.14175 0 0.4725
 N B.sub 50 0.20475 0 0.37125
 N fx.rotator 81 0.04 0.01 0.45
-T 8 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 8 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 8 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn
+T 8 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn | 8010 00
 N A.main 64 0.1147125 0 0.3315
 N A.ping 67 0.03375 0.005625 0.1326
 N B.fm 72 0.118125 0 0.357
 N B.sub 60 0.170625 0 0.2805
 N fx.rotator 81 0.04 0.01 0.45
-T 8 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 8 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 8 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 8 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn | 8010 00
 N B.fm 72 0.06733125 0 0.399
 N B.sub 60 0.09725625 0 0.3135
-T 8 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 8 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 8 8 17 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision
+T 8 8 17 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision | 8010 00
 N A.main 64 0.09975 0 0.561
 N A.ping 67 0.03375 0.005625 0.2244
 N B.fm 72 0.10125 0 0.56
 N B.sub 60 0.14625 0 0.44
 N fx.rotator 81 0.04 0.01 0.45
 N fx.collision 43 0.08 0.02 0.7
-T 8 8 18 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 8 8 18 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 8 9 19 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,wait
-T 8 9 20 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 8 9 19 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,wait | 8010 00
+T 8 9 20 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 8 10 21 11 1 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,move,collision,collision
+T 8 10 21 11 1 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,move,collision,collision | 30010 00
 N A.main 67 0.07125 0 0.935
 N A.ping 71 0.03375 0.005625 0.374
 N B.fm 64 0.05821875 0 0.595
 N B.sub 52 0.08409375 0 0.4675
 N fx.collision 43 0.08 0.02 0.7
 N fx.collision 43 0.08 0.03 0.7
-T 8 10 22 11 1 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 8 10 22 11 1 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 64 0.02109375 0 0.245
 N B.sub 52 0.03375 0 0.175
-T 8 11 23 0 1 5 0 0 0 spinner | A 2 3 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 8 11 23 0 1 5 0 0 0 spinner | A 2 3 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,wait | 20010 00
 N A.main 67 0.071071875 0 0.57
 N A.ping 71 0.03375 0.005625 0.228
 N B.fm 64 0.030375 0 0.14
 N B.sub 52 0.043875 0 0.11
-T 8 11 24 0 1 5 0 0 0 spinner | A 2 3 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 8 11 24 0 1 5 0 0 0 spinner | A 2 3 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 64 0.02109375 0 0.245
 N B.sub 52 0.03375 0 0.175
-T 8 12 25 1 2 0 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 8 12 25 1 2 0 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,wait | 20010 00
 N A.main 72 0.1147125 0 0.3315
 N A.ping 76 0.03375 0.005625 0.1326
-T 8 12 26 1 2 0 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 8 12 26 1 2 0 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 8 13 27 2 2 1 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,wait
-T 8 13 28 2 2 1 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 8 13 27 2 2 1 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,wait | 20010 00
+T 8 13 28 2 2 1 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 8 14 29 3 2 2 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 8 14 29 3 2 2 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,wait | 20010 00
 N A.main 72 0.04275 0 0.13
 N B.fm 69 0.02885625 0 0.133
 N B.sub 57 0.04168125 0 0.1045
-T 8 14 30 3 2 2 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 8 14 30 3 2 2 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 8 15 31 4 2 3 0 0 0 spinner | A 1 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 8 15 31 4 2 3 0 0 0 spinner | A 1 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,ping | 10010 00
 N A.main 71 0.135375 0 0.494
 N A.ping 74 0.03375 0.005625 0.1976
 N B.fm 67 0.06075 0 0.63
 N B.sub 55 0.08775 0 0.495
-T 8 15 32 4 2 3 0 0 0 spinner | A 1 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 8 15 32 4 2 3 0 0 0 spinner | A 1 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 74 0.0253125 0 0.35
 N B.fm 67 0.02109375 0 0.245
 N B.sub 55 0.03375 0 0.175
-T 8 16 33 5 2 4 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,turn
+T 8 16 33 5 2 4 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,turn | 20010 00
 N A.main 72 0.1026 0 0.5005
 N A.ping 76 0.03375 0.005625 0.2002
 N B.fm 69 0.0945 0 0.273
 N B.sub 57 0.1365 0 0.2145
-T 8 16 34 5 2 4 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 8 16 34 5 2 4 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 8 17 35 6 2 5 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 8 17 35 6 2 5 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn | 20010 00
 N B.fm 69 0.15710625 0 0.29925
 N B.sub 57 0.22693125 0 0.235125
-T 8 17 36 6 2 5 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 8 17 36 6 2 5 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 8 18 37 7 3 0 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | wait,move,rotator
+T 8 18 37 7 3 0 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | wait,move,rotator | 20200 00
 N A.main 76 0.0342 0 0.143
 N B.fm 72 0.135 0 0.364
 N B.sub 60 0.195 0 0.286
 N fx.rotator 81 0.04 0.02 0.45
-T 8 18 38 7 3 0 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 8 18 38 7 3 0 0 0 0 spinner | A 2 3 W 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 8 19 39 8 3 1 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | move,move,rotator,collision,rotator
+T 8 19 39 8 3 1 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | move,move,rotator,collision,rotator | 18200 00
 N A.main 72 0.0534375 0 1
 N A.ping 76 0.03375 0.005625 0.4
 N B.fm 69 0.091125 0 0.49
 N B.sub 57 0.131625 0 0.385
 N fx.rotator 81 0.04 0.02 0.45
 N fx.collision 43 0.08 0.03 0.7
-T 8 19 40 8 3 1 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 8 19 40 8 3 1 0 0 0 spinner | A 0 3 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 8 20 41 9 3 2 0 0 0 spinner | A 0 2 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 8 20 41 9 3 2 0 0 0 spinner | A 0 2 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | move,wait | 600 00
 N A.main 72 0.10153125 0 0.76
 N A.ping 76 0.03375 0.005625 0.304
-T 8 20 42 9 3 2 0 0 0 spinner | A 0 2 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 8 20 42 9 3 2 0 0 0 spinner | A 0 2 N 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 8 21 43 10 3 3 0 0 0 spinner | A 0 2 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,wait,rotator
+T 8 21 43 10 3 3 0 0 0 spinner | A 0 2 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,wait,rotator | 600 00
 N A.main 72 0.09975 0 0.39
 N A.ping 76 0.03375 0.005625 0.156
 N B.fm 69 0.050625 0 0.119
 N B.sub 57 0.073125 0 0.0935
 N fx.rotator 81 0.04 0.02 0.45
-T 8 21 44 10 3 3 0 0 0 spinner | A 0 2 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 8 21 44 10 3 3 0 0 0 spinner | A 0 2 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 8 22 45 11 3 4 0 0 0 spinner | A 0 2 S 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,turn,rotator
+T 8 22 45 11 3 4 0 0 0 spinner | A 0 2 S 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,turn,rotator | 600 00
 N A.main 72 0.200746875 0 0.3825
 N A.ping 76 0.03375 0.005625 0.153
 N B.fm 69 0.0945 0 0.3927
 N B.sub 57 0.1365 0 0.30855
 N fx.rotator 81 0.04 0.02 0.45
-T 8 22 46 11 3 4 0 0 0 spinner | A 0 2 S 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 8 22 46 11 3 4 0 0 0 spinner | A 0 2 S 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 8 23 47 0 3 5 0 0 0 spinner | A 0 1 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 8 23 47 0 3 5 0 0 0 spinner | A 0 1 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait | 220 00
 N A.main 84 0.1603125 0 0.595
 N A.ping 76 0.03375 0.005625 0.238
 N fx.rotator 81 0.04 0.01 0.45
-T 8 23 48 0 3 5 0 0 0 spinner | A 0 1 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 8 23 48 0 3 5 0 0 0 spinner | A 0 1 E 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 9 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 9 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset | 0 00
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 9 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 9 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 9 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 9 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait | 100010 00
 N A.main 53 0.069825 0 0.4725
 N A.ping 57 0.03375 0.005625 0.189
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
-T 9 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 9 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 9 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 9 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn | 100010 00
 N A.main 53 0.05985 0 0.165
 N B.fm 62 0.1323 0 0.3465
 N B.sub 50 0.1911 0 0.27225
-T 9 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 9 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 9 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | collision,move,rotator
+T 9 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | collision,move,rotator | 100200 00
 N A.main 53 0.1995 0 0.66
 N A.ping 57 0.03375 0.005625 0.264
 N B.fm 62 0.15525 0 0.3094
 N B.sub 50 0.22425 0 0.2431
 N fx.collision 43 0.08 0 0.7
 N fx.rotator 81 0.04 0.02 0.45
-T 9 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 9 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 9 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait,rotator
+T 9 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait,rotator | 8200 00
 N A.main 65 0.1218375 0 0.43225
 N A.ping 69 0.03375 0.005625 0.1729
 N B.fm 62 0.02885625 0 0.133
 N B.sub 50 0.04168125 0 0.1045
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 9 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 9 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 9 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping,rotator
+T 9 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping,rotator | 8200 00
 N A.main 65 0.0947625 0 0.3705
 N A.ping 69 0.03375 0.005625 0.1482
 N B.fm 62 0.10125 0 0.5355
 N B.sub 50 0.14625 0 0.42075
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 9 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 9 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 9 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator
+T 9 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator | 8200 00
 N A.main 64 0.1147125 0 0.3315
 N A.ping 67 0.03375 0.005625 0.1326
 N B.fm 72 0.118125 0 0.357
 N B.sub 60 0.170625 0 0.2805
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 9 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 9 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 9 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator
+T 9 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator | 8200 00
 N B.fm 72 0.11221875 0 0.33915
 N B.sub 60 0.16209375 0 0.266475
 N fx.rotator 81 0.04 0.02 0.45
-T 9 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 9 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 9 8 17 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision,rotator
+T 9 8 17 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision,rotator | 8200 00
 N A.main 64 0.09975 0 0.561
 N A.ping 67 0.03375 0.005625 0.2244
 N B.fm 72 0.23625 0 0.42
@@ -2153,178 +2153,178 @@ N B.sub 60 0.34125 0 0.33
 N fx.rotator 81 0.04 0.01 0.45
 N fx.collision 43 0.08 0.02 0.7
 N fx.rotator 81 0.04 0.03 0.45
-T 9 8 18 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 9 8 18 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 9 9 19 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,move
+T 9 9 19 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,move | 8010 00
 N A.main 64 0.118453125 0 0.4845
 N A.ping 67 0.03375 0.005625 0.1938
 N B.fm 72 0.212625 0 0.3675
 N B.sub 60 0.307125 0 0.28875
 N fx.rotator 81 0.04 0.01 0.45
-T 9 9 20 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 9 9 20 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 9 10 21 11 1 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,move,move,move
+T 9 10 21 11 1 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | move,move,move,move | 34200 00
 N A.main 67 0.07125 0 0.935
 N A.ping 71 0.03375 0.005625 0.374
 N B.fm 64 0.13584375 0 0.44625
 N B.sub 52 0.19621875 0 0.350625
-T 9 10 22 11 1 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 9 10 22 11 1 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 64 0.02109375 0 0.245
 N B.sub 52 0.03375 0 0.175
-T 9 11 23 0 1 5 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 9 11 23 0 1 5 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | wait,wait | 24000 00
 N B.fm 64 0.070875 0 0.105
 N B.sub 52 0.102375 0 0.0825
-T 9 11 24 0 1 5 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | -
+T 9 11 24 0 1 5 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 2 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 64 0.02109375 0 0.245
 N B.sub 52 0.03375 0 0.175
-T 9 12 25 1 2 0 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 9 12 25 1 2 0 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | wait,turn | 24000 00
 N B.fm 69 0.0945 0 0.3927
 N B.sub 57 0.1365 0 0.30855
-T 9 12 26 1 2 0 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | -
+T 9 12 26 1 2 0 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 9 13 27 2 2 1 0 0 0 spinner | A 3 3 E 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 9 13 27 2 2 1 0 0 0 spinner | A 3 3 E 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | move,wait | 44000 00
 N A.main 72 0.16921875 0 0.646
 N A.ping 76 0.03375 0.005625 0.2584
-T 9 13 28 2 2 1 0 0 0 spinner | A 3 3 E 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | -
+T 9 13 28 2 2 1 0 0 0 spinner | A 3 3 E 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 9 14 29 3 2 2 0 0 0 spinner | A 3 3 E 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 9 14 29 3 2 2 0 0 0 spinner | A 3 3 E 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | wait,wait | 44000 00
 N A.main 72 0.0534375 0 0.17
 N B.fm 69 0.04809375 0 0.11305
 N B.sub 57 0.06946875 0 0.088825
-T 9 14 30 3 2 2 0 0 0 spinner | A 3 3 E 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | -
+T 9 14 30 3 2 2 0 0 0 spinner | A 3 3 E 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 9 15 31 4 2 3 0 0 0 spinner | A 4 3 N 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping
+T 9 15 31 4 2 3 0 0 0 spinner | A 4 3 N 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | move,rotator,ping | 84000 00
 N A.main 76 0.10153125 0 0.76
 N A.ping 79 0.03375 0.005625 0.304
 N B.fm 72 0.10125 0 0.5355
 N B.sub 60 0.14625 0 0.42075
 N fx.rotator 81 0.04 0.01 0.45
-T 9 15 32 4 2 3 0 0 0 spinner | A 4 3 N 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | -
+T 9 15 32 4 2 3 0 0 0 spinner | A 4 3 N 0 0 0 | B 4 2 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 9 16 33 5 2 4 0 0 0 spinner | A 4 3 N 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 9 16 33 5 2 4 0 0 0 spinner | A 4 3 N 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | wait,turn | 84000 00
 N B.fm 72 0.070875 0 0.42
 N B.sub 60 0.102375 0 0.33
-T 9 16 34 5 2 4 0 0 0 spinner | A 4 3 N 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | -
+T 9 16 34 5 2 4 0 0 0 spinner | A 4 3 N 0 0 0 | B 4 2 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 9 17 35 6 2 5 0 0 0 spinner | A 4 3 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 9 17 35 6 2 5 0 0 0 spinner | A 4 3 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | wait,turn | 84000 00
 N B.fm 72 0.089775 0 0.25935
 N B.sub 60 0.129675 0 0.203775
-T 9 17 36 6 2 5 0 0 0 spinner | A 4 3 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | -
+T 9 17 36 6 2 5 0 0 0 spinner | A 4 3 N 0 0 0 | B 4 2 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 9 18 37 7 3 0 0 0 0 spinner | A 4 3 W 0 0 0 | B 2 2 W 1 0 0 | 0 0 | 0 0 0 | wait,rotator,move,move,belt,zap
+T 9 18 37 7 3 0 0 0 0 spinner | A 4 3 W 0 0 0 | B 2 2 W 1 0 0 | 0 0 | 0 0 0 | wait,rotator,move,move,belt,zap | 83000 00
 N A.main 79 0.0342 0 0.143
 N B.fm 72 0.01875 0 0.39312
 N B.sub 60 0.195 0 0.30888
 N B.fm 72 0.16875 0.0225 0.22464
 N fx.rotator 81 0.04 0.01 0.45
-T 9 18 38 7 3 0 0 0 0 spinner | A 4 3 W 0 0 0 | B 2 2 W 1 0 0 | 0 0 | 0 0 0 | -
+T 9 18 38 7 3 0 0 0 0 spinner | A 4 3 W 0 0 0 | B 2 2 W 1 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.2597
 N B.sub 60 0.03375 0 0.1855
 N B.fm 72 0.0328125 0.009375 0.1484
-T 9 19 39 8 3 1 0 0 0 spinner | A 2 3 W 0 0 0 | B 2 2 W 2 0 0 | 0 0 | 0 0 0 | move,move,move,move,belt,zap
+T 9 19 39 8 3 1 0 0 0 spinner | A 2 3 W 0 0 0 | B 2 2 W 2 0 0 | 0 0 | 0 0 0 | move,move,move,move,belt,zap | 63000 00
 N A.main 72 0.07125 0 0.65
 N A.ping 76 0.03375 0.005625 0.26
 N B.fm 71 0.01875 0 0.36946
 N B.sub 59 0.1755 0 0.29029
 N B.fm 71 0.16875 0.0225 0.21112
-T 9 19 40 8 3 1 0 0 0 spinner | A 2 3 W 0 0 0 | B 2 2 W 2 0 0 | 0 0 | 0 0 0 | -
+T 9 19 40 8 3 1 0 0 0 spinner | A 2 3 W 0 0 0 | B 2 2 W 2 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.2744
 N B.sub 59 0.03375 0 0.196
 N B.fm 71 0.0328125 0.009375 0.1568
-T 9 20 41 9 3 2 0 0 0 spinner | A 1 3 W 0 0 0 | B 0 2 W 2 0 0 | 0 0 | 0 0 0 | move,move,move
+T 9 20 41 9 3 2 0 0 0 spinner | A 1 3 W 0 0 0 | B 0 2 W 2 0 0 | 0 0 | 0 0 0 | move,move,move | 10c00 00
 N A.main 71 0.135375 0 0.494
 N A.ping 74 0.03375 0.005625 0.1976
 N B.fm 62 0.077625 0 0.44863
 N B.sub 50 0.112125 0 0.352495
-T 9 20 42 9 3 2 0 0 0 spinner | A 1 3 W 0 0 0 | B 0 2 W 2 0 0 | 0 0 | 0 0 0 | -
+T 9 20 42 9 3 2 0 0 0 spinner | A 1 3 W 0 0 0 | B 0 2 W 2 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 74 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.2744
 N B.sub 50 0.03375 0 0.196
-T 9 21 43 10 3 3 0 0 0 spinner | A 1 3 S 0 0 0 | B 0 2 W 2 0 0 | 0 0 | 0 0 0 | turn,wait
+T 9 21 43 10 3 3 0 0 0 spinner | A 1 3 S 0 0 0 | B 0 2 W 2 0 0 | 0 0 | 0 0 0 | turn,wait | 10400 00
 N A.main 71 0.1745625 0 0.45
 N A.ping 74 0.03375 0.005625 0.18
 N B.fm 62 0.0405 0 0.10556
 N B.sub 50 0.0585 0 0.08294
-T 9 21 44 10 3 3 0 0 0 spinner | A 1 3 S 0 0 0 | B 0 2 W 2 0 0 | 0 0 | 0 0 0 | -
+T 9 21 44 10 3 3 0 0 0 spinner | A 1 3 S 0 0 0 | B 0 2 W 2 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 74 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.2744
 N B.sub 50 0.03375 0 0.196
-T 9 22 45 11 3 4 0 0 0 spinner | A 1 3 E 0 0 0 | B 0 2 S 2 0 0 | 0 0 | 0 0 0 | turn,turn
+T 9 22 45 11 3 4 0 0 0 spinner | A 1 3 E 0 0 0 | B 0 2 S 2 0 0 | 0 0 | 0 0 0 | turn,turn | 10400 00
 N A.main 71 0.143390625 0 0.4335
 N A.ping 74 0.03375 0.005625 0.1734
 N B.fm 62 0.1323 0 0.40194
 N B.sub 50 0.1911 0 0.31581
-T 9 22 46 11 3 4 0 0 0 spinner | A 1 3 E 0 0 0 | B 0 2 S 2 0 0 | 0 0 | 0 0 0 | -
+T 9 22 46 11 3 4 0 0 0 spinner | A 1 3 E 0 0 0 | B 0 2 S 2 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 74 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.2744
 N B.sub 50 0.03375 0 0.196
-T 9 23 47 0 3 5 0 0 0 spinner | A 0 3 S 0 0 0 | B 0 3 W 2 0 0 | 0 1 | 0 0 0 | move,rotator,move,rotator
+T 9 23 47 0 3 5 0 0 0 spinner | A 0 3 S 0 0 0 | B 0 3 W 2 0 0 | 0 1 | 0 0 0 | move,rotator,move,rotator | 8000 00
 N A.main 69 0.2244375 0 0.525
 N A.ping 72 0.03375 0.005625 0.21
 N B.fm 72 0.15525 0 0.358904
 N B.sub 60 0.22425 0 0.281996
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 9 23 48 0 3 5 0 0 0 spinner | A 0 3 S 0 0 0 | B 0 3 W 2 0 0 | 0 1 | 0 0 0 | -
+T 9 23 48 0 3 5 0 0 0 spinner | A 0 3 S 0 0 0 | B 0 3 W 2 0 0 | 0 1 | 0 0 0 | - | 0 00
 N A.ping 72 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.2744
 N B.sub 60 0.03375 0 0.196
-T 10 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 10 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset | 0 00
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 10 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 10 1 3 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 10 1 3 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait | 100010 00
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
-T 10 1 4 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 1 4 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 10 2 5 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 10 2 5 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait | 100010 00
 N A.main 53 0.04275 0 0.187
-T 10 2 6 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 2 6 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 10 3 7 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,move,rotator
+T 10 3 7 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,move,rotator | 200008 00
 N A.main 57 0.0855 0 0.88
 N A.ping 60 0.03375 0.005625 0.352
 N B.fm 72 0.2716875 0 0.357
 N B.sub 60 0.3924375 0 0.2805
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 10 3 8 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 10 3 8 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 10 4 9 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | collision,rotator,wait,rotator
+T 10 4 9 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | collision,rotator,wait,rotator | 200008 00
 N A.main 53 0.1218375 0 0.43225
 N A.ping 57 0.03375 0.005625 0.1729
 N B.fm 72 0.04809375 0 0.11305
@@ -2332,41 +2332,41 @@ N B.sub 60 0.06946875 0 0.088825
 N fx.collision 43 0.08 0 0.7
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 10 4 10 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 10 4 10 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 10 5 11 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping,rotator
+T 10 5 11 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping,rotator | 200008 00
 N A.main 53 0.118453125 0 0.4845
 N A.ping 57 0.03375 0.005625 0.1938
 N B.fm 72 0.06075 0 0.63
 N B.sub 60 0.08775 0 0.495
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 10 5 12 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 10 5 12 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 10 6 13 7 1 0 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator
+T 10 6 13 7 1 0 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator | 200008 00
 N A.main 50 0.1147125 0 0.3315
 N A.ping 53 0.03375 0.005625 0.1326
 N B.fm 69 0.165375 0 0.315
 N B.sub 57 0.238875 0 0.2475
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 10 6 14 7 1 0 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 10 6 14 7 1 0 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 53 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 10 7 15 8 1 1 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator
+T 10 7 15 8 1 1 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator | 200008 00
 N B.fm 69 0.06733125 0 0.399
 N B.sub 57 0.09725625 0 0.3135
 N fx.rotator 81 0.04 0.02 0.45
-T 10 7 16 8 1 1 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 10 7 16 8 1 1 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 53 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 10 8 17 9 1 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision,rotator
+T 10 8 17 9 1 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision,rotator | 200008 00
 N A.main 50 0.0798 0 0.429
 N A.ping 53 0.03375 0.005625 0.1716
 N B.fm 69 0.135 0 0.364
@@ -2374,350 +2374,350 @@ N B.sub 57 0.195 0 0.286
 N fx.rotator 81 0.04 0.01 0.45
 N fx.collision 43 0.08 0.02 0.7
 N fx.rotator 81 0.04 0.03 0.45
-T 10 8 18 9 1 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 8 18 9 1 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 53 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 10 9 19 10 1 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,move
+T 10 9 19 10 1 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,move | 200010 00
 N B.fm 62 0.1215 0 0.3185
 N B.sub 50 0.1755 0 0.25025
-T 10 9 20 10 1 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 9 20 10 1 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 10 10 21 11 1 4 0 0 0 spinner | A 0 4 W 0 0 0 | B 2 0 W 0 0 0 | 0 0 | 0 0 0 | move,collision,move,move,pulse
+T 10 10 21 11 1 4 0 0 0 spinner | A 0 4 W 0 0 0 | B 2 0 W 0 0 0 | 0 0 | 0 0 0 | move,collision,move,move,pulse | 10000c 00
 N A.main 52 0.057 0 0.715
 N A.ping 55 0.03375 0.005625 0.286
 N B.fm 67 0.139725 0 0.38675
 N B.sub 55 0.201825 0 0.303875
 N fx.collision 43 0.08 0.01 0.7
-T 10 10 22 11 1 4 0 0 0 spinner | A 0 4 W 0 0 0 | B 2 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 10 22 11 1 4 0 0 0 spinner | A 0 4 W 0 0 0 | B 2 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 52 0.0253125 0 0.35
 N B.fm 67 0.02109375 0 0.245
 N B.sub 55 0.03375 0 0.175
-T 10 11 23 0 1 5 0 0 0 spinner | A 0 4 S 0 0 0 | B 2 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait,pulse
+T 10 11 23 0 1 5 0 0 0 spinner | A 0 4 S 0 0 0 | B 2 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait,pulse | 100004 00
 N A.main 48 0.165834375 0 0.4275
 N A.ping 52 0.03375 0.005625 0.171
 N B.fm 67 0.0729 0 0.091
 N B.sub 55 0.1053 0 0.0715
 N fx.pulse 84 0.06 0.02 0.4
-T 10 11 24 0 1 5 0 0 0 spinner | A 0 4 S 0 0 0 | B 2 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 11 24 0 1 5 0 0 0 spinner | A 0 4 S 0 0 0 | B 2 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 52 0.0253125 0 0.35
 N B.fm 67 0.02109375 0 0.245
 N B.sub 55 0.03375 0 0.175
-T 10 12 25 1 2 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 2 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 10 12 25 1 2 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 2 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait | 100004 00
 N A.main 53 0.143390625 0 0.4335
 N A.ping 57 0.03375 0.005625 0.1734
-T 10 12 26 1 2 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 2 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 10 12 26 1 2 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 2 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 10 13 27 2 2 1 0 0 0 spinner | A 1 4 N 0 0 0 | B 1 0 N 0 0 0 | 0 0 | 0 0 0 | move,rotator,move,rotator
+T 10 13 27 2 2 1 0 0 0 spinner | A 1 4 N 0 0 0 | B 1 0 N 0 0 0 | 0 0 | 0 0 0 | move,rotator,move,rotator | 200002 00
 N A.main 55 0.10153125 0 0.76
 N A.ping 59 0.03375 0.005625 0.304
 N B.fm 71 0.1164375 0 0.476
 N B.sub 59 0.1681875 0 0.374
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 10 13 28 2 2 1 0 0 0 spinner | A 1 4 N 0 0 0 | B 1 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 10 13 28 2 2 1 0 0 0 spinner | A 1 4 N 0 0 0 | B 1 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 59 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.245
 N B.sub 59 0.03375 0 0.175
-T 10 14 29 3 2 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | wait,rotator,wait,rotator
+T 10 14 29 3 2 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | wait,rotator,wait,rotator | 200002 00
 N A.main 55 0.04275 0 0.13
 N B.fm 71 0.04809375 0 0.11305
 N B.sub 59 0.06946875 0 0.088825
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 10 14 30 3 2 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 10 14 30 3 2 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 59 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.245
 N B.sub 59 0.03375 0 0.175
-T 10 15 31 4 2 3 0 0 0 spinner | A 0 4 W 0 0 0 | B 1 0 S 0 0 0 | 0 0 | 0 0 0 | move,ping,rotator
+T 10 15 31 4 2 3 0 0 0 spinner | A 0 4 W 0 0 0 | B 1 0 S 0 0 0 | 0 0 | 0 0 0 | move,ping,rotator | 100002 00
 N A.main 53 0.135375 0 0.494
 N A.ping 57 0.03375 0.005625 0.1976
 N B.fm 69 0.14175 0 0.4725
 N B.sub 57 0.20475 0 0.37125
 N fx.rotator 81 0.04 0.02 0.45
-T 10 15 32 4 2 3 0 0 0 spinner | A 0 4 W 0 0 0 | B 1 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 10 15 32 4 2 3 0 0 0 spinner | A 0 4 W 0 0 0 | B 1 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 10 16 33 5 2 4 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,turn,rotator
+T 10 16 33 5 2 4 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,turn,rotator | 200002 00
 N A.main 55 0.17955 0 0.5775
 N A.ping 59 0.03375 0.005625 0.231
 N B.fm 71 0.165375 0 0.315
 N B.sub 59 0.238875 0 0.2475
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 10 16 34 5 2 4 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 10 16 34 5 2 4 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 59 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.245
 N B.sub 59 0.03375 0 0.175
-T 10 17 35 6 2 5 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator
+T 10 17 35 6 2 5 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator | 200002 00
 N B.fm 71 0.15710625 0 0.29925
 N B.sub 59 0.22693125 0 0.235125
 N fx.rotator 81 0.04 0.02 0.45
-T 10 17 36 6 2 5 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 10 17 36 6 2 5 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 59 0.0253125 0 0.35
 N B.fm 71 0.02109375 0 0.245
 N B.sub 59 0.03375 0 0.175
-T 10 18 37 7 3 0 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | wait,move
+T 10 18 37 7 3 0 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | wait,move | 200040 00
 N B.fm 62 0.23625 0 0.42
 N B.sub 50 0.34125 0 0.33
-T 10 18 38 7 3 0 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 10 18 38 7 3 0 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 62 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 10 19 39 8 3 1 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | wait,wait
-T 10 19 40 8 3 1 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 10 19 39 8 3 1 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | wait,wait | 200040 00
+T 10 19 40 8 3 1 0 0 0 spinner | A 1 4 S 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 62 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 10 20 41 9 3 2 0 0 0 spinner | A 1 4 E 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | collision,rotator,wait
+T 10 20 41 9 3 2 0 0 0 spinner | A 1 4 E 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | collision,rotator,wait | 200040 00
 N A.main 59 0.16921875 0 0.646
 N A.ping 62 0.03375 0.005625 0.2584
 N fx.collision 43 0.08 0 0.7
 N fx.rotator 81 0.04 0.01 0.45
-T 10 20 42 9 3 2 0 0 0 spinner | A 1 4 E 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 10 20 42 9 3 2 0 0 0 spinner | A 1 4 E 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 62 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 10 21 43 10 3 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait
+T 10 21 43 10 3 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait | 200040 00
 N A.main 59 0.09975 0 0.39
 N A.ping 62 0.03375 0.005625 0.156
 N B.fm 62 0.070875 0 0.105
 N B.sub 50 0.102375 0 0.0825
 N fx.rotator 81 0.04 0.01 0.45
-T 10 21 44 10 3 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 10 21 44 10 3 3 0 0 0 spinner | A 1 4 W 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 62 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 10 22 45 11 3 4 0 0 0 spinner | A 1 4 E 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait
+T 10 22 45 11 3 4 0 0 0 spinner | A 1 4 E 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait | 200040 00
 N A.main 59 0.143390625 0 0.4335
 N A.ping 62 0.03375 0.005625 0.1734
 N fx.rotator 81 0.04 0.01 0.45
-T 10 22 46 11 3 4 0 0 0 spinner | A 1 4 E 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 10 22 46 11 3 4 0 0 0 spinner | A 1 4 E 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 62 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 10 23 47 0 3 5 0 0 0 spinner | A 0 4 E 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 10 23 47 0 3 5 0 0 0 spinner | A 0 4 E 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | move,wait | 100040 00
 N A.main 57 0.1603125 0 0.595
 N A.ping 60 0.03375 0.005625 0.238
-T 10 23 48 0 3 5 0 0 0 spinner | A 0 4 E 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 10 23 48 0 3 5 0 0 0 spinner | A 0 4 E 0 0 0 | B 1 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 60 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 11 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 11 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset | 0 00
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 11 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 11 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 11 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 11 1 3 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | turn,wait | 100010 00
 N A.main 53 0.069825 0 0.4725
 N A.ping 57 0.03375 0.005625 0.189
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
-T 11 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 11 1 4 2 0 1 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 11 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 11 2 5 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn | 100010 00
 N A.main 53 0.05985 0 0.165
 N B.fm 62 0.1323 0 0.3465
 N B.sub 50 0.1911 0 0.27225
-T 11 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 11 2 6 3 0 2 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 11 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,wait
+T 11 3 7 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | collision,wait | 100010 00
 N A.main 53 0.1995 0 0.66
 N A.ping 57 0.03375 0.005625 0.264
 N fx.collision 43 0.08 0 0.7
-T 11 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 11 3 8 4 0 3 0 0 0 spinner | A 0 4 S 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 11 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait
+T 11 4 9 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,wait | 8010 00
 N A.main 65 0.1218375 0 0.43225
 N A.ping 69 0.03375 0.005625 0.1729
 N B.fm 62 0.06733125 0 0.09975
 N B.sub 50 0.09725625 0 0.078375
 N fx.rotator 81 0.04 0.01 0.45
-T 11 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 11 4 10 5 0 4 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 11 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping
+T 11 5 11 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping | 8010 00
 N A.main 65 0.0947625 0 0.3705
 N A.ping 69 0.03375 0.005625 0.1482
 N B.fm 62 0.14175 0 0.4725
 N B.sub 50 0.20475 0 0.37125
 N fx.rotator 81 0.04 0.01 0.45
-T 11 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 11 5 12 6 0 5 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 69 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 11 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,turn
+T 11 6 13 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | wait,turn | 8010 00
 N B.fm 72 0.118125 0 0.357
 N B.sub 60 0.170625 0 0.2805
-T 11 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 11 6 14 7 1 0 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 11 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn
+T 11 7 15 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn | 8010 00
 N A.main 64 0.0947625 0 0.3705
 N A.ping 67 0.03375 0.005625 0.1482
 N B.fm 72 0.06733125 0 0.399
 N B.sub 60 0.09725625 0 0.3135
 N fx.rotator 81 0.04 0.01 0.45
-T 11 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 11 7 16 8 1 1 0 0 0 spinner | A 0 3 W 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 11 8 17 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision
+T 11 8 17 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision | 8010 00
 N A.main 64 0.09975 0 0.561
 N A.ping 67 0.03375 0.005625 0.2244
 N B.fm 72 0.10125 0 0.56
 N B.sub 60 0.14625 0 0.44
 N fx.rotator 81 0.04 0.01 0.45
 N fx.collision 43 0.08 0.02 0.7
-T 11 8 18 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 11 8 18 9 1 2 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 11 9 19 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,wait
-T 11 9 20 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 11 9 19 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,wait | 8010 00
+T 11 9 20 10 1 3 0 0 0 spinner | A 0 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 67 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 11 10 21 11 1 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,move,collision,collision
+T 11 10 21 11 1 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,move,collision,collision | 30010 00
 N A.main 67 0.07125 0 0.935
 N A.ping 71 0.03375 0.005625 0.374
 N B.fm 64 0.05821875 0 0.595
 N B.sub 52 0.08409375 0 0.4675
 N fx.collision 43 0.08 0.02 0.7
 N fx.collision 43 0.08 0.03 0.7
-T 11 10 22 11 1 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 11 10 22 11 1 4 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 64 0.02109375 0 0.245
 N B.sub 52 0.03375 0 0.175
-T 11 11 23 0 1 5 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 11 11 23 0 1 5 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,wait | 20010 00
 N B.fm 64 0.030375 0 0.14
 N B.sub 52 0.043875 0 0.11
-T 11 11 24 0 1 5 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 11 11 24 0 1 5 0 0 0 spinner | A 2 3 E 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 71 0.0253125 0 0.35
 N B.fm 64 0.02109375 0 0.245
 N B.sub 52 0.03375 0 0.175
-T 11 12 25 1 2 0 0 0 0 spinner | A 2 3 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,wait
+T 11 12 25 1 2 0 0 0 0 spinner | A 2 3 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | turn,wait | 20010 00
 N A.main 72 0.086034375 0 0.51
 N A.ping 76 0.03375 0.005625 0.204
-T 11 12 26 1 2 0 0 0 0 spinner | A 2 3 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 11 12 26 1 2 0 0 0 0 spinner | A 2 3 N 0 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 11 13 27 2 2 1 0 0 0 spinner | A 2 2 N 1 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,zap,collision
+T 11 13 27 2 2 1 0 0 0 spinner | A 2 2 N 1 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,zap,collision | 1010 00
 N A.main 71 0.050765625 0 0.8208
 N A.ping 74 0.03375 0.005625 0.32832
 N B.fm 69 0.1164375 0 0.476
 N B.sub 57 0.1681875 0 0.374
 N fx.zap -1 0.06 0.01 0.6
 N fx.collision 43 0.08 0.02 0.7
-T 11 13 28 2 2 1 0 0 0 spinner | A 2 2 N 1 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 11 13 28 2 2 1 0 0 0 spinner | A 2 2 N 1 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 74 0.0253125 0 0.371
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 11 14 29 3 2 2 0 0 0 spinner | A 2 2 N 2 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,zap,wait
+T 11 14 29 3 2 2 0 0 0 spinner | A 2 2 N 2 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | wait,zap,wait | 1010 00
 N A.main 72 0.01603125 0 0.232
 N B.fm 69 0.02885625 0 0.133
 N B.sub 57 0.04168125 0 0.1045
 N fx.zap -1 0.06 0.01 0.6
-T 11 14 30 3 2 2 0 0 0 spinner | A 2 2 N 2 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 11 14 30 3 2 2 0 0 0 spinner | A 2 2 N 2 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.392
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 11 15 31 4 2 3 0 0 0 spinner | A 2 1 N 2 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,ping
+T 11 15 31 4 2 3 0 0 0 spinner | A 2 1 N 2 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | move,ping | 90 00
 N A.main 84 0.10153125 0 0.8816
 N A.ping 76 0.03375 0.005625 0.35264
 N B.fm 69 0.06075 0 0.63
 N B.sub 57 0.08775 0 0.495
-T 11 15 32 4 2 3 0 0 0 spinner | A 2 1 N 2 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 11 15 32 4 2 3 0 0 0 spinner | A 2 1 N 2 0 0 | B 4 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.392
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 11 16 33 5 2 4 0 0 0 spinner | A 2 2 N 3 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,zap,turn
+T 11 16 33 5 2 4 0 0 0 spinner | A 2 2 N 3 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | move,zap,turn | 1010 00
 N A.main 72 0.038475 0 0.9548
 N A.ping 76 0.03375 0.005625 0.38192
 N B.fm 69 0.0945 0 0.273
 N B.sub 57 0.1365 0 0.2145
 N fx.zap -1 0.06 0.01 0.6
-T 11 16 34 5 2 4 0 0 0 spinner | A 2 2 N 3 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 11 16 34 5 2 4 0 0 0 spinner | A 2 2 N 3 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.392
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 11 17 35 6 2 5 0 0 0 spinner | A 2 2 N 4 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn
+T 11 17 35 6 2 5 0 0 0 spinner | A 2 2 N 4 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | ping,zap,turn | 1010 00
 N A.main 72 0.012825 0 1
 N A.ping 76 0.03375 0.005625 0.4
 N B.fm 69 0.15710625 0 0.29925
 N B.sub 57 0.22693125 0 0.235125
 N fx.zap -1 0.06 0.01 0.6
-T 11 17 36 6 2 5 0 0 0 spinner | A 2 2 N 4 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 11 17 36 6 2 5 0 0 0 spinner | A 2 2 N 4 0 0 | B 4 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 76 0.0253125 0 0.392
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 11 18 37 7 3 0 0 0 0 spinner | A 2 2 N 5 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | wait,zap,move,rotator
+T 11 18 37 7 3 0 0 0 0 spinner | A 2 2 N 5 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | wait,zap,move,rotator | 1200 00
 N A.main 76 0.012825 0 0.308
 N B.fm 72 0.135 0 0.364
 N B.sub 60 0.195 0 0.286
 N fx.zap -1 0.06 0.01 0.6
 N fx.rotator 81 0.04 0.03 0.45
-T 11 18 38 7 3 0 0 0 0 spinner | A 2 2 N 5 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | -
+T 11 18 38 7 3 0 0 0 0 spinner | A 2 2 N 5 0 0 | B 4 1 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.392
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 11 19 39 8 3 1 0 0 0 spinner | A 2 2 N 5 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | wait,collision,rotator
+T 11 19 39 8 3 1 0 0 0 spinner | A 2 2 N 5 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | wait,collision,rotator | 1200 00
 N B.fm 72 0.091125 0 0.49
 N B.sub 60 0.131625 0 0.385
 N fx.collision 43 0.08 0.01 0.7
 N fx.rotator 81 0.04 0.02 0.45
-T 11 19 40 8 3 1 0 0 0 spinner | A 2 2 N 5 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 11 19 40 8 3 1 0 0 0 spinner | A 2 2 N 5 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.392
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 11 20 41 9 3 2 0 0 0 spinner | A 2 1 N 5 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | move,wait
+T 11 20 41 9 3 2 0 0 0 spinner | A 2 1 N 5 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | move,wait | 280 00
 N A.main 76 0.10153125 0 1
 N A.ping 79 0.03375 0.005625 0.4
-T 11 20 42 9 3 2 0 0 0 spinner | A 2 1 N 5 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | -
+T 11 20 42 9 3 2 0 0 0 spinner | A 2 1 N 5 0 0 | B 4 1 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.392
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 11 21 43 10 3 3 0 0 0 spinner | A 2 1 W 5 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,wait,rotator
+T 11 21 43 10 3 3 0 0 0 spinner | A 2 1 W 5 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,wait,rotator | 280 00
 N A.main 76 0.09975 0 0.546
 N A.ping 79 0.03375 0.005625 0.2184
 N B.fm 72 0.050625 0 0.119
 N B.sub 60 0.073125 0 0.0935
 N fx.rotator 81 0.04 0.02 0.45
-T 11 21 44 10 3 3 0 0 0 spinner | A 2 1 W 5 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 11 21 44 10 3 3 0 0 0 spinner | A 2 1 W 5 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.392
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 11 22 45 11 3 4 0 0 0 spinner | A 2 1 S 5 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,turn,rotator
+T 11 22 45 11 3 4 0 0 0 spinner | A 2 1 S 5 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | turn,turn,rotator | 280 00
 N A.main 76 0.200746875 0 0.5355
 N A.ping 79 0.03375 0.005625 0.2142
 N B.fm 72 0.0945 0 0.3927
 N B.sub 60 0.1365 0 0.30855
 N fx.rotator 81 0.04 0.02 0.45
-T 11 22 46 11 3 4 0 0 0 spinner | A 2 1 S 5 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | -
+T 11 22 46 11 3 4 0 0 0 spinner | A 2 1 S 5 0 0 | B 4 1 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.392
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 11 23 47 0 3 5 0 0 0 spinner | A 2 0 S 4 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | move,pulse,collision,rotator
+T 11 23 47 0 3 5 0 0 0 spinner | A 2 0 S 4 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | move,pulse,collision,rotator | 204 00
 N A.main 76 0.4039875 0 0.693
 N A.ping 79 0.03375 0.005625 0.2772
 N B.fm 72 0.2716875 0 0.357
@@ -2725,46 +2725,46 @@ N B.sub 60 0.3924375 0 0.2805
 N fx.pulse 84 0.06 0.01 0.4
 N fx.collision 43 0.08 0.02 0.7
 N fx.rotator 81 0.04 0.03 0.45
-T 11 23 48 0 3 5 0 0 0 spinner | A 2 0 S 4 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | -
+T 11 23 48 0 3 5 0 0 0 spinner | A 2 0 S 4 0 0 | B 4 1 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 79 0.0253125 0 0.392
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 12 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset
+T 12 0 1 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | reset | 0 00
 N fx.pulse 76 0.07 0 0.42
 N fx.pulse 81 0.07 0.07 0.4
 N fx.pulse 84 0.06 0.14 0.36
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 12 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 12 0 2 1 0 0 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 12 1 3 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 12 1 3 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait | 100010 00
 N B.fm 62 0.0405 0 0.091
 N B.sub 50 0.0585 0 0.0715
-T 12 1 4 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 12 1 4 2 0 1 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 12 2 5 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait
+T 12 2 5 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | wait,wait | 100010 00
 N A.main 53 0.04275 0 0.187
-T 12 2 6 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 12 2 6 3 0 2 0 0 0 spinner | A 0 4 E 0 0 0 | B 4 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 62 0.02109375 0 0.245
 N B.sub 50 0.03375 0 0.175
-T 12 3 7 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,move,rotator
+T 12 3 7 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | move,rotator,move,rotator | 200008 00
 N A.main 57 0.0855 0 0.88
 N A.ping 60 0.03375 0.005625 0.352
 N B.fm 72 0.2716875 0 0.357
 N B.sub 60 0.3924375 0 0.2805
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 12 3 8 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 12 3 8 4 0 3 0 0 0 spinner | A 1 4 N 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 12 4 9 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | collision,rotator,wait,rotator
+T 12 4 9 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | collision,rotator,wait,rotator | 200008 00
 N A.main 53 0.1218375 0 0.43225
 N A.ping 57 0.03375 0.005625 0.1729
 N B.fm 72 0.04809375 0 0.11305
@@ -2772,41 +2772,41 @@ N B.sub 60 0.06946875 0 0.088825
 N fx.collision 43 0.08 0 0.7
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 12 4 10 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 12 4 10 5 0 4 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 12 5 11 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping,rotator
+T 12 5 11 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,ping,rotator | 200008 00
 N A.main 53 0.118453125 0 0.4845
 N A.ping 57 0.03375 0.005625 0.1938
 N B.fm 72 0.06075 0 0.63
 N B.sub 60 0.08775 0 0.495
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 12 5 12 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 12 5 12 6 0 5 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 57 0.0253125 0 0.35
 N B.fm 72 0.02109375 0 0.245
 N B.sub 60 0.03375 0 0.175
-T 12 6 13 7 1 0 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator
+T 12 6 13 7 1 0 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | wait,turn,rotator | 200008 00
 N B.fm 69 0.165375 0 0.315
 N B.sub 57 0.238875 0 0.2475
 N fx.rotator 81 0.04 0.02 0.45
-T 12 6 14 7 1 0 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | -
+T 12 6 14 7 1 0 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 S 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 53 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 12 7 15 8 1 1 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator
+T 12 7 15 8 1 1 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | turn,rotator,turn,rotator | 200008 00
 N A.main 50 0.0947625 0 0.3705
 N A.ping 53 0.03375 0.005625 0.1482
 N B.fm 69 0.06733125 0 0.399
 N B.sub 57 0.09725625 0 0.3135
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 12 7 16 8 1 1 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 12 7 16 8 1 1 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 53 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 12 8 17 9 1 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision,rotator
+T 12 8 17 9 1 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,collision,rotator | 200008 00
 N A.main 50 0.0798 0 0.429
 N A.ping 53 0.03375 0.005625 0.1716
 N B.fm 69 0.135 0 0.364
@@ -2814,34 +2814,34 @@ N B.sub 57 0.195 0 0.286
 N fx.rotator 81 0.04 0.01 0.45
 N fx.collision 43 0.08 0.02 0.7
 N fx.rotator 81 0.04 0.03 0.45
-T 12 8 18 9 1 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 12 8 18 9 1 2 0 0 0 spinner | A 1 4 W 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 53 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 12 9 19 10 1 3 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait
+T 12 9 19 10 1 3 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait | 200008 00
 N A.main 50 0.118453125 0 0.4845
 N A.ping 53 0.03375 0.005625 0.1938
 N fx.rotator 81 0.04 0.01 0.45
-T 12 9 20 10 1 3 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | -
+T 12 9 20 10 1 3 0 0 0 spinner | A 1 4 E 0 0 0 | B 3 0 W 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 53 0.0253125 0 0.35
 N B.fm 69 0.02109375 0 0.245
 N B.sub 57 0.03375 0 0.175
-T 12 10 21 11 1 4 0 0 0 spinner | A 1 4 E 0 0 0 | B 1 0 N 0 0 0 | 0 0 | 0 0 0 | wait,move,move,rotator
+T 12 10 21 11 1 4 0 0 0 spinner | A 1 4 E 0 0 0 | B 1 0 N 0 0 0 | 0 0 | 0 0 0 | wait,move,move,rotator | 200006 00
 N B.fm 65 0.05821875 0 0.595
 N B.sub 53 0.08409375 0 0.4675
 N fx.rotator 81 0.04 0.03 0.45
-T 12 10 22 11 1 4 0 0 0 spinner | A 1 4 E 0 0 0 | B 1 0 N 0 0 0 | 0 0 | 0 0 0 | -
+T 12 10 22 11 1 4 0 0 0 spinner | A 1 4 E 0 0 0 | B 1 0 N 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 53 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
-T 12 11 23 0 1 5 0 0 0 spinner | A 1 4 W 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait,rotator
+T 12 11 23 0 1 5 0 0 0 spinner | A 1 4 W 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | turn,rotator,wait,rotator | 200002 00
 N A.main 50 0.0947625 0 0.3705
 N A.ping 53 0.03375 0.005625 0.1482
 N B.fm 65 0.050625 0 0.119
 N B.sub 53 0.073125 0 0.0935
 N fx.rotator 81 0.04 0.01 0.45
 N fx.rotator 81 0.04 0.03 0.45
-T 12 11 24 0 1 5 0 0 0 spinner | A 1 4 W 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | -
+T 12 11 24 0 1 5 0 0 0 spinner | A 1 4 W 0 0 0 | B 1 0 E 0 0 0 | 0 0 | 0 0 0 | - | 0 00
 N A.ping 53 0.0253125 0 0.35
 N B.fm 65 0.02109375 0 0.245
 N B.sub 53 0.03375 0 0.175
