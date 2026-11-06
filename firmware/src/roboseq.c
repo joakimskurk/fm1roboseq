@@ -51,6 +51,7 @@ static void app_idle(void);
 #include "rs_voice.c"                         /* the voices */
 #include "rs_mix.c"                           /* the mix */
 #include "rs_screen.c"                        /* the board */
+#include "rs_splash.c"                        /* the splash at boot */
 #ifndef RING_PUBLISH                            /* (platform.c's, on the chip) */
 #define RING_PUBLISH() __asm__ volatile("" ::: "memory")
 #endif
@@ -327,6 +328,16 @@ static void app_main(void)
     rs_mix_init(&mix, 0x5EEDu);
     rs_default(&game);
     keys_init();
+    {                                           /* the splash: ~2.6 s, a frame every 33 ms; a key or a button skips it */
+        uint32_t t0 = fm1_ms, drawn = ~0u, rel;
+        while (fm1_ms - t0 < SPLASH_MS) {
+            platform_poll();
+            schedule();
+            if (fm1_input_edges(&rel) || fm1_in.notes) break;
+            if (drawn == ~0u || fm1_ms - drawn >= 33u) drawn = fm1_ms, draw_splash(fm1_ms - t0);
+        }
+        prev = fm1_in.notes;                    /* (a key that skipped it is not also a press on the board) */
+    }
     for (;;) {
         uint32_t rel, b, key, notes, len, k;
         int32_t e;

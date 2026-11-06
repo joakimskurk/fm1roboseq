@@ -19,7 +19,9 @@ static void lcd_blit(uint32_t x, uint32_t y, uint32_t w, uint32_t h, const uint1
 #include "rs_chance.c"
 #include "rs_score.c"
 #include "rs_voice.c"
+#include "rs_mix.h"
 #include "rs_screen.c"
+#include "rs_splash.c"
 
 static void ppm(const char *name)
 {
@@ -60,5 +62,7 @@ int main(void)
     rs_randomize_all(&g);
     v.step = 21, u.sel = 1, u.layer = RS_LAYER_MODIFIER;
     draw_seq(&v, &u, &g, 9 * SEQ_ROW + 5, 9), ppm("seq");
+    draw_splash(250), ppm("splash-0250");             /* the splash: the letters dropping, then all in */
+    draw_splash(2000), ppm("splash-2000");
     return 0;
 }
