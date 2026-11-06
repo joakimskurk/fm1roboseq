@@ -76,6 +76,8 @@ struct rs_state {
     uint8_t vm_index, vm_count;                                 /* voiceModIndex, voiceModStepCount */
     struct rs_bot bot[2];
     uint8_t clash_cooldown, love_steps;
+    /* the player's (D16): not the HTML's, 0 there */
+    uint8_t steer[2];                                           /* bot A / B's next move is this action + 1 (0: its register's) */
 };
 
 /* a note, as the HTML's triggerAttackRelease(note, duration, time, velocity) on one of its voices */
@@ -142,6 +144,8 @@ void rs_advance_voice_mod(struct rs_state *s);                  /* advanceVoiceM
 void rs_set_loop_len(struct rs_state *s, uint8_t len);          /* setLoopLength(): caps the programs, stops */
 void rs_set_prog_len(struct rs_state *s, int bot, uint8_t len); /* setProgramLength(): at most the loop's */
 void rs_cycle_action(struct rs_state *s, int bot, int i);       /* cycleAction() */
+void rs_steer(struct rs_state *s, int bot, uint8_t action);    /* the bot's next move does this, once (D16) */
+void rs_swap_registers(struct rs_state *s);                     /* swapRegisters() */
 void rs_cycle_modifier(struct rs_state *s, int bot, int i);     /* cycleModifier() */
 void rs_cycle_prob(struct rs_state *s, int bot, int i);         /* cycleProbability(): 100 -> 75 -> 50 */
 void rs_cycle_bassmod(struct rs_state *s, int i, int field, int dir);   /* cycleBassModStepValue(): 0 scale, 1 root, 2 semitone */

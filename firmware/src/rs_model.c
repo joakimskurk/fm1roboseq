@@ -185,7 +185,7 @@ void rs_load_board(struct rs_state *s, uint8_t id)      /* applyBoardPreset() */
     rs_set_board(s, &b, id);
 }
 
-void rs_start(struct rs_state *s) { rs_reset(s); s->playing = 1; }
+void rs_start(struct rs_state *s) { rs_reset(s); s->playing = 1; s->steer[0] = s->steer[1] = 0; }
 
 void rs_stop(struct rs_state *s)                        /* stopPlayback() */
 {
@@ -367,6 +367,11 @@ void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
         for (int b = 0; b < 2; b++) {
             if (s->bot[b].dying) continue;
             const struct rs_step *st = &s->prog[b].s[si % (s->prog[b].len ? s->prog[b].len : s->loop_len)];
+            struct rs_step live;
+            if (s->steer[b]) {                          /* steered by hand (D16): this action, its step's colour, sure */
+                live = *st, live.action = (uint8_t)(s->steer[b] - 1), live.prob = 100, st = &live;
+                s->steer[b] = 0;
+            }
             if (rs_skips(b, (uint32_t)si, s->cycle, st->prob)) { evk(o, RS_EV_WAIT, s->bot[b].x, s->bot[b].y); continue; }   /* hesitated */
             execute_step(s, b, st, o);
             s->bot[b].stepped_tile = tile_at(s, s->bot[b].x, s->bot[b].y);
@@ -444,6 +449,13 @@ void rs_cycle_action(struct rs_state *s, int bot, int i)
     struct rs_step *st = &s->prog[bot & 1].s[i & 63];
     st->action = (uint8_t)((st->action + 1) % RS_NACTIONS);
 }
+
+void rs_steer(struct rs_state *s, int bot, uint8_t action)
+{
+    if (action < RS_NACTIONS) s->steer[bot & 1] = (uint8_t)(action + 1);
+}
+
+void rs_swap_registers(struct rs_state *s) { s->swapped = !s->swapped; }
 
 void rs_cycle_modifier(struct rs_state *s, int bot, int i)
 {

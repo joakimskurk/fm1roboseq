@@ -133,3 +133,15 @@ it, or something like it, later; perhaps it is enough to manipulate the robots; 
 and their registers while they run, the music following from where they go, as the HTML's does. A melody layer
 of the FM-1's own is not ruled out but waits; it is taken up step by step, once the robots play well.
 
+## D16. The keys on the board: registers on the white keys, steering on the black ones (2026-11-06)
+
+The product owner chose both ways of reaching the robots. The white keys are the 16 steps of one bot's register
+(SEQ picks which, OCT- / OCT+ its next 16): a key turns its step to the next action, as the HTML's step card does
+(cycleAction). The black keys steer: a key makes that bot's next move this action, once (prob 100 %, its step's
+modifier kept, so it sounds like the step it replaces), then its register goes on. Five per bot: TURN L, MOVE,
+TURN R (left, ahead, right under the hand), DASH and PING; BACK and WAIT stay in the registers. The eleventh swaps the
+registers, as the HTML's REG SWAP. The steer is the player's, not the HTML's: with none the game is the HTML's tick
+for tick (the traces hold that). The step framed on the top row is the one the register plays (step mod its
+length); the HTML frames the step's number, which is off the card when the register is shorter than the loop.
+docs/roboseq/CONTROLS.md has the rules (C1-C6).
+

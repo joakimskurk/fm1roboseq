@@ -3,6 +3,12 @@
  * (reference/roboseq.html; ROADMAP.md). The controls, the board on the screen and the pages come in phase 3.
  *
  *   PLAY       starts the default song from its start, and stops it (the HTML's PLAY and STOP)
+ *   white keys the 16 steps of a bot's register (its movement sequencer): a key turns its step to the next action,
+ *              as the HTML's step cards do (on the screen's top row; the step playing framed)
+ *   SEQ        whose register is on the white keys: Scout-7 or Echo-3
+ *   OCT- OCT+  the register's next 16 steps (a register is up to 64)
+ *   black keys steer the bots by hand: the next move is this one (D16). F# G# A# C# D# from F3: Scout-7's TURN L,
+ *              MOVE, TURN R, DASH, PING; from F4 the same for Echo-3; the last (F#5) swaps the registers
  *   MASTER     the volume (platform.c)
  *
  * How the sound runs: the main loop plays the game (rs_tick, a step at a time, LOOKAHEAD ahead of the speaker, as
@@ -144,30 +150,84 @@ static const struct rs_view *view_now(void)
 }
 
 volatile uint32_t rs_boot_check;               /* rs_selfcheck() at boot: make emu reads it from RAM */
+/* ---- the keys (D16) */
+static const uint8_t STEER[5] = {RS_TURNL, RS_MOVE, RS_TURNR, RS_DASH, RS_PING};   /* a bot's five black keys */
+static uint8_t white_key[16], black_key[11];    /* key index (0 = F3) of the k-th white / black key */
+static uint8_t sel_bot, bank;
+
+static void keys_init(void)
+{
+    uint32_t k, w = 0, b = 0;
+    for (k = 0; k < 27u; k++) {
+        if ((0x54Au >> ((53u + k) % 12u)) & 1u) black_key[b++] = (uint8_t)k;
+        else white_key[w++] = (uint8_t)k;
+    }
+}
+
+static int keys(uint32_t down)                  /* what the keys pressed now do; 1 when the screen should show it */
+{
+    uint32_t k, len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len;
+    int changed = 0;
+    for (k = 0; k < 16u; k++)
+        if (down >> white_key[k] & 1u && bank * 16u + k < len) rs_cycle_action(&game, sel_bot, (int)(bank * 16u + k)), changed = 1;
+    for (k = 0; k < 11u; k++)
+        if (down >> black_key[k] & 1u) {
+            if (k < 10u) rs_steer(&game, k < 5u ? 0 : 1, STEER[k % 5u]);
+            else rs_swap_registers(&game);
+            changed = 1;
+        }
+    return changed;
+}
+
+static void ui_of(struct rs_ui *u, const struct rs_view *v)
+{
+    uint32_t k, len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len;
+    u->sel = sel_bot, u->bank = bank, u->len = (uint8_t)len, u->swapped = game.swapped;
+    u->playing_at = v->playing && v->step >= 0 ? (int16_t)(v->step % (int16_t)len) : -1;
+    u->steer[0] = game.steer[0], u->steer[1] = game.steer[1];
+    for (k = 0; k < 16u; k++) u->steps[k] = game.prog[sel_bot].s[(bank * 16u + k) & 63u];
+}
+
 static void app_main(void)
 {
     static struct rs_fx fx;
     static struct rs_view last;
-    uint32_t due = 0, shown = ~0u;
+    static struct rs_ui ui;
+    uint32_t due = 0, shown = ~0u, prev = 0;
     rs_boot_check = rs_selfcheck();             /* the model on the chip: make emu compares it with the computer's */
     rs_mix_init(&mix, 0x5EEDu);
     rs_default(&game);
+    keys_init();
     for (;;) {
-        uint32_t rel, b, key;
+        uint32_t rel, b, key, notes, len;
+        int dirty = 0;
         const struct rs_view *v;
         platform_poll();
         b = fm1_input_edges(&rel);
+        notes = fm1_in.notes;
+        dirty = keys(notes & ~prev);
+        prev = notes;
         if (b & (1u << BTN_PLAY)) { if (game.playing) stop(); else play(); }
+        if (b & (1u << BTN_SEQ)) sel_bot ^= 1u, bank = 0, dirty = 1;
+        len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len;
+        if (b & (1u << BTN_OCT_DOWN) && bank > 0) bank--, dirty = 1;
+        if (b & (1u << BTN_OCT_UP) && (bank + 1u) * 16u < len) bank++, dirty = 1;
+        if (bank * 16u >= len) bank = 0;
         schedule();
         fm1_led_key(BTN_PLAY, game.playing);
+        fm1_led_key(BTN_SEQ, sel_bot);          /* lit: Echo-3's register */
+        fm1_led_key(BTN_OCT_DOWN, bank > 0);
+        fm1_led_key(BTN_OCT_UP, (bank + 1u) * 16u < len);
         v = view_now();
         key = v->t0 ^ (uint32_t)v->playing << 31 ^ (uint32_t)v->step << 20;
         if (key != shown) {                     /* a new step heard: its effects start now */
             if (v->playing && shown != ~0u) screen_effects(&fx, &last, v, fm1_ms);
-            last = *v, shown = key;
-            draw_board(v, &fx, fm1_ms), due = fx_due(&fx, fm1_ms);
-        } else if (due && (int32_t)(fm1_ms - due) >= 0) {   /* an effect ran out */
-            draw_board(v, &fx, fm1_ms), due = fx_due(&fx, fm1_ms);
+            last = *v, shown = key, dirty = 1;
+        } else if (due && (int32_t)(fm1_ms - due) >= 0)   /* an effect ran out */
+            dirty = 1;
+        if (dirty) {
+            ui_of(&ui, v);
+            draw_board(v, &fx, &ui, fm1_ms), due = fx_due(&fx, fm1_ms);
         }
     }
 }

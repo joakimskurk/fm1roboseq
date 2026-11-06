@@ -5,6 +5,7 @@
 #   make reference  re-render tests/golden/html with Tone.Offline (node, a Chromium)
 #   make parity  the C voices, mix and song against those renders
 #   make song    the default song played on the host, PLAY at 0.5 s: build/host/song.wav
+#   make play    keys played on the host (tests/roboseq/play.txt): build/host/play.wav and its screens
 #   make probe   the HTML's mix pieces (limiter, reverb, low-pass) measured in Chromium: build/probe (node)
 #   make fw      the FM-1 package build/roboseq.fwsc (JieLi toolchain in ~/.jieli, SDK in ~/fw-AC79_AIoT_SDK)
 #   make check   everything CI runs: the package, then Dinghy's platform tests on it
@@ -40,6 +41,9 @@ parity:          ## the C voices, mix and song against those renders (numpy)
 	python3 tools/tone-ref/compare.py --check
 song: $(IMG)
 	$(RUN) sh -c 'cc -O2 -Wall -Wno-unused-function -DDINGHY_HOST -DAPP_VER="\"dev\"" -Ifirmware/hal -Ifirmware/src -Ifirmware/gen -o build/host/roboseq firmware/src/roboseq.c && build/host/roboseq build/host/song tests/roboseq/song.txt'
+play: $(IMG)
+	$(RUN) sh -c 'cc -O2 -Wall -Wno-unused-function -DDINGHY_HOST -DAPP_VER="\"dev\"" -Ifirmware/hal -Ifirmware/src -Ifirmware/gen -o build/host/roboseq firmware/src/roboseq.c && build/host/roboseq build/host/play tests/roboseq/play.txt'
+	$(PY) -c "import glob; from PIL import Image; [Image.open(p).resize((480, 480), Image.NEAREST).save(p[:-4] + '.png') for p in glob.glob('build/host/play-*.ppm')]"
 probe:
 	cd tools/tone-ref && npm ci --no-fund --no-audit
 	node tools/tone-ref/probe_mix.mjs && python3 tools/tone-ref/compressor.py

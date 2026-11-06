@@ -110,11 +110,13 @@ and the limiter.)
 
 ## Phase 3: playing it (controls and screen)
 
-- [ ] The control rules (as SkurkyMello's G1-G8) and the playing model (P2 above), tried on the host
+- [x] The control rules (docs/roboseq/CONTROLS.md, C1-C6) and the playing model (D15, D16), tried on the host
+      (`make play`)
 - [x] HOME is the board: the HTML's renderBoard() as 240 x 240 pixel art (its tile and robot art 1:1 on cells of
       40 px), the tiles an event lit, the explosion, heart and clash star for as long as the HTML shows them, the step,
       the cycle and the bots' health; drawn as the step is heard, not when the game computes it (2026-11-06)
-- [ ] The registers on the white keys
+- [x] The registers on the white keys (SEQ: whose, OCT: the next 16), the bots steered on the black keys (D16)
+- [ ] P4: the rules as host tests, page by page
 - [ ] The pages for programs, Voice Mod, drums, mix; the UI map generated from the code (`make screens`)
 - [ ] Storage: projects in Dinghy's blobs and slots
 

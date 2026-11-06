@@ -186,8 +186,27 @@ static void test_seq2_rolls(void)
     CHECK(rs_undo_depth() == 1, "and that roll is undoable");
 }
 
+static void test_steer(void)                     /* D16: a steer is the next move's action, once */
+{
+    static struct rs_state x, y;
+    static struct rs_tick_out ox, oy;
+    rs_default(&x), rs_start(&x), rs_default(&y), rs_start(&y);
+    for (int t = 0; t < 3; t++) rs_tick(&x, &ox), rs_tick(&y, &oy);
+    rs_steer(&y, 1, RS_DASH);
+    rs_tick(&x, &ox), rs_tick(&y, &oy);
+    CHECK(oy.acted[1] && oy.played[1].action == RS_DASH, "the steered move dashes");
+    CHECK(ox.played[1].action != RS_DASH, "(the register's own step is not a dash)");
+    CHECK(oy.played[1].modifier == ox.played[1].modifier, "it keeps its step's modifier");
+    CHECK(!y.steer[1] && oy.played[0].action == ox.played[0].action, "once, and bot A untouched");
+    rs_tick(&x, &ox), rs_tick(&y, &oy);
+    CHECK(oy.played[1].action == ox.played[1].action, "then the register again");
+    rs_swap_registers(&y);
+    CHECK(y.swapped == 1, "the registers swap");
+}
+
 int main(void)
 {
+    test_steer();
     test_randomize_steps();
     test_randomize_board();
     test_bassmod_seq2();

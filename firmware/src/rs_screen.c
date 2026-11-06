@@ -2,7 +2,7 @@
 /* RoboSeq's board on the FM-1's 240 x 240 screen: the HTML's renderBoard() as pixel art. The 5 x 5 board in cells
  * of 40 px (the HTML's tile art is drawn on a 40 x 40 grid, so it comes over 1:1), the bots on a 32 x 32 grid as
  * the HTML's robotPixelArt, the tiles an event lit, the explosion, the heart and the clash star for as long as the
- * HTML shows them; above it the step and the cycle, below it the bots' health as the HTML's status cards.
+ * HTML shows them; above it the register on the white keys, below it the bots' health as the HTML's status cards.
  * Main loop only (it draws into the canvas, gfx.c). Colours are the HTML's CSS. */
 
 /* ---- what the screen shows: the game as it is heard (roboseq.c keeps one a step, for when it sounds) */
@@ -267,6 +267,51 @@ static void draw_clash(int32_t x, int32_t y)
     cv_rect(x + 18, y + 18, 4, 4, C_WHITE);
 }
 
+/* ---- the keys' side (D16): the register on the white keys, the steering on the black ones */
+struct rs_ui {
+    uint8_t sel, bank, len, swapped;            /* the bot on the white keys, its 16-step page, its register's length */
+    int16_t playing_at;                         /* the step of the register playing now (-1: none) */
+    uint8_t steer[2];                           /* a bot's next move, by hand (action + 1) */
+    struct rs_step steps[16];                   /* the page */
+};
+
+static const char *const ACT_GLYPH[RS_NACTIONS + 1][7] = {   /* the HTML's icons (⇧ ⇩ ↺ ↻ ⇶ ✦ ·), 7 x 7 */
+    {"...#...", "..###..", ".#####.", "...#...", "...#...", "...#...", "...#..."},
+    {"...#...", "...#...", "...#...", "...#...", ".#####.", "..###..", "...#..."},
+    {"#.###..", "##...#.", "###...#", "......#", "......#", ".#...#.", "..###.."},
+    {"..###.#", ".#...##", "#...###", "#......", "#......", ".#...#.", "..###.."},
+    {"#..#...", ".#..#..", "..#..#.", "...#..#", "..#..#.", ".#..#..", "#..#..."},
+    {"...#...", "...#...", "..###..", "#######", "..###..", "...#...", "...#..."},
+    {".......", ".......", "..###..", "..###..", "..###..", ".......", "......."},
+    {".#.....", "###....", ".#...#.", ".#...#.", ".#...#.", "....###", ".....#."}};   /* (the last: ⇅, swapped) */
+static const uint16_t ACT_COLOUR[RS_NACTIONS] = {   /* renderStepCard's actionColorMap */
+    C_PULSE, RGB(0x73, 0xb7, 0xa9), C_ROT, C_BELT, C_DANGER, RGB(0x59, 0xd9, 0xc2), C_MUTED};
+
+static void glyph7(int32_t x, int32_t y, uint32_t g, int32_t px, uint16_t c)
+{
+    int32_t r, k;
+    for (r = 0; r < 7; r++)
+        for (k = 0; k < 7; k++)
+            if (ACT_GLYPH[g][r][k] == '#') cv_rect(x + k * px, y + r * px, px, px, c);
+}
+
+static void draw_strip(const struct rs_ui *u)   /* the white keys: 16 steps of the picked bot's register */
+{
+    uint32_t k;
+    uint16_t bot = u->sel ? C_BOT_B : C_BOT_A;
+    for (k = 0; k < 16; k++) {
+        int32_t x = (int32_t)k * 15, i = (int32_t)(u->bank * 16u + k);
+        if (i < u->len) {
+            cv_rect(x + 1, 1, 13, 17, RGB(0x1a, 0x1a, 0x2e));
+            glyph7(x + 1, 3, u->steps[k].action, 2, u->steps[k].prob == 100 ? ACT_COLOUR[u->steps[k].action]
+                                                     : mix565(ACT_COLOUR[u->steps[k].action], RGB(0x1a, 0x1a, 0x2e), 140));
+            if (i == u->playing_at) frame(x, 0, 15, 19, 1, C_WHITE);
+        } else
+            cv_rect(x + 6, 8, 3, 3, RGB(0x1a, 0x1a, 0x2e));   /* past its length */
+    }
+    cv_rect(0, 18, 240, 1, bot);                /* whose register: its colour under it */
+}
+
 /* ---- the whole screen */
 struct rs_fx {                                  /* what is showing, until when (fm1_ms), as the HTML times them */
     uint32_t boom_until[2], heart_until, clash_until[2], lit_until, hidden_until[2];
@@ -297,22 +342,11 @@ static uint32_t fx_due(const struct rs_fx *fx, uint32_t now_ms)   /* when the ne
     return best;
 }
 
-static void put_num(char *p, uint32_t v, uint32_t w)   /* v in w digits, zeros in front */
-{
-    while (w--) p[w] = (char)('0' + v % 10u), v /= 10u;
-}
-
-static void draw_board(const struct rs_view *v, const struct rs_fx *fx, uint32_t now_ms)
+static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const struct rs_ui *u, uint32_t now_ms)
 {
     int32_t i, b;
-    char top[32] = "STEP 00/00", cyc[16] = "CYCLE 0000";
     cv_begin(240, 240, C_BG);
-    /* the step and the cycle; the board's name */
-    put_num(top + 5, (uint32_t)(v->step < 0 ? 0 : v->step + 1), 2);
-    put_num(top + 8, v->loop_len, 2);
-    put_num(cyc + 6, (v->cycle + 1u) % 10000u, 4);
-    cv_text(4, 2, &FONT_S, top, v->playing ? C_TEXT : C_MUTED);
-    cv_text(236 - text_w(&FONT_S, cyc), 2, &FONT_S, cyc, C_MUTED);
+    draw_strip(u);
     /* the board */
     for (i = 0; i < RS_ROWS * RS_COLS; i++) {
         int32_t x = BX + (i % RS_COLS) * CELL, y = BY + (i / RS_COLS) * CELL;
@@ -333,6 +367,10 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, uint32_t
         else draw_bot(x + 4, y + 4, b, 0, C_CELL);
         draw_arrow(x, y, t->dir, b ? C_WARN : C_ACCENT);
         if ((int32_t)(fx->clash_until[b] - now_ms) > 0) draw_clash(x, y);
+        if (u->steer[b]) {                      /* steered: what its next move will be, on it */
+            cv_rect(x + 1, y + 1, 16, 16, b ? C_BOT_B : C_BOT_A);
+            glyph7(x + 2, y + 2, u->steer[b] - 1u, 2, C_WHITE);
+        }
     }
     for (b = 0; b < 2; b++)
         if ((int32_t)(fx->boom_until[b] - now_ms) > 0) draw_explosion(BX + fx->boom_x[b] * CELL, BY + fx->boom_y[b] * CELL, b);
@@ -341,9 +379,10 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, uint32_t
     for (b = 0; b < 2; b++) {
         int32_t x = b ? 124 : 4, hp = 6 - (v->bot[b].heat > 6 ? 6 : v->bot[b].heat < 0 ? 0 : v->bot[b].heat);
         uint16_t c = hp <= 2 ? C_DANGER : hp <= 4 ? C_WARN : C_PULSE;
-        int32_t w = cv_text(x, 222, &FONT_S, b ? "ECHO-3" : "SCOUT-7", b ? C_BOT_B : C_BOT_A) + 4;
-        cv_rect(w, 228, x + 112 - w, 6, RGB(0x1a, 0x1a, 0x2e));
-        cv_rect(w, 228, (x + 112 - w) * hp / 6, 6, c);
+        int32_t w = cv_text(x, 222, &FONT_S, b ? "ECHO-3" : "SCOUT-7", u->sel == b ? (b ? C_BOT_B : C_BOT_A) : C_MUTED) + 4;
+        cv_rect(w, 228, x + 104 - w, 6, RGB(0x1a, 0x1a, 0x2e));
+        cv_rect(w, 228, (x + 104 - w) * hp / 6, 6, c);
     }
+    if (u->swapped) glyph7(229, 224, RS_NACTIONS, 1, C_TEXT);   /* the registers swapped */
     cv_blit(0, 0);
 }
