@@ -286,3 +286,13 @@ keys are the lead's), so it sets the arp's notes a step, 1 to 4 (sixteenths, thi
 sixty-fourths at the robots' tempo): the main loop hands the lead the step's length cut in that many, and after each
 step the lead plays the rest as their times come. The rate shows small on the ARP fader.
 
+## D30. Only ARP arpeggiates; K4 is the octave without it (2026-11-06)
+
+The product owner: with D29 the arp could run without the ARP button lit, out of key, and its speed should be one of
+ARP's own settings. The arp without ARP was D26's scale arp on K4: thirds of Voice Mod's scale from the key held,
+which needn't be the key the player is in, and SELECT made it faster. Now only ARP arpeggiates (the chord held, its
+notes the player's own), and its settings are ARP's: K4 its kind, SELECT its notes a step (1-4, shown on the fader
+only while ARP is lit; outside ARP, SELECT does what the page has it do and the lead plays a note a step). Without
+ARP, K4 is the lead's octave, -2 .. +2 as OCT- / OCT+ (the product owner's first wish for K4 was "octave, or an arp
+up or down"), its fader from the middle; and an octave moved, by the knob or the buttons, takes the key held with it
+at once, gliding there, rather than on the next key. D26's scale arp is gone.

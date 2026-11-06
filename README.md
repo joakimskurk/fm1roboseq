@@ -64,7 +64,7 @@ The screens, drawn by the firmware itself (`make screens`): what you see, and wh
 | <img src="docs/screens/home-love.png" width="240" alt="Two robots on one tile"> | **When they meet.** Two on one tile simply stand side by side. Linger together and a heart appears and a coin chimes; dash into the other and a star flashes over the one hit. |
 | <img src="docs/screens/seq.png" width="240" alt="SEQ"> | **SEQ: the programs**, as step cards: number, move, modifier, chance; the card playing is framed in its robot's colour. SELECT moves the cursor (white), EDIT picks the robot. Type a program in with **W A S D** at the bottom of the keyboard (move, turn left, back, turn right) and the keys round them (idle, dash, ping): each move lands at the cursor and the cursor goes on, so you drive the program in. The coloured keyboard at the foot says what each key does. |
 | <img src="docs/screens/builder.png" width="240" alt="ENV, the board builder"> | **ENV: build a board.** W A S D move the cursor; further up a key for each tile (belt, rotator left and right, zap, pulse, crate), and the black key between S and D clears. A belt points the way you last moved; press it again to turn it. The robots meet your tiles on their next step. KNOB1 runs through the six preset boards. |
-| <img src="docs/screens/home-lead.png" width="240" alt="REC: the lead"> | **REC: play solo.** The keys become a SID-style lead over the robots, the knobs its CUT, ECHO, BITE and ARP, shown as faders across the top. **ARP** arpeggiates a chord you hold, a note each step, K4 its pattern. REC again gives the keys back. |
+| <img src="docs/screens/home-lead.png" width="240" alt="REC: the lead"> | **REC: play solo.** The keys become a SID-style lead over the robots, the knobs its CUT, ECHO, BITE and OCT, shown as faders across the top. **ARP** arpeggiates a chord you hold, a note each step: K4 its pattern, SELECT how fast. REC again gives the keys back. |
 | <img src="docs/screens/glo.png" width="240" alt="GLO"> | **GLO: tempo and time.** The tempo, how often the robots move (every 1, 2 or 4 ticks), the loop's length (it changes as the loop comes round, never stopping the music) and the speed (1/1, 1/2, 1/4). |
 | <img src="docs/screens/voicemod.png" width="240" alt="SCL: Voice Mod"> | **SCL: Voice Mod**, the harmony: four steps of scale, root and semitone that the music moves through, every so many loops or by hand (NEXT). White keys 1-4 pick a step, K1-K3 change it. |
 | <img src="docs/screens/seq2.png" width="240" alt="SCL again: Seq 2"> | **SCL again: Seq 2**, the arrangement: four steps that change the board and the drum pattern and can swap the robots' registers, as Voice Mod comes round. |
@@ -82,8 +82,8 @@ The FM-1's panel is printed, so its names are the firmware's names. What each co
 | **EDIT** | Whose program the keys edit: Scout-7 or Echo-3 (lit: Echo-3). |
 | **REC** | The keys and knobs play the lead (lit). Again: back. |
 | **ARP** | The keys a chord, arpeggiated (lit; it brings the lead with it). |
-| **SELECT** (encoder) | On HOME what a white key changes (a step's move, modifier or chance); on SEQ the cursor; on the drums the row; with REC on, how fast the arp runs (1-4 notes a step). |
-| **K1-K4** | The page's values; with REC on, the lead's CUT, ECHO, BITE and ARP. They never stop the music. |
+| **SELECT** (encoder) | On HOME what a white key changes (a step's move, modifier or chance); on SEQ the cursor; on the drums the row; with ARP on, how fast the arp runs (1-4 notes a step). |
+| **K1-K4** | The page's values; with REC on, the lead's CUT, ECHO, BITE and OCT (with ARP on, K4 the arp's pattern). They never stop the music. |
 | **White keys** | Positions where a page has steps; on SEQ and ENV a game controller (W A S D and the keys above them). |
 | **Black keys** | Steer the robots, on every page but SEQ and ENV (below). |
 | **OCT- / OCT+** | The next 16 steps of a long program (HOME), the cursor 8 steps (SEQ), the lead's octave (REC). |
@@ -111,10 +111,9 @@ for you, a step each time Voice Mod comes round.
 
 **Play over them.** REC turns the keyboard into a lead: a sharp SID voice (pulse and saw together, a wide sweeping
 pulse width, folded where it is driven hard, an open filter, a ping-pong echo in time), the last key held winning
-and gliding when you play legato. K1 CUT opens and closes its filter, K2 ECHO its echo, K3 BITE its edge, K4 ARP an
-arpeggio up or down the scale from the key you hold, a note each step. ARP instead arpeggiates a whole chord: hold
-one, and K4 picks up, down, up and down, two octaves up or down, or random. SELECT makes either arp faster: 1 to 4
-notes a step.
+and gliding when you play legato. K1 CUT opens and closes its filter, K2 ECHO its echo, K3 BITE its edge, K4 OCT its
+octave (the note you hold goes with it). ARP arpeggiates the chord you hold, a note each step: K4 picks up, down, up
+and down, two octaves up or down, or random, and SELECT makes it faster, 1 to 4 notes a step. Only ARP arpeggiates.
 
 ### What the moves and tiles do
 

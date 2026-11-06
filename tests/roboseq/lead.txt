@@ -1,5 +1,7 @@
 # A solo with the lead over the default song (make lead): PLAY, REC, a phrase with legato glides and a held
-# note for the vibrato, OCT+ for the last bar (FM-1: PLAY 12, REC 13, OCT+ 1; key k = bit k = MIDI 53 + k)
+# note for the vibrato, OCT+ for the last bar; K4 an octave up and back (D30), the knobs; then ARP with a chord, its
+# kind (K4) and two notes a step (SELECT) (FM-1: PLAY 12, REC 13, OCT+ 1, ARP 10; enc 0 SELECT, 2-5 K1-K4;
+# key k = bit k = MIDI 53 + k)
 # (a button at 0.1 s skips the splash)
 100 btn 8
 500 btn 12
@@ -39,16 +41,17 @@
 7620 keys 0x4000
 7920 keys 0x10000
 9120 keys 0
-9720 enc 5 3
+9720 enc 5 1
 9820 keys 0x10
 11320 enc 2 -4
 11420 enc 3 6
 11520 enc 4 6
 11620 shot
-12920 enc 5 -7
+12920 enc 5 -1
 14720 keys 0
 15720 btn 10
 15820 keys 0x4880
+16520 enc 0 1
 17220 enc 5 2
 17620 shot
 19220 keys 0

@@ -670,8 +670,8 @@ static void draw_mix(const volatile int32_t *level, uint32_t cursor, uint32_t co
 
 static void screen_out(void)                    /* while REC is on the header is the lead's; then to the screen */
 {
-    if (lead_badge > -99) {                     /* four faders across the page's header: K1 CUT, K2 ECHO, K3 ARP, K4 BITE */
-        static const char *const NAME[4] = {"CUT", "ECHO", "BITE", "ARP"};
+    if (lead_badge > -99) {                     /* four faders across the page's header: K1 CUT, K2 ECHO, K3 BITE, K4 OCT / ARP */
+        static const char *const NAME[4] = {"CUT", "ECHO", "BITE", "OCT"};
         static const char *const KIND[6] = {"UP", "DOWN", "U/D", "UP2", "DN2", "RND"};
         uint16_t empty = RGB(0x1a, 0x1a, 0x2e), full = RGB(0x2f, 0x6a, 0x63);   /* white reads on both */
         int32_t x0 = hdr_board ? 20 : 0, w = hdr_board ? 50 : 60, k;
@@ -682,8 +682,8 @@ static void screen_out(void)                    /* while REC is on the header is
             cv_rect(x + 1, 0, fw, 15, empty);
             if (k == 3 && lead_panel_arp >= 0)  /* ARP on: its kind, the fader full */
                 cv_rect(x + 1, 0, fw, 15, full);
-            else if (k == 3) {                  /* the scale's arp: from the middle, right up, left down */
-                int32_t mid = x + 1 + fw / 2, len = (fw / 2) * (v < 0 ? -v : v) / 6;
+            else if (k == 3) {                  /* ARP off: the octave (D30), from the middle, right up, left down */
+                int32_t mid = x + 1 + fw / 2, len = (fw / 2) * (v < 0 ? -v : v) / 2;
                 cv_rect(v < 0 ? mid - len : mid, 0, len, 15, full);
                 cv_rect(mid, 0, 1, 15, C_MUTED);
             } else
@@ -693,7 +693,7 @@ static void screen_out(void)                    /* while REC is on the header is
                 const char *s0 = k == 3 && lead_panel_arp >= 0 ? KIND[lead_panel_arp % 6] : NAME[k];
                 int32_t n = 0;
                 while (*s0) t[n++] = *s0++;
-                if (k == 3 && lead_panel_arp < 0 && v) t[n++] = v > 0 ? '+' : '-', t[n++] = (char)('1' + (v < 0 ? -v : v));   /* notes */
+                if (k == 3 && lead_panel_arp < 0 && v) t[n++] = v > 0 ? '+' : '-', t[n++] = (char)('0' + (v < 0 ? -v : v));   /* octaves */
                 t[n] = 0;
             }
             cv_text(x + w / 2 - text_w(&FONT_S, t) / 2 - (k == 3 && lead_panel_rate > 1 ? 3 : 0), 0, &FONT_S, t, C_TEXT);
