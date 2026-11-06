@@ -64,5 +64,6 @@ int main(void)
     draw_seq(&v, &u, &g, 9 * SEQ_ROW + 5, 9), ppm("seq");
     draw_splash(250), ppm("splash-0250");             /* the splash: the letters dropping, then all in */
     draw_splash(2000), ppm("splash-2000");
+    draw_splash(1630), ppm("splash-beat");               /* (on a beat) */
     return 0;
 }

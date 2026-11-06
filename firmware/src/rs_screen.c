@@ -17,6 +17,8 @@ struct rs_view {
     struct rs_board board;
 };
 
+#include "rs_icons.h"                         /* the step icons, the heart, the digits (tools/art/icons.py) */
+
 static int8_t lead_badge = -99;                 /* the keys play the lead (D21): its octave, else -99 */
 static void screen_out(void);                   /* (every page ends with it: the lead's badge, then to the screen) */
 
@@ -184,14 +186,24 @@ static void draw_explosion(int32_t x, int32_t y, int b)
     cv_rect(x + 18, y + 18, 4, 4, C_WHITE);
 }
 
-static void draw_heart(int32_t x, int32_t y, int32_t px)   /* px: 4 a tile's own, 2 small over two bots */
-{
-    static const char *const ROWS[8] = {"  ##  ## ", " ########", "#########", "#########", " ####### ", "  #####  ",
-                                        "   ###   ", "    #    "};
-    uint32_t r, k;
-    for (r = 0; r < 8; r++)
-        for (k = 0; k < 9; k++)
-            if (ROWS[r][k] == '#') cv_rect(x + px * (int32_t)k, y + px * (int32_t)r, px, px, r < 2 ? RGB(0xff, 0x8e, 0xc4) : RGB(0xff, 0x4d, 0xa6));
+static void draw_heart(int32_t x, int32_t y, int32_t px, int glow)   /* the heart (tools/art/icons.py), 15 x 13 x px; */
+{                                                                    /* glow: a beat, a light ring round it */
+    int32_t r, k;
+    if (glow)                                   /* a ring of light round its outline, one of its pixels wide */
+        for (r = 0; r < 13; r++)
+            for (k = 0; k < 15; k++)
+                if (HEART[r][k] == 'o') {
+                    uint16_t c = RGB(0xff, 0xa8, 0xd2);
+                    cv_rect(x + px * (k - 1), y + px * r, px, px, c), cv_rect(x + px * (k + 1), y + px * r, px, px, c);
+                    cv_rect(x + px * k, y + px * (r - 1), px, px, c), cv_rect(x + px * k, y + px * (r + 1), px, px, c);
+                }
+    for (r = 0; r < 13; r++)
+        for (k = 0; k < 15; k++) {
+            char ch = HEART[r][k];
+            uint16_t c = ch == 'o' ? RGB(0x14, 0x05, 0x0c) : ch == 'h' ? RGB(0xff, 0x8e, 0xc4) : ch == 'w' ? C_WHITE :
+                         ch == 'n' ? RGB(0xd0, 0x2a, 0x7c) : RGB(0xff, 0x4d, 0xa6);
+            if (ch != '.') cv_rect(x + px * k, y + px * r, px, px, c);
+        }
 }
 
 static void draw_clash(int32_t x, int32_t y, int32_t h)   /* h: 1 a tile's size (40), 2 half */
@@ -216,8 +228,6 @@ struct rs_ui {
     uint8_t steer[2];                           /* a bot's next move, by hand (action + 1) */
     struct rs_step steps[2][16];                /* the page of each */
 };
-
-#include "rs_icons.h"                         /* the step icons (tools/art/icons.py) */
 
 static const uint16_t ACT_COLOUR[RS_NACTIONS] = {   /* renderStepCard's actionColorMap */
     C_PULSE, RGB(0x73, 0xb7, 0xa9), C_ROT, C_BELT, C_DANGER, RGB(0x59, 0xd9, 0xc2), C_MUTED};
@@ -341,7 +351,7 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const st
             if ((int32_t)(fx->boom_until[b] - now_ms) > 0)   /* where it burned out, on its side */
                 draw_explosion(BX + fx->boom_x[b] * CELL + (b ? 10 : -10), BY + fx->boom_y[b] * CELL, b);
         if ((int32_t)(fx->heart_until - now_ms) > 0)   /* in love: a heart over the two */
-            draw_heart(BX + fx->heart_x * CELL + 11, BY + fx->heart_y * CELL + 2, 2);
+            draw_heart(BX + fx->heart_x * CELL + 13, BY + fx->heart_y * CELL + 4, 1, 0);
     }
     for (b = 0; b < 2; b++) {
         int32_t x = b ? 122 : 24, hp = 6 - (v->bot[b].heat > 6 ? 6 : v->bot[b].heat < 0 ? 0 : v->bot[b].heat);

@@ -15,6 +15,20 @@ static const char ICON[13][13][15] = {
     {"..............", ".oooooooooooo.", "ohhhhhhhhhhhho", ".oaaaaaaaaaao.", ".oaaaaaaaaaao.", "..oaaaaaaaao..", "...oaaaaaao...", "...oaaaaaao...", "....oaaaao....", ".....oaao.....", ".....oaao.....", "......oo......", ".............."},
     {"..............", "...o..........", "..ohoo........", ".ohahho.......", "ohaoaao.......", "hao.ooho.....o", "ao...oaho...oh", "ao....oaoo.oha", "o......ohhohao", ".......oaahao.", "........ooao..", "..........o...", ".............."},
     {"..............", "..............", ".......o......", "...oo.oho.....", "..ohhooaho..o.", "..oaaooaao.oho", ".ohaahhaaoohao", ".oaooaaoohhaao", "ohaooaaooaaao.", "oao..oo.oaao..", "oao......oo...", ".o............", ".............."}};
+static const char HEART[13][16] = {
+    "...ooo...ooo...",
+    "..ohhho.ohhho..",
+    ".ohaaahohaaaho.",
+    "ohawwaahaawwaho",
+    "oaawaaaaaaawaao",
+    "oaaaaaaaaaaaaao",
+    ".oaaaaaaaaaaao.",
+    "..oaaaaaaaaao..",
+    "...oaaaaaaao...",
+    "....onnnnno....",
+    ".....onnno.....",
+    "......ono......",
+    ".......o......."};
 static const char DIGIT[10][7][6] = {
     {".###.", "#...#", "#..##", "#.#.#", "##..#", "#...#", ".###."},
     {"..#..", ".##..", "..#..", "..#..", "..#..", "..#..", ".###."},
