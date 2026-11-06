@@ -152,6 +152,7 @@ void rs_cycle_prob(struct rs_state *s, int bot, int i);         /* cycleProbabil
 void rs_cycle_bassmod(struct rs_state *s, int i, int field, int dir);   /* cycleBassModStepValue(): 0 scale, 1 root, 2 semitone */
 void rs_save_user_board(struct rs_state *s);                    /* saveUserBoard() */
 void rs_load_user_board(struct rs_state *s);                    /* loadUserBoard() */
+void rs_clear_user_board(struct rs_state *s);                   /* clear-user-board */
 void rs_cycle_density(struct rs_state *s);                      /* cycleBoardDensity(): 30 -> 45 -> 60 */
 
 /* the randomizers (Math.random in the HTML: the same rules, the firmware's own numbers), each undoable */

@@ -613,3 +613,50 @@ static void draw_mix(const volatile int32_t *level, uint32_t cursor)
     cv_text(4, 200, &FONT_S, "KEYS 1-6 PICK  K1 LEVEL", mix565(C_MUTED, C_BG, 160));
     cv_blit(0, 0);
 }
+
+/* ---- ENV: the boards (the HTML's board panel): the board now and the one queued for the next loop, small; the
+ * presets, a reroll, the user board and its saving and clearing, the bots back to their pads, on the white keys */
+static void mini_board(int32_t x, int32_t y, const struct rs_board *bd)   /* 5 x 5 of 16 px */
+{
+    int32_t i;
+    for (i = 0; i < RS_ROWS * RS_COLS; i++) {
+        const struct rs_tile_t *t = &bd->t[i];
+        int32_t cx = x + (i % RS_COLS) * 16, cy = y + (i / RS_COLS) * 16;
+        uint16_t c = t->type == RS_T_BELT ? C_BELT : t->type == RS_T_ROTL || t->type == RS_T_ROTR ? C_ROT :
+                     t->type == RS_T_ZAP ? C_ZAP : t->type == RS_T_PULSE ? C_PULSE : t->type == RS_T_BLOCK ? RGB(0x8b, 0x69, 0x39) : C_CELL;
+        cv_rect(cx, cy, 15, 15, t->type == RS_T_NONE ? C_CELL : mix565(c, C_CELL, 150));
+        if (t->type == RS_T_BELT) {             /* the way it runs: a stub from the middle */
+            int32_t dx = t->dir == RS_E ? 1 : t->dir == RS_W ? -1 : 0, dy = t->dir == RS_S ? 1 : t->dir == RS_N ? -1 : 0, k;
+            for (k = 0; k < 6; k++) cv_rect(cx + 6 + dx * k, cy + 6 + dy * k, 3, 3, C_WHITE);
+        }
+    }
+}
+
+static void draw_boards(const struct rs_state *g)
+{
+    static const char *const KEY[11] = {"DFLT", "CORR", "GARD", "GAUN", "SPIN", "MAZE", "ROLL", "USER", "SAVE", "CLR", "RSET"};
+    static const char *const DENS[3] = {"SPARSE", "BALANCED", "CHAOS"};
+    uint16_t cell = RGB(0x1a, 0x1a, 0x2e);
+    uint32_t k, dens = g->density >= 60 ? 2u : g->density >= 45 ? 1u : 0u;
+    cv_begin(240, 240, C_BG);
+    cv_text(4, 0, &FONT_S, "BOARDS", C_TEXT);
+    cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
+    mini_board(8, 22, &g->board);
+    if (g->pending_board != RS_B_NONE) {        /* queued: it comes with the next loop */
+        cv_text(96, 44, &FONT_S, ">", C_WARN);
+        mini_board(112, 22, &g->pending_tiles);
+        frame(110, 20, 84, 84, 1, C_WARN);
+    }
+    knob_tag(200, 24, 1);
+    cv_text(236 - text_w(&FONT_S, DENS[dens]), 40, &FONT_S, DENS[dens], C_MUTED);
+    for (k = 0; k < 11u; k++) {
+        int32_t x = (int32_t)(k % 6u) * 40, y = 112 + (int32_t)(k / 6u) * 60;
+        uint32_t id = k < 6u ? k : k == 6u ? RS_B_RANDOM : k == 7u ? RS_B_USER : 0xFFu;
+        int on = id != 0xFFu && g->board_id == id, queued = id != 0xFFu && g->pending_board == id;
+        cv_rect(x + 2, y, 36, 52, queued ? mix565(C_WARN, cell, 70) : on ? mix565(C_ACCENT, cell, 70) : cell);
+        if (on) frame(x + 2, y, 36, 52, 1, C_ACCENT);
+        digits(x + 5, y + 4, k + 1u, k + 1u > 9u ? 2u : 1u, C_MUTED);
+        cv_text(x + 20 - text_w(&FONT_S, KEY[k]) / 2, y + 26, &FONT_S, KEY[k], k >= 8u ? C_WARN : C_TEXT);
+    }
+    cv_blit(0, 0);
+}

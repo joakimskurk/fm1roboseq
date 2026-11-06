@@ -19,6 +19,8 @@
  *   LFO        the drums: SELECT picks kick, snare or hihat, a white key turns its step; KNOB1 the patterns (then
  *              CLEAR), KNOB4 on / off
  *   FX         the mix: white keys 1-6 pick master or a bus, KNOB1 its level
+ *   ENV        the boards: white keys 1-6 the presets, 7 reroll, 8 the user board, 9 save it, 10 clear it, 11 reset
+ *              (the bots to their pads); KNOB1 how full a reroll is; while playing a board comes with the next loop
  *   EDIT       whose register is on the white keys: Scout-7 or Echo-3 (lit: Echo-3)
  *   OCT- OCT+  the register's 16 steps before / after (a register is up to 64)
  *   black keys steer the bots by hand: the next move is this one (D16). F# G# A# C# D# from F3: Scout-7's TURN L,
@@ -174,7 +176,7 @@ volatile uint32_t rs_boot_check;               /* rs_selfcheck() at boot: make e
 static const uint8_t STEER[5] = {RS_TURNL, RS_MOVE, RS_TURNR, RS_DASH, RS_PING};   /* a bot's five black keys */
 static uint8_t white_key[16], black_key[11];    /* key index (0 = F3) of the k-th white / black key */
 static uint8_t sel_bot, bank, layer;
-enum { PAGE_HOME, PAGE_SEQ, PAGE_GLO, PAGE_SCL, PAGE_ARP, PAGE_LFO, PAGE_FX };   /* the pages (D19) */
+enum { PAGE_HOME, PAGE_SEQ, PAGE_GLO, PAGE_SCL, PAGE_ARP, PAGE_LFO, PAGE_FX, PAGE_ENV };   /* the pages (D19) */
 static uint8_t page, scl_cursor, arp_cursor, drum_row, mix_cursor;
 static int32_t seq_scroll, seq_target;          /* the sequence page's scroll, px, and where it is going */
 static uint32_t seq_touched;                    /* when the player last scrolled it (fm1_ms): it follows the step after */
@@ -238,6 +240,17 @@ static int keys(uint32_t down)                  /* what the keys pressed now do;
             changed = 1;
         }
     }
+    if (page == PAGE_ENV)                       /* the boards: 1-6 the presets, 7 reroll, 8 user, 9 save it, 10 clear it, 11 reset */
+        for (k = 0; k < 11u; k++) {
+            if (!(down >> white_key[k] & 1u)) continue;
+            if (k < 6u) rs_push_undo(&game), rs_load_board(&game, (uint8_t)k);   /* (queued while playing) */
+            else if (k == 6u) rs_push_undo(&game), rs_randomize_board(&game);
+            else if (k == 7u) rs_push_undo(&game), rs_load_user_board(&game);
+            else if (k == 8u) rs_push_undo(&game), rs_save_user_board(&game);
+            else if (k == 9u) rs_clear_user_board(&game);
+            else rs_reset(&game);               /* the HTML's reset (bots to their pads, the loop from its start) */
+            changed = 1;
+        }
     if (page == PAGE_FX)                        /* the mix: white keys 1-6 pick a fader */
         for (k = 0; k < RS_NLEVEL; k++)
             if (down >> white_key[k] & 1u) mix_cursor = (uint8_t)k, changed = 1;
@@ -302,6 +315,7 @@ static void app_main(void)
         if (b & (1u << BTN_ARP) && page != PAGE_ARP) page = PAGE_ARP, dirty = 1;
         if (b & (1u << BTN_LFO) && page != PAGE_LFO) page = PAGE_LFO, dirty = 1;
         if (b & (1u << BTN_FX) && page != PAGE_FX) page = PAGE_FX, dirty = 1;
+        if (b & (1u << BTN_ENV) && page != PAGE_ENV) page = PAGE_ENV, dirty = 1;
         if (b & (1u << BTN_EDIT)) sel_bot ^= 1u, bank = 0, dirty = 1;   /* whose register is on the white keys */
         if ((e = fm1_enc_take(ENC_SELECT)) != 0) {        /* SELECT: what the white keys turn */
             if (page == PAGE_LFO) drum_row = (uint8_t)(((int32_t)drum_row + e % 3 + 3) % 3);
@@ -357,6 +371,13 @@ static void app_main(void)
             }
             if ((e = fm1_enc_take(ENC_KNOB4)) != 0) game.drums_on = e > 0, dirty = 1;
             (void)fm1_enc_take(ENC_KNOB2), (void)fm1_enc_take(ENC_KNOB3);
+        } else if (page == PAGE_ENV) {          /* KNOB1 how full a rerolled board is: sparse, balanced, chaos */
+            if ((e = fm1_enc_take(ENC_KNOB1)) != 0) {
+                static const uint8_t D[3] = {30, 45, 60};
+                int32_t at = game.density >= 60 ? 2 : game.density >= 45 ? 1 : 0;
+                at += e, game.density = D[at < 0 ? 0 : at > 2 ? 2 : at], dirty = 1;
+            }
+            (void)fm1_enc_take(ENC_KNOB2), (void)fm1_enc_take(ENC_KNOB3), (void)fm1_enc_take(ENC_KNOB4);
         } else if (page == PAGE_FX) {           /* KNOB1 the picked level, 2 % a detent (the HTML's 0..1) */
             if ((e = fm1_enc_take(ENC_KNOB1)) != 0) {
                 int32_t l = mix.level[mix_cursor] + e * 655;
@@ -396,6 +417,7 @@ static void app_main(void)
         fm1_led_key(BTN_ARP, page == PAGE_ARP);
         fm1_led_key(BTN_LFO, page == PAGE_LFO);
         fm1_led_key(BTN_FX, page == PAGE_FX);
+        fm1_led_key(BTN_ENV, page == PAGE_ENV);
         fm1_led_key(BTN_EDIT, sel_bot);         /* lit: Echo-3's register */
         fm1_led_key(BTN_OCT_DOWN, page == PAGE_SEQ ? seq_target > 0 : bank > 0);
         fm1_led_key(BTN_OCT_UP, page == PAGE_SEQ ? seq_target < ((int32_t)game.loop_len - 16) * SEQ_ROW : (bank + 1u) * 16u < len);
@@ -414,6 +436,7 @@ static void app_main(void)
             else if (page == PAGE_ARP) draw_arp(&game, arp_cursor);
             else if (page == PAGE_LFO) draw_drums(v, &game, drum_row);
             else if (page == PAGE_FX) draw_mix(mix.level, mix_cursor);
+            else if (page == PAGE_ENV) draw_boards(&game);
             else draw_board(v, &fx, &ui, fm1_ms);
             due = fx_due(&fx, fm1_ms);
         }

@@ -97,3 +97,16 @@ The white keys rest here (no register on the screen); the black keys steer as ev
 | white keys 1-6 | pick master, melody, bot B, percussion, FX or drums |
 | KNOB1 | its level, 0-100 % (2 % a detent; it glides there, as the HTML's 50 ms ramp) |
 
+## ENV (the boards)
+
+| Control | Does |
+|---|---|
+| white keys 1-6 | the presets: default, corridor, garden, gauntlet, spinner, maze |
+| white key 7 | reroll: a random board |
+| white key 8 | the user board |
+| white keys 9 / 10 | save the board as the user's / clear the user board |
+| white key 11 | reset: the bots back to their pads, the loop from its start |
+| KNOB1 | how full a reroll is: sparse, balanced, chaos |
+
+While playing, a board comes with the next loop (shown beside the board now, framed in yellow).
+

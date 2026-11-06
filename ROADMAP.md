@@ -127,8 +127,8 @@ and the limiter.)
 - [x] ARP: Seq 2's four steps as cards, a step's board, drums and swap on the knobs
 - [x] LFO: the drum machine, a row on the white keys, the patterns on KNOB1
 - [x] FX: the mix as six faders, the levels gliding as the HTML's rampTo
-- [ ]
-      ENV (boards); the UI map generated from the code (`make screens`)
+- [x] ENV: the boards, now and queued, the presets, reroll, the user board, reset (2026-11-06)
+- [ ] The UI map generated from the code (`make screens`)
 - [ ] Storage: projects in Dinghy's blobs and slots
 
 ## Phase 4: on the emulator, then hardware

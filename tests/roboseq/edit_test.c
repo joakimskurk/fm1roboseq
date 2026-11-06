@@ -242,6 +242,13 @@ static void test_pages(void)                     /* the model's parts of the pag
     CHECK(s.drum_preset == RS_D_HALF && s.drum_k[0], "a preset");
     rs_drum_clear(&s);
     CHECK(!s.drums_on && !s.drum_k[0] && s.drum_preset == RS_D_CUSTOM, "cleared: empty, custom, off");
+    rs_default(&s);
+    rs_save_user_board(&s);
+    CHECK(s.board_id == RS_B_USER && s.user_board.t[1].type == s.board.t[1].type, "the board saved as the user's");
+    rs_clear_user_board(&s);
+    int empty = 1;
+    for (int i = 0; i < RS_ROWS * RS_COLS; i++) empty &= s.board.t[i].type == RS_T_NONE && s.user_board.t[i].type == RS_T_NONE;
+    CHECK(empty, "the user board cleared, and the board with it while it is on");
 }
 
 int main(void)

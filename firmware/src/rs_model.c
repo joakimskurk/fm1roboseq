@@ -506,6 +506,11 @@ void rs_cycle_bassmod(struct rs_state *s, int i, int field, int dir)   /* cycleB
 
 void rs_save_user_board(struct rs_state *s) { s->user_board = s->board; s->board_id = RS_B_USER; }
 void rs_load_user_board(struct rs_state *s) { rs_set_board(s, &s->user_board, RS_B_USER); }
+void rs_clear_user_board(struct rs_state *s)            /* clear-user-board: gone; the user board on, it empties */
+{
+    for (int i = 0; i < RS_ROWS * RS_COLS; i++) s->user_board.t[i] = (struct rs_tile_t){RS_T_NONE, 0};
+    if (s->board_id == RS_B_USER) rs_push_undo(s), rs_load_user_board(s);
+}
 
 void rs_cycle_density(struct rs_state *s)               /* [0.3, 0.45, 0.6]; another value starts at 0.3 */
 {
