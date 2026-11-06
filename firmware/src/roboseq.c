@@ -259,11 +259,16 @@ static uint32_t colour_sig = ~0u;
 
 static void board_colour(void)                  /* the board's tiles colour the sound (D24), when they or the amount change */
 {
-    uint32_t n[7] = {0}, i, sig;
+    uint32_t n[7] = {0}, i, sig, amt = colour_amt;
+    if (game.music && game.playing) {           /* PLUS (D33d): each chord its own shade of the room, B more of it */
+        static const uint8_t SHADE[8] = {100, 118, 88, 110, 94, 122, 84, 106};
+        amt = amt * (SHADE[game.vm_index & 7u] + (rs_plus_section(&game) ? 45u : 0u)) / 100u;
+        if (amt > 100u) amt = 100u;
+    }
     for (i = 0; i < RS_ROWS * RS_COLS; i++) n[game.board.t[i].type % 7u]++;
     sig = n[RS_T_BELT] | n[RS_T_ZAP] << 5 | (n[RS_T_ROTL] + n[RS_T_ROTR]) << 10 | n[RS_T_PULSE] << 15 |
-          n[RS_T_BLOCK] << 20 | (uint32_t)colour_amt << 25;
-    if (sig != colour_sig) colour_sig = sig, rs_mix_colour(&mix, &game.board, colour_amt);
+          n[RS_T_BLOCK] << 20 | amt << 25;
+    if (sig != colour_sig) colour_sig = sig, rs_mix_colour(&mix, &game.board, amt);
 }
 
 static void lead_keys(uint32_t down, uint32_t up)   /* the last key held wins; let go, the one held before it again */

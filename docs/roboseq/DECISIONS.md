@@ -362,3 +362,10 @@ rising snare roll, or kick-snare-kick-snare; the next phrase starts with a crash
 choice is a hash of the loop and the step, so the same loop sounds the same each time, and nothing is drawn from
 the game's random (the game stays the HTML's).
 
+**D33d. The sound over the song in PLUS.** While it plays, each Voice Mod step gives the board's colour (D24) its
+own shade (0.84 to 1.22 of FX's amount) and section B adds 0.45 more, so the room, the send, the tilt and the drive
+breathe with the harmony and open up in the phrase's second half (they glide there, as D24's do). In B Scout-7 is
+answered on the and of each beat: its note a fifth up in its scale, half a step later, a third as loud, on its ping
+voice. (A swing was tried in thought and left out: the lead's arp steps with the straight grid, and the robots'
+tight feel is the HTML's.)
+

@@ -143,6 +143,8 @@ void rs_score_drums(const struct rs_state *s, uint8_t i, struct rs_tick_out *o);
 void rs_score_ghost_hat(const struct rs_state *s, int phase, struct rs_tick_out *o);
 void rs_score_coin(const struct rs_state *s, struct rs_tick_out *o);   /* the love check's chime */
 void rs_score_plus(const struct rs_state *s, struct rs_tick_out *o);   /* PLUS (D33): the tick's score, made more musical */
+uint32_t rs_plus_phrase(const struct rs_state *s);              /* PLUS: a phrase, in loops (a Voice Mod round) */
+int rs_plus_section(const struct rs_state *s);                  /* PLUS: 1 in a phrase's second half (B) */
 void rs_advance_voice_mod(struct rs_state *s);                  /* advanceVoiceMod(): MANUAL's tap, LOOP's count */
 
 /* editing, as the HTML's controls do it */

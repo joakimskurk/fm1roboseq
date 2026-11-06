@@ -142,6 +142,19 @@ static void test_drums(void)                            /* the fills, the crashe
         if (hat && hat->dur > SEC(0.1) && hat->dur < SEC(0.3)) opens++;
     }
     CHECK(quiet_hats_ok, "no hats under a fill");
+    {                                                   /* B: the answers a fifth up; A: none */
+        int in_a = 0, in_b = 0;
+        rs_default(&s), s.music = RS_MUSIC_PLUS, rs_start(&s);
+        for (int k = 0; k < 16 * 16; k++) {
+            rs_tick(&s, &o);
+            for (int i = 0; i < o.nnotes; i++)
+                if (o.notes[i].voice == RS_V_A_PING && o.notes[i].at == rs_step_q8(&s) / 2u) {
+                    if (rs_plus_section(&s)) in_b++;
+                    else in_a++;
+                }
+        }
+        CHECK(in_a == 0 && in_b > 10, "the answers: %d in B, %d in A", in_b, in_a);
+    }
     CHECK(fills >= 9, "a fill ends each phrase, its last snare loudest (%d of 10)", fills);
     CHECK(crashes >= 9, "a crash starts each phrase (%d of 9)", crashes);
     CHECK(ghosts > 5 && opens > 5, "ghost snares (%d) and open hats (%d)", ghosts, opens);

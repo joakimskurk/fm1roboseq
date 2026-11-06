@@ -401,6 +401,18 @@ static void drum(struct rs_tick_out *o, uint8_t voice, uint32_t dur, uint32_t ve
     else note(o, voice, voice == RS_V_KICK ? 24 : RS_NOISE, dur, 0, vel_q20);
 }
 
+uint32_t rs_plus_phrase(const struct rs_state *s)      /* a phrase: a Voice Mod round in loops (4 when manual or short) */
+{
+    uint32_t phrase = s->vm_manual ? 4u : (uint32_t)s->bassmod_len * s->vm_freq4 / 4u;
+    return phrase < 2u ? 4u : phrase;
+}
+
+int rs_plus_section(const struct rs_state *s)           /* the phrase's second half: section B */
+{
+    uint32_t phrase = rs_plus_phrase(s);
+    return s->cycle % phrase >= phrase / 2u;
+}
+
 static void plus_drums(const struct rs_state *s, struct rs_tick_out *o, int bar, int beat)
 {
     int len = rs_drum_steps(s->loop_len), dp = (s->drum_tick + len - 1) % len, any = 0, i;
@@ -408,9 +420,7 @@ static void plus_drums(const struct rs_state *s, struct rs_tick_out *o, int bar,
     for (i = 0; i < len; i++) any |= s->drum_k[i] | s->drum_s[i] | s->drum_h[i];
     if (!any) return;                                   /* (CLEAR: the player wants them quiet) */
     if (len != bar) bar = len, beat = len / 4;
-    uint32_t phrase = s->vm_manual ? 4u : (uint32_t)s->bassmod_len * s->vm_freq4 / 4u;
-    if (phrase < 2u) phrase = 4u;
-    uint32_t in = s->cycle % phrase, sec_b = in >= phrase / 2u, last = in == phrase - 1u;
+    uint32_t phrase = rs_plus_phrase(s), in = s->cycle % phrase, sec_b = (uint32_t)rs_plus_section(s), last = in == phrase - 1u;
     int nk = s->drum_k[dp], ns = s->drum_s[dp], nh = s->drum_h[dp], nxs = s->drum_s[(dp + 1) % len];
     int hs = s->bot[0].heat + s->bot[1].heat;
     uint32_t h = mix32(s->cycle, (uint32_t)dp, 0x5EEDu), heat = hs > 0 ? (uint32_t)hs : 0u;
@@ -489,6 +499,14 @@ void rs_score_plus(const struct rs_state *s, struct rs_tick_out *o)
         note(o, RS_V_B_SUB, fold(48 + root + (p ? (chord_tone(7, sc) ? 7 : 0) : 0), bass), step * 2u, 0, p ? F(0.42) : F(0.55));
     }
     plus_drums(s, o, bar, beat);
+    if (rs_plus_section(s) && p % beat == beat / 2) {   /* B: Scout-7's note answered a fifth up, softly, on the and */
+        const struct rs_note *a = find_note(o, RS_V_A_MAIN);
+        if (a) {
+            uint32_t step = rs_step_q8(s);
+            note(o, RS_V_A_PING, safe_shift(a->midi, sc, 4, range_of(s, 0)), mulq(step, F(0.6)), step / 2u,
+                 (uint32_t)a->vel * 11u);      /* (Q15 x 11 = Q20 x 0.34) */
+        }
+    }
     /* the pulse: the one leans in, the beats a little, the off-sixteenths fall back */
     {
         uint32_t f = p == 0 ? F(1.18) : p == bar / 2 ? F(1.14) : p % beat == 0 ? F(1.08) : (p & 1) ? F(0.82) : F(0.95);
