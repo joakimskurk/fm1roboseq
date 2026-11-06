@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""RoboSeq's tiles as pixel art on a 20 x 20 grid of 2 px (firmware/src/rs_screen.c draws them): written out as
-firmware/src/rs_tiles.h, and a preview at 8x (build/art/tiles.png).
+"""RoboSeq's tiles as pixel art, 40 x 40 at 1 px (firmware/src/rs_screen.c draws them 1:1 in a cell; each way a
+belt points and each rotator drawn on its own, so the light stays top left): written out as
+firmware/src/rs_tiles.h, and a preview at 4x (build/art/tiles.png).
 
-The light comes from the top left: each figure gets a light edge above and to its left ('h') and a drop shadow below
-and to its right ('g'); each tile a frame light above and left ('b'), dark below and right ('k'). The letters are a
-tile's palette (rs_screen.c tile_colour): '.' ground, 'g' ground in shadow, 'a' the tile's colour, 'h' it lit,
-'b' it dimmed, 'd' it dimmer, 'k' it dark, 'c' a light accent; the crate's are its woods.
+The light comes from the top left. A figure gets a dark outline ('k'), a lit edge where it faces up or left ('h') and
+a drop shadow two pixels down and right ('g'); a tile a frame light above and left ('b'), dark below and right ('k').
+The letters are a tile's palette (rs_screen.c tile_colour): '.' ground, 'g' ground in shadow, 'a' the tile's colour,
+'h' it lit, 'b' it dimmed, 'd' it dimmer, 'k' it dark, 'c' a light accent; the crate's are its woods ('n' nails).
 
   python3 tools/art/tiles.py [--check]"""
 import math
@@ -13,128 +14,151 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-N = 20
+N = 40
+C = (N - 1) / 2
 
 
 def grid(ch="."):
     return [[ch] * N for _ in range(N)]
 
 
-def frame(g):                                       # light above and left, dark below and right
+def frame(g):
     for i in range(N):
         g[0][i] = g[i][0] = "b"
         g[N - 1][i] = g[i][N - 1] = "k"
+        if 0 < i < N - 1:
+            g[1][i] = g[i][1] = "d" if g[1][i] == "." else g[1][i]
     g[0][N - 1] = g[N - 1][0] = "d"
 
 
-def shade(g, mask, body="a", lit="h", shadow="g", left=True):
-    """a figure: its pixels body, the ones with open space above (or to the left) lit, its shadow one down-right"""
+def poly(pts):
+    """the pixels whose centres are inside the polygon (nonzero rule)"""
+    out = set()
+    for y in range(N):
+        for x in range(N):
+            px, py, w = x + 0.5, y + 0.5, 0
+            for i in range(len(pts)):
+                (x0, y0), (x1, y1) = pts[i], pts[(i + 1) % len(pts)]
+                if y0 <= py < y1 and (x1 - x0) * (py - y0) - (px - x0) * (y1 - y0) > 0:
+                    w += 1
+                elif y1 <= py < y0 and (x1 - x0) * (py - y0) - (px - x0) * (y1 - y0) < 0:
+                    w -= 1
+            if w:
+                out.add((x, y))
+    return out
+
+
+def disc(cx, cy, r0, r1=None, a0=None, a1=None):
+    """an annulus r0..r1 (or a disc r0) around cx, cy, optionally without the angles a0..a1 (degrees, ccw from east)"""
+    out = set()
+    for y in range(N):
+        for x in range(N):
+            d = math.hypot(x - cx, y - cy)
+            if (d <= r0 if r1 is None else r0 <= d <= r1):
+                ang = math.degrees(math.atan2(cy - y, x - cx)) % 360
+                if a0 is None or not a0 <= ang <= a1:
+                    out.add((x, y))
+    return out
+
+
+def rect(x0, y0, w, h):
+    return {(x, y) for y in range(y0, y0 + h) for x in range(x0, x0 + w)}
+
+
+def inside(x, y):
+    return 1 < x < N - 2 and 1 < y < N - 2
+
+
+def shade(g, mask, body="a", lit="h", line="k", shadow="g", ground=".bd"):
+    """a figure, lit from the top left: outline, lit edge, body, its shadow"""
     for (x, y) in mask:
-        if (x + 1, y + 1) not in mask and 0 < x + 1 < N - 1 and 0 < y + 1 < N - 1 and g[y + 1][x + 1] in ".bd":
-            g[y + 1][x + 1] = shadow
+        for dx, dy in [(2, 2), (1, 2), (2, 1)]:
+            p = (x + dx, y + dy)
+            if p not in mask and inside(*p) and g[p[1]][p[0]] in ground:
+                g[p[1]][p[0]] = shadow
     for (x, y) in mask:
-        g[y][x] = lit if (x, y - 1) not in mask or (left and (x - 1, y) not in mask) else body
+        for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+            p = (x + dx, y + dy)
+            if p not in mask and inside(*p) and g[p[1]][p[0]] in ground + "g":
+                g[p[1]][p[0]] = line
+    for (x, y) in mask:
+        g[y][x] = lit if (x, y - 1) not in mask or (x - 1, y) not in mask else body
 
 
-def rows_mask(rows, ch="#", ox=0, oy=0):
-    return {(ox + x, oy + y) for y, r in enumerate(rows) for x, c in enumerate(r) if c == ch}
+def turn(mask, d):
+    """a shape drawn pointing east, turned to d (N E S W): turned before it is lit, so the light stays top left"""
+    f = {"E": lambda x, y: (x, y), "W": lambda x, y: (N - 1 - x, y),
+         "N": lambda x, y: (y, N - 1 - x), "S": lambda x, y: (N - 1 - y, x)}[d]
+    return {f(x, y) for (x, y) in mask}
 
 
-def belt():
+def belt(d):
     g = grid()
     frame(g)
-    for x in range(1, N - 1):                       # the belt's surface: treads that run along it
-        t = "d" if (x // 2) % 2 == 0 else "b"
-        g[2][x] = g[17][x] = t
-        g[3][x] = g[16][x] = "g"
-    arrow = rows_mask([
-        "........#.....",
-        "........##....",
-        "........###...",
-        "........####..",
-        "############..",
-        "#############.",
-        "#############.",
-        "############..",
-        "........####..",
-        "........###...",
-        "........##....",
-        "........#.....",
-    ], ox=3, oy=4)
-    shade(g, arrow)
+    tread = set()
+    for x in range(2, N - 2):                       # the belt's surface: treads that run along it
+        for y0 in (3, 33):
+            for k in range(4):
+                tread.add((x, y0 + k, (x - k) % 6 < 3))
+    for (x, y, lit) in tread:
+        (tx, ty), = turn({(x, y)}, d)
+        g[ty][tx] = "b" if lit else "d"
+    shade(g, turn(poly([(6, 16), (21, 16), (21, 8), (34, 20), (21, 32), (21, 24), (6, 24)]), d))
     return g
 
 
-def rotator():
-    """a gear whose ring is the turn, counter-clockwise: open at the top right, the arc runs from there round the
-    left and the bottom up the right, its head pointing up into the gap (the right rotator is this one mirrored)"""
+def rotator(right=False):
+    """a gear whose ring is the turn, counter-clockwise: open at the top right, running round the left and the
+    bottom and up the right, its head pointing up into the gap (the right rotator is this one mirrored)"""
     g = grid()
     frame(g)
-    c = 9.5
-    ring = set()
-    for y in range(1, N - 1):
-        for x in range(1, N - 1):
-            d, ang = math.hypot(x - c, y - c), math.degrees(math.atan2(c - y, x - c)) % 360
-            if 4.4 <= d <= 6.4 and not 10 <= ang <= 75:     # the gap: from east-north-east up to north-east
-                ring.add((x, y))
-    teeth = set()
-    for (x0, y0, w, h) in [(8, 16, 4, 3), (1, 8, 3, 4), (16, 10, 3, 2), (8, 1, 4, 3), (3, 3, 2, 2), (3, 15, 2, 2), (15, 15, 2, 2)]:
-        teeth |= {(x, y) for y in range(y0, y0 + h) for x in range(x0, x0 + w)}
-    head = rows_mask([                              # at the arc's end, pointing up into the gap
-        "...#...",
-        "..###..",
-        ".#####.",
-        "#######",
-    ], ox=11, oy=3)
-    shade(g, ring | teeth | head)
-    for y in range(8, 12):                          # the hub
-        for x in range(8, 12):
-            if (x, y) not in [(8, 8), (11, 8), (8, 11), (11, 11)]:
-                g[y][x] = "c" if (x, y) in [(9, 9), (10, 9), (9, 10)] else "a"
+    ring = disc(C, C, 9.0, 13.0, 8, 80)
+    teeth = rect(17, 3, 6, 5) | rect(17, 32, 6, 5) | rect(3, 17, 5, 6)
+    for a in (135, 225, 315):                       # the diagonal teeth
+        cx, cy = C + 13.5 * math.cos(math.radians(a)), C - 13.5 * math.sin(math.radians(a))
+        teeth |= disc(cx, cy, 2.6)
+    head = poly([(30.5, 5), (37.5, 15), (33.0, 15), (33.0, 19), (28.0, 19), (28.0, 15), (23.5, 15)])
+    fig = ring | teeth | head
+    if right:                                       # clockwise: the mirror image, lit as itself
+        fig = {(N - 1 - x, y) for (x, y) in fig}
+    shade(g, fig)
+    hub = disc(C, C, 3.6)
+    shade(g, hub)
+    for (x, y) in [(18, 18), (19, 18), (18, 19)]:
+        g[y][x] = "c"
     return g
 
 
 def zap():
     g = grid()
     frame(g)
-    for y in range(2, N - 2):                       # the rails it sparks on
-        g[y][4] = g[y][15] = "d" if y % 3 else "b"
-    bolt = rows_mask([
-        "......#####",
-        ".....#####.",
-        "....#####..",
-        "...#####...",
-        "..#####....",
-        ".#########.",
-        ".#########.",
-        ".....####..",
-        "....####...",
-        "...####....",
-        "..###......",
-        ".##........",
-        ".#.........",
-    ], ox=4, oy=2)
-    shade(g, bolt, left=False)
-    for x in range(6, 13):                          # the hot crossbar
-        g[8][x] = "c"
-    g[2][3] = g[16][16] = "c"                       # sparks
+    for y in range(3, N - 3):                       # the rails it sparks on
+        for x in (7, 32):
+            g[y][x] = "b" if y % 6 < 4 else "d"
+    bolt = poly([(25, 4), (14, 20), (22, 20), (13, 36), (29, 17), (21, 17), (31, 4)])
+    shade(g, bolt)
+    for (x, y) in sorted(bolt):                     # the hot core: the bolt's middle, one pixel wide
+        if (x - 1, y) in bolt and (x + 1, y) in bolt and (x, y - 1) in bolt and (x, y + 1) in bolt and \
+                (x - 2, y) in bolt and (x + 2, y) in bolt:
+            g[y][x] = "c"
+    for (sx, sy) in [(6, 6), (33, 33)]:             # sparks
+        for dx, dy in [(0, 0), (1, 0), (-1, 0), (0, 1), (0, -1)]:
+            g[sy + dy][sx + dx] = "c" if (dx, dy) == (0, 0) else "a"
     return g
 
 
 def pulse():
     g = grid()
     frame(g)
-    c = 9.5
-    for y in range(1, N - 1):
-        for x in range(1, N - 1):
-            d = math.hypot(x - c, y - c)
-            if 6.8 <= d <= 8.0:
-                g[y][x] = "d"
-            elif 4.4 <= d <= 5.6:
-                g[y][x] = "b"
-    pad = {(x, y) for y in range(7, 13) for x in range(7, 13)} - {(7, 7), (12, 7), (7, 12), (12, 12)}
+    for (x, y) in disc(C, C, 14.0, 15.5):
+        if inside(x, y):
+            g[y][x] = "d"
+    for (x, y) in disc(C, C, 10.0, 11.5):
+        g[y][x] = "b"
+    pad = rect(14, 14, 12, 12) - {(14, 14), (25, 14), (14, 25), (25, 25)}
     shade(g, pad)
-    g[9][9] = g[9][10] = g[10][9] = "c"             # its glow
+    for (x, y) in disc(18.0, 18.0, 2.2):
+        g[y][x] = "c"
     return g
 
 
@@ -142,34 +166,41 @@ def crate():
     g = grid()
     for y in range(N):
         for x in range(N):
-            if x in (0, N - 1) or y in (0, N - 1):
+            if x in (0, N - 1) or y in (0, N - 1) or x in (1, N - 2) or y in (1, N - 2):
                 ch = "."
-            elif x in (1, N - 2) or y in (1, N - 2):
-                ch = "k" if x == N - 2 or y == N - 2 else "c"
-            elif (x, y) in [(2, 2), (17, 2), (2, 17), (17, 17)]:
-                ch = "n"
-            elif x == y or x + y == N - 1:
-                ch = "n" if x in (9, 10) else "e"
-            elif y in (7, 12):
-                ch = "s"
-            elif y in (2, 8, 13):
-                ch = "h"                            # a plank's lit top
-            elif 8 <= y <= 11:
-                ch = "b"
+            elif x in (2, 3) or y in (2, 3):
+                ch = "c"
+            elif x in (N - 4, N - 3) or y in (N - 4, N - 3):
+                ch = "k"
+            elif y in (14, 15, 25, 26):
+                ch = "s" if y in (15, 26) else "k"
             else:
-                ch = "a"
+                band = 0 if y < 14 else 1 if y < 25 else 2
+                ch = "b" if band == 1 else "a"
+                if y in (4, 16, 27):
+                    ch = "h"                        # a plank's lit top
+                elif (x * 7 + y * 3 + band * 5) % 23 == 0:
+                    ch = "s"                        # the grain
             g[y][x] = ch
+    braces = poly([(4, 6), (6, 4), (36, 34), (34, 36)]) | poly([(34, 4), (36, 6), (6, 36), (4, 34)])
+    for (x, y) in braces:
+        if 3 < x < N - 4 and 3 < y < N - 4:
+            g[y][x] = "e"
+    for (x, y) in [(4, 4), (34, 4), (4, 34), (34, 34), (19, 19)]:
+        g[y][x], g[y][x + 1], g[y + 1][x], g[y + 1][x + 1] = "c", "n", "n", "n"
+        g[y][x] = "h"
     return g
 
 
-TILES = {"BELT": belt(), "ROTL": rotator(), "ZAP": zap(), "PULSE": pulse(), "BLOCK": crate()}
+TILES = {"BELT_N": belt("N"), "BELT_E": belt("E"), "BELT_S": belt("S"), "BELT_W": belt("W"), "ROTL": rotator(),
+         "ROTR": rotator(True), "ZAP": zap(), "PULSE": pulse(), "BLOCK": crate()}
 
 
 def header():
     out = ["/* SPDX-License-Identifier: GPL-3.0-only */\n",
-           "/* Generated by tools/art/tiles.py: RoboSeq's tiles, 20 x 20 on a grid of 2 px (the palette letters there). */\n"]
+           "/* Generated by tools/art/tiles.py: RoboSeq's tiles, 40 x 40 at 1 px (the palette letters there). */\n"]
     for k, g in TILES.items():
-        out.append(f"static const char ART_{k}[20][21] = {{\n" + ",\n".join(f'    "{"".join(r)}"' for r in g) + "};\n")
+        out.append(f"static const char ART_{k}[{N}][{N + 1}] = {{\n" + ",\n".join(f'    "{"".join(r)}"' for r in g) + "};\n")
     return "".join(out)
 
 
@@ -181,16 +212,16 @@ def preview(path):
         G, M = hx(ground), hx(main)
         return {".": G, "g": mix(G, (0, 0, 0), .45), "a": M, "h": mix((255, 255, 255), M, .45), "b": mix(M, G, .45),
                 "d": mix(M, G, .25), "k": mix(M, (0, 0, 0), .35), "c": hx(light)}
-    P = {"BELT": pal("#001a2e", "#63d9ff"), "ROTL": pal("#1a1400", "#ffcc00", "#fff3b0"),
+    belt_pal, rot_pal = pal("#001a2e", "#63d9ff"), pal("#1a1400", "#ffcc00", "#fff3b0")
+    P = {"BELT_N": belt_pal, "BELT_E": belt_pal, "BELT_S": belt_pal, "BELT_W": belt_pal, "ROTL": rot_pal, "ROTR": rot_pal,
          "ZAP": pal("#1a0012", "#ff3366", "#ffd6e0"), "PULSE": pal("#001a00", "#73ff9f", "#eafff0"),
          "BLOCK": {".": hx("#1a1a2e"), "c": hx("#4a2e14"), "k": hx("#2e1c0c"), "a": hx("#6e4b28"), "b": hx("#5c3d1e"),
                    "h": hx("#8a6236"), "s": hx("#4a2e14"), "e": hx("#8b6939"), "n": hx("#aaaaaa")}}
-    img = Image.new("RGB", (5 * 44, 40), (9, 46, 44))
+    img = Image.new("RGB", (len(TILES) * (N + 4), N), (9, 46, 44))
     for i, (k, g) in enumerate(TILES.items()):
         for y in range(N):
             for x in range(N):
-                for d in range(4):
-                    img.putpixel((i * 44 + 2 * x + d % 2, 2 * y + d // 2), P[k][g[y][x]])
+                img.putpixel((i * (N + 4) + x, y), P[k][g[y][x]])
     path.parent.mkdir(parents=True, exist_ok=True)
     img.resize((img.width * 4, img.height * 4), Image.NEAREST).save(path)
 

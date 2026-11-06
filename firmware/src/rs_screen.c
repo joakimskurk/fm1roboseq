@@ -53,11 +53,10 @@ static void frame(int32_t x, int32_t y, int32_t w, int32_t h, int32_t t, uint16_
     cv_rect(x, y, w, t, c), cv_rect(x, y + h - t, w, t, c), cv_rect(x, y, t, h, c), cv_rect(x + w - t, y, t, h, c);
 }
 
-/* ---- the tiles: pixel art of RoboSeq's own on a 20 x 20 grid of 2 px (the robots' and the effects' rhythm), after
- * the HTML's tilePixelArt, lit from the top left (tools/art/tiles.py makes it): the belt's arrow, the rotator's
+/* ---- the tiles: pixel art of RoboSeq's own, 40 x 40 at 1 px, after the HTML's tilePixelArt, lit from the top left (tools/art/tiles.py makes it): the belt's arrow, the rotator's
  * gear that is its turn, the zap's bolt, the pulse's rings, the crate. A letter is a colour of the tile's palette
  * ('.' its ground, 'g' that in shadow, 'a' its colour, 'h' lit, 'b' and 'd' dimmed, 'k' dark, 'c' a light one; the
- * crate its woods). The belt is drawn pointing east and turned; the right rotator is the left one mirrored. */
+ * crate its woods). Each way a belt points, and each rotator, is its own picture, so the light stays top left. */
 #include "rs_tiles.h"                         /* the art (tools/art/tiles.py) */
 
 static uint16_t tile_colour(uint32_t type, char ch)
@@ -96,78 +95,76 @@ static uint16_t tile_colour(uint32_t type, char ch)
 
 static void draw_tile(int32_t x, int32_t y, const struct rs_tile_t *t)
 {
-    const char (*art)[21] = 0;
+    const char (*art)[41] = 0;
     int32_t gx, gy;
     switch (t->type) {
-    case RS_T_BELT: art = ART_BELT; break;
-    case RS_T_ROTL:
-    case RS_T_ROTR: art = ART_ROTL; break;
+    case RS_T_BELT: art = t->dir == RS_N ? ART_BELT_N : t->dir == RS_S ? ART_BELT_S : t->dir == RS_W ? ART_BELT_W : ART_BELT_E; break;
+    case RS_T_ROTL: art = ART_ROTL; break;
+    case RS_T_ROTR: art = ART_ROTR; break;
     case RS_T_ZAP: art = ART_ZAP; break;
     case RS_T_PULSE: art = ART_PULSE; break;
     case RS_T_BLOCK: art = ART_BLOCK; break;
     default:                                    /* open: the ground, a dot every 8 px, a line above and left */
         cv_rect(x, y, CELL, CELL, C_CELL);
-        cv_rect(x, y, CELL, 2, C_CELL_LINE), cv_rect(x, y, 2, CELL, C_CELL_LINE);
-        for (gy = 2; gy < 20; gy += 4)
-            for (gx = 2; gx < 20; gx += 4) cv_rect(x + 2 * gx, y + 2 * gy, 2, 2, C_DITHER);
+        cv_rect(x, y, CELL, 1, C_CELL_LINE), cv_rect(x, y, 1, CELL, C_CELL_LINE);
+        for (gy = 4; gy < CELL; gy += 8)
+            for (gx = 4; gx < CELL; gx += 8) cv_pset(x + gx, y + gy, C_DITHER);
         return;
     }
-    for (gy = 0; gy < 20; gy++)
-        for (gx = 0; gx < 20; gx++) {
-            int32_t sx = gx, sy = gy;           /* where in the art this grid cell comes from */
-            if (t->type == RS_T_BELT) {
-                if (t->dir == RS_N) sx = 19 - gy, sy = gx;
-                else if (t->dir == RS_S) sx = gy, sy = 19 - gx;
-                else if (t->dir == RS_W) sx = 19 - gx;
-            } else if (t->type == RS_T_ROTR)
-                sx = 19 - gx;
-            cv_rect(x + 2 * gx, y + 2 * gy, 2, 2, tile_colour(t->type, art[sy][sx]));
-        }
+    for (gy = 0; gy < CELL; gy++)
+        for (gx = 0; gx < CELL; gx++) cv_pset(x + gx, y + gy, tile_colour(t->type, art[gy][gx]));
 }
 
-/* ---- the bots (robotPixelArt: Scout-7 and Echo-3, 32 x 32) */
-enum { P_MAIN, P_DARK, P_ACC, P_VISOR, P_WHITE, P_SHINE, P_THRUST };
-static const uint8_t BOT_RECTS[][5] = {         /* x, y, w, h, colour: both bots */
-    {10, 4, 12, 2, P_MAIN}, {8, 6, 16, 10, P_MAIN}, {9, 6, 3, 2, P_SHINE}, {9, 8, 14, 6, P_VISOR},
-    {10, 9, 4, 4, P_ACC}, {12, 10, 2, 2, P_WHITE}, {18, 9, 4, 4, P_ACC}, {18, 10, 2, 2, P_WHITE},
-    {13, 14, 6, 1, P_DARK}, {6, 8, 2, 4, P_DARK}, {24, 8, 2, 4, P_DARK}, {11, 16, 10, 6, P_MAIN},
-    {14, 17, 4, 2, P_ACC}, {8, 17, 3, 4, P_DARK}, {7, 21, 3, 2, P_ACC}, {21, 17, 3, 4, P_DARK},
-    {22, 21, 3, 2, P_ACC}, {12, 22, 3, 4, P_DARK}, {17, 22, 3, 4, P_DARK}, {11, 26, 4, 2, P_MAIN},
-    {17, 26, 4, 2, P_MAIN}, {12, 28, 2, 2, P_THRUST}, {18, 28, 2, 2, P_THRUST}};
-static const uint8_t ANT_A[][5] = {{15, 0, 2, 2, P_ACC}, {15, 2, 2, 2, P_DARK}};
-static const uint8_t ANT_B[][5] = {{9, 0, 2, 2, P_ACC}, {21, 0, 2, 2, P_ACC}, {10, 2, 2, 2, P_DARK}, {20, 2, 2, 2, P_DARK}};
-
-static void sprite_rects(int32_t x, int32_t y, const uint8_t (*r)[5], uint32_t n, const uint16_t *pal, uint32_t half)
-{
-    uint32_t i;
-    for (i = 0; i < n; i++) {
-        if (half) {
-            int32_t x0 = r[i][0] >> 1, y0 = r[i][1] >> 1, x1 = (r[i][0] + r[i][2] + 1) >> 1, y1 = (r[i][1] + r[i][3] + 1) >> 1;
-            cv_rect(x + x0, y + y0, x1 - x0, y1 - y0, pal[r[i][4]]);
-        } else
-            cv_rect(x + r[i][0], y + r[i][1], r[i][2], r[i][3], pal[r[i][4]]);
-    }
-}
+/* ---- the bots: Scout-7 and Echo-3 (tools/art/robots.py, after robotPixelArt), 32 x 32 at 1 px */
+#include "rs_robots.h"
 
 static void draw_bot(int32_t x, int32_t y, int b, uint32_t half, uint16_t under)
 {
+    const char (*art)[33] = b ? ART_BOT_B : ART_BOT_A;
     uint16_t main = b ? C_BOT_B : C_BOT_A, dark = b ? C_BOT_B2 : C_BOT_A2, acc = b ? C_WARN : C_ACCENT;
-    uint16_t pal[7] = {main, dark, acc, RGB(0x0a, 0x0a, 0x1a), C_WHITE, mix565(dark, main, 128), mix565(acc, under, 154)};
-    sprite_rects(x, y, BOT_RECTS, sizeof BOT_RECTS / sizeof BOT_RECTS[0], pal, half);
-    if (b) sprite_rects(x, y, ANT_B, 4, pal, half);
-    else sprite_rects(x, y, ANT_A, 2, pal, half);
+    int32_t gx, gy, step = half ? 2 : 1;
+    for (gy = 0; gy < 32; gy += step)
+        for (gx = 0; gx < 32; gx += step) {
+            uint16_t c;
+            switch (art[gy][gx]) {
+            case 'o': c = RGB(0x05, 0x05, 0x0c); break;
+            case 'm': c = main; break;
+            case 'M': c = mix565(C_WHITE, main, 90); break;
+            case 'n': c = mix565(main, dark, 128); break;
+            case 'd': c = dark; break;
+            case 'a': c = acc; break;
+            case 'v': c = RGB(0x0a, 0x0a, 0x1a); break;
+            case 'w': c = C_WHITE; break;
+            case 't': c = mix565(acc, under, 154); break;
+            default: continue;
+            }
+            cv_pset(x + gx / step, y + gy / step, c);
+        }
 }
 
-static void draw_arrow(int32_t x, int32_t y, uint32_t dir, uint16_t c)   /* the facing: a 3-step wedge at the cell's edge */
+static void draw_arrow(int32_t x, int32_t y, uint32_t dir, uint16_t c)   /* the facing: a wedge at the cell's edge, outlined */
 {
-    int32_t k;
-    for (k = 0; k < 3; k++) {                   /* row k of the wedge: 2 (3 - k) grid cells wide, k from the edge */
-        int32_t w = 2 * (3 - k) * 2, o = 20 - (3 - k) * 2;   /* px */
-        if (dir == RS_N) cv_rect(x + o, y + 2 * k, w, 2, c);
-        else if (dir == RS_S) cv_rect(x + o, y + CELL - 2 - 2 * k, w, 2, c);
-        else if (dir == RS_W) cv_rect(x + 2 * k, y + o, 2, w, c);
-        else cv_rect(x + CELL - 2 - 2 * k, y + o, 2, w, c);
-    }
+    int32_t k, i;
+    for (k = 0; k < 5; k++)                     /* row k from the edge: 2 (5 - k) px wide; outline around */
+        for (i = -(5 - k) - 1; i < (5 - k) + 1; i++) {
+            int32_t edge = i < -(5 - k) || i >= 5 - k;
+            uint16_t col = edge ? RGB(0x05, 0x05, 0x0c) : c;
+            int32_t a = 20 + i, d = 1 + k;
+            if (dir == RS_N) cv_pset(x + a, y + d, col);
+            else if (dir == RS_S) cv_pset(x + a, y + CELL - 1 - d, col);
+            else if (dir == RS_W) cv_pset(x + d, y + a, col);
+            else cv_pset(x + CELL - 1 - d, y + a, col);
+        }
+}
+
+static void dim_cell(int32_t x, int32_t y)       /* the tile under a bot, darker: the bot stands out on any tile */
+{
+    int32_t i, k;
+    for (k = 1; k < CELL - 1; k++)
+        for (i = 1; i < CELL - 1; i++) {
+            uint16_t *p = &cv_px[(uint32_t)(y + k) * cv_w + (uint32_t)(x + i)];
+            *p = swap16(mix565(swap16(*p), C_BLACK, 110));
+        }
 }
 
 /* ---- the effects (explosionPixelArt 16 x 16 at 2 px, heartPixelArt, clashPixelArt) */
@@ -311,14 +308,15 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const st
     for (b = 0; b < 2; b++) {                   /* the launch pads' marks (the HTML's trails never grow past them) */
         int32_t x = BX + START[b].x * CELL, y = BY + START[b].y * CELL;
         if (v->bot[b].x == START[b].x && v->bot[b].y == START[b].y) continue;
-        cv_rect(b ? x + 32 : x + 4, y + 32, 4, 4, mix565(b ? C_BOT_B : C_BOT_A, C_CELL, 64));
+        cv_rect(b ? x + 33 : x + 4, y + 33, 3, 3, mix565(b ? C_BOT_B : C_BOT_A, C_CELL, 64));
     }
     for (b = 0; b < 2; b++) {
         const struct rs_bot *t = &v->bot[b];
         int32_t x = BX + t->x * CELL, y = BY + t->y * CELL;
         int together = v->bot[0].x == v->bot[1].x && v->bot[0].y == v->bot[1].y;
         if ((int32_t)(fx->hidden_until[b] - now_ms) > 0) continue;
-        if (together) draw_bot(x + (b ? 21 : 3), y + 12, b, 1, C_CELL);
+        if (b == 0 || !together) dim_cell(x, y);
+        if (together) draw_bot(x + (b ? 21 : 3), y + 12, b, 1, C_CELL);   /* (both: at half size, side by side) */
         else draw_bot(x + 4, y + 4, b, 0, C_CELL);
         draw_arrow(x, y, t->dir, b ? C_WARN : C_ACCENT);
         if ((int32_t)(fx->clash_until[b] - now_ms) > 0) draw_clash(x, y);
