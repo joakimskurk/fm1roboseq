@@ -142,6 +142,7 @@ void rs_advance_voice_mod(struct rs_state *s);                  /* advanceVoiceM
 
 /* editing, as the HTML's controls do it */
 void rs_set_loop_len(struct rs_state *s, uint8_t len);          /* setLoopLength(): caps the programs, stops */
+void rs_set_loop_len_live(struct rs_state *s, uint8_t len);      /* the loop's length without a stop (D20) */
 void rs_set_prog_len(struct rs_state *s, int bot, uint8_t len); /* setProgramLength(): at most the loop's */
 void rs_cycle_action(struct rs_state *s, int bot, int i);       /* cycleAction() */
 void rs_steer(struct rs_state *s, int bot, uint8_t action);    /* the bot's next move does this, once (D16) */

@@ -48,3 +48,14 @@ the 16 rows on the white keys.
 | OCT- / OCT+ | scroll 16 rows |
 | (let go 3 s) | it follows the step playing |
 
+## GLO (the global settings)
+
+| Control | Does |
+|---|---|
+| KNOB1 | the tempo, 60-168 BPM |
+| KNOB2 | the bots move every 1, 2 or 4 ticks |
+| KNOB3 | the loop's length (8 ... 64): at once when stopped, else as the loop comes round (D20) |
+| KNOB4 | 1/4 speed (clockwise) or normal |
+
+The white keys rest here (no register on the screen); the black keys steer as everywhere.
+

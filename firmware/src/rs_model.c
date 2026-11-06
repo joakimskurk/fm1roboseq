@@ -439,6 +439,16 @@ void rs_set_loop_len(struct rs_state *s, uint8_t len)  /* setLoopLength() */
     rs_reset(s);
 }
 
+void rs_set_loop_len_live(struct rs_state *s, uint8_t len)   /* (D20) the loop's length, without stopping: as */
+{                                                       /* setLoopLength() less its stop and reset, for the moment */
+    uint8_t prev = rs_drum_steps(s->loop_len);          /* just after a loop reset (the reset step has played) */
+    if (len < 1 || len > RS_MAX_STEPS) return;
+    s->loop_len = len;
+    for (int b = 0; b < 2; b++)
+        if ((s->prog[b].len ? s->prog[b].len : len) > len) s->prog[b].len = len;
+    if (rs_drum_steps(len) != prev) rs_set_drums(s, s->drum_preset);
+}
+
 void rs_set_prog_len(struct rs_state *s, int bot, uint8_t len)   /* setProgramLength() */
 {
     s->prog[bot & 1].len = len < s->loop_len ? len : s->loop_len;

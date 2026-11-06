@@ -171,3 +171,12 @@ global settings (tempo, the loop's length, ticks per move, 1/4 speed). EDIT pick
 keys, the same on every page (it was SEQ before SEQ became a page). The black keys steer the bots on every page
 (C3), PLAY is the transport (C1), REC stays free for recording.
 
+## D20. The loop's length changes as the loop comes round, not by stopping (2026-11-06)
+
+The HTML changes the loop's length only by stopping and resetting (setLoopLength calls stopPlayback). On the FM-1
+the knobs never stop the music (C8), so GLO's KNOB3 picks the next length, shown beside the current one, and it
+lands just after the next loop reset (rs_set_loop_len_live: setLoopLength less its stop and reset; the registers
+capped, the drums re-laid when their step count changes). Stopped, it changes at once, as the HTML's does. The
+HTML's scale button is left out: its notes follow Voice Mod's scales, not that one. Its 1/4 speed, in its state but
+without a button, is KNOB4.
+

@@ -422,3 +422,49 @@ static void draw_seq(const struct rs_view *v, const struct rs_ui *u, const struc
     cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
     cv_blit(0, 0);
 }
+
+/* ---- GLO: the global settings, a knob each (the HTML's transport bar): the tempo, how often the bots move, the
+ * loop's length (it changes when the loop comes round: D20), 1/4 speed */
+static void knob_tag(int32_t x, int32_t y, uint32_t n)   /* "K" n: which knob */
+{
+    frame(x, y, 15, 11, 1, C_MUTED);
+    digits(x + 5, y + 2, n, 1, C_TEXT);
+}
+
+static void draw_glo(const struct rs_state *g, uint8_t pending_loop)
+{
+    char num[8];
+    int32_t r;
+    static const char *const LABEL[4] = {"TEMPO", "BOTS MOVE EVERY", "LOOP", "SPEED"};
+    cv_begin(240, 240, C_BG);
+    cv_text(120 - text_w(&FONT_S, "GLOBAL") / 2, 0, &FONT_S, "GLOBAL", C_TEXT);
+    cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
+    for (r = 0; r < 4; r++) {
+        int32_t y = 20 + r * 55, x;
+        const char *unit = "";
+        uint16_t c = C_TEXT;
+        knob_tag(6, y + 4, (uint32_t)r + 1u);
+        cv_text(28, y + 1, &FONT_S, LABEL[r], C_MUTED);
+        switch (r) {
+        case 0: num[0] = (char)('0' + g->bpm / 100u % 10u), num[1] = (char)('0' + g->bpm / 10u % 10u);
+                num[2] = (char)('0' + g->bpm % 10u), num[3] = 0;
+                if (g->bpm < 100u) num[0] = num[1], num[1] = num[2], num[2] = 0;
+                unit = "BPM"; break;
+        case 1: num[0] = (char)('0' + (g->tpm ? g->tpm : 1)), num[1] = 0; unit = g->tpm > 1 ? "TICKS" : "TICK"; break;
+        case 2: num[0] = (char)('0' + g->loop_len / 10u), num[1] = (char)('0' + g->loop_len % 10u), num[2] = 0;
+                if (g->loop_len < 10u) num[0] = num[1], num[1] = 0;
+                unit = "STEPS"; break;
+        default: num[0] = '1', num[1] = '/', num[2] = g->quarter ? '4' : '1', num[3] = 0;
+                 c = g->quarter ? C_WARN : C_TEXT; break;
+        }
+        x = cv_text(28, y + 18, &FONT_L, num, c);
+        cv_text(x + 6, y + 32, &FONT_S, unit, C_MUTED);
+        if (r == 2 && pending_loop && pending_loop != g->loop_len) {   /* the next length, when the loop comes round */
+            char p[12] = "> 00";
+            p[2] = (char)('0' + pending_loop / 10u), p[3] = (char)('0' + pending_loop % 10u);
+            cv_text(150, y + 24, &FONT_L, p, C_WARN);
+        }
+        cv_rect(0, y + 53, 240, 1, C_CELL_LINE);
+    }
+    cv_blit(0, 0);
+}
