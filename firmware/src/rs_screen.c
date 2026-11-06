@@ -118,15 +118,15 @@ static void draw_tile(int32_t x, int32_t y, const struct rs_tile_t *t)
 /* ---- the bots: Scout-7 and Echo-3 (tools/art/robots.py, after robotPixelArt), 32 x 32 at 1 px */
 #include "rs_robots.h"
 
-static void draw_bot(int32_t x, int32_t y, int b, uint32_t half, uint16_t under)
+static void draw_bot(int32_t x, int32_t y, int b, uint32_t mini, uint16_t under)   /* mini: the small one, two to a tile */
 {
-    const char (*art)[33] = b ? ART_BOT_B : ART_BOT_A;
     uint16_t main = b ? C_BOT_B : C_BOT_A, dark = b ? C_BOT_B2 : C_BOT_A2, acc = b ? C_WARN : C_ACCENT;
-    int32_t gx, gy, step = half ? 2 : 1;
-    for (gy = 0; gy < 32; gy += step)
-        for (gx = 0; gx < 32; gx += step) {
+    int32_t gx, gy, n = mini ? 18 : 32;
+    for (gy = 0; gy < n; gy++)
+        for (gx = 0; gx < n; gx++) {
+            char ch = mini ? (b ? ART_MINI_B : ART_MINI_A)[gy][gx] : (b ? ART_BOT_B : ART_BOT_A)[gy][gx];
             uint16_t c;
-            switch (art[gy][gx]) {
+            switch (ch) {
             case 'o': c = RGB(0x05, 0x05, 0x0c); break;
             case 'm': c = main; break;
             case 'M': c = mix565(C_WHITE, main, 90); break;
@@ -138,7 +138,7 @@ static void draw_bot(int32_t x, int32_t y, int b, uint32_t half, uint16_t under)
             case 't': c = mix565(acc, under, 154); break;
             default: continue;
             }
-            cv_pset(x + gx / step, y + gy / step, c);
+            cv_pset(x + gx, y + gy, c);
         }
 }
 
@@ -167,6 +167,20 @@ static void dim_cell(int32_t x, int32_t y)       /* the tile under a bot, darker
         }
 }
 
+static void draw_arrow_at(int32_t cx, int32_t cy, uint32_t dir, uint16_t c)   /* a small facing wedge around cx, cy */
+{
+    int32_t k, i;
+    for (k = 0; k < 3; k++)                     /* row k from the tip: 2 k + 1 px across (+ an outline) */
+        for (i = -k - 1; i <= k + 1; i++) {
+            uint16_t col = i < -k || i > k ? RGB(0x05, 0x05, 0x0c) : c;
+            int32_t d = k - 1;
+            if (dir == RS_N) cv_pset(cx + i, cy + d, col);
+            else if (dir == RS_S) cv_pset(cx + i, cy - d, col);
+            else if (dir == RS_W) cv_pset(cx + d, cy + i, col);
+            else cv_pset(cx - d, cy + i, col);
+        }
+}
+
 /* ---- the effects (explosionPixelArt 16 x 16 at 2 px, heartPixelArt, clashPixelArt) */
 static void draw_explosion(int32_t x, int32_t y, int b)
 {
@@ -180,27 +194,27 @@ static void draw_explosion(int32_t x, int32_t y, int b)
     cv_rect(x + 18, y + 18, 4, 4, C_WHITE);
 }
 
-static void draw_heart(int32_t x, int32_t y)
+static void draw_heart(int32_t x, int32_t y, int32_t px)   /* px: 4 a tile's own, 2 small over two bots */
 {
     static const char *const ROWS[8] = {"  ##  ## ", " ########", "#########", "#########", " ####### ", "  #####  ",
                                         "   ###   ", "    #    "};
     uint32_t r, k;
     for (r = 0; r < 8; r++)
         for (k = 0; k < 9; k++)
-            if (ROWS[r][k] == '#') cv_rect(x + 2 + 4 * (int32_t)k, y + 4 + 4 * (int32_t)r, 4, 4, r < 2 ? RGB(0xff, 0x8e, 0xc4) : RGB(0xff, 0x4d, 0xa6));
+            if (ROWS[r][k] == '#') cv_rect(x + px * (int32_t)k, y + px * (int32_t)r, px, px, r < 2 ? RGB(0xff, 0x8e, 0xc4) : RGB(0xff, 0x4d, 0xa6));
 }
 
-static void draw_clash(int32_t x, int32_t y)
+static void draw_clash(int32_t x, int32_t y, int32_t h)   /* h: 1 a tile's size (40), 2 half */
 {
     static const uint8_t W[][2] = {{18, 0}, {18, 36}, {0, 18}, {36, 18}};
     static const uint8_t Y[][2] = {{6, 6}, {30, 6}, {6, 30}, {30, 30}, {14, 10}, {22, 10}, {10, 14}, {26, 14},
                                    {10, 22}, {26, 22}, {14, 26}, {22, 26}};
     uint32_t i;
-    for (i = 0; i < 4; i++) cv_rect(x + W[i][0], y + W[i][1], 4, 4, C_WHITE);
-    for (i = 0; i < 12; i++) cv_rect(x + Y[i][0], y + Y[i][1], 4, 4, RGB(0xff, 0xdd, 0x44));
-    cv_rect(x + 14, y + 14, 12, 12, C_WHITE);
-    cv_rect(x + 16, y + 16, 8, 8, RGB(0xff, 0xdd, 0x44));
-    cv_rect(x + 18, y + 18, 4, 4, C_WHITE);
+    for (i = 0; i < 4; i++) cv_rect(x + W[i][0] / h, y + W[i][1] / h, 4 / h, 4 / h, C_WHITE);
+    for (i = 0; i < 12; i++) cv_rect(x + Y[i][0] / h, y + Y[i][1] / h, 4 / h, 4 / h, RGB(0xff, 0xdd, 0x44));
+    cv_rect(x + 14 / h, y + 14 / h, 12 / h, 12 / h, C_WHITE);
+    cv_rect(x + 16 / h, y + 16 / h, 8 / h, 8 / h, RGB(0xff, 0xdd, 0x44));
+    cv_rect(x + 18 / h, y + 18 / h, 4 / h, 4 / h, C_WHITE);
 }
 
 /* ---- the keys' side (D16): the register on the white keys, the steering on the black ones */
@@ -305,25 +319,34 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const st
         if (v->bot[b].x == START[b].x && v->bot[b].y == START[b].y) continue;
         cv_rect(b ? x + 33 : x + 4, y + 33, 3, 3, mix565(b ? C_BOT_B : C_BOT_A, C_CELL, 64));
     }
-    for (b = 0; b < 2; b++) {
-        const struct rs_bot *t = &v->bot[b];
-        int32_t x = BX + t->x * CELL, y = BY + t->y * CELL;
-        int together = v->bot[0].x == v->bot[1].x && v->bot[0].y == v->bot[1].y;
-        if ((int32_t)(fx->hidden_until[b] - now_ms) > 0) continue;
-        if (b == 0 || !together) dim_cell(x, y);
-        if (together) draw_bot(x + (b ? 21 : 3), y + 12, b, 1, C_CELL);   /* (both: at half size, side by side) */
-        else draw_bot(x + 4, y + 4, b, 0, C_CELL);
-        draw_arrow(x, y, t->dir, b ? C_WARN : C_ACCENT);
-        if ((int32_t)(fx->clash_until[b] - now_ms) > 0) draw_clash(x, y);
-        if (u->steer[b]) {                      /* steered: what its next move will be, on it */
-            cv_rect(x + 1, y + 1, 17, 16, b ? C_BOT_B2 : C_BOT_A2);
-            icon(x + 3, y + 2, u->steer[b] - 1u, C_WHITE);
+    {                                           /* the bots: one to a tile full size; two on one, small, side by side */
+        int hid[2] = {(int32_t)(fx->hidden_until[0] - now_ms) > 0, (int32_t)(fx->hidden_until[1] - now_ms) > 0};
+        int together = v->bot[0].x == v->bot[1].x && v->bot[0].y == v->bot[1].y && !hid[0] && !hid[1];
+        for (b = 0; b < 2; b++) {
+            const struct rs_bot *t = &v->bot[b];
+            int32_t x = BX + t->x * CELL, y = BY + t->y * CELL;
+            if (hid[b]) continue;
+            if (b == 0 || !together) dim_cell(x, y);
+            if (together) draw_bot(x + (b ? 21 : 1), y + 20, b, 1, C_CELL);
+            else draw_bot(x + 4, y + 4, b, 0, C_CELL);
+            if (together) draw_arrow_at(x + (b ? 30 : 10), y + 17, t->dir, b ? C_WARN : C_ACCENT);   /* over its own head */
+            else draw_arrow(x, y, t->dir, b ? C_WARN : C_ACCENT);
+            if ((int32_t)(fx->clash_until[b] - now_ms) > 0)   /* the one hit: the star over it */
+                draw_clash(together ? x + (b ? 20 : 0) : x, together ? y + 1 : y, together ? 2 : 1);
+            if (u->steer[b]) {                  /* steered: what its next move will be, on it */
+                int32_t bx = together && b ? x + 21 : x + 1;
+                cv_rect(bx, y + 1, 17, 16, b ? C_BOT_B2 : C_BOT_A2);
+                icon(bx + 2, y + 2, u->steer[b] - 1u, C_WHITE);
+            }
+        }
+        for (b = 0; b < 2; b++)
+            if ((int32_t)(fx->boom_until[b] - now_ms) > 0) draw_explosion(BX + fx->boom_x[b] * CELL, BY + fx->boom_y[b] * CELL, b);
+        if ((int32_t)(fx->heart_until - now_ms) > 0) {   /* in love: a heart over the two, small when they are there */
+            int32_t x = BX + fx->heart_x * CELL, y = BY + fx->heart_y * CELL;
+            if (together && v->bot[0].x == fx->heart_x && v->bot[0].y == fx->heart_y) draw_heart(x + 11, y + 2, 2);
+            else draw_heart(x + 2, y + 4, 4);
         }
     }
-    for (b = 0; b < 2; b++)
-        if ((int32_t)(fx->boom_until[b] - now_ms) > 0) draw_explosion(BX + fx->boom_x[b] * CELL, BY + fx->boom_y[b] * CELL, b);
-    if ((int32_t)(fx->heart_until - now_ms) > 0) draw_heart(BX + fx->heart_x * CELL, BY + fx->heart_y * CELL);
-    /* the bots' health (the status cards): 6 less the heat */
     for (b = 0; b < 2; b++) {
         int32_t x = b ? 122 : 24, hp = 6 - (v->bot[b].heat > 6 ? 6 : v->bot[b].heat < 0 ? 0 : v->bot[b].heat);
         uint16_t c = hp <= 2 ? C_DANGER : hp <= 4 ? C_WARN : C_PULSE;
