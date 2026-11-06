@@ -54,115 +54,11 @@ static void frame(int32_t x, int32_t y, int32_t w, int32_t h, int32_t t, uint16_
 }
 
 /* ---- the tiles: pixel art of RoboSeq's own on a 20 x 20 grid of 2 px (the robots' and the effects' rhythm), after
- * the HTML's tilePixelArt: the belt's arrow, the rotator's gear and its turn, the zap's bolt, the pulse's rings, the
- * crate. A letter is a colour of the tile's palette ('.' its ground, 'a' its colour, 'b' and 'd' that dimmed, 'c'
- * a light one; the crate its woods). The belt is drawn pointing east and turned; the right rotator is the left
- * one mirrored. */
-static const char ART_BELT[20][21] = {
-    "bbbbbbbbbbbbbbbbbbbb",
-    "b..................b",
-    "b.bbbbbbbbbbbbbbbb.b",
-    "b..................b",
-    "b.........a........b",
-    "b.........aa.......b",
-    "b.........aaa......b",
-    "b.........aaaa.....b",
-    "b..aaaaaaaaaaaa....b",
-    "b..aaaaaaaaaaaaa...b",
-    "b..aaaaaaaaaaaaa...b",
-    "b..aaaaaaaaaaaa....b",
-    "b.........aaaa.....b",
-    "b.........aaa......b",
-    "b.........aa.......b",
-    "b.........a........b",
-    "b..................b",
-    "b.bbbbbbbbbbbbbbbb.b",
-    "b..................b",
-    "bbbbbbbbbbbbbbbbbbbb"};
-static const char ART_ROTL[20][21] = {
-    "bbbbbbbbbbbbbbbbbbbb",
-    "b.......aaaa.......b",
-    "b.......aaaa.......b",
-    "b..aa...aaaa...aa..b",
-    "b..aa..aaaaaa..aa..b",
-    "b.....aa....aa.....b",
-    "b....aa......aa....b",
-    "b...aa...cc...aa...b",
-    "baaaa...cccc...aaaab",
-    "baaaa..c....c..aaaab",
-    "baaaa..c....c..aaaab",
-    "baaaa.ccc......aaaab",
-    "b...aa.c......aa...b",
-    "b....aa......aa....b",
-    "b.....aa....aa.....b",
-    "b..aa..aaaaaa..aa..b",
-    "b..aa...aaaa...aa..b",
-    "b.......aaaa.......b",
-    "b.......aaaa.......b",
-    "bbbbbbbbbbbbbbbbbbbb"};
-static const char ART_ZAP[20][21] = {
-    "bbbbbbbbbbbbbbbbbbbb",
-    "b..................b",
-    "b..c........aaaaa..b",
-    "b..........aaaaa...b",
-    "b.........aaaaa....b",
-    "b........aaaaa.....b",
-    "b.......aaaaa......b",
-    "b......aaaaaaaaaa..b",
-    "b......aaaaaaaaaa..b",
-    "b..........aaaaa...b",
-    "b.........aaaaa....b",
-    "b........aaaaa.....b",
-    "b.......aaaa.......b",
-    "b......aaa.........b",
-    "b.....aa...........b",
-    "b.....a............b",
-    "b...............c..b",
-    "b..................b",
-    "b..................b",
-    "bbbbbbbbbbbbbbbbbbbb"};
-static const char ART_PULSE[20][21] = {
-    "bbbbbbbbbbbbbbbbbbbb",
-    "b..................b",
-    "b......dddddd......b",
-    "b....dd......dd....b",
-    "b...d..........d...b",
-    "b...d...bbbb...d...b",
-    "b..d...b....b...d..b",
-    "b..d..b......b..d..b",
-    "b..d..b.aaaa.b..d..b",
-    "b..d..b.aaaa.b..d..b",
-    "b..d..b.aaaa.b..d..b",
-    "b..d..b.aaaa.b..d..b",
-    "b..d..b......b..d..b",
-    "b..d...b....b...d..b",
-    "b...d...bbbb...d...b",
-    "b...d..........d...b",
-    "b....dd......dd....b",
-    "b......dddddd......b",
-    "b..................b",
-    "bbbbbbbbbbbbbbbbbbbb"};
-static const char ART_BLOCK[20][21] = {
-    "....................",
-    ".cccccccccccccccccc.",
-    ".cnaaaaaaaaaaaaaanc.",
-    ".caeaaaaaaaaaaaaeac.",
-    ".caaeaaaaaaaaaaeaac.",
-    ".caaaeaaaaaaaaeaaac.",
-    ".caaaaeaaaaaaeaaaac.",
-    ".csssssessssesssssc.",
-    ".cbbbbbbebbebbbbbbc.",
-    ".cbbbbbbbnnbbbbbbbc.",
-    ".cbbbbbbbnnbbbbbbbc.",
-    ".cbbbbbbebbebbbbbbc.",
-    ".csssssessssesssssc.",
-    ".caaaaeaaaaaaeaaaac.",
-    ".caaaeaaaaaaaaeaaac.",
-    ".caaeaaaaaaaaaaeaac.",
-    ".caeaaaaaaaaaaaaeac.",
-    ".cnaaaaaaaaaaaaaanc.",
-    ".cccccccccccccccccc.",
-    "...................."};
+ * the HTML's tilePixelArt, lit from the top left (tools/art/tiles.py makes it): the belt's arrow, the rotator's
+ * gear that is its turn, the zap's bolt, the pulse's rings, the crate. A letter is a colour of the tile's palette
+ * ('.' its ground, 'g' that in shadow, 'a' its colour, 'h' lit, 'b' and 'd' dimmed, 'k' dark, 'c' a light one; the
+ * crate its woods). The belt is drawn pointing east and turned; the right rotator is the left one mirrored. */
+#include "rs_tiles.h"                         /* the art (tools/art/tiles.py) */
 
 static uint16_t tile_colour(uint32_t type, char ch)
 {
@@ -171,12 +67,14 @@ static uint16_t tile_colour(uint32_t type, char ch)
     case RS_T_BELT: ground = RGB(0x00, 0x1a, 0x2e), main = C_BELT; break;
     case RS_T_ROTL:
     case RS_T_ROTR: ground = RGB(0x1a, 0x14, 0x00), main = C_ROT, light = RGB(0xff, 0xf3, 0xb0); break;
-    case RS_T_ZAP: ground = RGB(0x1a, 0x00, 0x12), main = C_ZAP, light = RGB(0xff, 0xb3, 0xc6); break;
-    case RS_T_PULSE: ground = RGB(0x00, 0x1a, 0x00), main = C_PULSE; break;
+    case RS_T_ZAP: ground = RGB(0x1a, 0x00, 0x12), main = C_ZAP, light = RGB(0xff, 0xd6, 0xe0); break;
+    case RS_T_PULSE: ground = RGB(0x00, 0x1a, 0x00), main = C_PULSE, light = RGB(0xea, 0xff, 0xf0); break;
     default:                                    /* the crate */
         switch (ch) {
         case 'a': return RGB(0x6e, 0x4b, 0x28);
         case 'b': return RGB(0x5c, 0x3d, 0x1e);
+        case 'h': return RGB(0x8a, 0x62, 0x36);
+        case 'k': return RGB(0x2e, 0x1c, 0x0c);
         case 'e': return RGB(0x8b, 0x69, 0x39);
         case 'n': return RGB(0xaa, 0xaa, 0xaa);
         case 'c':
@@ -186,8 +84,11 @@ static uint16_t tile_colour(uint32_t type, char ch)
     }
     switch (ch) {
     case 'a': return main;
+    case 'h': return mix565(C_WHITE, main, 115);
     case 'b': return mix565(main, ground, 115);
     case 'd': return mix565(main, ground, 64);
+    case 'k': return mix565(main, C_BLACK, 166);
+    case 'g': return mix565(ground, C_BLACK, 141);
     case 'c': return light;
     default: return ground;
     }

@@ -27,6 +27,7 @@ $CC -std=c11 -O2 -Wall -Wextra -Werror -Ifirmware/src -o build/test/parity_rende
     firmware/src/rs_voice.c firmware/src/rs_score.c firmware/src/rs_model.c firmware/src/rs_chance.c -lm
 if python3 -c "import numpy" 2>/dev/null; then
     python3 tools/tone-ref/mix_tables.py --check
+    python3 tools/art/tiles.py --check
     python3 tools/tone-ref/compare.py --check > build/test/parity.txt || { cat build/test/parity.txt; exit 1; }
     echo "parity: every voice, the mix, the song, the limiter and the reverb within their tolerances (build/test/parity.txt)"
 else
