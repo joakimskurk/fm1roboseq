@@ -75,10 +75,6 @@ static void draw_splash(uint32_t t)
                     cv_rect(lx + 3 * k, ly + 3 * y, 3, 3, ch == 'h' ? RGB(0xff, 0xf0, 0xb0) : ch == 'n' ? RGB(0xc9, 0x9a, 0x00) : C_WARN);
             }
     }
-    /* the three slashes under, red, from 700 ms, flickering now and then */
-    if (t > 700u && (t / 90u) % 11u != 0u)
-        for (k = 0; k < 3; k++)
-            for (y = 0; y < 7; y++) cv_rect(104 + k * 10 + (6 - y) / 2, 84 + y, 3, 1, C_DANGER);
     /* the floor */
     cv_rect(14, 196, 212, 2, line);
     for (k = 0; k < 9; k++) cv_rect(20 + k * 24, 202, 12, 1, grid), cv_rect(26 + k * 24, 207, 8, 1, grid);
@@ -91,7 +87,7 @@ static void draw_splash(uint32_t t)
         big_bot(xb, 130 + bob, 1);
         if (t > 1000u) {
             int beat = (t - 1000u) % 600u < 120u;   /* a beat every 0.6 s: a little bigger */
-            draw_heart(120 - 22, 99, 3, beat);  /* 45 x 39, in the middle over them; on the beat a glow round it */
+            draw_heart(120 - 15, 104, 2, beat);  /* 30 x 26, in the middle over them; on the beat a glow round it */
         }
     }
     /* the dots: as it starts */

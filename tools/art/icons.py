@@ -112,8 +112,8 @@ ICONS = [draw(up), draw(flip_v(up)), draw(turn_l), draw(flip_h(turn_l)), draw(sy
          draw(sym(steady)), draw(sym(sun)), draw(sym(low)), draw(wave), draw(glitch)]   # steady bright low wobble glitch
 
 
-# the heart (love on a tile, the splash), 13 x 11 and exactly symmetric (the HTML's 9 x 8 is not): an outline round
-# it ('o'), lit on top of each lobe ('h') with a shine on both ('w'), darker toward its tip ('n')
+# the heart (love on a tile, the splash), 13 x 11 and exactly symmetric (the HTML's 9 x 8 is not), simple: an
+# outline round it ('o'), lit on top of each lobe ('h'), the rest one pink ('a')
 HEART_SHAPE = ["..###...###..", ".#####.#####.", "#############", "#############", "#############",
                ".###########.", "..#########..", "...#######...", "....#####....", ".....###.....", "......#......"]
 
@@ -124,11 +124,9 @@ def heart():
     for y in range(13):
         for x in range(15):
             if on(x - 1, y - 1):
-                g[y][x] = "h" if not on(x - 1, y - 2) else "n" if y >= 9 else "a"
+                g[y][x] = "h" if not on(x - 1, y - 2) else "a"
             elif any(on(x - 1 + dx, y - 1 + dy) for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]):
                 g[y][x] = "o"
-    for (x, y) in [(3, 3), (4, 3), (3, 4)]:         # the shine, on both lobes
-        g[y][x] = g[y][14 - x] = "w"
     assert all(r == r[::-1] for r in ["".join(r) for r in g])
     return ["".join(r) for r in g]
 
