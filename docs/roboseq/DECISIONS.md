@@ -147,3 +147,11 @@ is the one the register plays (step mod its
 length); the HTML frames the step's number, which is off the card when the register is shorter than the loop.
 docs/roboseq/CONTROLS.md has the rules (C1-C6).
 
+## D17. Each bot keeps its side of a tile, at one size (2026-11-06)
+
+The product owner, on two bots meeting on a tile: let them keep their size the whole way, Scout-7 always on the
+left of its tile and Echo-3 always on the right, which makes more sense overall. So both are drawn small (18 x 18
+at 1 px, the HTML's build), at the foot of the tile, each in its own half, its facing over its head, a steer over it.
+Two on one tile is then nothing special: both are there, a dash's clash star over the one hit, the love heart over
+the two. (The HTML draws a bot large in its cell and two as minis side by side.)
+

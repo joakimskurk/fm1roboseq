@@ -116,7 +116,8 @@ and the limiter.)
       40 px), the tiles an event lit, the explosion, heart and clash star for as long as the HTML shows them, the step,
       the cycle and the bots' health; drawn as the step is heard, not when the game computes it (2026-11-06)
 - [x] The board's art our own (tools/art): tiles, robots and step icons at 1 px, lit from above, the symmetric
-      exactly so; two bots on one tile drawn small side by side, the clash star or the heart over them (`make scenes`)
+      exactly so; each bot on its own side of a tile at one size (D17), the clash star or the heart over them
+      (`make scenes`)
 - [x] The registers on the white keys (SEQ: whose, OCT: the next 16), the bots steered on the black keys (D16)
 - [ ] P4: the rules as host tests, page by page
 - [ ] The pages for programs, Voice Mod, drums, mix; the UI map generated from the code (`make screens`)

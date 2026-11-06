@@ -115,18 +115,19 @@ static void draw_tile(int32_t x, int32_t y, const struct rs_tile_t *t)
         for (gx = 0; gx < CELL; gx++) cv_pset(x + gx, y + gy, tile_colour(t->type, art[gy][gx]));
 }
 
-/* ---- the bots: Scout-7 and Echo-3 (tools/art/robots.py, after robotPixelArt), 32 x 32 at 1 px */
+/* ---- the bots: Scout-7 and Echo-3 (tools/art/robots.py, after robotPixelArt), 18 x 18 at 1 px, each on its own
+ * side of a tile (D17) */
 #include "rs_robots.h"
 
-static void draw_bot(int32_t x, int32_t y, int b, uint32_t mini, uint16_t under)   /* mini: the small one, two to a tile */
+static void draw_bot(int32_t x, int32_t y, int b, uint32_t mini, uint16_t under)   /* 18 x 18 (mini: the only size now) */
 {
     uint16_t main = b ? C_BOT_B : C_BOT_A, dark = b ? C_BOT_B2 : C_BOT_A2, acc = b ? C_WARN : C_ACCENT;
-    int32_t gx, gy, n = mini ? 18 : 32;
-    for (gy = 0; gy < n; gy++)
-        for (gx = 0; gx < n; gx++) {
-            char ch = mini ? (b ? ART_MINI_B : ART_MINI_A)[gy][gx] : (b ? ART_BOT_B : ART_BOT_A)[gy][gx];
+    int32_t gx, gy;
+    (void)mini;
+    for (gy = 0; gy < 18; gy++)
+        for (gx = 0; gx < 18; gx++) {
             uint16_t c;
-            switch (ch) {
+            switch ((b ? ART_MINI_B : ART_MINI_A)[gy][gx]) {
             case 'o': c = RGB(0x05, 0x05, 0x0c); break;
             case 'm': c = main; break;
             case 'M': c = mix565(C_WHITE, main, 90); break;
@@ -139,21 +140,6 @@ static void draw_bot(int32_t x, int32_t y, int b, uint32_t mini, uint16_t under)
             default: continue;
             }
             cv_pset(x + gx, y + gy, c);
-        }
-}
-
-static void draw_arrow(int32_t x, int32_t y, uint32_t dir, uint16_t c)   /* the facing: a wedge at the cell's edge, outlined */
-{
-    int32_t k, i;
-    for (k = 0; k < 5; k++)                     /* row k from the edge: 2 (5 - k) px wide; outline around */
-        for (i = -(5 - k) - 1; i < (5 - k) + 1; i++) {
-            int32_t edge = i < -(5 - k) || i >= 5 - k;
-            uint16_t col = edge ? RGB(0x05, 0x05, 0x0c) : c;
-            int32_t a = 20 + i, d = 1 + k;
-            if (dir == RS_N) cv_pset(x + a, y + d, col);
-            else if (dir == RS_S) cv_pset(x + a, y + CELL - 1 - d, col);
-            else if (dir == RS_W) cv_pset(x + d, y + a, col);
-            else cv_pset(x + CELL - 1 - d, y + a, col);
         }
 }
 
@@ -319,33 +305,28 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const st
         if (v->bot[b].x == START[b].x && v->bot[b].y == START[b].y) continue;
         cv_rect(b ? x + 33 : x + 4, y + 33, 3, 3, mix565(b ? C_BOT_B : C_BOT_A, C_CELL, 64));
     }
-    {                                           /* the bots: one to a tile full size; two on one, small, side by side */
+    {                                           /* the bots: each always on its own side of a tile, Scout-7 left,
+                                                   Echo-3 right, so two on one tile is just both there */
         int hid[2] = {(int32_t)(fx->hidden_until[0] - now_ms) > 0, (int32_t)(fx->hidden_until[1] - now_ms) > 0};
         int together = v->bot[0].x == v->bot[1].x && v->bot[0].y == v->bot[1].y && !hid[0] && !hid[1];
         for (b = 0; b < 2; b++) {
             const struct rs_bot *t = &v->bot[b];
-            int32_t x = BX + t->x * CELL, y = BY + t->y * CELL;
+            int32_t x = BX + t->x * CELL, y = BY + t->y * CELL, sx = x + (b ? 20 : 0);   /* its half */
             if (hid[b]) continue;
             if (b == 0 || !together) dim_cell(x, y);
-            if (together) draw_bot(x + (b ? 21 : 1), y + 20, b, 1, C_CELL);
-            else draw_bot(x + 4, y + 4, b, 0, C_CELL);
-            if (together) draw_arrow_at(x + (b ? 30 : 10), y + 17, t->dir, b ? C_WARN : C_ACCENT);   /* over its own head */
-            else draw_arrow(x, y, t->dir, b ? C_WARN : C_ACCENT);
-            if ((int32_t)(fx->clash_until[b] - now_ms) > 0)   /* the one hit: the star over it */
-                draw_clash(together ? x + (b ? 20 : 0) : x, together ? y + 1 : y, together ? 2 : 1);
-            if (u->steer[b]) {                  /* steered: what its next move will be, on it */
-                int32_t bx = together && b ? x + 21 : x + 1;
-                cv_rect(bx, y + 1, 17, 16, b ? C_BOT_B2 : C_BOT_A2);
-                icon(bx + 2, y + 2, u->steer[b] - 1u, C_WHITE);
+            draw_bot(sx + 1, y + 20, b, 1, C_CELL);
+            draw_arrow_at(sx + 10, y + 17, t->dir, b ? C_WARN : C_ACCENT);   /* its facing, over its head */
+            if ((int32_t)(fx->clash_until[b] - now_ms) > 0) draw_clash(sx, y + 1, 2);   /* hit: the star over it */
+            if (u->steer[b]) {                  /* steered: what its next move will be, over it */
+                cv_rect(sx + 1, y + 1, 18, 15, b ? C_BOT_B2 : C_BOT_A2);
+                icon(sx + 3, y + 2, u->steer[b] - 1u, C_WHITE);
             }
         }
         for (b = 0; b < 2; b++)
-            if ((int32_t)(fx->boom_until[b] - now_ms) > 0) draw_explosion(BX + fx->boom_x[b] * CELL, BY + fx->boom_y[b] * CELL, b);
-        if ((int32_t)(fx->heart_until - now_ms) > 0) {   /* in love: a heart over the two, small when they are there */
-            int32_t x = BX + fx->heart_x * CELL, y = BY + fx->heart_y * CELL;
-            if (together && v->bot[0].x == fx->heart_x && v->bot[0].y == fx->heart_y) draw_heart(x + 11, y + 2, 2);
-            else draw_heart(x + 2, y + 4, 4);
-        }
+            if ((int32_t)(fx->boom_until[b] - now_ms) > 0)   /* where it burned out, on its side */
+                draw_explosion(BX + fx->boom_x[b] * CELL + (b ? 10 : -10), BY + fx->boom_y[b] * CELL, b);
+        if ((int32_t)(fx->heart_until - now_ms) > 0)   /* in love: a heart over the two */
+            draw_heart(BX + fx->heart_x * CELL + 11, BY + fx->heart_y * CELL + 2, 2);
     }
     for (b = 0; b < 2; b++) {
         int32_t x = b ? 122 : 24, hp = 6 - (v->bot[b].heat > 6 ? 6 : v->bot[b].heat < 0 ? 0 : v->bot[b].heat);
