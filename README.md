@@ -66,7 +66,7 @@ The screens, drawn by the firmware itself (`make screens`): what you see, and wh
 | <img src="docs/screens/boards.png" width="240" alt="ENV: the boards"> | **ENV: the boards**, all at a glance: the six presets, a random roll and your own board, each small with its white key. Press a key and that board comes in (while playing, as the loop comes round: framed yellow, blinking, until it arrives); the one playing is framed in mint. 9 saves the board as yours, 10 clears yours, 11 puts the robots back on their pads. The black keys steer as on HOME. |
 | <img src="docs/screens/builder.png" width="240" alt="ENV again, the board builder"> | **ENV again: build a board.** W A S D move the cursor; further up a key for each tile (belt, rotator left and right, zap, pulse, crate), and the black key between S and D clears. A belt points the way you last moved; press it again to turn it. The robots meet your tiles on their next step. KNOB1 runs through the six preset boards. |
 | <img src="docs/screens/home-lead.png" width="240" alt="REC: the lead"> | **REC: play solo.** The keys become a SID-style lead over the robots, the knobs its CUT, ECHO, BITE and OCT, shown as faders across the top. **ARP** arpeggiates a chord you hold, a note each step: K4 its pattern, SELECT how fast. REC again gives the keys back. |
-| <img src="docs/screens/glo.png" width="240" alt="GLO"> | **GLO: tempo and time.** The tempo, how often the robots move (every 1, 2 or 4 ticks), the loop's length (it changes as the loop comes round, never stopping the music) and the speed (1/1, 1/2, 1/4). |
+| <img src="docs/screens/glo.png" width="240" alt="GLO"> | **GLO: tempo and time.** The tempo, how often the robots move (every 1, 2 or 4 ticks), the loop's length (it changes as the loop comes round, never stopping the music) and the speed (1/1, 1/2, 1/4). SELECT picks the music: PLUS or CLASSIC (below). |
 | <img src="docs/screens/voicemod.png" width="240" alt="SCL: Voice Mod"> | **SCL: Voice Mod**, the harmony: four steps of scale, root and semitone that the music moves through, every so many loops or by hand (NEXT). White keys 1-4 pick a step, K1-K3 change it. |
 | <img src="docs/screens/seq2.png" width="240" alt="SCL again: Seq 2"> | **SCL again: Seq 2**, the arrangement: four steps that change the board and the drum pattern and can swap the robots' registers, as Voice Mod comes round. |
 | <img src="docs/screens/drums.png" width="240" alt="LFO: the drums"> | **LFO: the drums.** Kick, snare and hihat over 16 steps; SELECT picks the row, a white key a step, KNOB1 the six patterns. |
@@ -132,7 +132,16 @@ plays; Voice Mod's scale and root keep them in key.
 
 ## The sound
 
-The robots' music is the browser original's, note for note: the same game and the same score, checked against the
+RoboSeq has two kinds of music, picked with SELECT on GLO. **PLUS**, where it starts, is RoboSeq's own on top of
+the original's: the same robots choose the same notes, and PLUS plays them as a band would. On every beat the robots
+land on the chord's tones, Echo-3's low voice becomes a bass line (the root on the one, the fifth on three, a step
+into the next chord before it changes), and the bar breathes in its accents. The drums keep your pattern but get a
+drummer: dynamics, ghost notes, a kick pushing into four every other loop, open and busier hats in the second half
+of each phrase, a fill at its end and a crash on the next. The room shades with each chord and opens in the second
+half, where a soft answer to Scout-7 joins on the off-beats. And Voice Mod's random (SCL, 16) writes a progression
+in a key, such as I V vi IV, ii V I vi, i VI VII i or a modal vamp, instead of four unrelated keys.
+
+**CLASSIC** is the browser original's music, note for note: the same game and the same score, checked against the
 HTML's own script tick by tick over 36 scenarios (88,120 notes). The voices, the mix, the reverb and the limiter are
 measured against renders of the HTML's own audio in a browser (most voices within 0.15 dB in level, shape and
 timbre), and the mix is in stereo as the HTML's is. Two things are as the original meant rather than as it happened

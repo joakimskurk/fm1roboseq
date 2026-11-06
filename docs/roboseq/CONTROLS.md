@@ -74,7 +74,7 @@ The white keys rest here (no register on the screen); the black keys steer as ev
 | KNOB4 | when it moves on: MANUAL, or every 1/4, 1/2, 1, 2, 4 loops |
 | white key 13 | NEXT: on to its next step (MANUAL) |
 | white key 14 | ROOT: the root transposes the sequence, on / off |
-| white keys 15 / 16 | reset / random (random can be undone) |
+| white keys 15 / 16 | reset / random (random can be undone; in PLUS a progression in a key, D33a) |
 
 ## Seq 2 (SCL pressed again)
 
