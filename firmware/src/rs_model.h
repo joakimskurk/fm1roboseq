@@ -166,6 +166,7 @@ void rs_randomize_steps(struct rs_state *s, int bot);           /* randomizeStep
 void rs_randomize_all(struct rs_state *s);                      /* randomizeAllSteps() */
 void rs_clear_steps(struct rs_state *s);                        /* resetAllSteps() */
 void rs_randomize_board(struct rs_state *s);                    /* randomizeBoard() (not undoable, as the HTML) */
+void rs_compose_bassmod(struct rs_state *s);                    /* PLUS's Voice Mod roll: a progression in a key (D33) */
 void rs_randomize_bassmod(struct rs_state *s);                  /* randomizeBassMod() */
 void rs_set_voice_mod(struct rs_state *s, uint8_t manual, uint8_t freq4);   /* its trigger, its loop frequency x 4 */
 void rs_reset_bassmod(struct rs_state *s);                      /* resetBassMod() */

@@ -510,11 +510,14 @@ void rs_cycle_bassmod(struct rs_state *s, int i, int field, int dir)   /* cycleB
 {
     struct rs_bassmod_step *st = &s->bassmod[i & 7];
     dir = dir < 0 ? -1 : 1;
-    if (field == 0) {
-        int at = 0;
-        for (int k = 0; k < 6; k++)
-            if (SCALE_OPTIONS[k] == st->scale) at = k;
-        st->scale = SCALE_OPTIONS[(at + dir + 6) % 6];
+    if (field == 0) {                                   /* (PLUS: every mode its roll uses, D33) */
+        static const uint8_t PLUS_OPTIONS[9] = {RS_SC_MAJOR, RS_SC_MINOR, RS_SC_PENTATONIC, RS_SC_MINPENTA, RS_SC_DORIAN,
+                                                RS_SC_MIXOLYDIAN, RS_SC_LYDIAN, RS_SC_PHRYGIAN, RS_SC_CHROMATIC};
+        const uint8_t *opt = s->music ? PLUS_OPTIONS : SCALE_OPTIONS;
+        int at = 0, n = s->music ? 9 : 6;
+        for (int k = 0; k < n; k++)
+            if (opt[k] == st->scale) at = k;
+        st->scale = opt[(at + dir + n) % n];
     } else if (field == 1) {
         st->root = (uint8_t)((st->root + dir + 12) % 12);
     } else {                                            /* BASS_INTERVAL_OPTIONS: -12..12, wrapping */
@@ -664,6 +667,48 @@ void rs_randomize_bassmod(struct rs_state *s)           /* randomizeBassMod() */
         s->bassmod[i].root = (uint8_t)rs_random(s, 12);
         s->bassmod[i].semitone = (int8_t)((int)rs_random(s, 7) - 3);
     }
+}
+
+/* PLUS's Voice Mod roll (D33): a progression in one key, not four random keys. Each step is a chord of the key
+ * as its mode (the board's x then starts on the chord's root, so 0 / 2 / 4 are its chord tones), all inside the
+ * key: I major, ii dorian, iii phrygian, IV lydian, V mixolydian, vi minor; or, a third of the time, each as its
+ * pentatonic (the gentlest). Or, a fifth of the time, the default song's kind: one quality moving by thirds and
+ * fourths. SCL turns all of these in PLUS. */
+static const uint8_t KEY_PC[7] = {0, 2, 4, 5, 7, 9, 11};
+static const uint8_t MODE_OF[6] = {RS_SC_MAJOR, RS_SC_DORIAN, RS_SC_PHRYGIAN, RS_SC_LYDIAN, RS_SC_MIXOLYDIAN, RS_SC_MINOR};
+static const uint8_t PENTA_OF[6] = {RS_SC_PENTATONIC, RS_SC_MINPENTA, RS_SC_MINPENTA, RS_SC_PENTATONIC, RS_SC_PENTATONIC,
+                                    RS_SC_MINPENTA};
+static const uint8_t PROG[15][4] = {                    /* degrees of the key, 0 = I */
+    {0, 4, 5, 3}, {5, 3, 0, 4}, {0, 5, 3, 4}, {0, 3, 5, 4}, {1, 4, 0, 5},   /* I V vi IV, vi IV I V, I vi IV V, ... */
+    {3, 4, 2, 5}, {0, 2, 3, 4}, {5, 1, 2, 5}, {5, 4, 3, 4}, {5, 3, 4, 5},   /* IV V iii vi, ..., i iv v i, i VII VI VII */
+    {0, 3, 0, 4}, {1, 4, 1, 4}, {4, 3, 4, 3}, {3, 4, 3, 4}, {5, 2, 3, 0}};  /* ..., the dorian, mixolydian, lydian vamps */
+static const int8_t MEDIANT[6] = {3, -3, 4, -4, 5, 7};   /* the default song's moves (Eb C F A: -3 +5 +4) */
+
+void rs_compose_bassmod(struct rs_state *s)
+{
+    uint32_t key, family, penta, p, q, i;
+    rs_push_undo(s);
+    key = rs_random(s, 12);
+    family = rs_random(s, 5);                           /* 0: the mediants; else a progression of the key */
+    penta = rs_random(s, 3);                            /* 0: pentatonic all through (the gentlest) */
+    p = rs_random(s, 15);
+    q = rs_random(s, 15);                               /* (an 8-step Voice Mod: a second progression after it) */
+    if (family == 0) {
+        uint32_t quality = rs_random(s, 3);             /* major, minor, or the two in turn */
+        int root = (int)key;
+        for (i = 0; i < s->bassmod_len; i++) {
+            uint32_t m = rs_random(s, 6);
+            uint8_t sc = quality == 0 ? RS_SC_MAJOR : quality == 1 ? RS_SC_MINOR : (i & 1u) ? RS_SC_MINOR : RS_SC_MAJOR;
+            s->bassmod[i] = (struct rs_bassmod_step){penta == 0 ? (sc == RS_SC_MAJOR ? RS_SC_PENTATONIC : RS_SC_MINPENTA) : sc,
+                                                     (uint8_t)root, 0};
+            root = ((root + MEDIANT[m]) % 12 + 12) % 12;
+        }
+    } else
+        for (i = 0; i < s->bassmod_len; i++) {
+            uint8_t d = PROG[i < 4u ? p : q][i % 4u];
+            s->bassmod[i] = (struct rs_bassmod_step){penta == 0 ? PENTA_OF[d] : MODE_OF[d], (uint8_t)((key + KEY_PC[d]) % 12u), 0};
+        }
+    s->transpose_root = 1;                              /* (the roots are the progression: they must move the notes) */
 }
 
 void rs_randomize_seq2(struct rs_state *s)              /* randomizeSeq2(): "--" or a preset; a swap 30 % */

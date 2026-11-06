@@ -1,0 +1,78 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+/* PLUS, RoboSeq's own music on top of the HTML's (D33): what each part promises. CLASSIC is held by the traces. */
+#include <stdio.h>
+#include <string.h>
+#include "rs_model.c"                                   /* (its tables: SCALE_MASK) */
+
+static int fails;
+#define CHECK(c, ...) do { if (!(c)) { fails++; printf("FAIL %s:%d: ", __FILE__, __LINE__); printf(__VA_ARGS__); printf("\n"); } } while (0)
+
+static uint16_t pcs(const struct rs_bassmod_step *b)    /* the pitch classes a step plays: its scale on its root */
+{
+    uint16_t m = SCALE_MASK[b->scale], r = 0;
+    for (int k = 0; k < 12; k++)
+        if (m >> k & 1) r |= (uint16_t)(1u << ((k + b->root) % 12));
+    return r;
+}
+
+static void test_compose(void)                          /* the Voice Mod roll: a progression in a key */
+{
+    static struct rs_state s;
+    int keyed = 0, mediant = 0, distinct = 0;
+    static uint8_t seen[1u << 16];
+    for (int r = 0; r < 4000; r++) {
+        rs_default(&s);
+        s.music = RS_MUSIC_PLUS, s.rng = 0x9E3779B9u * (uint32_t)(r + 1), s.transpose_root = 0;
+        s.bassmod_len = (r & 1) ? 8 : 4;
+        rs_compose_bassmod(&s);
+        CHECK(s.transpose_root == 1, "roll %d: the roots move the notes", r);
+        int in_key = 0;
+        for (int k = 0; k < 12 && !in_key; k++) {       /* every step inside one major key? */
+            uint16_t key = 0;
+            for (int d = 0; d < 7; d++) key |= (uint16_t)(1u << ((k + KEY_PC[d]) % 12));
+            int all = 1;
+            for (int i = 0; i < s.bassmod_len; i++) all &= (pcs(&s.bassmod[i]) & ~key) == 0;
+            in_key = all;
+        }
+        int same_kind = 1;                              /* else the mediants: one quality (or two in turn), no other */
+        for (int i = 0; i < s.bassmod_len; i++) {
+            uint8_t sc = s.bassmod[i].scale;
+            same_kind &= sc == RS_SC_MAJOR || sc == RS_SC_MINOR || sc == RS_SC_PENTATONIC || sc == RS_SC_MINPENTA;
+            CHECK(sc != RS_SC_CHROMATIC && sc != RS_SC_DIMINISHED && sc != RS_SC_WHOLETONE && sc != RS_SC_AUGMENTED,
+                  "roll %d step %d: a scale of the key, not %d", r, i, sc);
+            CHECK(s.bassmod[i].root < 12 && s.bassmod[i].semitone == 0, "roll %d step %d: root, no semitone", r, i);
+        }
+        keyed += in_key, mediant += !in_key;
+        CHECK(in_key || same_kind, "roll %d: in a key, or the mediants' one quality", r);
+        uint32_t h = 0;
+        for (int i = 0; i < 4; i++) h = h * 31u + (uint32_t)((s.bassmod[i].root - s.bassmod[0].root + 12) % 12) * 16u + s.bassmod[i].scale;
+        if (!seen[h & 0xFFFFu]) seen[h & 0xFFFFu] = 1, distinct++;
+    }
+    CHECK(keyed > 2600 && mediant > 500, "the families: %d in a key, %d mediants", keyed, mediant);
+    CHECK(distinct > 60, "many progressions, not a few (%d)", distinct);
+    {                                                   /* undoable, as the HTML's roll */
+        rs_default(&s);
+        s.music = RS_MUSIC_PLUS;
+        struct rs_bassmod_step before = s.bassmod[0];
+        rs_undo_clear();
+        rs_compose_bassmod(&s);
+        rs_pop_undo(&s);
+        CHECK(!memcmp(&before, &s.bassmod[0], sizeof before), "undo brings the Voice Mod back");
+    }
+    {                                                   /* PLUS's SCL turns every mode the roll uses */
+        rs_default(&s);
+        s.music = RS_MUSIC_PLUS, s.bassmod[0].scale = RS_SC_LYDIAN;
+        rs_cycle_bassmod(&s, 0, 0, +1);
+        CHECK(s.bassmod[0].scale == RS_SC_PHRYGIAN, "PLUS: lydian -> phrygian");
+        s.music = RS_MUSIC_CLASSIC, s.bassmod[0].scale = RS_SC_MAJOR;
+        rs_cycle_bassmod(&s, 0, 0, +1);
+        CHECK(s.bassmod[0].scale == RS_SC_MINOR, "CLASSIC: the HTML's order, major -> minor");
+    }
+}
+
+int main(void)
+{
+    test_compose();
+    printf("plus_test: %s\n", fails ? "FAILED" : "all pass");
+    return fails != 0;
+}

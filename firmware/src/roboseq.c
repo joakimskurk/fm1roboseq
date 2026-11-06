@@ -388,7 +388,7 @@ static int keys(uint32_t down)                  /* what the keys pressed now do;
             else if (k == 12u && game.vm_manual) rs_advance_voice_mod(&game);
             else if (k == 13u) game.transpose_root = !game.transpose_root;
             else if (k == 14u) rs_reset_bassmod(&game);
-            else if (k == 15u) rs_randomize_bassmod(&game);
+            else if (k == 15u) { if (game.music) rs_compose_bassmod(&game); else rs_randomize_bassmod(&game); }   /* (PLUS: a progression, D33) */
             changed = 1;
         }
     }

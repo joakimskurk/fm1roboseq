@@ -331,3 +331,13 @@ where the app starts, adds RoboSeq's own on top of the same game: the robots sti
 only changes how what they play is voiced, accented and accompanied. Each part of PLUS is its own commit and says
 here what it does. The selfcheck fingerprint is CLASSIC's.
 
+**D33a. Voice Mod's roll (SCL's 16) in PLUS: a progression in a key.** The HTML's roll draws each step's scale and
+root alone, so four steps are four unrelated keys. PLUS's draws a key and then, four times in five, one of fifteen
+progressions of it (I V vi IV, vi IV I V, I vi IV V, I IV vi V, ii V I vi, IV V iii vi, I iii IV V, i iv v i, i VII VI
+VII, i VI VII i, I IV I V, vi iii IV I, and the dorian, mixolydian and lydian vamps), each chord its mode on its
+root (I major, ii dorian, iii phrygian, IV lydian, V mixolydian, vi minor; a third of the time their pentatonics):
+the board's x then starts on the chord's root, its 0, 2 and 4 the chord's tones, and every note stays in the key. An
+8-step Voice Mod gets a second progression of the key after it. The fifth time it is the default song's own kind
+(Eb C F A: one quality moving by thirds and fourths). ROOT is switched on (the roots are the progression). SCL in
+PLUS turns all the modes the roll uses (lydian and phrygian, minor pentatonic too). tests/roboseq/plus_test.c.
+
