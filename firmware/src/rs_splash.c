@@ -47,7 +47,7 @@ static void corner(int32_t x, int32_t y, int32_t dx, int32_t dy, uint16_t c)   /
 static void draw_splash(uint32_t t)
 {
     uint16_t bg = RGB(0x0b, 0x23, 0x24), grid = RGB(0x10, 0x2f, 0x2f), line = RGB(0x2f, 0x6a, 0x63);
-    int32_t i, k, x, y;
+    int32_t i, k, y;
     cv_begin(240, 240, bg);
     for (i = 6; i < 240; i += 12) cv_rect(i, 6, 1, 228, grid), cv_rect(6, i, 228, 1, grid);   /* a faint grid */
     frame(5, 5, 230, 230, 1, line);

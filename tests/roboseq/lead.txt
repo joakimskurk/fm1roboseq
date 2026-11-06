@@ -39,5 +39,12 @@
 7620 keys 0x4000
 7920 keys 0x10000
 9120 keys 0
-9720 shot
-10120 end
+9720 enc 4 3
+9820 keys 0x10
+11320 enc 2 -4
+11420 enc 3 6
+11520 enc 5 6
+11620 shot
+12920 enc 4 -7
+14720 keys 0
+15720 end

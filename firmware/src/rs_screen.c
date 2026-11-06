@@ -20,6 +20,8 @@ struct rs_view {
 #include "rs_icons.h"                         /* the step icons, the heart, the digits (tools/art/icons.py) */
 
 static int8_t lead_badge = -99;                 /* the keys play the lead (D21): its octave, else -99 */
+static int lead_panel;                          /* a knob turned just now: the lead's four values at the foot (D26) */
+static int8_t lead_panel_v[4];
 static void screen_out(void);                   /* (every page ends with it: the lead's badge, then to the screen) */
 
 #define BX 20                                   /* the board's corner on the screen */
@@ -688,6 +690,28 @@ static void screen_out(void)                    /* the lead's badge over any pag
         if (!lead_badge) t[4] = 0;
         cv_rect(178, 0, 62, 15, C_ACCENT);
         cv_text(182, 0, &FONT_S, t, RGB(0x05, 0x05, 0x0c));
+    }
+    if (lead_panel) {                           /* K1 CUT, K2 ECHO, K3 ARP, K4 BITE: the lead's knobs as they are */
+        static const char *const NAME[4] = {"CUT", "ECHO", "ARP", "BITE"};
+        uint32_t k;
+        cv_rect(0, 200, 240, 40, RGB(0x05, 0x14, 0x14));
+        cv_rect(0, 200, 240, 1, C_ACCENT);
+        for (k = 0; k < 4u; k++) {
+            int32_t x = (int32_t)k * 60, v = lead_panel_v[k];
+            knob_tag(x + 3, 204, k + 1u);
+            cv_text(x + 21, 202, &FONT_S, NAME[k], C_TEXT);
+            if (k == 2u) {                      /* the arp: off, or up / down and how many notes */
+                if (!v) cv_text(x + 6, 221, &FONT_S, "OFF", C_MUTED);
+                else {
+                    icon(x + 4, 222, v > 0 ? RS_MOVE : RS_BACK, C_ACCENT);
+                    digits(x + 22, 225, (uint32_t)(v < 0 ? -v : v) + 1u, 1, C_TEXT);
+                }
+            } else {                            /* a bar, 0 .. 20 */
+                cv_rect(x + 6, 226, 48, 6, RGB(0x1a, 0x1a, 0x2e));
+                cv_rect(x + 6, 226, 48 * v / 20, 6, C_ACCENT);
+                cv_rect(x + 30, 224, 1, 10, C_MUTED);   /* (the middle: as it sounded before) */
+            }
+        }
     }
     cv_blit(0, 0);
 }

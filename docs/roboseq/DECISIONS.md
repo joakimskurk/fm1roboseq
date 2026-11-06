@@ -228,3 +228,14 @@ it animated; then: the robots closer together with a small, simple heart, "Seq" 
 over them, the dots fill as it starts. About 2.6 s; any key or button skips it (and is not also a press on the board).
 The sound runs meanwhile.
 
+## D26. With REC on, the knobs play the lead too (2026-11-06)
+
+The product owner: in the lead's mode K1-K4 become performance controls for it: the filter's cutoff, the delay's
+intensity, an arp up or down by where the knob is turned, in time and in the scale, and one more that makes sense.
+So, on every page while REC is lit: K1 the cutoff (a quarter to 2.5 times D23's, the middle as before); K2 the echo
+(heard 0-0.8, fed back 0.25-0.7); K3 the arp, off in the middle, turned right it climbs, left it falls, further
+more notes (2-7), in thirds of the scale Voice Mod is on (its root under it), one note each step the robots take
+(the main loop hands the lead each step's time), the filter plucked on each, the key's own note again when off;
+K4 the bite, the one more: how hard the wave is folded and how wide the PWM swings. Their values show at the foot
+for two seconds after a turn. The pages' own knobs wait while REC is on.
+

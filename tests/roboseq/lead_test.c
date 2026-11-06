@@ -11,7 +11,7 @@ static int fails;
 static struct rs_lead l;
 static int32_t buf[44100];
 
-static void run(uint32_t n) { for (uint32_t i = 0; i < n; i++) buf[i] = 0; rs_lead_render(&l, buf, n); }
+static void run(uint32_t n) { for (uint32_t i = 0; i < n; i++) buf[i] = 0; rs_lead_render(&l, buf, n, 0); }
 
 static double freq(uint32_t n)                  /* the pitch over n samples, by autocorrelation (the folded wave */
 {                                               /* crosses zero more than once a cycle) */
@@ -80,6 +80,30 @@ int main(void)
     run(4410);
     f = freq(4410);
     CHECK(fabs(f - 220) < 3, "a new note from silence starts at its pitch (%.1f)", f);
+    /* the arp (D26): four notes, a step every 100 ms; each step its next note, round again */
+    rs_lead_init(&l);
+    static const int8_t ARP[4] = {57, 60, 64, 67};
+    static const double HZ[4] = {220.0, 261.63, 329.63, 392.0};
+    for (int i = 0; i < 4; i++) l.arp_notes[i] = ARP[i];
+    l.arp_n = 4;
+    for (int i = 0; i < 8; i++) l.tick_at[i] = 4410u * (uint32_t)(i + 1);
+    l.tick_head = 8;
+    rs_lead_play(&l, 57, 1, 1);
+    static int32_t seg[4410];
+    uint32_t now = 0;
+    for (int stepn = 0; stepn < 9; stepn++, now += 4410) {
+        for (uint32_t i = 0; i < 4410; i++) seg[i] = 0;
+        rs_lead_render(&l, seg, 4410, now);
+        if (stepn == 0) continue;               /* (the key's own note until the first step) */
+        for (uint32_t i = 0; i < 4410; i++) buf[i] = seg[i];
+        f = freq(3000);
+        double want = HZ[(stepn - 1) % 4];
+        CHECK(fabs(f - want) < want * 0.02, "the arp's step %d at %.1f Hz (%.1f)", stepn, want, f);
+    }
+    l.arp_n = 0;                                /* the arp off: back to the key */
+    run(4410);
+    f = freq(4410);
+    CHECK(fabs(f - 220) < 4.4, "the arp off: the key's note again (%.1f)", f);
     printf("lead_test: %s\n", fails ? "FAILED" : "all pass");
     return fails != 0;
 }

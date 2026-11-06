@@ -31,8 +31,7 @@ static const int32_t DEFAULT_LEVEL[RS_NLEVEL] = {29491, 29491, 26214, 18022, 196
 #endif
 #define DLY_MAX 32768                           /* the lead's delay: up to 0.74 s a side */
 static int16_t lead_dly[2][DLY_MAX] RS_POOL;    /* left, right: a ping-pong */
-#define DLY_FB 14746                            /* the feedback, 0.45 */
-#define DLY_WET 13107                           /* how much of it is heard, 0.4 */
+/* K2 (D26): the echo's intensity, m->echo Q15; at 16384 about D23's: heard 0.4, fed back 0.47 */
 #define DLY_DAMP 9830                           /* the repeats darker: a one-pole at ~2.5 kHz, Q15 */
 #define M_ONE (1 << 30)
 #define M_NONE (-65536)                           /* max_att: none yet (Chromium's -1 dB) */
@@ -87,6 +86,7 @@ void rs_mix_init(struct rs_mix *m, uint32_t seed)
     m->dly_len = m->dly_target = 24806;         /* three 16ths at 80 BPM */
     for (uint32_t i = 0; i < 8; i++) m->rev_k[i] = REV_KT[8 + i];   /* the HTML's room, no colour */
     m->send_t = m->send_n = SEND;
+    m->echo = 16384;
     for (uint32_t i = 0; i < DLY_MAX; i++) lead_dly[0][i] = lead_dly[1][i] = 0;
 }
 
@@ -95,13 +95,14 @@ static void lead_delay(struct rs_mix *m, int32_t in, int32_t *l, int32_t *r)   /
     uint32_t rd = (m->dly_w - (uint32_t)m->dly_len) & (DLY_MAX - 1);
     int32_t yl = lead_dly[0][rd], yr = lead_dly[1][rd];
     m->dly_lp += mulq15(yr - m->dly_lp, DLY_DAMP);  /* what comes back round, darker */
-    int32_t w = in + mulq15(m->dly_lp, DLY_FB);
+    int32_t e = m->echo, fb = 8192 + mulq15(e, 14746), wet = mulq15(e, 26214);   /* fed back 0.25 .. 0.7, heard 0 .. 0.8 */
+    int32_t w = in + mulq15(m->dly_lp, fb);
     lead_dly[0][m->dly_w] = (int16_t)(w > 32767 ? 32767 : w < -32768 ? -32768 : w);
     lead_dly[1][m->dly_w] = (int16_t)yl;            /* the left's repeat goes on to the right */
     m->dly_w = (m->dly_w + 1) & (DLY_MAX - 1);
     if ((m->dly_w & 7u) == 0 && m->dly_len != m->dly_target)   /* a new tempo: it glides there, as tape */
         m->dly_len += m->dly_target > m->dly_len ? 1 : -1;
-    *l = mulq15(yl, DLY_WET), *r = mulq15(yr, DLY_WET);
+    *l = mulq15(yl, wet), *r = mulq15(yr, wet);
 }
 
 void rs_mix_colour(struct rs_mix *m, const struct rs_board *bd, uint32_t amount)   /* the board's colour (D24) */
@@ -255,7 +256,7 @@ void rs_mix_render(struct rs_mix *m, int32_t *out, uint32_t n, uint32_t now)
         for (uint32_t k = 0; k < RS_NVOICES; k++)
             rs_voice_render(&m->v[k], m->bus[rs_voice_bus[k]], RS_MIX_SUB, now);
         for (uint32_t i = 0; i < RS_MIX_SUB; i++) m->lead_bus[i] = 0;
-        rs_lead_render(&m->lead, m->lead_bus, RS_MIX_SUB);
+        rs_lead_render(&m->lead, m->lead_bus, RS_MIX_SUB, now);
         lim_division(m);
         {                                               /* the board's colour glides to its new one (D24) */
             int32_t d = m->send_t - m->send_n;

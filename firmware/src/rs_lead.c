@@ -23,7 +23,8 @@ void rs_lead_init(struct rs_lead *l)
     for (int m = 68; m >= 0; m--) inc = (inc * 1013477326ull + (1u << 29)) >> 30, lead_inc[m] = (uint32_t)inc;
     uint64_t f = 1u << 30;                      /* 2^(1/768) x 2^30 = 1074711849, a 64th of a semitone */
     for (int k = 0; k <= 64; k++) lead_frac[k] = (uint32_t)f, f = (f * 1074711849ull + (1u << 29)) >> 30;
-    l->pitch = l->target = 69 << 8;
+    l->pitch = l->target = l->held = 69 << 8;
+    l->cut = 16384, l->bite = 13107;            /* (D23's sound) */
 }
 
 void rs_lead_play(struct rs_lead *l, int note, int gate, int pressed)   /* main loop: what the keys hold now */
@@ -74,13 +75,14 @@ static int32_t tri_q15(uint32_t ph)             /* a triangle, -32768 .. 32767 o
 #define PWM_RATE 155843u                        /* 1.6 Hz: the pulse's width sweeps 10 % .. 90 % */
 enum { L_IDLE, L_ATTACK, L_DECAY, L_SUSTAIN, L_RELEASE };
 
-void rs_lead_render(struct rs_lead *l, int32_t *out, uint32_t n)
+void rs_lead_render(struct rs_lead *l, int32_t *out, uint32_t n, uint32_t now)
 {
     uint32_t req = l->req, i;
     if (req != l->seen) {                       /* what the keys did since the last block */
         int note = (int)(req & 127u), gate = (int)(req >> 8 & 1u), pressed = (req >> 9) != (l->seen >> 9);
         if (gate) {
-            l->target = note << 8;
+            l->target = l->held = note << 8;
+            if (pressed) l->arp_pos = 0;        /* a new key: the arp from its first note again */
             if (pressed && !l->gate) {          /* a new note from silence: from its pitch, the envelopes again */
                 l->pitch = l->target, l->stage = L_ATTACK, l->age = 0, l->fenv = 1 << 15;
                 l->step = (int32_t)((1 << 30) - (l->env > 0 ? l->env : 0)) / (int32_t)LEAD_ATTACK;
@@ -91,9 +93,19 @@ void rs_lead_render(struct rs_lead *l, int32_t *out, uint32_t n)
         }
         l->gate = (uint8_t)gate, l->seen = req;
     }
-    if (l->stage == L_IDLE) return;             /* silent: nothing to do */
-    for (uint32_t f0 = 0; f0 < n; f0 += 32) {   /* a block of 32: the pitch, the width, the filter */
-        uint32_t m = n - f0 < 32 ? n - f0 : 32;
+    for (uint32_t f0 = 0; f0 < n; f0 += 32) {   /* a block of 32: the arp, the pitch, the width, the filter */
+        uint32_t m = n - f0 < 32 ? n - f0 : 32, k;
+        for (k = 0; k < 8u && l->tick_tail != l->tick_head; k++) {   /* the robots' steps reached in this block */
+            if ((int32_t)(l->tick_at[l->tick_tail % 8u] - (now + f0 + m)) >= 0) break;
+            l->tick_tail++;
+            if (l->gate && l->arp_n > 1) {      /* the arp: its next note, at once (no glide), the filter plucked */
+                int32_t note = l->arp_notes[l->arp_pos++ % l->arp_n] << 8;
+                l->target = l->pitch = note;
+                if (l->fenv < (3 << 13)) l->fenv = 3 << 13;
+            }
+        }
+        if (l->arp_n <= 1 && l->gate) l->target = l->held;   /* the arp off: back to the key */
+        if (l->stage == L_IDLE) continue;       /* silent: nothing more to do */
         int32_t d = l->target - l->pitch;
         l->pitch += d / LEAD_GLIDE ? d / LEAD_GLIDE : d;
         int32_t vib = 0;
@@ -104,12 +116,15 @@ void rs_lead_render(struct rs_lead *l, int32_t *out, uint32_t n)
         }
         l->vib_ph += VIB_RATE * m, l->pwm_ph += PWM_RATE * m, l->age += m;
         uint32_t inc = lead_inc_of(l->pitch + vib), binv = 0xFFFFFFFFu / ((inc >> 15) ? inc >> 15 : 1u);
-        uint32_t pw = 0x80000000u + (uint32_t)(tri_q15(l->pwm_ph) * 52428);   /* 50 % +- 40 % */
+        int32_t bite = l->bite, depth = 39321 + bite > 65000 ? 65000 : 39321 + bite;   /* PWM: +-30 % .. +-49 % */
+        uint32_t pw = 0x80000000u + (uint32_t)(tri_q15(l->pwm_ph) * depth);
         /* the filter, open: 1.8 kHz plus the note's own pitch and the envelope's up to +4.5 kHz; f = 2 pi fc / fs */
         int32_t fc = 1800 + ((int32_t)(inc >> 16) * 3) / 2 + ((l->fenv * 4500) >> 15);
+        int32_t cut = l->cut, f12 = cut < 16384 ? 1024 + 3 * (cut >> 4) : 4096 + 6144 * (cut - 16384) / 16384;
+        fc = fc * f12 >> 12;                    /* K1: a quarter .. 2.5 times */
         int32_t fq = fc * 4669 / 1000;
         if (fq > 26000) fq = 26000;
-        int32_t drive = 22118 + (l->fenv >> 1);     /* the fold's drive, Q14: 1.35, more on the attack */
+        int32_t drive = 16384 + (bite * 14336 >> 15) + (l->fenv >> 1);   /* the fold's drive, Q14: 1 .. 1.9, more on the attack */
         l->fenv -= (l->fenv >> 6) + 1;          /* (it closes over ~150 ms) */
         if (l->fenv < 0) l->fenv = 0;
         for (i = 0; i < m; i++) {
@@ -145,6 +160,5 @@ void rs_lead_render(struct rs_lead *l, int32_t *out, uint32_t n)
             }
             out[f0 + i] += (int32_t)(((int64_t)l->lp * l->env) >> 30);
         }
-        if (l->stage == L_IDLE) break;
     }
 }

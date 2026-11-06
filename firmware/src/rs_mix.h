@@ -24,7 +24,7 @@ struct rs_mix {
     volatile int32_t rev_k[8];                  /* the reverb's line gains, Q32 (the board's room: D24) */
     volatile int32_t send_t, tilt_t, drive_t;   /* the board's colour (D24), Q15: the send, a tilt (+ brighter), a drive */
     int32_t send_n, tilt_n, drive_n, tlp[2];    /* where they are on their way; the tilt's low-pass, L and R */
-    volatile int32_t dly_target;                /* the lead's delay, samples: three steps (the main loop sets it) */
+    volatile int32_t dly_target, echo;          /* the lead's delay, samples (three steps); K2's intensity, Q15 (D26) */                /* the lead's delay, samples: three steps (the main loop sets it) */
     int32_t dly_len, dly_lp;
     uint32_t dly_w, dly_hold;
     volatile int32_t level[RS_NLEVEL];          /* Q15: DEFAULT_MIXER; the mix page sets them (one writer) */

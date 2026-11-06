@@ -27,7 +27,9 @@
  *   black keys steer the bots by hand: the next move is this one (D16). F# G# A# C# D# from F3: Scout-7's TURN L,
  *              MOVE, TURN R, DASH, PING; from F4 the same for Echo-3; the last (F#5) swaps the registers
  *   REC        the keys play the lead instead (D21): a SID-style solo over the robots, all 27 keys from F3, the last
- *              held winning, legato gliding; OCT- / OCT+ its octave (-2 .. +2); REC lit and LEAD on the screen
+ *              held winning, legato gliding; OCT- / OCT+ its octave (-2 .. +2); REC lit and LEAD on the screen;
+ *              the knobs play it too (D26): K1 its cutoff, K2 its echo, K3 an arp in the scale (right up, left
+ *              down, further more notes; a note each step), K4 its bite (the fold and the PWM)
  *   MASTER     the volume (platform.c)
  *
  * How the sound runs: the main loop plays the game (rs_tick, a step at a time, LOOKAHEAD ahead of the speaker, as
@@ -139,6 +141,9 @@ static void schedule(void)
             rs_set_loop_len_live(&game, pending_loop);
             pending_loop = 0;
         }
+        mix.lead.tick_at[mix.lead.tick_head % 8u] = t;   /* the step's time to the lead: its arp steps with the robots */
+        RING_PUBLISH();
+        mix.lead.tick_head++;
         view_of(&views[view_head % NVIEW], &tick_out, t);
         view_head++;
         next_q8 += rs_step_q8(&game);
@@ -181,6 +186,37 @@ static uint8_t white_key[16], black_key[11];    /* key index (0 = F3) of the k-t
 static uint8_t sel_bot, bank, layer;
 static uint8_t lead_on, held_n, held[27];       /* REC: the keys play the lead (D21); the keys held, in the order pressed */
 static int8_t lead_oct;                         /* its octave, -2 .. +2 (OCT- / OCT+ while it is on) */
+static int8_t lead_knob[4] = {10, 10, 0, 8};    /* K1 cut, K2 echo, K4 bite: 0 .. 20 (10 the middle); K3 the arp -6 .. 6 */
+static uint32_t lead_knob_ms;                   /* when one was last turned (its values show for a while) */
+static int arp_base = -1;                       /* the note the arp's notes are worked out from */
+
+static void lead_arp(void)                      /* K3: the arp's notes, in thirds of Voice Mod's scale, up or down */
+{
+    int a = lead_knob[2], n = a < 0 ? -a : a, base = held_n ? 53 + 12 * lead_oct + held[held_n - 1u] : -1, i;
+    const struct rs_bassmod_step *bm = &game.bassmod[game.vm_index % (game.bassmod_len ? game.bassmod_len : 1)];
+    for (i = 0; i <= n && i < 8; i++) {         /* (from the key, the scale's root under it) */
+        int note = base < 0 ? 0 : rs_scale_shift(base - bm->root, bm->scale, (a < 0 ? -2 : 2) * i) + bm->root;
+        mix.lead.arp_notes[i] = (int8_t)(note < 0 ? 0 : note > 127 ? 127 : note);
+    }
+    mix.lead.arp_n = (uint8_t)(n ? n + 1 : 0);
+    arp_base = base;
+}
+
+static void lead_knobs(void)                    /* while REC is on, K1-K4 play the lead (D26) */
+{
+    int32_t e;
+    uint32_t k;
+    for (k = 0; k < 4u; k++)
+        if ((e = fm1_enc_take(ENC_KNOB1 + k)) != 0) {
+            int32_t lo = k == 2u ? -6 : 0, hi = k == 2u ? 6 : 20, v = lead_knob[k] + e;
+            lead_knob[k] = (int8_t)(v < lo ? lo : v > hi ? hi : v);
+            lead_knob_ms = fm1_ms;
+        }
+    mix.lead.cut = lead_knob[0] * 32768 / 20;
+    mix.echo = lead_knob[1] * 32768 / 20;
+    mix.lead.bite = lead_knob[3] * 32768 / 20;
+    lead_arp();                                 /* (the key, the scale and the knob may all have moved) */
+}
 
 static uint8_t colour_amt = 40;                 /* how much the board colours the sound (D24), % (FX's KNOB2) */
 static uint32_t colour_sig = ~0u;
@@ -356,6 +392,12 @@ static void app_main(void)
         if (lead_on && b & (1u << BTN_OCT_DOWN) && lead_oct > -2) lead_oct--, dirty = 1;
         if (lead_on && b & (1u << BTN_OCT_UP) && lead_oct < 2) lead_oct++, dirty = 1;
         if (lead_on) b &= ~(1u << BTN_OCT_DOWN | 1u << BTN_OCT_UP);   /* (OCT is the lead's while it plays) */
+        if (lead_on) {                          /* (and the knobs: D26) */
+            uint32_t was = lead_knob_ms;
+            lead_knobs();
+            if (lead_knob_ms != was) dirty = 1;
+            if (lead_knob_ms && fm1_ms - lead_knob_ms > 2000u && fm1_ms - lead_knob_ms < 2050u) dirty = 1;   /* (the values go) */
+        }
         if (b & (1u << BTN_PLAY)) { if (game.playing) stop(); else play(); }
         if (b & (1u << BTN_HOME) && page != PAGE_HOME) page = PAGE_HOME, dirty = 1;
         if (b & (1u << BTN_SEQ) && page != PAGE_SEQ) page = PAGE_SEQ, seq_scroll_to((int32_t)keys_top()), dirty = 1;
@@ -371,7 +413,8 @@ static void app_main(void)
             else layer = (uint8_t)(((int32_t)layer + e % RS_NLAYERS + RS_NLAYERS) % RS_NLAYERS);
             dirty = 1;
         }
-        if (page == PAGE_GLO) {                 /* the knobs: tempo, moves, loop, speed */
+        if (lead_on) {                          /* (the knobs are the lead's: lead_knobs above) */
+        } else if (page == PAGE_GLO) {          /* the knobs: tempo, moves, loop, speed */
             if ((e = fm1_enc_take(ENC_KNOB1)) != 0) {
                 int32_t bpm = (int32_t)game.bpm + e;
                 game.bpm = (uint16_t)(bpm < 60 ? 60 : bpm > 168 ? 168 : bpm), dirty = 1;
@@ -497,6 +540,8 @@ static void app_main(void)
             dirty = 1;
         if (dirty) {
             lead_badge = lead_on ? lead_oct : -99;
+            lead_panel = lead_on && lead_knob_ms && fm1_ms - lead_knob_ms < 2000u;
+            lead_panel_v[0] = lead_knob[0], lead_panel_v[1] = lead_knob[1], lead_panel_v[2] = lead_knob[2], lead_panel_v[3] = lead_knob[3];
             ui_of(&ui, v);
             if (page == PAGE_SEQ) draw_seq(v, &ui, &game, seq_scroll, keys_top());
             else if (page == PAGE_GLO) draw_glo(&game, pending_loop);
