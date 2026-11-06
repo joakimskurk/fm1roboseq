@@ -1,0 +1,94 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+/* The README's first tour: every page as the firmware draws it (rs_screen.c, rs_splash.c), from a real game a few
+ * steps in, into docs/screens/<name>.ppm (make screens turns them into PNG). */
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+static uint16_t fb[240 * 240];
+static void lcd_sync(void) {}
+static void lcd_blit(uint32_t x, uint32_t y, uint32_t w, uint32_t h, const uint16_t *p)
+{
+    for (uint32_t j = 0; j < h; j++)
+        for (uint32_t i = 0; i < w; i++) fb[(y + j) * 240 + x + i] = (uint16_t)(p[j * w + i] >> 8 | p[j * w + i] << 8);
+}
+#define CV_MAX (240u * 240u)
+#include "gfx.c"
+#include "rs_model.c"
+#include "rs_chance.c"
+#include "rs_score.c"
+#include "rs_voice.c"
+#include "rs_mix.h"
+#include "rs_screen.c"
+#include "rs_splash.c"
+
+static void shot(const char *name)
+{
+    char path[128];
+    snprintf(path, sizeof path, "docs/screens/%s.ppm", name);
+    FILE *f = fopen(path, "wb");
+    if (!f) { perror(path); return; }
+    fprintf(f, "P6 240 240 255\n");
+    for (int i = 0; i < 240 * 240; i++) {
+        uint16_t c = fb[i];
+        unsigned char rgb[3] = {(unsigned char)((c >> 11) << 3), (unsigned char)(((c >> 5) & 63) << 2), (unsigned char)((c & 31) << 3)};
+        fwrite(rgb, 1, 3, f);
+    }
+    fclose(f);
+    printf("screen -> %s\n", path);
+}
+
+static struct rs_state g;
+static struct rs_tick_out o;
+static struct rs_view v;
+static struct rs_ui u;
+static struct rs_fx fx;
+
+static void view_ui(void)                       /* roboseq.c's view_of and ui_of */
+{
+    v.step = g.step, v.loop_len = g.loop_len, v.board_id = g.board_id, v.playing = g.playing, v.cycle = g.cycle;
+    v.bot[0] = g.bot[0], v.bot[1] = g.bot[1], v.board = g.board, v.drum_tick = g.drum_tick, v.active = o.active;
+    for (int b = 0; b < 2; b++) {
+        int len = g.prog[b].len ? g.prog[b].len : g.loop_len;
+        u.len[b] = (uint8_t)len, u.playing_at[b] = g.playing && g.step >= 0 ? (int16_t)(g.step % len) : -1;
+        for (int k = 0; k < 16; k++) u.steps[b][k] = g.prog[b].s[k];
+    }
+    u.swapped = g.swapped;
+}
+
+int main(void)
+{
+    static const int32_t LEVEL[RS_NLEVEL] = {29491, 29491, 26214, 18022, 19661, 22938, 19661};
+    draw_splash(2000), shot("splash");
+    rs_default(&g), view_ui();
+    draw_board(&v, &fx, &u, 0), shot("home");
+    rs_start(&g);
+    for (int t = 0; t < 7; t++) rs_tick(&g, &o);
+    view_ui(), fx.lit = o.active, fx.lit_until = 100;
+    draw_board(&v, &fx, &u, 0), shot("home-playing");
+    lead_badge = 0, lead_panel_v[0] = 13, lead_panel_v[1] = 12, lead_panel_v[2] = 8, lead_panel_v[3] = 0, lead_panel_arp = 2;
+    draw_board(&v, &fx, &u, 0), shot("home-lead");
+    lead_badge = -99, lead_panel_arp = -1;
+    memset(&fx, 0, sizeof fx);
+    {                                           /* the two meet on a tile: a heart over them */
+        struct rs_view w = v;
+        w.bot[0].x = w.bot[1].x = 2, w.bot[0].y = w.bot[1].y = 3, w.bot[0].dir = RS_E, w.bot[1].dir = RS_W;
+        fx.heart_until = 100, fx.heart_x = 2, fx.heart_y = 3;
+        draw_board(&w, &fx, &u, 0), shot("home-love");
+        memset(&fx, 0, sizeof fx);
+    }
+    u.sel = 0, u.layer = RS_LAYER_ACTION;
+    draw_seq(&v, &u, &g, 0, 3), shot("seq");
+    rs_place_tile(&g, 0, 2, RS_T_BELT, RS_E), rs_place_tile(&g, 1, 2, RS_T_BELT, RS_E);
+    view_ui(), draw_editor(&v, &g, 2, 2, 1, 1), shot("builder");
+    rs_default(&g), rs_start(&g);
+    draw_glo(&g, 32), shot("glo");
+    rs_cycle_bassmod(&g, 1, 0, 1), rs_cycle_bassmod(&g, 1, 2, -1);
+    draw_scl(&g, 1), shot("voicemod");
+    g.seq2[0] = (struct rs_seq2_step){RS_B_GARDEN, RS_D_BREAK, 0}, g.seq2[2] = (struct rs_seq2_step){RS_B_MAZE, RS_D_NONE, 1};
+    g.seq2_active = 1, g.seq2_index = 0, g.seq2_rnd[0] = 1;
+    draw_arp(&g, 2), shot("seq2");
+    for (int t = 0; t < 5; t++) rs_tick(&g, &o);
+    view_ui(), draw_drums(&v, &g, 1), shot("drums");
+    draw_mix(LEVEL, 6, 40), shot("mix");
+    return 0;
+}

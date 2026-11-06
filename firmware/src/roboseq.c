@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* RoboSeq for the M-VAVE FM-1: the app. Phase 2: the HTML's default song plays, its sound as the HTML's
- * (reference/roboseq.html; ROADMAP.md). The controls, the board on the screen and the pages come in phase 3.
+/* RoboSeq for the M-VAVE FM-1: the app (reference/roboseq.html on the FM-1; README.md is the manual, ROADMAP.md the
+ * plan, docs/roboseq/CONTROLS.md every control). The controls, as this file wires them:
  *
  *   PLAY       starts the default song from its start, and stops it (the HTML's PLAY and STOP)
  *   white keys the 16 steps of a bot's register (its movement sequencer): a key turns its step to the next action,

@@ -130,7 +130,7 @@ and the limiter.)
 - [x] ENV: the boards, now and queued, the presets, reroll, the user board, reset (2026-11-06)
 - [x] A SID lead to play solo over the robots on REC (D21, D23: sharper, folded, a ping-pong echo), its own fader
 - [x] The mix in stereo as the HTML's (its reverb's two channels); the board colours the whole sound (D24)
-- [ ] The UI map generated from the code (`make screens`)
+- [x] The screens generated from the code (`make screens`), the README as the manual (2026-11-06)
 - [ ] Storage: projects in Dinghy's blobs and slots
 
 ## Phase 4: on the emulator, then hardware
