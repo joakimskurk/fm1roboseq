@@ -115,10 +115,57 @@ static void test_harmony(void)                          /* the bots on the chord
     CHECK(louder > 20 && quieter > 100, "the pulse: %d beats louder, %d off-16ths softer", louder, quieter);
 }
 
+static void test_drums(void)                            /* the fills, the crashes, quiet when cleared, the same each time */
+{
+    static struct rs_state s, t;
+    static struct rs_tick_out o, o2;
+    int fills = 0, crashes = 0, ghosts = 0, opens = 0, quiet_hats_ok = 1;
+    rs_default(&s), rs_default(&t);
+    s.music = t.music = RS_MUSIC_PLUS;
+    rs_start(&s), rs_start(&t);
+    for (int k = 0; k < 16 * 40; k++) {
+        rs_tick(&s, &o), rs_tick(&t, &o2);
+        CHECK(o.nnotes == o2.nnotes && !memcmp(o.notes, o2.notes, sizeof o.notes[0] * (size_t)o.nnotes), "tick %d: the same each time", k);
+        int dp = (s.drum_tick + 15) % 16, last = s.cycle % 4 == 3;
+        const struct rs_note *hat = 0, *sn = 0;
+        for (int i = 0; i < o.nnotes; i++) {
+            if (o.notes[i].at) continue;
+            if (o.notes[i].voice == RS_V_HIHAT) hat = &o.notes[i];
+            if (o.notes[i].voice == RS_V_SNARE) sn = &o.notes[i];
+        }
+        if (last && dp >= 12) {
+            if (hat && hat->vel) quiet_hats_ok = 0;
+            if (dp == 15) fills += sn && sn->vel > 20000;
+        }
+        if (dp == 0 && s.cycle % 4 == 0 && s.cycle > 0 && hat) crashes += hat->dur >= SEC(0.5);
+        if (sn && sn->vel < 6000) ghosts++;
+        if (hat && hat->dur > SEC(0.1) && hat->dur < SEC(0.3)) opens++;
+    }
+    CHECK(quiet_hats_ok, "no hats under a fill");
+    CHECK(fills >= 9, "a fill ends each phrase, its last snare loudest (%d of 10)", fills);
+    CHECK(crashes >= 9, "a crash starts each phrase (%d of 9)", crashes);
+    CHECK(ghosts > 5 && opens > 5, "ghost snares (%d) and open hats (%d)", ghosts, opens);
+    {                                                   /* CLEAR, and the drums off: nothing */
+        int hits = 0;
+        rs_default(&s), s.music = RS_MUSIC_PLUS, rs_drum_clear(&s), rs_start(&s);
+        for (int k = 0; k < 16 * 8; k++) {
+            rs_tick(&s, &o);
+            for (int i = 0; i < o.nnotes; i++) hits += o.notes[i].voice >= RS_V_KICK && o.notes[i].voice <= RS_V_HIHAT;
+        }
+        rs_default(&s), s.music = RS_MUSIC_PLUS, s.drums_on = 0, rs_start(&s);
+        for (int k = 0; k < 16 * 8; k++) {
+            rs_tick(&s, &o);
+            for (int i = 0; i < o.nnotes; i++) hits += o.notes[i].voice >= RS_V_KICK && o.notes[i].voice <= RS_V_HIHAT;
+        }
+        CHECK(hits == 0, "cleared or off, the drums stay quiet (%d hits)", hits);
+    }
+}
+
 int main(void)
 {
     test_compose();
     test_harmony();
+    test_drums();
     printf("plus_test: %s\n", fails ? "FAILED" : "all pass");
     return fails != 0;
 }

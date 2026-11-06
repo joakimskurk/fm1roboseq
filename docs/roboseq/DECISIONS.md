@@ -351,3 +351,14 @@ Voice Mod changes a step into the next root (a semitone under it or a whole tone
 out the one or three the bass plays anyway. And the bar breathes: the one 1.18, three 1.14, the other beats 1.08,
 the off-sixteenths 0.82 of their velocity.
 
+**D33c. The drums in PLUS: the player's pattern, played by a drummer.** The pattern stays what the player set (a
+preset, their own, or CLEAR: then PLUS adds nothing, nor with the drums off); PLUS plays it with dynamics and
+variation over a phrase, one Voice Mod round (its steps times how often it moves; 4 loops when manual or shorter):
+the kick leans on one and three, the snare's backbeat over its other hits, the hats strong on the beats, weaker on
+the eighths, weakest between, each hit a hair different. A ghost snare before a backbeat now and then; every other
+loop a kick pushing into four. In the phrase's second half (B) the sixteenth hats fill in (also when the bots run
+hot) and the hat opens on four's and. The phrase's last bar ends in a fill, its last four steps without hats: a
+rising snare roll, or kick-snare-kick-snare; the next phrase starts with a crash (the hat's noise, long). Each
+choice is a hash of the loop and the step, so the same loop sounds the same each time, and nothing is drawn from
+the game's random (the game stays the HTML's).
+

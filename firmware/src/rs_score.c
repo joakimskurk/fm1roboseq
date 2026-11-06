@@ -376,6 +376,78 @@ static uint16_t scale_vel(uint16_t v, uint32_t f)       /* a velocity times f (Q
     return (uint16_t)(x > 32767u ? 32767u : x);
 }
 
+/* PLUS's drums (D33c): the pattern as the player set it, played by a drummer. A phrase is a Voice Mod round (its
+ * steps x how often it moves; 4 loops when it is manual or shorter than 2); in its second half (section B) the
+ * hats open up and fill in; its last bar ends in a fill and the next one starts with a crash. Every choice is a hash
+ * of the loop and the step: the same each time the same loop comes round, and no draw from the game's random. */
+static uint32_t mix32(uint32_t a, uint32_t b, uint32_t c)
+{
+    uint32_t h = a * 0x9E3779B1u ^ (b + 0x7F4A7C15u) * 0x85EBCA77u ^ c * 0xC2B2AE3Du;
+    h ^= h >> 15, h *= 0x2C1B3C6Du, h ^= h >> 12, h *= 0x297A2D39u, h ^= h >> 15;
+    return h;
+}
+
+static struct rs_note *find_note(struct rs_tick_out *o, uint8_t voice)   /* the voice's note at the tick's start */
+{
+    for (int i = 0; i < o->nnotes; i++)
+        if (o->notes[i].voice == voice && o->notes[i].at == 0) return &o->notes[i];
+    return 0;
+}
+
+static void drum(struct rs_tick_out *o, uint8_t voice, uint32_t dur, uint32_t vel_q20)   /* set or add its hit */
+{
+    struct rs_note *n = find_note(o, voice);
+    if (n) n->dur = dur, n->vel = (uint16_t)((vel_q20 + 16u) >> 5);
+    else note(o, voice, voice == RS_V_KICK ? 24 : RS_NOISE, dur, 0, vel_q20);
+}
+
+static void plus_drums(const struct rs_state *s, struct rs_tick_out *o, int bar, int beat)
+{
+    int len = rs_drum_steps(s->loop_len), dp = (s->drum_tick + len - 1) % len, any = 0, i;
+    if (!s->drums_on || (!o->move_tick && !o->loop_reset)) return;
+    for (i = 0; i < len; i++) any |= s->drum_k[i] | s->drum_s[i] | s->drum_h[i];
+    if (!any) return;                                   /* (CLEAR: the player wants them quiet) */
+    if (len != bar) bar = len, beat = len / 4;
+    uint32_t phrase = s->vm_manual ? 4u : (uint32_t)s->bassmod_len * s->vm_freq4 / 4u;
+    if (phrase < 2u) phrase = 4u;
+    uint32_t in = s->cycle % phrase, sec_b = in >= phrase / 2u, last = in == phrase - 1u;
+    int nk = s->drum_k[dp], ns = s->drum_s[dp], nh = s->drum_h[dp], nxs = s->drum_s[(dp + 1) % len];
+    int hs = s->bot[0].heat + s->bot[1].heat;
+    uint32_t h = mix32(s->cycle, (uint32_t)dp, 0x5EEDu), heat = hs > 0 ? (uint32_t)hs : 0u;
+    uint32_t hum = F(0.96) + (h & 31u) * (F(0.08) / 31u);   /* a hair either way, never two hits the same */
+    if (last && dp >= bar - 4) {                        /* the fill: the bar's last four, no hats */
+        struct rs_note *hat = find_note(o, RS_V_HIHAT);
+        int k = dp - (bar - 4);
+        if (hat) hat->vel = 0;                          /* (silent: the voice keeps its place in the order) */
+        if (mix32(s->cycle, 99u, 1u) & 1u) {            /* a roll, rising */
+            static const uint32_t ROLL[4] = {F(0.30), F(0.42), F(0.56), F(0.74)};
+            drum(o, RS_V_SNARE, SEC(0.07), ROLL[k]);
+            if (k == 3) drum(o, RS_V_KICK, SEC(0.18), F(0.9));
+        } else {                                        /* kick, snare, kick, snare */
+            if (k & 1) drum(o, RS_V_SNARE, SEC(0.09), k == 3 ? F(0.78) : F(0.6));
+            else drum(o, RS_V_KICK, SEC(0.18), F(0.88));
+        }
+        return;
+    }
+    if (dp == 0 && in == 0 && s->cycle > 0)             /* a new phrase: the crash (the hat's noise, long) */
+        drum(o, RS_V_HIHAT, SEC(0.55), F(0.5));
+    else if (nh)                                        /* the hats: the beats, the eighths, the sixteenths in between */
+        drum(o, RS_V_HIHAT, sec_b && dp == bar - 2 ? SEC(0.16) : SEC(0.03),
+             mulq(dp % beat == 0 ? F(0.5) : dp % 2 == 0 ? F(0.4) : F(0.27), hum));
+    else if ((dp & 1) && (sec_b || heat >= 6u) && (h >> 8 & 255u) < 140u)
+        drum(o, RS_V_HIHAT, SEC(0.025), mulq(F(0.2), hum));   /* B, or the bots hot: the sixteenths fill in */
+    else if (sec_b && dp == bar - 2)
+        drum(o, RS_V_HIHAT, SEC(0.16), F(0.4));         /* B: the open hat on four's and */
+    if (nk)
+        drum(o, RS_V_KICK, SEC(0.18), mulq(dp == 0 ? F(1.0) : dp == bar / 2 ? F(0.92) : F(0.82), hum));
+    else if ((s->cycle & 1u) && dp == bar - 6 && (h >> 16 & 255u) < 160u)
+        drum(o, RS_V_KICK, SEC(0.16), F(0.7));          /* every other loop: a kick pushing into four */
+    if (ns)
+        drum(o, RS_V_SNARE, SEC(0.1), mulq(dp % beat == 0 ? F(0.72) : F(0.5), hum));
+    else if ((dp & 1) && nxs && (h >> 24) < 110u)
+        drum(o, RS_V_SNARE, SEC(0.05), F(0.16));        /* a ghost before the backbeat */
+}
+
 void rs_score_plus(const struct rs_state *s, struct rs_tick_out *o)
 {
     /* (the moves and the loop's reset tick, its one: the bots stand at their pads there, the drums and now the bass
@@ -416,6 +488,7 @@ void rs_score_plus(const struct rs_state *s, struct rs_tick_out *o)
         uint32_t step = rs_step_q8(s) * (uint32_t)(s->tpm ? s->tpm : 1);
         note(o, RS_V_B_SUB, fold(48 + root + (p ? (chord_tone(7, sc) ? 7 : 0) : 0), bass), step * 2u, 0, p ? F(0.42) : F(0.55));
     }
+    plus_drums(s, o, bar, beat);
     /* the pulse: the one leans in, the beats a little, the off-sixteenths fall back */
     {
         uint32_t f = p == 0 ? F(1.18) : p == bar / 2 ? F(1.14) : p % beat == 0 ? F(1.08) : (p & 1) ? F(0.82) : F(0.95);
