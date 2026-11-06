@@ -100,6 +100,21 @@ int main(void)
         double want = HZ[(stepn - 1) % 4];
         CHECK(fabs(f - want) < want * 0.02, "the arp's step %d at %.1f Hz (%.1f)", stepn, want, f);
     }
+    l.arp_random = 1;                           /* random (D27): a note drawn each step, never the same twice running */
+    {
+        int prev = -1, same = 0, seen[4] = {0};
+        for (int stepn = 0; stepn < 64; stepn++) {
+            l.tick_at[l.tick_head % 8u] = now + 10u, l.tick_head++;
+            for (int i = 0; i < 32; i++) seg[i] = 0;
+            rs_lead_render(&l, seg, 32, now);   /* (a block of 32 frames: the step falls in it) */
+            now += 32;
+            int at = (int)l.arp_last;
+            if (at == prev) same++;
+            seen[at % 4]++, prev = at;
+        }
+        CHECK(!same && seen[0] && seen[1] && seen[2] && seen[3], "random: every note, none twice running (%d)", same);
+    }
+    l.arp_random = 0;
     l.arp_n = 0;                                /* the arp off: back to the key */
     run(4410);
     f = freq(4410);

@@ -15,10 +15,10 @@ struct rs_lead {
     /* the player's knobs while REC is on (D26), Q15, set by the main loop: K1 the cutoff, K4 the bite */
     volatile int32_t cut, bite;                 /* 16384: as D23; cut 0 a quarter, 32768 2.5 times; bite the fold, PWM */
     /* the arp (K3): its notes, up or down in the scale, one each step the robots take */
-    volatile int8_t arp_notes[8];
-    volatile uint8_t arp_n;                     /* 0 or 1: off */
+    volatile int8_t arp_notes[16];
+    volatile uint8_t arp_n, arp_random;         /* 0 or 1: off; random: a note drawn from them each step */
     volatile uint32_t tick_at[8], tick_head;    /* the steps' times (audio frames), as the main loop schedules them */
-    uint32_t tick_tail, arp_pos;
+    uint32_t tick_tail, arp_pos, arp_rng, arp_last;
     int32_t held;                               /* the key's own note, Q8 (the arp leaves it, off it comes back) */
 };
 

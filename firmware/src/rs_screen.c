@@ -21,6 +21,7 @@ struct rs_view {
 
 static int8_t lead_badge = -99;                 /* the keys play the lead (D21): its octave, else -99 */
 static int8_t lead_panel_v[4];                  /* the lead's knobs (D26): shown in the header while REC is on */
+static int8_t lead_panel_arp = -1;              /* ARP on (D27): its kind, else -1 */
 static int hdr_board;                           /* the page drawn is the board: its header sits between the registers */
 static void screen_out(void);                   /* (every page ends with it: the lead's badge, then to the screen) */
 
@@ -685,7 +686,8 @@ static void draw_boards(const struct rs_state *g)
 static void screen_out(void)                    /* while REC is on the header is the lead's; then to the screen */
 {
     if (lead_badge > -99) {                     /* four faders across the page's header: K1 CUT, K2 ECHO, K3 ARP, K4 BITE */
-        static const char *const NAME[4] = {"CUT", "ECHO", "ARP", "BITE"};
+        static const char *const NAME[4] = {"CUT", "ECHO", "BITE", "ARP"};
+        static const char *const KIND[6] = {"UP", "DOWN", "U/D", "UP2", "DN2", "RND"};
         uint16_t empty = RGB(0x1a, 0x1a, 0x2e), full = RGB(0x2f, 0x6a, 0x63);   /* white reads on both */
         int32_t x0 = hdr_board ? 20 : 0, w = hdr_board ? 50 : 60, k;
         cv_rect(x0, 0, 4 * w, SEQ_TOP, C_BG);
@@ -693,7 +695,9 @@ static void screen_out(void)                    /* while REC is on the header is
             int32_t x = x0 + k * w, v = lead_panel_v[k], fw = w - 2;
             char t[8];
             cv_rect(x + 1, 0, fw, 15, empty);
-            if (k == 2) {                       /* the arp: from the middle, right up, left down */
+            if (k == 3 && lead_panel_arp >= 0)  /* ARP on: its kind, the fader full */
+                cv_rect(x + 1, 0, fw, 15, full);
+            else if (k == 3) {                  /* the scale's arp: from the middle, right up, left down */
                 int32_t mid = x + 1 + fw / 2, len = (fw / 2) * (v < 0 ? -v : v) / 6;
                 cv_rect(v < 0 ? mid - len : mid, 0, len, 15, full);
                 cv_rect(mid, 0, 1, 15, C_MUTED);
@@ -701,10 +705,10 @@ static void screen_out(void)                    /* while REC is on the header is
                 cv_rect(x + 1, 0, fw * v / 20, 15, full);
             t[0] = 0;
             {
-                const char *s0 = NAME[k];
+                const char *s0 = k == 3 && lead_panel_arp >= 0 ? KIND[lead_panel_arp % 6] : NAME[k];
                 int32_t n = 0;
                 while (*s0) t[n++] = *s0++;
-                if (k == 2 && v) t[n++] = v > 0 ? '+' : '-', t[n++] = (char)('1' + (v < 0 ? -v : v));   /* notes */
+                if (k == 3 && lead_panel_arp < 0 && v) t[n++] = v > 0 ? '+' : '-', t[n++] = (char)('1' + (v < 0 ? -v : v));   /* notes */
                 t[n] = 0;
             }
             cv_text(x + w / 2 - text_w(&FONT_S, t) / 2, 0, &FONT_S, t, C_TEXT);

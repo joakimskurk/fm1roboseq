@@ -99,7 +99,15 @@ void rs_lead_render(struct rs_lead *l, int32_t *out, uint32_t n, uint32_t now)
             if ((int32_t)(l->tick_at[l->tick_tail % 8u] - (now + f0 + m)) >= 0) break;
             l->tick_tail++;
             if (l->gate && l->arp_n > 1) {      /* the arp: its next note, at once (no glide), the filter plucked */
-                int32_t note = l->arp_notes[l->arp_pos++ % l->arp_n] << 8;
+                uint32_t at = l->arp_pos++ % l->arp_n;
+                if (l->arp_random) {            /* a xorshift draw (never the same note twice running) */
+                    uint32_t x = l->arp_rng ? l->arp_rng : 0x2545F491u;
+                    x ^= x << 13, x ^= x >> 17, x ^= x << 5, l->arp_rng = x;
+                    at = (x >> 8) % l->arp_n;
+                    if (at == l->arp_last) at = (at + 1u) % l->arp_n;
+                }
+                l->arp_last = at;
+                int32_t note = l->arp_notes[at] << 8;
                 l->target = l->pitch = note;
                 if (l->fenv < (3 << 13)) l->fenv = 3 << 13;
             }

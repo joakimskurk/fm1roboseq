@@ -12,9 +12,9 @@
  *   HOME       the board                SEQ   the sequence: both registers as one list, scrolled by KNOB2
  *   GLO        the tempo (KNOB1), how often the bots move (KNOB2), the loop's length (KNOB3: as the loop comes round,
  *              D20), the speed 1/1, 1/2, 1/4 (KNOB4)
- *   SCL (SEL)  Voice Mod: white keys 1-4 pick a step, KNOB1-3 its scale, root, semitone, KNOB4 when it moves on;
+ *   SCL (SEL)  Seq 1, pressed again Seq 2 (D27). Voice Mod (Seq 1): white keys 1-4 pick a step, KNOB1-3 its scale, root, semitone, KNOB4 when it moves on;
  *              white keys 13-16 NEXT (MANUAL), ROOT transpose, reset, random
- *   ARP        Seq 2: white keys 1-4 pick a step, KNOB1-3 its board, drums, the registers swapped; white keys 12-16
+ *   ...        Seq 2: white keys 1-4 pick a step, KNOB1-3 its board, drums, the registers swapped; white keys 12-16
  *              on / off (queued while playing), roll A's / B's register on its wrap, reset, random
  *   LFO        the drums: SELECT picks kick, snare or hihat, a white key turns its step; KNOB1 the patterns (then
  *              CLEAR), KNOB4 on / off
@@ -28,9 +28,11 @@
  *              MOVE, TURN R, DASH, PING; from F4 the same for Echo-3; the last (F#5) swaps the registers
  *   REC        the keys play the lead instead (D21): a SID-style solo over the robots, all 27 keys from F3, the last
  *              held winning, legato gliding; OCT- / OCT+ its octave (-2 .. +2); REC lit and LEAD on the screen;
- *              the knobs play it too (D26): K1 its cutoff, K2 its echo, K3 an arp in the scale (right up, left
- *              down, further more notes; a note each step), K4 its bite (the fold and the PWM); the four as faders
- *              in the page's header while REC is on
+ *              the knobs play it too (D26): K1 its cutoff, K2 its echo, K3 its bite (the fold and the PWM), K4 an
+ *              arp in the scale (right up, left down, further more notes; a note each step); the four as faders in
+ *              the page's header while the lead plays
+ *   ARP        the keys a chord arpeggiated, a note each step (D27; lit, and the lead on with it): hold a chord;
+ *              K4 its kind: up, down, up and down, up two octaves, down two octaves, random
  *   MASTER     the volume (platform.c)
  *
  * How the sound runs: the main loop plays the game (rs_tick, a step at a time, LOOKAHEAD ahead of the speaker, as
@@ -187,36 +189,66 @@ static uint8_t white_key[16], black_key[11];    /* key index (0 = F3) of the k-t
 static uint8_t sel_bot, bank, layer;
 static uint8_t lead_on, held_n, held[27];       /* REC: the keys play the lead (D21); the keys held, in the order pressed */
 static int8_t lead_oct;                         /* its octave, -2 .. +2 (OCT- / OCT+ while it is on) */
-static int8_t lead_knob[4] = {10, 10, 0, 8};    /* K1 cut, K2 echo, K4 bite: 0 .. 20 (10 the middle); K3 the arp -6 .. 6 */
-static uint32_t lead_knob_ms;                   /* when one was last turned (its values show for a while) */
-static int arp_base = -1;                       /* the note the arp's notes are worked out from */
+static int8_t lead_knob[4] = {10, 10, 8, 0};    /* K1 cut, K2 echo, K3 bite: 0 .. 20 (10 the middle); K4 the scale arp -6 .. 6 */
+static uint32_t lead_knob_ms;                   /* when one was last turned */
+static uint8_t arp_mode, arp_kind;              /* ARP (D27): the keys' chord arpeggiated; K4 its kind */
+enum { ARP_UP, ARP_DOWN, ARP_UPDOWN, ARP_UP2, ARP_DOWN2, ARP_RANDOM, ARP_KINDS };
 
-static void lead_arp(void)                      /* K3: the arp's notes, in thirds of Voice Mod's scale, up or down */
+static void lead_arp(void)                      /* the arp's notes: the chord held (ARP), or thirds of the scale (K4) */
 {
-    int a = lead_knob[2], n = a < 0 ? -a : a, base = held_n ? 53 + 12 * lead_oct + held[held_n - 1u] : -1, i;
-    const struct rs_bassmod_step *bm = &game.bassmod[game.vm_index % (game.bassmod_len ? game.bassmod_len : 1)];
-    for (i = 0; i <= n && i < 8; i++) {         /* (from the key, the scale's root under it) */
-        int note = base < 0 ? 0 : rs_scale_shift(base - bm->root, bm->scale, (a < 0 ? -2 : 2) * i) + bm->root;
-        mix.lead.arp_notes[i] = (int8_t)(note < 0 ? 0 : note > 127 ? 127 : note);
+    int8_t *out = (int8_t *)mix.lead.arp_notes;
+    uint32_t n = 0, i, j;
+    if (arp_mode) {                             /* the keys held, low to high (8 at most), as the kind lays them */
+        int8_t c[8];
+        uint32_t m = 0;
+        for (i = 0; i < held_n && m < 8u; i++) {
+            int8_t note = (int8_t)(53 + 12 * lead_oct + held[i]);
+            for (j = m; j > 0 && c[j - 1] > note; j--) c[j] = c[j - 1];
+            c[j] = note, m++;
+        }
+        if (m) switch (arp_kind) {
+            case ARP_DOWN: for (i = 0; i < m; i++) out[n++] = c[m - 1u - i]; break;
+            case ARP_UPDOWN:                    /* up, then down without the ends twice */
+                for (i = 0; i < m; i++) out[n++] = c[i];
+                for (i = m >= 2u ? m - 2u : 0u; i > 0; i--) out[n++] = c[i];
+                break;
+            case ARP_UP2: for (i = 0; i < 2u * m; i++) out[n++] = (int8_t)(c[i % m] + (i >= m ? 12 : 0)); break;
+            case ARP_DOWN2: for (i = 0; i < 2u * m; i++) out[n++] = (int8_t)(c[m - 1u - i % m] + (i < m ? 12 : 0)); break;
+            default: for (i = 0; i < m; i++) out[n++] = c[i]; break;   /* up, and random draws from them */
+            }
+        mix.lead.arp_random = arp_kind == ARP_RANDOM;
+        mix.lead.arp_n = (uint8_t)(n ? n : 1u);     /* (one key: that note; none: it lets go anyway) */
+        return;
     }
-    mix.lead.arp_n = (uint8_t)(n ? n + 1 : 0);
-    arp_base = base;
+    int a = lead_knob[3], k = a < 0 ? -a : a, base = held_n ? 53 + 12 * lead_oct + held[held_n - 1u] : -1;
+    const struct rs_bassmod_step *bm = &game.bassmod[game.vm_index % (game.bassmod_len ? game.bassmod_len : 1)];
+    for (i = 0; i <= (uint32_t)k && i < 8u; i++) {   /* (from the key, the scale's root under it) */
+        int note = base < 0 ? 0 : rs_scale_shift(base - bm->root, bm->scale, (a < 0 ? -2 : 2) * (int)i) + bm->root;
+        out[i] = (int8_t)(note < 0 ? 0 : note > 127 ? 127 : note);
+    }
+    mix.lead.arp_random = 0;
+    mix.lead.arp_n = (uint8_t)(k ? k + 1 : 0);
 }
 
-static void lead_knobs(void)                    /* while REC is on, K1-K4 play the lead (D26) */
+static void lead_knobs(void)                    /* while the lead plays, K1-K4 play it (D26, D27) */
 {
     int32_t e;
     uint32_t k;
     for (k = 0; k < 4u; k++)
         if ((e = fm1_enc_take(ENC_KNOB1 + k)) != 0) {
-            int32_t lo = k == 2u ? -6 : 0, hi = k == 2u ? 6 : 20, v = lead_knob[k] + e;
-            lead_knob[k] = (int8_t)(v < lo ? lo : v > hi ? hi : v);
+            if (k == 3u && arp_mode) {          /* K4 with ARP on: the arp's kind */
+                int32_t v = (int32_t)arp_kind + e;
+                arp_kind = (uint8_t)(v < 0 ? 0 : v >= ARP_KINDS ? ARP_KINDS - 1 : v);
+            } else {
+                int32_t lo = k == 3u ? -6 : 0, hi = k == 3u ? 6 : 20, v = lead_knob[k] + e;
+                lead_knob[k] = (int8_t)(v < lo ? lo : v > hi ? hi : v);
+            }
             lead_knob_ms = fm1_ms;
         }
     mix.lead.cut = lead_knob[0] * 32768 / 20;
     mix.echo = lead_knob[1] * 32768 / 20;
-    mix.lead.bite = lead_knob[3] * 32768 / 20;
-    lead_arp();                                 /* (the key, the scale and the knob may all have moved) */
+    mix.lead.bite = lead_knob[2] * 32768 / 20;
+    lead_arp();                                 /* (the keys, the scale and the knob may all have moved) */
 }
 
 static uint8_t colour_amt = 40;                 /* how much the board colours the sound (D24), % (FX's KNOB2) */
@@ -241,7 +273,7 @@ static void lead_keys(uint32_t down, uint32_t up)   /* the last key held wins; l
                 if (held[i] == k) { for (; i + 1u < held_n; i++) held[i] = held[i + 1u]; held_n--; break; }
         if (down >> k & 1u && held_n < 27u) held[held_n++] = (uint8_t)k, pressed = 1;
     }
-    if (held_n) rs_lead_play(&mix.lead, 53 + 12 * lead_oct + held[held_n - 1u], 1, pressed);
+    if (held_n) rs_lead_play(&mix.lead, 53 + 12 * lead_oct + held[held_n - 1u], 1, pressed);   /* (ARP: its notes over it) */
     else rs_lead_play(&mix.lead, 53 + 12 * lead_oct, 0, 0);
 }
 enum { PAGE_HOME, PAGE_SEQ, PAGE_GLO, PAGE_SCL, PAGE_ARP, PAGE_LFO, PAGE_FX, PAGE_ENV };   /* the pages (D19) */
@@ -388,6 +420,7 @@ static void app_main(void)
         prev = notes;
         if (b & (1u << BTN_REC)) {             /* the lead on / off; off, what it holds lets go */
             lead_on = !lead_on, held_n = 0, dirty = 1;
+            if (!lead_on) arp_mode = 0;         /* (the lead off, its arp with it) */
             rs_lead_play(&mix.lead, 53 + 12 * lead_oct, 0, 0);
         }
         if (lead_on && b & (1u << BTN_OCT_DOWN) && lead_oct > -2) lead_oct--, dirty = 1;
@@ -402,8 +435,12 @@ static void app_main(void)
         if (b & (1u << BTN_HOME) && page != PAGE_HOME) page = PAGE_HOME, dirty = 1;
         if (b & (1u << BTN_SEQ) && page != PAGE_SEQ) page = PAGE_SEQ, seq_scroll_to((int32_t)keys_top()), dirty = 1;
         if (b & (1u << BTN_GLO) && page != PAGE_GLO) page = PAGE_GLO, dirty = 1;
-        if (b & (1u << BTN_SEL) && page != PAGE_SCL) page = PAGE_SCL, dirty = 1;
-        if (b & (1u << BTN_ARP) && page != PAGE_ARP) page = PAGE_ARP, dirty = 1;
+        if (b & (1u << BTN_SEL))                /* SCL: Seq 1 (Voice Mod), pressed again Seq 2 (D27) */
+            page = page == PAGE_SCL ? PAGE_ARP : PAGE_SCL, dirty = 1;
+        if (b & (1u << BTN_ARP)) {              /* ARP: the keys a chord arpeggiated (D27); it brings the lead with it */
+            arp_mode = !arp_mode, dirty = 1;
+            if (arp_mode && !lead_on) lead_on = 1, held_n = 0;
+        }
         if (b & (1u << BTN_LFO) && page != PAGE_LFO) page = PAGE_LFO, dirty = 1;
         if (b & (1u << BTN_FX) && page != PAGE_FX) page = PAGE_FX, dirty = 1;
         if (b & (1u << BTN_ENV) && page != PAGE_ENV) page = PAGE_ENV, dirty = 1;
@@ -519,8 +556,8 @@ static void app_main(void)
         fm1_led_key(BTN_HOME, page == PAGE_HOME);
         fm1_led_key(BTN_SEQ, page == PAGE_SEQ);
         fm1_led_key(BTN_GLO, page == PAGE_GLO);
-        fm1_led_key(BTN_SEL, page == PAGE_SCL);
-        fm1_led_key(BTN_ARP, page == PAGE_ARP);
+        fm1_led_key(BTN_SEL, page == PAGE_SCL || page == PAGE_ARP);
+        fm1_led_key(BTN_ARP, arp_mode);
         fm1_led_key(BTN_LFO, page == PAGE_LFO);
         fm1_led_key(BTN_FX, page == PAGE_FX);
         fm1_led_key(BTN_ENV, page == PAGE_ENV);
@@ -541,6 +578,7 @@ static void app_main(void)
         if (dirty) {
             lead_badge = lead_on ? lead_oct : -99;
             lead_panel_v[0] = lead_knob[0], lead_panel_v[1] = lead_knob[1], lead_panel_v[2] = lead_knob[2], lead_panel_v[3] = lead_knob[3];
+            lead_panel_arp = arp_mode ? (int8_t)arp_kind : -1;
             ui_of(&ui, v);
             if (page == PAGE_SEQ) draw_seq(v, &ui, &game, seq_scroll, keys_top());
             else if (page == PAGE_GLO) draw_glo(&game, pending_loop);

@@ -241,3 +241,13 @@ faders in the page's own header line (between the registers on the board), their
 muted teal fill and a dark empty part, so nothing lies over the board (the product owner: no overlapping; the LEAD
 badge went with it, REC's light says it). The pages' own knobs wait while REC is on.
 
+## D27. ARP: the keys a chord, arpeggiated in time; Seq 2 behind SCL (2026-11-06)
+
+The product owner: with an ARP button, toggling it should put the keys in an arp mode where chords are held, a knob
+turns the arp's kind, the button lit while it is on; and the arp's adjustment on K4. So ARP now toggles that mode
+(lit; it brings the lead with it, REC off takes both away): the keys held, low to high (up to eight), are played a
+note each step the robots take, as K4 lays them: up, down, up and down, up over two octaves, down over two, random
+(never the same note twice running). Without ARP, K4 is D26's arp in the scale from one key. The knobs are now K1
+cut, K2 echo, K3 bite, K4 arp. Seq 2, which had the ARP button, is SCL pressed again: SCL toggles Seq 1 (Voice
+Mod) and Seq 2, the HTML's two small sequencers side by side (D19 amended).
+
