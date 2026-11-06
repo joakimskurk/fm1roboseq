@@ -59,3 +59,14 @@ the 16 rows on the white keys.
 
 The white keys rest here (no register on the screen); the black keys steer as everywhere.
 
+## SCL (Voice Mod, the HTML's Seq 1; the SEL button)
+
+| Control | Does |
+|---|---|
+| white keys 1-4 | pick a step (framed) |
+| KNOB1 / KNOB2 / KNOB3 | the picked step's scale / root / semitone (-12 ... +12) |
+| KNOB4 | when it moves on: MANUAL, or every 1/4, 1/2, 1, 2, 4 loops |
+| white key 13 | NEXT: on to its next step (MANUAL) |
+| white key 14 | ROOT: the root transposes the sequence, on / off |
+| white keys 15 / 16 | reset / random (random can be undone) |
+

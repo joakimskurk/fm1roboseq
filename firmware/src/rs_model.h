@@ -160,6 +160,8 @@ void rs_randomize_all(struct rs_state *s);                      /* randomizeAllS
 void rs_clear_steps(struct rs_state *s);                        /* resetAllSteps() */
 void rs_randomize_board(struct rs_state *s);                    /* randomizeBoard() (not undoable, as the HTML) */
 void rs_randomize_bassmod(struct rs_state *s);                  /* randomizeBassMod() */
+void rs_set_voice_mod(struct rs_state *s, uint8_t manual, uint8_t freq4);   /* its trigger, its loop frequency x 4 */
+void rs_reset_bassmod(struct rs_state *s);                      /* resetBassMod() */
 void rs_randomize_seq2(struct rs_state *s);                     /* randomizeSeq2() */
 uint32_t rs_random(struct rs_state *s, uint32_t n);             /* 0..n-1 */
 

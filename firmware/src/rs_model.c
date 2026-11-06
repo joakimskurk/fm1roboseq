@@ -559,6 +559,20 @@ void rs_randomize_board(struct rs_state *s)             /* randomizeBoard() */
     rs_set_board(s, &b, RS_B_RANDOM);
 }
 
+void rs_set_voice_mod(struct rs_state *s, uint8_t manual, uint8_t freq4)   /* cycleVoiceModTrigger(), ...LoopFreq() */
+{
+    if (manual != s->vm_manual) s->vm_manual = manual, s->vm_count = 0;   /* (and voiceModResetCount, unused) */
+    if (freq4 && freq4 != s->vm_freq4) s->vm_freq4 = freq4, s->vm_count = 0;
+}
+
+void rs_reset_bassmod(struct rs_state *s)               /* resetBassMod(): buildBassModSteps(), 4 steps */
+{
+    static const struct rs_bassmod_step BM[4] = {{RS_SC_MAJOR, 3, 0}, {RS_SC_MAJOR, 0, 0}, {RS_SC_MAJOR, 5, 0},
+                                                 {RS_SC_MAJOR, 9, 0}};
+    s->bassmod_len = 4;
+    for (int i = 0; i < RS_BASSMOD_MAX; i++) s->bassmod[i] = i < 4 ? BM[i] : (struct rs_bassmod_step){RS_SC_MAJOR, 0, 0};
+}
+
 void rs_randomize_bassmod(struct rs_state *s)           /* randomizeBassMod() */
 {
     rs_push_undo(s);

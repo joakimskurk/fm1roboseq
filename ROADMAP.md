@@ -123,7 +123,8 @@ and the limiter.)
 - [ ] P4: the rules as host tests, page by page
 - [x] The pages on the buttons (D19); SEQ, the sequence: both registers as one list that glides (KNOB2, OCT)
 - [x] GLO: tempo, ticks per move, the loop's length as the loop comes round (D20), 1/4 speed
-- [ ] SCL (Voice Mod), ARP (Seq 2), LFO (drums), FX (mix),
+- [x] SCL: Voice Mod's four steps as cards, a step's scale, root and semitone on the knobs
+- [ ] ARP (Seq 2), LFO (drums), FX (mix),
       ENV (boards); the UI map generated from the code (`make screens`)
 - [ ] Storage: projects in Dinghy's blobs and slots
 

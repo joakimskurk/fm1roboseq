@@ -468,3 +468,53 @@ static void draw_glo(const struct rs_state *g, uint8_t pending_loop)
     }
     cv_blit(0, 0);
 }
+
+/* ---- SCL: Voice Mod (the HTML's Seq 1): its four steps as cards, each a scale, a root and a semitone; the step it
+ * is on lit, the one the knobs edit framed; when it moves on below; the white keys' words at the foot */
+static void key_labels(const char *const *w, uint32_t first)   /* the white keys' words: four, from white key first */
+{
+    uint32_t k;
+    for (k = 0; k < 4u; k++) {
+        int32_t x = (int32_t)k * 60;
+        cv_rect(x + 2, 214, 56, 24, RGB(0x1a, 0x1a, 0x2e));
+        digits(x + 5, 216, first + k, first + k > 9u ? 2u : 1u, C_MUTED);
+        cv_text(x + 30 - text_w(&FONT_S, w[k]) / 2, 221, &FONT_S, w[k], C_TEXT);
+    }
+}
+
+static void draw_scl(const struct rs_state *g, uint32_t cursor)
+{
+    static const char *const SCALE[RS_NSCALES] = {"CHROM", "MAJOR", "MINOR", "DORIA", "PHRYG", "LYDIA", "MIXO",
+                                                  "PENTA", "MPENT", "DIM", "WHOLE", "AUG"};
+    static const char *const ROOT[12] = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
+    static const char *const KEYS[4] = {"NEXT", "ROOT", "RST", "RND"};
+    static const char *const FREQ[6] = {"MANUAL", "1/4 LOOP", "1/2 LOOP", "1 LOOP", "2 LOOPS", "4 LOOPS"};
+    uint32_t n = g->bassmod_len ? g->bassmod_len : 4, i, f;
+    uint16_t cell = RGB(0x1a, 0x1a, 0x2e);
+    char st[8];
+    cv_begin(240, 240, C_BG);
+    cv_text(120 - text_w(&FONT_S, "VOICE MOD") / 2, 0, &FONT_S, "VOICE MOD", C_TEXT);
+    cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
+    for (i = 0; i < 4u && i < n; i++) {         /* (this HTML's Seq 1 has four) */
+        const struct rs_bassmod_step *b = &g->bassmod[i];
+        int32_t x = (int32_t)i * 60, on = i == g->vm_index % n, s = b->semitone;
+        cv_rect(x + 2, 20, 56, 150, on ? mix565(C_ACCENT, cell, 60) : cell);
+        if (i == cursor) frame(x + 2, 20, 56, 150, 2, C_WHITE);
+        digits(x + 27, 25, i + 1u, 1, on ? C_ACCENT : C_MUTED);
+        cv_text(x + 30 - text_w(&FONT_S, SCALE[b->scale % RS_NSCALES]) / 2, 44, &FONT_S, SCALE[b->scale % RS_NSCALES], C_TEXT);
+        cv_text(x + 30 - text_w(&FONT_L, ROOT[b->root % 12u]) / 2, 74, &FONT_L, ROOT[b->root % 12u], on ? C_ACCENT : C_TEXT);
+        st[0] = s > 0 ? '+' : s < 0 ? '-' : ' ', s = s < 0 ? -s : s;
+        st[1] = (char)(s >= 10 ? '1' : '0' + s), st[2] = s >= 10 ? (char)('0' + s - 10) : 0, st[3] = 0;
+        if (st[0] == ' ') st[0] = '0', st[1] = 0;
+        cv_text(x + 30 - text_w(&FONT_S, st) / 2, 124, &FONT_S, st, C_MUTED);
+        cv_text(x + 30 - text_w(&FONT_S, "SEMI") / 2, 144, &FONT_S, "SEMI", mix565(C_MUTED, cell, 120));
+    }
+    f = g->vm_manual ? 0u : g->vm_freq4 >= 16 ? 5u : g->vm_freq4 >= 8 ? 4u : g->vm_freq4 >= 4 ? 3u : g->vm_freq4 >= 2 ? 2u : 1u;
+    knob_tag(4, 177, 4);
+    cv_text(24, 175, &FONT_S, FREQ[f], g->vm_manual ? C_WARN : C_TEXT);
+    cv_text(236 - text_w(&FONT_S, g->transpose_root ? "ROOT ON" : "ROOT OFF"), 175, &FONT_S,
+            g->transpose_root ? "ROOT ON" : "ROOT OFF", g->transpose_root ? C_ACCENT : C_MUTED);
+    cv_text(4, 195, &FONT_S, "K1 SCALE K2 ROOT K3 SEMI", mix565(C_MUTED, C_BG, 160));
+    key_labels(KEYS, 13);
+    cv_blit(0, 0);
+}
