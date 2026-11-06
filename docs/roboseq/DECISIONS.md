@@ -277,3 +277,12 @@ On both pages a little keyboard at the foot shows each key in the colour of what
 keys are the builder's, so the black keys do not steer there (C3 now: everywhere else). Building while the robots
 play is playing: it is heard on the next step or loop (P1).
 
+## D29. PLAY flashes the beat; the arp goes faster on SELECT (2026-11-06)
+
+The product owner: PLAY should flash the tempo; in the lead's mode the arp should go faster still. PLAY's light now
+flashes 100 ms on every beat as it is heard (every fourth move: every 4 x ticks-per-move steps, so it follows the
+tempo, the speed and the ticks), and is dark when stopped. While the lead plays SELECT has nothing else to do (the
+keys are the lead's), so it sets the arp's notes a step, 1 to 4 (sixteenths, thirty-seconds, triplets of them,
+sixty-fourths at the robots' tempo): the main loop hands the lead the step's length cut in that many, and after each
+step the lead plays the rest as their times come. The rate shows small on the ARP fader.
+

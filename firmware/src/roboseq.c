@@ -115,6 +115,8 @@ static void view_of(struct rs_view *v, const struct rs_tick_out *o, uint32_t t0)
     v->board = game.board;
     v->drum_tick = game.drum_tick;
     v->active = o ? o->active : 0;
+    v->n = steps_played;                        /* (the step's count: the beat is every fourth move) */
+    v->tpm = game.tpm ? game.tpm : 1;
     v->died[0] = o && o->died[0], v->died[1] = o && o->died[1], v->love = o && o->love;
     v->clash[0] = o && o->clash[0], v->clash[1] = o && o->clash[1];
 }
@@ -191,6 +193,7 @@ static int8_t lead_oct;                         /* its octave, -2 .. +2 (OCT- / 
 static int8_t lead_knob[4] = {10, 10, 8, 0};    /* K1 cut, K2 echo, K3 bite: 0 .. 20 (10 the middle); K4 the scale arp -6 .. 6 */
 static uint32_t lead_knob_ms;                   /* when one was last turned */
 static uint8_t arp_mode, arp_kind;              /* ARP (D27): the keys' chord arpeggiated; K4 its kind */
+static uint8_t arp_rate = 1;                    /* its notes a step, 1 .. 4: SELECT while the lead plays (D29) */
 enum { ARP_UP, ARP_DOWN, ARP_UPDOWN, ARP_UP2, ARP_DOWN2, ARP_RANDOM, ARP_KINDS };
 
 static void lead_arp(void)                      /* the arp's notes: the chord held (ARP), or thirds of the scale (K4) */
@@ -244,6 +247,8 @@ static void lead_knobs(void)                    /* while the lead plays, K1-K4 p
             }
             lead_knob_ms = fm1_ms;
         }
+    mix.lead.arp_rate = arp_rate;               /* (and how fast: the step cut in arp_rate) */
+    mix.lead.arp_sub = (rs_step_q8(&game) >> 8) / arp_rate;
     mix.lead.cut = lead_knob[0] * 32768 / 20;
     mix.echo = lead_knob[1] * 32768 / 20;
     mix.lead.bite = lead_knob[2] * 32768 / 20;
@@ -440,7 +445,7 @@ static void app_main(void)
     static struct rs_fx fx;
     static struct rs_view last;
     static struct rs_ui ui;
-    uint32_t due = 0, shown = ~0u, prev = 0;
+    uint32_t due = 0, shown = ~0u, prev = 0, beat_ms = 0;
     rs_boot_check = rs_selfcheck();             /* the model on the chip: make emu compares it with the computer's */
     rs_mix_init(&mix, 0x5EEDu);
     rs_default(&game);
@@ -497,7 +502,10 @@ static void app_main(void)
             if (page == PAGE_SEQ) seq_cursor_to((int32_t)seq_cursor);
         }
         if ((e = fm1_enc_take(ENC_SELECT)) != 0) {        /* SELECT: what the white keys turn */
-            if (page == PAGE_LFO) drum_row = (uint8_t)(((int32_t)drum_row + e % 3 + 3) % 3);
+            if (lead_on) {                      /* the lead's: the arp's notes a step, 1 .. 4 (D29) */
+                int32_t r = arp_rate + e;
+                arp_rate = (uint8_t)(r < 1 ? 1 : r > 4 ? 4 : r);
+            } else if (page == PAGE_LFO) drum_row = (uint8_t)(((int32_t)drum_row + e % 3 + 3) % 3);
             else if (page == PAGE_SEQ) seq_cursor_to((int32_t)seq_cursor + e);   /* SEQ: the cursor up and down (D28) */
             else layer = (uint8_t)(((int32_t)layer + e % RS_NLAYERS + RS_NLAYERS) % RS_NLAYERS);
             dirty = 1;
@@ -605,7 +613,7 @@ static void app_main(void)
             while (d >= DLY_MAX) d >>= 1;
             mix.dly_target = (int32_t)d;
         }
-        fm1_led_key(BTN_PLAY, game.playing);
+        fm1_led_key(BTN_PLAY, game.playing && fm1_ms - beat_ms < 100u);   /* PLAY flashes the beat (D29) */
         fm1_led_key(BTN_HOME, page == PAGE_HOME);
         fm1_led_key(BTN_SEQ, page == PAGE_SEQ);
         fm1_led_key(BTN_GLO, page == PAGE_GLO);
@@ -627,6 +635,7 @@ static void app_main(void)
         }
         v = view_now();
         key = v->t0 ^ (uint32_t)v->playing << 31 ^ (uint32_t)v->step << 20;
+        if (key != shown && v->playing && v->n % (4u * v->tpm) == 0) beat_ms = fm1_ms;   /* a beat heard */
         if (key != shown) {                     /* a new step heard: its effects start now */
             if (v->playing && shown != ~0u) screen_effects(&fx, &last, v, fm1_ms);
             last = *v, shown = key, dirty = 1;
@@ -636,6 +645,7 @@ static void app_main(void)
             lead_badge = lead_on ? lead_oct : -99;
             lead_panel_v[0] = lead_knob[0], lead_panel_v[1] = lead_knob[1], lead_panel_v[2] = lead_knob[2], lead_panel_v[3] = lead_knob[3];
             lead_panel_arp = arp_mode ? (int8_t)arp_kind : -1;
+            lead_panel_rate = arp_rate;
             ui_of(&ui, v);
             if (page == PAGE_SEQ) draw_seq(v, &ui, &game, seq_scroll, seq_cursor);
             else if (page == PAGE_GLO) draw_glo(&game, pending_loop);

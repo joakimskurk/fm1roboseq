@@ -100,6 +100,19 @@ int main(void)
         double want = HZ[(stepn - 1) % 4];
         CHECK(fabs(f - want) < want * 0.02, "the arp's step %d at %.1f Hz (%.1f)", stepn, want, f);
     }
+    {                                           /* faster (D29): two notes a step, the second half way */
+        uint32_t p0 = l.arp_pos;
+        l.arp_rate = 2, l.arp_sub = 2205;
+        l.tick_at[l.tick_head % 8u] = now + 10u, l.tick_head++;
+        for (int i = 0; i < 64; i++) seg[i] = 0;
+        rs_lead_render(&l, seg, 64, now);      /* the step: its first note */
+        CHECK(l.arp_pos == p0 + 1u, "the step's first note (%u)", l.arp_pos - p0);
+        rs_lead_render(&l, seg, 2048, now + 64);   /* not yet half way */
+        CHECK(l.arp_pos == p0 + 1u, "nothing before half way");
+        rs_lead_render(&l, seg, 256, now + 2112);  /* half way: the second */
+        CHECK(l.arp_pos == p0 + 2u, "the second note half way through the step (%u)", l.arp_pos - p0);
+        now += 4410, l.arp_rate = 1;
+    }
     l.arp_random = 1;                           /* random (D27): a note drawn each step, never the same twice running */
     {
         int prev = -1, same = 0, seen[4] = {0};

@@ -7,14 +7,14 @@ robots are the instrument; D16 says how the keys reach them. A rule here is a te
 
 | | Rule |
 |---|---|
-| C1 | **PLAY is the transport**, on every page: start from the board's start, stop with the HTML's panic. Nothing else. |
+| C1 | **PLAY is the transport**, on every page: start from the board's start, stop with the HTML's panic. Nothing else. Its light flashes the beat (D29). |
 | C2 | **The white keys are positions.** Where a page has steps (a register, Voice Mod, the drums) the 16 white keys are its steps, OCT- / OCT+ the next 16. A key turns its step to its next value, as the HTML's buttons cycle. |
 | C3 | **The black keys steer the bots**, on every page but the two builders, SEQ and ENV (D28), while it plays (P1): the first five Scout-7's TURN L, MOVE, TURN R, DASH, PING, the next five Echo-3's, the last swaps the registers. A steer is the bot's next move, once. |
 | C4 | **What a key does is on the screen** (P3); on the builders a little keyboard at the foot in each key's colour (D28): both registers down the board's sides (Scout-7 left, Echo-3 right, top to bottom = white keys left to right), the one on the white keys bright, the step playing framed; the registers swapped shows. The FM-1's keys have no lights, so the screen is the only place. |
 | C5 | **The result is heard on the next step**, never later: the game runs 64 ms ahead (D12), so an edit or a steer lands on the next step the game computes. |
 | C6 | **EDIT picks whose register** is on the white keys (lit: Echo-3's), on every page with a register. |
 | C7 | **SELECT picks which part of a step** the white keys turn: its ACTION, MODIFIER or CHANCE (the HTML's step card's three buttons), named over the board in the picked bot's colour; the register on the keys shows that part, the other its actions. |
-| C9 | **REC turns the keys into the lead** (D21) on every page: all 27 play it, OCT- / OCT+ its octave, K1-K4 its cutoff, echo, bite and arp (D26, D27), shown as four faders in the header line. ARP (lit) arpeggiates the chord held, K4 its kind (D27). REC again gives the keys and knobs back. |
+| C9 | **REC turns the keys into the lead** (D21) on every page: all 27 play it, OCT- / OCT+ its octave, K1-K4 its cutoff, echo, bite and arp (D26, D27), shown as four faders in the header line. ARP (lit) arpeggiates the chord held, K4 its kind (D27); SELECT the arp's notes a step, 1-4 (D29). REC again gives the keys and knobs back. |
 | C8 | **The knobs never stop the music.** KNOB1 is the picked register's length (8, 12, 16 ... up to the loop's). What the HTML does only by stopping (the loop's length) waits for a page of its own. |
 
 ## The pages (D19)

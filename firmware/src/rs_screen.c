@@ -11,8 +11,8 @@ struct rs_view {
     uint32_t t0;                                /* when it sounds (audio frames) */
     int16_t step;
     uint8_t loop_len, board_id, playing, died[2], love, clash[2];
-    uint32_t cycle, active;
-    uint8_t drum_tick;
+    uint32_t cycle, active, n;                  /* n: the step's count since PLAY */
+    uint8_t drum_tick, tpm;
     struct rs_bot bot[2];
     struct rs_board board;
 };
@@ -22,6 +22,7 @@ struct rs_view {
 static int8_t lead_badge = -99;                 /* the keys play the lead (D21): its octave, else -99 */
 static int8_t lead_panel_v[4];                  /* the lead's knobs (D26): shown in the header while REC is on */
 static int8_t lead_panel_arp = -1;              /* ARP on (D27): its kind, else -1 */
+static uint8_t lead_panel_rate = 1;             /* the arp's notes a step (D29) */
 static int hdr_board;                           /* the page drawn is the board: its header sits between the registers */
 static void screen_out(void);                   /* (every page ends with it: the lead's badge, then to the screen) */
 
@@ -695,7 +696,9 @@ static void screen_out(void)                    /* while REC is on the header is
                 if (k == 3 && lead_panel_arp < 0 && v) t[n++] = v > 0 ? '+' : '-', t[n++] = (char)('1' + (v < 0 ? -v : v));   /* notes */
                 t[n] = 0;
             }
-            cv_text(x + w / 2 - text_w(&FONT_S, t) / 2, 0, &FONT_S, t, C_TEXT);
+            cv_text(x + w / 2 - text_w(&FONT_S, t) / 2 - (k == 3 && lead_panel_rate > 1 ? 3 : 0), 0, &FONT_S, t, C_TEXT);
+            if (k == 3 && lead_panel_rate > 1)  /* how fast: its notes a step, small at the right */
+                digits(x + w - 8, 4, lead_panel_rate, 1, C_WARN);
         }
         cv_rect(x0, SEQ_TOP - 1, 4 * w, 1, C_ACCENT);
     }

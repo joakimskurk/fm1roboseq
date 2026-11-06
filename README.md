@@ -77,12 +77,12 @@ The FM-1's panel is printed, so its names are the firmware's names. What each co
 
 | Control | What it is |
 |---|---|
-| **PLAY** | Start the board from its beginning; stop. Lit while playing. |
+| **PLAY** | Start the board from its beginning; stop. It flashes the beat while playing. |
 | **HOME, SEQ, SEL (SCL), LFO, FX, ENV, GLO** | The pages: the board, the programs, Voice Mod and (pressed again) Seq 2, the drums, the mix, the board builder, the global settings. The page's button is lit. |
 | **EDIT** | Whose program the keys edit: Scout-7 or Echo-3 (lit: Echo-3). |
 | **REC** | The keys and knobs play the lead (lit). Again: back. |
 | **ARP** | The keys a chord, arpeggiated (lit; it brings the lead with it). |
-| **SELECT** (encoder) | On HOME what a white key changes (a step's move, modifier or chance); on SEQ the cursor; on the drums the row. |
+| **SELECT** (encoder) | On HOME what a white key changes (a step's move, modifier or chance); on SEQ the cursor; on the drums the row; with REC on, how fast the arp runs (1-4 notes a step). |
 | **K1-K4** | The page's values; with REC on, the lead's CUT, ECHO, BITE and ARP. They never stop the music. |
 | **White keys** | Positions where a page has steps; on SEQ and ENV a game controller (W A S D and the keys above them). |
 | **Black keys** | Steer the robots, on every page but SEQ and ENV (below). |
@@ -113,7 +113,8 @@ for you, a step each time Voice Mod comes round.
 pulse width, folded where it is driven hard, an open filter, a ping-pong echo in time), the last key held winning
 and gliding when you play legato. K1 CUT opens and closes its filter, K2 ECHO its echo, K3 BITE its edge, K4 ARP an
 arpeggio up or down the scale from the key you hold, a note each step. ARP instead arpeggiates a whole chord: hold
-one, and K4 picks up, down, up and down, two octaves up or down, or random.
+one, and K4 picks up, down, up and down, two octaves up or down, or random. SELECT makes either arp faster: 1 to 4
+notes a step.
 
 ### What the moves and tiles do
 

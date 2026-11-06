@@ -19,6 +19,9 @@ struct rs_lead {
     volatile uint8_t arp_n, arp_random;         /* 0 or 1: off; random: a note drawn from them each step */
     volatile uint32_t tick_at[8], tick_head;    /* the steps' times (audio frames), as the main loop schedules them */
     uint32_t tick_tail, arp_pos, arp_rng, arp_last;
+    volatile uint8_t arp_rate;                  /* notes a step: 1 .. 4 (D29) */
+    volatile uint32_t arp_sub;                  /* frames between them: the step / the rate (the main loop's) */
+    uint32_t sub_next, sub_left;
     int32_t held;                               /* the key's own note, Q8 (the arp leaves it, off it comes back) */
 };
 

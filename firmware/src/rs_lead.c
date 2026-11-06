@@ -56,6 +56,21 @@ static uint32_t lead_inc_of(int32_t pitch)      /* Q8 semitones -> phase step */
     return (uint32_t)(((uint64_t)lead_inc[semi] * f) >> 30);
 }
 
+static void arp_next(struct rs_lead *l)         /* the arp's next note, at once (no glide), the filter plucked */
+{
+    if (!l->gate || l->arp_n <= 1) return;
+    uint32_t at = l->arp_pos++ % l->arp_n;
+    if (l->arp_random) {                        /* a xorshift draw (never the same note twice running) */
+        uint32_t x = l->arp_rng ? l->arp_rng : 0x2545F491u;
+        x ^= x << 13, x ^= x >> 17, x ^= x << 5, l->arp_rng = x;
+        at = (x >> 8) % l->arp_n;
+        if (at == l->arp_last) at = (at + 1u) % l->arp_n;
+    }
+    l->arp_last = at;
+    l->target = l->pitch = l->arp_notes[at] << 8;
+    if (l->fenv < (3 << 13)) l->fenv = 3 << 13;
+}
+
 static int32_t tri_q15(uint32_t ph)             /* a triangle, -32768 .. 32767 over 2^32 */
 {
     int32_t x = (int32_t)(ph >> 15);            /* 0 .. 131071 */
@@ -96,21 +111,17 @@ void rs_lead_render(struct rs_lead *l, int32_t *out, uint32_t n, uint32_t now)
     for (uint32_t f0 = 0; f0 < n; f0 += 32) {   /* a block of 32: the arp, the pitch, the width, the filter */
         uint32_t m = n - f0 < 32 ? n - f0 : 32, k;
         for (k = 0; k < 8u && l->tick_tail != l->tick_head; k++) {   /* the robots' steps reached in this block */
-            if ((int32_t)(l->tick_at[l->tick_tail % 8u] - (now + f0 + m)) >= 0) break;
+            uint32_t at = l->tick_at[l->tick_tail % 8u];
+            if ((int32_t)(at - (now + f0 + m)) >= 0) break;
             l->tick_tail++;
-            if (l->gate && l->arp_n > 1) {      /* the arp: its next note, at once (no glide), the filter plucked */
-                uint32_t at = l->arp_pos++ % l->arp_n;
-                if (l->arp_random) {            /* a xorshift draw (never the same note twice running) */
-                    uint32_t x = l->arp_rng ? l->arp_rng : 0x2545F491u;
-                    x ^= x << 13, x ^= x >> 17, x ^= x << 5, l->arp_rng = x;
-                    at = (x >> 8) % l->arp_n;
-                    if (at == l->arp_last) at = (at + 1u) % l->arp_n;
-                }
-                l->arp_last = at;
-                int32_t note = l->arp_notes[at] << 8;
-                l->target = l->pitch = note;
-                if (l->fenv < (3 << 13)) l->fenv = 3 << 13;
-            }
+            arp_next(l);
+            uint32_t rate = l->arp_rate > 1 ? l->arp_rate : 1u;   /* faster (D29): the step cut in 2, 3 or 4 */
+            l->sub_left = rate - 1u, l->sub_next = at + l->arp_sub;
+        }
+        for (k = 0; k < 4u && l->sub_left; k++) {   /* the step's further notes, as their times come */
+            if ((int32_t)(l->sub_next - (now + f0 + m)) >= 0) break;
+            l->sub_left--, l->sub_next += l->arp_sub;
+            arp_next(l);
         }
         if (l->arp_n <= 1 && l->gate) l->target = l->held;   /* the arp off: back to the key */
         if (l->stage == L_IDLE) continue;       /* silent: nothing more to do */
