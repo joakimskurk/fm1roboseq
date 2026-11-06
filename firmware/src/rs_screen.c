@@ -590,3 +590,26 @@ static void draw_drums(const struct rs_view *v, const struct rs_state *g, uint32
     cv_text(4, 218, &FONT_S, "K4 ON/OFF", mix565(C_MUTED, C_BG, 160));
     cv_blit(0, 0);
 }
+
+/* ---- FX: the mix (the HTML's MIX panel): master and the five buses as faders, the one on KNOB1 framed */
+static void draw_mix(const volatile int32_t *level, uint32_t cursor)
+{
+    static const char *const NAME[RS_NLEVEL] = {"MAST", "MEL", "BOTB", "PERC", "FX", "DRUM"};
+    uint16_t cell = RGB(0x1a, 0x1a, 0x2e);
+    uint32_t k;
+    cv_begin(240, 240, C_BG);
+    cv_text(120 - text_w(&FONT_S, "MIX") / 2, 0, &FONT_S, "MIX", C_TEXT);
+    cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
+    for (k = 0; k < RS_NLEVEL; k++) {
+        int32_t x = (int32_t)k * 40, pct = (level[k] * 100 + 16384) >> 15, h = pct * 140 / 100;
+        uint16_t c = k == 0 ? C_TEXT : k == 1 ? C_BOT_A : k == 2 ? C_BOT_B : k == 3 ? C_PULSE : k == 4 ? C_BELT : C_DANGER;
+        cv_rect(x + 12, 40, 16, 140, cell);
+        cv_rect(x + 12, 180 - h, 16, h, k == cursor ? c : mix565(c, cell, 140));
+        if (k == cursor) frame(x + 10, 38, 20, 144, 1, C_WHITE);
+        digits(x + 20 - (pct >= 100 ? 9 : pct >= 10 ? 6 : 3), 186, (uint32_t)pct, pct >= 100 ? 3u : pct >= 10 ? 2u : 1u, C_TEXT);
+        cv_text(x + 20 - text_w(&FONT_S, NAME[k]) / 2, 18, &FONT_S, NAME[k], k == cursor ? C_TEXT : C_MUTED);
+        digits(x + 17, 222, k + 1u, 1, C_MUTED);   /* its white key */
+    }
+    cv_text(4, 200, &FONT_S, "KEYS 1-6 PICK  K1 LEVEL", mix565(C_MUTED, C_BG, 160));
+    cv_blit(0, 0);
+}

@@ -19,6 +19,7 @@ enum rs_level { RS_L_MASTER, RS_L_MELODY, RS_L_BOTB, RS_L_PERC, RS_L_FX, RS_L_DR
 struct rs_mix {
     struct rs_voice v[RS_NVOICES];
     volatile int32_t level[RS_NLEVEL];          /* Q15: DEFAULT_MIXER; the mix page sets them (one writer) */
+    int32_t now_level[RS_NLEVEL];               /* where each is on its way there (applyMixer's 50 ms rampTo) */
     int32_t bus[RS_NBUS][RS_MIX_SUB];
     int32_t lp_x1, lp_x2, lp_y1, lp_y2;         /* bot B's low-pass: x Q15, y Q23 */
     /* the reverb: Q24 */

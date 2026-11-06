@@ -90,3 +90,10 @@ The white keys rest here (no register on the screen); the black keys steer as ev
 | KNOB1 | the patterns: four, break, half, offbeat, triplet, minimal, then CLEAR (empty, off) |
 | KNOB4 | the drums on (clockwise) / off |
 
+## FX (the mix)
+
+| Control | Does |
+|---|---|
+| white keys 1-6 | pick master, melody, bot B, percussion, FX or drums |
+| KNOB1 | its level, 0-100 % (2 % a detent; it glides there, as the HTML's 50 ms ramp) |
+

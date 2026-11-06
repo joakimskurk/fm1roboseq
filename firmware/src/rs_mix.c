@@ -67,7 +67,7 @@ void rs_mix_init(struct rs_mix *m, uint32_t seed)
     uint8_t *p = (uint8_t *)m;
     for (unsigned i = 0; i < sizeof *m; i++) p[i] = 0;
     for (uint32_t k = 0; k < RS_NVOICES; k++) rs_voice_init(&m->v[k], (uint8_t)k, seed + k * 0x9E3779B9u);
-    for (uint32_t k = 0; k < RS_NLEVEL; k++) m->level[k] = DEFAULT_LEVEL[k];
+    for (uint32_t k = 0; k < RS_NLEVEL; k++) m->level[k] = m->now_level[k] = DEFAULT_LEVEL[k];
     m->det = 0;                                 /* Chromium's Reset(): the detector at 0, the gain at 1 */
     m->gain = M_ONE;
     m->max_att = M_NONE;
@@ -174,8 +174,12 @@ static int32_t limiter(struct rs_mix *m, int32_t x)
 void rs_mix_render(struct rs_mix *m, int32_t *out, uint32_t n, uint32_t now)
 {
     int32_t lv[RS_NLEVEL];
-    for (uint32_t k = 0; k < RS_NLEVEL; k++) lv[k] = m->level[k];
     for (uint32_t f0 = 0; f0 < n; f0 += RS_MIX_SUB, now += RS_MIX_SUB) {
+        for (uint32_t k = 0; k < RS_NLEVEL; k++) {      /* a level glides to a new one, a sixth of the way each 32 frames */
+            int32_t d = m->level[k] - m->now_level[k];  /* (~20 ms, as the HTML's rampTo 0.05) */
+            m->now_level[k] += d / 6 ? d / 6 : d;
+            lv[k] = m->now_level[k];
+        }
         for (uint32_t b = 0; b < RS_NBUS; b++)
             for (uint32_t i = 0; i < RS_MIX_SUB; i++) m->bus[b][i] = 0;
         for (uint32_t k = 0; k < RS_NVOICES; k++)
