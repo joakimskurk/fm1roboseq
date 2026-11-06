@@ -50,7 +50,7 @@ struct rs_seq2_step { uint8_t board, drums, regswap; };
 struct rs_state {
     /* the settings */
     uint16_t bpm;                                               /* 80 */
-    uint8_t quarter, scale, transpose_root;                     /* 1/4 speed; the scale (unused by the HTML's notes) */
+    uint8_t quarter, scale, transpose_root;                     /* 1: 1/4 speed (the HTML's), 2: 1/2 (D22); the scale (unused by the HTML's notes) */
     uint8_t loop_len, tpm;                                      /* 8..64; ticks per move 1, 2, 4 */
     uint8_t vm_manual, vm_freq4;                                /* Voice Mod: LOOP or MANUAL; its frequency x 4 (1..16) */
     uint8_t bassmod_len;                                        /* 4 or 8 */

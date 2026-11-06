@@ -233,6 +233,14 @@ static void test_pages(void)                     /* the model's parts of the pag
     CHECK(s.playing && s.loop_len == 32 && s.step == 4, "the loop's length changed without a stop");
     rs_set_loop_len_live(&s, 8);
     CHECK(s.prog[0].len <= 8 && s.prog[1].len <= 8, "the registers capped to it");
+    {
+        uint32_t full = rs_step_q8(&s);
+        s.quarter = 2;
+        CHECK(rs_step_q8(&s) == 2 * full || rs_step_q8(&s) == 2 * full + 1, "1/2 speed: steps twice as long (D22)");
+        s.quarter = 1;
+        CHECK(rs_step_q8(&s) >= 4 * full - 2 && rs_step_q8(&s) <= 4 * full + 2, "1/4 speed: four times");
+        s.quarter = 0;
+    }
     rs_default(&s);
     rs_drum_toggle(&s, 1, 3);
     CHECK(s.drum_s[3] && s.drum_preset == RS_D_CUSTOM, "a drum step by hand: custom");

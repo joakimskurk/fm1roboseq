@@ -88,7 +88,8 @@ static void sound_tile(const struct rs_state *s, int b, uint8_t *type, uint8_t *
 uint32_t rs_step_q8(const struct rs_state *s)           /* 60 / (bpm * rate * tpm) / 4 s */
 {
     uint32_t bpm = s->bpm ? s->bpm : 80, tpm = s->tpm ? s->tpm : 1;
-    return (RS_SR * 256u * 15u * (s->quarter ? 4u : 1u) + (bpm * tpm) / 2u) / (bpm * tpm);
+    uint32_t slow = s->quarter == 1 ? 4u : s->quarter == 2 ? 2u : 1u;   /* 1/4 (the HTML's playbackRate), 1/2 (D22) */
+    return (RS_SR * 256u * 15u * slow + (bpm * tpm) / 2u) / (bpm * tpm);
 }
 
 /* ---- the arps */

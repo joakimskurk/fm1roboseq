@@ -428,7 +428,7 @@ static void draw_seq(const struct rs_view *v, const struct rs_ui *u, const struc
 }
 
 /* ---- GLO: the global settings, a knob each (the HTML's transport bar): the tempo, how often the bots move, the
- * loop's length (it changes when the loop comes round: D20), 1/4 speed */
+ * loop's length (it changes when the loop comes round: D20), the speed (1/1, 1/2, 1/4: D22) */
 static void knob_tag(int32_t x, int32_t y, uint32_t n)   /* "K" n: which knob */
 {
     frame(x, y, 15, 11, 1, C_MUTED);
@@ -458,7 +458,7 @@ static void draw_glo(const struct rs_state *g, uint8_t pending_loop)
         case 2: num[0] = (char)('0' + g->loop_len / 10u), num[1] = (char)('0' + g->loop_len % 10u), num[2] = 0;
                 if (g->loop_len < 10u) num[0] = num[1], num[1] = 0;
                 unit = "STEPS"; break;
-        default: num[0] = '1', num[1] = '/', num[2] = g->quarter ? '4' : '1', num[3] = 0;
+        default: num[0] = '1', num[1] = '/', num[2] = g->quarter == 1 ? '4' : g->quarter == 2 ? '2' : '1', num[3] = 0;
                  c = g->quarter ? C_WARN : C_TEXT; break;
         }
         x = cv_text(28, y + 18, &FONT_L, num, c);

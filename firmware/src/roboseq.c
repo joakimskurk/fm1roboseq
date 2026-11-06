@@ -11,7 +11,7 @@
  *   KNOB1      the picked register's length: 8, 12, 16 ... up to the loop's (the HTML's program length)
  *   HOME       the board                SEQ   the sequence: both registers as one list, scrolled by KNOB2
  *   GLO        the tempo (KNOB1), how often the bots move (KNOB2), the loop's length (KNOB3: as the loop comes round,
- *              D20), 1/4 speed (KNOB4)
+ *              D20), the speed 1/1, 1/2, 1/4 (KNOB4)
  *   SCL (SEL)  Voice Mod: white keys 1-4 pick a step, KNOB1-3 its scale, root, semitone, KNOB4 when it moves on;
  *              white keys 13-16 NEXT (MANUAL), ROOT transpose, reset, random
  *   ARP        Seq 2: white keys 1-4 pick a step, KNOB1-3 its board, drums, the registers swapped; white keys 12-16
@@ -367,7 +367,11 @@ static void app_main(void)
                 else pending_loop = cur == game.loop_len ? 0 : (uint8_t)cur;
                 dirty = 1;
             }
-            if ((e = fm1_enc_take(ENC_KNOB4)) != 0) game.quarter = e > 0, dirty = 1;   /* 1/4 speed */
+            if ((e = fm1_enc_take(ENC_KNOB4)) != 0) {   /* the speed: 1/1, 1/2, 1/4 (the model: 0, 2, 1) */
+                static const uint8_t SPEED[3] = {0, 2, 1};
+                int32_t at = game.quarter == 2 ? 1 : game.quarter == 1 ? 2 : 0;
+                at += e, game.quarter = SPEED[at < 0 ? 0 : at > 2 ? 2 : at], dirty = 1;
+            }
         } else if (page == PAGE_SCL) {          /* the picked step's scale, root, semitone; when it moves on */
             for (k = 0; k < 3u; k++)
                 if ((e = fm1_enc_take(ENC_KNOB1 + k)) != 0)

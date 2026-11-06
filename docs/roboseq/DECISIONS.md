@@ -192,3 +192,9 @@ goes to the reverb as the melody does. With REC lit all 27 keys play it from F3 
 octaves; the white keys no longer edit and the black keys no longer steer until REC again (the lead is what is
 played then: P1). LEAD and its octave show on every page. REC's later job, recording, can record this.
 
+## D22. A half speed between the HTML's normal and quarter (2026-11-06)
+
+The product owner: with 2 or 4 ticks per move it gets very fast; 1/2 works better with the ticks. The HTML has
+only a playbackRate of 1 or 0.25. GLO's KNOB4 now steps 1/1, 1/2, 1/4 (the model's `quarter`: 0, 2, 1; 1 stays the
+HTML's quarter, so the traces are unchanged), and every step's length follows it as it follows the HTML's quarter.
+
