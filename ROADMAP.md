@@ -121,7 +121,9 @@ and the limiter.)
 - [x] The registers on the white keys (SEQ: whose, OCT: the next 16), the bots steered on the black keys (D16);
       SELECT: a step's action, modifier or chance; KNOB1: the register's length (C7, C8)
 - [ ] P4: the rules as host tests, page by page
-- [ ] The pages for programs, Voice Mod, drums, mix; the UI map generated from the code (`make screens`)
+- [x] The pages on the buttons (D19); SEQ, the sequence: both registers as one list that glides (KNOB2, OCT)
+- [ ] GLO (tempo, loop length, ticks per move, 1/4 speed), SCL (Voice Mod), ARP (Seq 2), LFO (drums), FX (mix),
+      ENV (boards); the UI map generated from the code (`make screens`)
 - [ ] Storage: projects in Dinghy's blobs and slots
 
 ## Phase 4: on the emulator, then hardware

@@ -349,3 +349,76 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const st
     if (u->swapped) icon(107, 223, RS_NACTIONS, C_TEXT);        /* the registers swapped */
     cv_blit(0, 0);
 }
+
+/* ---- SEQ: the sequence, both registers as one list (the HTML's planner, the step cards side by side), 16 rows of
+ * 14 px on the screen and the rest a smooth scroll away. Scout-7's steps left, Echo-3's right, the step's number
+ * between: each step its action, its modifier and its chance; the step each register plays framed; a bar along
+ * the left edge marks the rows on the white keys. */
+#define SEQ_TOP 16
+#define SEQ_ROW 14
+
+static void digits(int32_t x, int32_t y, uint32_t v, uint32_t w, uint16_t c)   /* v in w digits of 5 x 7, 6 px apart */
+{
+    while (w--) {
+        uint32_t d = v % 10u, r, k;
+        for (r = 0; r < 7; r++)
+            for (k = 0; k < 5; k++)
+                if (DIGIT[d][r][k] == '#') cv_pset(x + 6 * (int32_t)w + (int32_t)k, y + (int32_t)r, c);
+        v /= 10u;
+    }
+}
+
+static void chance_bars(int32_t x, int32_t y, uint8_t prob, uint16_t under, int on)   /* one to three bars, 12 x 10 */
+{
+    uint32_t n = prob >= 100 ? 3u : prob >= 75 ? 2u : 1u, k;
+    uint16_t c = n == 3u ? C_ACCENT : n == 2u ? C_WARN : C_DANGER;
+    if (!on) c = mix565(c, under, 110);
+    for (k = 0; k < 3u; k++) {
+        int32_t h = 4 + 3 * (int32_t)k;
+        cv_rect(x + 4 * (int32_t)k, y + 10 - h, 3, h, k < n ? c : mix565(C_MUTED, under, 50));
+    }
+}
+
+static void draw_seq(const struct rs_view *v, const struct rs_ui *u, const struct rs_state *g, int32_t scroll,
+                     uint32_t keys_top)
+{
+    static const char *const LAYER[RS_NLAYERS] = {"ACTION", "MODIFIER", "CHANCE"};
+    uint16_t cell = RGB(0x1a, 0x1a, 0x2e);
+    int32_t rows = g->loop_len, first = scroll / SEQ_ROW, off = scroll % SEQ_ROW, r, b;
+    cv_begin(240, 240, C_BG);
+    for (r = 0; r <= 16; r++) {
+        int32_t i = first + r, y = SEQ_TOP + r * SEQ_ROW - off;
+        if (i >= rows) break;
+        uint16_t num = v->playing && v->step == i ? C_TEXT : mix565(C_MUTED, C_BG, 150);
+        digits(108, y + 3, (uint32_t)i + 1u, 2, num);
+        for (b = 0; b < 2; b++) {
+            int32_t len = g->prog[b].len ? g->prog[b].len : g->loop_len, x = b ? 132 : 4, on = u->sel == b;
+            const struct rs_step *st = &g->prog[b].s[i & 63];
+            if (i >= len) { cv_rect(x + 50, y + 6, 2, 2, cell); continue; }   /* past its length */
+            cv_rect(x, y, 104, SEQ_ROW - 1, cell);
+            cv_rect(b ? x + 102 : x, y, 2, SEQ_ROW - 1, mix565(ACT_COLOUR[st->action], cell, on ? 200 : 90));   /* its colour at the edge */
+            icon(x + 6, y, st->action, on ? ACT_COLOUR[st->action] : mix565(ACT_COLOUR[st->action], cell, 110));
+            icon(x + 24, y, 8u + st->modifier % RS_NMODIFIERS,
+                 on ? MOD_COLOUR[st->modifier % RS_NMODIFIERS] : mix565(MOD_COLOUR[st->modifier % RS_NMODIFIERS], cell, 110));
+            chance_bars(x + 44, y + 2, st->prob, cell, on);
+            if (on && u->layer != RS_LAYER_ACTION)  /* what the white keys turn: underlined */
+                cv_rect(x + (u->layer == RS_LAYER_MODIFIER ? 24 : 42), y + SEQ_ROW - 2, 15, 1, C_WHITE);
+            else if (on)
+                cv_rect(x + 6, y + SEQ_ROW - 2, 14, 1, C_WHITE);
+            if (v->playing && v->step >= 0 && v->step % len == i)   /* the step it plays */
+                frame(x, y, 104, SEQ_ROW - 1, 1, on ? C_WHITE : C_MUTED);
+        }
+        if ((uint32_t)i >= keys_top && (uint32_t)i < keys_top + 16u)   /* on the white keys */
+            cv_rect(0, y, 2, SEQ_ROW - 1, u->sel ? C_BOT_B : C_BOT_A);
+    }
+    if (rows > 16) {                            /* where in the list: a thumb at the right edge */
+        int32_t h = 224 * 16 / rows, y = SEQ_TOP + (224 - h) * scroll / ((rows - 16) * SEQ_ROW);
+        cv_rect(238, y, 2, h, C_MUTED);
+    }
+    cv_rect(0, 0, 240, SEQ_TOP, C_BG);          /* the header, over what scrolled under it */
+    cv_text(4, 0, &FONT_S, "SCOUT", u->sel ? mix565(C_BOT_A, C_BG, 120) : C_BOT_A);
+    cv_text(236 - text_w(&FONT_S, "ECHO"), 0, &FONT_S, "ECHO", u->sel ? C_BOT_B : mix565(C_BOT_B, C_BG, 120));
+    cv_text(120 - text_w(&FONT_S, LAYER[u->layer % RS_NLAYERS]) / 2, 0, &FONT_S, LAYER[u->layer % RS_NLAYERS], C_TEXT);
+    cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
+    cv_blit(0, 0);
+}

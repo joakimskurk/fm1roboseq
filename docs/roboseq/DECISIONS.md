@@ -161,3 +161,13 @@ The product owner: the steps often run fast, and this is meant to be a bit of lo
 robots is not needed. So a steer shows only in what the bot does on its next move, heard and seen there (C5),
 not as a badge beforehand. The facing over a bot's head stays (the HTML's dirArrow).
 
+## D19. The pages on the FM-1's buttons, every part of the HTML on one (2026-11-06)
+
+The product owner: all of the HTML's parts come over, made for the FM-1 ("FM-1-ified"), and the page with the
+whole sequence scrolls fully. The pages and their buttons: HOME the board; SEQ the sequence, both registers as one
+list of up to 64 steps that glides (KNOB2 a row, OCT- / OCT+ sixteen; it follows the step playing three seconds
+after the player let go); SCL Voice Mod (Seq 1); ARP Seq 2; LFO the drums; FX the mix; ENV the boards; GLO the
+global settings (tempo, the loop's length, ticks per move, 1/4 speed). EDIT picks whose register is on the white
+keys, the same on every page (it was SEQ before SEQ became a page). The black keys steer the bots on every page
+(C3), PLAY is the transport (C1), REC stays free for recording.
+

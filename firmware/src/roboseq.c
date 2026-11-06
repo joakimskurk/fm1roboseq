@@ -9,8 +9,9 @@
  *   SELECT     what a white key turns: the step's ACTION, its MODIFIER (steady, bright, low, wobble, glitch) or its
  *              CHANCE (100, 75, 50 %), as the HTML's step card's three buttons (named over the board)
  *   KNOB1      the picked register's length: 8, 12, 16 ... up to the loop's (the HTML's program length)
- *   SEQ        whose register is on the white keys: Scout-7 or Echo-3
- *   OCT- OCT+  the register's next 16 steps (a register is up to 64)
+ *   HOME       the board                SEQ   the sequence: both registers as one list, scrolled by KNOB2
+ *   EDIT       whose register is on the white keys: Scout-7 or Echo-3 (lit: Echo-3)
+ *   OCT- OCT+  the register's 16 steps before / after (a register is up to 64)
  *   black keys steer the bots by hand: the next move is this one (D16). F# G# A# C# D# from F3: Scout-7's TURN L,
  *              MOVE, TURN R, DASH, PING; from F4 the same for Echo-3; the last (F#5) swaps the registers
  *   MASTER     the volume (platform.c)
@@ -158,6 +159,21 @@ volatile uint32_t rs_boot_check;               /* rs_selfcheck() at boot: make e
 static const uint8_t STEER[5] = {RS_TURNL, RS_MOVE, RS_TURNR, RS_DASH, RS_PING};   /* a bot's five black keys */
 static uint8_t white_key[16], black_key[11];    /* key index (0 = F3) of the k-th white / black key */
 static uint8_t sel_bot, bank, layer;
+enum { PAGE_HOME, PAGE_SEQ };                   /* the pages (D19) */
+static uint8_t page;
+static int32_t seq_scroll, seq_target;          /* the sequence page's scroll, px, and where it is going */
+static uint32_t seq_touched;                    /* when the player last scrolled it (fm1_ms): it follows the step after */
+
+static uint32_t keys_top(void)                  /* the step on the first white key */
+{
+    return page == PAGE_SEQ ? (uint32_t)((seq_target + SEQ_ROW / 2) / SEQ_ROW) : bank * 16u;
+}
+
+static void seq_scroll_to(int32_t row)          /* the sequence page's target, rows, within the list */
+{
+    int32_t max = game.loop_len > 16 ? (int32_t)game.loop_len - 16 : 0;
+    seq_target = (row < 0 ? 0 : row > max ? max : row) * SEQ_ROW;
+}
 static const uint8_t LENGTHS[7] = {8, 12, 16, 24, 32, 48, 64};   /* LOOP_OPTIONS: a register's lengths, up to the loop's */
 
 static void turn_length(int32_t e)              /* KNOB1: the picked register's length, through the HTML's choices */
@@ -186,8 +202,8 @@ static int keys(uint32_t down)                  /* what the keys pressed now do;
     uint32_t k, len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len;
     int changed = 0;
     for (k = 0; k < 16u; k++)
-        if (down >> white_key[k] & 1u && bank * 16u + k < len) {
-            int i = (int)(bank * 16u + k);
+        if (down >> white_key[k] & 1u && keys_top() + k < len) {
+            int i = (int)(keys_top() + k);
             if (layer == RS_LAYER_MODIFIER) rs_cycle_modifier(&game, sel_bot, i);
             else if (layer == RS_LAYER_CHANCE) rs_cycle_prob(&game, sel_bot, i);
             else rs_cycle_action(&game, sel_bot, i);
@@ -236,19 +252,40 @@ static void app_main(void)
         dirty = keys(notes & ~prev);
         prev = notes;
         if (b & (1u << BTN_PLAY)) { if (game.playing) stop(); else play(); }
-        if (b & (1u << BTN_SEQ)) sel_bot ^= 1u, bank = 0, dirty = 1;
+        if (b & (1u << BTN_HOME) && page != PAGE_HOME) page = PAGE_HOME, dirty = 1;
+        if (b & (1u << BTN_SEQ) && page != PAGE_SEQ) page = PAGE_SEQ, seq_scroll_to(keys_top() / 1u), dirty = 1;
+        if (b & (1u << BTN_EDIT)) sel_bot ^= 1u, bank = 0, dirty = 1;   /* whose register is on the white keys */
         if ((e = fm1_enc_take(ENC_SELECT)) != 0)          /* SELECT: what the white keys turn */
             layer = (uint8_t)(((int32_t)layer + e % RS_NLAYERS + RS_NLAYERS) % RS_NLAYERS), dirty = 1;
         if ((e = fm1_enc_take(ENC_KNOB1)) != 0) turn_length(e), dirty = 1;
         len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len;
-        if (b & (1u << BTN_OCT_DOWN) && bank > 0) bank--, dirty = 1;
-        if (b & (1u << BTN_OCT_UP) && (bank + 1u) * 16u < len) bank++, dirty = 1;
-        if (bank * 16u >= len) bank = 0;
+        if (page == PAGE_SEQ) {                 /* KNOB2 scrolls row by row, OCT- / OCT+ by 16; then it follows */
+            if ((e = fm1_enc_take(ENC_KNOB2)) != 0) seq_scroll_to(seq_target / SEQ_ROW + e), seq_touched = fm1_ms;
+            if (b & (1u << BTN_OCT_DOWN)) seq_scroll_to(seq_target / SEQ_ROW - 16), seq_touched = fm1_ms;
+            if (b & (1u << BTN_OCT_UP)) seq_scroll_to(seq_target / SEQ_ROW + 16), seq_touched = fm1_ms;
+            if (game.playing && fm1_ms - seq_touched > 3000u && game.step >= 0) {   /* the step playing in view */
+                const struct rs_view *w = view_now();
+                int32_t at = w->step >= 0 ? w->step : 0, top = seq_target / SEQ_ROW;
+                if (at < top + 1 || at > top + 14) seq_scroll_to(at - 1);
+            }
+            if (seq_scroll != seq_target) {     /* glide there: a third of the way a frame */
+                int32_t d = (seq_target - seq_scroll) / 3;
+                seq_scroll += d ? d : seq_target > seq_scroll ? 1 : -1;
+                dirty = 1;
+            }
+        } else {
+            (void)fm1_enc_take(ENC_KNOB2);
+            if (b & (1u << BTN_OCT_DOWN) && bank > 0) bank--, dirty = 1;
+            if (b & (1u << BTN_OCT_UP) && (bank + 1u) * 16u < len) bank++, dirty = 1;
+            if (bank * 16u >= len) bank = 0;
+        }
         schedule();
         fm1_led_key(BTN_PLAY, game.playing);
-        fm1_led_key(BTN_SEQ, sel_bot);          /* lit: Echo-3's register */
-        fm1_led_key(BTN_OCT_DOWN, bank > 0);
-        fm1_led_key(BTN_OCT_UP, (bank + 1u) * 16u < len);
+        fm1_led_key(BTN_HOME, page == PAGE_HOME);
+        fm1_led_key(BTN_SEQ, page == PAGE_SEQ);
+        fm1_led_key(BTN_EDIT, sel_bot);         /* lit: Echo-3's register */
+        fm1_led_key(BTN_OCT_DOWN, page == PAGE_SEQ ? seq_target > 0 : bank > 0);
+        fm1_led_key(BTN_OCT_UP, page == PAGE_SEQ ? seq_target < ((int32_t)game.loop_len - 16) * SEQ_ROW : (bank + 1u) * 16u < len);
         v = view_now();
         key = v->t0 ^ (uint32_t)v->playing << 31 ^ (uint32_t)v->step << 20;
         if (key != shown) {                     /* a new step heard: its effects start now */
@@ -258,7 +295,9 @@ static void app_main(void)
             dirty = 1;
         if (dirty) {
             ui_of(&ui, v);
-            draw_board(v, &fx, &ui, fm1_ms), due = fx_due(&fx, fm1_ms);
+            if (page == PAGE_SEQ) draw_seq(v, &ui, &game, seq_scroll, keys_top());
+            else draw_board(v, &fx, &ui, fm1_ms);
+            due = fx_due(&fx, fm1_ms);
         }
     }
 }
