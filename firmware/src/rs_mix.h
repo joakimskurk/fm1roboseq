@@ -9,15 +9,18 @@
 #include <stdint.h>
 #include "rs_voice.h"
 #include "rs_mix_tables.h"
+#include "rs_lead.h"
 
 enum rs_bus { RS_BUS_MELODY, RS_BUS_BOTB, RS_BUS_PERC, RS_BUS_FX, RS_BUS_DRUMS, RS_NBUS };
-enum rs_level { RS_L_MASTER, RS_L_MELODY, RS_L_BOTB, RS_L_PERC, RS_L_FX, RS_L_DRUMS, RS_NLEVEL };
+enum rs_level { RS_L_MASTER, RS_L_MELODY, RS_L_BOTB, RS_L_PERC, RS_L_FX, RS_L_DRUMS, RS_L_LEAD, RS_NLEVEL };
 
 #define RS_MIX_SUB 32           /* frames the voices render at a time (the limiter's division) */
 #define RS_LIM_BUF 512          /* the limiter's look-ahead (LIM_PRE frames), a power of two */
 
 struct rs_mix {
     struct rs_voice v[RS_NVOICES];
+    struct rs_lead lead;                        /* the player's solo voice (D21), on a bus of its own */
+    int32_t lead_bus[RS_MIX_SUB];
     volatile int32_t level[RS_NLEVEL];          /* Q15: DEFAULT_MIXER; the mix page sets them (one writer) */
     int32_t now_level[RS_NLEVEL];               /* where each is on its way there (applyMixer's 50 ms rampTo) */
     int32_t bus[RS_NBUS][RS_MIX_SUB];

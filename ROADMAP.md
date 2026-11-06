@@ -128,6 +128,7 @@ and the limiter.)
 - [x] LFO: the drum machine, a row on the white keys, the patterns on KNOB1
 - [x] FX: the mix as six faders, the levels gliding as the HTML's rampTo
 - [x] ENV: the boards, now and queued, the presets, reroll, the user board, reset (2026-11-06)
+- [x] A SID lead to play solo over the robots on REC (D21), its own fader on FX
 - [ ] The UI map generated from the code (`make screens`)
 - [ ] Storage: projects in Dinghy's blobs and slots
 

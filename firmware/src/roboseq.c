@@ -18,13 +18,15 @@
  *              on / off (queued while playing), roll A's / B's register on its wrap, reset, random
  *   LFO        the drums: SELECT picks kick, snare or hihat, a white key turns its step; KNOB1 the patterns (then
  *              CLEAR), KNOB4 on / off
- *   FX         the mix: white keys 1-6 pick master or a bus, KNOB1 its level
+ *   FX         the mix: white keys 1-7 pick master, a bus or the lead, KNOB1 its level
  *   ENV        the boards: white keys 1-6 the presets, 7 reroll, 8 the user board, 9 save it, 10 clear it, 11 reset
  *              (the bots to their pads); KNOB1 how full a reroll is; while playing a board comes with the next loop
  *   EDIT       whose register is on the white keys: Scout-7 or Echo-3 (lit: Echo-3)
  *   OCT- OCT+  the register's 16 steps before / after (a register is up to 64)
  *   black keys steer the bots by hand: the next move is this one (D16). F# G# A# C# D# from F3: Scout-7's TURN L,
  *              MOVE, TURN R, DASH, PING; from F4 the same for Echo-3; the last (F#5) swaps the registers
+ *   REC        the keys play the lead instead (D21): a SID-style solo over the robots, all 27 keys from F3, the last
+ *              held winning, legato gliding; OCT- / OCT+ its octave (-2 .. +2); REC lit and LEAD on the screen
  *   MASTER     the volume (platform.c)
  *
  * How the sound runs: the main loop plays the game (rs_tick, a step at a time, LOOKAHEAD ahead of the speaker, as
@@ -176,6 +178,22 @@ volatile uint32_t rs_boot_check;               /* rs_selfcheck() at boot: make e
 static const uint8_t STEER[5] = {RS_TURNL, RS_MOVE, RS_TURNR, RS_DASH, RS_PING};   /* a bot's five black keys */
 static uint8_t white_key[16], black_key[11];    /* key index (0 = F3) of the k-th white / black key */
 static uint8_t sel_bot, bank, layer;
+static uint8_t lead_on, held_n, held[27];       /* REC: the keys play the lead (D21); the keys held, in the order pressed */
+static int8_t lead_oct;                         /* its octave, -2 .. +2 (OCT- / OCT+ while it is on) */
+
+static void lead_keys(uint32_t down, uint32_t up)   /* the last key held wins; let go, the one held before it again */
+{
+    uint32_t k, i;
+    int pressed = 0;
+    for (k = 0; k < 27u; k++) {
+        if (up >> k & 1u)
+            for (i = 0; i < held_n; i++)
+                if (held[i] == k) { for (; i + 1u < held_n; i++) held[i] = held[i + 1u]; held_n--; break; }
+        if (down >> k & 1u && held_n < 27u) held[held_n++] = (uint8_t)k, pressed = 1;
+    }
+    if (held_n) rs_lead_play(&mix.lead, 53 + 12 * lead_oct + held[held_n - 1u], 1, pressed);
+    else rs_lead_play(&mix.lead, 53 + 12 * lead_oct, 0, 0);
+}
 enum { PAGE_HOME, PAGE_SEQ, PAGE_GLO, PAGE_SCL, PAGE_ARP, PAGE_LFO, PAGE_FX, PAGE_ENV };   /* the pages (D19) */
 static uint8_t page, scl_cursor, arp_cursor, drum_row, mix_cursor;
 static int32_t seq_scroll, seq_target;          /* the sequence page's scroll, px, and where it is going */
@@ -305,8 +323,16 @@ static void app_main(void)
         platform_poll();
         b = fm1_input_edges(&rel);
         notes = fm1_in.notes;
-        dirty = keys(notes & ~prev);
+        if (lead_on) lead_keys(notes & ~prev, prev & ~notes);   /* REC: the keys are the lead's */
+        else dirty = keys(notes & ~prev);
         prev = notes;
+        if (b & (1u << BTN_REC)) {             /* the lead on / off; off, what it holds lets go */
+            lead_on = !lead_on, held_n = 0, dirty = 1;
+            rs_lead_play(&mix.lead, 53 + 12 * lead_oct, 0, 0);
+        }
+        if (lead_on && b & (1u << BTN_OCT_DOWN) && lead_oct > -2) lead_oct--, dirty = 1;
+        if (lead_on && b & (1u << BTN_OCT_UP) && lead_oct < 2) lead_oct++, dirty = 1;
+        if (lead_on) b &= ~(1u << BTN_OCT_DOWN | 1u << BTN_OCT_UP);   /* (OCT is the lead's while it plays) */
         if (b & (1u << BTN_PLAY)) { if (game.playing) stop(); else play(); }
         if (b & (1u << BTN_HOME) && page != PAGE_HOME) page = PAGE_HOME, dirty = 1;
         if (b & (1u << BTN_SEQ) && page != PAGE_SEQ) page = PAGE_SEQ, seq_scroll_to((int32_t)keys_top()), dirty = 1;
@@ -419,8 +445,12 @@ static void app_main(void)
         fm1_led_key(BTN_FX, page == PAGE_FX);
         fm1_led_key(BTN_ENV, page == PAGE_ENV);
         fm1_led_key(BTN_EDIT, sel_bot);         /* lit: Echo-3's register */
-        fm1_led_key(BTN_OCT_DOWN, page == PAGE_SEQ ? seq_target > 0 : bank > 0);
-        fm1_led_key(BTN_OCT_UP, page == PAGE_SEQ ? seq_target < ((int32_t)game.loop_len - 16) * SEQ_ROW : (bank + 1u) * 16u < len);
+        fm1_led_key(BTN_REC, lead_on);
+        if (lead_on) fm1_led_key(BTN_OCT_DOWN, lead_oct < 0), fm1_led_key(BTN_OCT_UP, lead_oct > 0);
+        else {
+            fm1_led_key(BTN_OCT_DOWN, page == PAGE_SEQ ? seq_target > 0 : bank > 0);
+            fm1_led_key(BTN_OCT_UP, page == PAGE_SEQ ? seq_target < ((int32_t)game.loop_len - 16) * SEQ_ROW : (bank + 1u) * 16u < len);
+        }
         v = view_now();
         key = v->t0 ^ (uint32_t)v->playing << 31 ^ (uint32_t)v->step << 20;
         if (key != shown) {                     /* a new step heard: its effects start now */
@@ -429,6 +459,7 @@ static void app_main(void)
         } else if (due && (int32_t)(fm1_ms - due) >= 0)   /* an effect ran out */
             dirty = 1;
         if (dirty) {
+            lead_badge = lead_on ? lead_oct : -99;
             ui_of(&ui, v);
             if (page == PAGE_SEQ) draw_seq(v, &ui, &game, seq_scroll, keys_top());
             else if (page == PAGE_GLO) draw_glo(&game, pending_loop);

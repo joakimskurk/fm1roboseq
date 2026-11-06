@@ -3,7 +3,7 @@
 The rules every page keeps (as SkurkyMello's G1-G8), then what each control does now. The playing model is D15: the
 robots are the instrument; D16 says how the keys reach them. A rule here is a test (P4) once a page is built on it.
 
-## The rules (C1-C8, 2026-11-06)
+## The rules (C1-C9, 2026-11-06)
 
 | | Rule |
 |---|---|
@@ -14,6 +14,7 @@ robots are the instrument; D16 says how the keys reach them. A rule here is a te
 | C5 | **The result is heard on the next step**, never later: the game runs 64 ms ahead (D12), so an edit or a steer lands on the next step the game computes. |
 | C6 | **EDIT picks whose register** is on the white keys (lit: Echo-3's), on every page with a register. |
 | C7 | **SELECT picks which part of a step** the white keys turn: its ACTION, MODIFIER or CHANCE (the HTML's step card's three buttons), named over the board in the picked bot's colour; the register on the keys shows that part, the other its actions. |
+| C9 | **REC turns the keys into the lead** (D21) on every page: all 27 play it, OCT- / OCT+ its octave; LEAD shows top right. REC again gives the keys back. |
 | C8 | **The knobs never stop the music.** KNOB1 is the picked register's length (8, 12, 16 ... up to the loop's). What the HTML does only by stopping (the loop's length) waits for a page of its own. |
 
 ## The pages (D19)
@@ -94,7 +95,7 @@ The white keys rest here (no register on the screen); the black keys steer as ev
 
 | Control | Does |
 |---|---|
-| white keys 1-6 | pick master, melody, bot B, percussion, FX or drums |
+| white keys 1-7 | pick master, melody, bot B, percussion, FX, drums or the lead |
 | KNOB1 | its level, 0-100 % (2 % a detent; it glides there, as the HTML's 50 ms ramp) |
 
 ## ENV (the boards)

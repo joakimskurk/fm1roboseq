@@ -180,3 +180,15 @@ capped, the drums re-laid when their step count changes). Stopped, it changes at
 HTML's scale button is left out: its notes follow Voice Mod's scales, not that one. Its 1/4 speed, in its state but
 without a button, is KNOB4.
 
+## D21. A lead to play solo over the robots, on REC (2026-11-06)
+
+The product owner wanted to play solo on the keys over the robots with a typical SID lead, and chose REC to switch
+the keys to it. Not the HTML's (it has no keyboard voice): a lead of our own (rs_lead.c), monophonic as a SID voice,
+the last key held winning and a glide (~45 ms) when played legato; a pulse wave whose width sweeps 20-80 % at
+0.7 Hz; a vibrato of +-1/4 semitone at 5.5 Hz coming in after 250 ms held; a resonant two-pole low-pass opening
+with each note (600 Hz + the note's own pitch + up to 3 kHz, closing over ~150 ms); 4 ms attack, decay to 3/4,
+200 ms release. It has its own level on the mix page (0.45, so it sits over the robots without hiding them) and
+goes to the reverb as the melody does. With REC lit all 27 keys play it from F3 and OCT- / OCT+ shift it +-2
+octaves; the white keys no longer edit and the black keys no longer steer until REC again (the lead is what is
+played then: P1). LEAD and its octave show on every page. REC's later job, recording, can record this.
+

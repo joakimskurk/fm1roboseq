@@ -6,6 +6,7 @@
 #   make parity  the C voices, mix and song against those renders
 #   make song    the default song played on the host, PLAY at 0.5 s: build/host/song.wav
 #   make play    keys played on the host (tests/roboseq/play.txt): build/host/play.wav and its screens
+#   make lead    a solo with the lead over the default song (tests/roboseq/lead.txt): build/host/lead.wav
 #   make scenes  the board's rarer moments (a clash, love, steering) drawn straight: build/scenes/*.png
 #   make probe   the HTML's mix pieces (limiter, reverb, low-pass) measured in Chromium: build/probe (node)
 #   make fw      the FM-1 package build/roboseq.fwsc (JieLi toolchain in ~/.jieli, SDK in ~/fw-AC79_AIoT_SDK)
@@ -45,6 +46,8 @@ song: $(IMG)
 play: $(IMG)
 	$(RUN) sh -c 'cc -O2 -Wall -Wno-unused-function -DDINGHY_HOST -DAPP_VER="\"dev\"" -Ifirmware/hal -Ifirmware/src -Ifirmware/gen -o build/host/roboseq firmware/src/roboseq.c && build/host/roboseq build/host/play tests/roboseq/play.txt'
 	$(PY) -c "import glob; from PIL import Image; [Image.open(p).resize((480, 480), Image.NEAREST).save(p[:-4] + '.png') for p in glob.glob('build/host/play-*.ppm')]"
+lead: $(IMG)
+	$(RUN) sh -c 'cc -O2 -Wall -Wno-unused-function -DDINGHY_HOST -DAPP_VER="\"dev\"" -Ifirmware/hal -Ifirmware/src -Ifirmware/gen -o build/host/roboseq firmware/src/roboseq.c && build/host/roboseq build/host/lead tests/roboseq/lead.txt'
 scenes: $(IMG)
 	mkdir -p build/scenes
 	$(RUN) sh -c 'cc -std=c11 -O1 -w -Ifirmware/src -Ifirmware/gen -Ifirmware/hal -o build/scenes/scenes tests/roboseq/scenes.c && build/scenes/scenes'

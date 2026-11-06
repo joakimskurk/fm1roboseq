@@ -17,6 +17,9 @@ struct rs_view {
     struct rs_board board;
 };
 
+static int8_t lead_badge = -99;                 /* the keys play the lead (D21): its octave, else -99 */
+static void screen_out(void);                   /* (every page ends with it: the lead's badge, then to the screen) */
+
 #define BX 20                                   /* the board's corner on the screen */
 #define BY 20
 #define CELL 40
@@ -348,7 +351,7 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const st
         cv_rect(w, 228, (x + 82 - w) * hp / 6, 6, c);
     }
     if (u->swapped) icon(107, 223, RS_NACTIONS, C_TEXT);        /* the registers swapped */
-    cv_blit(0, 0);
+    screen_out();
 }
 
 /* ---- SEQ: the sequence, both registers as one list (the HTML's planner, the step cards side by side), 16 rows of
@@ -421,7 +424,7 @@ static void draw_seq(const struct rs_view *v, const struct rs_ui *u, const struc
     cv_text(236 - text_w(&FONT_S, "ECHO"), 0, &FONT_S, "ECHO", u->sel ? C_BOT_B : mix565(C_BOT_B, C_BG, 120));
     cv_text(120 - text_w(&FONT_S, LAYER[u->layer % RS_NLAYERS]) / 2, 0, &FONT_S, LAYER[u->layer % RS_NLAYERS], C_TEXT);
     cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
-    cv_blit(0, 0);
+    screen_out();
 }
 
 /* ---- GLO: the global settings, a knob each (the HTML's transport bar): the tempo, how often the bots move, the
@@ -467,7 +470,7 @@ static void draw_glo(const struct rs_state *g, uint8_t pending_loop)
         }
         cv_rect(0, y + 53, 240, 1, C_CELL_LINE);
     }
-    cv_blit(0, 0);
+    screen_out();
 }
 
 /* ---- SCL: Voice Mod (the HTML's Seq 1): its four steps as cards, each a scale, a root and a semitone; the step it
@@ -518,7 +521,7 @@ static void draw_scl(const struct rs_state *g, uint32_t cursor)
             g->transpose_root ? "ROOT ON" : "ROOT OFF", g->transpose_root ? C_ACCENT : C_MUTED);
     cv_text(4, 195, &FONT_S, "K1 SCALE K2 ROOT K3 SEMI", mix565(C_MUTED, C_BG, 160));
     key_labels(KEYS, 4, 13);
-    cv_blit(0, 0);
+    screen_out();
 }
 
 /* ---- ARP: Seq 2 (the HTML's), its four steps as cards: a board, a drum pattern, the registers swapped; on, queued
@@ -555,7 +558,7 @@ static void draw_arp(const struct rs_state *g, uint32_t cursor)
     cv_text(124, 194, &FONT_S, "A", g->seq2_rnd[0] ? C_BOT_A : mix565(C_BOT_A, C_BG, 70));
     cv_text(144, 194, &FONT_S, "B", g->seq2_rnd[1] ? C_BOT_B : mix565(C_BOT_B, C_BG, 70));
     key_labels(KEYS, 5, 12);
-    cv_blit(0, 0);
+    screen_out();
 }
 
 /* ---- LFO: the drum machine (the HTML's): kick, snare and hihat over the drum steps (16, or 12 in a 12-step loop),
@@ -588,30 +591,30 @@ static void draw_drums(const struct rs_view *v, const struct rs_state *g, uint32
     }
     cv_text(4, 198, &FONT_S, "SELECT ROW K1 PATTERN", mix565(C_MUTED, C_BG, 160));
     cv_text(4, 218, &FONT_S, "K4 ON/OFF", mix565(C_MUTED, C_BG, 160));
-    cv_blit(0, 0);
+    screen_out();
 }
 
-/* ---- FX: the mix (the HTML's MIX panel): master and the five buses as faders, the one on KNOB1 framed */
+/* ---- FX: the mix (the HTML's MIX panel): master, the five buses and the lead as faders, the one on KNOB1 framed */
 static void draw_mix(const volatile int32_t *level, uint32_t cursor)
 {
-    static const char *const NAME[RS_NLEVEL] = {"MAST", "MEL", "BOTB", "PERC", "FX", "DRUM"};
+    static const char *const NAME[RS_NLEVEL] = {"MAST", "MEL", "BOTB", "PERC", "FX", "DRUM", "LEAD"};
     uint16_t cell = RGB(0x1a, 0x1a, 0x2e);
     uint32_t k;
     cv_begin(240, 240, C_BG);
     cv_text(120 - text_w(&FONT_S, "MIX") / 2, 0, &FONT_S, "MIX", C_TEXT);
     cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
     for (k = 0; k < RS_NLEVEL; k++) {
-        int32_t x = (int32_t)k * 40, pct = (level[k] * 100 + 16384) >> 15, h = pct * 140 / 100;
-        uint16_t c = k == 0 ? C_TEXT : k == 1 ? C_BOT_A : k == 2 ? C_BOT_B : k == 3 ? C_PULSE : k == 4 ? C_BELT : C_DANGER;
-        cv_rect(x + 12, 40, 16, 140, cell);
-        cv_rect(x + 12, 180 - h, 16, h, k == cursor ? c : mix565(c, cell, 140));
-        if (k == cursor) frame(x + 10, 38, 20, 144, 1, C_WHITE);
-        digits(x + 20 - (pct >= 100 ? 9 : pct >= 10 ? 6 : 3), 186, (uint32_t)pct, pct >= 100 ? 3u : pct >= 10 ? 2u : 1u, C_TEXT);
-        cv_text(x + 20 - text_w(&FONT_S, NAME[k]) / 2, 18, &FONT_S, NAME[k], k == cursor ? C_TEXT : C_MUTED);
-        digits(x + 17, 222, k + 1u, 1, C_MUTED);   /* its white key */
+        int32_t x = (int32_t)k * 34 + 1, pct = (level[k] * 100 + 16384) >> 15, h = pct * 140 / 100;
+        uint16_t c = k == 0 ? C_TEXT : k == 1 ? C_BOT_A : k == 2 ? C_BOT_B : k == 3 ? C_PULSE : k == 4 ? C_BELT : k == 5 ? C_DANGER : C_ACCENT;
+        cv_rect(x + 10, 40, 14, 140, cell);
+        cv_rect(x + 10, 180 - h, 14, h, k == cursor ? c : mix565(c, cell, 140));
+        if (k == cursor) frame(x + 8, 38, 18, 144, 1, C_WHITE);
+        digits(x + 17 - (pct >= 100 ? 9 : pct >= 10 ? 6 : 3), 186, (uint32_t)pct, pct >= 100 ? 3u : pct >= 10 ? 2u : 1u, C_TEXT);
+        cv_text(x + 17 - text_w(&FONT_S, NAME[k]) / 2, 18, &FONT_S, NAME[k], k == cursor ? C_TEXT : C_MUTED);
+        digits(x + 14, 222, k + 1u, 1, C_MUTED);   /* its white key */
     }
-    cv_text(4, 200, &FONT_S, "KEYS 1-6 PICK  K1 LEVEL", mix565(C_MUTED, C_BG, 160));
-    cv_blit(0, 0);
+    cv_text(4, 200, &FONT_S, "KEYS 1-7 PICK  K1 LEVEL", mix565(C_MUTED, C_BG, 160));
+    screen_out();
 }
 
 /* ---- ENV: the boards (the HTML's board panel): the board now and the one queued for the next loop, small; the
@@ -657,6 +660,19 @@ static void draw_boards(const struct rs_state *g)
         if (on) frame(x + 2, y, 36, 52, 1, C_ACCENT);
         digits(x + 5, y + 4, k + 1u, k + 1u > 9u ? 2u : 1u, C_MUTED);
         cv_text(x + 20 - text_w(&FONT_S, KEY[k]) / 2, y + 26, &FONT_S, KEY[k], k >= 8u ? C_WARN : C_TEXT);
+    }
+    screen_out();
+}
+
+static void screen_out(void)                    /* the lead's badge over any page, then the canvas to the screen */
+{
+    if (lead_badge > -99) {
+        char t[8] = "LEAD  ";
+        t[4] = lead_badge < 0 ? '-' : lead_badge > 0 ? '+' : ' ';
+        t[5] = (char)('0' + (lead_badge < 0 ? -lead_badge : lead_badge));
+        if (!lead_badge) t[4] = 0;
+        cv_rect(178, 0, 62, 15, C_ACCENT);
+        cv_text(182, 0, &FONT_S, t, RGB(0x05, 0x05, 0x0c));
     }
     cv_blit(0, 0);
 }

@@ -1,0 +1,69 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+/* The lead (rs_lead.c, D21) on its own: a held note at its pitch, legato gliding to the next, the vibrato only after
+ * its delay, silence after the release, a new press from silence starting again. lead_test: exit 0 all pass */
+#include <math.h>
+#include <stdio.h>
+#include "rs_lead.c"
+
+static int fails;
+#define CHECK(c, ...) do { if (!(c)) { fails++; printf("FAIL lead_test: "); printf(__VA_ARGS__); printf("\n"); } } while (0)
+
+static struct rs_lead l;
+static int32_t buf[44100];
+
+static void run(uint32_t n) { for (uint32_t i = 0; i < n; i++) buf[i] = 0; rs_lead_render(&l, buf, n); }
+
+static double freq(uint32_t n)                  /* rising zero crossings of the filtered pulse over n samples */
+{
+    int c = 0, first = -1, last = -1;
+    for (uint32_t i = 1; i < n; i++)
+        if (buf[i - 1] < 0 && buf[i] >= 0) { if (first < 0) first = (int)i; last = (int)i, c++; }
+    return c > 1 ? 44100.0 * (c - 1) / (last - first) : 0;
+}
+
+static double spread(uint32_t n, uint32_t win)  /* how much the pitch moves: max - min over windows */
+{
+    double lo = 1e9, hi = 0;
+    static int32_t keep[44100];
+    for (uint32_t i = 0; i < n; i++) keep[i] = buf[i];
+    for (uint32_t w = 0; w + win <= n; w += win) {
+        for (uint32_t i = 0; i < win; i++) buf[i] = keep[w + i];
+        double f = freq(win);
+        if (f > 0) lo = f < lo ? f : lo, hi = f > hi ? f : hi;
+    }
+    return hi - lo;
+}
+
+int main(void)
+{
+    rs_lead_init(&l);
+    run(4096);
+    CHECK(buf[100] == 0, "silent before a note");
+    rs_lead_play(&l, 69, 1, 1);                 /* A4 */
+    run(8820);                                  /* 200 ms: before the vibrato */
+    double f = freq(8820);
+    CHECK(fabs(f - 440) < 3, "A4 at 440 Hz (%.1f)", f);
+    run(8820);
+    CHECK(spread(8820, 2205) < 3, "no vibrato in the first 250 ms");
+    run(26460);                                 /* 0.6 s more: the vibrato is in */
+    double sp = spread(26460, 2205);
+    CHECK(sp > 6 && sp < 40, "a vibrato once held (it moves %.1f Hz)", sp);
+    rs_lead_play(&l, 76, 1, 1);                 /* E5, legato: it glides */
+    run(441);
+    f = freq(441);
+    CHECK(f > 440 && f < 640, "a glide on the way to E5 (%.1f)", f);
+    run(8820);
+    f = freq(8820);
+    CHECK(fabs(f - 659.3) < 15, "E5 reached (%.1f)", f);
+    rs_lead_play(&l, 76, 0, 0);                 /* let go */
+    run(13230);                                 /* 300 ms: past the release */
+    int32_t peak = 0;
+    for (int i = 11000; i < 13230; i++) peak = buf[i] > peak ? buf[i] : -buf[i] > peak ? -buf[i] : peak;
+    CHECK(peak == 0 && l.stage == 0, "silent after the release (%d)", peak);
+    rs_lead_play(&l, 57, 1, 1);                 /* A3 from silence: no glide */
+    run(4410);
+    f = freq(4410);
+    CHECK(fabs(f - 220) < 3, "a new note from silence starts at its pitch (%.1f)", f);
+    printf("lead_test: %s\n", fails ? "FAILED" : "all pass");
+    return fails != 0;
+}

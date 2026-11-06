@@ -10,6 +10,7 @@
  * (mix_tables.py). The limiter is Chromium's DynamicsCompressorKernel step for step (tools/tone-ref/compressor.py),
  * its curve and rates as tables. */
 #include "rs_mix.h"
+#include "rs_lead.c"
 
 const uint8_t rs_voice_bus[RS_NVOICES] = {      /* where buildAudio() connects each voice */
     [RS_V_A_MAIN] = RS_BUS_MELODY, [RS_V_A_PING] = RS_BUS_MELODY,
@@ -19,8 +20,8 @@ const uint8_t rs_voice_bus[RS_NVOICES] = {      /* where buildAudio() connects e
     [RS_V_COLLISION] = RS_BUS_FX, [RS_V_ROTATOR] = RS_BUS_FX, [RS_V_PULSE] = RS_BUS_FX, [RS_V_COIN] = RS_BUS_FX,
     [RS_V_KICK] = RS_BUS_DRUMS, [RS_V_SNARE] = RS_BUS_DRUMS, [RS_V_HIHAT] = RS_BUS_DRUMS,
 };
-/* DEFAULT_MIXER: master .9, melody .9, bot B .8, percussion .55, FX .6, drums .7 (Q15) */
-static const int32_t DEFAULT_LEVEL[RS_NLEVEL] = {29491, 29491, 26214, 18022, 19661, 22938};
+/* DEFAULT_MIXER: master .9, melody .9, bot B .8, percussion .55, FX .6, drums .7 (Q15); then the lead's */
+static const int32_t DEFAULT_LEVEL[RS_NLEVEL] = {29491, 29491, 26214, 18022, 19661, 22938, 14746};   /* (lead .45: ours) */
 #define SEND 14746                              /* the reverb send, 0.45 */
 #define M_ONE (1 << 30)
 #define M_NONE (-65536)                           /* max_att: none yet (Chromium's -1 dB) */
@@ -71,6 +72,7 @@ void rs_mix_init(struct rs_mix *m, uint32_t seed)
     m->det = 0;                                 /* Chromium's Reset(): the detector at 0, the gain at 1 */
     m->gain = M_ONE;
     m->max_att = M_NONE;
+    rs_lead_init(&m->lead);
 }
 
 void rs_mix_note(struct rs_mix *m, uint8_t voice, uint32_t at, uint32_t dur, int midi, uint16_t vel)
@@ -184,6 +186,8 @@ void rs_mix_render(struct rs_mix *m, int32_t *out, uint32_t n, uint32_t now)
             for (uint32_t i = 0; i < RS_MIX_SUB; i++) m->bus[b][i] = 0;
         for (uint32_t k = 0; k < RS_NVOICES; k++)
             rs_voice_render(&m->v[k], m->bus[rs_voice_bus[k]], RS_MIX_SUB, now);
+        for (uint32_t i = 0; i < RS_MIX_SUB; i++) m->lead_bus[i] = 0;
+        rs_lead_render(&m->lead, m->lead_bus, RS_MIX_SUB);
         lim_division(m);
         for (uint32_t i = 0; i < RS_MIX_SUB; i++) {
             int32_t mel = mulq15(m->bus[RS_BUS_MELODY][i], lv[RS_L_MELODY]);
@@ -195,8 +199,9 @@ void rs_mix_render(struct rs_mix *m, int32_t *out, uint32_t n, uint32_t now)
                         - (int64_t)LP_A1 * m->lp_y1 - (int64_t)LP_A2 * m->lp_y2;
             int32_t y = (int32_t)(acc >> 30);                           /* Q23 */
             m->lp_x2 = m->lp_x1, m->lp_x1 = bx, m->lp_y2 = m->lp_y1, m->lp_y1 = y;
-            int32_t rev = (reverb(m, mulq15(mel + perc + fx, SEND)) + 256) >> 9;
-            int32_t master = mulq15(mel + ((y + 128) >> 8) + perc + fx + dr + rev, lv[RS_L_MASTER]);
+            int32_t ld = mulq15(m->lead_bus[i], lv[RS_L_LEAD]);   /* the lead: to the reverb as the melody, and out */
+            int32_t rev = (reverb(m, mulq15(mel + perc + fx + ld, SEND)) + 256) >> 9;
+            int32_t master = mulq15(mel + ((y + 128) >> 8) + perc + fx + dr + ld + rev, lv[RS_L_MASTER]);
             out[f0 + i] = limiter(m, master);
         }
     }
