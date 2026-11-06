@@ -1,5 +1,23 @@
 # RoboSeq for the M-VAVE FM-1
 
+This one started as a little browser toy with a simple question: what if a sequencer were a board game? Two robots,
+register cards borrowed in spirit from RoboRally, a board full of conveyor belts and zap rails, and every move they
+make turned into a note. It was meant to be a quick experiment.
+
+Bringing it to the FM-1 was a chance to make it something you play with your hands instead of clicking at: steer the
+robots, build their board, type their programs in as if you were driving them, and solo over the chaos they make.
+It is more toy than tool, and that is the point.
+
+It has not met a real FM-1 yet, so please be kind.
+
+Enjoy the robots.
+
+*- Joakim*
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-skurk-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/skurk)
+
+## What it is
+
 Two little robots, Scout-7 and Echo-3, walk a 5 x 5 board of conveyor belts, zap rails, rotators, pulse pads and
 crates. Each runs its own program of moves (forward, reverse, turn, dash, ping, idle), and where they go, what they
 ride, what they bump into and when they meet becomes the music: Scout-7 the melody, Echo-3 the bass, the board the
