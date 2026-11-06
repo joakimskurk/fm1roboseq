@@ -14,6 +14,8 @@ $CC -std=c11 -O2 -Wall -Wextra -Werror -Ifirmware/src -o build/test/edit_test te
 build/test/edit_test
 $CC -std=c11 -O2 -Wall -Wextra -Werror -Ifirmware/src -o build/test/lead_test tests/roboseq/lead_test.c -lm
 build/test/lead_test
+$CC -std=c11 -O2 -Wall -Wextra -Werror -Ifirmware/hal -o build/test/flash_id_test tests/roboseq/flash_id_test.c
+build/test/flash_id_test
 $CC -std=c11 -O2 -Wall -Wextra -Werror -Ifirmware/src -o build/test/colour_test tests/roboseq/colour_test.c \
     firmware/src/rs_voice.c firmware/src/rs_score.c firmware/src/rs_model.c firmware/src/rs_chance.c -lm
 build/test/colour_test
