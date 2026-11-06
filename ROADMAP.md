@@ -118,7 +118,8 @@ and the limiter.)
 - [x] The board's art our own (tools/art): tiles, robots and step icons at 1 px, lit from above, the symmetric
       exactly so; each bot on its own side of a tile at one size (D17), the clash star or the heart over them
       (`make scenes`)
-- [x] The registers on the white keys (SEQ: whose, OCT: the next 16), the bots steered on the black keys (D16)
+- [x] The registers on the white keys (SEQ: whose, OCT: the next 16), the bots steered on the black keys (D16);
+      SELECT: a step's action, modifier or chance; KNOB1: the register's length (C7, C8)
 - [ ] P4: the rules as host tests, page by page
 - [ ] The pages for programs, Voice Mod, drums, mix; the UI map generated from the code (`make screens`)
 - [ ] Storage: projects in Dinghy's blobs and slots

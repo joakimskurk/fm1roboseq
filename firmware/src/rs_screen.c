@@ -204,8 +204,9 @@ static void draw_clash(int32_t x, int32_t y, int32_t h)   /* h: 1 a tile's size 
 }
 
 /* ---- the keys' side (D16): the register on the white keys, the steering on the black ones */
+enum { RS_LAYER_ACTION, RS_LAYER_MODIFIER, RS_LAYER_CHANCE, RS_NLAYERS };   /* what the white keys turn (SELECT) */
 struct rs_ui {
-    uint8_t sel, bank, swapped;                 /* the bot on the white keys, the 16-step page shown */
+    uint8_t sel, bank, swapped, layer;          /* the bot on the white keys, the 16-step page shown, which part of a step */
     uint8_t len[2];                             /* each register's length */
     int16_t playing_at[2];                      /* the step of each register playing now (-1: none) */
     uint8_t steer[2];                           /* a bot's next move, by hand (action + 1) */
@@ -216,6 +217,9 @@ struct rs_ui {
 
 static const uint16_t ACT_COLOUR[RS_NACTIONS] = {   /* renderStepCard's actionColorMap */
     C_PULSE, RGB(0x73, 0xb7, 0xa9), C_ROT, C_BELT, C_DANGER, RGB(0x59, 0xd9, 0xc2), C_MUTED};
+
+static const uint16_t MOD_COLOUR[RS_NMODIFIERS] = {   /* renderStepCard's modColorMap */
+    C_MUTED, C_WARN, C_BOT_B, C_ACCENT, C_DANGER};
 
 static void icon(int32_t x, int32_t y, uint32_t i, uint16_t c)   /* a step icon, 14 x 13, in colour c, lit and outlined */
 {
@@ -236,11 +240,21 @@ static void draw_strip(const struct rs_ui *u, int b)   /* a register down the bo
         int32_t y = (int32_t)k * 15, i = (int32_t)(u->bank * 16u + k);
         const struct rs_step *st = &u->steps[b][k];
         if (i < u->len[b]) {
-            uint16_t c = ACT_COLOUR[st->action];
-            if (st->prob != 100) c = mix565(c, cell, 140);
+            uint32_t layer = on ? u->layer : RS_LAYER_ACTION;   /* (the other register always shows its actions) */
+            uint16_t c = layer == RS_LAYER_MODIFIER ? MOD_COLOUR[st->modifier % RS_NMODIFIERS] : ACT_COLOUR[st->action];
+            if (layer == RS_LAYER_ACTION && st->prob != 100) c = mix565(c, cell, 140);
             if (!on) c = mix565(c, cell, 110);
             cv_rect(x0 + 1, y, 18, 14, cell);
-            icon(x0 + 3, y + 1, st->action, c);
+            if (layer == RS_LAYER_MODIFIER) icon(x0 + 3, y + 1, 8u + st->modifier % RS_NMODIFIERS, c);
+            else if (layer == RS_LAYER_CHANCE) {        /* the chance as bars: three 100 %, two 75 %, one 50 % */
+                uint32_t n = st->prob >= 100 ? 3u : st->prob >= 75 ? 2u : 1u, k2;
+                uint16_t pc = n == 3u ? C_ACCENT : n == 2u ? C_WARN : C_DANGER;
+                for (k2 = 0; k2 < 3u; k2++) {
+                    int32_t h = 4 + 3 * (int32_t)k2;
+                    cv_rect(x0 + 4 + 4 * (int32_t)k2, y + 13 - h, 3, h, k2 < n ? pc : mix565(C_MUTED, cell, 60));
+                }
+            } else
+                icon(x0 + 3, y + 1, st->action, c);
             if (i == u->playing_at[b]) frame(x0, y, 20, 15, 1, on ? C_WHITE : C_MUTED);
         } else
             cv_rect(x0 + 9, y + 6, 2, 2, cell); /* past its length */
@@ -286,14 +300,15 @@ static void put_num(char *p, uint32_t v, uint32_t w)   /* v in w digits, zeros i
 static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const struct rs_ui *u, uint32_t now_ms)
 {
     int32_t i, b;
-    char top[32] = "STEP 00/00", cyc[8] = "C0000";
+    static const char *const LAYER[RS_NLAYERS] = {"ACTION", "MODIFIER", "CHANCE"};
+    char top[32] = "STEP 00/00";
     cv_begin(240, 240, C_BG);
     draw_strip(u, 0), draw_strip(u, 1);
     put_num(top + 5, (uint32_t)(v->step < 0 ? 0 : v->step + 1), 2);   /* the loop's step, the cycle */
     put_num(top + 8, v->loop_len, 2);
-    put_num(cyc + 1, (v->cycle + 1u) % 10000u, 4);
     cv_text(24, 2, &FONT_S, top, v->playing ? C_TEXT : C_MUTED);
-    cv_text(216 - text_w(&FONT_S, cyc), 2, &FONT_S, cyc, C_MUTED);
+    cv_text(216 - text_w(&FONT_S, LAYER[u->layer % RS_NLAYERS]), 2, &FONT_S, LAYER[u->layer % RS_NLAYERS],
+            u->sel ? C_BOT_B : C_BOT_A);       /* what the white keys turn, in the colour of whose */
     /* the board */
     for (i = 0; i < RS_ROWS * RS_COLS; i++) {
         int32_t x = BX + (i % RS_COLS) * CELL, y = BY + (i / RS_COLS) * CELL;

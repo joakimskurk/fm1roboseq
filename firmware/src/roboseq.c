@@ -6,6 +6,9 @@
  *   white keys the 16 steps of a bot's register (its movement sequencer): a key turns its step to the next action,
  *              as the HTML's step cards do (the registers down the screen's sides, Scout-7 left, Echo-3 right,
  *              the one on the keys bright; the step playing framed)
+ *   SELECT     what a white key turns: the step's ACTION, its MODIFIER (steady, bright, low, wobble, glitch) or its
+ *              CHANCE (100, 75, 50 %), as the HTML's step card's three buttons (named over the board)
+ *   KNOB1      the picked register's length: 8, 12, 16 ... up to the loop's (the HTML's program length)
  *   SEQ        whose register is on the white keys: Scout-7 or Echo-3
  *   OCT- OCT+  the register's next 16 steps (a register is up to 64)
  *   black keys steer the bots by hand: the next move is this one (D16). F# G# A# C# D# from F3: Scout-7's TURN L,
@@ -154,7 +157,20 @@ volatile uint32_t rs_boot_check;               /* rs_selfcheck() at boot: make e
 /* ---- the keys (D16) */
 static const uint8_t STEER[5] = {RS_TURNL, RS_MOVE, RS_TURNR, RS_DASH, RS_PING};   /* a bot's five black keys */
 static uint8_t white_key[16], black_key[11];    /* key index (0 = F3) of the k-th white / black key */
-static uint8_t sel_bot, bank;
+static uint8_t sel_bot, bank, layer;
+static const uint8_t LENGTHS[7] = {8, 12, 16, 24, 32, 48, 64};   /* LOOP_OPTIONS: a register's lengths, up to the loop's */
+
+static void turn_length(int32_t e)              /* KNOB1: the picked register's length, through the HTML's choices */
+{
+    uint32_t len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len, k;
+    for (; e > 0; e--)
+        for (k = 0; k < 7u; k++)
+            if (LENGTHS[k] > len && LENGTHS[k] <= game.loop_len) { len = LENGTHS[k]; break; }
+    for (; e < 0; e++)
+        for (k = 7u; k-- > 0;)
+            if (LENGTHS[k] < len) { len = LENGTHS[k]; break; }
+    rs_set_prog_len(&game, sel_bot, (uint8_t)len);
+}
 
 static void keys_init(void)
 {
@@ -170,7 +186,13 @@ static int keys(uint32_t down)                  /* what the keys pressed now do;
     uint32_t k, len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len;
     int changed = 0;
     for (k = 0; k < 16u; k++)
-        if (down >> white_key[k] & 1u && bank * 16u + k < len) rs_cycle_action(&game, sel_bot, (int)(bank * 16u + k)), changed = 1;
+        if (down >> white_key[k] & 1u && bank * 16u + k < len) {
+            int i = (int)(bank * 16u + k);
+            if (layer == RS_LAYER_MODIFIER) rs_cycle_modifier(&game, sel_bot, i);
+            else if (layer == RS_LAYER_CHANCE) rs_cycle_prob(&game, sel_bot, i);
+            else rs_cycle_action(&game, sel_bot, i);
+            changed = 1;
+        }
     for (k = 0; k < 11u; k++)
         if (down >> black_key[k] & 1u) {
             if (k < 10u) rs_steer(&game, k < 5u ? 0 : 1, STEER[k % 5u]);
@@ -183,7 +205,7 @@ static int keys(uint32_t down)                  /* what the keys pressed now do;
 static void ui_of(struct rs_ui *u, const struct rs_view *v)
 {
     uint32_t k, b;
-    u->sel = sel_bot, u->bank = bank, u->swapped = game.swapped;
+    u->sel = sel_bot, u->bank = bank, u->swapped = game.swapped, u->layer = layer;
     for (b = 0; b < 2; b++) {
         uint32_t len = game.prog[b].len ? game.prog[b].len : game.loop_len;
         u->len[b] = (uint8_t)len;
@@ -205,6 +227,7 @@ static void app_main(void)
     keys_init();
     for (;;) {
         uint32_t rel, b, key, notes, len;
+        int32_t e;
         int dirty = 0;
         const struct rs_view *v;
         platform_poll();
@@ -214,6 +237,9 @@ static void app_main(void)
         prev = notes;
         if (b & (1u << BTN_PLAY)) { if (game.playing) stop(); else play(); }
         if (b & (1u << BTN_SEQ)) sel_bot ^= 1u, bank = 0, dirty = 1;
+        if ((e = fm1_enc_take(ENC_SELECT)) != 0)          /* SELECT: what the white keys turn */
+            layer = (uint8_t)(((int32_t)layer + e % RS_NLAYERS + RS_NLAYERS) % RS_NLAYERS), dirty = 1;
+        if ((e = fm1_enc_take(ENC_KNOB1)) != 0) turn_length(e), dirty = 1;
         len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len;
         if (b & (1u << BTN_OCT_DOWN) && bank > 0) bank--, dirty = 1;
         if (b & (1u << BTN_OCT_UP) && (bank + 1u) * 16u < len) bank++, dirty = 1;
