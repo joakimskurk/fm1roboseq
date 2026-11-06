@@ -434,7 +434,10 @@ void rs_set_loop_len(struct rs_state *s, uint8_t len)  /* setLoopLength() */
     s->loop_len = len;
     for (int b = 0; b < 2; b++)
         if ((s->prog[b].len ? s->prog[b].len : len) > len) s->prog[b].len = len;
-    if (rs_drum_steps(len) != prev) { rs_set_drums(s, s->drum_preset); s->drum_tick = 0; }
+    if (rs_drum_steps(len) != prev) {                  /* (a custom pattern: the HTML finds no preset, keeps it) */
+        if (s->drum_preset < RS_NDRUMS) rs_set_drums(s, s->drum_preset);
+        s->drum_tick = 0;
+    }
     rs_stop(s);
     rs_reset(s);
 }
@@ -446,7 +449,7 @@ void rs_set_loop_len_live(struct rs_state *s, uint8_t len)   /* (D20) the loop's
     s->loop_len = len;
     for (int b = 0; b < 2; b++)
         if ((s->prog[b].len ? s->prog[b].len : len) > len) s->prog[b].len = len;
-    if (rs_drum_steps(len) != prev) rs_set_drums(s, s->drum_preset);
+    if (rs_drum_steps(len) != prev && s->drum_preset < RS_NDRUMS) rs_set_drums(s, s->drum_preset);
 }
 
 void rs_set_prog_len(struct rs_state *s, int bot, uint8_t len)   /* setProgramLength() */
@@ -571,6 +574,28 @@ void rs_reset_bassmod(struct rs_state *s)               /* resetBassMod(): build
                                                  {RS_SC_MAJOR, 9, 0}};
     s->bassmod_len = 4;
     for (int i = 0; i < RS_BASSMOD_MAX; i++) s->bassmod[i] = i < 4 ? BM[i] : (struct rs_bassmod_step){RS_SC_MAJOR, 0, 0};
+}
+
+void rs_drum_preset(struct rs_state *s, uint8_t id)     /* applyDrumPreset() */
+{
+    if (id >= RS_NDRUMS) return;
+    rs_push_undo(s);
+    rs_set_drums(s, id);
+}
+
+void rs_drum_toggle(struct rs_state *s, int voice, int step)   /* toggleDrumCell() */
+{
+    uint8_t *p = voice == 0 ? s->drum_k : voice == 1 ? s->drum_s : s->drum_h;
+    rs_push_undo(s);
+    p[step & 63] = !p[step & 63];
+    s->drum_preset = RS_D_CUSTOM;
+}
+
+void rs_drum_clear(struct rs_state *s)                  /* clearDrumPattern() */
+{
+    rs_push_undo(s);
+    for (int i = 0; i < RS_MAX_STEPS; i++) s->drum_k[i] = s->drum_s[i] = s->drum_h[i] = 0;
+    s->drum_preset = RS_D_CUSTOM, s->drums_on = 0;
 }
 
 void rs_seq2_toggle(struct rs_state *s)                 /* seq2-toggle-active: on (queued while playing), off */

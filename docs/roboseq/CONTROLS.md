@@ -81,3 +81,12 @@ The white keys rest here (no register on the screen); the black keys steer as ev
 | white keys 13 / 14 | roll Scout-7's / Echo-3's register as Seq 2 wraps |
 | white keys 15 / 16 | reset / random |
 
+## LFO (the drums)
+
+| Control | Does |
+|---|---|
+| SELECT | the row on the white keys: kick, snare, hihat |
+| white keys | turn that row's step on / off (16 steps, or 12 in a 12-step loop) |
+| KNOB1 | the patterns: four, break, half, offbeat, triplet, minimal, then CLEAR (empty, off) |
+| KNOB4 | the drums on (clockwise) / off |
+

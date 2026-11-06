@@ -125,7 +125,8 @@ and the limiter.)
 - [x] GLO: tempo, ticks per move, the loop's length as the loop comes round (D20), 1/4 speed
 - [x] SCL: Voice Mod's four steps as cards, a step's scale, root and semitone on the knobs
 - [x] ARP: Seq 2's four steps as cards, a step's board, drums and swap on the knobs
-- [ ] LFO (drums), FX (mix),
+- [x] LFO: the drum machine, a row on the white keys, the patterns on KNOB1
+- [ ] FX (mix),
       ENV (boards); the UI map generated from the code (`make screens`)
 - [ ] Storage: projects in Dinghy's blobs and slots
 

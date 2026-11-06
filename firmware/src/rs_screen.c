@@ -12,6 +12,7 @@ struct rs_view {
     int16_t step;
     uint8_t loop_len, board_id, playing, died[2], love, clash[2];
     uint32_t cycle, active;
+    uint8_t drum_tick;
     struct rs_bot bot[2];
     struct rs_board board;
 };
@@ -554,5 +555,38 @@ static void draw_arp(const struct rs_state *g, uint32_t cursor)
     cv_text(124, 194, &FONT_S, "A", g->seq2_rnd[0] ? C_BOT_A : mix565(C_BOT_A, C_BG, 70));
     cv_text(144, 194, &FONT_S, "B", g->seq2_rnd[1] ? C_BOT_B : mix565(C_BOT_B, C_BG, 70));
     key_labels(KEYS, 5, 12);
+    cv_blit(0, 0);
+}
+
+/* ---- LFO: the drum machine (the HTML's): kick, snare and hihat over the drum steps (16, or 12 in a 12-step loop),
+ * the row on the white keys marked, the step playing framed; on / off and the pattern over them */
+static void draw_drums(const struct rs_view *v, const struct rs_state *g, uint32_t row)
+{
+    static const char *const NAME[3] = {"KICK", "SNARE", "HIHAT"};
+    static const char *const PRESET[RS_NDRUMS] = {"FOUR", "BREAK", "HALF", "OFFBEAT", "TRIPLET", "MINIMAL"};
+    const uint8_t *pat[3] = {g->drum_k, g->drum_s, g->drum_h};
+    const uint16_t col[3] = {C_DANGER, C_WARN, C_ACCENT};
+    uint16_t cell = RGB(0x1a, 0x1a, 0x2e);
+    uint32_t n = rs_drum_steps(g->loop_len), r, i;
+    const char *pn = g->drum_preset < RS_NDRUMS ? PRESET[g->drum_preset] : "CUSTOM";
+    cv_begin(240, 240, C_BG);
+    cv_text(4, 0, &FONT_S, "DRUMS", C_TEXT);
+    cv_text(120 - text_w(&FONT_S, pn) / 2, 0, &FONT_S, pn, C_MUTED);
+    cv_text(236 - text_w(&FONT_S, g->drums_on ? "ON" : "OFF"), 0, &FONT_S, g->drums_on ? "ON" : "OFF", g->drums_on ? C_ACCENT : C_MUTED);
+    cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
+    for (r = 0; r < 3u; r++) {
+        int32_t y = 22 + (int32_t)r * 58;
+        cv_text(4, y, &FONT_S, NAME[r], r == row ? col[r] : C_MUTED);
+        if (r == row) cv_rect(0, y + 18, 240, 1, col[r]);       /* on the white keys */
+        for (i = 0; i < 16u; i++) {
+            int32_t x = (int32_t)i * 15;
+            if (i >= n) { cv_rect(x + 6, y + 34, 2, 2, cell); continue; }
+            cv_rect(x + 1, y + 22, 13, 30, pat[r][i] ? (g->drums_on ? col[r] : mix565(col[r], cell, 110)) : cell);
+            if (i % 4u == 0) cv_rect(x + 1, y + 53, 13, 1, C_CELL_LINE);   /* the beats */
+            if (v->playing && i == v->drum_tick % n) frame(x + 1, y + 22, 13, 30, 1, C_WHITE);
+        }
+    }
+    cv_text(4, 198, &FONT_S, "SELECT ROW K1 PATTERN", mix565(C_MUTED, C_BG, 160));
+    cv_text(4, 218, &FONT_S, "K4 ON/OFF", mix565(C_MUTED, C_BG, 160));
     cv_blit(0, 0);
 }

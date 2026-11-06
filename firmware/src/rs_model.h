@@ -26,7 +26,7 @@ enum rs_event {
 enum rs_board_id { RS_B_DEFAULT, RS_B_CORRIDOR, RS_B_GARDEN, RS_B_GAUNTLET, RS_B_SPINNER, RS_B_MAZE, RS_NBOARDS,
                    RS_B_RANDOM = RS_NBOARDS, RS_B_USER, RS_B_NONE = 0xFF };   /* (none: seq 2's "--") */
 enum rs_drum_id { RS_D_FOUR, RS_D_BREAK, RS_D_HALF, RS_D_OFFBEAT, RS_D_TRIPLET, RS_D_MINIMAL, RS_NDRUMS,
-                  RS_D_NONE = 0xFF };
+                  RS_D_CUSTOM = 0xFE, RS_D_NONE = 0xFF };   /* custom: the pattern edited by hand */
 enum rs_scale { RS_SC_CHROMATIC, RS_SC_MAJOR, RS_SC_MINOR, RS_SC_DORIAN, RS_SC_PHRYGIAN, RS_SC_LYDIAN,
                 RS_SC_MIXOLYDIAN, RS_SC_PENTATONIC, RS_SC_MINPENTA, RS_SC_DIMINISHED, RS_SC_WHOLETONE,
                 RS_SC_AUGMENTED, RS_NSCALES };
@@ -162,6 +162,9 @@ void rs_randomize_board(struct rs_state *s);                    /* randomizeBoar
 void rs_randomize_bassmod(struct rs_state *s);                  /* randomizeBassMod() */
 void rs_set_voice_mod(struct rs_state *s, uint8_t manual, uint8_t freq4);   /* its trigger, its loop frequency x 4 */
 void rs_reset_bassmod(struct rs_state *s);                      /* resetBassMod() */
+void rs_drum_preset(struct rs_state *s, uint8_t id);            /* applyDrumPreset() */
+void rs_drum_toggle(struct rs_state *s, int voice, int step);   /* toggleDrumCell(): 0 kick, 1 snare, 2 hihat */
+void rs_drum_clear(struct rs_state *s);                         /* clearDrumPattern(): empty, custom, off */
 void rs_seq2_toggle(struct rs_state *s);                        /* Seq 2 on (queued while playing) / off */
 void rs_seq2_cycle(struct rs_state *s, int i, int field, int dir);   /* step i's 0 board, 1 drums (dir), 2 regswap */
 void rs_reset_seq2(struct rs_state *s);                         /* resetSeq2() */

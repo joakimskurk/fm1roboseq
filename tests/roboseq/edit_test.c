@@ -233,6 +233,15 @@ static void test_pages(void)                     /* the model's parts of the pag
     CHECK(s.playing && s.loop_len == 32 && s.step == 4, "the loop's length changed without a stop");
     rs_set_loop_len_live(&s, 8);
     CHECK(s.prog[0].len <= 8 && s.prog[1].len <= 8, "the registers capped to it");
+    rs_default(&s);
+    rs_drum_toggle(&s, 1, 3);
+    CHECK(s.drum_s[3] && s.drum_preset == RS_D_CUSTOM, "a drum step by hand: custom");
+    rs_set_loop_len(&s, 12);
+    CHECK(s.drum_s[3], "a custom pattern kept when the drum steps change (the HTML finds no preset)");
+    rs_drum_preset(&s, RS_D_HALF);
+    CHECK(s.drum_preset == RS_D_HALF && s.drum_k[0], "a preset");
+    rs_drum_clear(&s);
+    CHECK(!s.drums_on && !s.drum_k[0] && s.drum_preset == RS_D_CUSTOM, "cleared: empty, custom, off");
 }
 
 int main(void)
