@@ -8,7 +8,7 @@
 #   make play    keys played on the host (tests/roboseq/play.txt): build/host/play.wav and its screens
 #   make lead    a solo with the lead over the default song (tests/roboseq/lead.txt): build/host/lead.wav
 #   make screens the README's tour: every page as the firmware draws it, docs/screens/*.png; the Hub's card, docs/card.png; the film,
-#                docs/screens/roboseq.gif (tests/roboseq/gif.txt)
+#                docs/screens/roboseq.gif (tests/roboseq/gif.txt); the README's art, assets/readme/*.svg (tests/roboseq/art.c)
 #   make panels  the README's FM-1 in BATTLE, in fm1-emu: docs/screens/panel-battle.png
 #   make scenes  the board's rarer moments (a clash, love, steering) drawn straight: build/scenes/*.png
 #   make probe   the HTML's mix pieces (limiter, reverb, low-pass) measured in Chromium: build/probe (node)
@@ -65,6 +65,8 @@ screens: $(IMG)
 	rm -rf build/gif && mkdir -p build/gif     # (the film: the app itself on the host, its version left out)
 	$(RUN) sh -c 'cc -O2 -w -DDINGHY_HOST -DAPP_VER="\"\"" -Ifirmware/hal -Ifirmware/src -Ifirmware/gen -o build/gif/roboseq firmware/src/roboseq.c && build/gif/roboseq build/gif/f tests/roboseq/gif.txt 12 >/dev/null'
 	$(PY) tools/art/gif.py build/gif/f docs/screens/roboseq.gif 12
+	mkdir -p assets/readme              # (the README's art, drawn by the firmware's code: tests/roboseq/art.c)
+	$(RUN) sh -c 'cc -std=c11 -O1 -w -Ifirmware/src -Ifirmware/gen -Ifirmware/hal -o build/readme-art tests/roboseq/art.c && build/readme-art >/dev/null'
 probe:
 	cd tools/tone-ref && npm ci --no-fund --no-audit
 	node tools/tone-ref/probe_mix.mjs && python3 tools/tone-ref/compressor.py
