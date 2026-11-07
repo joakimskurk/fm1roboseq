@@ -96,5 +96,13 @@ static void draw_splash(uint32_t t)
         int lit = (int32_t)t * 7 / (int32_t)SPLASH_MS > k;
         cv_rect(85 + k * 12, 216, 8, 8, lit ? C_ACCENT : RGB(0x1a, 0x3a, 0x38));
     }
+#ifdef APP_VER
+    /* the version, as --release built it (D31), in the corner by the dots: the one place on the FM-1 it is read
+     * (v0.1; v0.0 a build that is not a release; dev on the host). The screens and the card are built without it. */
+    {
+        const char *ver = APP_VER[0] >= '0' && APP_VER[0] <= '9' ? "v" APP_VER : APP_VER;
+        cv_text(228 - text_w(&FONT_S, ver), 212, &FONT_S, ver, line);
+    }
+#endif
     screen_out();
 }

@@ -308,6 +308,11 @@ resume an interrupted install for. One identity for every build, dev and release
 name and same identity is fine"): the version is only in the text (`--release X.Y`), so a release can never drift
 onto another firmware's number. The SMK-37 packages follow: `SMK-37 Pro_965`, `SMK-37 Elite_965`, `MKE-P37_965`.
 
+The text on the FM-1 (2026-11-07, before 0.1): RoboSeq had dropped Dinghy's version on the screen, so a release and
+any other build looked the same on the device (the 0.1 package was byte for byte the dev one). The version is now in
+the splash's corner by the dots, dim: `v0.1` for a release, `v0.0` for a build that is not one, `dev` on the host.
+The README's screens and the Hub's card are drawn without it.
+
 ## D32. ENV shows every board; pressed again it builds one (2026-11-06)
 
 The product owner missed the overview of all the boards (phase 3's ENV page, gone with D28's builder, which left
