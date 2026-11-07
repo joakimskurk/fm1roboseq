@@ -107,7 +107,7 @@ The white keys rest here (no register on the screen); the black keys steer as ev
 ## ENV (the boards, D32)
 
 Every board as a card with its tiles small: the one playing framed in mint, the one coming with the loop in yellow,
-blinking.
+blinking. In PLUS a board is also its bass groove (D35): picking one changes the groove as the loop comes round.
 
 | Control | Does |
 |---|---|

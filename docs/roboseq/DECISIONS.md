@@ -384,6 +384,8 @@ scale, and 0 of 54,223 notes struck together a semitone, a major seventh or a tr
 
 ## D34. PLUS writes its own music from the game (2026-11-07)
 
+(Its lead, its second voice and its bass are D35's now; the rest stands.)
+
 The product owner, on the corrected D33b: a little better, but held back by keeping the old; a new algorithm, with
 the sound kept. So PLUS no longer voices the HTML's notes: for the bots' four voices (Scout-7's main and ping,
 Echo-3's FM and sub) the HTML's score is dropped and rs_score_plus writes the music anew from the same game, each
@@ -409,4 +411,36 @@ bot a musician (the voices, the mix, the drums of D33c, the room of D33d and Voi
 plus_test holds it: the game the same as CLASSIC's tick for tick, 0 notes outside the scale and 0 rubs over 24
 setups, chord tones on the beats and the root on the one, Scout-7's line 2.1 to 3.3 semitones a note on the six
 boards (the HTML's 1.4 to 4.4) with no leap past an octave but a dash's, A sparser than B, a bass on the beats.
+
+## D35. PLUS: tunes that come back, a groove a board (2026-11-07)
+
+The product owner, on D34: a step the right way, but the bass much the same on every board, and the melody still
+sounds random. The piano roll said why: Scout-7 struck a new note on nearly every sixteenth, from positions that
+jump, voice-led to the nearest octave so a bar never quite came back; and every board had the same walking bass. So:
+
+- **The board is a keyboard.** A cell is a degree of the key: x plus the rows up, from E4 (Scout-7) or E3 (Echo-3).
+  A step on the board is a step in the scale, a dash a third. The bots go back to their pads every loop and walk
+  the same way again, so what they sing comes back every bar: a tune.
+- **Its rhythm is when they move.** A note starts where a bot gets to a new cell (a ping strikes it again); it
+  holds while the bot turns or pushes at a wall, to its register's next wait (a wait is a rest), or the next note
+  (the voices are monophonic). In A Scout-7's notes start on the eighths and on dashes, in B on every step.
+- **On the beats, the chord.** A note on a beat is the chord's tone nearest the way the tune goes (so the contour
+  stays); a new cell is always a new note; a note off the beat still sounding on one resolves there, a step to the
+  chord. In the bar, no leap past a sixth (the octave nearer).
+- **Call and answer.** In A, Scout-7 sings three beats and Echo-3 the last: Scout-7's first notes again, as they
+  went, from Echo-3's cell (a fugue's answer); before that Echo-3 sounds on the beats where it gets to a new cell.
+  In B Echo-3 sings with Scout-7, the chord's tone a third or a sixth under, and on its own in Scout-7's gaps.
+- **Cadences.** The bar half way through a phrase ends on the chord's fifth, its last bar on the root: from half
+  the bar on, Scout-7 lands there (moved or not) and holds; the drummer's fill plays under it.
+- **A groove a board.** The bass plays the board's own bar: DEFAULT three-three-two, CORRIDOR straight eighths,
+  GARDEN a walk in quarters, GAUNTLET a gallop, SPINNER octaves, MAZE syncopated round the corners; a rolled or the
+  user's board one of those or dub or half time, by its tiles. Root, fifth, octave, third and a step into the next
+  chord's root. Echo-3 plays into it: its dash an octave up, its ping a double, its wait a rest off the beat.
+  Changing the board (ENV) changes the groove as the loop comes round.
+
+The ghost ticks' glint, the belt's roll, the ping's glint, the tuned tiles, the drummer, the room and the composer
+stay. plus_test holds it: the same bar a phrase later the same tune (417 of 423 notes), Echo-3's answers as
+Scout-7's calls went (45 of 45), every phrase home on the root (30 of 30), six boards six grooves, the bass on
+every bar's one, Scout-7 2.4 to 3.2 semitones a note in a bar (no leap past an octave but a dash's), A sparser
+than B, and as before 0 notes outside the scale, 0 rubs, chord tones on the beats, the game CLASSIC's.
 

@@ -202,17 +202,19 @@ static void test_drums(void)                            /* the fills, the crashe
     }
 }
 
-static void test_lines(void)                            /* lines that walk, a first half sparser, a bass on the beats */
+static void test_lines(void)                            /* tunes that walk, a first half sparser, a groove a board */
 {
     static struct rs_state c, s;
     static struct rs_tick_out oc, o;
+    uint16_t groove[RS_NBOARDS];
     for (int board = 0; board < RS_NBOARDS; board++) {
-        long jumps_c = 0, jumps_p = 0, nc = 0, np = 0, in_a = 0, in_b = 0, beats = 0, bassed = 0, big = 0;
-        int last_c = 0, last_p = 0;
+        long jumps_c = 0, jumps_p = 0, nc = 0, np = 0, in_a = 0, in_b = 0, bars = 0, ones = 0, big = 0;
+        int last_c = 0, last_p = 0, first = 1;
         rs_default(&c), rs_default(&s);
         rs_load_board(&c, (uint8_t)board), rs_load_board(&s, (uint8_t)board);
         s.music = RS_MUSIC_PLUS;
         rs_start(&c), rs_start(&s);
+        groove[board] = 0;
         for (int t = 0; t < 16 * 32; t++) {
             rs_tick(&c, &oc), rs_tick(&s, &o);
             for (int i = 0; i < oc.nnotes; i++)
@@ -220,32 +222,95 @@ static void test_lines(void)                            /* lines that walk, a fi
                     if (last_c) jumps_c += abs(oc.notes[i].midi - last_c), nc++;
                     last_c = oc.notes[i].midi;
                 }
-            int dash = o.acted[0] && o.played[0].action == RS_DASH, has_bass = 0;
+            if (s.step == 0) first = 1;                 /* (a bar: the bots back at their pads, the tune again) */
+            int dash = o.acted[0] && o.played[0].action == RS_DASH, bass_one = 0;
             for (int i = 0; i < o.nnotes; i++) {
-                if (o.notes[i].voice == RS_V_A_MAIN && o.notes[i].at == 0) {
-                    if (last_p) {
-                        jumps_p += abs(o.notes[i].midi - last_p), np++;
-                        big += abs(o.notes[i].midi - last_p) > 12 && !dash;
+                const struct rs_note *n = &o.notes[i];
+                if (n->voice == RS_V_A_MAIN && n->at == 0) {
+                    if (!first) {
+                        jumps_p += abs(n->midi - last_p), np++;
+                        big += abs(n->midi - last_p) > 12 && !dash;
                     }
-                    last_p = o.notes[i].midi;
+                    last_p = n->midi, first = 0;
                     if (rs_plus_section(&s)) in_b++;
                     else in_a++;
                 }
-                has_bass |= o.notes[i].voice == RS_V_B_SUB;
+                if (n->voice == RS_V_B_SUB && n->at == 0) {
+                    bass_one |= s.step == 0;
+                    if (s.cycle == 2) groove[board] |= (uint16_t)(1u << s.step);
+                }
             }
-            if ((o.move_tick || o.loop_reset) && s.step % 4 == 0) beats++, bassed += has_bass;
+            if (s.step == 0 && (o.loop_reset || t == 0)) bars++, ones += bass_one;
         }
-        printf("plus_test: board %d: Scout-7 moves %.1f semitones a note (the HTML's %.1f)\n", board, (double)jumps_p / (double)np, (double)jumps_c / (double)nc);
-        CHECK(np > 50 && jumps_p * 10 <= 35 * np, "board %d: Scout-7's line walks (%.1f semitones a note)", board, (double)jumps_p / (double)np);
-        CHECK(big == 0, "board %d: no leap past an octave but a dash's (%ld)", board, big);
+        printf("plus_test: board %d: Scout-7 moves %.1f semitones a note in a bar (the HTML's %.1f); groove %04x\n", board,
+               (double)jumps_p / (double)np, (double)jumps_c / (double)nc, groove[board]);
+        CHECK(np > 50 && jumps_p * 10 <= 35 * np, "board %d: Scout-7's tune walks (%.1f semitones a note)", board, (double)jumps_p / (double)np);
+        CHECK(big == 0, "board %d: no leap past an octave in a bar but a dash's (%ld)", board, big);
         CHECK(in_a * 10 < in_b * 8, "board %d: the first half sparser (%ld notes in A, %ld in B)", board, in_a, in_b);
-        CHECK(bassed * 10 >= beats * 9, "board %d: a bass on the beats (%ld of %ld)", board, bassed, beats);
+        CHECK(bars > 30 && ones * 10 >= bars * 9, "board %d: the bass on every bar's one (%ld of %ld)", board, ones, bars);
     }
+    for (int i = 0; i < RS_NBOARDS; i++)
+        for (int j = i + 1; j < RS_NBOARDS; j++)
+            CHECK(groove[i] != groove[j], "boards %d and %d: a bass groove each (%04x)", i, j, groove[i]);
+}
+
+static int lead_at(const struct rs_tick_out *o, uint8_t voice)   /* the voice's note at the tick's start, or 0 */
+{
+    for (int i = 0; i < o->nnotes; i++)
+        if (o->notes[i].voice == voice && o->notes[i].at == 0 && o->notes[i].vel) return o->notes[i].midi;
+    return 0;
+}
+
+static void test_tunes(void)                            /* the tune comes back, Echo-3 answers it, the phrase comes home */
+{
+    static struct rs_state s;
+    static struct rs_tick_out o;
+    static int8_t roll[20][16], echo[20][16];
+    long same = 0, notes = 0, answers = 0, imitated = 0, homes = 0, phrases = 0;
+    for (int board = 0; board < RS_NBOARDS; board++) {
+        rs_default(&s);
+        rs_load_board(&s, (uint8_t)board);
+        s.music = RS_MUSIC_PLUS;
+        rs_start(&s);
+        memset(roll, 0, sizeof roll), memset(echo, 0, sizeof echo);
+        while (s.cycle < 20) {
+            rs_tick(&s, &o);
+            if (s.cycle < 20 && s.step >= 0 && s.step < 16)
+                roll[s.cycle][s.step] = (int8_t)lead_at(&o, RS_V_A_MAIN), echo[s.cycle][s.step] = (int8_t)lead_at(&o, RS_V_B_FM);
+        }
+        for (int bar = 4; bar < 16; bar++)              /* the same bar of the next phrase: the same tune */
+            for (int p = 0; p < 16; p++)
+                if (roll[bar][p]) notes++, same += roll[bar + 4][p] == roll[bar][p];
+        for (int bar = 0; bar < 20; bar++) {
+            uint8_t sc = s.bassmod[bar % 4].scale;
+            if (bar % 4 == 0) {                         /* A's first bar: Echo-3 answers with Scout-7's call */
+                int f = 0;
+                while (f < 12 && !roll[bar][f]) f++;
+                for (int j = 1; j < 4 && f < 12; j++)
+                    if (roll[bar][f + j] && echo[bar][12 + j] && echo[bar][12]) {
+                        answers++;
+                        imitated += idx_of(echo[bar][12 + j], sc) - idx_of(echo[bar][12], sc) ==
+                                    idx_of(roll[bar][f + j], sc) - idx_of(roll[bar][f], sc);
+                    }
+            }
+            if (bar % 4 == 3) {                         /* the phrase's last bar: its last note the chord's root */
+                const struct rs_bassmod_step *ms = &s.bassmod[bar % 4];
+                int last = 0, root = chord_root(&s, ms, ms->scale);
+                for (int p = 0; p < 16; p++) last = roll[bar][p] ? roll[bar][p] : last;
+                phrases++, homes += last && ((last - root) % 12 + 12) % 12 == 0;
+            }
+        }
+    }
+    printf("plus_test: the tune again %ld of %ld notes, answers %ld of %ld, home %ld of %ld\n", same, notes, imitated, answers, homes, phrases);
+    CHECK(notes > 200 && same * 10 >= notes * 8, "the tune comes back a phrase later (%ld of %ld notes)", same, notes);
+    CHECK(answers > 20 && imitated * 10 >= answers * 8, "Echo-3's answer goes as Scout-7's call (%ld of %ld)", imitated, answers);
+    CHECK(homes * 10 >= phrases * 9, "a phrase ends on the chord's root (%ld of %ld)", homes, phrases);
 }
 
 int main(void)
 {
     test_lines();
+    test_tunes();
     test_compose();
     test_in_scale();
     test_harmony();

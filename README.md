@@ -133,11 +133,16 @@ plays; Voice Mod's scale and root keep them in key.
 ## The sound
 
 RoboSeq has two kinds of music, picked with SELECT on GLO. **PLUS**, where it starts, is RoboSeq's own music from the
-same game and the same sounds, each robot a musician. Scout-7 sings the line: where it stands is where the melody
-goes, a step walks there, a dash leaps, a turn is a neighbour note, a wait a rest, and on the beats it lands on the
-chord. Echo-3 harmonises it a third or a sixth below and answers when Scout-7 rests, and its low voice walks a bass
-under them (the root on the one, the fifth on three, a step into each new chord). The first half of each phrase is
-sparser than the second, like a verse and a chorus, and the tiles' sounds are tuned to the chord. The drums keep
+same game and the same sounds, each robot a musician, and the board is their keyboard: a cell is a note of the key,
+a step on the board a step in the scale, a dash a third. The robots go back to their pads every loop and walk the
+same way again, so their tunes come back every bar, the rhythm from when they move (a note where a robot gets to a
+new cell, held while it turns or pushes at a wall, a wait a rest) and the chord on the beats. Scout-7 sings the tune;
+in the first half of each phrase it sings three beats and Echo-3 answers in the fourth with Scout-7's own motif,
+from where Echo-3 stands; in the second half they sing together, Echo-3 a third or a sixth below. Half way through a
+phrase the tune lands on the chord's fifth, at its end on the root. Each board has its own bass groove (DEFAULT
+three-three-two, CORRIDOR straight eighths, GARDEN a walk, GAUNTLET a gallop, SPINNER octaves, MAZE syncopation;
+a rolled or your own board gets one by its tiles), and Echo-3 plays into it: a dash pops it up an octave, a ping
+doubles it, a wait leaves a gap. The tiles' sounds are tuned to the chord. The drums keep
 your pattern but get a drummer: dynamics, ghost notes, a kick pushing into four every other loop, open and busier hats in the second half
 of each phrase, a fill at its end and a crash on the next. The room shades with each chord and opens in the second
 half. And Voice Mod's random (SCL, 16) writes a progression

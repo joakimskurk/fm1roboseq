@@ -190,7 +190,14 @@ void rs_load_board(struct rs_state *s, uint8_t id)      /* applyBoardPreset() */
     rs_set_board(s, &b, id);
 }
 
-void rs_start(struct rs_state *s) { rs_reset(s); s->playing = 1; s->steer[0] = s->steer[1] = 0; s->plus_lead = s->plus_echo = s->plus_bass = 0; }
+void rs_start(struct rs_state *s)
+{
+    rs_reset(s);
+    s->playing = 1, s->steer[0] = s->steer[1] = 0;
+    s->plus_lead = s->plus_echo = s->plus_bass = 0, s->plus_cell[0] = s->plus_cell[1] = -1, s->plus_cad = 0;
+    s->plus_at[0] = s->plus_at[1] = 0, s->plus_end = 0, s->plus_first = 255, s->plus_ans = -1;
+    for (int i = 0; i < 4; i++) s->plus_call[i] = -1;
+}
 
 void rs_stop(struct rs_state *s)                        /* stopPlayback() */
 {

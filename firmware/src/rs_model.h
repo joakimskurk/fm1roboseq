@@ -80,6 +80,10 @@ struct rs_state {
     uint8_t steer[2];                                           /* bot A / B's next move is this action + 1 (0: its register's) */
     uint8_t music;                                              /* RS_MUSIC_CLASSIC (the HTML's, rs_default) or _PLUS (D33) */
     int8_t plus_lead, plus_echo, plus_bass;                     /* PLUS's lines (D34): their last notes (0: none yet) */
+    int8_t plus_cell[2];                                        /* PLUS's tunes (D35): the cell each bot's last note is from (-1) */
+    uint8_t plus_at[2], plus_cad, plus_end;                     /* the step of that note; the bar's cadence has sounded; Scout-7's note ends */
+    int8_t plus_call[4], plus_ans;                              /* Scout-7's call: its bar's first notes (scale steps, -1); Echo-3's answer's */
+    uint8_t plus_first;                                         /* the step of the call's first note (255: none yet) */
 };
 
 enum { RS_MUSIC_CLASSIC, RS_MUSIC_PLUS };                     /* the music: the HTML's, or RoboSeq's own on top (D33) */
@@ -146,6 +150,7 @@ void rs_score_coin(const struct rs_state *s, struct rs_tick_out *o);   /* the lo
 void rs_score_plus(struct rs_state *s, struct rs_tick_out *o);  /* PLUS (D34): the tick's music, written anew */
 uint32_t rs_plus_phrase(const struct rs_state *s);              /* PLUS: a phrase, in loops (a Voice Mod round) */
 int rs_plus_section(const struct rs_state *s);                  /* PLUS: 1 in a phrase's second half (B) */
+int rs_plus_groove(const struct rs_state *s);                   /* PLUS: the bass's groove, 0..7 (the board's, D35) */
 void rs_advance_voice_mod(struct rs_state *s);                  /* advanceVoiceMod(): MANUAL's tap, LOOP's count */
 
 /* editing, as the HTML's controls do it */
