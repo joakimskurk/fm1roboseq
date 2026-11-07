@@ -84,9 +84,11 @@ int main(void)
     draw_boards(&g, 1, 0), shot("boards");
     rs_default(&g), rs_start(&g);
     g.music = RS_MUSIC_PLUS, draw_glo(&g, 32), shot("glo");   /* (the app starts in PLUS: D33) */
-    rs_cycle_bassmod(&g, 1, 0, 1), rs_cycle_bassmod(&g, 1, 2, -1);
+    rs_apply_prog(&g, 1, 5), rs_set_follow(&g, 1);   /* (D38: I V vi IV in G, FOLLOW on, the next one ready) */
+    g.vm_index = 2, rs_advance_voice_mod(&g);            /* (on the last step: the next one ready) */
     draw_scl(&g, 1), shot("voicemod");
-    g.seq2[0] = (struct rs_seq2_step){RS_B_GARDEN, RS_D_BREAK, 0}, g.seq2[2] = (struct rs_seq2_step){RS_B_MAZE, RS_D_NONE, 1};
+    g.vm_index = 0, g.next_ready = 0;
+    g.seq2[0] = (struct rs_seq2_step){RS_B_GARDEN, RS_D_BREAK, 0, 2}, g.seq2[2] = (struct rs_seq2_step){RS_B_MAZE, RS_D_NONE, 1, 26};
     g.seq2_active = 1, g.seq2_index = 0, g.seq2_rnd[0] = 1;
     draw_arp(&g, 2), shot("seq2");
     for (int t = 0; t < 5; t++) rs_tick(&g, &o);

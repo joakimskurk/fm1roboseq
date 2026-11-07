@@ -45,7 +45,8 @@ struct rs_bot {                                                 /* boardState.A 
 
 struct rs_prog { struct rs_step s[RS_MAX_STEPS]; uint8_t len; };   /* a bot's register; len 1..64 */
 struct rs_bassmod_step { uint8_t scale, root; int8_t semitone; };
-struct rs_seq2_step { uint8_t board, drums, regswap; };
+struct rs_seq2_step { uint8_t board, drums, regswap, prog; };   /* prog (D38, the port's): 0 "--", 1.. a progression, RS_P_RND */
+#define RS_P_RND 0xFFu                                          /* a Seq 2 step's progression: a new one, following on */
 
 struct rs_state {
     /* the settings */
@@ -85,6 +86,10 @@ struct rs_state {
     int8_t plus_call[4], plus_ans;                              /* Scout-7's call: its bar's first notes (scale steps, -1); Echo-3's answer's */
     uint8_t plus_first;                                         /* the step of the call's first note (255: none yet) */
     int8_t plus_run;                                            /* the bass's run into the next phrase: 1 up, -1 down (D36c) */
+    /* the progressions (D38, the port's): Voice Mod's, by name and key (0: made by hand); the next round's, ready on
+     * its last step when FOLLOW or the chain changes it */
+    uint8_t vm_follow, prog_id, prog_key, next_id, next_key, next_ready;
+    struct rs_bassmod_step bm_next[RS_BASSMOD_MAX];
 };
 
 enum { RS_MUSIC_CLASSIC, RS_MUSIC_PLUS };                     /* the music: the HTML's, or RoboSeq's own on top (D33) */
@@ -193,7 +198,14 @@ void rs_randomize_steps(struct rs_state *s, int bot);           /* randomizeStep
 void rs_randomize_all(struct rs_state *s);                      /* randomizeAllSteps() */
 void rs_clear_steps(struct rs_state *s);                        /* resetAllSteps() */
 void rs_randomize_board(struct rs_state *s);                    /* randomizeBoard() (not undoable, as the HTML) */
-void rs_compose_bassmod(struct rs_state *s);                    /* PLUS's Voice Mod roll: a progression in a key (D33) */
+void rs_compose_bassmod(struct rs_state *s);                    /* PLUS's Voice Mod roll: a progression in a key (D33, D38) */
+#define RS_NKEYS 6                                              /* the keys the C modes give: Ab Eb Bb F C G major (and their minors) */
+uint32_t rs_nprogs(void);                                       /* the named progressions: ids 1..rs_nprogs() */
+const char *rs_prog_name(uint8_t id);                           /* "I V vi IV" ("--" for 0, "RND" for RS_P_RND) */
+void rs_prog_key_name(uint8_t id, uint8_t key, char *out);      /* its key, "G", "Am", "C" (4 bytes) */
+void rs_apply_prog(struct rs_state *s, uint8_t id, uint8_t key);   /* a named progression into Voice Mod (undoable) */
+void rs_set_follow(struct rs_state *s, uint8_t on);             /* FOLLOW: every round a new progression, following on */
+const struct rs_bassmod_step *rs_next_mod_step(const struct rs_state *s);   /* the chord after this one (the next round's) */
 void rs_randomize_bassmod(struct rs_state *s);                  /* randomizeBassMod() */
 void rs_set_voice_mod(struct rs_state *s, uint8_t manual, uint8_t freq4);   /* its trigger, its loop frequency x 4 */
 void rs_reset_bassmod(struct rs_state *s);                      /* resetBassMod() */
@@ -201,7 +213,7 @@ void rs_drum_preset(struct rs_state *s, uint8_t id);            /* applyDrumPres
 void rs_drum_toggle(struct rs_state *s, int voice, int step);   /* toggleDrumCell(): 0 kick, 1 snare, 2 hihat */
 void rs_drum_clear(struct rs_state *s);                         /* clearDrumPattern(): empty, custom, off */
 void rs_seq2_toggle(struct rs_state *s);                        /* Seq 2 on (queued while playing) / off */
-void rs_seq2_cycle(struct rs_state *s, int i, int field, int dir);   /* step i's 0 board, 1 drums (dir), 2 regswap */
+void rs_seq2_cycle(struct rs_state *s, int i, int field, int dir);   /* step i's 0 board, 1 drums (dir), 2 regswap, 3 prog (D38) */
 void rs_reset_seq2(struct rs_state *s);                         /* resetSeq2() */
 void rs_randomize_seq2(struct rs_state *s);                     /* randomizeSeq2() */
 uint32_t rs_random(struct rs_state *s, uint32_t n);             /* 0..n-1 */

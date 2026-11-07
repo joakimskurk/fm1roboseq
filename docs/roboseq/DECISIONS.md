@@ -532,3 +532,57 @@ determines span, tile determines rate":
 The big one's arpeggio and the belt's both use it. plus_test: five or more shapes across the positions and loops,
 two octaves hot, the other shape far apart, every tone in the scale.
 
+## D38. Progressions: 73 named ones in six keys, FOLLOW and the chain (2026-11-07)
+
+The product owner: look over the progressions' random, so there are many variations; and pick other progressions in
+a chain, or follow.
+
+**The bank.** D33a drew from about 30 four-chord progressions, all on C, and a fifth of the time from random roots
+moving by thirds. But the C modes are six keys, since every note is quantized to the step's scale on C:
+- C major is C major's and A minor's notes;
+- C lydian is G major's, C mixolydian F major's, C dorian Bb major's;
+- C minor is Eb major's, C phrygian Ab major's.
+
+So a progression is now its chords as degrees of its own mode, and a key is one of those six. The bank holds 73
+named progressions:
+
+| Kind | Count | Examples |
+|---|---|---|
+| Major | 22 | I V vi IV, ii V I vi, I IV ii V, IV iii ii I |
+| Major, eight chords | 3 | CANON, FIFTIES, GOSPEL |
+| Minor | 13, and DESCENT of eight | i VI III VII, i iv v i, VI VII i i |
+| Dorian | 6 | |
+| Mixolydian | 6 | |
+| Lydian | 3 | |
+| Phrygian | 3 | |
+| Pentatonic | 4 of each | |
+| Borrowing a chord in C | 8 | I bVII IV I, I IV iv I, I bVI bVII I, I II IV I |
+
+Four chords in an eight-step Voice Mod are said twice, the second time ending home (on V when they ended home).
+
+**The roll** (SCL 16, PLUS) draws a family (major most, then minor, the modes, the pentatonics, the borrowing ones),
+one of its progressions (never the one playing) and a key. The default song is ii I IV vi in C, as before.
+
+**FOLLOW** (SCL 12, lit; either engine) gives every round a new progression, following on: the same key three times
+in four, else a fifth up or down round the circle (Ab Eb Bb F C G).
+
+**The chain** (Seq 2's K4, a fourth field on its steps: "--", RND or a progression by number) names the next round's
+progression for that step, in the key the music is in; "--" leaves it, or lets FOLLOW have it.
+
+The next round's progression is made on the round's last step (rs_state.bm_next), so the bass's step and run into the
+next chord (D35, D36c) aim at the chord that will come (rs_next_mod_step); it goes in as the round wraps, before Seq 2
+moves on.
+
+The SCL header names what plays (I V vi IV G); NEXT > names what comes. Undo keeps the name with the steps; editing a
+step by hand forgets it. CLASSIC's roll is still the HTML's randomizeBassMod; FOLLOW and the chain use the bank in
+both engines.
+
+plus_test:
+- 672 different Voice Mods in 4000 rolls; every progression and every key rolled; borrowing ones 194 times.
+- Every root a note of its step's scale, one scale all through but where a chord is borrowed.
+- Four chords in eight steps home the second time.
+- I V vi IV in G is G D E C, and a minor one in C's notes is in A minor.
+- FOLLOW: a new progression each of 20 rounds, each in the key or a fifth away, the bass knowing the next round's
+  first chord every time.
+- The chain: every round as its step says.
+

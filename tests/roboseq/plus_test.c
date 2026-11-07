@@ -9,33 +9,75 @@
 static int fails;
 #define CHECK(c, ...) do { if (!(c)) { fails++; printf("FAIL %s:%d: ", __FILE__, __LINE__); printf(__VA_ARGS__); printf("\n"); } } while (0)
 
-static void test_compose(void)                          /* the Voice Mod roll: one scale, a progression of its chords */
+static int c_mode(uint8_t sc)                           /* a scale the progressions use: a C mode or a C pentatonic */
+{
+    return sc == RS_SC_MAJOR || sc == RS_SC_MINOR || sc == RS_SC_DORIAN || sc == RS_SC_MIXOLYDIAN || sc == RS_SC_LYDIAN ||
+           sc == RS_SC_PHRYGIAN || sc == RS_SC_PENTATONIC || sc == RS_SC_MINPENTA;
+}
+
+static void test_compose(void)                          /* the Voice Mod roll (D38): a named progression in a key */
 {
     static struct rs_state s;
-    int on_notes = 0, distinct = 0;
-    static uint8_t seen[1u << 16];
+    int distinct = 0, keys[RS_NKEYS] = {0}, ids_seen = 0, borrowed = 0, homes = 0, eights = 0;
+    static uint8_t seen[1u << 16], id_seen[256];
     for (int r = 0; r < 4000; r++) {
         rs_default(&s);
         s.music = RS_MUSIC_PLUS, s.rng = 0x9E3779B9u * (uint32_t)(r + 1), s.transpose_root = 0;
         s.bassmod_len = (r & 1) ? 8 : 4;
         rs_compose_bassmod(&s);
         CHECK(s.transpose_root == 1, "roll %d: the roots move the notes", r);
-        int all_on = 1;
+        CHECK(s.prog_id >= 1 && s.prog_id <= rs_nprogs(), "roll %d: a named progression (%d)", r, s.prog_id);
+        int one_key = 1;
         for (int i = 0; i < s.bassmod_len; i++) {
             uint8_t sc = s.bassmod[i].scale;
-            CHECK(sc == s.bassmod[0].scale, "roll %d step %d: one scale all through (a key), not %d and %d", r, i, sc, s.bassmod[0].scale);
-            CHECK(sc == RS_SC_MAJOR || sc == RS_SC_MINOR || sc == RS_SC_DORIAN || sc == RS_SC_MIXOLYDIAN || sc == RS_SC_PENTATONIC ||
-                  sc == RS_SC_MINPENTA, "roll %d step %d: a scale to play in, not %d", r, i, sc);
+            CHECK(c_mode(sc), "roll %d step %d: a scale to play in, not %d", r, i, sc);
             CHECK(s.bassmod[i].root < 12 && s.bassmod[i].semitone == 0, "roll %d step %d: root, no semitone", r, i);
-            all_on &= SCALE_MASK[sc] >> s.bassmod[i].root & 1;
+            CHECK(SCALE_MASK[sc] >> s.bassmod[i].root & 1, "roll %d step %d: the root a note of its scale", r, i);
+            one_key &= sc == s.bassmod[0].scale;
         }
-        on_notes += all_on;
+        int bor = PROG[s.prog_id - 1].mode == M_BOR;
+        CHECK(one_key || bor, "roll %d: one key all through, unless it borrows (%s)", r, rs_prog_name(s.prog_id));
+        borrowed += bor && !one_key;
+        keys[s.prog_key % RS_NKEYS]++;
+        if (!id_seen[s.prog_id]) id_seen[s.prog_id] = 1, ids_seen++;
+        if (s.bassmod_len == 8 && PROG[s.prog_id - 1].n == 4) {   /* said twice: the second time home (or on V) */
+            const struct prog_def *pd = &PROG[s.prog_id - 1];
+            struct rs_bassmod_step want = prog_chord(pd, s.prog_key, pd->d[3] == 0 ? 4 : 0, 0);
+            eights++, homes += s.bassmod[7].root == want.root && s.bassmod[7].scale == want.scale;
+        }
         uint32_t h = s.bassmod[0].scale;
-        for (int i = 0; i < 4; i++) h = h * 31u + s.bassmod[i].root;
+        for (int i = 0; i < s.bassmod_len; i++) h = h * 31u + s.bassmod[i].root * 13u + s.bassmod[i].scale;
         if (!seen[h & 0xFFFFu]) seen[h & 0xFFFFu] = 1, distinct++;
     }
-    CHECK(on_notes > 3000, "four in five: every root a note of the scale (%d of 4000)", on_notes);
-    CHECK(distinct > 40, "many progressions, not a few (%d)", distinct);
+    printf("plus_test: the roll: %d different Voice Mods in 4000, %d of %u progressions, keys %d %d %d %d %d %d, %d borrowing\n",
+           distinct, ids_seen, rs_nprogs(), keys[0], keys[1], keys[2], keys[3], keys[4], keys[5], borrowed);
+    CHECK(distinct > 600, "many progressions, not a few (%d)", distinct);
+    CHECK(ids_seen == (int)rs_nprogs(), "every named progression rolls (%d of %u)", ids_seen, rs_nprogs());
+    for (int k = 0; k < RS_NKEYS; k++) CHECK(keys[k] > 200, "every key (%d: %d)", k, keys[k]);
+    CHECK(borrowed > 50, "some borrow a chord (%d)", borrowed);
+    CHECK(eights > 500 && homes == eights, "four chords in eight steps: the second time home (%d of %d)", homes, eights);
+    {                                                   /* every progression in every key: its chords where they belong */
+        static const int MAJ[7] = {0, 2, 4, 5, 7, 9, 11};
+        rs_default(&s);
+        s.bassmod_len = 4;
+        rs_apply_prog(&s, 1, 5);                        /* I V vi IV in G (C lydian's notes): G D E C */
+        CHECK(s.bassmod[0].root == 7 && s.bassmod[1].root == 2 && s.bassmod[2].root == 4 && s.bassmod[3].root == 0 &&
+              s.bassmod[0].scale == RS_SC_LYDIAN, "I V vi IV in G: G D E C on G major's notes");
+        char kn[4];
+        rs_prog_key_name(1, 5, kn);
+        CHECK(!strcmp(kn, "G"), "its key: G (%s)", kn);
+        for (uint8_t id = 1; id <= rs_nprogs(); id++)
+            if (PROG[id - 1].mode == M_AEO) {
+                rs_apply_prog(&s, id, KEY_C);           /* a minor one in C's notes: A minor */
+                rs_prog_key_name(id, KEY_C, kn);
+                CHECK(!strcmp(kn, "Am"), "%s in C's notes is in A minor (%s)", rs_prog_name(id), kn);
+                CHECK(s.bassmod[0].root == MAJ[(5 + PROG[id - 1].d[0]) % 7], "%s: its first chord", rs_prog_name(id));
+                break;
+            }
+        rs_apply_prog(&s, 1, 4);
+        const struct rs_bassmod_step *nx = rs_next_mod_step(&s);
+        CHECK(nx == &s.bassmod[1], "the next chord is the next step's");
+    }
     {                                                   /* undoable, as the HTML's roll */
         rs_default(&s);
         s.music = RS_MUSIC_PLUS;
@@ -444,6 +486,62 @@ static void test_arp_rules(void)                        /* the arpeggio by the H
     CHECK(diff, "far apart, the other shape");
 }
 
+static void test_follow_chain(void)                     /* FOLLOW and the chain (D38) */
+{
+    static struct rs_state s;
+    static struct rs_tick_out o;
+    int rounds = 0, changed = 0, near_key = 0, ahead = 0;
+    rs_default(&s);
+    s.music = RS_MUSIC_PLUS, s.rng = 4242;
+    rs_compose_bassmod(&s);
+    rs_set_follow(&s, 1);
+    rs_start(&s);
+    uint8_t last_id = s.prog_id, last_key = s.prog_key;
+    struct rs_bassmod_step promised = {0, 0, 0};
+    int promised_ok = 0;
+    while (s.cycle < 4 * 20) {
+        uint8_t vm = s.vm_index;
+        rs_tick(&s, &o);
+        if (s.vm_index + 1u == s.bassmod_len && s.next_ready && !promised_ok)   /* the last step: the next one ready */
+            promised = *rs_next_mod_step(&s), promised_ok = 1;
+        if (s.vm_index == 0 && vm != 0) {
+            rounds++, changed += s.prog_id != last_id;
+            int d = (s.prog_key - last_key + RS_NKEYS) % RS_NKEYS;
+            near_key += d == 0 || d == 1 || d == RS_NKEYS - 1;
+            ahead += promised_ok && promised.root == s.bassmod[0].root && promised.scale == s.bassmod[0].scale;
+            last_id = s.prog_id, last_key = s.prog_key, promised_ok = 0;
+        }
+    }
+    printf("plus_test: FOLLOW: %d rounds, %d new, %d in the key or a fifth off, %d as the last step said\n", rounds, changed, near_key, ahead);
+    CHECK(rounds >= 19 && changed == rounds, "FOLLOW: a new progression every round (%d of %d)", changed, rounds);
+    CHECK(near_key == rounds, "FOLLOW: the same key or a fifth away (%d of %d)", near_key, rounds);
+    CHECK(ahead == rounds, "the bass knew the next round's first chord (%d of %d)", ahead, rounds);
+    {                                                   /* the chain: Seq 2's steps name the next round's progression */
+        static const uint8_t CHAIN[RS_SEQ2_STEPS] = {3, 0, 10, RS_P_RND};
+        int ok = 0, n = 0;
+        rs_default(&s);
+        s.music = RS_MUSIC_PLUS, s.rng = 77;
+        rs_apply_prog(&s, 1, 2);                        /* I V vi IV in Bb */
+        for (int i = 0; i < RS_SEQ2_STEPS; i++) s.seq2[i].prog = CHAIN[i];
+        rs_seq2_toggle(&s);                             /* (stopped: on at once) */
+        rs_start(&s);
+        uint8_t before = s.prog_id;
+        while (s.cycle < 4 * 9) {
+            uint8_t vm = s.vm_index;
+            rs_tick(&s, &o);
+            if (s.vm_index == 0 && vm != 0) {
+                uint8_t want = s.seq2[s.seq2_index].prog;
+                n++;
+                if (want == 0) ok += s.prog_id == before;   /* "--": as it was */
+                else if (want == RS_P_RND) ok += s.prog_id != before;
+                else ok += s.prog_id == want && s.prog_key == 2;   /* (in the key it was in) */
+                before = s.prog_id;
+            }
+        }
+        CHECK(n >= 8 && ok == n, "the chain: every round as its Seq 2 step says (%d of %d)", ok, n);
+    }
+}
+
 int main(void)
 {
     test_lines();
@@ -452,6 +550,7 @@ int main(void)
     test_tiles();
     test_arp_rules();
     test_compose();
+    test_follow_chain();
     test_in_scale();
     test_harmony();
     test_drums();

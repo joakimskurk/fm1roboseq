@@ -398,10 +398,11 @@ static int keys(uint32_t down)                  /* what the keys pressed now do;
     if (page == PAGE_ENV) return keys_env(down);
     uint32_t k, len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len;
     int changed = 0;
-    if (page == PAGE_SCL) {                     /* Voice Mod: 1-4 pick a step, 13 NEXT, 14 ROOT, 15 reset, 16 random */
+    if (page == PAGE_SCL) {                     /* Voice Mod: 1-4 pick a step, 12 FOLLOW, 13 NEXT, 14 ROOT, 15 reset, 16 random */
         for (k = 0; k < 16u; k++) {
             if (!(down >> white_key[k] & 1u)) continue;
             if (k < 4u) scl_cursor = (uint8_t)k;
+            else if (k == 11u) rs_set_follow(&game, !game.vm_follow);   /* FOLLOW (D38) */
             else if (k == 12u && game.vm_manual) rs_advance_voice_mod(&game);
             else if (k == 13u) game.transpose_root = !game.transpose_root;
             else if (k == 14u) rs_reset_bassmod(&game);
@@ -586,7 +587,10 @@ static void app_main(void)
                     else for (; e; e += e > 0 ? -1 : 1) rs_seq2_cycle(&game, arp_cursor, (int)k, e > 0 ? 1 : -1);
                     dirty = 1;
                 }
-            (void)fm1_enc_take(ENC_KNOB4);
+            if ((e = fm1_enc_take(ENC_KNOB4)) != 0) {   /* the step's progression (D38): "--", RND, the named ones */
+                for (; e; e += e > 0 ? -1 : 1) rs_seq2_cycle(&game, arp_cursor, 3, e > 0 ? 1 : -1);
+                dirty = 1;
+            }
         } else if (page == PAGE_LFO) {          /* KNOB1 the patterns, then CLEAR; KNOB4 on / off */
             if ((e = fm1_enc_take(ENC_KNOB1)) != 0) {
                 int32_t at = game.drum_preset < RS_NDRUMS ? game.drum_preset : -1;

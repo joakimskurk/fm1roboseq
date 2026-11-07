@@ -151,7 +151,7 @@ void rs_default(struct rs_state *s)                     /* buildDefaultState() *
     s->drums_on = 1;
     rs_set_drums(s, RS_D_FOUR);
     s->seq2_index = 0;
-    for (int i = 0; i < RS_SEQ2_STEPS; i++) s->seq2[i] = (struct rs_seq2_step){RS_B_NONE, RS_D_NONE, 0};
+    for (int i = 0; i < RS_SEQ2_STEPS; i++) s->seq2[i] = (struct rs_seq2_step){RS_B_NONE, RS_D_NONE, 0, 0};
     for (int b = 0; b < 2; b++) {
         s->prog[b].len = 16;
         for (int i = 0; i < RS_MAX_STEPS; i++)
@@ -323,14 +323,20 @@ static void advance_seq2(struct rs_state *s)            /* advanceSeq2() */
         s->rnd_due = (uint8_t)((s->seq2_rnd[0] ? 1 : 0) | (s->seq2_rnd[1] ? 2 : 0));
 }
 
+static void prepare_next(struct rs_state *s);
 void rs_advance_voice_mod(struct rs_state *s)           /* advanceVoiceMod() */
 {
     uint8_t prev = s->vm_index;
     s->vm_index = (uint8_t)((s->vm_index + 1) % s->bassmod_len);
+    if (s->vm_index == 0 && prev != 0 && s->next_ready) {   /* (D38: the round's progression, chained or following on) */
+        for (int i = 0; i < RS_BASSMOD_MAX; i++) s->bassmod[i] = s->bm_next[i];
+        s->prog_id = s->next_id, s->prog_key = s->next_key, s->next_ready = 0, s->transpose_root = 1;
+    }
     if (s->vm_index == 0 && prev != 0 && s->seq2_pending) {
         s->seq2_active = 1, s->seq2_pending = 0, s->seq2_index = -1;
     }
     if (s->vm_index == 0 && prev != 0 && s->seq2_active) advance_seq2(s);
+    if (s->vm_index + 1u == s->bassmod_len && !s->next_ready) prepare_next(s);   /* (its last step: the next one ready) */
 }
 
 void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
@@ -517,6 +523,7 @@ static const uint8_t SCALE_OPTIONS[6] = {RS_SC_MAJOR, RS_SC_MINOR, RS_SC_PENTATO
 void rs_cycle_bassmod(struct rs_state *s, int i, int field, int dir)   /* cycleBassModStepValue() */
 {
     struct rs_bassmod_step *st = &s->bassmod[i & 7];
+    s->prog_id = 0;                                     /* (made by hand now: no name) */
     dir = dir < 0 ? -1 : 1;
     if (field == 0) {                                   /* (PLUS: every mode its roll uses, D33) */
         static const uint8_t PLUS_OPTIONS[9] = {RS_SC_MAJOR, RS_SC_MINOR, RS_SC_PENTATONIC, RS_SC_MINPENTA, RS_SC_DORIAN,
@@ -608,7 +615,7 @@ void rs_reset_bassmod(struct rs_state *s)               /* resetBassMod(): build
 {
     static const struct rs_bassmod_step BM[4] = {{RS_SC_MAJOR, 3, 0}, {RS_SC_MAJOR, 0, 0}, {RS_SC_MAJOR, 5, 0},
                                                  {RS_SC_MAJOR, 9, 0}};
-    s->bassmod_len = 4;
+    s->bassmod_len = 4, s->prog_id = 0;
     for (int i = 0; i < RS_BASSMOD_MAX; i++) s->bassmod[i] = i < 4 ? BM[i] : (struct rs_bassmod_step){RS_SC_MAJOR, 0, 0};
 }
 
@@ -657,19 +664,25 @@ void rs_seq2_cycle(struct rs_state *s, int i, int field, int dir)   /* seq2-boar
         int at = st->drums == RS_D_NONE ? 0 : st->drums + 1;
         at = (at + dir + RS_NDRUMS + 1) % (RS_NDRUMS + 1);
         st->drums = (uint8_t)(at == 0 ? RS_D_NONE : at - 1);
-    } else
+    } else if (field == 2) {
         st->regswap = !st->regswap;
+    } else {                                            /* (D38) "--", RND, the progressions */
+        int n = (int)rs_nprogs() + 2, at = st->prog == RS_P_RND ? 1 : st->prog == 0 ? 0 : st->prog + 1;
+        at = (at + dir + n) % n;
+        st->prog = (uint8_t)(at == 0 ? 0 : at == 1 ? RS_P_RND : at - 1);
+    }
 }
 
 void rs_reset_seq2(struct rs_state *s)                  /* resetSeq2(): its steps "--", back to its first; (pending goes) */
 {
     s->seq2_index = 0, s->seq2_pending = 0;
-    for (int i = 0; i < RS_SEQ2_STEPS; i++) s->seq2[i] = (struct rs_seq2_step){RS_B_NONE, RS_D_NONE, 0};
+    for (int i = 0; i < RS_SEQ2_STEPS; i++) s->seq2[i] = (struct rs_seq2_step){RS_B_NONE, RS_D_NONE, 0, 0};
 }
 
 void rs_randomize_bassmod(struct rs_state *s)           /* randomizeBassMod() */
 {
     rs_push_undo(s);
+    s->prog_id = 0;
     for (int i = 0; i < s->bassmod_len; i++) {
         s->bassmod[i].scale = SCALE_OPTIONS[rs_random(s, 6)];
         s->bassmod[i].root = (uint8_t)rs_random(s, 12);
@@ -677,58 +690,201 @@ void rs_randomize_bassmod(struct rs_state *s)           /* randomizeBassMod() */
     }
 }
 
-/* PLUS's Voice Mod roll (D33a): a progression, not four random steps. In the HTML every note is quantized to the
- * step's scale on C, and the root only shifts the board's degrees before that (rs_score.c: the chord a step sounds
- * is the scale's triad on its note nearest the root). So a key is one scale for every step, and a chord is a root
- * on one of its notes: I V vi IV of major is roots C G A F. The roll draws a scale (major most, then minor, dorian,
- * mixolydian and the two pentatonics) and one of its progressions; or, a fifth of the time, the default song's kind:
- * one scale, the roots moving by thirds and fourths (Eb C F A major sounds Dm C F Am). */
-struct prog_set { uint8_t sc, n; const uint8_t (*p)[4]; };
-static const uint8_t P_MAJ[11][4] = {{0, 4, 5, 3}, {5, 3, 0, 4}, {0, 5, 3, 4}, {0, 3, 5, 4}, {1, 4, 0, 5}, {3, 4, 2, 5},
-                                     {0, 2, 3, 4}, {0, 3, 0, 4}, {5, 2, 3, 0}, {0, 4, 3, 4}, {3, 0, 4, 5}};
-static const uint8_t P_MIN[7][4] = {{0, 5, 2, 6}, {0, 3, 4, 0}, {0, 6, 5, 6}, {0, 5, 6, 0}, {0, 3, 6, 2}, {0, 2, 6, 5},
-                                    {0, 5, 3, 4}};
-static const uint8_t P_DOR[4][4] = {{0, 3, 0, 3}, {0, 1, 3, 0}, {0, 6, 3, 0}, {0, 3, 6, 0}};
-static const uint8_t P_MIX[4][4] = {{0, 6, 3, 0}, {0, 6, 0, 6}, {0, 4, 6, 3}, {0, 3, 6, 0}};
-static const uint8_t P_PEN[5][4] = {{0, 3, 4, 3}, {0, 4, 3, 0}, {4, 3, 0, 3}, {0, 1, 3, 4}, {0, 3, 1, 4}};
-static const struct prog_set PROGS[6] = {{RS_SC_MAJOR, 11, P_MAJ}, {RS_SC_MINOR, 7, P_MIN}, {RS_SC_DORIAN, 4, P_DOR},
-                                         {RS_SC_MIXOLYDIAN, 4, P_MIX}, {RS_SC_PENTATONIC, 5, P_PEN}, {RS_SC_MINPENTA, 5, P_PEN}};
-static const uint8_t PROG_W[20] = {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5};   /* the scales' odds */
-static const int8_t MEDIANT[6] = {3, -3, 4, -4, 5, 7};   /* the default song's moves (Eb C F A: -3 +5 +4) */
+/* The progressions (D33a, D38). In the HTML every note is quantized to the step's scale ON C, and the root only shifts
+ * the board's degrees before that (rs_score.c: the chord a step sounds is the scale's triad on its note nearest the
+ * root). So the C modes are six keys: C major's notes are C major's and A minor's, C lydian's G major's and E
+ * minor's, C mixolydian's F major's, C dorian's Bb major's, C minor's Eb major's, C phrygian's Ab major's. A
+ * progression is its chords as degrees of its own mode (I V vi IV of a major key, i VI III VII of a minor one ...);
+ * in a key, a degree is a note of that key's C mode, the step's root. The pentatonic ones are in C's two pentatonics,
+ * and a few borrow a chord in C from another C mode (bVII from mixolydian, iv bVI bIII from minor, II from lydian).
+ * Four chords, or eight; four in an eight-step Voice Mod are said twice, the second time ending home (or on V when
+ * they ended home). */
+enum { M_ION, M_DOR, M_PHR, M_LYD, M_MIX, M_AEO, M_PEN, M_MPEN, M_BOR };
+struct prog_def { char name[16]; uint8_t mode, n, d[8], b[8]; };   /* b: M_BOR's borrowed C mode for a chord, 0 none */
+#define MI RS_SC_MINOR
+#define MX RS_SC_MIXOLYDIAN
+#define LY RS_SC_LYDIAN
+static const struct prog_def PROG[] = {
+    {"I V vi IV", M_ION, 4, {0, 4, 5, 3}, {0}},       {"vi IV I V", M_ION, 4, {5, 3, 0, 4}, {0}},
+    {"I vi IV V", M_ION, 4, {0, 5, 3, 4}, {0}},       {"I IV vi V", M_ION, 4, {0, 3, 5, 4}, {0}},
+    {"ii V I vi", M_ION, 4, {1, 4, 0, 5}, {0}},       {"IV V iii vi", M_ION, 4, {3, 4, 2, 5}, {0}},
+    {"I iii IV V", M_ION, 4, {0, 2, 3, 4}, {0}},      {"I IV I V", M_ION, 4, {0, 3, 0, 4}, {0}},
+    {"vi iii IV I", M_ION, 4, {5, 2, 3, 0}, {0}},     {"I V IV V", M_ION, 4, {0, 4, 3, 4}, {0}},
+    {"IV I V vi", M_ION, 4, {3, 0, 4, 5}, {0}},       {"I IV ii V", M_ION, 4, {0, 3, 1, 4}, {0}},
+    {"I vi ii V", M_ION, 4, {0, 5, 1, 4}, {0}},       {"I I IV V", M_ION, 4, {0, 0, 3, 4}, {0}},
+    {"vi V IV V", M_ION, 4, {5, 4, 3, 4}, {0}},       {"IV IV I V", M_ION, 4, {3, 3, 0, 4}, {0}},
+    {"I iii vi IV", M_ION, 4, {0, 2, 5, 3}, {0}},     {"ii IV V I", M_ION, 4, {1, 3, 4, 0}, {0}},
+    {"I V ii IV", M_ION, 4, {0, 4, 1, 3}, {0}},       {"IV vi I V", M_ION, 4, {3, 5, 0, 4}, {0}},
+    {"ii I IV vi", M_ION, 4, {1, 0, 3, 5}, {0}},      {"IV iii ii I", M_ION, 4, {3, 2, 1, 0}, {0}},
+    {"CANON", M_ION, 8, {0, 4, 5, 2, 3, 0, 3, 4}, {0}},
+    {"FIFTIES", M_ION, 8, {0, 5, 3, 4, 0, 5, 1, 4}, {0}},
+    {"GOSPEL", M_ION, 8, {0, 3, 0, 4, 5, 3, 0, 4}, {0}},
+    {"i VI III VII", M_AEO, 4, {0, 5, 2, 6}, {0}},    {"i iv v i", M_AEO, 4, {0, 3, 4, 0}, {0}},
+    {"i VII VI VII", M_AEO, 4, {0, 6, 5, 6}, {0}},    {"i VI VII i", M_AEO, 4, {0, 5, 6, 0}, {0}},
+    {"i iv VII III", M_AEO, 4, {0, 3, 6, 2}, {0}},    {"i III VII VI", M_AEO, 4, {0, 2, 6, 5}, {0}},
+    {"i VI iv v", M_AEO, 4, {0, 5, 3, 4}, {0}},       {"VI VII i i", M_AEO, 4, {5, 6, 0, 0}, {0}},
+    {"i iv VI VII", M_AEO, 4, {0, 3, 5, 6}, {0}},     {"iv i v i", M_AEO, 4, {3, 0, 4, 0}, {0}},
+    {"i III iv VI", M_AEO, 4, {0, 2, 3, 5}, {0}},     {"i VII VI v", M_AEO, 4, {0, 6, 5, 4}, {0}},
+    {"VI III VII i", M_AEO, 4, {5, 2, 6, 0}, {0}},
+    {"DESCENT", M_AEO, 8, {0, 6, 5, 6, 0, 6, 5, 4}, {0}},
+    {"i IV i IV", M_DOR, 4, {0, 3, 0, 3}, {0}},       {"i ii IV i", M_DOR, 4, {0, 1, 3, 0}, {0}},
+    {"i VII IV i", M_DOR, 4, {0, 6, 3, 0}, {0}},      {"i IV VII i", M_DOR, 4, {0, 3, 6, 0}, {0}},
+    {"i III IV i", M_DOR, 4, {0, 2, 3, 0}, {0}},      {"i v IV i", M_DOR, 4, {0, 4, 3, 0}, {0}},
+    {"I VII IV I", M_MIX, 4, {0, 6, 3, 0}, {0}},      {"I VII I VII", M_MIX, 4, {0, 6, 0, 6}, {0}},
+    {"I v VII IV", M_MIX, 4, {0, 4, 6, 3}, {0}},      {"I IV VII I", M_MIX, 4, {0, 3, 6, 0}, {0}},
+    {"I v IV I", M_MIX, 4, {0, 4, 3, 0}, {0}},        {"I VII vi VII", M_MIX, 4, {0, 6, 5, 6}, {0}},
+    {"I II I II", M_LYD, 4, {0, 1, 0, 1}, {0}},       {"I II vi V", M_LYD, 4, {0, 1, 5, 4}, {0}},
+    {"I II iii II", M_LYD, 4, {0, 1, 2, 1}, {0}},
+    {"i II i II", M_PHR, 4, {0, 1, 0, 1}, {0}},       {"i II vii i", M_PHR, 4, {0, 1, 6, 0}, {0}},
+    {"i II III II", M_PHR, 4, {0, 1, 2, 1}, {0}},
+    {"PENTA 1", M_PEN, 4, {0, 3, 4, 3}, {0}},         {"PENTA 2", M_PEN, 4, {0, 4, 3, 0}, {0}},
+    {"PENTA 3", M_PEN, 4, {4, 3, 0, 3}, {0}},         {"PENTA 4", M_PEN, 4, {0, 1, 3, 4}, {0}},
+    {"MPENTA 1", M_MPEN, 4, {0, 3, 4, 3}, {0}},       {"MPENTA 2", M_MPEN, 4, {0, 4, 3, 0}, {0}},
+    {"MPENTA 3", M_MPEN, 4, {4, 3, 0, 3}, {0}},       {"MPENTA 4", M_MPEN, 4, {0, 1, 3, 4}, {0}},
+    {"I bVII IV I", M_BOR, 4, {0, 6, 3, 0}, {0, MX, 0, 0}},
+    {"I IV iv I", M_BOR, 4, {0, 3, 3, 0}, {0, 0, MI, 0}},
+    {"I bVI bVII I", M_BOR, 4, {0, 5, 6, 0}, {0, MI, MI, 0}},
+    {"I bIII IV I", M_BOR, 4, {0, 2, 3, 0}, {0, MI, 0, 0}},
+    {"I II IV I", M_BOR, 4, {0, 1, 3, 0}, {0, LY, 0, 0}},
+    {"vi IV I bVII", M_BOR, 4, {5, 3, 0, 6}, {0, 0, 0, MX}},
+    {"I iv I V", M_BOR, 4, {0, 3, 0, 4}, {0, MI, 0, 0}},
+    {"I bVII bVI bVII", M_BOR, 4, {0, 6, 5, 6}, {0, MI, MI, MI}},
+};
+#undef MI
+#undef MX
+#undef LY
+#define NPROG (sizeof PROG / sizeof PROG[0])
+static const uint8_t KEY_SC[RS_NKEYS] = {RS_SC_PHRYGIAN, RS_SC_MINOR, RS_SC_DORIAN, RS_SC_MIXOLYDIAN, RS_SC_MAJOR, RS_SC_LYDIAN};
+static const uint8_t KEY_PC[RS_NKEYS] = {8, 3, 10, 5, 0, 7};   /* their major keys' tonics, round the circle of fifths */
+static const uint8_t MODE_OFF[6] = {0, 1, 2, 3, 4, 5};    /* ionian .. aeolian: the degree of the major key they start on */
+static const uint8_t MAJ_PC[7] = {0, 2, 4, 5, 7, 9, 11};
+#define KEY_C 4u
+
+uint32_t rs_nprogs(void) { return NPROG; }
+const char *rs_prog_name(uint8_t id) { return id == 0 ? "--" : id == RS_P_RND ? "RND" : id <= NPROG ? PROG[id - 1].name : "?"; }
 
 static uint8_t scale_degree_pc(uint8_t sc, uint32_t d)  /* the scale's d-th note on C, a pitch class */
 {
     uint16_t m = SCALE_MASK[sc];
+    uint32_t len = 0;
+    for (uint8_t k = 0; k < 12; k++) len += m >> k & 1;
+    d %= len ? len : 1;
     for (uint8_t k = 0; k < 12; k++)
         if (m >> k & 1) { if (!d) return k; d--; }
     return 0;
 }
 
-void rs_compose_bassmod(struct rs_state *s)
+static int fixed_key(uint8_t mode) { return mode >= M_PEN; }   /* (the pentatonics and the borrowed ones: in C) */
+
+void rs_prog_key_name(uint8_t id, uint8_t key, char *out)
 {
-    uint32_t family, set, p, q, i;
-    rs_push_undo(s);
-    family = rs_random(s, 5);                           /* 0: the default song's kind; else a progression */
-    set = PROG_W[rs_random(s, 20)];
-    p = rs_random(s, PROGS[set].n);
-    q = rs_random(s, PROGS[set].n);                     /* (an 8-step Voice Mod: a second progression after it) */
-    if (family == 0) {
-        uint8_t sc = set == 1 || set == 2 || set == 5 ? RS_SC_MINOR : RS_SC_MAJOR;
-        int root = (int)rs_random(s, 12);
-        for (i = 0; i < s->bassmod_len; i++) {
-            uint32_t m = rs_random(s, 6);
-            s->bassmod[i] = (struct rs_bassmod_step){sc, (uint8_t)root, 0};
-            root = ((root + MEDIANT[m]) % 12 + 12) % 12;
-        }
+    static const char *const PC[12] = {"C", "Db", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"};
+    out[0] = 0;
+    if (id == 0 || id > NPROG) return;
+    const struct prog_def *p = &PROG[id - 1];
+    int minor = p->mode == M_AEO || p->mode == M_DOR || p->mode == M_PHR || p->mode == M_MPEN;
+    uint8_t t = fixed_key(p->mode) ? 0 : (uint8_t)((KEY_PC[key % RS_NKEYS] + MAJ_PC[MODE_OFF[p->mode]]) % 12);
+    const char *n = PC[t];
+    int i = 0;
+    while (n[i] && i < 2) out[i] = n[i], i++;
+    if (minor) out[i++] = 'm';
+    out[i] = 0;
+}
+
+static struct rs_bassmod_step prog_chord(const struct prog_def *p, uint8_t key, uint8_t d, uint8_t borrow)
+{
+    struct rs_bassmod_step c = {RS_SC_MAJOR, 0, 0};
+    if (p->mode == M_PEN || p->mode == M_MPEN) {
+        c.scale = p->mode == M_PEN ? RS_SC_PENTATONIC : RS_SC_MINPENTA, c.root = scale_degree_pc(c.scale, d);
+    } else if (p->mode == M_BOR) {
+        c.scale = borrow ? borrow : RS_SC_MAJOR, c.root = scale_degree_pc(c.scale, d);
     } else {
-        const struct prog_set *ps = &PROGS[set];
-        uint32_t len = ps->sc == RS_SC_PENTATONIC || ps->sc == RS_SC_MINPENTA ? 5u : 7u;
-        for (i = 0; i < s->bassmod_len; i++) {
-            uint8_t d = ps->p[i < 4u ? p : q][i % 4u];
-            s->bassmod[i] = (struct rs_bassmod_step){ps->sc, scale_degree_pc(ps->sc, d % len), 0};
-        }
+        uint8_t k = key % RS_NKEYS;
+        c.scale = KEY_SC[k], c.root = (uint8_t)((KEY_PC[k] + MAJ_PC[(MODE_OFF[p->mode] + d) % 7]) % 12);
     }
+    return c;
+}
+
+static void prog_into(struct rs_bassmod_step *dst, uint8_t len, uint8_t id, uint8_t key)   /* a progression's steps */
+{
+    const struct prog_def *p = &PROG[(id ? id - 1 : 0) % NPROG];
+    for (uint8_t i = 0; i < len; i++) {
+        uint8_t c = (uint8_t)(i % p->n), d = p->d[c], b = p->b[c];
+        if (p->n == 4 && len == 8 && i == 7) d = p->d[3] == 0 ? 4 : 0, b = 0;   /* (said twice: the second time home) */
+        dst[i] = prog_chord(p, key, d, b);
+    }
+}
+
+static uint8_t draw_prog(struct rs_state *s, uint8_t not_id)   /* a progression by the families' odds */
+{
+    static const uint8_t FAMILY_W[20] = {M_ION, M_ION, M_ION, M_ION, M_ION, M_ION, M_ION, M_ION, M_AEO, M_AEO, M_AEO,
+                                         M_AEO, M_AEO, M_DOR, M_MIX, M_MIX, M_LYD, M_PHR, M_PEN, M_BOR};
+    uint8_t id = 1;
+    for (int tries = 0; tries < 8; tries++) {
+        uint32_t f = FAMILY_W[rs_random(s, 20)], n = 0, k;
+        if (f == M_PEN && rs_random(s, 2)) f = M_MPEN;
+        for (k = 0; k < NPROG; k++) n += PROG[k].mode == f;
+        uint32_t pick = rs_random(s, n ? n : 1);
+        for (k = 0; k < NPROG; k++)
+            if (PROG[k].mode == f && pick-- == 0) break;
+        id = (uint8_t)(k < NPROG ? k + 1 : 1);
+        if (id != not_id) break;
+    }
+    return id;
+}
+
+static void set_prog(struct rs_state *s, uint8_t id, uint8_t key)
+{
+    prog_into(s->bassmod, s->bassmod_len ? s->bassmod_len : 4, id, key);
+    s->prog_id = id, s->prog_key = fixed_key(PROG[id - 1].mode) ? KEY_C : key;
     s->transpose_root = 1;                              /* (the roots are the progression: they must move the notes) */
+}
+
+void rs_compose_bassmod(struct rs_state *s)             /* the roll: any progression, in any key */
+{
+    rs_push_undo(s);
+    uint8_t id = draw_prog(s, s->prog_id), key = (uint8_t)rs_random(s, RS_NKEYS);
+    set_prog(s, id, key);
+}
+
+void rs_apply_prog(struct rs_state *s, uint8_t id, uint8_t key)
+{
+    if (id == 0 || id > NPROG) return;
+    rs_push_undo(s);
+    set_prog(s, id, key);
+}
+
+void rs_set_follow(struct rs_state *s, uint8_t on)
+{
+    s->vm_follow = on ? 1 : 0;
+    if (!on) s->next_ready = 0;
+}
+
+/* the next round's progression, made ready on this round's last step: the chain's (Seq 2's next step, when it names
+ * one), else FOLLOW's: a new one following on, in the same key three times in four, else a fifth up or down */
+static void prepare_next(struct rs_state *s)
+{
+    uint8_t want = 0, key = s->prog_id ? s->prog_key : KEY_C;
+    if (s->seq2_active || s->seq2_pending) {
+        int ni = s->seq2_pending ? 0 : (s->seq2_index + 1) % RS_SEQ2_STEPS;
+        want = s->seq2[ni].prog;
+    }
+    if (!want && s->vm_follow) want = RS_P_RND;
+    if (!want) return;
+    if (want == RS_P_RND) {
+        want = draw_prog(s, s->prog_id);
+        if (!fixed_key(PROG[want - 1].mode) && rs_random(s, 4) == 0) key = (uint8_t)((key + (rs_random(s, 2) ? 1 : RS_NKEYS - 1)) % RS_NKEYS);
+    }
+    if (want > NPROG) return;
+    prog_into(s->bm_next, s->bassmod_len ? s->bassmod_len : 4, want, key);
+    s->next_id = want, s->next_key = fixed_key(PROG[want - 1].mode) ? KEY_C : key, s->next_ready = 1;
+}
+
+const struct rs_bassmod_step *rs_next_mod_step(const struct rs_state *s)
+{
+    uint8_t len = s->bassmod_len ? s->bassmod_len : 1;
+    if (s->vm_index + 1u >= len && s->next_ready) return &s->bm_next[0];
+    return &s->bassmod[(s->vm_index + 1) % len];
 }
 
 void rs_randomize_seq2(struct rs_state *s)              /* randomizeSeq2(): "--" or a preset; a swap 30 % */
@@ -750,6 +906,7 @@ struct rs_snapshot {
     uint16_t bpm;
     uint8_t loop_len, scale, vm_manual, vm_freq4, drums_on, drum_preset;
     uint8_t drum_k[RS_MAX_STEPS], drum_s[RS_MAX_STEPS], drum_h[RS_MAX_STEPS];
+    uint8_t prog_id, prog_key;                          /* (the port's: Voice Mod's name, D38) */
 };
 static struct rs_snapshot undo_ring[RS_UNDO_MAX];
 static int undo_top, undo_n;
@@ -762,6 +919,7 @@ void rs_push_undo(const struct rs_state *s)
     for (int i = 0; i < RS_BASSMOD_MAX; i++) u->bassmod[i] = s->bassmod[i];
     u->bpm = s->bpm, u->loop_len = s->loop_len, u->scale = s->scale, u->vm_manual = s->vm_manual;
     u->vm_freq4 = s->vm_freq4, u->drums_on = s->drums_on, u->drum_preset = s->drum_preset;
+    u->prog_id = s->prog_id, u->prog_key = s->prog_key;
     for (int i = 0; i < RS_MAX_STEPS; i++) u->drum_k[i] = s->drum_k[i], u->drum_s[i] = s->drum_s[i], u->drum_h[i] = s->drum_h[i];
     undo_top = (undo_top + 1) % RS_UNDO_MAX;
     if (undo_n < RS_UNDO_MAX) undo_n++;
@@ -778,6 +936,7 @@ int rs_pop_undo(struct rs_state *s)
     for (int i = 0; i < RS_BASSMOD_MAX; i++) s->bassmod[i] = u->bassmod[i];
     s->bpm = u->bpm, s->loop_len = u->loop_len, s->scale = u->scale, s->vm_manual = u->vm_manual;
     s->vm_freq4 = u->vm_freq4, s->drums_on = u->drums_on, s->drum_preset = u->drum_preset;
+    s->prog_id = u->prog_id, s->prog_key = u->prog_key, s->next_ready = 0;
     for (int i = 0; i < RS_MAX_STEPS; i++) s->drum_k[i] = u->drum_k[i], s->drum_s[i] = u->drum_s[i], s->drum_h[i] = u->drum_h[i];
     return 1;
 }

@@ -771,7 +771,7 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
                 if (p == end - 4 || !s->plus_run) s->plus_run = s->bot[1].dir == RS_N || s->bot[1].dir == RS_E ? 1 : -1;
                 int thr = s->vm_freq4 * s->loop_len / 4, nroot = root, up = s->plus_run > 0;
                 if (!s->vm_manual && thr >= 1 && thr - s->vm_count <= end - p) {
-                    const struct rs_bassmod_step *nx = &s->bassmod[(s->vm_index + 1) % (s->bassmod_len ? s->bassmod_len : 1)];
+                    const struct rs_bassmod_step *nx = rs_next_mod_step(s);   /* (the next round's, when it changes) */
                     nroot = chord_root(s, nx, nx->scale < RS_NSCALES ? nx->scale : RS_SC_MAJOR);
                 }
                 int ti = idx_of(fold(48 + nroot, bass), sc);
@@ -785,7 +785,7 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
             else if (c == 'A') {                        /* a scale step into the next chord's root (this one's if it stays) */
                 int thr = s->vm_freq4 * s->loop_len / 4, nroot = root;
                 if (!s->vm_manual && thr >= 1 && thr - s->vm_count <= end - p) {
-                    const struct rs_bassmod_step *nx = &s->bassmod[(s->vm_index + 1) % (s->bassmod_len ? s->bassmod_len : 1)];
+                    const struct rs_bassmod_step *nx = rs_next_mod_step(s);   /* (the next round's, when it changes) */
                     nroot = chord_root(s, nx, nx->scale < RS_NSCALES ? nx->scale : RS_SC_MAJOR);
                 }
                 int to = fold(48 + nroot, bass), last = s->plus_bass ? s->plus_bass : r;

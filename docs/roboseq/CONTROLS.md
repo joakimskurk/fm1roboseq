@@ -72,9 +72,13 @@ The white keys rest here (no register on the screen); the black keys steer as ev
 | white keys 1-4 | pick a step (framed) |
 | KNOB1 / KNOB2 / KNOB3 | the picked step's scale / root / semitone (-12 ... +12) |
 | KNOB4 | when it moves on: MANUAL, or every 1/4, 1/2, 1, 2, 4 loops |
+| white key 12 | FOLLOW (lit): every round ends in a new progression, following on: the same key, or a fifth away (D38) |
 | white key 13 | NEXT: on to its next step (MANUAL) |
 | white key 14 | ROOT: the root transposes the sequence, on / off |
-| white keys 15 / 16 | reset / random (random can be undone; in PLUS a progression in a key, D33a) |
+| white keys 15 / 16 | reset / random (random can be undone; in PLUS one of 73 named progressions in one of six keys, D38) |
+
+The header names the progression and its key when it has one (I V vi IV G); NEXT > the next round's, once it is
+ready on the round's last step.
 
 ## Seq 2 (SCL pressed again)
 
@@ -83,6 +87,7 @@ The white keys rest here (no register on the screen); the black keys steer as ev
 | white keys 1-4 | pick a step (framed) |
 | KNOB1 / KNOB2 | the picked step's board / drum pattern ("--": unchanged) |
 | KNOB3 | the registers swapped on that step (clockwise on) |
+| KNOB4 | the chain: the step's progression, "--" (as it is), RND (a new one, following on) or one of the named ones by number (its name at the foot) (D38) |
 | white key 12 | Seq 2 on / off (queued while playing: it starts on Voice Mod's next wrap) |
 | white keys 13 / 14 | roll Scout-7's / Echo-3's register as Seq 2 wraps |
 | white keys 15 / 16 | reset / random |
