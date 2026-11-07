@@ -142,7 +142,13 @@ from where Echo-3 stands; in the second half they sing together, Echo-3 a third 
 phrase the tune lands on the chord's fifth, at its end on the root. Each board has its own bass groove (DEFAULT
 three-three-two, CORRIDOR straight eighths, GARDEN a walk, GAUNTLET a gallop, SPINNER octaves, MAZE syncopation;
 a rolled or your own board gets one by its tiles), and Echo-3 plays into it: a dash pops it up an octave, a ping
-doubles it, a wait leaves a gap. The tiles' sounds are tuned to the chord. The drums keep
+doubles it, a wait leaves a gap; at each phrase's end it runs up or down (the way Echo-3 faces) into the next chord.
+The tiles also touch the robots' synths a little, each robot by the tiles on its side of the board: zap rails narrow
+the square to a thinner pulse, rotators make it swing slowly, crates and pulse pads soften it, pulse pads let it
+ring and zap rails pluck it. Every other phrase ends in the big one, as dense as the original: an arpeggio of the
+chord over the tune, the notes struck on every eighth, the bass pumping, the hats on every sixteenth. And the robots'
+heat counts as in the original: every ping and dash makes them louder and, hot, adds a strike above Scout-7's notes,
+so steering them with dashes and pings turns the music up. The tiles' sounds are tuned to the chord. The drums keep
 your pattern but get a drummer: dynamics, ghost notes, a kick pushing into four every other loop, open and busier hats in the second half
 of each phrase, a fill at its end and a crash on the next. The room shades with each chord and opens in the second
 half. And Voice Mod's random (SCL, 16) writes a progression
