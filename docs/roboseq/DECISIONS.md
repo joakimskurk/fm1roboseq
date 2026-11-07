@@ -764,3 +764,48 @@ header beside the names. The start screen draws the keyboard big with no note na
 for the strike, lit while held, which says enough. The key in the middle between the two, F#4, is RESET: the match
 again from round 1.
 
+## D43. The project kept over a power-off (2026-11-07)
+
+ROADMAP phase 3's storage. The HTML keeps its project in the browser (`saveState()`, 300 ms after any change; the
+user board apart, on SAVE) and takes it back at load (`loadState()`). The FM-1 does the same with Dinghy's blobs.
+
+**What is kept** (`struct rs_project`, rs_model.c):
+- **The HTML's `saveState()` payload:** the tempo, the loop, the scale, ROOT, the speed, the mixer, Voice Mod (its
+  steps, when it moves on), Seq 2 (its steps, on, where it is, its rolls), the density, both registers with their
+  lengths, the drums (a preset made again at the loop's length, a pattern by hand as it was), ticks per move and
+  the registers swapped.
+- **The user board**, kept with it.
+- **The port's own:** the engine, Voice Mod's progression and its key, FOLLOW; and in the app, the mix's seven
+  faders, the board's colour, the lead's three knobs, the arp's kind and rate.
+
+**What is not kept** is what the HTML does not keep either: the board playing (it starts on the default), the
+robots, the step, the undo.
+
+**Taken back as the HTML's `loadState()` does.** Each field only if the HTML would take it (`clampNumber`,
+`LOOP_OPTIONS.includes`, `typeof`), else the default's; a register no longer than the loop. A version number comes
+first: another version is not taken at all. edit_test checks a round trip byte for byte, and that 300 projects of
+random bytes come out valid states that play.
+
+**When it is saved.** A save erases a 4 KB sector, about 50 ms with the interrupts off, and the sound stops for that
+long. So the project is saved only when nothing plays: stopped 2 s, unchanged 3 s, no key held. While it plays, a
+change waits for the stop.
+- **SAVE is lit** while there are changes not kept yet.
+- **Pressed while stopped**, SAVE keeps them at once.
+- **In the battle** nothing is saved: its tempo is the fight's.
+
+**Where.** Blobs 0 and 1 by turns, each save numbered. At boot the newer valid one is taken, so a save cut short by
+a power-off leaves the one before (Dinghy writes the header last: a cut save is invalid). Two sectors also halve the
+wear. A blob is 4 KB; the project with the app's part is 732 bytes.
+
+**RAM.** .data + .bss went from 70 200 to 75 768 bytes of 98 304. Dinghy's sector buffer is 4 KB of that, and two
+copies of the project. The undo ring (12 KB) stays in RAM: 22 KB are still free (ROADMAP phase 1's item).
+
+**Tried in fm1-emu** (`fm1-live --flash FILE`, FM1_STRICT, three runs on one flash):
+1. Tempo to 100 while playing, then stop: saved once, 2.25 s after the stop.
+2. Boots at 100; tempo to 93 and SAVE: saved at once.
+3. Boots at 93.
+
+**D39's "the app starts in BAND"** now holds for a first boot. After that, the engine is the one kept.
+
+Later, if wanted: more projects in the other blobs and slots (SAVE and a key, say).
+

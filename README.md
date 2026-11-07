@@ -115,6 +115,7 @@ Lost? Press **HOME**. Every page says on the screen what its keys do.
 | **SELECT** (encoder) | On HOME, what a white key changes; on SEQ, the cursor; on the drums, the row; on GLO, the engine. |
 | **K1-K4** | The page's values, shown on the screen. They never stop the music. |
 | **OCT- / OCT+** | The next 16 steps of a long program (HOME), the cursor 8 steps (SEQ), the lead's octave (REC). |
+| **SAVE** | Lit while there are changes not saved yet. RoboSeq saves by itself once it is stopped; SAVE saves at once. |
 | **MASTER** | The volume. |
 
 The keyboard has 27 keys, **F3 to G5**: 16 white and 11 black. The FM-1's keys have no lights, so the screen always

@@ -52,7 +52,8 @@ The HTML's game, bit for bit, in C with host tests; no sound and no screen yet.
 - [x] The randomizers (registers, board and its density, Seq 1, seq 2 and its rolls of the registers), the user
       board, the HTML's edits (loop and program lengths, the cycles of action, modifier, chance, Seq 1's fields) and
       undo (20), with the firmware's own xorshift32: tests/roboseq/edit_test.c holds the HTML's rules for each
-- [ ] Later, with phase 3: the undo ring (12 KB of RAM's 96) into POOL if RAM gets short
+- [x] Later, with phase 3: the undo ring (12 KB of RAM's 96) into POOL if RAM gets short: measured with storage
+      in (D43), .data + .bss 75 768 B of 98 304, so it stays in RAM (2026-11-07)
 
 - The state: two bots (A at 0,4 facing E; B at 4,0 facing W), programs of up to 64 steps (action, modifier,
   probability 1 / 0.75 / 0.5, repeats), loop lengths 8-64, BPM (80 default), scale and root, ticks per move
@@ -134,7 +135,8 @@ and the limiter.)
 - [x] A SID lead to play solo over the robots on REC (D21, D23: sharper, folded, a ping-pong echo), its own fader
 - [x] The mix in stereo as the HTML's (its reverb's two channels); the board colours the whole sound (D24)
 - [x] The screens generated from the code (`make screens`), the README as the manual (2026-11-06)
-- [ ] Storage: projects in Dinghy's blobs and slots
+- [x] Storage: the project kept over a power-off, as the HTML's saveState() (D43): blobs 0 and 1 by turns, saved
+      when stopped, SAVE lit till it is (2026-11-07)
 
 ## Phase 4: on the emulator, then hardware
 

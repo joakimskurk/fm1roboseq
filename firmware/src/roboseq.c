@@ -553,6 +553,75 @@ static void draw_page(const struct rs_view *v, struct rs_fx *fx, struct rs_ui *u
     else draw_board(v, fx, ui, fm1_ms);
 }
 
+/* ---- the project kept over a power-off (D43): the HTML's saveState() (rs_project) and the port's mix, board colour
+ * and lead, in blobs 0 and 1 by turns, so a save cut short leaves the one before. A save erases a sector (~50 ms
+ * with the sound stopped), so it waits till nothing plays: stopped 2 s, the project unchanged 3 s, no key held. SAVE
+ * lit: changes not kept yet; pressed while stopped it keeps them at once. Not in the battle (its tempo is the fight's). */
+struct app_save {
+    struct rs_project p;
+    uint32_t seq;                               /* the saves so far: the newer blob holds the higher */
+    int32_t level[RS_NLEVEL];
+    uint8_t colour, lead_knob[3], arp_kind, arp_rate, pad[2];
+};
+static struct app_save saved, now_save;         /* what flash holds; the project now (and the other blob at boot) */
+static uint8_t unsaved;                         /* the project is not what flash holds: SAVE lit */
+
+static void save_of(struct app_save *a)
+{
+    memset(a, 0, sizeof *a);
+    rs_project_put(&game, &a->p);
+    a->seq = saved.seq;
+    for (uint32_t k = 0; k < RS_NLEVEL; k++) a->level[k] = mix.level[k];
+    a->colour = colour_amt, a->arp_kind = arp_kind, a->arp_rate = arp_rate;
+    for (uint32_t k = 0; k < 3u; k++) a->lead_knob[k] = (uint8_t)lead_knob[k];
+}
+
+static void project_load(void)                  /* at boot, on the default: the newer of the blobs that hold one */
+{
+    struct app_save *a0 = &saved, *a1 = &now_save;
+    int ok0 = blob_load(0, a0, sizeof *a0) == 0 && a0->p.ver == RS_PROJECT_VER;
+    int ok1 = blob_load(1, a1, sizeof *a1) == 0 && a1->p.ver == RS_PROJECT_VER;
+    const struct app_save *f = ok0 && ok1 ? (a1->seq > a0->seq ? a1 : a0) : ok1 ? a1 : ok0 ? a0 : 0;
+    uint32_t seq = f ? f->seq : 0;
+    if (f && rs_project_take(&game, &f->p)) {   /* (each field as the model takes them: the HTML's, else the default) */
+        for (uint32_t k = 0; k < RS_NLEVEL; k++)
+            if (f->level[k] >= 0 && f->level[k] <= 32768) mix.level[k] = f->level[k];
+        if (f->colour <= 100u) colour_amt = f->colour;
+        if (f->arp_kind < ARP_KINDS) arp_kind = f->arp_kind;
+        if (f->arp_rate >= 1u && f->arp_rate <= 4u) arp_rate = f->arp_rate;
+        for (uint32_t k = 0; k < 3u; k++)
+            if (f->lead_knob[k] <= 20u) lead_knob[k] = (int8_t)f->lead_knob[k];
+    }
+    save_of(&saved);                            /* (what flash holds, as taken: nothing to save till it changes) */
+    saved.seq = seq;
+}
+
+static uint32_t save_hash(const struct app_save *a)   /* FNV-1a: has the project changed since the last look */
+{
+    const uint8_t *q = (const uint8_t *)a;
+    uint32_t h = 2166136261u;
+    for (uint32_t i = 0; i < sizeof *a; i++) h = (h ^ q[i]) * 16777619u;
+    return h;
+}
+
+static void project_keep(uint32_t held, int now)   /* the main loop's; now: SAVE pressed */
+{
+    struct app_save *a = &now_save;
+    static uint32_t checked, changed_ms, playing_ms, seen;
+    if (game.playing) playing_ms = fm1_ms;
+    if (page == PAGE_BATTLE || (!now && fm1_ms - checked < 250u)) return;
+    checked = fm1_ms;
+    save_of(a);
+    uint32_t h = save_hash(a);
+    if (h != seen) seen = h, changed_ms = fm1_ms;
+    unsaved = memcmp(a, &saved, sizeof *a) != 0;
+    if (!unsaved || game.playing || held) return;
+    if (!now && (fm1_ms - changed_ms < 3000u || fm1_ms - playing_ms < 2000u)) return;
+    a->seq = saved.seq + 1u;
+    blob_save(a->seq & 1u, a, sizeof *a);       /* (one that fails is not tried again till the next change) */
+    saved = *a, unsaved = 0;
+}
+
 #ifdef RS_P4_TEST
 #include "../../tests/roboseq/p4_test.c"        /* the playability rules, page by page (P4), on the host */
 #endif
@@ -570,6 +639,7 @@ static void app_main(void)
     rs_mix_init(&mix, 0x5EEDu);
     rs_default(&game);
     game.engine = RS_ENGINE_BAND;               /* the engine: RoboSeq's own BAND; ORIGINAL (the HTML's) on GLO's SELECT (D33, D39) */
+    project_load();                             /* (the project kept, its engine with it: D43) */
     keys_init();
     {                                           /* the splash: ~2.6 s, a frame every 33 ms; a key or a button skips it */
         uint32_t t0 = fm1_ms, drawn = ~0u, rel;
@@ -785,6 +855,8 @@ static void app_main(void)
         fm1_led_key(BTN_ENV, page == PAGE_ENV || page == PAGE_BOARDS);
         fm1_led_key(BTN_EDIT, sel_bot);         /* lit: Echo-3's register */
         fm1_led_key(BTN_REC, lead_on);
+        project_keep(notes, (b >> BTN_SAVE & 1u) != 0);
+        fm1_led_key(BTN_SAVE, unsaved);         /* lit: changes not kept yet (D43) */
         if (lead_on) fm1_led_key(BTN_OCT_DOWN, lead_oct < 0), fm1_led_key(BTN_OCT_UP, lead_oct > 0);
         else {
             fm1_led_key(BTN_OCT_DOWN, page == PAGE_SEQ ? seq_cursor > 0 : bank > 0);
