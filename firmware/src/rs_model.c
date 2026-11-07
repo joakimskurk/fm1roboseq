@@ -955,6 +955,89 @@ int rs_pop_undo(struct rs_state *s)
 int rs_undo_depth(void) { return undo_n; }
 void rs_undo_clear(void) { undo_top = undo_n = 0; }
 
+/* ---- the project (D43) */
+void rs_project_put(const struct rs_state *s, struct rs_project *p)
+{
+    uint8_t *q = (uint8_t *)p;
+    for (unsigned i = 0; i < sizeof *p; i++) q[i] = 0;
+    p->ver = RS_PROJECT_VER, p->bpm = s->bpm, p->quarter = s->quarter, p->scale = s->scale;
+    p->transpose_root = s->transpose_root, p->loop_len = s->loop_len, p->tpm = s->tpm, p->vm_manual = s->vm_manual;
+    p->vm_freq4 = s->vm_freq4, p->bassmod_len = s->bassmod_len;
+    for (int i = 0; i < RS_BASSMOD_MAX; i++) p->bassmod[i] = s->bassmod[i];
+    p->drums_on = s->drums_on, p->drum_preset = s->drum_preset;
+    for (int i = 0; i < RS_MAX_STEPS; i++) p->drum_k[i] = s->drum_k[i], p->drum_s[i] = s->drum_s[i], p->drum_h[i] = s->drum_h[i];
+    p->seq2_active = s->seq2_active || s->seq2_pending, p->seq2_index = (uint8_t)(s->seq2_index < 0 ? 0 : s->seq2_index);
+    p->seq2_rnd[0] = s->seq2_rnd[0], p->seq2_rnd[1] = s->seq2_rnd[1];
+    for (int i = 0; i < RS_SEQ2_STEPS; i++) p->seq2[i] = s->seq2[i];
+    p->swapped = s->swapped, p->density = s->density, p->engine = s->engine, p->vm_follow = s->vm_follow;
+    p->prog_id = s->prog_id, p->prog_key = s->prog_key;
+    p->prog[0] = s->prog[0], p->prog[1] = s->prog[1];
+    p->user_board = s->user_board;
+}
+
+static int one_of(const uint8_t *set, int n, unsigned v)
+{
+    for (int i = 0; i < n; i++)
+        if (set[i] == v) return 1;
+    return 0;
+}
+
+int rs_project_take(struct rs_state *s, const struct rs_project *p)   /* loadState(): clampNumber, includes, typeof */
+{
+    static const uint8_t LENS[7] = {8, 12, 16, 24, 32, 48, 64}, FREQ4[5] = {1, 2, 4, 8, 16}, DENS[3] = {30, 45, 60};
+    if (p->ver != RS_PROJECT_VER) return 0;
+    if (p->bpm >= 60 && p->bpm <= 168) s->bpm = p->bpm;
+    if (p->quarter <= 2) s->quarter = p->quarter;
+    if (p->scale < RS_NSCALES) s->scale = p->scale;
+    if (p->transpose_root <= 1) s->transpose_root = p->transpose_root;
+    if (one_of(LENS, 7, p->loop_len)) s->loop_len = p->loop_len;
+    if (p->tpm == 1 || p->tpm == 2 || p->tpm == 4) s->tpm = p->tpm;
+    if (p->vm_manual <= 1) s->vm_manual = p->vm_manual;
+    if (one_of(FREQ4, 5, p->vm_freq4)) s->vm_freq4 = p->vm_freq4;
+    if (p->bassmod_len == 4 || p->bassmod_len == 8) s->bassmod_len = p->bassmod_len;
+    for (int i = 0; i < RS_BASSMOD_MAX; i++) {
+        const struct rs_bassmod_step *b = &p->bassmod[i];
+        if (b->scale < RS_NSCALES && b->root < 12 && b->semitone >= -12 && b->semitone <= 12) s->bassmod[i] = *b;
+    }
+    if (p->drums_on <= 1) s->drums_on = p->drums_on;
+    if (p->drum_preset < RS_NDRUMS) rs_set_drums(s, p->drum_preset);   /* (a preset made again at the loop's length) */
+    else if (p->drum_preset == RS_D_CUSTOM) {
+        s->drum_preset = RS_D_CUSTOM;
+        for (int i = 0; i < RS_MAX_STEPS; i++) s->drum_k[i] = p->drum_k[i] != 0, s->drum_s[i] = p->drum_s[i] != 0, s->drum_h[i] = p->drum_h[i] != 0;
+    } else rs_set_drums(s, s->drum_preset);   /* (the default's, at the loop's length) */
+    for (int i = 0; i < RS_SEQ2_STEPS; i++) {
+        const struct rs_seq2_step *t = &p->seq2[i];
+        if ((t->board < RS_NBOARDS || t->board == RS_B_USER || t->board == RS_B_NONE) &&
+            (t->drums < RS_NDRUMS || t->drums == RS_D_NONE) && t->regswap <= 1 && ((unsigned)t->prog <= NPROG || t->prog == RS_P_RND))
+            s->seq2[i] = *t;
+    }
+    if (p->seq2_active <= 1) s->seq2_active = p->seq2_active;
+    if (p->seq2_index < RS_SEQ2_STEPS) s->seq2_index = (int8_t)p->seq2_index;
+    for (int b = 0; b < 2; b++) if (p->seq2_rnd[b] <= 1) s->seq2_rnd[b] = p->seq2_rnd[b];
+    if (p->swapped <= 1) s->swapped = p->swapped;
+    if (one_of(DENS, 3, p->density)) s->density = p->density;
+    if (p->engine <= RS_ENGINE_BAND) s->engine = p->engine;
+    if (p->vm_follow <= 1) s->vm_follow = p->vm_follow;
+    if ((unsigned)p->prog_id <= NPROG && p->prog_key < RS_NKEYS) s->prog_id = p->prog_id, s->prog_key = p->prog_key;
+    for (int b = 0; b < 2; b++) {
+        const struct rs_prog *g = &p->prog[b];
+        for (int i = 0; i < RS_MAX_STEPS; i++)
+            if (g->s[i].action < RS_NACTIONS && g->s[i].modifier < RS_NMODIFIERS &&
+                (g->s[i].prob == 100 || g->s[i].prob == 75 || g->s[i].prob == 50))
+                s->prog[b].s[i] = g->s[i];
+        if (one_of(LENS, 7, g->len)) s->prog[b].len = g->len;
+        if (s->prog[b].len > s->loop_len) s->prog[b].len = s->loop_len;   /* (Math.min(programLength, loopLength)) */
+    }
+    for (int i = 0; i < RS_ROWS * RS_COLS; i++) {
+        const struct rs_tile_t *t = &p->user_board.t[i];
+        s->user_board.t[i] = t->type <= RS_T_BLOCK && t->dir < 4 ? *t : (struct rs_tile_t){RS_T_NONE, 0};
+    }
+    s->next_ready = 0;
+    rs_stop(s);
+    rs_reset(s);
+    return 1;
+}
+
 /* ---- a fingerprint of the model: the default state's first 400 ticks with their score (default.trace) and the
  * chance of 64 steps x 32 loops for both bots, hashed (FNV-1a). The same on any machine that runs the model right:
  * the host tests print it, the firmware computes it at boot, make emu reads it back from the chip's RAM. */

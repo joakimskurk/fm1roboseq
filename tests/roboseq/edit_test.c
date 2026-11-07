@@ -288,8 +288,58 @@ static void test_engine_default(void)            /* the HTML's state is the HTML
     CHECK(s.engine == RS_ENGINE_ORIGINAL, "rs_default: the original engine");
 }
 
+static void test_project(void)                  /* D43: a project kept and taken back; rubbish never breaks the game */
+{
+    static struct rs_project a, b;
+    static const uint8_t LENS[7] = {8, 12, 16, 24, 32, 48, 64};
+    uint32_t x = 0x9E3779B9u;
+    rs_default(&s);                             /* a project far from the default: every part changed */
+    s.engine = RS_ENGINE_BAND, s.bpm = 133, s.quarter = 2, s.tpm = 4, s.density = 60, s.swapped = 1, s.vm_follow = 1;
+    rs_set_loop_len(&s, 24);
+    rs_randomize_all(&s), rs_randomize_seq2(&s), rs_apply_prog(&s, 12, 3), rs_set_voice_mod(&s, 1, 8);
+    rs_set_prog_len(&s, 1, 12);
+    rs_drum_toggle(&s, 1, 5);
+    s.seq2_rnd[1] = 1, s.seq2_active = 1, s.seq2_index = 2;
+    rs_randomize_board(&s), rs_save_user_board(&s);
+    rs_project_put(&s, &a);
+    rs_default(&t);
+    CHECK(rs_project_take(&t, &a) == 1, "a project of this version is taken");
+    rs_project_put(&t, &b);
+    CHECK(!memcmp(&a, &b, sizeof a), "taken back, the project is the one kept, byte for byte");
+    CHECK(t.engine == RS_ENGINE_BAND && t.bpm == 133 && t.loop_len == 24 && t.prog[1].len == 12 && t.drum_preset == RS_D_CUSTOM,
+          "the engine, the tempo, the loop, a register's length, the drums by hand");
+    CHECK(!t.playing && t.step == -1 && t.bot[0].heat == 0 && t.bot[1].deaths == 0, "stopped, the robots afresh");
+    a.ver++;
+    rs_default(&t);
+    t.bpm = 99;
+    CHECK(rs_project_take(&t, &a) == 0 && t.bpm == 99, "another version: not taken, the state as it was");
+    for (int r = 0; r < 300; r++) {             /* rubbish of this version: every field the HTML's or the default's */
+        struct rs_tick_out o;
+        uint8_t *q = (uint8_t *)&a;
+        int ok = 1;
+        for (unsigned i = 0; i < sizeof a; i++) x ^= x << 13, x ^= x >> 17, x ^= x << 5, q[i] = (uint8_t)(r & 1 ? x : x % 5u);
+        a.ver = RS_PROJECT_VER;
+        rs_default(&t);
+        rs_project_take(&t, &a);
+        ok &= t.bpm >= 60 && t.bpm <= 168 && t.quarter <= 2 && t.scale < RS_NSCALES && (t.tpm == 1 || t.tpm == 2 || t.tpm == 4);
+        ok &= memchr(LENS, t.loop_len, 7) != NULL && (t.bassmod_len == 4 || t.bassmod_len == 8) && t.engine <= RS_ENGINE_BAND;
+        for (int b2 = 0; b2 < 2; b2++) {
+            ok &= t.prog[b2].len >= 1 && t.prog[b2].len <= t.loop_len;
+            for (int i = 0; i < RS_MAX_STEPS; i++)
+                ok &= t.prog[b2].s[i].action < RS_NACTIONS && t.prog[b2].s[i].modifier < RS_NMODIFIERS && t.prog[b2].s[i].prob >= 50;
+        }
+        for (int i = 0; i < RS_ROWS * RS_COLS; i++) ok &= t.user_board.t[i].type <= RS_T_BLOCK && t.user_board.t[i].dir < 4;
+        for (int i = 0; i < RS_BASSMOD_MAX; i++) ok &= t.bassmod[i].root < 12 && t.bassmod[i].scale < RS_NSCALES;
+        CHECK(ok, "rubbish %d: a valid state", r);
+        if (!ok) break;
+        rs_start(&t);                           /* and it plays (UBSan + ASan: edit_test_san) */
+        for (int k = 0; k < 400; k++) rs_tick(&t, &o);
+    }
+}
+
 int main(void)
 {
+    test_project();
     test_engine_default();
     test_steer();
     test_pages();

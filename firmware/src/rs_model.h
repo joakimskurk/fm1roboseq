@@ -257,6 +257,25 @@ int rs_pop_undo(struct rs_state *s);                            /* popUndo(): 0 
 int rs_undo_depth(void);
 void rs_undo_clear(void);
 
+/* the project (D43): what the HTML's saveState() keeps over a reload, its user board (saveUserBoard), and the
+ * port's own (the engine, the progression, FOLLOW); the app keeps it in flash. rs_project_put fills it from the
+ * state (its padding zero: two of one state compare equal); rs_project_take puts it into a state fresh from
+ * rs_default, each field the HTML's loadState() would take, else the default's; the robots afresh, stopped */
+#define RS_PROJECT_VER 1u
+struct rs_project {
+    uint16_t ver, bpm;
+    uint8_t quarter, scale, transpose_root, loop_len, tpm, vm_manual, vm_freq4, bassmod_len;
+    struct rs_bassmod_step bassmod[RS_BASSMOD_MAX];
+    uint8_t drums_on, drum_preset, drum_k[RS_MAX_STEPS], drum_s[RS_MAX_STEPS], drum_h[RS_MAX_STEPS];
+    uint8_t seq2_active, seq2_index, seq2_rnd[2];
+    struct rs_seq2_step seq2[RS_SEQ2_STEPS];
+    uint8_t swapped, density, engine, vm_follow, prog_id, prog_key;
+    struct rs_prog prog[2];
+    struct rs_board user_board;
+};
+void rs_project_put(const struct rs_state *s, struct rs_project *p);
+int rs_project_take(struct rs_state *s, const struct rs_project *p);   /* 0: not this version's (s as it was) */
+
 /* seededChance(bot, step, cycle, repeat) > prob / 100, without float (rs_chance.c, docs/roboseq/DECISIONS.md D6) */
 uint32_t rs_chance_q32(int bot, uint32_t step, uint32_t cycle, uint32_t repeat);   /* the chance, Q32 */
 int rs_skips(int bot, uint32_t step, uint32_t cycle, uint8_t prob);
