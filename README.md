@@ -6,7 +6,7 @@ make turned into a note. It was meant to be a quick experiment.
 
 Bringing it to the FM-1 was a chance to make it something you play with your hands instead of clicking at: steer the
 robots, build their board, type their programs in as if you were driving them, and solo over the chaos they make.
-It is more toy than tool, and that is the point.
+It is more toy than tool, and that is the point. And now two of you can fight with them, on the beat.
 
 It has not met a real FM-1 yet, so please be kind.
 
@@ -16,32 +16,65 @@ Enjoy the robots.
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-skurk-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/skurk)
 
-## What it is
-
-Two little robots, Scout-7 and Echo-3, walk a 5 x 5 board of conveyor belts, zap rails, rotators, pulse pads and
-crates. Each runs its own program of moves (forward, reverse, turn, dash, ping, idle), and where they go, what they
-ride, what they bump into and when they meet becomes the music: Scout-7 the melody, Echo-3 the bass, the board the
-percussion and the effects. Program them, steer them while they run, build them a board, and play a SID lead over
-the top.
-
-RoboSeq began as a browser instrument ([reference/roboseq.html](reference/roboseq.html)), which stays the reference
-for how it sounds and behaves. This is its port to the FM-1 as a firmware, built on
-[Dinghy](https://github.com/zvenson/dinghy) 0.4 by zvenson and, under that, the Felucca / SLOOP platform, made the
-same way as [SkurkyMello](https://github.com/joakimskurk/fm1mello).
+<p align="center">
+  <img src="docs/screens/home-playing.png" width="240" alt="HOME, playing">
+  <img src="docs/screens/battle-strike.png" width="240" alt="BATTLE">
+  <img src="docs/screens/boards.png" width="240" alt="The boards">
+</p>
 
 > **Status: tested on the computer and in an emulator, not yet on an FM-1.** Every build runs in
 > [fm1-emu](https://github.com/joakimeriksson/fm1-emu) under its strict mode, and its sound is checked against the
 > browser original's own renders. Nothing is saved to flash yet: a board or a program you build is gone when you
 > switch off. Every flash can brick a unit: hold OCT- while switching on to reach the updater.
 
-This README is the manual. What the music does, in both engines, is in [docs/roboseq/ENGINES.md](docs/roboseq/ENGINES.md);
-the design record is in [docs/roboseq/DECISIONS.md](docs/roboseq/DECISIONS.md), the plan in [ROADMAP.md](ROADMAP.md), and every
-control page by page in [docs/roboseq/CONTROLS.md](docs/roboseq/CONTROLS.md).
+## Contents
+
+**Getting started**
+1. [What it is](#what-it-is)
+2. [Install](#install)
+3. [Your first five minutes](#your-first-five-minutes)
+4. [The panel and the keyboard](#the-panel-and-the-keyboard)
+
+**Lessons**
+- [1. Play and steer](#lesson-1-play-and-steer)
+- [2. Program the robots](#lesson-2-program-the-robots)
+- [3. Build their world](#lesson-3-build-their-world)
+- [4. Chords and progressions](#lesson-4-chords-and-progressions)
+- [5. Drums and the mix](#lesson-5-drums-and-the-mix)
+- [6. Play solo](#lesson-6-play-solo)
+- [7. Battle: two players](#lesson-7-battle-two-players)
+
+**Reference**
+- [The two engines](#the-two-engines)
+- [Every page](#every-page)
+- [The rules of the game](#the-rules-of-the-game)
+- [Build it yourself](#build-it-yourself)
+- [Where things are](#where-things-are)
+
+---
+
+## What it is
+
+Two little robots, **Scout-7** (red) and **Echo-3** (orange), walk a 5 x 5 board of conveyor belts, zap rails,
+rotators, pulse pads and crates. Each runs its own program of moves: forward, back, turn, dash, ping, idle. Where they
+go, what they ride, what they bump into and when they meet becomes the music.
+
+- **You play it** by reaching into the robots while they run. Steer them, rewrite their programs, swap their board,
+  change the chords. Everything you change is heard on their next step.
+- **It has two engines.** **BAND**, where it starts, turns the robots into a band: a tune that comes back every bar,
+  an answering voice, a bass groove per board, a drummer, songs with a big chorus. **ORIGINAL** is the browser
+  original's score, note for note.
+- **It has a battle mode.** Two players, a robot each, moving on the beat, until one burns out.
+
+RoboSeq began as a browser instrument ([reference/roboseq.html](reference/roboseq.html)), which stays the reference
+for how it sounds and behaves. This is its port to the FM-1 as firmware, built on
+[Dinghy](https://github.com/zvenson/dinghy) 0.4 by zvenson and, under that, the Felucca / SLOOP platform, made the same
+way as [SkurkyMello](https://github.com/joakimskurk/fm1mello).
 
 ## Install
 
-The package is `build/roboseq.fwsc`. Install it on an FM-1 running M-VAVE's official V15 (or another firmware with
-the FM-1 update loader), over USB-MIDI:
+The package is `build/roboseq.fwsc`. Install it on an FM-1 running M-VAVE's official V15 (or another firmware with the
+FM-1 update loader), over USB-MIDI:
 
 ```sh
 pip3 install mido python-rtmidi
@@ -49,134 +82,298 @@ python3 tools/fm1_install.py build/roboseq.fwsc
 python3 tools/fm1_install.py --info        # what the FM-1 runs now
 ```
 
-The same package plays in `fm1-emu` on a computer and in its web emulator. Back to another firmware with the
+The same package plays in `fm1-emu` on a computer and in its web emulator. To go back to another firmware, use the
 [FM-1 Firmware Hub](https://thefirmwarehub.com) in Chrome or Edge. RoboSeq identifies itself as `FM-1_965`, free on the
 Hub (checked 2026-11-06), the same for every version.
 
-## A first tour
+## Your first five minutes
 
-The screens, drawn by the firmware itself (`make screens`): what you see, and what to do.
-
-| | |
+| Do | What happens |
 |---|---|
-| <img src="docs/screens/splash.png" width="240" alt="The splash"> | **Switch on.** The robots walk in and meet under a heart while the dots fill. Any key skips it. Then HOME. |
-| <img src="docs/screens/home.png" width="240" alt="HOME"> | **HOME is the board.** The tiles, Scout-7 (red, always on the left of its tile) and Echo-3 (orange, on the right), each with a wedge over its head saying where it faces. Down the left edge Scout-7's program, down the right Echo-3's, a step a row. Over the board the step and what the white keys change; under it the robots' health. |
-| <img src="docs/screens/home-playing.png" width="240" alt="HOME, playing"> | **PLAY.** The robots move a step at a time. The tiles they set off light up, each program frames the step it plays, and a robot that runs too hot burns out and comes back in a far corner. PLAY again stops. |
-| <img src="docs/screens/home-love.png" width="240" alt="Two robots on one tile"> | **When they meet.** Two on one tile simply stand side by side. Linger together and a heart appears and a coin chimes; dash into the other and a star flashes over the one hit. |
-| <img src="docs/screens/seq.png" width="240" alt="SEQ"> | **SEQ: the programs**, as step cards: number, move, modifier, chance; the card playing is framed in its robot's colour. SELECT moves the cursor (white), EDIT picks the robot. Type a program in with **W A S D** at the bottom of the keyboard (move, turn left, back, turn right) and the keys round them (idle, dash, ping): each move lands at the cursor and the cursor goes on, so you drive the program in. The coloured keyboard at the foot says what each key does. |
-| <img src="docs/screens/boards.png" width="240" alt="ENV: the boards"> | **ENV: the boards**, all at a glance: the six presets, a random roll and your own board, each small with its white key. Press a key and that board comes in (while playing, as the loop comes round: framed yellow, blinking, until it arrives); the one playing is framed in mint. 9 saves the board as yours, 10 clears yours, 11 puts the robots back on their pads. The black keys steer as on HOME. |
-| <img src="docs/screens/builder.png" width="240" alt="ENV again, the board builder"> | **ENV again: build a board.** W A S D move the cursor; further up a key for each tile (belt, rotator left and right, zap, pulse, crate), and the black key between S and D clears. A belt points the way you last moved; press it again to turn it. The robots meet your tiles on their next step. KNOB1 runs through the six preset boards. |
-| <img src="docs/screens/home-lead.png" width="240" alt="REC: the lead"> | **REC: play solo.** The keys become a SID-style lead over the robots, the knobs its CUT, ECHO, BITE and OCT, shown as faders across the top. **ARP** arpeggiates a chord you hold, a note each step: K4 its pattern, SELECT how fast. REC again gives the keys back. |
-| <img src="docs/screens/glo.png" width="240" alt="GLO"> | **GLO: tempo and time.** The tempo, how often the robots move (every 1, 2 or 4 ticks), the loop's length (it changes as the loop comes round, never stopping the music) and the speed (1/1, 1/2, 1/4). SELECT picks the engine: BAND or ORIGINAL (below). |
-| <img src="docs/screens/voicemod.png" width="240" alt="SCL: Voice Mod"> | **SCL: Voice Mod**, the harmony: four steps of scale, root and semitone that the music moves through, every so many loops or by hand (NEXT). White keys 1-4 pick a step, K1-K3 change it. |
-| <img src="docs/screens/seq2.png" width="240" alt="SCL again: Seq 2"> | **SCL again: Seq 2**, the arrangement: four steps that change the board and the drum pattern and can swap the robots' registers, as Voice Mod comes round. |
-| <img src="docs/screens/drums.png" width="240" alt="LFO: the drums"> | **LFO: the drums.** Kick, snare and hihat over 16 steps; SELECT picks the row, a white key a step, KNOB1 the six patterns. |
-| <img src="docs/screens/mix.png" width="240" alt="FX: the mix"> | **FX: the mix.** Master, the five buses and the lead as faders (white keys 1-7 pick, KNOB1 sets). KNOB2, BOARD COLOUR: how much the board's tiles colour the whole sound. |
-| <img src="docs/screens/battle.png" width="240" alt="BATTLE"> | **BATTLE (GLO, white key 16): two players.** Each takes a robot and a corner of the keyboard: Scout-7 F3 F#3 G3 A3 (left, up, down, right) and B3, Echo-3 C5 C#5 D5 E5 and F5. Before the match: K2 the rounds to win, K3 the arena, K4 what each new round brings (the same arena, the next, a random one). PLAY starts it. |
-| <img src="docs/screens/battle-countdown.png" width="240" alt="The countdown"> | **4, 3, 2, 1, FIGHT!** on the music's beats, a beep each. |
-| <img src="docs/screens/battle-strike.png" width="240" alt="A strike"> | **Move on the beat.** Hold a way and your robot steps there on every beat; the arena's frame flashes with it. The fifth key strikes when the other is a tile on (or two, with the tile between open: you lunge): +2 heat, and the hit drives the two apart, the other two tiles back (a wall or a crate slams it: +1 more) and you a tile the other way. Out of reach the same key plays the lead, a tone of the chord where you stand. Zap rails heat you, pulse pads cool you, belts carry you, rotators turn you. Your health is at the foot. |
-| <img src="docs/screens/battle-round.png" width="240" alt="A round taken"> | **Burn the other out** (heat 6) to take the round: a segment lights in your score bar down your side. A round that drags overheats: the arena's edge starts to glow, then all but the middle. |
-| <img src="docs/screens/battle-winner.png" width="240" alt="The winner"> | **The first to the rounds wins**, big. PLAY: another match. Any page button leaves the battle. |
+| **1.** Switch on | The robots walk in and meet under a heart. Any key skips it. You are on **HOME**, the board. |
+| **2.** Press **PLAY** | The robots start walking and the music is what they do. PLAY flashes on the beat. |
+| **3.** Press the black key **G#3** | Scout-7 steps forward now, out of its program, once. That is steering. |
+| **4.** Press **ENV**, then white key **6** | MAZE arrives as the loop comes round: a new board, a new bass groove, a new sound. |
+| **5.** Press **SEL** (SCL), then white key **16** | Voice Mod writes a new chord progression, and the header names it. |
+| **6.** Press **GLO**, then white key **16** | **BATTLE**: hand a friend the other end of the keyboard and press PLAY. |
 
-## The panel
+Lost? Press **HOME**. Every page says on the screen what its keys do.
 
-The FM-1's panel is printed, so its names are the firmware's names. What each control is:
+## The panel and the keyboard
+
+<p align="center"><img src="docs/screens/panel.png" width="640" alt="The FM-1 running RoboSeq, in fm1-emu"></p>
 
 | Control | What it is |
 |---|---|
-| **PLAY** | Start the board from its beginning; stop. It flashes the beat while playing. |
-| **HOME, SEQ, SEL (SCL), LFO, FX, ENV, GLO** | The pages: the board, the programs, Voice Mod and (pressed again) Seq 2, the drums, the mix, the boards and (pressed again) the board builder, the global settings. The page's button is lit. |
-| **EDIT** | Whose program the keys edit: Scout-7 or Echo-3 (lit: Echo-3). |
-| **REC** | The keys and knobs play the lead (lit). Again: back. |
-| **ARP** | The keys a chord, arpeggiated (lit; it brings the lead with it). |
-| **SELECT** (encoder) | On HOME what a white key changes (a step's move, modifier or chance); on SEQ the cursor; on the drums the row; with ARP on, how fast the arp runs (1-4 notes a step). |
-| **K1-K4** | The page's values; with REC on, the lead's CUT, ECHO, BITE and OCT (with ARP on, K4 the arp's pattern). They never stop the music. |
-| **White keys** | Positions where a page has steps; on SEQ and ENV a game controller (W A S D and the keys above them). |
-| **Black keys** | Steer the robots, on every page but the two builders, SEQ and ENV's second page (below). |
+| **PLAY** | Start the board from its beginning, or stop. It flashes the beat while playing. |
+| **HOME, SEQ, SEL (SCL), LFO, FX, ENV, GLO** | The pages: the board, the programs, the chords and (pressed again) Seq 2, the drums, the mix, the boards and (pressed again) the board builder, the global settings. The page's button is lit. |
+| **EDIT** | Whose program the keys edit: Scout-7, or Echo-3 when lit. |
+| **REC** | The keys and the knobs play the lead (lit). Press it again to get them back. |
+| **ARP** | Arpeggiates a chord you hold (lit). It brings the lead with it. |
+| **SELECT** (encoder) | On HOME, what a white key changes; on SEQ, the cursor; on the drums, the row; on GLO, the engine. |
+| **K1-K4** | The page's values, shown on the screen. They never stop the music. |
 | **OCT- / OCT+** | The next 16 steps of a long program (HOME), the cursor 8 steps (SEQ), the lead's octave (REC). |
-| **MASTER** (the knob) | The volume. |
+| **MASTER** | The volume. |
 
-The FM-1's keys have no lights, so the screen always shows what the keys do: the programs down the board's sides,
-the faders across the top while the lead plays, a coloured keyboard at the foot of the builders.
+The keyboard has 27 keys, **F3 to G5**: 16 white and 11 black. The FM-1's keys have no lights, so the screen always
+shows what they do: the programs down the board's sides on HOME, a coloured little keyboard on the builders and in
+the battle.
 
-## Playing it
+On most pages:
+- **The white keys are positions:** a program's steps, Voice Mod's steps, the drum steps.
+- **The black keys steer the robots,** two hands of five and a swap:
 
-RoboSeq is played by reaching into the robots while they run; what you change is heard on their next step.
+| Black key | F#3 | G#3 | A#3 | C#4 | D#4 | F#4 | G#4 | A#4 | C#5 | D#5 | F#5 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| **Does** | Scout-7 turn left | Scout-7 move | Scout-7 turn right | Scout-7 dash | Scout-7 ping | Echo-3 turn left | Echo-3 move | Echo-3 turn right | Echo-3 dash | Echo-3 ping | swap who plays high |
 
-**Steer them.** The black keys are two hands of five, F#3 to D#4 for Scout-7 and F#4 to D#5 for Echo-3: TURN LEFT,
-MOVE, TURN RIGHT, DASH, PING. A key makes that robot's next move this one, once, then its program goes on. The last
-black key, F#5, swaps the robots' registers (who plays high, who plays low).
+---
 
-**Change their programs as they play.** On HOME the 16 white keys are the picked robot's steps, its program down the
-side of the board: a key turns the step to its next move (or, with SELECT, its modifier or its chance). On SEQ the
-same programs are cards you type into with W A S D, the cursor moving on as you go, like driving the robot through
-its moves; undo, roll a program, roll both, swap or clear them on the top keys.
+## Lesson 1: Play and steer
 
-**Change their world.** ENV shows every board: a white key drops one in (it arrives as the loop comes round). ENV
-again builds the board under them, tile by tile, while they walk it; on both KNOB1 runs through the presets. Seq 2 can change the board and the drums
-for you, a step each time Voice Mod comes round.
+<img src="docs/screens/home.png" width="240" align="right" alt="HOME">
 
-**Play over them.** REC turns the keyboard into a lead: a sharp SID voice (pulse and saw together, a wide sweeping
-pulse width, folded where it is driven hard, an open filter, a ping-pong echo in time), the last key held winning
-and gliding when you play legato. K1 CUT opens and closes its filter, K2 ECHO its echo, K3 BITE its edge, K4 OCT its
-octave (the note you hold goes with it). ARP arpeggiates the chord you hold, a note each step: K4 picks up, down, up
-and down, two octaves up or down, or random, and SELECT makes it faster, 1 to 4 notes a step. Only ARP arpeggiates.
+**HOME** is the board.
+- **The robots:** Scout-7 stands on the left half of its tile, Echo-3 on the right. Each has a wedge over its head
+  that points the way it faces.
+- **Their programs** run down the board's sides, a step a row: Scout-7's on the left, Echo-3's on the right.
+- **Their health** is at the foot.
 
-### What the moves and tiles do
+1. **Press PLAY.** The robots move a step at a time. The tiles they set off light up, and each program frames the step
+   it is playing.
+2. **Steer.** Press **G#3**. Scout-7's next move is a step forward, once; then its program goes on. Try **C#4**, a dash
+   of two tiles, and **D#4**, a ping straight ahead.
+3. **Steer Echo-3** the same way, an octave up: **F#4 to D#5**.
+4. **Meet.** Steer them onto the same tile and let them linger: a heart appears and a coin chimes. Dash one into the
+   other and a star flashes over the one hit.
+5. **Press PLAY again** to stop.
+
+*What is happening:* zap rails and hits heat a robot up. A hot robot plays louder, and at heat 6 it burns out and
+comes back in a far corner. Pulse pads cool it.
+
+<br clear="right">
+
+## Lesson 2: Program the robots
+
+<img src="docs/screens/seq.png" width="240" align="right" alt="SEQ">
+
+A robot's program is its moves, a step each, up to 64.
+
+**On HOME,** the 16 white keys are the picked robot's steps.
+1. **EDIT** picks whose program it is. Lit means Echo-3.
+2. **A white key** turns its step to the next move: move, back, turn left, turn right, dash, ping, wait.
+3. **SELECT** changes what a key turns: the step's **move**, its **modifier** (steady, bright, low, wobble, glitch: how
+   its note sounds) or its **chance** (100, 75, 50 %: how likely it fires each loop).
+4. **KNOB1** sets the program's length.
+
+**On SEQ,** you drive the program in like a game.
+- **Type moves:** F3 F#3 G3 A3 are **A W S D**: turn left, move, back, turn right. G#3 is wait, A#3 dash, B3 ping.
+  Each move lands at the cursor, and the cursor goes on.
+- **Colour them:** C4 to G4 set the modifier, A4 B4 C5 the chance.
+- **Tools:** C#5 undo, D5 roll this program, E5 roll both, F5 swap them, G5 clear them.
+- **The cursor:** SELECT moves it, OCT- / OCT+ by 8.
+
+*Try this:* roll both (E5) a couple of times while it plays. In BAND every new program is a new tune.
+
+<br clear="right">
+
+## Lesson 3: Build their world
+
+<img src="docs/screens/boards.png" width="240" align="right" alt="The boards">
+
+**ENV** shows every board.
+- **The keys:**
+  - white keys **1-6** are the presets: DEFAULT, CORRIDOR, GARDEN, GAUNTLET, SPINNER, MAZE;
+  - **7** rolls a random board, **8** brings back your own;
+  - **9** saves the board as yours, **10** clears yours, **11** puts the robots back on their pads.
+- **While it plays,** a new board comes in as the loop comes round: framed yellow, blinking, until it arrives.
+- **KNOB2** sets how full a rolled board is.
+
+<img src="docs/screens/builder.png" width="240" align="right" alt="The builder">
+
+**ENV again** is the builder: build the board under the robots while they walk it.
+1. **Move the cursor:** **A W S D** (F3 F#3 G3 A3).
+2. **Lay a tile:** C4 belt, D4 rotator left, E4 rotator right, F4 zap rail, G4 pulse pad, A4 crate. G#3 clears the
+   tile.
+3. **Belts:** a belt points the way you last moved. Press C4 on a belt to turn it.
+4. **Presets:** KNOB1 runs through them.
+
+*In BAND each board is a band of its own:* its own bass groove, and its tiles shape the synths and the notes. Pulse
+pads make long notes with vibrato, zap rails short hard ones, belts arpeggios, rotators bends, and crates stop a note
+dead.
+
+<br clear="both">
+
+## Lesson 4: Chords and progressions
+
+<img src="docs/screens/voicemod.png" width="240" align="right" alt="SCL: Voice Mod">
+
+**SCL (the SEL button)** is Voice Mod: the chords the music moves through.
+
+1. **White keys 1-4** pick a step. **K1** sets its scale, **K2** its root, **K3** a semitone shift.
+2. **K4** sets when it moves on: every 1/4, 1/2, 1, 2 or 4 loops, or MANUAL. In MANUAL, key **13** is NEXT.
+3. **Key 16** rolls a new progression. In BAND it is one of 73 named ones in one of six keys (*I V vi IV G*, *i VI III
+   VII Am* ...). The header names it, and undo brings the old one back.
+4. **Key 12 is FOLLOW** (lit): every time the progression comes round, a new one follows it, in the same key or a
+   fifth away. The header shows what comes next.
+
+<img src="docs/screens/seq2.png" width="240" align="right" alt="SCL again: Seq 2">
+
+**SCL again** is **Seq 2**, the arrangement: four steps, one each time Voice Mod comes round.
+- **What each step sets:** K1 a board, K2 a drum pattern, K3 whether the robots swap registers, K4 a progression
+  (`--` as it is, `RND` a new one, or one of the 73 by number).
+- **The keys:** key 12 turns it on, keys 13 and 14 roll a robot's program each time it comes round.
+
+*Try this:* turn FOLLOW on, put the robots on GARDEN and let it play. It never quite repeats.
+
+<br clear="both">
+
+## Lesson 5: Drums and the mix
+
+<img src="docs/screens/drums.png" width="240" align="right" alt="LFO: the drums">
+
+**LFO** is the drum machine.
+1. **SELECT** picks the row: kick, snare or hihat.
+2. **The white keys** turn that row's steps on and off.
+3. **KNOB1** runs through the patterns (four, break, half, offbeat, triplet, minimal) and then CLEAR. **KNOB4**
+   switches the drums on and off.
+
+In BAND the pattern is played by a drummer:
+- dynamics, ghost notes, a fill at each phrase's end and a crash after it;
+- a punchier kit, its kick tuned to the chord;
+- a snare whose body is as high as Echo-3 stands, and hats as bright as Scout-7 stands.
+
+<img src="docs/screens/mix.png" width="240" align="right" alt="FX: the mix">
+
+**FX** is the mix.
+- **White keys 1-7** pick a fader: master, melody, bot B, percussion, FX, drums, the lead.
+- **KNOB1** sets the picked fader.
+- **KNOB2** is BOARD COLOUR: how much the board's tiles colour the room.
+
+<br clear="both">
+
+## Lesson 6: Play solo
+
+<img src="docs/screens/home-lead.png" width="240" align="right" alt="REC: the lead">
+
+**REC** turns the keyboard into a lead over the robots: a sharp SID-style voice with a ping-pong echo in time.
+- **The keys play it.** The last key held wins, and it glides when you play legato. **OCT- / OCT+** move it an
+  octave.
+- **The knobs** are its CUT (filter), ECHO, BITE (edge) and OCT, shown as faders across the top.
+- **ARP** arpeggiates the chord you hold, a note each step. K4 picks the pattern (up, down, up and down, two octaves,
+  random), SELECT how fast (1 to 4 notes a step).
+- **REC again** gives the keys back.
+
+<br clear="right">
+
+## Lesson 7: Battle: two players
+
+<img src="docs/screens/battle.png" width="240" align="right" alt="BATTLE">
+
+**GLO, then white key 16** opens the battle. Each player takes a robot and an end of the keyboard:
+
+| | Left | Up | Down | Right | Strike |
+|---|---|---|---|---|---|
+| **Scout-7** | F3 | F#3 | G3 | A3 | C4 |
+| **Echo-3** | C5 | C#5 | D5 | E5 | G5 |
+
+The screen draws the keyboard with each player's keys marked (arrows, and a burst for the strike) and lights each
+key as it is held. **F#4**, in the middle between you, is **RESET**: the match again from round 1.
+
+**Before the match:**
+- **K2** sets the rounds to win, 1 to 9.
+- **K3** picks the arena.
+- **K4** sets what each new round brings: the same arena, the next, or a random one.
+- **K1** sets the tempo.
+
+<img src="docs/screens/battle-countdown.png" width="240" align="right" alt="The countdown">
+
+**How to play:**
+1. **PLAY** starts the match: 4, 3, 2, 1 on the music's beats, a beep each, then **FIGHT!**
+2. **Hold a way** and your robot steps there on every beat. The arena's frame flashes the beat.
+3. **Strike** when the other is a tile ahead, or two with the tile between open, which makes you lunge.
+   - A hit is +2 heat and drives you apart: the other two tiles back, you one.
+   - If a wall or a crate stops the knock-back, it is +1 more for each tile it stops.
+   - The one hit can't be hit again on the next beat.
+4. **Out of reach, the strike key plays the lead:** a note from the chord, where you stand. Press again on one tile
+   and it climbs the chord.
+5. **The tiles count:** zap rails heat you, pulse pads cool you, belts carry you, rotators turn you.
+
+<img src="docs/screens/battle-round.png" width="240" align="right" alt="A round">
+
+**Winning:**
+- Heat 6 burns a robot out, and the other takes the round. A segment lights in its score bar, down its side.
+- A long round **overheats**: the pads stop cooling, the edge of the arena glows, then all but the middle.
+- The first to the rounds wins, big. PLAY starts another match, and any page button leaves the battle.
+
+<p align="center"><img src="docs/screens/battle-winner.png" width="240" alt="The winner"></p>
+
+<br clear="both">
+
+---
+
+## The two engines
+
+SELECT on GLO picks the engine. Both play the same game; they turn it into music differently.
+
+| | ORIGINAL | BAND (where it starts) |
+|---|---|---|
+| **Scout-7** | a note every step, from where it stands | a tune: the board is a keyboard, and the tune comes back every bar |
+| **Echo-3** | a harmony of Scout-7, every step | it answers Scout-7, then sings with it |
+| **The bass** | Echo-3's sub | the board's own groove |
+| **The drums** | your pattern | your pattern, played by a drummer on a punchier kit |
+| **The form** | the loop | phrases: verse, chorus, verse, the big one |
+| **The chords** | Voice Mod | Voice Mod, rolled from 73 named progressions |
+
+**ORIGINAL** is the browser original, note for note. It is checked against the HTML's own script tick by tick over 36
+scenarios (88,120 notes). Its voices, mix, reverb and limiter are measured against renders of the HTML's own audio,
+most voices within 0.15 dB.
+
+**BAND** is the robots as a band:
+- **The tunes.** A tile is a note of the key, a step a step in the scale, a dash a third. The rhythm is their moves.
+- **Call and answer.** In a phrase's first half Scout-7 calls and Echo-3 answers with Scout-7's own motif; in the
+  second half they sing together.
+- **The tiles shape the notes.**
+- **Heat makes it louder.**
+- **The big one.** Every other phrase ends in it, an arpeggio of the chord over the tune.
+
+What every move, tile and setting does in each engine is in **[docs/roboseq/ENGINES.md](docs/roboseq/ENGINES.md)**,
+with the whole bank of progressions.
+
+## Every page
+
+| Page | The button | What it is | The keys | The knobs |
+|---|---|---|---|---|
+| HOME | HOME | the board | white: the program's steps; black: steer | K1 the program's length |
+| SEQ | SEQ | the programs as cards | type moves (A W S D and round them) | K1 the length |
+| SCL | SEL | Voice Mod, the chords | 1-4 a step; 12 FOLLOW, 13 NEXT, 14 ROOT, 15 reset, 16 roll | K1 scale, K2 root, K3 semitone, K4 when |
+| Seq 2 | SEL again | the arrangement | 1-4 a step; 12 on, 13/14 roll on the wrap, 15 reset, 16 random | K1 board, K2 drums, K3 swap, K4 progression |
+| LFO | LFO | the drums | a step of the row | K1 pattern, K4 on/off |
+| FX | FX | the mix | 1-7 a fader | K1 level, K2 board colour |
+| ENV | ENV | the boards | 1-6 presets, 7 roll, 8 yours, 9 save, 10 clear, 11 pads | K1 presets, K2 fullness |
+| Builder | ENV again | build a board | A W S D cursor, the tiles above them | K1 presets, K2 fullness |
+| GLO | GLO | the global settings | 16 BATTLE | K1 tempo, K2 moves every 1/2/4 ticks, K3 the loop, K4 speed; SELECT the engine |
+| BATTLE | GLO, key 16 | two players | the two clusters | K1 tempo, K2 rounds, K3 arena, K4 each round |
+
+Every control, page by page, and the rules they keep: **[docs/roboseq/CONTROLS.md](docs/roboseq/CONTROLS.md)**.
+
+## The rules of the game
 
 | Move | | Tile | |
 |---|---|---|---|
-| FWD / REV | a tile forward / back (walls and crates stop it) | Belt | carries a robot on, mid-step |
-| LEFT / RGHT | a quarter turn | Rotator | turns a robot left or right |
-| DASH | two tiles; into the other robot, it hits it | Zap rail | heats a robot (too hot and it burns out) |
-| PING | a pulse straight ahead; the other robot in its line is zapped | Pulse pad | cools it |
-| IDLE | stays, so the tiles can sing | Crate | blocks the way |
+| MOVE / BACK | a tile forward or back (walls and crates stop it) | Belt | carries a robot on a tile, mid-step |
+| TURN L / R | a quarter turn | Rotator | turns a robot left or right |
+| DASH | two tiles; landing on the other robot hits it (+2 heat for it) | Zap rail | +1 heat |
+| PING | a pulse straight ahead; reaching the other robot, +1 heat for it | Pulse pad | -1 heat |
+| WAIT | stays, so the tiles can sing | Crate | blocks the way |
 
-A step's **modifier** colours its note (steady, bright, low, wobble, glitch) and its **chance** (100, 75, 50 %) says
-how likely it is to fire on a loop. How hot a robot runs, where it stands and which way it faces shape the notes it
-plays; Voice Mod's scale and root keep them in key.
+- **Heat 6** burns a robot out; it comes back in the corner farthest away.
+- **The loop:** at the end of every loop the robots go back to their pads and walk the same way again. That is why
+  their tunes come back.
+- **Love:** two robots on one tile, two steps running, play the coin.
+- **Notes:** a step's modifier colours its note, and its chance says how likely it fires on a loop.
 
-## The sound
-
-RoboSeq has one game and two engines, picked with SELECT on GLO. **BAND**, where it starts, is RoboSeq's own: the
-robots as a band. **ORIGINAL** is the browser original's score, note for note. What every move, tile and setting does
-in each is in [docs/roboseq/ENGINES.md](docs/roboseq/ENGINES.md); in short:
-
-**BAND.** The board is the robots' keyboard: a cell is a note of the key, a step on the board a step in the scale,
-a dash a third.
-- **The tunes.** The robots go back to their pads every loop and walk the same way again, so their tunes come back
-  every bar. The rhythm is their moves: a note where a robot gets to a new cell, held while it turns or leans on a
-  wall, a wait a rest, and the chord on the beats.
-- **Call and answer.** Scout-7 sings the tune. In the first half of each phrase it sings three beats and Echo-3
-  answers in the fourth with Scout-7's own motif; in the second half they sing together. Half way through a phrase
-  the tune lands on the chord's fifth, at its end on the root.
-- **The tiles shape the notes.** A zap rail's note is short and hard, a pulse pad's long, with vibrato. A belt
-  plays an arpeggio its way, a rotator bends the note in, and bumping a crate stops it dead. WOBBLE sings with a wide
-  vibrato, and long notes get a slow one.
-- **The bass.** Each board has its own groove: DEFAULT three-three-two, CORRIDOR straight eighths, GARDEN a walk,
-  GAUNTLET a gallop, SPINNER octaves, MAZE syncopation, and a rolled or your own board one by its tiles. Echo-3 plays
-  into it, and at each phrase's end the bass runs into the next chord.
-- **The synths.** The tiles on each robot's side of the board touch its synth a little.
-- **The big one.** Every other phrase ends in it, as dense as the original: an arpeggio of the chord over the tune,
-  shaped by the original's own arp rules (the chord from where Scout-7 stands, the contour from its facing, the span
-  from its heat, the rate from its tile).
-- **Heat.** It counts as in the original: zap rails, and the other robot's dash or ping, make a robot hotter and
-  louder, so steering them into each other turns the music up.
-- **The drummer.** It plays your pattern with dynamics, ghost notes, fills and crashes.
-- **The chords.** Voice Mod's random writes one of 73 named progressions in one of six keys. FOLLOW (SCL key 12)
-  writes a new one, following on, every round, and Seq 2 can chain them.
-
-**ORIGINAL** is the browser original's music, note for note: the same game and the same score, checked against the
-HTML's own script tick by tick over 36 scenarios (88,120 notes). The voices, the mix, the reverb and the limiter are
-measured against renders of the HTML's own audio in a browser (most voices within 0.15 dB in level, shape and
-timbre), and the mix is in stereo as the HTML's is. Two things are as the original meant rather than as it happened
-to play: its FX bus and reverb are heard (a routing loop silenced them in the browser), and a voice started twice at
-one moment no longer cuts the step short. The rest is new for the FM-1: the SID lead and its echo, the half speed,
-and BOARD COLOUR, which lets a board's tiles colour the whole sound a little (an open board a bigger room, zap rails
-brighter and drier, pulse pads warmer and wetter; at 0 % it is the original's sound).
-[DECISIONS.md](docs/roboseq/DECISIONS.md) has each reason.
-
-## Build
+## Build it yourself
 
 ```sh
 make test       # the model against the HTML, the sound against its renders, the app on this computer
@@ -189,7 +386,8 @@ make lead       # a solo with the lead over it: build/host/lead.wav
 ```
 
 On macOS `make test` and the host builds run in a small Docker image (`make image`), because Dinghy's host mode needs
-Linux's sections. `make reference` re-renders the browser original's sound (node and a Chromium).
+Linux's sections. `make reference` re-renders the browser original's sound (node and a Chromium). The panel picture
+above is `make emu`'s.
 
 ## Where things are
 
