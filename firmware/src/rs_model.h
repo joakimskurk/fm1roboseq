@@ -84,6 +84,7 @@ struct rs_state {
     uint8_t plus_at[2], plus_cad, plus_end;                     /* the step of that note; the bar's cadence has sounded; Scout-7's note ends */
     int8_t plus_call[4], plus_ans;                              /* Scout-7's call: its bar's first notes (scale steps, -1); Echo-3's answer's */
     uint8_t plus_first;                                         /* the step of the call's first note (255: none yet) */
+    int8_t plus_run;                                            /* the bass's run into the next phrase: 1 up, -1 down (D36c) */
 };
 
 enum { RS_MUSIC_CLASSIC, RS_MUSIC_PLUS };                     /* the music: the HTML's, or RoboSeq's own on top (D33) */

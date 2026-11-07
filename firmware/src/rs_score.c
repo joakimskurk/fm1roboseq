@@ -702,10 +702,24 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
         char c = g[slot(p, bar)];
         int eact = o->acted[1] && !s->bot[1].dying ? o->played[1].action : -1, pump = 0;
         if ((c == '.' || c == '-') && peak && p % 2 == 0 && !fill) pump = 1, c = s->plus_bass ? 'P' : 'R';   /* (the big one: it pumps) */
-        if (c != '.' && c != '-' && !(eact == RS_WAIT && !on_beat)) {
+        if (fill) c = 'W';                              /* the phrase's end: under the drummer's fill, a run into the next */
+        if (c != '.' && c != '-' && !(eact == RS_WAIT && !on_beat && c != 'W')) {
             int k = 1, r = fold(48 + root, bass), b = r;
-            while (!pump && p + k < end && g[slot(p + k, bar)] == '-') k++;
+            while (!pump && !fill && p + k < end && g[slot(p + k, bar)] == '-') k++;
             if (c == 'P') b = s->plus_bass;              /* (the note it holds, again) */
+            else if (c == 'W') {                        /* a scale run to the next chord's root, up (Echo-3 facing north or
+                                                         * east as it starts) or down onto it, a step each sixteenth */
+                if (p == end - 4 || !s->plus_run) s->plus_run = s->bot[1].dir == RS_N || s->bot[1].dir == RS_E ? 1 : -1;
+                int thr = s->vm_freq4 * s->loop_len / 4, nroot = root, up = s->plus_run > 0;
+                if (!s->vm_manual && thr >= 1 && thr - s->vm_count <= end - p) {
+                    const struct rs_bassmod_step *nx = &s->bassmod[(s->vm_index + 1) % (s->bassmod_len ? s->bassmod_len : 1)];
+                    nroot = chord_root(s, nx, nx->scale < RS_NSCALES ? nx->scale : RS_SC_MAJOR);
+                }
+                int ti = idx_of(fold(48 + nroot, bass), sc);
+                b = note_of(ti + (up ? -(end - p) : end - p), sc);
+                b = b < 28 ? b + 12 : b > 60 ? b - 12 : b;
+                eact = -1;
+            }
             else if (c == 'O') b = fold(r + 12, bass_hi);
             else if (c == 'F') b = fifth > 0 ? fold(r + fifth, bass) : r;
             else if (c == 'T') b = third_of(root, sc) > 0 ? fold(r + third_of(root, sc), bass) : r;
@@ -720,7 +734,8 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
                 b = iabs(c0 - last) <= iabs(c1 - last) ? c0 : c1;
             }
             if (eact == RS_DASH && c != 'O') b = fold(b + 12, bass_hi);
-            uint32_t vel = pump ? F(0.4) : p == 0 ? F(0.62) : on_beat ? F(0.54) : p % 2 == 0 ? F(0.48) : F(0.42);
+            uint32_t vel = pump ? F(0.4) : c == 'W' ? F(0.4) + (uint32_t)(4 - (end - p)) * F(0.05)
+                         : p == 0 ? F(0.62) : on_beat ? F(0.54) : p % 2 == 0 ? F(0.48) : F(0.42);
             if (peak) vel = mulq(vel, F(1.08));
             note(o, RS_V_B_SUB, b, mulq(step * (uint32_t)k, k > 1 ? F(0.95) : F(0.8)), 0, vel);
             if (eact == RS_PING) note(o, RS_V_B_SUB, b, mulq(step / 2u, F(0.8)), step / 2u, mulq(vel, F(0.7)));

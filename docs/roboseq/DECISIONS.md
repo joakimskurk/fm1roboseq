@@ -471,3 +471,8 @@ heat (to 6) makes its notes 5 % louder, and at 4 Scout-7's notes get the HTML's 
 dashes and pings is turning it up. plus_test: the big one 1.4 to 1.9 times the notes and the velocity of the other
 Bs on every board, its arpeggio and the bass on the eighths, no arpeggio outside it.
 
+**D36c. The bass runs into the next phrase.** Under the drummer's fill at a phrase's end the bass leaves its groove
+for a run of four sixteenths, a scale step each, onto the next chord's root: up from below when Echo-3 faces north
+or east as the run starts, down from above when it faces south or west (a turn is the player's say). plus_test: the
+run into the next phrase in 24 of 30 phrase ends (the rest moved a step off a clash).
+

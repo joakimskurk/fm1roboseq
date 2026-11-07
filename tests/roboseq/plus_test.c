@@ -265,18 +265,19 @@ static void test_tunes(void)                            /* the tune comes back, 
 {
     static struct rs_state s;
     static struct rs_tick_out o;
-    static int8_t roll[20][16], echo[20][16];
-    long same = 0, notes = 0, answers = 0, imitated = 0, homes = 0, phrases = 0;
+    static int8_t roll[20][16], echo[20][16], low[20][16];
+    long same = 0, notes = 0, answers = 0, imitated = 0, homes = 0, phrases = 0, runs = 0;
     for (int board = 0; board < RS_NBOARDS; board++) {
         rs_default(&s);
         rs_load_board(&s, (uint8_t)board);
         s.music = RS_MUSIC_PLUS;
         rs_start(&s);
-        memset(roll, 0, sizeof roll), memset(echo, 0, sizeof echo);
+        memset(roll, 0, sizeof roll), memset(echo, 0, sizeof echo), memset(low, 0, sizeof low);
         while (s.cycle < 20) {
             rs_tick(&s, &o);
             if (s.cycle < 20 && s.step >= 0 && s.step < 16)
-                roll[s.cycle][s.step] = (int8_t)lead_at(&o, RS_V_A_MAIN), echo[s.cycle][s.step] = (int8_t)lead_at(&o, RS_V_B_FM);
+                roll[s.cycle][s.step] = (int8_t)lead_at(&o, RS_V_A_MAIN), echo[s.cycle][s.step] = (int8_t)lead_at(&o, RS_V_B_FM),
+                low[s.cycle][s.step] = (int8_t)lead_at(&o, RS_V_B_SUB);
         }
         for (int bar = 4; bar < 16; bar++)              /* the same bar of the next phrase: the same tune */
             for (int p = 0; p < 16; p++)
@@ -298,10 +299,20 @@ static void test_tunes(void)                            /* the tune comes back, 
                 int last = 0, root = chord_root(&s, ms, ms->scale);
                 for (int p = 0; p < 16; p++) last = roll[bar][p] ? roll[bar][p] : last;
                 phrases++, homes += last && ((last - root) % 12 + 12) % 12 == 0;
+                if (bar + 1 < 20) {                     /* and the bass runs into the next phrase, a scale step a sixteenth */
+                    int ok = 1;
+                    for (int p = 12; p < 16; p++) {
+                        int to = p < 15 ? low[bar][p + 1] : low[bar + 1][0];
+                        int d = low[bar][p] && to ? idx_of(to, sc) - idx_of(low[bar][p], sc) : 9;
+                        ok &= d == 1 || d == -1;
+                    }
+                    runs += ok;
+                }
             }
         }
     }
-    printf("plus_test: the tune again %ld of %ld notes, answers %ld of %ld, home %ld of %ld\n", same, notes, imitated, answers, homes, phrases);
+    printf("plus_test: the tune again %ld of %ld notes, answers %ld of %ld, home %ld of %ld, runs %ld\n", same, notes, imitated, answers, homes, phrases, runs);
+    CHECK(runs * 10 >= phrases * 8, "the bass runs into the next phrase (%ld of %ld)", runs, phrases);
     CHECK(notes > 200 && same * 10 >= notes * 8, "the tune comes back a phrase later (%ld of %ld notes)", same, notes);
     CHECK(answers > 20 && imitated * 10 >= answers * 8, "Echo-3's answer goes as Scout-7's call (%ld of %ld)", imitated, answers);
     CHECK(homes * 10 >= phrases * 9, "a phrase ends on the chord's root (%ld of %ld)", homes, phrases);
