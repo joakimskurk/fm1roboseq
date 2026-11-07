@@ -9,6 +9,7 @@
 #   make lead    a solo with the lead over the default song (tests/roboseq/lead.txt): build/host/lead.wav
 #   make screens the README's tour: every page as the firmware draws it, docs/screens/*.png; the Hub's card, docs/card.png; the film,
 #                docs/screens/roboseq.gif (tests/roboseq/gif.txt)
+#   make panels  the README's FM-1 in BATTLE, in fm1-emu: docs/screens/panel-battle.png
 #   make scenes  the board's rarer moments (a clash, love, steering) drawn straight: build/scenes/*.png
 #   make probe   the HTML's mix pieces (limiter, reverb, low-pass) measured in Chromium: build/probe (node)
 #   make fw      the FM-1 package build/roboseq.fwsc (JieLi toolchain in ~/.jieli, SDK in ~/fw-AC79_AIoT_SDK)
@@ -30,8 +31,10 @@ endif
 EMU ?= ../fm1-emu/target/release/fm1-live
 EMU_MS ?= 8000
 EMU_KEYS ?= 5000:PLAY
+# (the splash skipped, GLO, white key 16: BATTLE; PLAY, the countdown; Scout-7 right (A3), Echo-3 down (D5), the strikes)
+BATTLE_KEYS = 3000:HOME,3100:HOME^,3400:GLO,3500:GLO^,3800:n26,3900:n26^,4300:PLAY,4400:PLAY^,7700:n4,7750:n21,9900:n7,10000:n7^,10300:n26,10400:n26^
 
-.PHONY: test host traces reference parity fw check emu image clean
+.PHONY: test host traces reference parity fw check emu panels image clean
 test: $(IMG)
 	sh tests/run_roboseq.sh
 	$(RUN) sh tests/run_host.sh
@@ -77,6 +80,11 @@ emu:             # (PLAY at 5 s, after the boot and the splash: the default song
 	$(PY) tools/emu_selfcheck.py build/roboseq.dis build/emu/ram.bin build/test/trace_test
 	$(PY) -c "from PIL import Image; Image.open('build/emu/work/panel.ppm').save('build/emu/panel.png')"
 	@echo "panel -> build/emu/panel.png"
+panels:          # the README's FM-1 in fm1-emu, strict: BATTLE, Scout-7 striking Echo-3 (build/roboseq.fwsc: make fw first)
+	mkdir -p build/panels/work
+	cd build/panels && FM1_STRICT=1 FM1_BENCH_KEYS='$(BATTLE_KEYS)' $(abspath $(EMU)) --fwsc ../roboseq.fwsc --shot 10500 >/dev/null
+	$(PY) -c "from PIL import Image; Image.open('build/panels/work/panel.ppm').save('docs/screens/panel-battle.png', optimize=True)"
+	@echo "panel -> docs/screens/panel-battle.png"
 image:
 	@docker image inspect roboseq-dev >/dev/null 2>&1 || docker build -q --platform linux/amd64 -t roboseq-dev tools/docker
 clean:
