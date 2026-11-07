@@ -66,7 +66,7 @@ static void app_idle(void);
 /* ---- the score, from the main loop to the audio interrupt: a ring, the main loop writes the head, the ISR the tail */
 #define QN 256u                                 /* notes (a step makes up to RS_MAX_NOTES) */
 #define LOOKAHEAD (RS_SR * 64u / 1000u)         /* the game runs 64 ms ahead of the speaker (D12) */
-static struct { uint32_t t0, at, dur; uint16_t vel; uint8_t voice; int8_t midi; } qn[QN];   /* t0: the step's start */
+static struct { uint32_t t0, at, dur; uint16_t vel; uint8_t voice, fx; int8_t midi; } qn[QN];   /* t0: the step's start */
 static volatile uint32_t qn_head, qn_tail;
 static volatile uint32_t audio_now;             /* frames rendered since boot: the clock the notes' times are on */
 static volatile uint32_t panic_req, panic_done; /* the main loop asks (PLAY to stop), the ISR releases every voice */
@@ -90,7 +90,7 @@ static void app_audio(int32_t *out, uint32_t n)
         uint32_t j = tail % QN;                         /* all their notes at once, as Tone has them (a step's notes
                                                            are in the HTML's call order, not in time) */
         if ((int32_t)(qn[j].t0 - (now + 2u * n)) >= 0) break;
-        rs_mix_note(&mix, qn[j].voice, qn[j].at, qn[j].dur, qn[j].midi, qn[j].vel);
+        rs_mix_note_fx(&mix, qn[j].voice, qn[j].at, qn[j].dur, qn[j].midi, qn[j].vel, qn[j].fx);
     }
     qn_tail = tail;
     rs_mix_render(&mix, out, n, now);           /* stereo, straight into the platform's buffer */
@@ -140,7 +140,7 @@ static void schedule(void)
             qn[j].t0 = t;
             qn[j].at = (uint32_t)((next_q8 + e->at + 128u) >> 8);
             qn[j].dur = (e->dur + 128u) >> 8;
-            qn[j].vel = e->vel, qn[j].voice = e->voice, qn[j].midi = e->midi;
+            qn[j].vel = e->vel, qn[j].voice = e->voice, qn[j].midi = e->midi, qn[j].fx = e->fx;
         }
         RING_PUBLISH();                         /* the notes before the head that shows them */
         qn_head = h;

@@ -139,7 +139,7 @@ static void cancel_after(struct rs_voice *v, uint32_t t, int kinds)   /* bit k: 
 {
     uint8_t n = 0;
     for (uint8_t i = 0; i < v->nq; i++)
-        if (!((kinds >> v->q[i].kind) & 1) || !before(t, v->q[i].at)) v->q[n++] = v->q[i];
+        if (!((kinds >> (v->q[i].kind & 15)) & 1) || !before(t, v->q[i].at)) v->q[n++] = v->q[i];
     v->nq = n;
 }
 
@@ -158,11 +158,16 @@ static void insert(struct rs_voice *v, uint32_t at, uint8_t kind, int midi, uint
 
 void rs_voice_note(struct rs_voice *v, uint32_t at, uint32_t dur, int midi, uint16_t vel)
 {
+    rs_voice_note_fx(v, at, dur, midi, vel, 0);
+}
+
+void rs_voice_note_fx(struct rs_voice *v, uint32_t at, uint32_t dur, int midi, uint16_t vel, uint8_t fx)
+{
     const struct rs_vdef *d = vdef(v);
     /* triggerAttack(at) */
     cancel_after(v, at, ENVK | SRCK);
     insert(v, at, EV_ATTACK, midi, vel);
-    if (d->osc != RS_OSC_WHITE && d->osc != RS_OSC_BROWN) insert(v, at, EV_FREQ, midi, vel);
+    if (d->osc != RS_OSC_WHITE && d->osc != RS_OSC_BROWN) insert(v, at, (uint8_t)(EV_FREQ | (fx & 15) << 4), midi, vel);
     if (d->s == 0) insert(v, at + d->a + d->d, EV_STOP, 0, 0);
     /* triggerRelease(at + dur) */
     uint32_t rt = at + dur;
@@ -188,7 +193,7 @@ static void lin(struct rs_voice *v, uint8_t stage, int32_t target, uint32_t n)
 static void apply(struct rs_voice *v, const struct rs_vev *e)
 {
     const struct rs_vdef *d = vdef(v);
-    switch (e->kind) {
+    switch (e->kind & 15) {
     case EV_ATTACK: {
         int32_t vel = (int32_t)e->vel << 15;                    /* Q15 -> Q30 */
         v->peak = vel;
@@ -210,6 +215,7 @@ static void apply(struct rs_voice *v, const struct rs_vev *e)
         break;
     case EV_STOP: v->running = 0; break;
     case EV_FREQ:
+        v->fx = (uint8_t)(e->kind >> 4), v->fx_age = 0;       /* (its gesture starts with it) */
         v->inc = note_inc[(uint8_t)e->midi & 127];
         v->binv = 0xFFFFFFFFu / (v->inc >> 15 ? v->inc >> 15 : 1u);   /* (32-bit, once a note) */
         if (d->osc == RS_OSC_MEMBRANE) {                        /* from octaves x f down to f over pitchDecay */
@@ -374,15 +380,43 @@ static int32_t source(struct rs_voice *v)                       /* one sample, Q
     return s;
 }
 
+/* a note's gesture (D37a): the phase step for the next k samples, off the note's own by a vibrato and a bend. Per
+ * block of at most 32 samples, integers; the vibrato a 5.5 Hz sine, the bend a straight line back in 46 ms */
+#define VIB_INC 535700u                                         /* 5.5 Hz: 5.5 / 44100 x 2^32 */
+#define VIB_LATE 11200000                                       /* 2^(18/1200) - 1, Q30 */
+#define VIB_WIDE 25100000                                       /* 2^(40/1200) - 1, Q30 */
+#define BEND_FROM_BELOW (-60200000)                             /* 2^(-1/12) - 1, Q30 */
+#define BEND_FROM_ABOVE 63900000                                /* 2^(1/12) - 1, Q30 */
+static uint32_t fx_inc(struct rs_voice *v, uint32_t k)
+{
+    int32_t dm = 0;
+    uint32_t age = v->fx_age;
+    if (v->fx & (RS_FX_VIB_LATE | RS_FX_VIB_WIDE)) {
+        int wide = v->fx & RS_FX_VIB_WIDE;
+        uint32_t delay = wide ? 0u : 11025u, a = age > delay ? age - delay : 0u;
+        if (a) {                                                /* it grows over 16384 samples (0.37 s) */
+            int32_t full = wide ? VIB_WIDE : VIB_LATE, depth = a >= 16384u ? full : (int32_t)(((int64_t)full * a) >> 14);
+            v->vib_ph += VIB_INC * k;
+            dm += (int32_t)(((int64_t)depth * sine_q15(v->vib_ph)) >> 15);
+        }
+    }
+    if ((v->fx & (RS_FX_BEND_UP | RS_FX_BEND_DOWN)) && age < 2048u)
+        dm += (int32_t)(((int64_t)(v->fx & RS_FX_BEND_UP ? BEND_FROM_BELOW : BEND_FROM_ABOVE) * (int32_t)(2048u - age)) >> 11);
+    v->fx_age = age + k;
+    return (uint32_t)((int64_t)v->inc + (((int64_t)v->inc * dm) >> 30));
+}
+
 /* the source times the envelope into out, k samples without an event: a loop for each kind of source */
 static inline int32_t vlevel(int32_t s, int32_t env) { return (int32_t)(((int64_t)(s * 4) * env) >> 32); }   /* s env / 2^30 */
 static void voice_play(struct rs_voice *v, int32_t *out, const int32_t *e, uint32_t k)
 {
     const struct rs_vdef *d = vdef(v);
-    uint32_t j, ph = v->phase, inc = v->inc;
+    uint32_t j, ph = v->phase, inc = v->inc, inv = v->binv;
+    if (v->fx && (d->osc == RS_OSC_SQUARE || d->osc == RS_OSC_TRIANGLE))   /* (a gesture: the pitch moves a little) */
+        inc = fx_inc(v, k), inv = 0xFFFFFFFFu / (inc >> 15 ? inc >> 15 : 1u);
     switch (d->osc) {
     case RS_OSC_SQUARE: {
-        uint32_t inv = v->binv, pw = v->pw;
+        uint32_t pw = v->pw;
         int32_t soft = v->soft;
         if ((pw == 0 || pw == 0x80000000u) && !soft) {
             for (j = 0; j < k; j++, ph += inc) {

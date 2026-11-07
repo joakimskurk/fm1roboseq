@@ -102,6 +102,13 @@ struct rs_note {
     int8_t midi;                                                /* RS_NOISE for the noise voices */
     uint16_t vel;                                               /* Q15, 32768 = 1 */
     uint32_t at, dur;                                           /* from the tick's start, and how long: 1/256 sample */
+    uint8_t fx;                                                 /* its pitch gesture (PLUS, D37a: RS_FX_*; 0 none) */
+};
+enum {                                                          /* a note's pitch gesture: a vibrato | a bend */
+    RS_FX_VIB_LATE = 1,                                         /* a held note's: after a quarter second, growing, +-18 cents */
+    RS_FX_VIB_WIDE = 2,                                         /* a wobble's: at once, +-40 cents */
+    RS_FX_BEND_UP = 4,                                          /* into the note from a semitone below (a left rotator) */
+    RS_FX_BEND_DOWN = 8,                                        /* from a semitone above (a right rotator) */
 };
 
 struct rs_tick_out {
@@ -117,6 +124,7 @@ struct rs_tick_out {
     uint8_t drum_k, drum_s, drum_h, drum_ghost;                 /* the drum step played, or a ghost hihat */
     uint32_t active;                                            /* bit y * RS_COLS + x: the tiles an event lit (activeKeys) */
     uint8_t clash[2];                                           /* bot A / B was dashed into (the clash star) */
+    uint8_t bumped[2];                                          /* bot A / B bumped this tick: 1 into a wall, 2 into a crate (D37b) */
     uint8_t nnotes;
     struct rs_note notes[RS_MAX_NOTES];                         /* the score of this tick, in the HTML's call order */
 };

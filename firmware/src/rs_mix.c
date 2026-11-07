@@ -146,6 +146,11 @@ void rs_mix_note(struct rs_mix *m, uint8_t voice, uint32_t at, uint32_t dur, int
     if (voice < RS_NVOICES) rs_voice_note(&m->v[voice], at, dur, midi, vel);
 }
 
+void rs_mix_note_fx(struct rs_mix *m, uint8_t voice, uint32_t at, uint32_t dur, int midi, uint16_t vel, uint8_t fx)
+{
+    if (voice < RS_NVOICES) rs_voice_note_fx(&m->v[voice], at, dur, midi, vel, fx);
+}
+
 /* ---- the reverb: a frame, Q15 in, Q24 out. Unrolled, its multiplies the high word of a 64-bit product (one
  * instruction on the chip) */
 static inline int32_t mulh(int32_t x, int32_t k) { return (int32_t)(((int64_t)x * k) >> 32); }

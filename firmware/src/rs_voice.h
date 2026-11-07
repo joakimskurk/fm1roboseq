@@ -35,11 +35,16 @@ struct rs_voice {
     volatile uint32_t pw;                                       /* a square's falling edge, 2^32 a cycle (0: at a half) */
     volatile int32_t soft;                                      /* a triangle mixed into a square, Q15 */
     volatile uint8_t shape;                                     /* the envelope: 0 the HTML's, 1 shorter, 2 longer (the bots' voices) */
+    /* the note's pitch gesture (PLUS, D37a): RS_FX_*, set with its frequency; 0 is the HTML's steady pitch */
+    uint8_t fx;
+    uint32_t fx_age, vib_ph;                                    /* samples since the note began; the vibrato's phase */
 };
+
 
 void rs_voice_init(struct rs_voice *v, uint8_t def, uint32_t seed);
 /* triggerAttackRelease(midi, duration, time, velocity): start and length in samples (absolute), velocity Q15 */
 void rs_voice_note(struct rs_voice *v, uint32_t at, uint32_t dur, int midi, uint16_t vel);
+void rs_voice_note_fx(struct rs_voice *v, uint32_t at, uint32_t dur, int midi, uint16_t vel, uint8_t fx);   /* with a gesture */
 /* triggerRelease(at): what stopPlayback()'s panic does to each voice (and a future attack goes, as Tone's
  * cancelAndHold takes it off the envelope) */
 void rs_voice_release(struct rs_voice *v, uint32_t at);

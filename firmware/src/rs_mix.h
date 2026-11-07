@@ -55,6 +55,7 @@ void rs_mix_colour(struct rs_mix *m, const struct rs_board *bd, uint32_t amount)
 void rs_mix_patch(struct rs_mix *m, const struct rs_patch *p);
 /* triggerAttackRelease on voice `voice` (RS_V_*): rs_voice_note's arguments */
 void rs_mix_note(struct rs_mix *m, uint8_t voice, uint32_t at, uint32_t dur, int midi, uint16_t vel);
+void rs_mix_note_fx(struct rs_mix *m, uint8_t voice, uint32_t at, uint32_t dur, int midi, uint16_t vel, uint8_t fx);
 /* n frames (a multiple of RS_MIX_SUB) from sample `now` on into out, stereo (L R L R), Q15 in int32 (the limiter's
  * output can pass full scale as the HTML's does: the platform clips) */
 void rs_mix_render(struct rs_mix *m, int32_t *out, uint32_t n, uint32_t now);

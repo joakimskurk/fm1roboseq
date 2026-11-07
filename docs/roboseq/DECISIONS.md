@@ -485,3 +485,16 @@ the eighths, and the arpeggio is up to 0.78 and an octave lower (G4 to D6). Rend
 HTML's (148 to 154 against CLASSIC's 146; a B's 102 to 120), 1 to 4 dB more between 1 and 4 kHz. Echo-3's notes and
 the bass's pump keep to the chord's tones that sound with Scout-7's (a diminished chord's own tritone included).
 
+## D37. PLUS: the tiles shape the notes, a vibrato, the HTML's arp rules (2026-11-07)
+
+The product owner, on D36 and docs/roboseq/MUSIC.md: quite good now; boards more distinct, a little vibrato on
+longer notes, the arpeggio more varied, every rule making sense by the movement and the blocks the robots hit.
+
+**D37a. A note's gesture.** A note can carry a pitch gesture (rs_note.fx, RS_FX_*), carried to the voice with its
+frequency (packed in the timeline event's kind, so the timeline grows no bigger): a late vibrato (after a quarter
+second, growing over 0.37 s to +-18 cents at 5.5 Hz), a wide one (at once, +-40 cents) and a bend into the note from a
+semitone below or above (back in 46 ms). The square and triangle voices only; per block of at most 32 samples, the
+phase step and its PolyBLEP inverse recomputed (a 32-bit division, as the note's own). No gesture is the HTML's voice
+sample for sample, and CLASSIC never sets one. patch_test: the late vibrato waits, then about +-1 %; the wide one at
+once; the bend starts 106 samples a cycle for A4's 100 and is home in 50 ms. fm1-emu: the worst block still 28 %.
+
