@@ -26,7 +26,7 @@ static void note(struct rs_tick_out *o, uint8_t voice, int midi, uint32_t dur, u
     for (int i = 0; i < o->nnotes; i++)                /* a voice's second start at a time it starts at: dropped (D10) */
         if (o->notes[i].voice == voice && o->notes[i].at == at) return;
     struct rs_note *n = &o->notes[o->nnotes++];
-    n->voice = voice, n->midi = (int8_t)midi, n->dur = dur, n->at = at;
+    n->voice = voice, n->midi = (int8_t)midi, n->dur = dur, n->at = at, n->fx = 0;
     n->vel = (uint16_t)((vel_q20 + 16u) >> 5);
 }
 
@@ -604,6 +604,54 @@ static int under_lead(int idx, int lead, int root, uint8_t sc)   /* the chord to
     }
     return idx;
 }
+/* what the tile a bot landed on and its step's modifier do to a note's pitch (D37a, D37b): a left rotator bends it in
+ * from below, a right one from above; a pulse pad (it heals: long and sustained) and WOBBLE sing with a wide vibrato
+ * at once; any other held note grows a slow one after a quarter second; a zap rail's and GLITCH's notes stay plain */
+static uint8_t gesture(uint8_t tile, uint8_t modifier)
+{
+    if (modifier == RS_GLITCH || tile == RS_T_ZAP) return 0;
+    if (tile == RS_T_ROTL) return RS_FX_BEND_UP | RS_FX_VIB_LATE;
+    if (tile == RS_T_ROTR) return RS_FX_BEND_DOWN | RS_FX_VIB_LATE;
+    if (modifier == RS_WOBBLE || tile == RS_T_PULSE) return RS_FX_VIB_WIDE;
+    return RS_FX_VIB_LATE;
+}
+static void note_fx(struct rs_tick_out *o, uint8_t voice, int midi, uint32_t dur, uint32_t at, uint32_t vel_q20, uint8_t fx)
+{
+    uint8_t n0 = o->nnotes;
+    note(o, voice, midi, dur, at, vel_q20);
+    if (o->nnotes > n0) o->notes[n0].fx = fx;
+}
+/* the arpeggio's tones by the HTML's own arp rules (D37c): the chord's shape from where Scout-7 stands and the loop
+ * (getChordShape: triad, seventh, sus4, add9, power, sixth), its span from the heat (two octaves at 4), the other
+ * shape when the bots are four tiles or more apart (getComplementShape). From the chord's root at or over lo, up;
+ * sus4 is the triad here (its fourth would rub on the third Echo-3 and the bass sound) */
+static int arp_tones(const struct rs_state *s, int root, uint8_t sc, int lo, int *out)
+{
+    const struct rs_bot *a = &s->bot[0], *b = &s->bot[1];
+    int shape = chord_shape(a->x, s->cycle), dist = iabs(a->x - b->x) + iabs(a->y - b->y);
+    if (dist >= 4) shape = complement(shape);
+    if (shape == CH_SUS4) shape = CH_TRIAD;
+    int span = a->heat >= 4 ? 2 : 1, n = SCALE_LEN[sc], rm = lo + mod12(root - lo), ri = idx_of(rm, sc), c = 0;
+    for (int o = 0; o <= span; o++)
+        for (int d = 0; d < CHORD_N[shape]; d++) {
+            int m = note_of(ri + CHORD[shape][d] + o * n, sc), dup = 0;
+            if (m > rm + 12 * span || c >= 12) continue;
+            for (int k = 0; k < c; k++) dup |= out[k] == m;
+            if (dup) continue;
+            int k = c++;
+            for (; k > 0 && out[k - 1] > m; k--) out[k] = out[k - 1];
+            out[k] = m;
+        }
+    return c;
+}
+static int pat_index(int pat, int u, int n)             /* the u-th note of a contour over n tones (ARP_PATTERNS) */
+{
+    int w = 2 * n - 2 > 0 ? 2 * n - 2 : 1, v = u % w;
+    return pat == P_UP ? u % n : pat == P_DOWN ? n - 1 - u % n : pat == P_UPDOWN ? (v < n ? v : w - v)
+         : (u & 1) ? n - 1 - (u / 2) % n : (u / 2) % n;
+}
+static const uint32_t ARP_GATE[RS_NMODIFIERS] = {F(0.9), F(0.7), F(1.2), F(1.0), F(0.5)};   /* getArpGate: steady .. glitch */
+
 static int snap_dir(int idx, int root, uint8_t sc, int dir)   /* the nearest chord tone, the way the tune goes first */
 {
     static const int8_t D[5] = {0, 1, -1, 2, -2};
@@ -768,7 +816,7 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
     if (o->move_tick && o->acted[0] && !s->bot[0].dying) {
         const struct rs_bot *a = &s->bot[0];
         const struct rs_step *st = &o->played[0];
-        int d = cell_deg(a), act = st->action;
+        int d = cell_deg(a), act = st->action, land = a->stepped_tile;
         int fresh = (d != s->plus_cell[0] || act == RS_PING) && act != RS_WAIT;
         int may = sec_b || p % 2 == 0 || act == RS_DASH;
         if (zone ? !s->plus_cad && p < calls : fresh && may && p < calls) {   /* (the cadence lands, moved or not) */
@@ -779,6 +827,7 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
                 s->plus_cad = 1;
             } else {
                 k = hold_of(s, 0, p, calls, 8);
+                if (land == RS_T_PULSE && k < 8) k = calls - p < 8 ? calls - p : 8;   /* a pulse pad: held, to the next note */
                 if (on_beat) i = snap_dir(i, root, sc, dir);
             }
             int m = note_of(i, sc), prev = s->plus_lead;
@@ -794,39 +843,56 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
             if (st->modifier == RS_BRIGHT) vel = mulq(vel, F(1.15));
             else if (st->modifier == RS_LOW) vel = mulq(vel, F(0.8));
             else if (st->modifier == RS_GLITCH) dur = mulq(step, F(0.4));
-            if (s->board.t[a->y * RS_COLS + a->x].type == RS_T_PULSE) vel = mulq(vel, F(1.1));
+            if (land == RS_T_PULSE) vel = mulq(vel, F(1.1));
+            if (land == RS_T_ZAP) dur = mulq(step, F(0.45)), vel = mulq(vel, F(1.15)), k = 1;   /* a zap rail: short and hard */
             if (vel > ONE) vel = ONE;
-            note(o, RS_V_A_MAIN, m, dur, 0, vel);
+            note_fx(o, RS_V_A_MAIN, m, dur, 0, vel, zone ? RS_FX_VIB_LATE : gesture((uint8_t)land, st->modifier));
             if (act == RS_PING)                         /* the glint: a chord tone an octave up */
                 note(o, RS_V_A_PING, note_of(keep_in(snap_idx(i + n, root, sc), sc, 60, 90), sc), q, q / 4u, mulq(vel, F(0.5))),
                 ping_used = 1;
-            if (a->stepped_tile == RS_T_BELT) {         /* riding a belt: the chord rolls up or down after it */
-                int up = a->stepped_dir == RS_N || a->stepped_dir == RS_E, j = snap_idx(i + (up ? 2 : -2), root, sc);
-                note(o, RS_V_A_PING, note_of(keep_in(j, sc, 60, 90), sc), q / 2u, step / 2u, mulq(vel, F(0.45)));
+            if (land == RS_T_BELT) {                    /* riding a belt: an arpeggio after the note, the belt's way, */
+                int ct[12], nct = arp_tones(s, root, sc, 60, ct), up = a->stepped_dir == RS_N || a->stepped_dir == RS_E;
+                int nn = a->heat >= 3 ? 3 : 2, j0 = 0;       /* two notes (three hot: the HTML's), within the step */
+                while (j0 < nct && ct[j0] <= m) j0++;
+                if (!up) j0 -= 1;
+                while (j0 >= 0 && j0 < nct && !up && ct[j0] >= m) j0--;
+                for (int t = 0; t < nn; t++) {
+                    int j = up ? j0 + t : j0 - t;
+                    if (j < 0 || j >= nct) break;
+                    note(o, RS_V_A_PING, ct[j], mulq(step / (uint32_t)(nn + 1), ARP_GATE[st->modifier]),
+                         (uint32_t)(t + 1) * (step / (uint32_t)(nn + 1)), mulq(vel, F(0.5)));
+                }
                 ping_used = 1;
             }
             if (!ping_used && h0 >= 4 && !peak)         /* hot: the HTML's third above, a strike */
                 note(o, RS_V_A_PING, note_of(keep_in(i + 2, sc, 60, 90), sc), mulq(step, F(0.2)), mulq(step, F(0.03)),
                      mulq(vel, F(0.4))), ping_used = 1;
             s->plus_cell[0] = (int8_t)d, s->plus_lead = (int8_t)m, s->plus_at[0] = (uint8_t)p;
-            s->plus_end = (uint8_t)(st->modifier == RS_GLITCH ? p + 1 : p + k);
+            s->plus_end = (uint8_t)(st->modifier == RS_GLITCH || land == RS_T_ZAP ? p + 1 : p + k);
             if (s->plus_first == 255) s->plus_first = (uint8_t)p;
             if (p - s->plus_first < 4) s->plus_call[p - s->plus_first] = (int8_t)i;
             lead_on = 1, lead_idx = i;
         }
     }
-    if (peak && !ping_used && !fill && !s->bot[0].dying) {
-        int ct[8], nct = 0, j;                          /* the big one: the chord's tones over the tune, the way Scout-7 faces */
-        for (int m = 67; m <= 86 && nct < 8; m++)
-            if (chord_tone(m, root, sc)) ct[nct++] = m;
-        if (nct > 1) {
-            int pat = dir_pattern(s->bot[0].dir), w = 2 * nct - 2, u = p % w;
-            j = pat == P_UP ? p % nct : pat == P_DOWN ? nct - 1 - p % nct : pat == P_UPDOWN ? (u < nct ? u : w - u)
-              : (p & 1) ? nct - 1 - (p / 2) % nct : (p / 2) % nct;
-            note(o, RS_V_A_PING, ct[j], mulq(q, F(0.8)), 0, mulq(on_beat ? F(0.78) : p % 2 == 0 ? F(0.66) : F(0.56), warm0));
-        }
+    int choked = 0;
+    if ((o->bumped[0] & 2) && !lead_on && s->plus_lead && p < s->plus_end && !s->bot[0].dying) {
+        note(o, RS_V_A_MAIN, s->plus_lead, mulq(q, F(0.1)), 0, 0);   /* a crate: the note it held stops dead (velocity 0) */
+        s->plus_end = (uint8_t)p, choked = 1;
     }
-    if (peak && !lead_on && !fill && p % 2 == 0 && s->plus_lead && p < calls && o->acted[0] && !s->bot[0].dying) {
+    if (peak && !ping_used && !fill && !s->bot[0].dying) {
+        /* the big one's arpeggio by the HTML's rules: the shape from where Scout-7 stands, the span from its heat, the
+         * contour from its facing, how long each rings from the step's modifier, the rate from the tile it is on (a
+         * belt twice as fast, a pulse pad half) */
+        int ct[12], nct = arp_tones(s, root, sc, 67, ct), land = s->bot[0].stepped_tile;
+        int per = land == RS_T_BELT ? 2 : 1, pat = dir_pattern(s->bot[0].dir);
+        uint8_t mod = o->acted[0] ? o->played[0].modifier : RS_STEADY;
+        uint32_t av = mulq(on_beat ? F(0.78) : p % 2 == 0 ? F(0.66) : F(0.56), warm0);
+        if (nct > 1 && (land != RS_T_PULSE || p % 2 == 0))
+            for (int t = 0; t < per; t++)
+                note(o, RS_V_A_PING, ct[pat_index(pat, p * per + t, nct)], mulq(mulq(q, ARP_GATE[mod % RS_NMODIFIERS]), per == 2 ? F(0.5) : ONE),
+                     (uint32_t)t * (q / 2u), t ? mulq(av, F(0.8)) : av);
+    }
+    if (peak && !lead_on && !choked && !fill && p % 2 == 0 && s->plus_lead && p < calls && o->acted[0] && !s->bot[0].dying) {
         int i = snap_idx(idx_of(s->plus_lead, sc), root, sc);   /* the big one: the tune's note struck again, the eighths */
         note(o, RS_V_A_MAIN, note_of(i, sc), mulq(step, F(1.6)), 0, mulq(on_beat ? F(0.6) : F(0.5), warm0));
         s->plus_lead = (int8_t)note_of(i, sc), lead_on = 2, lead_idx = i;
@@ -843,7 +909,7 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
      * two steps or more). */
     if (o->move_tick && o->acted[1] && !s->bot[1].dying) {
         const struct rs_bot *b = &s->bot[1];
-        int d = cell_deg(b), act = o->played[1].action, e = 0, k = 1, j = p - calls;
+        int d = cell_deg(b), act = o->played[1].action, e = 0, k = 1, j = p - calls, eland = b->stepped_tile;
         int fresh = (d != s->plus_cell[1] || act == RS_PING) && act != RS_WAIT;
         uint32_t vel = F(0.5);
         if (answer && j >= 0 && j < 4 && s->plus_call[0] >= 0) {
@@ -869,17 +935,21 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
             if (p < s->plus_end) i = under_lead(i, s->plus_lead, root, sc);   /* (under Scout-7's note: a consonance) */
             e = note_of(i, sc), vel = on_beat ? F(0.56) : F(0.48);
             k = hold_of(s, 1, p, answer ? calls : end, 4);
+            if (eland == RS_T_PULSE) k = (answer ? calls : end) - p < 6 ? (answer ? calls : end) - p : 6;   /* (held) */
             s->plus_cell[1] = (int8_t)d, s->plus_at[1] = (uint8_t)p;
         }
         if (!e && peak && p % 2 == 0 && s->plus_echo && act != RS_WAIT && !fill)   /* the big one: its chord tone again */
             e = note_of(under_lead(snap_idx(idx_of(s->plus_echo, sc), root, sc), s->plus_lead, root, sc), sc), vel = F(0.46);
         if (e) {
+            uint32_t edur = mulq(step * (uint32_t)k, F(0.9));
             vel = mulq(vel, peak ? mulq(warm1, F(1.08)) : warm1);
+            if (eland == RS_T_ZAP) edur = mulq(step, F(0.45)), vel = mulq(vel, F(1.15));   /* a zap rail: short and hard */
             if (vel > ONE) vel = ONE;
-            note(o, RS_V_B_FM, e, mulq(step * (uint32_t)k, F(0.9)), 0, vel), s->plus_echo = (int8_t)e;
+            note_fx(o, RS_V_B_FM, e, edur, 0, vel, gesture((uint8_t)eland, o->played[1].modifier)), s->plus_echo = (int8_t)e;
             if (b->stepped_tile == RS_T_BELT && !(lead_on && s->bot[0].stepped_tile == RS_T_BELT))
                 note(o, RS_V_B_FM, fold(e + 12, (struct range){45, 79}), q / 2u, step / 2u, mulq(vel, F(0.6)));
-        }
+        } else if ((o->bumped[1] & 2) && s->plus_echo && p - s->plus_at[1] < 4)
+            note(o, RS_V_B_FM, s->plus_echo, mulq(q, F(0.1)), 0, 0);   /* a crate: its note stops dead */
     }
     unrub(s, o, root, sc, bass);
     plus_drums(s, o, bar, beat);

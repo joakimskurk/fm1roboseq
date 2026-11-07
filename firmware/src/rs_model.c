@@ -223,8 +223,8 @@ static int attempt_move(struct rs_state *s, int b, int heading, struct rs_tick_o
 {
     struct rs_bot *bot = &s->bot[b];
     int nx = bot->x + DX[heading], ny = bot->y + DY[heading];
-    if (!inside(nx, ny)) { evk(o, RS_EV_COLLISION, bot->x, bot->y); return 0; }        /* the wall */
-    if (blocked(s, nx, ny)) { evk(o, RS_EV_COLLISION, nx, ny); return 0; }             /* a crate */
+    if (!inside(nx, ny)) { evk(o, RS_EV_COLLISION, bot->x, bot->y); o->bumped[b] |= 1; return 0; }   /* the wall */
+    if (blocked(s, nx, ny)) { evk(o, RS_EV_COLLISION, nx, ny); o->bumped[b] |= 2; return 0; }        /* a crate */
     bot->x = (int8_t)nx, bot->y = (int8_t)ny;           /* bots can share a tile */
     evk(o, RS_EV_MOVE, nx, ny);
     return 1;

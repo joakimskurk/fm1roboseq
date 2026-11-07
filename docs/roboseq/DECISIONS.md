@@ -498,3 +498,37 @@ phase step and its PolyBLEP inverse recomputed (a 32-bit division, as the note's
 sample for sample, and CLASSIC never sets one. patch_test: the late vibrato waits, then about +-1 %; the wide one at
 once; the bend starts 106 samples a cycle for A4's 100 and is home in 50 ms. fm1-emu: the worst block still 28 %.
 
+**D37b. What the robots meet shapes the notes.** By the HTML's help (a zap rail's notes "short and staccato", a
+pulse pad's "longer and sustained") and its tiles:
+
+- **Zap rail:** the note struck on it is short (0.45 of a step) and harder (+15 %), plain (no vibrato).
+- **Pulse pad:** the note on it is held to the next note (the call's end at most, 8 steps) with the wide vibrato;
+  Echo-3's up to 6 steps.
+- **Belt:** Scout-7's note is followed, within the step, by an arpeggio of two chord tones (three at heat 3, the
+  HTML's), up for a north or east belt and down for a south or west one, from the note on; Echo-3 keeps its octave.
+- **Rotator:** the note bends in, from below on a left rotator and from above on a right one.
+- **Crate:** a bump stops the note the robot holds dead (a note of velocity 0 on its voice). A wall does not: the
+  robot leans on the board's edge and its note holds, as in D35. The model tells the score which it was (rs_tick_out
+  .bumped: 1 a wall, 2 a crate; the game is unchanged).
+- **Modifiers:** WOBBLE sings with the wide vibrato, what its name says; GLITCH stays plain; every other note grows
+  the late vibrato, heard only on a note held past a quarter second.
+
+So the boards sound apart by what they are made of: GARDEN's pulse pads sing long, GAUNTLET's zap rails spit, CORRIDOR's
+belts arpeggiate, SPINNER's rotators bend, MAZE's crates choke. plus_test (6 boards x 3 register rolls): every zap
+rail note short and plain, every pulse pad note held and singing, every rotator note bent its way, every belt's
+arpeggio its way, chokes only after crates.
+
+**D37c. The arpeggio by the HTML's own rules.** "Position determines chord, direction determines contour, heat
+determines span, tile determines rate":
+
+- **Position:** the shape is the HTML's getChordShape, Scout-7's x and the loop: triad, seventh, add9, power, sixth.
+  Its sus4 is the triad here, since its fourth would rub on the third Echo-3 and the bass sound.
+- **Two robots:** when they are 4 tiles or more apart, the other shape (getComplementShape).
+- **Heat:** the span is two octaves at heat 4 (getArpOctaves), else one.
+- **Direction:** the contour is the facing, as before.
+- **Modifier:** how long each note rings is getArpGate (steady 0.9, bright 0.7, low 1.2, wobble 1.0, glitch 0.5).
+- **Tile:** the rate is twice as fast on a belt and half on a pulse pad.
+
+The big one's arpeggio and the belt's both use it. plus_test: five or more shapes across the positions and loops,
+two octaves hot, the other shape far apart, every tone in the scale.
+

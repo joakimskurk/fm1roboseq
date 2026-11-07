@@ -356,11 +356,101 @@ static void test_peaks(void)                            /* every other phrase's 
     }
 }
 
+static void test_tiles(void)                            /* what the robots meet shapes the notes (D37a, D37b) */
+{
+    static struct rs_state s;
+    static struct rs_tick_out o;
+    long zap = 0, zap_ok = 0, pulse = 0, pulse_ok = 0, rot = 0, rot_ok = 0, belt = 0, belt_ok = 0, chokes = 0, plain = 0, plain_ok = 0;
+    for (int board = 0; board < RS_NBOARDS; board++)
+        for (int roll = 0; roll < 3; roll++) {
+            rs_default(&s);
+            rs_load_board(&s, (uint8_t)board);
+            s.music = RS_MUSIC_PLUS, s.rng = 991u + (uint32_t)(board * 7 + roll);
+            if (roll) rs_randomize_all(&s);
+            rs_start(&s);
+            uint32_t step = rs_step_q8(&s);
+            while (s.cycle < 12) {
+                rs_tick(&s, &o);
+                if (!o.move_tick || s.step < 0) continue;
+                const struct rs_note *lead = 0;
+                int pings_up = 0, pings_down = 0, last_ping = 0, choke = 0;
+                for (int i = 0; i < o.nnotes; i++) {
+                    const struct rs_note *n = &o.notes[i];
+                    if (n->voice == RS_V_A_MAIN && n->at == 0) {
+                        if (n->vel) lead = n;
+                        else choke = 1;
+                    }
+                    if (n->voice == RS_V_A_PING && n->at > 0) {
+                        if (last_ping) pings_up += n->midi > last_ping, pings_down += n->midi < last_ping;
+                        last_ping = n->midi;
+                    }
+                }
+                chokes += choke;
+                if (choke) CHECK(o.bumped[0] & 2, "board %d: a choke only after a crate", board);
+                int pp = s.step % 16, in = (int)(s.cycle % 4), cadence = (in == 1 || in == 3) && pp >= 8;
+                if (!lead || !o.acted[0] || rs_plus_peak(&s) || s.plus_at[0] != pp || cadence) continue;   /* (its struck note) */
+                int land = s.bot[0].stepped_tile, mod = o.played[0].modifier;
+                if (land == RS_T_ZAP) zap++, zap_ok += lead->dur <= step / 2u && lead->fx == 0;
+                else if (mod == RS_GLITCH) continue;      /* (GLITCH: clipped and plain wherever it is) */
+                else if (land == RS_T_PULSE) {
+                    uint32_t calls = rs_plus_section(&s) ? 16u : 12u, want = (calls - (uint32_t)pp) * step * 9u / 10u;
+                    pulse++, pulse_ok += (lead->fx & RS_FX_VIB_WIDE) && lead->dur >= (want < step * 3u / 2u ? want : step * 3u / 2u);
+                } else if (land == RS_T_ROTL || land == RS_T_ROTR)
+                    rot++, rot_ok += (lead->fx & (land == RS_T_ROTL ? RS_FX_BEND_UP : RS_FX_BEND_DOWN)) != 0;
+                else if (land == RS_T_BELT) {
+                    int up = s.bot[0].stepped_dir == RS_N || s.bot[0].stepped_dir == RS_E;
+                    belt++, belt_ok += up ? !pings_down : !pings_up;
+                } else if (mod != RS_GLITCH && mod != RS_WOBBLE) plain++, plain_ok += (lead->fx & RS_FX_VIB_LATE) != 0;
+            }
+        }
+    printf("plus_test: zap rails %ld (short %ld), pulse pads %ld (held, singing %ld), rotators %ld (bent %ld), belts %ld (the belt's way %ld), "
+           "chokes %ld, the rest %ld (a late vibrato %ld)\n", zap, zap_ok, pulse, pulse_ok, rot, rot_ok, belt, belt_ok, chokes, plain, plain_ok);
+    CHECK(zap > 10 && zap_ok == zap, "a zap rail's note short and plain (%ld of %ld)", zap_ok, zap);
+    CHECK(pulse > 10 && pulse_ok * 10 >= pulse * 9, "a pulse pad's note held, with a wide vibrato (%ld of %ld)", pulse_ok, pulse);
+    CHECK(rot > 10 && rot_ok == rot, "a rotator bends the note in, its way (%ld of %ld)", rot_ok, rot);
+    CHECK(belt > 10 && belt_ok == belt, "a belt's arpeggio goes its way (%ld of %ld)", belt_ok, belt);
+    CHECK(chokes > 5, "a crate chokes a held note (%ld)", chokes);
+    CHECK(plain > 50 && plain_ok == plain, "every other note may sing late (%ld of %ld)", plain_ok, plain);
+}
+
+static void test_arp_rules(void)                        /* the arpeggio by the HTML's rules (D37c) */
+{
+    static struct rs_state s;
+    int t[12], shapes = 0;
+    static char seen[4096];
+    rs_default(&s);
+    s.music = RS_MUSIC_PLUS;
+    for (int x = 0; x < 5; x++)
+        for (uint32_t cyc = 0; cyc < 18; cyc += 3) {
+            s.bot[0].x = (int8_t)x, s.bot[0].y = 2, s.bot[1].x = (int8_t)x, s.bot[1].y = 2, s.cycle = cyc, s.bot[0].heat = 0;
+            int n = arp_tones(&s, 0, RS_SC_MAJOR, 67, t), sig = 0;
+            CHECK(n >= 3 && t[n - 1] - t[0] <= 12, "x %d: an octave of tones (%d, %d..%d)", x, n, t[0], t[n - 1]);
+            for (int i = 0; i < n; i++) {
+                sig |= 1 << ((t[i] - t[0]) % 12);
+                CHECK(SCALE_MASK[RS_SC_MAJOR] >> (t[i] % 12) & 1, "x %d: in the scale (%d)", x, t[i]);
+            }
+            if (!seen[sig]) seen[sig] = 1, shapes++;
+        }
+    CHECK(shapes >= 4, "where Scout-7 stands picks the chord's shape (%d shapes)", shapes);
+    s.bot[0].x = 1, s.bot[1].x = 1, s.cycle = 0, s.bot[0].heat = 4;
+    int n = arp_tones(&s, 0, RS_SC_MAJOR, 67, t);
+    CHECK(t[n - 1] - t[0] > 12, "hot (4): two octaves (%d..%d)", t[0], t[n - 1]);
+    s.bot[0].heat = 0;
+    int near = arp_tones(&s, 0, RS_SC_MAJOR, 67, t), a0[12];
+    memcpy(a0, t, sizeof a0);
+    s.bot[1].x = 4, s.bot[1].y = 0;                     /* (far apart: 3 + 2 tiles) */
+    int far = arp_tones(&s, 0, RS_SC_MAJOR, 67, t), diff = far != near;
+    for (int i = 0; i < near && i < far; i++) diff |= a0[i] != t[i];
+    CHECK(diff, "far apart, the other shape");
+}
+
 int main(void)
 {
     test_lines();
     test_tunes();
     test_peaks();
+    test_tiles();
+    test_arp_rules();
     test_compose();
     test_in_scale();
     test_harmony();
