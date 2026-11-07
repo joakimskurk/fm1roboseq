@@ -17,8 +17,6 @@ and [SkurkyMello](https://github.com/joakimskurk/fm1mello).
 
 <p align="center"><img src="docs/screens/roboseq.gif" width="360" alt="The splash: the letters drop in, the two robots walk in from the sides and meet under a beating heart. Then HOME, the board playing: the robots walk their programs over belts, zap rails and rotators, the tiles light as they set them off, the steps they play framed down the board's sides"></p>
 
-<p align="center"><img src="docs/screens/panel-battle.png" width="820" alt="RoboSeq on the FM-1, in fm1-emu: BATTLE, round 1, Scout-7 striking Echo-3 on the beat, the score bars in the header, the players' keys lit on the little keyboard at the screen's foot"></p>
-
 This one started as a little browser toy with a simple question: what if a sequencer were a board game? Two robots,
 register cards borrowed in spirit from RoboRally, a board full of conveyor belts and zap rails, and every move they
 make turned into a note. It was meant to be a quick experiment.
