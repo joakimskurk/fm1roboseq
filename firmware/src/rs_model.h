@@ -151,6 +151,14 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o);  /* PLUS (D34): t
 uint32_t rs_plus_phrase(const struct rs_state *s);              /* PLUS: a phrase, in loops (a Voice Mod round) */
 int rs_plus_section(const struct rs_state *s);                  /* PLUS: 1 in a phrase's second half (B) */
 int rs_plus_groove(const struct rs_state *s);                   /* PLUS: the bass's groove, 0..7 (the board's, D35) */
+struct rs_patch {                                               /* PLUS: the board's touch on the bots' synths (D36a) */
+    uint16_t pw[2];                                             /* Scout-7's and Echo-3's square: its duty, Q16 (32768 a half, the HTML's) */
+    uint16_t pwm[2];                                            /* its slow swing around that, Q16 */
+    uint16_t rate;                                              /* the swing's rate, mHz */
+    uint16_t soft[2];                                           /* a triangle into the square, Q15 (0: the HTML's) */
+    uint8_t env[3];                                             /* Scout-7's, Echo-3's, the bass's envelope: 0 the HTML's, 1 shorter, 2 longer */
+};
+void rs_plus_patch(const struct rs_board *b, struct rs_patch *p);   /* the patch of a board (CLASSIC: all 0) */
 void rs_advance_voice_mod(struct rs_state *s);                  /* advanceVoiceMod(): MANUAL's tap, LOOP's count */
 
 /* editing, as the HTML's controls do it */

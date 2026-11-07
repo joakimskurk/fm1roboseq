@@ -71,6 +71,20 @@ static const struct rs_vdef VDEF[RS_NVOICES] = {
     VD(RS_OSC_WHITE, 0.001, 0.18, 0, 0.04),                     /* ex.crackle */
 };
 
+/* the bots' four voices shorter and longer (the board's patch, D36a: a pulse pad's board rings on, a zap rail's
+ * plucks) */
+static const struct rs_vdef VDEF_VAR[2][4] = {
+    {VD(RS_OSC_SQUARE, 0.003, 0.09, 0.03, 0.05), VD(RS_OSC_TRIANGLE, 0.003, 0.04, 0, 0.03),
+     VD(RS_OSC_SQUARE, 0.005, 0.18, 0.3, 0.09), VD(RS_OSC_TRIANGLE, 0.006, 0.22, 0.35, 0.1)},
+    {VD(RS_OSC_SQUARE, 0.003, 0.24, 0.12, 0.16), VD(RS_OSC_TRIANGLE, 0.003, 0.1, 0, 0.07),
+     VD(RS_OSC_SQUARE, 0.005, 0.45, 0.5, 0.26), VD(RS_OSC_TRIANGLE, 0.008, 0.6, 0.6, 0.32)},
+};
+static inline const struct rs_vdef *vdef(const struct rs_voice *v)
+{
+    uint8_t e = v->shape;
+    return e && e <= 2 && v->def < 4 ? &VDEF_VAR[e - 1][v->def] : &VDEF[v->def];
+}
+
 /* the phase step of each midi note: 440 x 2^((m - 69) / 12) / 44100 x 2^32, from A4's and the twelfth root */
 static uint32_t note_inc[128];
 static int16_t sine_tab[1025];
@@ -144,7 +158,7 @@ static void insert(struct rs_voice *v, uint32_t at, uint8_t kind, int midi, uint
 
 void rs_voice_note(struct rs_voice *v, uint32_t at, uint32_t dur, int midi, uint16_t vel)
 {
-    const struct rs_vdef *d = &VDEF[v->def];
+    const struct rs_vdef *d = vdef(v);
     /* triggerAttack(at) */
     cancel_after(v, at, ENVK | SRCK);
     insert(v, at, EV_ATTACK, midi, vel);
@@ -161,7 +175,7 @@ void rs_voice_release(struct rs_voice *v, uint32_t at)  /* triggerRelease(at): t
 {
     cancel_after(v, at, ENVK | SRCK);
     insert(v, at, EV_RELEASE, 0, 0);
-    insert(v, at + VDEF[v->def].r, EV_STOP, 0, 0);
+    insert(v, at + vdef(v)->r, EV_STOP, 0, 0);
 }
 
 /* ---- the envelope */
@@ -173,7 +187,7 @@ static void lin(struct rs_voice *v, uint8_t stage, int32_t target, uint32_t n)
 
 static void apply(struct rs_voice *v, const struct rs_vev *e)
 {
-    const struct rs_vdef *d = &VDEF[v->def];
+    const struct rs_vdef *d = vdef(v);
     switch (e->kind) {
     case EV_ATTACK: {
         int32_t vel = (int32_t)e->vel << 15;                    /* Q15 -> Q30 */
@@ -209,7 +223,7 @@ static void apply(struct rs_voice *v, const struct rs_vev *e)
 
 static void env_step(struct rs_voice *v)
 {
-    const struct rs_vdef *d = &VDEF[v->def];
+    const struct rs_vdef *d = vdef(v);
     switch (v->stage) {
     case ST_ATTACK_LIN:
         v->env += v->step;
@@ -251,7 +265,7 @@ static void env_step(struct rs_voice *v)
 /* env_step k times, each sample's level into e: a stage at a time, the same arithmetic as env_step */
 static void env_fill(struct rs_voice *v, int32_t *e, uint32_t k)
 {
-    const struct rs_vdef *d = &VDEF[v->def];
+    const struct rs_vdef *d = vdef(v);
     uint32_t j = 0, c, u;
     while (j < k) {
         int32_t env = v->env;
@@ -317,7 +331,7 @@ static inline int32_t blep(uint32_t t, uint32_t dt, uint32_t inv)      /* the Po
 
 static int32_t source(struct rs_voice *v)                       /* one sample, Q15 */
 {
-    const struct rs_vdef *d = &VDEF[v->def];
+    const struct rs_vdef *d = vdef(v);
     int32_t s = 0;
     switch (d->osc) {
     case RS_OSC_SQUARE: {
@@ -364,16 +378,33 @@ static int32_t source(struct rs_voice *v)                       /* one sample, Q
 static inline int32_t vlevel(int32_t s, int32_t env) { return (int32_t)(((int64_t)(s * 4) * env) >> 32); }   /* s env / 2^30 */
 static void voice_play(struct rs_voice *v, int32_t *out, const int32_t *e, uint32_t k)
 {
-    const struct rs_vdef *d = &VDEF[v->def];
+    const struct rs_vdef *d = vdef(v);
     uint32_t j, ph = v->phase, inc = v->inc;
     switch (d->osc) {
     case RS_OSC_SQUARE: {
-        uint32_t inv = v->binv;
+        uint32_t inv = v->binv, pw = v->pw;
+        int32_t soft = v->soft;
+        if ((pw == 0 || pw == 0x80000000u) && !soft) {
+            for (j = 0; j < k; j++, ph += inc) {
+                int32_t s = ph < 0x80000000u ? 32767 : -32767;
+                s += blep(ph, inc, inv);                        /* the rising edge at 0 */
+                s -= blep(ph ^ 0x80000000u, inc, inv);          /* the falling edge at 1/2 */
+                out[j] += vlevel((s * SQUARE_GAIN) >> 15, e[j]);
+            }
+            break;
+        }
+        if (pw == 0) pw = 0x80000000u;                      /* the board's patch: a pulse, a triangle in it */
+        int32_t dc = (int32_t)(pw >> 16) - 32768;           /* (the pulse's mean, Q15, taken out) */
         for (j = 0; j < k; j++, ph += inc) {
-            int32_t s = ph < 0x80000000u ? 32767 : -32767;
-            s += blep(ph, inc, inv);                            /* the rising edge at 0 */
-            s -= blep(ph ^ 0x80000000u, inc, inv);              /* the falling edge at 1/2 */
-            out[j] += vlevel((s * SQUARE_GAIN) >> 15, e[j]);
+            int32_t s = ph < pw ? 32767 : -32767;
+            s += blep(ph, inc, inv);
+            s -= blep(ph - pw, inc, inv);                       /* the falling edge at pw */
+            s = ((s - dc) * SQUARE_GAIN) >> 15;
+            if (soft) {
+                int32_t x = (int32_t)(ph >> 15), tri = x < 32768 ? x : x < 98304 ? 65536 - x : x - 131072;
+                s += ((tri - s) * soft) >> 15;
+            }
+            out[j] += vlevel(s, e[j]);
         }
         break;
     }

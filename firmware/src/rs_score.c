@@ -622,6 +622,34 @@ int rs_plus_groove(const struct rs_state *s)
     for (int i = 0; i < RS_ROWS * RS_COLS; i++) h = h * 31u + s->board.t[i].type * 4u + s->board.t[i].dir;
     return (int)(mix32(h, 0x6A00u, 7u) & 7u);
 }
+/* the board's touch on the synths (D36a), a little: the tiles on each bot's side of the board (Scout-7's the
+ * lower left, Echo-3's the upper right, the diagonal both) shape its voice. Zap rails narrow its pulse, belts a
+ * little too; rotators swing the pulse slowly (belts faster); crates and pulse pads mix a triangle in, darker; pulse
+ * pads let it ring longer, zap rails pluck it shorter. The bass rings with pulse pads, plucks among crates. */
+void rs_plus_patch(const struct rs_board *b, struct rs_patch *p)
+{
+    int n[2][7] = {{0}}, all[7] = {0};
+    for (int y = 0; y < RS_ROWS; y++)
+        for (int x = 0; x < RS_COLS; x++) {
+            int t = b->t[y * RS_COLS + x].type % 7, deg = x + (RS_ROWS - 1 - y);
+            all[t]++;
+            if (deg <= 4) n[0][t]++;
+            if (deg >= 4) n[1][t]++;
+        }
+    for (int i = 0; i < 2; i++) {
+        int z = n[i][RS_T_ZAP], r = n[i][RS_T_ROTL] + n[i][RS_T_ROTR], bl = n[i][RS_T_BELT], pu = n[i][RS_T_PULSE];
+        int k = n[i][RS_T_BLOCK], pw = 32768 - 1300 * z - 500 * bl, sw = 1100 * r, so = 3200 * k + 900 * pu;
+        if (pw < 22000) pw = 22000;
+        if (sw > 5000) sw = 5000;
+        if (pw - sw < 18000) sw = pw - 18000;
+        p->pw[i] = (uint16_t)pw, p->pwm[i] = (uint16_t)sw, p->soft[i] = (uint16_t)(so > 11500 ? 11500 : so);
+        p->env[i] = (uint8_t)(pu >= 2 && pu > z ? 2 : z >= 3 ? 1 : 0);
+    }
+    int rate = 200 + 120 * all[RS_T_BELT];
+    p->rate = (uint16_t)(rate > 1200 ? 1200 : rate);
+    p->env[2] = (uint8_t)(all[RS_T_PULSE] >= 3 ? 2 : all[RS_T_BLOCK] >= 3 ? 1 : 0);
+}
+
 static int slot(int p, int bar) { return bar == 12 ? p / 3 * 4 + (p % 3 ? p % 3 + 1 : 0) : p; }
 
 void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)

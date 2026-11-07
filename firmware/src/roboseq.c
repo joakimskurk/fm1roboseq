@@ -271,6 +271,18 @@ static void board_colour(void)                  /* the board's tiles colour the 
     if (sig != colour_sig) colour_sig = sig, rs_mix_colour(&mix, &game.board, amt);
 }
 
+static uint32_t patch_sig = ~0u;
+static void board_patch(void)                   /* PLUS: the board's touch on the bots' synths (D36a); CLASSIC: none */
+{
+    uint32_t sig = 2166136261u;
+    for (uint32_t i = 0; game.music && i < RS_ROWS * RS_COLS; i++)
+        sig = (sig ^ (game.board.t[i].type * 4u + game.board.t[i].dir + 1u)) * 16777619u;
+    if (sig == patch_sig) return;
+    struct rs_patch p = {{0}};
+    if (game.music) rs_plus_patch(&game.board, &p);
+    patch_sig = sig, rs_mix_patch(&mix, &p);
+}
+
 static void lead_keys(uint32_t down, uint32_t up)   /* the last key held wins; let go, the one held before it again */
 {
     uint32_t k, i;
@@ -629,6 +641,7 @@ static void app_main(void)
         }
         schedule();
         board_colour();
+        board_patch();
         {                                       /* the lead's delay: three steps (a dotted eighth), halved till it fits */
             uint32_t d = rs_step_q8(&game) * 3u >> 8;
             while (d >= DLY_MAX) d >>= 1;

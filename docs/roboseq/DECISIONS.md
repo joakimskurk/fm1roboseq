@@ -444,3 +444,19 @@ Scout-7's calls went (45 of 45), every phrase home on the root (30 of 30), six b
 every bar's one, Scout-7 2.4 to 3.2 semitones a note in a bar (no leap past an octave but a dash's), A sparser
 than B, and as before 0 notes outside the scale, 0 rubs, chord tones on the beats, the game CLASSIC's.
 
+## D36. PLUS: the board in the synths, peaks, phrase ends (2026-11-07)
+
+The product owner, on D35: much better; the board's layout should say something about the synths too, a little;
+better still, and now and then the intensity the original had (PLUS sits in between); the demos should roll the
+movement registers a couple of times.
+
+**D36a. The board's touch on the synths.** In PLUS the tiles on each bot's side of the board (Scout-7's the lower
+left, Echo-3's the upper right, the diagonal both: where they are, not only how many) shape its voice, a little:
+zap rails narrow its square to a pulse (a duty down to a third), belts a little too; rotators swing the pulse slowly
+(a triangle LFO, Echo-3's the other way; belts make it faster, 0.2 to 1.2 Hz); crates and pulse pads mix up to a
+third of a triangle in, darker; pulse pads let it ring longer, zap rails pluck it shorter (a second set of the bots'
+envelopes each way); the bass rings with pulse pads and plucks among crates. rs_plus_patch is a pure function of the
+board; the app sets it on the mix when the board changes (as D24's colour), CLASSIC sets nothing, and an empty board
+is the HTML's voices. patch_test: six boards six patches, all within those bounds, the HTML's square sample for
+sample at a half's duty, the patched pulse without a DC and no more than a quarter louder.
+

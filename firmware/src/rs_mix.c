@@ -129,6 +129,18 @@ void rs_mix_colour(struct rs_mix *m, const struct rs_board *bd, uint32_t amount)
     m->drive_t = 32768 * drive / 1000 * a / 100;
 }
 
+void rs_mix_patch(struct rs_mix *m, const struct rs_patch *p)   /* the board's patch (D36a) */
+{
+    static const uint8_t V[2] = {RS_V_A_MAIN, RS_V_B_FM};
+    for (int i = 0; i < 2; i++) {
+        m->pw_base[i] = (uint32_t)p->pw[i] << 16, m->pw_swing[i] = (uint32_t)p->pwm[i] << 16;
+        m->v[V[i]].soft = p->soft[i], m->v[V[i]].shape = p->env[i];
+        m->v[V[i] + 1].shape = i ? p->env[2] : p->env[0];   /* (Scout-7's ping as its main, the bass its own) */
+        if (!p->pwm[i]) m->v[V[i]].pw = m->pw_base[i];
+    }
+    m->lfo_inc = (uint32_t)p->rate * 3117u;             /* mHz -> a block's step: 2^32 x 32 / 44100000 */
+}
+
 void rs_mix_note(struct rs_mix *m, uint8_t voice, uint32_t at, uint32_t dur, int midi, uint16_t vel)
 {
     if (voice < RS_NVOICES) rs_voice_note(&m->v[voice], at, dur, midi, vel);
@@ -253,6 +265,12 @@ void rs_mix_render(struct rs_mix *m, int32_t *out, uint32_t n, uint32_t now)
         }
         for (uint32_t b = 0; b < RS_NBUS; b++)
             for (uint32_t i = 0; i < RS_MIX_SUB; i++) m->bus[b][i] = 0;
+        if (m->pw_swing[0] | m->pw_swing[1]) {          /* the pulses swing (D36a): a triangle, Echo-3's the other way */
+            m->lfo += m->lfo_inc;
+            int32_t tri = (int32_t)(m->lfo >> 16), w = (tri < 32768 ? tri : 65535 - tri) * 2 - 32768;   /* Q15 */
+            m->v[RS_V_A_MAIN].pw = m->pw_base[0] + (uint32_t)(((int64_t)(int32_t)(m->pw_swing[0] >> 1) * w) >> 14);
+            m->v[RS_V_B_FM].pw = m->pw_base[1] - (uint32_t)(((int64_t)(int32_t)(m->pw_swing[1] >> 1) * w) >> 14);
+        }
         for (uint32_t k = 0; k < RS_NVOICES; k++)
             rs_voice_render(&m->v[k], m->bus[rs_voice_bus[k]], RS_MIX_SUB, now);
         for (uint32_t i = 0; i < RS_MIX_SUB; i++) m->lead_bus[i] = 0;

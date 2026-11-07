@@ -42,12 +42,17 @@ struct rs_mix {
     int32_t det, gain, scaled, rate, max_att;   /* max_att: 1/65536 dB, -1 none */
     uint8_t releasing;
     uint32_t clips;                             /* a reverb line was full (tests count them) */
+    /* the board's patch (D36a): the bots' pulses swing around their duty, Echo-3's the other way */
+    volatile uint32_t pw_base[2], pw_swing[2], lfo_inc;   /* Q32 of a cycle; the swing's step a block */
+    uint32_t lfo;
 };
 
 void rs_mix_init(struct rs_mix *m, uint32_t seed);
 /* the board colours the whole sound (D24): its tiles into the reverb's room and send, a tilt and a drive, amount %
  * of the way (0: the HTML's sound); main loop, when the board or the amount changes */
 void rs_mix_colour(struct rs_mix *m, const struct rs_board *bd, uint32_t amount);
+/* the board's touch on the bots' synths (PLUS, D36a; all 0: the HTML's voices); main loop, when the board changes */
+void rs_mix_patch(struct rs_mix *m, const struct rs_patch *p);
 /* triggerAttackRelease on voice `voice` (RS_V_*): rs_voice_note's arguments */
 void rs_mix_note(struct rs_mix *m, uint8_t voice, uint32_t at, uint32_t dur, int midi, uint16_t vel);
 /* n frames (a multiple of RS_MIX_SUB) from sample `now` on into out, stereo (L R L R), Q15 in int32 (the limiter's
