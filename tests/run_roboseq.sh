@@ -23,6 +23,8 @@ $CC -std=c11 -O2 -Wall -Wextra -Werror -Ifirmware/src -o build/test/colour_test 
 build/test/colour_test
 $CC -std=c11 -O2 -Wall -Wextra -Werror -Ifirmware/src -o build/test/patch_test tests/roboseq/patch_test.c firmware/src/rs_chance.c firmware/src/rs_voice.c
 build/test/patch_test
+$CC -std=c11 -O2 -Wall -Wextra -Werror -Ifirmware/src -o build/test/battle_test tests/roboseq/battle_test.c firmware/src/rs_chance.c firmware/src/rs_voice.c
+build/test/battle_test
 if $CC -fsanitize=undefined,address -x c -o build/test/san_probe - <<'C' 2>/dev/null; then
 int main(void) { return 0; }
 C

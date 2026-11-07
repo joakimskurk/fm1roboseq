@@ -48,6 +48,23 @@ struct rs_bassmod_step { uint8_t scale, root; int8_t semitone; };
 struct rs_seq2_step { uint8_t board, drums, regswap, prog; };   /* prog (D38, the port's): 0 "--", 1.. a progression, RS_P_RND */
 #define RS_P_RND 0xFFu                                          /* a Seq 2 step's progression: a new one, following on */
 
+enum { RS_BT_OFF, RS_BT_READY, RS_BT_FIGHT, RS_BT_ROUND, RS_BT_MATCH };   /* the battle's phase (D42) */
+enum { RS_BT_WAIT, RS_BT_MOVE, RS_BT_STRIKE };                 /* what a robot did on a beat */
+enum { RS_ARENA_SAME, RS_ARENA_NEXT, RS_ARENA_RANDOM, RS_NARENAS };   /* the arena between rounds */
+#define RS_BT_OVERHEAT 64                                       /* a round's beats before the arena's edge glows (+1 a beat) */
+#define RS_BT_OVERHEAT2 96                                      /* and before all but its middle tile does */
+struct rs_battle {                                              /* the battle mode (D42): two players, the robots on the beat */
+    uint8_t phase, to_win, wins[2], round, winner;              /* the round's or the match's winner: 0, 1, 2 a draw */
+    uint8_t arena;                                              /* between rounds: RS_ARENA_SAME, _NEXT (preset), _RANDOM (rolled) */
+    uint8_t count;                                              /* beats left of READY's countdown or ROUND's pause */
+    uint8_t hold[2], act[2], press[2];                          /* the players: the way held (RS_N .. + 1, 0 none), action held, pressed */
+    uint8_t did[2], hit[2], sdir[2];                            /* this beat: what each did (RS_BT_*), it landed a hit, the way it struck */
+    uint8_t guard[2];                                           /* just hit: it cannot be hit on the next beat */
+    uint8_t rhits[2];                                           /* the round's hits each landed (a burnout together: the more wins) */
+    uint8_t draws, coin;                                        /* draws running; this round a coin decided it */
+    uint16_t beats;                                             /* the round's beats so far (from RS_BT_OVERHEAT on: +1 heat a bar) */
+};
+
 struct rs_state {
     /* the settings */
     uint16_t bpm;                                               /* 80 */
@@ -90,6 +107,7 @@ struct rs_state {
      * its last step when FOLLOW or the chain changes it */
     uint8_t vm_follow, prog_id, prog_key, next_id, next_key, next_ready;
     struct rs_bassmod_step bm_next[RS_BASSMOD_MAX];
+    struct rs_battle battle;                                    /* the battle mode (D42); phase RS_BT_OFF: the registers play */
 };
 
 enum { RS_ENGINE_ORIGINAL, RS_ENGINE_BAND };                    /* the engine: the HTML's score, or RoboSeq's own band (D33, D39) */
@@ -166,6 +184,7 @@ void rs_score_event(const struct rs_state *s, uint8_t kind, uint32_t at, struct 
 void rs_score_drums(const struct rs_state *s, uint8_t i, struct rs_tick_out *o);   /* playDrumStep() */
 void rs_score_ghost_hat(const struct rs_state *s, int phase, struct rs_tick_out *o);
 void rs_score_coin(const struct rs_state *s, struct rs_tick_out *o);   /* the love check's chime */
+void rs_score_count(const struct rs_state *s, int n, struct rs_tick_out *o);   /* the battle's countdown: 4 .. 1, 0 FIGHT (D42) */
 void rs_score_band(struct rs_state *s, struct rs_tick_out *o);  /* BAND (D34-D37): the tick's music, written anew */
 uint32_t rs_band_phrase(const struct rs_state *s);              /* BAND: a phrase, in loops (a Voice Mod round) */
 int rs_band_section(const struct rs_state *s);                  /* BAND: 1 in a phrase's second half (B) */
@@ -210,6 +229,14 @@ const char *rs_prog_name(uint8_t id);                           /* "I V vi IV" (
 void rs_prog_key_name(uint8_t id, uint8_t key, char *out);      /* its key, "G", "Am", "C" (4 bytes) */
 void rs_apply_prog(struct rs_state *s, uint8_t id, uint8_t key);   /* a named progression into Voice Mod (undoable) */
 void rs_set_follow(struct rs_state *s, uint8_t on);             /* FOLLOW: every round a new progression, following on */
+/* the battle mode (D42, rs_battle.c): two players steer the robots, a step on every beat, and strike */
+void rs_battle_start(struct rs_state *s, uint8_t to_win, uint8_t arena);   /* a match: round 1, the robots at their pads */
+void rs_battle_stop(struct rs_state *s);                        /* back to the registers */
+void rs_battle_keys(struct rs_state *s, int player, uint8_t hold, uint8_t act, uint8_t pressed);   /* hold: RS_N .. + 1, or 0 */
+int rs_battle_beat_steps(const struct rs_state *s);             /* the steps of a beat: 4, or 3 in a 12-step loop */
+int rs_battle_hot(const struct rs_battle *t, int x, int y);     /* that tile glows now (the overheat) */
+int rs_battle_in_reach(const struct rs_state *s, int player);   /* the other within a strike, the way it holds or faces */
+int rs_battle_lead_note(const struct rs_state *s, int player, int k);   /* out of reach the strike plays the lead: this note */
 const struct rs_bassmod_step *rs_next_mod_step(const struct rs_state *s);   /* the chord after this one (the next round's) */
 void rs_randomize_bassmod(struct rs_state *s);                  /* randomizeBassMod() */
 void rs_set_voice_mod(struct rs_state *s, uint8_t manual, uint8_t freq4);   /* its trigger, its loop frequency x 4 */

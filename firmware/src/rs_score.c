@@ -332,6 +332,13 @@ void rs_score_ghost_hat(const struct rs_state *s, int phase, struct rs_tick_out 
     note(o, RS_V_HIHAT, RS_NOISE, SEC(0.02), 0, phase == tpm / 2 ? F(0.25) : F(0.12));
 }
 
+void rs_score_count(const struct rs_state *s, int n, struct rs_tick_out *o)   /* a beep a count, FIGHT higher and long */
+{
+    (void)s;
+    if (n > 0) note(o, RS_V_COIN, 76, SEC(0.09), 0, n == 1 ? F(0.8) : F(0.65));   /* E5 (BAND: the chord's nearest) */
+    else note(o, RS_V_COIN, 88, SEC(0.4), 0, F(0.9)), note(o, RS_V_PULSE, 76, SEC(0.3), 0, F(0.6));
+}
+
 void rs_score_coin(const struct rs_state *s, struct rs_tick_out *o)
 {
     uint8_t sc = scale_of(s);
@@ -750,6 +757,17 @@ static void band_kit(const struct rs_state *s, struct rs_tick_out *o, int root, 
             if (len == 3 && free) x->voice = RS_V_EX_CRACKLE, x->vel = scale_vel(x->vel, F(1.3));   /* the crash: its own voice */
         }
     }
+}
+
+/* the battle's strike out of reach plays the lead (D42): a tone of the chord the music is in, where the robot stands on
+ * the board's keyboard (Scout-7 an octave over Echo-3), and on up the chord as it is pressed again on one tile */
+int rs_battle_lead_note(const struct rs_state *s, int player, int k)
+{
+    uint8_t sc = scale_of(s);
+    int b = player & 1, root = chord_root(s, mod_step(s), sc);
+    int i = snap_idx(idx_of(b ? 60 : 72, sc) + cell_deg(&s->bot[b]), root, sc);
+    for (int j = 0; j < k % 4; j++) i = step_on(i, root, sc, 1, 1);
+    return note_of(keep_in(i, sc, b ? 55 : 67, b ? 81 : 93), sc);
 }
 
 void rs_score_band(struct rs_state *s, struct rs_tick_out *o)

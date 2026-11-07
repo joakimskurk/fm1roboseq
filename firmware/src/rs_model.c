@@ -339,6 +339,7 @@ void rs_advance_voice_mod(struct rs_state *s)           /* advanceVoiceMod() */
     if (s->vm_index + 1u == s->bassmod_len && !s->next_ready) prepare_next(s);   /* (its last step: the next one ready) */
 }
 
+static void battle_beat(struct rs_state *s, struct rs_tick_out *o, int si);   /* (rs_battle.c) */
 void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
 {
     uint8_t *p = (uint8_t *)o;
@@ -362,13 +363,13 @@ void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
             s->cycle++;
             o->loop_reset = 1;
             rs_score_event(s, RS_EV_RESET, 0, o);       /* playEventSound("reset") (and again with the events below) */
-            for (int b = 0; b < 2; b++) process_death(s, b, o);
+            if (!s->battle.phase) for (int b = 0; b < 2; b++) process_death(s, b, o);
             if (s->pending_board != RS_B_NONE) {
                 s->board = s->pending_tiles;
                 s->board_id = s->pending_board, s->pending_board = RS_B_NONE;
             }
             uint16_t da = s->bot[0].deaths, db = s->bot[1].deaths;
-            board_state_new(s);
+            if (!s->battle.phase) board_state_new(s);   /* (a battle: the robots stay where they fight, D42) */
             s->bot[0].deaths = da, s->bot[1].deaths = db;
             ev(o, RS_EV_RESET);
             s->step = 0, s->drum_tick = 0, s->move_tick = 0, s->vm_count = 0;
@@ -378,7 +379,10 @@ void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
         }
     }
 
-    if (is_move && !skip) {
+    if (is_move && s->battle.phase) {                   /* a battle (D42): the players move the robots, on the beat */
+        o->move_tick = 1;
+        battle_beat(s, o, s->step);
+    } else if (is_move && !skip) {
         int si = s->step;
         o->move_tick = 1;
         for (int b = 0; b < 2; b++) process_death(s, b, o);   /* deaths marked last step land on the beat */
@@ -413,7 +417,7 @@ void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
         } else {
             s->love_steps = 0;
         }
-    } else if (tpm > 1) {                               /* a ghost tick (also the reset tick's, phase 0: the HTML's) */
+    } else if (tpm > 1 && !(is_move && s->battle.phase)) {   /* a ghost tick (also the reset tick's, phase 0: the HTML's) */
         o->ghost = 1, o->ghost_phase = (uint8_t)(s->move_tick % tpm);
         rs_score_ghost(s, o->ghost_phase, o);
     }
@@ -585,7 +589,7 @@ void rs_clear_steps(struct rs_state *s)                 /* resetAllSteps(): ever
         for (int i = 0; i < RS_MAX_STEPS; i++) s->prog[b].s[i] = (struct rs_step){RS_WAIT, RS_STEADY, 100};
 }
 
-void rs_randomize_board(struct rs_state *s)             /* randomizeBoard() */
+static void roll_board(struct rs_state *s, struct rs_board *out)   /* randomizeBoard()'s tiles (the pads kept open) */
 {
     static const uint8_t TYPES[6] = {RS_T_BELT, RS_T_ZAP, RS_T_PULSE, RS_T_ROTL, RS_T_ROTR, RS_T_BLOCK};
     struct rs_board b;
@@ -602,6 +606,13 @@ void rs_randomize_board(struct rs_state *s)             /* randomizeBoard() */
             if (type == RS_T_BLOCK) blocks++;
             b.t[y * RS_COLS + x].type = type, b.t[y * RS_COLS + x].dir = dir;
         }
+    *out = b;
+}
+
+void rs_randomize_board(struct rs_state *s)             /* randomizeBoard() */
+{
+    struct rs_board b;
+    roll_board(s, &b);
     rs_set_board(s, &b, RS_B_RANDOM);
 }
 
@@ -667,9 +678,9 @@ void rs_seq2_cycle(struct rs_state *s, int i, int field, int dir)   /* seq2-boar
     } else if (field == 2) {
         st->regswap = !st->regswap;
     } else {                                            /* (D38) "--", RND, the progressions */
-        int n = (int)rs_nprogs() + 2, at = st->prog == RS_P_RND ? 1 : st->prog == 0 ? 0 : st->prog + 1;
+        int n = (int)rs_nprogs() + 2, at = st->prog == RS_P_RND ? 1 : st->prog == 0 ? 0 : (int)st->prog + 1;
         at = (at + dir + n) % n;
-        st->prog = (uint8_t)(at == 0 ? 0 : at == 1 ? RS_P_RND : at - 1);
+        st->prog = (uint8_t)(at == 0 ? 0 : at == 1 ? (int)RS_P_RND : at - 1);
     }
 }
 
@@ -989,3 +1000,5 @@ uint32_t rs_selfcheck(void)
     }
     return h;
 }
+
+#include "rs_battle.c"                                 /* the battle mode (D42): the game's own moves and tiles */
