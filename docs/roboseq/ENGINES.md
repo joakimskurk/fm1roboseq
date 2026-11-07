@@ -94,8 +94,13 @@ The black keys steer: each robot's next move, once. The white keys edit its regi
 - **ORIGINAL.** Every step sounds, its loudness by the action (move 0.8, back 0.7, a turn 0.6, dash 1.0 and short,
   ping 0.9, wait 0.2). Every step but a wait also gets a ping a third above.
 - **BAND.**
-  - **The rhythm is the movement.** A note starts where a robot gets to a new cell. It holds while the robot turns or
-    leans on a wall, to its register's next wait.
+  - **The rhythm is the movement.** A note starts where a robot gets to a new cell; on the one the robots are back
+    at their pads, so Scout-7 sings from there. A note holds while the robot turns or leans on a wall, to its
+    register's next wait.
+  - **The lead stays in front.** Scout-7's square is a pluck, so a note it still holds is struck again on each beat,
+    softer. After a clipped note (a glitch, a zap rail, a crate) the tune's note comes back on the next beat (in B
+    the next eighth). Scout-7 sings a little louder than Echo-3, which keeps its harmony to a beat at most:
+    `band_test` holds it in front of Echo-3 by 1.7 to 4.9 dB on every board, where ORIGINAL has them about level.
   - **The actions.** WAIT is a rest. PING strikes the note again, with a glint an octave up. DASH is 20 % louder.
   - **Echo-3 also plays the bass.** Its dash pops the bass an octave up, its ping doubles the bass's note, and its
     wait leaves a gap off the beat.
@@ -119,7 +124,7 @@ glitch shortest.
 |---|---|---|
 | Belt | Scout-7: an arpeggio of the chord, up for a north or east belt, down for south or west. Echo-3: a note an octave up. | Scout-7: two chord tones after its note within the step, the belt's way; three when hot (heat 3). Echo-3: an octave double. |
 | Rotator | (it turns the robot: the facing changes) | the note bends in, from a semitone below on a left rotator, from above on a right one |
-| Zap rail | the note half as long, "short and staccato" | the note short (0.45 of a step) and 15 % harder, with no vibrato |
+| Zap rail | the note half as long, "short and staccato" | the note short (0.45 of a step) and 30 % harder, with no vibrato; while the robot is on the rail its notes come short and hard: it spits |
 | Pulse pad | the note 1.8 times as long, "long and sustained" | the note held to the next one, with a wide vibrato, 10 % louder |
 | Crate | the bump's blip | the bump stops the robot's held note dead |
 | Wall | the bump's blip | the robot leans on the edge and its note holds |
@@ -220,7 +225,8 @@ Changing the board on ENV changes the groove as the loop comes round.
     - crates and pulse pads mix a triangle in, darker;
     - pulse pads let it ring longer, zap rails pluck it.
 
-    The bass rings among pulse pads and plucks among crates.
+    The bass rings among pulse pads and plucks among crates. Scout-7's pluck rings a little longer on every board
+    but the zap rails' (BAND holds its notes, ORIGINAL strikes one every step).
   - **The notes' gestures.** The vibratos and the bends above, from the modifiers and the tiles.
 
 ### Chords and progressions (Voice Mod)

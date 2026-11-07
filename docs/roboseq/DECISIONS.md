@@ -608,3 +608,33 @@ rs_band_*, band_test. The entries before this one keep the old names.
 
 The README's sound section is the short form, and links it.
 
+## D40. BAND: Scout-7 in front, Echo-3 under it (2026-11-07)
+
+The product owner: quite good, but the first robot is often low and the second a little too high. Measured both ways:
+
+| | Pitch | Level through the mix |
+|---|---|---|
+| ORIGINAL | Scout-7 61-71, Echo-3 61-67 (MIDI, by velocity) | about level, -0.7 to +0.8 dB |
+| BAND, before | Scout-7 65-72, Echo-3 59-65 | Scout-7 up to 3.8 dB under Echo-3 |
+
+So the pitch was right and the level was not. In BAND, Scout-7's voice was near silent 19 to 38 % of the time, where
+ORIGINAL's is 7 %. Its square is a pluck: it falls to 6 % in 0.14 s, which suits ORIGINAL's note every step, but in
+BAND's held notes it left quiet tails. Echo-3's square keeps 40 % and was held as long as Scout-7's note. So in BAND:
+
+- **The one.** The robots are back at their pads, a new cell, so Scout-7 sings from there: the chord's tone, with
+  the bass's root and the kick, one that sounds with the bass.
+- **Held notes.** A note Scout-7 still holds is struck again on each beat, softer (0.56); a passing one resolves
+  there as before.
+- **Clipped notes.** After a glitch's, a zap rail's or a crate's note, the tune's note comes back on the next beat
+  (in B the next eighth). On a zap rail it comes short and 30 % hard, so the rail spits rather than falls silent.
+  Off the beat a crate still chokes.
+- **Levels.** Scout-7's notes are 12 % louder (0.84, 0.72, 0.6 on the beat, the eighth, the sixteenth), Echo-3's 15 %
+  softer, and its harmony in B lasts a beat at most.
+- **The pluck.** Scout-7 has the longer pluck of D36a's patch on every board but the zap rails' (sustain 0.12, decay
+  0.24 s), as BAND holds its notes.
+
+band_test (each robot's voice alone through the mix, 12 loops a board):
+- Scout-7 1.7 to 4.9 dB in front of Echo-3 on every board (ORIGINAL -0.7 to +0.8).
+- Quiet 11 to 28 % of the time, against 20 to 38 % before; the rest is the answer beat and the zap rails' staccato.
+- The tune, the answers, A sparser than B, the scale and the rubs as before.
+

@@ -71,7 +71,7 @@ int main(void)
         struct rs_patch e;
         rs_band_patch(&empty, &e);
         CHECK(e.pw[0] == 32768 && e.pw[1] == 32768 && !e.pwm[0] && !e.pwm[1] && !e.soft[0] && !e.soft[1] &&
-              !e.env[0] && !e.env[1] && !e.env[2], "an empty board: no touch");
+              e.env[0] == 2 && !e.env[1] && !e.env[2], "an empty board: no touch but Scout-7's longer pluck (D40)");
     }
     {                                                   /* the HTML's square three ways the same; the patched one sound */
         int32_t pk0, pk1, pk2, pk;

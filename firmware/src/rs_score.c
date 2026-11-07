@@ -708,6 +708,7 @@ void rs_band_patch(const struct rs_board *b, struct rs_patch *p)
         if (pw - sw < 18000) sw = pw - 18000;
         p->pw[i] = (uint16_t)pw, p->pwm[i] = (uint16_t)sw, p->soft[i] = (uint16_t)(so > 11500 ? 11500 : so);
         p->env[i] = (uint8_t)(pu >= 2 && pu > z ? 2 : z >= 3 ? 1 : 0);
+        if (i == 0 && p->env[0] == 0) p->env[0] = 2;     /* (D40: BAND holds Scout-7's notes; its pluck rings a little on) */
     }
     int rate = 200 + 120 * all[RS_T_BELT];
     p->rate = (uint16_t)(rate > 1200 ? 1200 : rate);
@@ -813,6 +814,18 @@ void rs_score_band(struct rs_state *s, struct rs_tick_out *o)
     int answer = !sec_b && cad != 2 && end - beat >= beat;   /* A: the bar's last beat is Echo-3's */
     int calls = answer ? end - beat : end;              /* (Scout-7's notes end before it) */
     int lead_on = 0, lead_idx = 0;
+    if (one && !o->move_tick && !s->bot[0].dying && calls > 0) {
+        /* the one: back at its pad (a new cell), Scout-7 sings from there, with the bass's root and the kick (D40);
+         * the chord's tone nearest, and one that sounds with the bass */
+        int d = cell_deg(&s->bot[0]), i = snap_dir(idx_of(64, sc) + d, root, sc, 0), k = hold_of(s, 0, 0, calls, 8);
+        static const int8_t TRY[5] = {0, 2, -2, 4, -4};
+        for (int t = 0; t < 5; t++)
+            if (chord_tone(note_of(i + TRY[t], sc), root, sc) && !clashes_but(o, note_of(i + TRY[t], sc), 0)) { i += TRY[t]; break; }
+        int m = note_of(i, sc);
+        note_fx(o, RS_V_A_MAIN, m, mulq(step * (uint32_t)k, F(0.94)), 0, mulq(F(0.84), warm0), RS_FX_VIB_LATE);
+        s->band_cell[0] = (int8_t)d, s->band_lead = (int8_t)m, s->band_at[0] = 0, s->band_end = (uint8_t)k;
+        s->band_first = 0, s->band_call[0] = (int8_t)i, lead_on = 1, lead_idx = i;
+    }
     if (o->move_tick && o->acted[0] && !s->bot[0].dying) {
         const struct rs_bot *a = &s->bot[0];
         const struct rs_step *st = &o->played[0];
@@ -821,7 +834,7 @@ void rs_score_band(struct rs_state *s, struct rs_tick_out *o)
         int may = sec_b || p % 2 == 0 || act == RS_DASH;
         if (zone ? !s->band_cad && p < calls : fresh && may && p < calls) {   /* (the cadence lands, moved or not) */
             int dir = s->band_cell[0] >= 0 ? d - s->band_cell[0] : 0, i = idx_of(64, sc) + d, k;
-            uint32_t vel = on_beat ? F(0.74) : p % 2 == 0 ? F(0.62) : F(0.52);
+            uint32_t vel = on_beat ? F(0.84) : p % 2 == 0 ? F(0.72) : F(0.6);   /* (D40: the lead in front) */
             if (zone) {
                 i = home_idx(i, cad == 2 || fifth < 0 ? root : root + fifth, sc), k = calls - p, vel = F(0.7);
                 s->band_cad = 1;
@@ -844,7 +857,7 @@ void rs_score_band(struct rs_state *s, struct rs_tick_out *o)
             else if (st->modifier == RS_LOW) vel = mulq(vel, F(0.8));
             else if (st->modifier == RS_GLITCH) dur = mulq(step, F(0.4));
             if (land == RS_T_PULSE) vel = mulq(vel, F(1.1));
-            if (land == RS_T_ZAP) dur = mulq(step, F(0.45)), vel = mulq(vel, F(1.15)), k = 1;   /* a zap rail: short and hard */
+            if (land == RS_T_ZAP) dur = mulq(step, F(0.45)), vel = mulq(vel, F(1.3)), k = 1;   /* a zap rail: short and hard */
             if (vel > ONE) vel = ONE;
             note_fx(o, RS_V_A_MAIN, m, dur, 0, vel, zone ? RS_FX_VIB_LATE : gesture((uint8_t)land, st->modifier));
             if (act == RS_PING)                         /* the glint: a chord tone an octave up */
@@ -875,7 +888,7 @@ void rs_score_band(struct rs_state *s, struct rs_tick_out *o)
         }
     }
     int choked = 0;
-    if ((o->bumped[0] & 2) && !lead_on && s->band_lead && p < s->band_end && !s->bot[0].dying) {
+    if ((o->bumped[0] & 2) && !lead_on && !on_beat && s->band_lead && p < s->band_end && !s->bot[0].dying) {   /* (off the beat) */
         note(o, RS_V_A_MAIN, s->band_lead, mulq(q, F(0.1)), 0, 0);   /* a crate: the note it held stops dead (velocity 0) */
         s->band_end = (uint8_t)p, choked = 1;
     }
@@ -897,10 +910,22 @@ void rs_score_band(struct rs_state *s, struct rs_tick_out *o)
         note(o, RS_V_A_MAIN, note_of(i, sc), mulq(step, F(1.6)), 0, mulq(on_beat ? F(0.6) : F(0.5), warm0));
         s->band_lead = (int8_t)note_of(i, sc), lead_on = 2, lead_idx = i;
     }
-    if (on_beat && !lead_on && s->band_lead && p < s->band_end && !chord_tone(s->band_lead, root, sc)) {
-        int i = snap_idx(idx_of(s->band_lead, sc), root, sc);   /* (held into the beat: it resolves) */
-        note(o, RS_V_A_MAIN, note_of(i, sc), mulq(step * (uint32_t)(s->band_end - p), F(0.94)), 0, F(0.46));
-        s->band_lead = (int8_t)note_of(i, sc);
+    if ((on_beat || (sec_b && p % 2 == 0 && p >= s->band_end)) && !lead_on && !choked && s->band_lead && s->band_first != 255 &&
+        p < calls && o->acted[0] &&
+        !s->bot[0].dying && o->played[0].action != RS_WAIT) {
+        /* a note still held on a beat is struck again there, softer (Scout-7's square is a pluck: a long note on it
+         * is a note played again, D40); after a clipped one (a glitch, a zap rail, a crate) the tune's note comes
+         * back on the next beat (in B the next eighth); a passing note held into the beat resolves there */
+        int i = idx_of(s->band_lead, sc), passing = !chord_tone(s->band_lead, root, sc), held = p < s->band_end;
+        int k = held ? s->band_end - p : hold_of(s, 0, p, calls, 8), glitch = o->played[0].modifier == RS_GLITCH;
+        int zap = s->bot[0].stepped_tile == RS_T_ZAP;
+        uint32_t rv = passing ? F(0.5) : held ? F(0.56) : F(0.5);
+        if (passing && on_beat) i = snap_idx(i, root, sc);
+        if (glitch || zap) k = 1;                       /* (a glitch step's or a zap rail's note is clipped, as any; */
+        if (zap) rv = mulq(rv, F(1.3));                 /*  the rail's hard: it spits) */
+        note_fx(o, RS_V_A_MAIN, note_of(i, sc), glitch || zap ? mulq(step, zap ? F(0.45) : F(0.4)) : mulq(step * (uint32_t)k, F(0.94)), 0,
+                mulq(rv, warm0), glitch || zap ? 0 : RS_FX_VIB_LATE);
+        s->band_lead = (int8_t)note_of(i, sc), s->band_end = (uint8_t)(p + k);
     }
     /* Echo-3: in A it answers. In the bar's last beat it sings Scout-7's call again, its first notes as they went,
      * from where Echo-3 stands (the chord tone of its cell, an octave down and under Scout-7's; a wait does not stop
@@ -927,7 +952,7 @@ void rs_score_band(struct rs_state *s, struct rs_tick_out *o)
             if (under >= lead_idx) under = snap_idx(under - 2, root, sc);
             under = under_lead(under, note_of(lead_idx, sc), root, sc);
             e = note_of(keep_in(under, sc, 45, 74), sc), vel = F(0.42);
-            k = zone ? end - p : hold_of(s, 0, p, end, 8);
+            k = zone ? end - p : hold_of(s, 0, p, end, 4);   /* (a beat at most: under the lead, not over it) */
         } else if (fresh && (on_beat || (sec_b && !lead_on && p - s->band_at[0] >= 2))) {
             int i = snap_idx(idx_of(52, sc) + d, root, sc);   /* (the chord's tones: it sounds over Scout-7's) */
             i = keep_in(i, sc, 43, 74);
@@ -942,7 +967,7 @@ void rs_score_band(struct rs_state *s, struct rs_tick_out *o)
             e = note_of(under_lead(snap_idx(idx_of(s->band_echo, sc), root, sc), s->band_lead, root, sc), sc), vel = F(0.46);
         if (e) {
             uint32_t edur = mulq(step * (uint32_t)k, F(0.9));
-            vel = mulq(vel, peak ? mulq(warm1, F(1.08)) : warm1);
+            vel = mulq(mulq(vel, F(0.85)), peak ? mulq(warm1, F(1.08)) : warm1);   /* (D40: the second voice under the first) */
             if (eland == RS_T_ZAP) edur = mulq(step, F(0.45)), vel = mulq(vel, F(1.15));   /* a zap rail: short and hard */
             if (vel > ONE) vel = ONE;
             note_fx(o, RS_V_B_FM, e, edur, 0, vel, gesture((uint8_t)eland, o->played[1].modifier)), s->band_echo = (int8_t)e;

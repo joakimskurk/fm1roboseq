@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include "rs_model.c"                                   /* (its tables: SCALE_MASK) */
 #include "rs_score.c"                                   /* (BAND's chord_tone) */
+#include "rs_mix.c"                                     /* (the robots' levels through the mix) */
+#include <math.h>
 
 static int fails;
 #define CHECK(c, ...) do { if (!(c)) { fails++; printf("FAIL %s:%d: ", __FILE__, __LINE__); printf(__VA_ARGS__); printf("\n"); } } while (0)
@@ -542,8 +544,63 @@ static void test_follow_chain(void)                     /* FOLLOW and the chain 
     }
 }
 
+static double level(int board, int engine, uint32_t mask, int *quiet_pct)   /* a robot's voices alone through the mix */
+{
+    static struct rs_mix m;
+    static struct rs_state s;
+    static struct rs_tick_out o;
+    static int32_t buf[512];
+    rs_default(&s);
+    rs_load_board(&s, (uint8_t)board);
+    s.engine = (uint8_t)engine;
+    rs_mix_init(&m, 1);
+    struct rs_patch pt;
+    memset(&pt, 0, sizeof pt);
+    if (engine) rs_band_patch(&s.board, &pt);
+    rs_mix_patch(&m, &pt);
+    rs_start(&s);
+    uint64_t t_q8 = 0, now = 0;
+    double e = 0, win = 0;
+    long n = 0, wins = 0, quiet = 0, k = 0;
+    while (s.cycle < 12) {
+        rs_tick(&s, &o);
+        for (int i = 0; i < o.nnotes; i++)
+            if (mask >> o.notes[i].voice & 1)
+                rs_mix_note_fx(&m, o.notes[i].voice, (uint32_t)((t_q8 + o.notes[i].at + 128) >> 8), (o.notes[i].dur + 128) >> 8,
+                               o.notes[i].midi, o.notes[i].vel, o.notes[i].fx);
+        t_q8 += rs_step_q8(&s);
+        while ((now + 256) * 256 <= t_q8) {
+            memset(buf, 0, sizeof buf);
+            rs_mix_render(&m, buf, 256, (uint32_t)now);
+            for (int i = 0; i < 512; i++) e += (double)buf[i] * buf[i], win += (double)buf[i] * buf[i], n++;
+            if (++k == 8) wins++, quiet += win / 4096.0 < 1073741824.0 * 3.2e-5, win = 0, k = 0;   /* (46 ms under -45 dB) */
+            now += 256;
+        }
+    }
+    *quiet_pct = (int)(100 * quiet / (wins ? wins : 1));
+    return 10 * log10(e / (double)n / 1073741824.0 + 1e-12);
+}
+
+static void test_balance(void)                          /* Scout-7 sings in front, Echo-3 under it (D40) */
+{
+    const uint32_t MAIN = 1u << RS_V_A_MAIN, ECHO = 1u << RS_V_B_FM;
+    int qsum = 0;
+    for (int board = 0; board < RS_NBOARDS; board++) {
+        int qs, qe, qo, qoe;
+        double ls = level(board, 1, MAIN, &qs), le = level(board, 1, ECHO, &qe);
+        double os = level(board, 0, MAIN, &qo), oe = level(board, 0, ECHO, &qoe);
+        printf("band_test: board %d: Scout-7 %+.1f dB over Echo-3 (ORIGINAL's %+.1f), quiet %d%% of the time (ORIGINAL's %d%%)\n",
+               board, ls - le, os - oe, qs, qo);
+        CHECK(ls >= le + 0.5, "board %d: Scout-7 in front of Echo-3 (%.1f, %.1f dB)", board, ls, le);
+        CHECK(qs <= 35, "board %d: Scout-7 not often quiet (%d%%)", board, qs);
+        qsum += qs;
+    }
+    CHECK(qsum <= 24 * RS_NBOARDS, "Scout-7 quiet a fifth of the time or less, on the boards together (%d%%)", qsum / RS_NBOARDS);
+}
+
 int main(void)
 {
+    test_balance();
     test_lines();
     test_tunes();
     test_peaks();
