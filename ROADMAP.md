@@ -140,5 +140,9 @@ and the limiter.)
 
 ## Phase 4: on the emulator, then hardware
 
-- fm1-emu: load, stacks, the worst block under half the budget
-- The first release `roboseq-0.1.fwsc`; FIRST_FLASH.md for someone with an FM-1
+- [x] fm1-emu: load, stacks, the worst block under half the budget (`make emu`: the worst block 31 %, the stacks
+      7 % and 12 %; the saves over three runs on one flash file, D43) (2026-11-07)
+- [x] FIRST_FLASH.md for someone with an FM-1: the way back, the install, a checklist, what to send; `fmhub.json` and
+      the card (`make screens`: docs/card.png) for the Firmware Hub (2026-11-07)
+- [ ] The first release `roboseq-0.1.fwsc` (a `v*` tag: the product owner's call)
+- [ ] On a real FM-1: FIRST_FLASH.md's checklist ticked, then the Hub (it lists a firmware tested on one)

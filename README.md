@@ -84,6 +84,10 @@ python3 tools/fm1_install.py build/roboseq.fwsc
 python3 tools/fm1_install.py --info        # what the FM-1 runs now
 ```
 
+RoboSeq has not yet run on a real FM-1, only on the computer and in `fm1-emu`. If you have one, **[FIRST_FLASH.md](FIRST_FLASH.md)**
+is a half-hour checklist, with the way back. RoboSeq keeps its project in flash sectors of its own and does not read
+other firmwares' projects or samples.
+
 The same package plays in `fm1-emu` on a computer and in its web emulator. To go back to another firmware, use the
 [FM-1 Firmware Hub](https://thefirmwarehub.com) in Chrome or Edge. RoboSeq identifies itself as `FM-1_965`, free on the
 Hub (checked 2026-11-06), the same for every version.
@@ -398,6 +402,8 @@ above is `make emu`'s.
 - [docs/roboseq/ENGINES.md](docs/roboseq/ENGINES.md): the two engines, BAND and ORIGINAL: what every move, tile and setting does in each
 - [docs/roboseq/DECISIONS.md](docs/roboseq/DECISIONS.md): why things are as they are
 - [ROADMAP.md](ROADMAP.md): the phases and the playability rules
+- [FIRST_FLASH.md](FIRST_FLASH.md): the first install on a real FM-1, a checklist
+- [fmhub.json](fmhub.json), [docs/card.png](docs/card.png): the Firmware Hub's card
 - [PLATFORM.md](PLATFORM.md): the Dinghy commit and what differs from it
 - [reference/](reference/): the browser original and its SHA-256
 - `tools/tone-ref/`, `tools/trace/`: how the sound and the score are checked against the original; `tools/art/`: the
