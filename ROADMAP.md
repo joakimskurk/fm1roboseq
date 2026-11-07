@@ -122,7 +122,8 @@ and the limiter.)
       (`make scenes`)
 - [x] The registers on the white keys (SEQ: whose, OCT: the next 16), the bots steered on the black keys (D16);
       SELECT: a step's action, modifier or chance; KNOB1: the register's length (C7, C8)
-- [ ] P4: the rules as host tests, page by page
+- [x] P4: the rules as host tests, page by page (tests/roboseq/p4_test.c, in `make test`: every page's 27 keys while it
+      plays; a steer and the swap shown on every page they work on)
 - [x] The pages on the buttons (D19); SEQ, the sequence: both registers as one list that glides (KNOB2, OCT)
 - [x] GLO: tempo, ticks per move, the loop's length as the loop comes round (D20), 1/4 speed
 - [x] SCL: Voice Mod's four steps as cards, a step's scale, root and semitone on the knobs
