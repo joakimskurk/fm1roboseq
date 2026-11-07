@@ -75,12 +75,14 @@ way as [SkurkyMello](https://github.com/joakimskurk/fm1mello).
 
 ## Install
 
-The package is `build/roboseq.fwsc`. Install it on an FM-1 running M-VAVE's official V15 (or another firmware with the
-FM-1 update loader), over USB-MIDI:
+The package is `roboseq-X.Y.fwsc` from the [releases](https://github.com/joakimskurk/fm1roboseq/releases), with its
+SHA-256 in `SHA256SUMS` beside it, or `build/roboseq.fwsc` when you build it yourself (`make fw`). Its version is in
+the splash's corner (`v0.0`: not a release). Install it on an FM-1 running M-VAVE's official V15 (or another firmware
+with the FM-1 update loader), over USB-MIDI:
 
 ```sh
 pip3 install mido python-rtmidi
-python3 tools/fm1_install.py build/roboseq.fwsc
+python3 tools/fm1_install.py roboseq-0.1.fwsc
 python3 tools/fm1_install.py --info        # what the FM-1 runs now
 ```
 

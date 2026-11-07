@@ -22,10 +22,13 @@ the community firmwares on the [Firmware Hub](https://thefirmwarehub.com). Still
 
 - An FM-1 on M-VAVE's V15 or on any firmware with the FM-1 update loader (all Hub firmwares have it).
 - A USB cable and a computer with Python 3, or Chrome / Edge for the Hub.
-- The package: `roboseq.fwsc` from the release, and its SHA-256 from the release notes. Check it:
+- `tools/fm1_install.py` from this repository (a clone, or the file alone).
+- The package: `roboseq-0.1.fwsc` from the [release](https://github.com/joakimskurk/fm1roboseq/releases) (or the
+  newest one's), and `SHA256SUMS` beside it. Check it: the number has to be the one in `SHA256SUMS`, and in the
+  release notes.
 
 ```sh
-shasum -a 256 roboseq.fwsc
+shasum -a 256 roboseq-0.1.fwsc
 ```
 
 ## Install
@@ -33,7 +36,7 @@ shasum -a 256 roboseq.fwsc
 ```sh
 pip3 install mido python-rtmidi
 python3 tools/fm1_install.py --info               # what the FM-1 runs now: write it down
-python3 tools/fm1_install.py roboseq.fwsc          # the install, about a minute
+python3 tools/fm1_install.py roboseq-0.1.fwsc      # the install, about a minute
 python3 tools/fm1_install.py --info               # now: FM-1_965, RoboSeq
 ```
 
@@ -44,7 +47,8 @@ The tool asks before it writes, and checks after the restart that the FM-1 runs 
 Tick what works, and note what doesn't: what you did, what you saw or heard, what you expected.
 
 **Boot and sound**
-- [ ] The splash: the two robots walk in, meet under a heart, the name. Any key skips it.
+- [ ] The splash: the two robots walk in, meet under a heart, the name, the version in the corner (`v0.1`). Any
+      key skips it.
 - [ ] HOME: the board, the programs down its sides. PLAY starts it: music, and PLAY flashes on the beat.
 - [ ] Every output the FM-1 has plays, and USB audio on a computer. MASTER is the volume.
 - [ ] No clicks, crackle or dropouts while it plays, for five minutes at least, with the default song and on MAZE
@@ -74,7 +78,7 @@ Open an issue at [joakimskurk/fm1roboseq](https://github.com/joakimskurk/fm1robo
 
 - the checklist, ticked;
 - what `fm1_install.py --info` said before and after;
-- the package's SHA-256;
+- the package's SHA-256, and the version on the splash;
 - photos of anything that looked wrong, a crash screen's PC, and a recording of anything that sounded wrong
   (a phone is fine).
 
