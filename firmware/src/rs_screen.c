@@ -495,11 +495,11 @@ static void draw_glo(const struct rs_state *g, uint8_t pending_loop)
     static const char *const LABEL[4] = {"TEMPO", "BOTS MOVE EVERY", "LOOP", "SPEED"};
     cv_begin(240, 240, C_BG);
     cv_text(4, 0, &FONT_S, "GLOBAL", C_TEXT);
-    {                                           /* SELECT: the music, RoboSeq's own (PLUS) or the HTML's (CLASSIC: D33) */
-        const char *m = g->music ? "PLUS" : "CLASSIC";
+    {                                           /* SELECT: the engine, RoboSeq's own BAND or the HTML's ORIGINAL (D33, D39) */
+        const char *m = g->engine ? "BAND" : "ORIGINAL";
         int32_t w = text_w(&FONT_S, m);
-        cv_text(236 - w, 0, &FONT_S, m, g->music ? C_ACCENT : C_WARN);
-        cv_text(236 - w - 8 - text_w(&FONT_S, "SEL MUSIC"), 0, &FONT_S, "SEL MUSIC", C_MUTED);
+        cv_text(236 - w, 0, &FONT_S, m, g->engine ? C_ACCENT : C_WARN);
+        cv_text(236 - w - 8 - text_w(&FONT_S, "SEL ENGINE"), 0, &FONT_S, "SEL ENGINE", C_MUTED);
     }
     cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
     for (r = 0; r < 4; r++) {

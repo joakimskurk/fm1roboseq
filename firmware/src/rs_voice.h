@@ -31,11 +31,11 @@ struct rs_voice {
     int32_t env, target, step;                                  /* a linear stage's step a sample, or a curve's coefficient */
     uint32_t left;                                              /* samples left in the stage */
     int32_t peak;                                               /* the attack's velocity (decay goes to sustain x it) */
-    /* the board's patch (PLUS, D36a): all 0 is the HTML's voice. The main loop sets soft and shape, the mix pw */
+    /* the board's patch (BAND, D36a): all 0 is the HTML's voice. The main loop sets soft and shape, the mix pw */
     volatile uint32_t pw;                                       /* a square's falling edge, 2^32 a cycle (0: at a half) */
     volatile int32_t soft;                                      /* a triangle mixed into a square, Q15 */
     volatile uint8_t shape;                                     /* the envelope: 0 the HTML's, 1 shorter, 2 longer (the bots' voices) */
-    /* the note's pitch gesture (PLUS, D37a): RS_FX_*, set with its frequency; 0 is the HTML's steady pitch */
+    /* the note's pitch gesture (BAND, D37a): RS_FX_*, set with its frequency; 0 is the HTML's steady pitch */
     uint8_t fx;
     uint32_t fx_age, vib_ph;                                    /* samples since the note began; the vibrato's phase */
 };

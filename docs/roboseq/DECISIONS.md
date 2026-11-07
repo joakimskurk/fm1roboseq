@@ -487,7 +487,7 @@ the bass's pump keep to the chord's tones that sound with Scout-7's (a diminishe
 
 ## D37. PLUS: the tiles shape the notes, a vibrato, the HTML's arp rules (2026-11-07)
 
-The product owner, on D36 and docs/roboseq/MUSIC.md: quite good now; boards more distinct, a little vibrato on
+The product owner, on D36 and docs/roboseq/MUSIC.md (now ENGINES.md): quite good now; boards more distinct, a little vibrato on
 longer notes, the arpeggio more varied, every rule making sense by the movement and the blocks the robots hit.
 
 **D37a. A note's gesture.** A note can carry a pitch gesture (rs_note.fx, RS_FX_*), carried to the voice with its
@@ -585,4 +585,26 @@ plus_test:
 - FOLLOW: a new progression each of 20 rounds, each in the key or a fifth away, the bass knowing the next round's
   first chord every time.
 - The chain: every round as its step says.
+
+## D39. The engines: BAND and ORIGINAL; ENGINES.md (2026-11-07)
+
+The product owner: the engine, PLUS or CLASSIC, as a setting in the firmware, under GLO; and a proper overview on
+GitHub of what everything does in both engines, under the names that fit best.
+
+**The setting.** It was there since D33, on GLO's SELECT ("SEL MUSIC"). Now the header says what it is, `SEL ENGINE`
+and the engine's name. It is not kept over a power-off: nothing is yet (ROADMAP's storage), and the app starts in BAND.
+
+**The names.** PLUS is **BAND**: the robots as a band, a singer and an answering voice, a bass player with a groove
+per board, a drummer, songs with phrases, cadences and a big chorus. CLASSIC is **ORIGINAL**: the browser
+original's score, note for note. In the code: rs_state.engine (RS_ENGINE_ORIGINAL, RS_ENGINE_BAND), rs_score_band,
+rs_band_*, band_test. The entries before this one keep the old names.
+
+**The overview.** docs/roboseq/ENGINES.md (it was MUSIC.md) has:
+- the two engines side by side, and the game's rules;
+- every element (where a robot stands, its facing, the actions, the modifiers, the tiles, heat, burning out, the two
+  robots, the loop and the phrase, the arpeggio, the bass and its grooves, the synths, the chords and the whole bank
+  of progressions by number, the drums, the board), in each engine;
+- what BAND does not use yet, and the controls that change the music.
+
+The README's sound section is the short form, and links it.
 

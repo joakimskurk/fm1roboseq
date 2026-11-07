@@ -79,20 +79,20 @@ struct rs_state {
     uint8_t clash_cooldown, love_steps;
     /* the player's (D16): not the HTML's, 0 there */
     uint8_t steer[2];                                           /* bot A / B's next move is this action + 1 (0: its register's) */
-    uint8_t music;                                              /* RS_MUSIC_CLASSIC (the HTML's, rs_default) or _PLUS (D33) */
-    int8_t plus_lead, plus_echo, plus_bass;                     /* PLUS's lines (D34): their last notes (0: none yet) */
-    int8_t plus_cell[2];                                        /* PLUS's tunes (D35): the cell each bot's last note is from (-1) */
-    uint8_t plus_at[2], plus_cad, plus_end;                     /* the step of that note; the bar's cadence has sounded; Scout-7's note ends */
-    int8_t plus_call[4], plus_ans;                              /* Scout-7's call: its bar's first notes (scale steps, -1); Echo-3's answer's */
-    uint8_t plus_first;                                         /* the step of the call's first note (255: none yet) */
-    int8_t plus_run;                                            /* the bass's run into the next phrase: 1 up, -1 down (D36c) */
+    uint8_t engine;                                             /* RS_ENGINE_ORIGINAL (the HTML's, rs_default) or _BAND (D33, D39) */
+    int8_t band_lead, band_echo, band_bass;                     /* BAND's lines (D34): their last notes (0: none yet) */
+    int8_t band_cell[2];                                        /* BAND's tunes (D35): the cell each bot's last note is from (-1) */
+    uint8_t band_at[2], band_cad, band_end;                     /* the step of that note; the bar's cadence has sounded; Scout-7's note ends */
+    int8_t band_call[4], band_ans;                              /* Scout-7's call: its bar's first notes (scale steps, -1); Echo-3's answer's */
+    uint8_t band_first;                                         /* the step of the call's first note (255: none yet) */
+    int8_t band_run;                                            /* the bass's run into the next phrase: 1 up, -1 down (D36c) */
     /* the progressions (D38, the port's): Voice Mod's, by name and key (0: made by hand); the next round's, ready on
      * its last step when FOLLOW or the chain changes it */
     uint8_t vm_follow, prog_id, prog_key, next_id, next_key, next_ready;
     struct rs_bassmod_step bm_next[RS_BASSMOD_MAX];
 };
 
-enum { RS_MUSIC_CLASSIC, RS_MUSIC_PLUS };                     /* the music: the HTML's, or RoboSeq's own on top (D33) */
+enum { RS_ENGINE_ORIGINAL, RS_ENGINE_BAND };                    /* the engine: the HTML's score, or RoboSeq's own band (D33, D39) */
 
 /* a note, as the HTML's triggerAttackRelease(note, duration, time, velocity) on one of its voices */
 enum rs_voice_id {
@@ -107,7 +107,7 @@ struct rs_note {
     int8_t midi;                                                /* RS_NOISE for the noise voices */
     uint16_t vel;                                               /* Q15, 32768 = 1 */
     uint32_t at, dur;                                           /* from the tick's start, and how long: 1/256 sample */
-    uint8_t fx;                                                 /* its pitch gesture (PLUS, D37a: RS_FX_*; 0 none) */
+    uint8_t fx;                                                 /* its pitch gesture (BAND, D37a: RS_FX_*; 0 none) */
 };
 enum {                                                          /* a note's pitch gesture: a vibrato | a bend */
     RS_FX_VIB_LATE = 1,                                         /* a held note's: after a quarter second, growing, +-18 cents */
@@ -161,19 +161,19 @@ void rs_score_event(const struct rs_state *s, uint8_t kind, uint32_t at, struct 
 void rs_score_drums(const struct rs_state *s, uint8_t i, struct rs_tick_out *o);   /* playDrumStep() */
 void rs_score_ghost_hat(const struct rs_state *s, int phase, struct rs_tick_out *o);
 void rs_score_coin(const struct rs_state *s, struct rs_tick_out *o);   /* the love check's chime */
-void rs_score_plus(struct rs_state *s, struct rs_tick_out *o);  /* PLUS (D34): the tick's music, written anew */
-uint32_t rs_plus_phrase(const struct rs_state *s);              /* PLUS: a phrase, in loops (a Voice Mod round) */
-int rs_plus_section(const struct rs_state *s);                  /* PLUS: 1 in a phrase's second half (B) */
-int rs_plus_peak(const struct rs_state *s);                     /* PLUS: 1 in every other phrase's B, the big one (D36b) */
-int rs_plus_groove(const struct rs_state *s);                   /* PLUS: the bass's groove, 0..7 (the board's, D35) */
-struct rs_patch {                                               /* PLUS: the board's touch on the bots' synths (D36a) */
+void rs_score_band(struct rs_state *s, struct rs_tick_out *o);  /* BAND (D34-D37): the tick's music, written anew */
+uint32_t rs_band_phrase(const struct rs_state *s);              /* BAND: a phrase, in loops (a Voice Mod round) */
+int rs_band_section(const struct rs_state *s);                  /* BAND: 1 in a phrase's second half (B) */
+int rs_band_peak(const struct rs_state *s);                     /* BAND: 1 in every other phrase's B, the big one (D36b) */
+int rs_band_groove(const struct rs_state *s);                   /* BAND: the bass's groove, 0..7 (the board's, D35) */
+struct rs_patch {                                               /* BAND: the board's touch on the bots' synths (D36a) */
     uint16_t pw[2];                                             /* Scout-7's and Echo-3's square: its duty, Q16 (32768 a half, the HTML's) */
     uint16_t pwm[2];                                            /* its slow swing around that, Q16 */
     uint16_t rate;                                              /* the swing's rate, mHz */
     uint16_t soft[2];                                           /* a triangle into the square, Q15 (0: the HTML's) */
     uint8_t env[3];                                             /* Scout-7's, Echo-3's, the bass's envelope: 0 the HTML's, 1 shorter, 2 longer */
 };
-void rs_plus_patch(const struct rs_board *b, struct rs_patch *p);   /* the patch of a board (CLASSIC: all 0) */
+void rs_band_patch(const struct rs_board *b, struct rs_patch *p);   /* the patch of a board (ORIGINAL: all 0) */
 void rs_advance_voice_mod(struct rs_state *s);                  /* advanceVoiceMod(): MANUAL's tap, LOOP's count */
 
 /* editing, as the HTML's controls do it */
@@ -198,7 +198,7 @@ void rs_randomize_steps(struct rs_state *s, int bot);           /* randomizeStep
 void rs_randomize_all(struct rs_state *s);                      /* randomizeAllSteps() */
 void rs_clear_steps(struct rs_state *s);                        /* resetAllSteps() */
 void rs_randomize_board(struct rs_state *s);                    /* randomizeBoard() (not undoable, as the HTML) */
-void rs_compose_bassmod(struct rs_state *s);                    /* PLUS's Voice Mod roll: a progression in a key (D33, D38) */
+void rs_compose_bassmod(struct rs_state *s);                    /* BAND's Voice Mod roll: a progression in a key (D33, D38) */
 #define RS_NKEYS 6                                              /* the keys the C modes give: Ab Eb Bb F C G major (and their minors) */
 uint32_t rs_nprogs(void);                                       /* the named progressions: ids 1..rs_nprogs() */
 const char *rs_prog_name(uint8_t id);                           /* "I V vi IV" ("--" for 0, "RND" for RS_P_RND) */

@@ -83,7 +83,7 @@ int main(void)
     rs_default(&g), rs_start(&g), rs_load_board(&g, RS_B_SPINNER);   /* the boards: DEFAULT playing, SPINNER coming */
     draw_boards(&g, 1, 0), shot("boards");
     rs_default(&g), rs_start(&g);
-    g.music = RS_MUSIC_PLUS, draw_glo(&g, 32), shot("glo");   /* (the app starts in PLUS: D33) */
+    g.engine = RS_ENGINE_BAND, draw_glo(&g, 32), shot("glo");   /* (the app starts in BAND: D33) */
     rs_apply_prog(&g, 1, 5), rs_set_follow(&g, 1);   /* (D38: I V vi IV in G, FOLLOW on, the next one ready) */
     g.vm_index = 2, rs_advance_voice_mod(&g);            /* (on the last step: the next one ready) */
     draw_scl(&g, 1), shot("voicemod");

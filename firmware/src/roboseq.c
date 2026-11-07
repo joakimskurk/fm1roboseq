@@ -260,9 +260,9 @@ static uint32_t colour_sig = ~0u;
 static void board_colour(void)                  /* the board's tiles colour the sound (D24), when they or the amount change */
 {
     uint32_t n[7] = {0}, i, sig, amt = colour_amt;
-    if (game.music && game.playing) {           /* PLUS (D33d): each chord its own shade of the room, B more of it */
+    if (game.engine && game.playing) {           /* BAND (D33d): each chord its own shade of the room, B more of it */
         static const uint8_t SHADE[8] = {100, 118, 88, 110, 94, 122, 84, 106};
-        amt = amt * (SHADE[game.vm_index & 7u] + (rs_plus_section(&game) ? 45u : 0u)) / 100u;
+        amt = amt * (SHADE[game.vm_index & 7u] + (rs_band_section(&game) ? 45u : 0u)) / 100u;
         if (amt > 100u) amt = 100u;
     }
     for (i = 0; i < RS_ROWS * RS_COLS; i++) n[game.board.t[i].type % 7u]++;
@@ -272,14 +272,14 @@ static void board_colour(void)                  /* the board's tiles colour the 
 }
 
 static uint32_t patch_sig = ~0u;
-static void board_patch(void)                   /* PLUS: the board's touch on the bots' synths (D36a); CLASSIC: none */
+static void board_patch(void)                   /* BAND: the board's touch on the bots' synths (D36a); ORIGINAL: none */
 {
     uint32_t sig = 2166136261u;
-    for (uint32_t i = 0; game.music && i < RS_ROWS * RS_COLS; i++)
+    for (uint32_t i = 0; game.engine && i < RS_ROWS * RS_COLS; i++)
         sig = (sig ^ (game.board.t[i].type * 4u + game.board.t[i].dir + 1u)) * 16777619u;
     if (sig == patch_sig) return;
     struct rs_patch p = {{0}};
-    if (game.music) rs_plus_patch(&game.board, &p);
+    if (game.engine) rs_band_patch(&game.board, &p);
     patch_sig = sig, rs_mix_patch(&mix, &p);
 }
 
@@ -406,7 +406,7 @@ static int keys(uint32_t down)                  /* what the keys pressed now do;
             else if (k == 12u && game.vm_manual) rs_advance_voice_mod(&game);
             else if (k == 13u) game.transpose_root = !game.transpose_root;
             else if (k == 14u) rs_reset_bassmod(&game);
-            else if (k == 15u) { if (game.music) rs_compose_bassmod(&game); else rs_randomize_bassmod(&game); }   /* (PLUS: a progression, D33) */
+            else if (k == 15u) { if (game.engine) rs_compose_bassmod(&game); else rs_randomize_bassmod(&game); }   /* (BAND: a progression, D33) */
             changed = 1;
         }
     }
@@ -477,7 +477,7 @@ static void app_main(void)
     rs_boot_check = rs_selfcheck();             /* the model on the chip: make emu compares it with the computer's */
     rs_mix_init(&mix, 0x5EEDu);
     rs_default(&game);
-    game.music = RS_MUSIC_PLUS;                 /* RoboSeq's own music; CLASSIC (the HTML's) on GLO's SELECT (D33) */
+    game.engine = RS_ENGINE_BAND;               /* the engine: RoboSeq's own BAND; ORIGINAL (the HTML's) on GLO's SELECT (D33, D39) */
     keys_init();
     {                                           /* the splash: ~2.6 s, a frame every 33 ms; a key or a button skips it */
         uint32_t t0 = fm1_ms, drawn = ~0u, rel;
@@ -540,7 +540,7 @@ static void app_main(void)
                 arp_rate = (uint8_t)(r < 1 ? 1 : r > 4 ? 4 : r);
             } else if (page == PAGE_LFO) drum_row = (uint8_t)(((int32_t)drum_row + e % 3 + 3) % 3);
             else if (page == PAGE_SEQ) seq_cursor_to((int32_t)seq_cursor + e);   /* SEQ: the cursor up and down (D28) */
-            else if (page == PAGE_GLO) game.music = e > 0 ? RS_MUSIC_PLUS : RS_MUSIC_CLASSIC;   /* GLO: the music (D33) */
+            else if (page == PAGE_GLO) game.engine = e > 0 ? RS_ENGINE_BAND : RS_ENGINE_ORIGINAL;   /* GLO: the engine (D33, D39) */
             else layer = (uint8_t)(((int32_t)layer + e % RS_NLAYERS + RS_NLAYERS) % RS_NLAYERS);
             dirty = 1;
         }

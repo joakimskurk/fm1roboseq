@@ -34,8 +34,9 @@ same way as [SkurkyMello](https://github.com/joakimskurk/fm1mello).
 > browser original's own renders. Nothing is saved to flash yet: a board or a program you build is gone when you
 > switch off. Every flash can brick a unit: hold OCT- while switching on to reach the updater.
 
-This README is the manual. The design record is in [docs/roboseq/DECISIONS.md](docs/roboseq/DECISIONS.md), the plan
-in [ROADMAP.md](ROADMAP.md), and every control page by page in [docs/roboseq/CONTROLS.md](docs/roboseq/CONTROLS.md).
+This README is the manual. What the music does, in both engines, is in [docs/roboseq/ENGINES.md](docs/roboseq/ENGINES.md);
+the design record is in [docs/roboseq/DECISIONS.md](docs/roboseq/DECISIONS.md), the plan in [ROADMAP.md](ROADMAP.md), and every
+control page by page in [docs/roboseq/CONTROLS.md](docs/roboseq/CONTROLS.md).
 
 ## Install
 
@@ -66,7 +67,7 @@ The screens, drawn by the firmware itself (`make screens`): what you see, and wh
 | <img src="docs/screens/boards.png" width="240" alt="ENV: the boards"> | **ENV: the boards**, all at a glance: the six presets, a random roll and your own board, each small with its white key. Press a key and that board comes in (while playing, as the loop comes round: framed yellow, blinking, until it arrives); the one playing is framed in mint. 9 saves the board as yours, 10 clears yours, 11 puts the robots back on their pads. The black keys steer as on HOME. |
 | <img src="docs/screens/builder.png" width="240" alt="ENV again, the board builder"> | **ENV again: build a board.** W A S D move the cursor; further up a key for each tile (belt, rotator left and right, zap, pulse, crate), and the black key between S and D clears. A belt points the way you last moved; press it again to turn it. The robots meet your tiles on their next step. KNOB1 runs through the six preset boards. |
 | <img src="docs/screens/home-lead.png" width="240" alt="REC: the lead"> | **REC: play solo.** The keys become a SID-style lead over the robots, the knobs its CUT, ECHO, BITE and OCT, shown as faders across the top. **ARP** arpeggiates a chord you hold, a note each step: K4 its pattern, SELECT how fast. REC again gives the keys back. |
-| <img src="docs/screens/glo.png" width="240" alt="GLO"> | **GLO: tempo and time.** The tempo, how often the robots move (every 1, 2 or 4 ticks), the loop's length (it changes as the loop comes round, never stopping the music) and the speed (1/1, 1/2, 1/4). SELECT picks the music: PLUS or CLASSIC (below). |
+| <img src="docs/screens/glo.png" width="240" alt="GLO"> | **GLO: tempo and time.** The tempo, how often the robots move (every 1, 2 or 4 ticks), the loop's length (it changes as the loop comes round, never stopping the music) and the speed (1/1, 1/2, 1/4). SELECT picks the engine: BAND or ORIGINAL (below). |
 | <img src="docs/screens/voicemod.png" width="240" alt="SCL: Voice Mod"> | **SCL: Voice Mod**, the harmony: four steps of scale, root and semitone that the music moves through, every so many loops or by hand (NEXT). White keys 1-4 pick a step, K1-K3 change it. |
 | <img src="docs/screens/seq2.png" width="240" alt="SCL again: Seq 2"> | **SCL again: Seq 2**, the arrangement: four steps that change the board and the drum pattern and can swap the robots' registers, as Voice Mod comes round. |
 | <img src="docs/screens/drums.png" width="240" alt="LFO: the drums"> | **LFO: the drums.** Kick, snare and hihat over 16 steps; SELECT picks the row, a white key a step, KNOB1 the six patterns. |
@@ -132,30 +133,35 @@ plays; Voice Mod's scale and root keep them in key.
 
 ## The sound
 
-RoboSeq has two kinds of music, picked with SELECT on GLO. **PLUS**, where it starts, is RoboSeq's own music from the
-same game and the same sounds, each robot a musician, and the board is their keyboard: a cell is a note of the key,
-a step on the board a step in the scale, a dash a third. The robots go back to their pads every loop and walk the
-same way again, so their tunes come back every bar, the rhythm from when they move (a note where a robot gets to a
-new cell, held while it turns or pushes at a wall, a wait a rest) and the chord on the beats. Scout-7 sings the tune;
-in the first half of each phrase it sings three beats and Echo-3 answers in the fourth with Scout-7's own motif,
-from where Echo-3 stands; in the second half they sing together, Echo-3 a third or a sixth below. Half way through a
-phrase the tune lands on the chord's fifth, at its end on the root. Each board has its own bass groove (DEFAULT
-three-three-two, CORRIDOR straight eighths, GARDEN a walk, GAUNTLET a gallop, SPINNER octaves, MAZE syncopation;
-a rolled or your own board gets one by its tiles), and Echo-3 plays into it: a dash pops it up an octave, a ping
-doubles it, a wait leaves a gap; at each phrase's end it runs up or down (the way Echo-3 faces) into the next chord.
-The tiles also touch the robots' synths a little, each robot by the tiles on its side of the board: zap rails narrow
-the square to a thinner pulse, rotators make it swing slowly, crates and pulse pads soften it, pulse pads let it
-ring and zap rails pluck it. Every other phrase ends in the big one, as dense as the original: an arpeggio of the
-chord over the tune, the notes struck on every eighth, the bass pumping, the hats on every sixteenth. And the robots'
-heat counts as in the original: a zap rail, a dash into it or a ping that reaches it heats a robot, and a hotter
-robot plays louder and, hot, adds a strike above Scout-7's notes (a pulse pad cools it; at 6 it burns out), so
-steering one robot into the other, or over the rails, turns the music up. The tiles' sounds are tuned to the chord. The drums keep
-your pattern but get a drummer: dynamics, ghost notes, a kick pushing into four every other loop, open and busier hats in the second half
-of each phrase, a fill at its end and a crash on the next. The room shades with each chord and opens in the second
-half. And Voice Mod's random (SCL, 16) writes a progression
-in a key, such as I V vi IV, ii V I vi, i VI VII i or a modal vamp, instead of four unrelated keys.
+RoboSeq has one game and two engines, picked with SELECT on GLO. **BAND**, where it starts, is RoboSeq's own: the
+robots as a band. **ORIGINAL** is the browser original's score, note for note. What every move, tile and setting does
+in each is in [docs/roboseq/ENGINES.md](docs/roboseq/ENGINES.md); in short:
 
-**CLASSIC** is the browser original's music, note for note: the same game and the same score, checked against the
+**BAND.** The board is the robots' keyboard: a cell is a note of the key, a step on the board a step in the scale,
+a dash a third.
+- **The tunes.** The robots go back to their pads every loop and walk the same way again, so their tunes come back
+  every bar. The rhythm is their moves: a note where a robot gets to a new cell, held while it turns or leans on a
+  wall, a wait a rest, and the chord on the beats.
+- **Call and answer.** Scout-7 sings the tune. In the first half of each phrase it sings three beats and Echo-3
+  answers in the fourth with Scout-7's own motif; in the second half they sing together. Half way through a phrase
+  the tune lands on the chord's fifth, at its end on the root.
+- **The tiles shape the notes.** A zap rail's note is short and hard, a pulse pad's long, with vibrato. A belt
+  plays an arpeggio its way, a rotator bends the note in, and bumping a crate stops it dead. WOBBLE sings with a wide
+  vibrato, and long notes get a slow one.
+- **The bass.** Each board has its own groove: DEFAULT three-three-two, CORRIDOR straight eighths, GARDEN a walk,
+  GAUNTLET a gallop, SPINNER octaves, MAZE syncopation, and a rolled or your own board one by its tiles. Echo-3 plays
+  into it, and at each phrase's end the bass runs into the next chord.
+- **The synths.** The tiles on each robot's side of the board touch its synth a little.
+- **The big one.** Every other phrase ends in it, as dense as the original: an arpeggio of the chord over the tune,
+  shaped by the original's own arp rules (the chord from where Scout-7 stands, the contour from its facing, the span
+  from its heat, the rate from its tile).
+- **Heat.** It counts as in the original: zap rails, and the other robot's dash or ping, make a robot hotter and
+  louder, so steering them into each other turns the music up.
+- **The drummer.** It plays your pattern with dynamics, ghost notes, fills and crashes.
+- **The chords.** Voice Mod's random writes one of 73 named progressions in one of six keys. FOLLOW (SCL key 12)
+  writes a new one, following on, every round, and Seq 2 can chain them.
+
+**ORIGINAL** is the browser original's music, note for note: the same game and the same score, checked against the
 HTML's own script tick by tick over 36 scenarios (88,120 notes). The voices, the mix, the reverb and the limiter are
 measured against renders of the HTML's own audio in a browser (most voices within 0.15 dB in level, shape and
 timbre), and the mix is in stereo as the HTML's is. Two things are as the original meant rather than as it happened
@@ -183,7 +189,7 @@ Linux's sections. `make reference` re-renders the browser original's sound (node
 ## Where things are
 
 - [docs/roboseq/CONTROLS.md](docs/roboseq/CONTROLS.md): every control, page by page, and the rules they keep
-- [docs/roboseq/MUSIC.md](docs/roboseq/MUSIC.md): what the robots, the tiles and the board do to the music, in both modes
+- [docs/roboseq/ENGINES.md](docs/roboseq/ENGINES.md): the two engines, BAND and ORIGINAL: what every move, tile and setting does in each
 - [docs/roboseq/DECISIONS.md](docs/roboseq/DECISIONS.md): why things are as they are
 - [ROADMAP.md](ROADMAP.md): the phases and the playability rules
 - [PLATFORM.md](PLATFORM.md): the Dinghy commit and what differs from it

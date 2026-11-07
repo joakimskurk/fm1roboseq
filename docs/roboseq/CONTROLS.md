@@ -61,7 +61,7 @@ Scout-7's and Echo-3's registers as two columns of step cards, the HTML's planne
 | KNOB2 | the bots move every 1, 2 or 4 ticks |
 | KNOB3 | the loop's length (8 ... 64): at once when stopped, else as the loop comes round (D20) |
 | KNOB4 | the speed: 1/1, 1/2, 1/4 (D22) |
-| SELECT | the music: PLUS (RoboSeq's own, where it starts) or CLASSIC (the HTML's) (D33) |
+| SELECT | the engine: BAND (RoboSeq's own, where it starts) or ORIGINAL (the HTML's score) (D33, D39; docs/roboseq/ENGINES.md) |
 
 The white keys rest here (no register on the screen); the black keys steer as everywhere.
 
@@ -75,7 +75,7 @@ The white keys rest here (no register on the screen); the black keys steer as ev
 | white key 12 | FOLLOW (lit): every round ends in a new progression, following on: the same key, or a fifth away (D38) |
 | white key 13 | NEXT: on to its next step (MANUAL) |
 | white key 14 | ROOT: the root transposes the sequence, on / off |
-| white keys 15 / 16 | reset / random (random can be undone; in PLUS one of 73 named progressions in one of six keys, D38) |
+| white keys 15 / 16 | reset / random (random can be undone; in BAND one of 73 named progressions in one of six keys, D38) |
 
 The header names the progression and its key when it has one (I V vi IV G); NEXT > the next round's, once it is
 ready on the round's last step.
@@ -112,7 +112,7 @@ ready on the round's last step.
 ## ENV (the boards, D32)
 
 Every board as a card with its tiles small: the one playing framed in mint, the one coming with the loop in yellow,
-blinking. In PLUS a board is also its bass groove (D35): picking one changes the groove as the loop comes round.
+blinking. In BAND a board is also its bass groove (D35): picking one changes the groove as the loop comes round.
 
 | Control | Does |
 |---|---|

@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* The board's touch on the bots' synths (rs_plus_patch, rs_mix_patch, D36a): a little, each board its own, an empty
- * board and CLASSIC the HTML's voices exactly; the patched pulse in range and without a DC. A note's gesture (D37a):
+/* The board's touch on the bots' synths (rs_band_patch, rs_mix_patch, D36a): a little, each board its own, an empty
+ * board and ORIGINAL the HTML's voices exactly; the patched pulse in range and without a DC. A note's gesture (D37a):
  * the vibratos and the bends as they should be, none the HTML's. patch_test: exit 0 */
 #include <stdio.h>
 #include <string.h>
@@ -57,7 +57,7 @@ int main(void)
     for (uint8_t b = 0; b < RS_NBOARDS; b++) {
         struct rs_board bd;
         rs_preset_board(&bd, b);
-        rs_plus_patch(&bd, &p[b]);
+        rs_band_patch(&bd, &p[b]);
         for (int i = 0; i < 2; i++) {
             CHECK(p[b].pw[i] >= 22000 && p[b].pw[i] <= 32768, "board %d bot %d: the duty a little off a half (%u)", b, i, p[b].pw[i]);
             CHECK(p[b].pwm[i] <= 5000 && p[b].pw[i] - p[b].pwm[i] >= 18000, "board %d bot %d: a small swing (%u)", b, i, p[b].pwm[i]);
@@ -69,7 +69,7 @@ int main(void)
     }
     {                                                   /* an empty board: the HTML's voices */
         struct rs_patch e;
-        rs_plus_patch(&empty, &e);
+        rs_band_patch(&empty, &e);
         CHECK(e.pw[0] == 32768 && e.pw[1] == 32768 && !e.pwm[0] && !e.pwm[1] && !e.soft[0] && !e.soft[1] &&
               !e.env[0] && !e.env[1] && !e.env[2], "an empty board: no touch");
     }
@@ -120,7 +120,7 @@ int main(void)
         CHECK(e0 == e1 && s0 == s1, "rs_voice_note is rs_voice_note_fx with none, sample for sample");
         (void)pk2;
     }
-    {                                                   /* CLASSIC: rs_mix_patch with nothing leaves the voices as they were */
+    {                                                   /* ORIGINAL: rs_mix_patch with nothing leaves the voices as they were */
         static struct rs_mix m;
         struct rs_patch z;
         memset(&z, 0, sizeof z);

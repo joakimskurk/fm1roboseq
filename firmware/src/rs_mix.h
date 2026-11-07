@@ -51,7 +51,7 @@ void rs_mix_init(struct rs_mix *m, uint32_t seed);
 /* the board colours the whole sound (D24): its tiles into the reverb's room and send, a tilt and a drive, amount %
  * of the way (0: the HTML's sound); main loop, when the board or the amount changes */
 void rs_mix_colour(struct rs_mix *m, const struct rs_board *bd, uint32_t amount);
-/* the board's touch on the bots' synths (PLUS, D36a; all 0: the HTML's voices); main loop, when the board changes */
+/* the board's touch on the bots' synths (BAND, D36a; all 0: the HTML's voices); main loop, when the board changes */
 void rs_mix_patch(struct rs_mix *m, const struct rs_patch *p);
 /* triggerAttackRelease on voice `voice` (RS_V_*): rs_voice_note's arguments */
 void rs_mix_note(struct rs_mix *m, uint8_t voice, uint32_t at, uint32_t dur, int midi, uint16_t vel);

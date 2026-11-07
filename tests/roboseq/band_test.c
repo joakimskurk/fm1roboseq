@@ -1,10 +1,10 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* PLUS, RoboSeq's own music on top of the HTML's (D33): what each part promises. CLASSIC is held by the traces. */
+/* BAND, RoboSeq's own music on top of the HTML's (D33): what each part promises. ORIGINAL is held by the traces. */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "rs_model.c"                                   /* (its tables: SCALE_MASK) */
-#include "rs_score.c"                                   /* (PLUS's chord_tone) */
+#include "rs_score.c"                                   /* (BAND's chord_tone) */
 
 static int fails;
 #define CHECK(c, ...) do { if (!(c)) { fails++; printf("FAIL %s:%d: ", __FILE__, __LINE__); printf(__VA_ARGS__); printf("\n"); } } while (0)
@@ -22,7 +22,7 @@ static void test_compose(void)                          /* the Voice Mod roll (D
     static uint8_t seen[1u << 16], id_seen[256];
     for (int r = 0; r < 4000; r++) {
         rs_default(&s);
-        s.music = RS_MUSIC_PLUS, s.rng = 0x9E3779B9u * (uint32_t)(r + 1), s.transpose_root = 0;
+        s.engine = RS_ENGINE_BAND, s.rng = 0x9E3779B9u * (uint32_t)(r + 1), s.transpose_root = 0;
         s.bassmod_len = (r & 1) ? 8 : 4;
         rs_compose_bassmod(&s);
         CHECK(s.transpose_root == 1, "roll %d: the roots move the notes", r);
@@ -49,7 +49,7 @@ static void test_compose(void)                          /* the Voice Mod roll (D
         for (int i = 0; i < s.bassmod_len; i++) h = h * 31u + s.bassmod[i].root * 13u + s.bassmod[i].scale;
         if (!seen[h & 0xFFFFu]) seen[h & 0xFFFFu] = 1, distinct++;
     }
-    printf("plus_test: the roll: %d different Voice Mods in 4000, %d of %u progressions, keys %d %d %d %d %d %d, %d borrowing\n",
+    printf("band_test: the roll: %d different Voice Mods in 4000, %d of %u progressions, keys %d %d %d %d %d %d, %d borrowing\n",
            distinct, ids_seen, rs_nprogs(), keys[0], keys[1], keys[2], keys[3], keys[4], keys[5], borrowed);
     CHECK(distinct > 600, "many progressions, not a few (%d)", distinct);
     CHECK(ids_seen == (int)rs_nprogs(), "every named progression rolls (%d of %u)", ids_seen, rs_nprogs());
@@ -80,21 +80,21 @@ static void test_compose(void)                          /* the Voice Mod roll (D
     }
     {                                                   /* undoable, as the HTML's roll */
         rs_default(&s);
-        s.music = RS_MUSIC_PLUS;
+        s.engine = RS_ENGINE_BAND;
         struct rs_bassmod_step before = s.bassmod[0];
         rs_undo_clear();
         rs_compose_bassmod(&s);
         rs_pop_undo(&s);
         CHECK(!memcmp(&before, &s.bassmod[0], sizeof before), "undo brings the Voice Mod back");
     }
-    {                                                   /* PLUS's SCL turns every mode */
+    {                                                   /* BAND's SCL turns every mode */
         rs_default(&s);
-        s.music = RS_MUSIC_PLUS, s.bassmod[0].scale = RS_SC_LYDIAN;
+        s.engine = RS_ENGINE_BAND, s.bassmod[0].scale = RS_SC_LYDIAN;
         rs_cycle_bassmod(&s, 0, 0, +1);
-        CHECK(s.bassmod[0].scale == RS_SC_PHRYGIAN, "PLUS: lydian -> phrygian");
-        s.music = RS_MUSIC_CLASSIC, s.bassmod[0].scale = RS_SC_MAJOR;
+        CHECK(s.bassmod[0].scale == RS_SC_PHRYGIAN, "BAND: lydian -> phrygian");
+        s.engine = RS_ENGINE_ORIGINAL, s.bassmod[0].scale = RS_SC_MAJOR;
         rs_cycle_bassmod(&s, 0, 0, +1);
-        CHECK(s.bassmod[0].scale == RS_SC_MINOR, "CLASSIC: the HTML's order, major -> minor");
+        CHECK(s.bassmod[0].scale == RS_SC_MINOR, "ORIGINAL: the HTML's order, major -> minor");
     }
 }
 
@@ -126,7 +126,7 @@ static int rubs(const struct rs_tick_out *o, int *pairs)   /* a semitone, major 
     return r;
 }
 
-static void test_in_scale(void)                         /* no note outside the scale (CLASSIC's own too), no rubs in PLUS */
+static void test_in_scale(void)                         /* no note outside the scale (ORIGINAL's own too), no rubs in BAND */
 {
     static struct rs_state s;
     static struct rs_tick_out o;
@@ -136,11 +136,11 @@ static void test_in_scale(void)                         /* no note outside the s
             rs_default(&s);
             if (setup % 3 == 1) rs_load_board(&s, RS_B_MAZE);
             if (setup % 3 == 2) rs_load_board(&s, (uint8_t)(setup % RS_NBOARDS));
-            if (setup >= 2) s.music = RS_MUSIC_PLUS, s.rng = 1234u + (uint32_t)setup * 77u, s.bassmod_len = setup & 4 ? 8 : 4,
+            if (setup >= 2) s.engine = RS_ENGINE_BAND, s.rng = 1234u + (uint32_t)setup * 77u, s.bassmod_len = setup & 4 ? 8 : 4,
                             rs_compose_bassmod(&s);
             s.tpm = setup % 5 == 3 ? 2 : setup % 7 == 4 ? 4 : 1;
             if (setup % 6 == 5) rs_set_loop_len(&s, 12);
-            s.music = (uint8_t)mode;
+            s.engine = (uint8_t)mode;
             rs_start(&s);
             for (int t = 0; t < 900; t++) {
                 rs_tick(&s, &o);
@@ -153,10 +153,10 @@ static void test_in_scale(void)                         /* no note outside the s
                                 CHECK(((o.notes[i].midi - o.notes[j].midi) % 12 + 12) % 12 != 6, "the answer: no tritone");
             }
         }
-        if (mode) CHECK(rub == 0, "PLUS: %d of %d notes struck together rub (a semitone, a 7th, a tritone)", rub, pairs);
-        else printf("plus_test: CLASSIC's own rubs, for comparison: %d of %d\n", rub, pairs);
-        CHECK(bad == 0, "%s: %d of %d pitched notes outside their step's scale", mode ? "PLUS" : "CLASSIC", bad, pitched);
-        CHECK(pitched > 20000, "%s: enough notes checked (%d)", mode ? "PLUS" : "CLASSIC", pitched);
+        if (mode) CHECK(rub == 0, "BAND: %d of %d notes struck together rub (a semitone, a 7th, a tritone)", rub, pairs);
+        else printf("band_test: ORIGINAL's own rubs, for comparison: %d of %d\n", rub, pairs);
+        CHECK(bad == 0, "%s: %d of %d pitched notes outside their step's scale", mode ? "BAND" : "ORIGINAL", bad, pitched);
+        CHECK(pitched > 20000, "%s: enough notes checked (%d)", mode ? "BAND" : "ORIGINAL", pitched);
     }
 }
 
@@ -168,16 +168,16 @@ static void test_harmony(void)                          /* the bots on the chord
     for (int run = 0; run < 2; run++) {
         rs_default(&c), rs_default(&s);
         if (run) {                                      /* and a rolled progression, MAZE */
-            s.music = RS_MUSIC_PLUS, s.rng = 77, rs_compose_bassmod(&s), s.music = 0;
+            s.engine = RS_ENGINE_BAND, s.rng = 77, rs_compose_bassmod(&s), s.engine = 0;
             c.bassmod_len = s.bassmod_len, memcpy(c.bassmod, s.bassmod, sizeof c.bassmod), c.transpose_root = 1;
             rs_load_board(&c, RS_B_MAZE), rs_load_board(&s, RS_B_MAZE);
         }
-        s.music = RS_MUSIC_PLUS;
+        s.engine = RS_ENGINE_BAND;
         rs_start(&c), rs_start(&s);
         for (int t = 0; t < 600; t++) {
             rs_tick(&c, &oc), rs_tick(&s, &o);
             CHECK(!memcmp(c.bot, s.bot, sizeof c.bot) && c.step == s.step && c.vm_index == s.vm_index,
-                  "tick %d: PLUS plays the same game", t);
+                  "tick %d: BAND plays the same game", t);
             if ((!o.move_tick && !o.loop_reset) || s.step < 0) continue;
             const struct rs_bassmod_step *ms = &s.bassmod[s.vm_index % s.bassmod_len];
             int root = chord_root(&s, ms, ms->scale), p = s.step % 16;
@@ -204,7 +204,7 @@ static void test_drums(void)                            /* the fills, the crashe
     static struct rs_tick_out o, o2;
     int fills = 0, crashes = 0, ghosts = 0, opens = 0, quiet_hats_ok = 1;
     rs_default(&s), rs_default(&t);
-    s.music = t.music = RS_MUSIC_PLUS;
+    s.engine = t.engine = RS_ENGINE_BAND;
     rs_start(&s), rs_start(&t);
     for (int k = 0; k < 16 * 40; k++) {
         rs_tick(&s, &o), rs_tick(&t, &o2);
@@ -230,12 +230,12 @@ static void test_drums(void)                            /* the fills, the crashe
     CHECK(ghosts > 5 && opens > 5, "ghost snares (%d) and open hats (%d)", ghosts, opens);
     {                                                   /* CLEAR, and the drums off: nothing */
         int hits = 0;
-        rs_default(&s), s.music = RS_MUSIC_PLUS, rs_drum_clear(&s), rs_start(&s);
+        rs_default(&s), s.engine = RS_ENGINE_BAND, rs_drum_clear(&s), rs_start(&s);
         for (int k = 0; k < 16 * 8; k++) {
             rs_tick(&s, &o);
             for (int i = 0; i < o.nnotes; i++) hits += o.notes[i].voice >= RS_V_KICK && o.notes[i].voice <= RS_V_HIHAT;
         }
-        rs_default(&s), s.music = RS_MUSIC_PLUS, s.drums_on = 0, rs_start(&s);
+        rs_default(&s), s.engine = RS_ENGINE_BAND, s.drums_on = 0, rs_start(&s);
         for (int k = 0; k < 16 * 8; k++) {
             rs_tick(&s, &o);
             for (int i = 0; i < o.nnotes; i++) hits += o.notes[i].voice >= RS_V_KICK && o.notes[i].voice <= RS_V_HIHAT;
@@ -254,7 +254,7 @@ static void test_lines(void)                            /* tunes that walk, a fi
         int last_c = 0, last_p = 0, first = 1;
         rs_default(&c), rs_default(&s);
         rs_load_board(&c, (uint8_t)board), rs_load_board(&s, (uint8_t)board);
-        s.music = RS_MUSIC_PLUS;
+        s.engine = RS_ENGINE_BAND;
         rs_start(&c), rs_start(&s);
         groove[board] = 0;
         for (int t = 0; t < 16 * 32; t++) {
@@ -274,7 +274,7 @@ static void test_lines(void)                            /* tunes that walk, a fi
                         big += abs(n->midi - last_p) > 12 && !dash;
                     }
                     last_p = n->midi, first = 0;
-                    if (rs_plus_section(&s)) in_b++;
+                    if (rs_band_section(&s)) in_b++;
                     else in_a++;
                 }
                 if (n->voice == RS_V_B_SUB && n->at == 0) {
@@ -284,7 +284,7 @@ static void test_lines(void)                            /* tunes that walk, a fi
             }
             if (s.step == 0 && (o.loop_reset || t == 0)) bars++, ones += bass_one;
         }
-        printf("plus_test: board %d: Scout-7 moves %.1f semitones a note in a bar (the HTML's %.1f); groove %04x\n", board,
+        printf("band_test: board %d: Scout-7 moves %.1f semitones a note in a bar (the HTML's %.1f); groove %04x\n", board,
                (double)jumps_p / (double)np, (double)jumps_c / (double)nc, groove[board]);
         CHECK(np > 50 && jumps_p * 10 <= 35 * np, "board %d: Scout-7's tune walks (%.1f semitones a note)", board, (double)jumps_p / (double)np);
         CHECK(big == 0, "board %d: no leap past an octave in a bar but a dash's (%ld)", board, big);
@@ -312,7 +312,7 @@ static void test_tunes(void)                            /* the tune comes back, 
     for (int board = 0; board < RS_NBOARDS; board++) {
         rs_default(&s);
         rs_load_board(&s, (uint8_t)board);
-        s.music = RS_MUSIC_PLUS;
+        s.engine = RS_ENGINE_BAND;
         rs_start(&s);
         memset(roll, 0, sizeof roll), memset(echo, 0, sizeof echo), memset(low, 0, sizeof low);
         while (s.cycle < 20) {
@@ -353,7 +353,7 @@ static void test_tunes(void)                            /* the tune comes back, 
             }
         }
     }
-    printf("plus_test: the tune again %ld of %ld notes, answers %ld of %ld, home %ld of %ld, runs %ld\n", same, notes, imitated, answers, homes, phrases, runs);
+    printf("band_test: the tune again %ld of %ld notes, answers %ld of %ld, home %ld of %ld, runs %ld\n", same, notes, imitated, answers, homes, phrases, runs);
     CHECK(runs * 10 >= phrases * 8, "the bass runs into the next phrase (%ld of %ld)", runs, phrases);
     CHECK(notes > 200 && same * 10 >= notes * 8, "the tune comes back a phrase later (%ld of %ld notes)", same, notes);
     CHECK(answers > 20 && imitated * 10 >= answers * 8, "Echo-3's answer goes as Scout-7's call (%ld of %ld)", imitated, answers);
@@ -368,12 +368,12 @@ static void test_peaks(void)                            /* every other phrase's 
         long notes[2] = {0}, vel[2] = {0}, bars[2] = {0}, arps[2] = {0}, evens[2] = {0}, bassed[2] = {0}, a_arps = 0;
         rs_default(&s);
         rs_load_board(&s, (uint8_t)board);
-        s.music = RS_MUSIC_PLUS;
+        s.engine = RS_ENGINE_BAND;
         rs_start(&s);
         while (s.cycle < 16) {
             rs_tick(&s, &o);
             if ((!o.move_tick && !o.loop_reset) || s.step < 0) continue;
-            int b = rs_plus_section(&s), pk = rs_plus_peak(&s), fill = s.cycle % 4 == 3 && s.step >= 12, ping = 0, sub = 0;
+            int b = rs_band_section(&s), pk = rs_band_peak(&s), fill = s.cycle % 4 == 3 && s.step >= 12, ping = 0, sub = 0;
             CHECK(!pk || b, "board %d: a peak only in a B", board);
             if (s.step == 0) bars[pk] += b;
             for (int i = 0; i < o.nnotes; i++) {
@@ -386,7 +386,7 @@ static void test_peaks(void)                            /* every other phrase's 
             if (!b) a_arps += ping && o.acted[0] && o.played[0].action != RS_PING && s.bot[0].stepped_tile != RS_T_BELT && s.bot[0].heat < 4;
             if (b && s.step % 2 == 0 && !fill) evens[pk]++, arps[pk] += ping, bassed[pk] += sub;
         }
-        printf("plus_test: board %d: B %ld notes a bar, the big one %ld (%.1fx the velocity), its arpeggio on %ld of %ld eighths, bass %ld\n",
+        printf("band_test: board %d: B %ld notes a bar, the big one %ld (%.1fx the velocity), its arpeggio on %ld of %ld eighths, bass %ld\n",
                board, notes[0] / bars[0], notes[1] / bars[1], (double)vel[1] * (double)bars[0] / ((double)vel[0] * (double)bars[1]),
                arps[1], evens[1], bassed[1]);
         CHECK(notes[1] * 10 >= notes[0] * 13, "board %d: the big one denser (%ld, %ld notes a bar)", board,
@@ -407,7 +407,7 @@ static void test_tiles(void)                            /* what the robots meet 
         for (int roll = 0; roll < 3; roll++) {
             rs_default(&s);
             rs_load_board(&s, (uint8_t)board);
-            s.music = RS_MUSIC_PLUS, s.rng = 991u + (uint32_t)(board * 7 + roll);
+            s.engine = RS_ENGINE_BAND, s.rng = 991u + (uint32_t)(board * 7 + roll);
             if (roll) rs_randomize_all(&s);
             rs_start(&s);
             uint32_t step = rs_step_q8(&s);
@@ -430,12 +430,12 @@ static void test_tiles(void)                            /* what the robots meet 
                 chokes += choke;
                 if (choke) CHECK(o.bumped[0] & 2, "board %d: a choke only after a crate", board);
                 int pp = s.step % 16, in = (int)(s.cycle % 4), cadence = (in == 1 || in == 3) && pp >= 8;
-                if (!lead || !o.acted[0] || rs_plus_peak(&s) || s.plus_at[0] != pp || cadence) continue;   /* (its struck note) */
+                if (!lead || !o.acted[0] || rs_band_peak(&s) || s.band_at[0] != pp || cadence) continue;   /* (its struck note) */
                 int land = s.bot[0].stepped_tile, mod = o.played[0].modifier;
                 if (land == RS_T_ZAP) zap++, zap_ok += lead->dur <= step / 2u && lead->fx == 0;
                 else if (mod == RS_GLITCH) continue;      /* (GLITCH: clipped and plain wherever it is) */
                 else if (land == RS_T_PULSE) {
-                    uint32_t calls = rs_plus_section(&s) ? 16u : 12u, want = (calls - (uint32_t)pp) * step * 9u / 10u;
+                    uint32_t calls = rs_band_section(&s) ? 16u : 12u, want = (calls - (uint32_t)pp) * step * 9u / 10u;
                     pulse++, pulse_ok += (lead->fx & RS_FX_VIB_WIDE) && lead->dur >= (want < step * 3u / 2u ? want : step * 3u / 2u);
                 } else if (land == RS_T_ROTL || land == RS_T_ROTR)
                     rot++, rot_ok += (lead->fx & (land == RS_T_ROTL ? RS_FX_BEND_UP : RS_FX_BEND_DOWN)) != 0;
@@ -445,7 +445,7 @@ static void test_tiles(void)                            /* what the robots meet 
                 } else if (mod != RS_GLITCH && mod != RS_WOBBLE) plain++, plain_ok += (lead->fx & RS_FX_VIB_LATE) != 0;
             }
         }
-    printf("plus_test: zap rails %ld (short %ld), pulse pads %ld (held, singing %ld), rotators %ld (bent %ld), belts %ld (the belt's way %ld), "
+    printf("band_test: zap rails %ld (short %ld), pulse pads %ld (held, singing %ld), rotators %ld (bent %ld), belts %ld (the belt's way %ld), "
            "chokes %ld, the rest %ld (a late vibrato %ld)\n", zap, zap_ok, pulse, pulse_ok, rot, rot_ok, belt, belt_ok, chokes, plain, plain_ok);
     CHECK(zap > 10 && zap_ok == zap, "a zap rail's note short and plain (%ld of %ld)", zap_ok, zap);
     CHECK(pulse > 10 && pulse_ok * 10 >= pulse * 9, "a pulse pad's note held, with a wide vibrato (%ld of %ld)", pulse_ok, pulse);
@@ -461,7 +461,7 @@ static void test_arp_rules(void)                        /* the arpeggio by the H
     int t[12], shapes = 0;
     static char seen[4096];
     rs_default(&s);
-    s.music = RS_MUSIC_PLUS;
+    s.engine = RS_ENGINE_BAND;
     for (int x = 0; x < 5; x++)
         for (uint32_t cyc = 0; cyc < 18; cyc += 3) {
             s.bot[0].x = (int8_t)x, s.bot[0].y = 2, s.bot[1].x = (int8_t)x, s.bot[1].y = 2, s.cycle = cyc, s.bot[0].heat = 0;
@@ -492,7 +492,7 @@ static void test_follow_chain(void)                     /* FOLLOW and the chain 
     static struct rs_tick_out o;
     int rounds = 0, changed = 0, near_key = 0, ahead = 0;
     rs_default(&s);
-    s.music = RS_MUSIC_PLUS, s.rng = 4242;
+    s.engine = RS_ENGINE_BAND, s.rng = 4242;
     rs_compose_bassmod(&s);
     rs_set_follow(&s, 1);
     rs_start(&s);
@@ -512,7 +512,7 @@ static void test_follow_chain(void)                     /* FOLLOW and the chain 
             last_id = s.prog_id, last_key = s.prog_key, promised_ok = 0;
         }
     }
-    printf("plus_test: FOLLOW: %d rounds, %d new, %d in the key or a fifth off, %d as the last step said\n", rounds, changed, near_key, ahead);
+    printf("band_test: FOLLOW: %d rounds, %d new, %d in the key or a fifth off, %d as the last step said\n", rounds, changed, near_key, ahead);
     CHECK(rounds >= 19 && changed == rounds, "FOLLOW: a new progression every round (%d of %d)", changed, rounds);
     CHECK(near_key == rounds, "FOLLOW: the same key or a fifth away (%d of %d)", near_key, rounds);
     CHECK(ahead == rounds, "the bass knew the next round's first chord (%d of %d)", ahead, rounds);
@@ -520,7 +520,7 @@ static void test_follow_chain(void)                     /* FOLLOW and the chain 
         static const uint8_t CHAIN[RS_SEQ2_STEPS] = {3, 0, 10, RS_P_RND};
         int ok = 0, n = 0;
         rs_default(&s);
-        s.music = RS_MUSIC_PLUS, s.rng = 77;
+        s.engine = RS_ENGINE_BAND, s.rng = 77;
         rs_apply_prog(&s, 1, 2);                        /* I V vi IV in Bb */
         for (int i = 0; i < RS_SEQ2_STEPS; i++) s.seq2[i].prog = CHAIN[i];
         rs_seq2_toggle(&s);                             /* (stopped: on at once) */
@@ -554,6 +554,6 @@ int main(void)
     test_in_scale();
     test_harmony();
     test_drums();
-    printf("plus_test: %s\n", fails ? "FAILED" : "all pass");
+    printf("band_test: %s\n", fails ? "FAILED" : "all pass");
     return fails != 0;
 }

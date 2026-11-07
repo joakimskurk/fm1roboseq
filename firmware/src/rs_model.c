@@ -194,9 +194,9 @@ void rs_start(struct rs_state *s)
 {
     rs_reset(s);
     s->playing = 1, s->steer[0] = s->steer[1] = 0;
-    s->plus_lead = s->plus_echo = s->plus_bass = 0, s->plus_cell[0] = s->plus_cell[1] = -1, s->plus_cad = 0;
-    s->plus_at[0] = s->plus_at[1] = 0, s->plus_end = 0, s->plus_first = 255, s->plus_ans = -1;
-    for (int i = 0; i < 4; i++) s->plus_call[i] = -1;
+    s->band_lead = s->band_echo = s->band_bass = 0, s->band_cell[0] = s->band_cell[1] = -1, s->band_cad = 0;
+    s->band_at[0] = s->band_at[1] = 0, s->band_end = 0, s->band_first = 255, s->band_ans = -1;
+    for (int i = 0; i < 4; i++) s->band_call[i] = -1;
 }
 
 void rs_stop(struct rs_state *s)                        /* stopPlayback() */
@@ -436,7 +436,7 @@ void rs_tick(struct rs_state *s, struct rs_tick_out *o)  /* advanceSequence() */
         rs_score_event(s, o->events[i], (uint32_t)at * 112896u, o);   /* 10 ms: 441 samples x 256 */
         at++;
     }
-    if (s->music) rs_score_plus(s, o);                  /* PLUS: RoboSeq's own music from the same game (D34) */
+    if (s->engine) rs_score_band(s, o);                  /* BAND: RoboSeq's own music from the same game (D34) */
     if (s->rnd_due) {                                   /* seq 2's rolls, after the tick as the HTML's setTimeout */
         uint8_t due = s->rnd_due;
         s->rnd_due = 0;
@@ -525,11 +525,11 @@ void rs_cycle_bassmod(struct rs_state *s, int i, int field, int dir)   /* cycleB
     struct rs_bassmod_step *st = &s->bassmod[i & 7];
     s->prog_id = 0;                                     /* (made by hand now: no name) */
     dir = dir < 0 ? -1 : 1;
-    if (field == 0) {                                   /* (PLUS: every mode its roll uses, D33) */
-        static const uint8_t PLUS_OPTIONS[9] = {RS_SC_MAJOR, RS_SC_MINOR, RS_SC_PENTATONIC, RS_SC_MINPENTA, RS_SC_DORIAN,
+    if (field == 0) {                                   /* (BAND: every mode its roll uses, D33) */
+        static const uint8_t BAND_OPTIONS[9] = {RS_SC_MAJOR, RS_SC_MINOR, RS_SC_PENTATONIC, RS_SC_MINPENTA, RS_SC_DORIAN,
                                                 RS_SC_MIXOLYDIAN, RS_SC_LYDIAN, RS_SC_PHRYGIAN, RS_SC_CHROMATIC};
-        const uint8_t *opt = s->music ? PLUS_OPTIONS : SCALE_OPTIONS;
-        int at = 0, n = s->music ? 9 : 6;
+        const uint8_t *opt = s->engine ? BAND_OPTIONS : SCALE_OPTIONS;
+        int at = 0, n = s->engine ? 9 : 6;
         for (int k = 0; k < n; k++)
             if (opt[k] == st->scale) at = k;
         st->scale = opt[(at + dir + n) % n];
