@@ -17,7 +17,7 @@ and [SkurkyMello](https://github.com/joakimskurk/fm1mello).
 
 <p align="center"><img src="docs/screens/roboseq.gif" width="360" alt="The splash: the letters drop in, the two robots walk in from the sides and meet under a beating heart. Then HOME, the board playing: the robots walk their programs over belts, zap rails and rotators, the tiles light as they set them off, the steps they play framed down the board's sides"></p>
 
-<p align="center"><img src="docs/screens/reference-page.png" width="820" alt="The browser original playing: the transport, the board with its presets, and the two robots' program registers as step cards"></p>
+<p align="center"><img src="docs/screens/panel-battle.png" width="820" alt="RoboSeq on the FM-1, in fm1-emu: BATTLE, round 1, Scout-7 striking Echo-3 on the beat, the score bars in the header, the players' keys lit on the little keyboard at the screen's foot"></p>
 
 This one started as a little browser toy with a simple question: what if a sequencer were a board game? Two robots,
 register cards borrowed in spirit from RoboRally, a board full of conveyor belts and zap rails, and every move they
@@ -39,7 +39,7 @@ Enjoy the robots.
 
 **Getting started**
 1. [What it is](#what-it-is)
-2. [Try it](#try-it)
+2. [Try it without an FM-1](#try-it-without-an-fm-1)
 3. [Install](#install)
 4. [Your first five minutes](#your-first-five-minutes)
 5. [The panel and the keyboard](#the-panel-and-the-keyboard)
@@ -88,19 +88,16 @@ for how it sounds and behaves. This is its port to the FM-1 as firmware, built o
 [Dinghy](https://github.com/zvenson/dinghy) 0.4 by zvenson and, under that, the Felucca / SLOOP platform, made the same
 way as [SkurkyMello](https://github.com/joakimskurk/fm1mello).
 
-## Try it
+## Try it without an FM-1
 
-**The original, in a browser.** Open [`reference/roboseq.html`](reference/roboseq.html) in a browser (it loads
-Tone.js from the internet). The space bar or `S` plays and stops, `R` rolls new programs for both robots and `U`
-undoes; everything else is clicked: the presets, the board's tiles, every step. This is RoboSeq as it began, and it
-stays the reference for how the firmware sounds and behaves.
-
-**The firmware, without an FM-1.** fm1-emu runs the FM-1's own packages in the browser:
+RoboSeq runs in [fm1-emu](https://joakimeriksson.github.io/fm1-emu/), which runs the FM-1's own packages in a
+browser:
 1. Download `roboseq-X.Y.fwsc` from the [releases](https://github.com/joakimskurk/fm1roboseq/releases), or
    `packages` from a build under *Actions* on GitHub (`roboseq.fwsc` is in it).
 2. Open [fm1-emu](https://joakimeriksson.github.io/fm1-emu/), click **Open .fwsc…** (or drop the file on the synth)
    and press **Start**.
-3. Play it on the computer's keyboard, with the mouse, on a touch screen or with a MIDI keyboard.
+3. Play it on the computer's keyboard, with the mouse, on a touch screen or with a MIDI keyboard. Your first five
+   minutes are below.
 
 ## Install
 
@@ -424,7 +421,7 @@ make lead       # a solo with the lead over it: build/host/lead.wav
 On macOS `make test` and the host builds run in a small Docker image (`make image`), because Dinghy's host mode needs
 Linux's sections. `make reference` re-renders the browser original's sound (node and a Chromium). The panel picture
 above is `make emu`'s; the film at the top is the app itself on the computer (`make screens`, from
-`tests/roboseq/gif.txt`), and the browser original's picture is `node tools/tone-ref/page_shot.mjs`.
+`tests/roboseq/gif.txt`), and the battle at the top is `make panels`, in fm1-emu.
 
 **Measured.**
 - **The game and the score:** ORIGINAL plays the browser original's notes tick by tick, 88,120 notes over 36
