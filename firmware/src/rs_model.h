@@ -111,8 +111,8 @@ struct rs_note {
 };
 /* BAND's kit (D41): a hit's tone, in the note (ORIGINAL's hits are the HTML's: the noises' midi RS_NOISE, a kick's
  * fx 0). A snare's or a hihat's midi: its tone; a kick's midi its pitch and its fx: RS_KICK_* */
-#define RS_SNARE_KIT(pitch, snap, len) ((pitch) & 7 | ((snap) & 3) << 3 | ((len) & 3) << 5)   /* body 0..7 (147-262 Hz), crack 0..3, 0 short 1 mid 2 long */
-#define RS_HAT_KIT(bright, len) ((bright) & 7 | ((len) & 3) << 3)    /* 0..7 (3-10 kHz up), 0 closed 1 half 2 open 3 a crash */
+#define RS_SNARE_KIT(pitch, snap, len) (((pitch) & 7) | ((snap) & 3) << 3 | ((len) & 3) << 5)   /* body 0..7 (147-262 Hz), crack 0..3, 0 short 1 mid 2 long */
+#define RS_HAT_KIT(bright, len) (((bright) & 7) | ((len) & 3) << 3)    /* 0..7 (3-10 kHz up), 0 closed 1 half 2 open 3 a crash */
 enum { RS_KICK_CLICK = 1, RS_KICK_DRIVE = 2, RS_KICK_LONG = 4, RS_KICK_TIGHT = 8 };
 enum {                                                          /* a note's pitch gesture: a vibrato | a bend */
     RS_FX_VIB_LATE = 1,                                         /* a held note's: after a quarter second, growing, +-18 cents */
