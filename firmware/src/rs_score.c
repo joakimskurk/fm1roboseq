@@ -717,6 +717,41 @@ void rs_band_patch(const struct rs_board *b, struct rs_patch *p)
 
 static int slot(int p, int bar) { return bar == 12 ? p / 3 * 4 + (p % 3 ? p % 3 + 1 : 0) : p; }
 
+/* BAND's kit (D41), hit by hit: the drums' tone from the board and from what the robots do. The kick is tuned to the
+ * chord's root (41-78 Hz) and driven; it clicks on the one, when a robot dashes, bumps a crate or runs hot; it booms
+ * long among pulse pads and is tight among crates or zap rails. The snare's body is as high as Echo-3 stands, its
+ * crack bright with zap rails and belts, dark among pulse pads, harder when Echo-3 dashes; short among crates, long
+ * among pulse pads, a ghost short. The hihat is as bright as Scout-7 stands (belts and zap rails brighter, pulse
+ * pads darker), and as long as the drummer plays it: closed, half, open, a crash. */
+static void band_kit(const struct rs_state *s, struct rs_tick_out *o, int root, int p)
+{
+    int n[7] = {0};
+    for (int i = 0; i < RS_ROWS * RS_COLS; i++) n[s->board.t[i].type % 7]++;
+    int dash = (o->acted[0] && o->played[0].action == RS_DASH) || (o->acted[1] && o->played[1].action == RS_DASH);
+    int impact = dash || ((o->bumped[0] | o->bumped[1]) & 2) || s->bot[0].heat >= 4 || s->bot[1].heat >= 4;
+    int edash = o->acted[1] && o->played[1].action == RS_DASH;
+    for (int i = 0; i < o->nnotes; i++) {
+        struct rs_note *x = &o->notes[i];
+        if (x->voice == RS_V_KICK) {
+            x->midi = (int8_t)(28 + mod12(root - 28));
+            x->fx = (uint8_t)(RS_KICK_DRIVE | (p == 0 || impact ? RS_KICK_CLICK : 0) |
+                              (n[RS_T_PULSE] >= 3 ? RS_KICK_LONG : n[RS_T_BLOCK] >= 3 || n[RS_T_ZAP] >= 4 ? RS_KICK_TIGHT : 0));
+        } else if (x->voice == RS_V_SNARE) {
+            int pitch = (RS_ROWS - 1 - s->bot[1].y) * 7 / (RS_ROWS - 1);
+            int snap = n[RS_T_ZAP] >= 3 ? 3 : n[RS_T_PULSE] >= 3 ? 0 : n[RS_T_BELT] >= 3 ? 2 : 1;
+            int len = x->vel < 6000 ? 0 : n[RS_T_BLOCK] >= 3 ? 0 : n[RS_T_PULSE] >= 3 ? 2 : 1;
+            if (edash && snap < 3) snap++;
+            x->midi = (int8_t)RS_SNARE_KIT(pitch, snap, len);
+        } else if (x->voice == RS_V_HIHAT) {
+            int bright = (RS_ROWS - 1 - s->bot[0].y) + 2 + (n[RS_T_BELT] >= 3) + (n[RS_T_ZAP] >= 3) - (n[RS_T_PULSE] >= 3);
+            int len = x->dur >= SEC(0.4) ? 3 : x->dur >= SEC(0.1) ? 2 : x->dur >= SEC(0.05) ? 1 : 0, free = 1;
+            x->midi = (int8_t)RS_HAT_KIT(bright < 0 ? 0 : bright > 7 ? 7 : bright, len);
+            for (int j = 0; j < o->nnotes; j++) free &= o->notes[j].voice != RS_V_EX_CRACKLE || o->notes[j].at != x->at;
+            if (len == 3 && free) x->voice = RS_V_EX_CRACKLE, x->vel = scale_vel(x->vel, F(1.3));   /* the crash: its own voice */
+        }
+    }
+}
+
 void rs_score_band(struct rs_state *s, struct rs_tick_out *o)
 {
     if (s->step < 0) return;
@@ -747,6 +782,7 @@ void rs_score_band(struct rs_state *s, struct rs_tick_out *o)
             note(o, RS_V_A_PING, note_of(keep_in(i, sc, 60, 88), sc), q / 2u, 0, F(0.16));
         }
         band_drums(s, o, bar, beat);
+        band_kit(s, o, root, p);
         return;
     }
     if (p == 0) {                                       /* a bar: the tunes start again */
@@ -978,6 +1014,7 @@ void rs_score_band(struct rs_state *s, struct rs_tick_out *o)
     }
     unrub(s, o, root, sc, bass);
     band_drums(s, o, bar, beat);
+    band_kit(s, o, root, p);
     {                                                   /* the bar breathes: the one and three lean in */
         uint32_t f = p == 0 ? F(1.12) : p == bar / 2 ? F(1.1) : on_beat ? F(1.04) : F(0.96);
         for (int i = 0; i < o->nnotes; i++)

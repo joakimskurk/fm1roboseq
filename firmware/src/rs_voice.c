@@ -79,9 +79,18 @@ static const struct rs_vdef VDEF_VAR[2][4] = {
     {VD(RS_OSC_SQUARE, 0.003, 0.24, 0.12, 0.16), VD(RS_OSC_TRIANGLE, 0.003, 0.1, 0, 0.07),
      VD(RS_OSC_SQUARE, 0.005, 0.45, 0.5, 0.26), VD(RS_OSC_TRIANGLE, 0.008, 0.6, 0.6, 0.32)},
 };
+/* BAND's kit (D41): the kick long and tight, the snare short, mid and long, the hihat closed, half, open and a crash */
+static const struct rs_vdef KIT_KICK[2] = {MEM(0.5, 0.12, 6, 1.791759469228055, 0.05), MEM(0.17, 0.04, 6, 1.791759469228055, 0.03)};
+static const struct rs_vdef KIT_SNARE[3] = {VD(RS_OSC_WHITE, 0.001, 0.08, 0, 0.03), VD(RS_OSC_WHITE, 0.001, 0.14, 0, 0.05),
+                                            VD(RS_OSC_WHITE, 0.001, 0.22, 0, 0.08)};
+static const struct rs_vdef KIT_HAT[4] = {VD(RS_OSC_WHITE, 0.001, 0.035, 0, 0.01), VD(RS_OSC_WHITE, 0.001, 0.09, 0, 0.03),
+                                          VD(RS_OSC_WHITE, 0.001, 0.25, 0, 0.08), VD(RS_OSC_WHITE, 0.001, 0.9, 0, 0.3)};
 static inline const struct rs_vdef *vdef(const struct rs_voice *v)
 {
     uint8_t e = v->shape;
+    if (v->kit && v->def == RS_V_SNARE) { uint32_t l = (uint32_t)(v->kit - 1) >> 5 & 3u; return &KIT_SNARE[l > 2 ? 2 : l]; }
+    if (v->kit && (v->def == RS_V_HIHAT || v->def == RS_V_EX_CRACKLE)) return &KIT_HAT[(uint32_t)(v->kit - 1) >> 3 & 3u];
+    if (v->def == RS_V_KICK && (v->fx & (RS_KICK_LONG | RS_KICK_TIGHT))) return &KIT_KICK[v->fx & RS_KICK_LONG ? 0 : 1];
     return e && e <= 2 && v->def < 4 ? &VDEF_VAR[e - 1][v->def] : &VDEF[v->def];
 }
 
@@ -190,8 +199,19 @@ static void lin(struct rs_voice *v, uint8_t stage, int32_t target, uint32_t n)
     v->step = (int32_t)((target - v->env) / (int32_t)v->left);
 }
 
+static void kit_strike(struct rs_voice *v, int midi)    /* a snare's or a hihat's hit: the HTML's noise, or BAND's tone */
+{
+    v->kit = midi >= 0 ? (uint8_t)(midi + 1) : 0, v->kit_age = 0, v->hp_x = v->hp_y = 0;
+    if (v->kit && v->def == RS_V_SNARE) {               /* the body: 147-262 Hz, from half again above, falling */
+        static const uint8_t BODY[8] = {50, 51, 53, 54, 56, 57, 59, 60};
+        v->body_end = note_inc[BODY[midi & 7]], v->body_inc = v->body_end + v->body_end / 2u, v->body_ph = 0, v->body_amp = 26000;
+    }
+}
+
 static void apply(struct rs_voice *v, const struct rs_vev *e)
 {
+    if ((e->kind & 15) == EV_ATTACK && (v->def == RS_V_SNARE || v->def == RS_V_HIHAT || v->def == RS_V_EX_CRACKLE))
+        kit_strike(v, e->midi);                         /* (BAND's crash rides the crackle's voice: its own, to ring) */
     const struct rs_vdef *d = vdef(v);
     switch (e->kind & 15) {
     case EV_ATTACK: {
@@ -215,7 +235,7 @@ static void apply(struct rs_voice *v, const struct rs_vev *e)
         break;
     case EV_STOP: v->running = 0; break;
     case EV_FREQ:
-        v->fx = (uint8_t)(e->kind >> 4), v->fx_age = 0;       /* (its gesture starts with it) */
+        v->fx = (uint8_t)(e->kind >> 4), v->fx_age = 0, v->kit_age = 0;   /* (its gesture starts with it) */
         v->inc = note_inc[(uint8_t)e->midi & 127];
         v->binv = 0xFFFFFFFFu / (v->inc >> 15 ? v->inc >> 15 : 1u);   /* (32-bit, once a note) */
         if (d->osc == RS_OSC_MEMBRANE) {                        /* from octaves x f down to f over pitchDecay */
@@ -370,6 +390,24 @@ static int32_t source(struct rs_voice *v)                       /* one sample, Q
         x ^= x << 13, x ^= x >> 17, x ^= x << 5;
         v->rng = x;
         int32_t w = (int32_t)(x >> 16) - 32768;                 /* -1..1, Q15 */
+        if (d->osc == RS_OSC_WHITE && v->kit) {             /* BAND's kit (D41): the noise high-passed; a snare's body */
+            static const int16_t HP_SNARE[4] = {30081, 27623, 24642, 20775};   /* 0.6, 1.2, 2, 3.2 kHz: exp(-2 pi fc / fs), Q15 */
+            static const int16_t HP_HAT[8] = {21365, 18547, 16057, 13926, 12091, 10486, 9109, 7897};   /* 3 .. 10 kHz */
+            uint32_t k = (uint32_t)(v->kit - 1);
+            int snare = v->def == RS_V_SNARE;
+            int32_t a = snare ? HP_SNARE[k >> 3 & 3u] : HP_HAT[k & 7u];
+            int32_t y = (int32_t)(((int64_t)a * (v->hp_y + w - v->hp_x)) >> 15);
+            v->hp_x = w, v->hp_y = y;
+            if (snare) {                                    /* the crack and a body falling from half again above */
+                int32_t body = (int32_t)(((int64_t)sine_q15(v->body_ph) * v->body_amp) >> 15);
+                v->body_ph += v->body_inc;
+                v->body_inc = v->body_end + (uint32_t)(((uint64_t)(v->body_inc - v->body_end) * 32650u) >> 15);   /* (6 ms) */
+                v->body_amp = (v->body_amp * 32740) >> 15;  /* (26 ms) */
+                s = y + (y >> 1) + body;
+            } else
+                s = y * 2 + (y >> 1);                       /* (the high-passed noise up to the HTML's hat's level) */
+            break;
+        }
         if (d->osc == RS_OSC_WHITE) { s = w; break; }
         /* y = (y + 0.02 w) / 1.02, out 3.5 y: y in Q15 x 2^8 for the small steps */
         v->brown = (int32_t)(((int64_t)v->brown * 1028016 + (int64_t)w * 256 * 20560) >> 20);   /* 1/1.02, 0.02/1.02, Q20 */
@@ -449,6 +487,32 @@ static void voice_play(struct rs_voice *v, int32_t *out, const int32_t *e, uint3
         }
         break;
     case RS_OSC_MEMBRANE:
+        if (v->def == RS_V_KICK && (v->fx & (RS_KICK_CLICK | RS_KICK_DRIVE))) {   /* BAND's kick (D41): driven, a click */
+            for (j = 0; j < k; j++) {
+                int32_t x = sine_q15(ph);
+                if (v->fx & RS_KICK_DRIVE) {                /* 1.5 u - 0.5 u^3 of u = 2 x: a rounder square, the same peak */
+                    int32_t u = x * 2;
+                    u = u > 32767 ? 32767 : u < -32767 ? -32767 : u;
+                    int32_t u3 = (int32_t)(((((int64_t)u * u) >> 15) * u) >> 15);
+                    x = (3 * u - u3) >> 1;
+                }
+                if ((v->fx & RS_KICK_CLICK) && v->kit_age < 160u) {   /* 3.6 ms of noise, falling: the beater */
+                    uint32_t r = v->rng;
+                    r ^= r << 13, r ^= r >> 17, r ^= r << 5;
+                    v->rng = r;
+                    x += (((int32_t)(r >> 16) - 32768) * (int32_t)(160u - v->kit_age)) >> 9;   /* (no 64-bit division) */
+                }
+                v->kit_age++;
+                out[j] += vlevel(x, e[j]);
+                ph += inc;
+                if (v->glide_left) {
+                    inc = (uint32_t)(((uint64_t)inc * v->glide_k) >> 30);
+                    if (--v->glide_left == 0) inc = v->inc_end;
+                }
+            }
+            v->inc = inc;
+            break;
+        }
         for (j = 0; j < k; j++) {
             out[j] += vlevel(sine_q15(ph), e[j]);
             ph += inc;

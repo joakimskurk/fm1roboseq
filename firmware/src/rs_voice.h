@@ -38,6 +38,10 @@ struct rs_voice {
     /* the note's pitch gesture (BAND, D37a): RS_FX_*, set with its frequency; 0 is the HTML's steady pitch */
     uint8_t fx;
     uint32_t fx_age, vib_ph;                                    /* samples since the note began; the vibrato's phase */
+    /* BAND's kit (D41): a snare's or a hihat's tone (its midi + 1; 0: the HTML's noise), a high-pass, a snare's body */
+    uint8_t kit;
+    int32_t hp_x, hp_y, body_amp;
+    uint32_t body_ph, body_inc, body_end, kit_age;
 };
 
 

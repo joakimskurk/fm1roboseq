@@ -328,7 +328,16 @@ The bank by number, the numbers Seq 2's K4 shows:
 ### The drums
 
 - **ORIGINAL.** The pattern as set on LFO.
-- **BAND.** The same pattern played by a drummer:
+- **BAND.** The same pattern played by a drummer, on a kit of its own (ORIGINAL keeps the HTML's: a sine kick at C1
+  and white noise):
+  - **The kick** is tuned to the chord's root (41 to 78 Hz) and driven, so it is heard on a small speaker. It clicks
+    on the one and when a robot dashes, bumps a crate or runs hot. It booms long among pulse pads (GARDEN) and is
+    tight among crates or zap rails (MAZE, GAUNTLET).
+  - **The snare** is a body falling from half again above, as high as Echo-3 stands (147 to 262 Hz), under a
+    high-passed crack. The crack is bright with zap rails and belts, dark among pulse pads, and harder when Echo-3
+    dashes. The snare is short among crates and long among pulse pads.
+  - **The hihat** is high-passed noise, as bright as Scout-7 stands: belts and zap rails brighter, pulse pads darker.
+    It is as long as the drummer plays it: closed, half, open, or a crash on a voice of its own that rings out.
   - dynamics, never two hits quite the same;
   - ghost snares before the backbeat;
   - a kick pushing into four every other loop;

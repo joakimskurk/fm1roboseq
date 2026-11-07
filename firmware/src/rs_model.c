@@ -980,7 +980,7 @@ uint32_t rs_selfcheck(void)
         static struct rs_voice v;
         static int32_t buf[256];
         rs_voice_init(&v, vd, 12345);
-        rs_voice_note(&v, 64, 2000, 45 + vd, 24000);
+        rs_voice_note(&v, 64, 2000, vd == RS_V_SNARE || vd == RS_V_HIHAT || vd == RS_V_EX_CRACKLE ? RS_NOISE : 45 + vd, 24000);   /* (the HTML's hits: D41) */
         for (uint32_t t = 0; t < 4096; t += 256) {
             for (int i = 0; i < 256; i++) buf[i] = 0;
             rs_voice_render(&v, buf, 256, t);

@@ -222,7 +222,9 @@ static void test_drums(void)                            /* the fills, the crashe
             if (hat && hat->vel) quiet_hats_ok = 0;
             if (dp == 15) fills += sn && sn->vel > 20000;
         }
-        if (dp == 0 && s.cycle % 4 == 0 && s.cycle > 0 && hat) crashes += hat->dur >= SEC(0.5);
+        for (int i = 0; i < o.nnotes; i++)              /* (BAND's crash rides the crackle's voice, D41) */
+            if (dp == 0 && s.cycle % 4 == 0 && s.cycle > 0 && o.notes[i].at == 0 && o.notes[i].dur >= SEC(0.5) &&
+                (o.notes[i].voice == RS_V_HIHAT || o.notes[i].voice == RS_V_EX_CRACKLE)) crashes++;
         if (sn && sn->vel < 6000) ghosts++;
         if (hat && hat->dur > SEC(0.1) && hat->dur < SEC(0.3)) opens++;
     }
@@ -598,6 +600,56 @@ static void test_balance(void)                          /* Scout-7 sings in fron
     CHECK(qsum <= 24 * RS_NBOARDS, "Scout-7 quiet a fifth of the time or less, on the boards together (%d%%)", qsum / RS_NBOARDS);
 }
 
+static void test_kit(void)                             /* BAND's kit (D41): the hits' tone from the board and the moves */
+{
+    static struct rs_state s;
+    static struct rs_tick_out o;
+    long kicks = 0, tuned = 0, ones = 0, clicked = 0, snares = 0, snare_ok = 0, hats = 0, hat_ok = 0, crashes = 0;
+    int long_garden = 0, tight_maze = 0, orig_plain = 1;
+    for (int board = 0; board < RS_NBOARDS; board++)
+        for (int eng = 0; eng < 2; eng++) {
+            rs_default(&s);
+            rs_load_board(&s, (uint8_t)board);
+            s.engine = (uint8_t)eng;
+            rs_start(&s);
+            while (s.cycle < 8) {
+                rs_tick(&s, &o);
+                if (s.step < 0) continue;
+                const struct rs_bassmod_step *ms = &s.bassmod[s.vm_index % s.bassmod_len];
+                int root = chord_root(&s, ms, ms->scale);
+                for (int i = 0; i < o.nnotes; i++) {
+                    const struct rs_note *n = &o.notes[i];
+                    if (!eng) {
+                        if (n->voice == RS_V_KICK) orig_plain &= n->midi == 24 && n->fx == 0;
+                        if (n->voice == RS_V_SNARE || n->voice == RS_V_HIHAT) orig_plain &= n->midi == RS_NOISE;
+                        continue;
+                    }
+                    if (n->voice == RS_V_KICK) {
+                        kicks++, tuned += ((n->midi - root) % 12 + 12) % 12 == 0 && n->midi >= 28 && n->midi <= 39 && (n->fx & RS_KICK_DRIVE);
+                        if (s.step == 0) ones++, clicked += (n->fx & RS_KICK_CLICK) != 0;
+                        if (board == RS_B_GARDEN) long_garden |= (n->fx & RS_KICK_LONG) != 0;
+                        if (board == RS_B_MAZE) tight_maze |= (n->fx & RS_KICK_TIGHT) != 0;
+                    } else if (n->voice == RS_V_SNARE && n->vel) {
+                        int want = (RS_ROWS - 1 - s.bot[1].y) * 7 / (RS_ROWS - 1);
+                        snares++, snare_ok += n->midi >= 0 && (n->midi & 7) == want;
+                    } else if ((n->voice == RS_V_HIHAT || n->voice == RS_V_EX_CRACKLE) && n->vel && n->midi >= 0) {
+                        int len = n->midi >> 3 & 3;
+                        hats++, hat_ok += len == (n->dur >= SEC(0.4) ? 3 : n->dur >= SEC(0.1) ? 2 : n->dur >= SEC(0.05) ? 1 : 0);
+                        crashes += n->voice == RS_V_EX_CRACKLE && len == 3;
+                    }
+                }
+            }
+        }
+    printf("band_test: the kit: %ld kicks (%ld tuned to the root, driven), %ld of %ld ones clicked, %ld snares (%ld as high as Echo-3), %ld hats (%ld as long as played), %ld crashes\n",
+           kicks, tuned, clicked, ones, snares, snare_ok, hats, hat_ok, crashes);
+    CHECK(orig_plain, "ORIGINAL's drums are the HTML's: C1, the noises");
+    CHECK(kicks > 100 && tuned == kicks, "every kick tuned to the chord's root and driven (%ld of %ld)", tuned, kicks);
+    CHECK(ones > 20 && clicked == ones, "the one's kick clicks (%ld of %ld)", clicked, ones);
+    CHECK(long_garden && tight_maze, "GARDEN's kick booms long, MAZE's is tight");
+    CHECK(snares > 50 && snare_ok == snares, "the snare's body as high as Echo-3 stands (%ld of %ld)", snare_ok, snares);
+    CHECK(hats > 100 && hat_ok == hats && crashes > 5, "the hats as long as the drummer plays them, crashes on their own voice (%ld of %ld, %ld)", hat_ok, hats, crashes);
+}
+
 int main(void)
 {
     test_balance();
@@ -611,6 +663,7 @@ int main(void)
     test_in_scale();
     test_harmony();
     test_drums();
+    test_kit();
     printf("band_test: %s\n", fails ? "FAILED" : "all pass");
     return fails != 0;
 }

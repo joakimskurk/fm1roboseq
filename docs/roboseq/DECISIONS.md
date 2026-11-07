@@ -638,3 +638,52 @@ band_test (each robot's voice alone through the mix, 12 loops a board):
 - Quiet 11 to 28 % of the time, against 20 to 38 % before; the rest is the answer beat and the zap rails' staccato.
 - The tune, the answers, A sparser than B, the scale and the rubs as before.
 
+## D41. BAND's kit: punch, and the board and the moves in the drums (2026-11-07)
+
+The product owner: more punch in the drums by design, and some of their parameters changing with the board and the
+movement. The HTML's kit is a sine kick at C1, 33 Hz, gliding from 196 Hz, most of it under what a small speaker
+plays, and a snare and a hihat of plain white noise, the hihat dying in 40 ms whatever its length (so an open hat or
+a crash was a closed one). ORIGINAL keeps it bit for bit: its hits carry no tone.
+
+BAND's hits carry their tone in the note: a snare's or a hihat's midi, which the HTML's noise does not use, and a
+kick's pitch and fx.
+
+**The kit (rs_voice.c):**
+- **Kick:** driven (1.5u - 0.5u^3 of twice the sine: a rounder square at the same peak), a 3.6 ms click of falling
+  noise (the beater), and a long and a tight decay beside the HTML's.
+- **Snare:** noise through a one-pole high-pass (0.6 to 3.2 kHz: the crack) over a sine body falling from half again
+  above in 6 ms and dying in 26 ms, at 147 to 262 Hz. Short, mid and long decays.
+- **Hihat:** noise high-passed at 3 to 10 kHz, closed, half, open (0.25 s) and a crash (0.9 s).
+- **Crash:** BAND's crash rides the crackle's voice (an explosion's, a death's), so the next hat does not cut it.
+
+All integers in the interrupt, no 64-bit division. fm1-emu: the worst block 31 % (28 before).
+
+**The hits (rs_score.c's band_kit, after the drummer):**
+- **Kick:**
+  - tuned to the chord's root in 41 to 78 Hz, and driven;
+  - it clicks on the one, and when a robot dashes, bumps a crate or runs hot (heat 4);
+  - long among three pulse pads or more, tight among three crates or four zap rails.
+- **Snare:**
+  - its body is as high as Echo-3 stands;
+  - its crack is bright with zap rails, a little brighter with belts, dark among pulse pads, a step harder when
+    Echo-3 dashes;
+  - short among crates and for a ghost, long among pulse pads.
+- **Hihat:**
+  - as bright as Scout-7 stands: belts and zap rails a step brighter, pulse pads a step darker;
+  - as long as the drummer plays it.
+
+Measured (the drums alone through the mix, BAND against ORIGINAL, DEFAULT):
+- the kick 7 dB more between 150 and 400 Hz and 18 dB more between 0.4 and 2 kHz, 3 dB less under 60 Hz, its peak
+  2 dB higher;
+- the snare 14 dB more body, its crack as the HTML's;
+- the hats 30 dB less under 400 Hz;
+- GARDEN's kick the longest, MAZE's the tightest.
+
+band_test:
+- every kick tuned to its root and driven, every one's kick clicked;
+- GARDEN long, MAZE tight;
+- every snare as high as Echo-3, every hat as long as played, the crashes on their own voice;
+- ORIGINAL's drums the HTML's.
+
+The model's fingerprint stays 150e92e1: the selfcheck plays the HTML's hits.
+
