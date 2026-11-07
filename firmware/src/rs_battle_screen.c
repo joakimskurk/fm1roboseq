@@ -3,7 +3,7 @@
  * the countdown, a round won, and the match: the winner, big. Included after rs_screen.c and rs_splash.c. */
 
 static const char *const BT_NAME[2] = {"SCOUT-7", "ECHO-3"};
-static const uint8_t BT_KEY[2][5] = {{0, 1, 2, 4, 6}, {19, 20, 21, 23, 24}};   /* the keys: left, up, down, right, strike */
+static const uint8_t BT_KEY[2][5] = {{0, 1, 2, 4, 7}, {19, 20, 21, 23, 26}};   /* left, up, down, right; strike a white key on */
 static const uint8_t BT_DIR[4] = {RS_W, RS_N, RS_S, RS_E};
 
 static void bt_banner(const char *big, const char *small, uint16_t c)   /* a band over the arena, its words in it */
@@ -29,13 +29,22 @@ static void bt_score(int b, uint32_t wins, uint32_t to_win)   /* a robot's score
     }
 }
 
-static void bt_keymap(int32_t y)                 /* the two players' keys on the little keyboard */
+static void bt_keymap(int32_t y, uint32_t held)  /* the two players' keys on the little keyboard, lit as they are held */
 {
     uint16_t col[27] = {0};
     for (int p = 0; p < 2; p++)
-        for (int k = 0; k < 5; k++)
-            col[BT_KEY[p][k]] = k == 4 ? C_WHITE : p ? C_BOT_B : C_BOT_A;
+        for (int k = 0; k < 5; k++) {
+            uint16_t c = k == 4 ? (p ? C_WARN : C_ACCENT) : p ? C_BOT_B : C_BOT_A;
+            col[BT_KEY[p][k]] = held >> BT_KEY[p][k] & 1u ? mix565(C_WHITE, c, 100) : mix565(c, C_BG, 120);
+        }
     draw_keymap(y, col);
+}
+
+static void bt_life(int32_t x, int b, int32_t hp)   /* a robot's life in the header: six pips */
+{
+    uint16_t c = hp <= 2 ? C_DANGER : hp <= 4 ? C_WARN : C_PULSE;
+    for (int32_t k = 0; k < 6; k++) cv_rect(x + k * 7, 5, 5, 8, k < hp ? c : RGB(0x1a, 0x1a, 0x2e));
+    (void)b;
 }
 
 static void bt_winner(const struct rs_battle *t)
@@ -57,21 +66,26 @@ static void bt_winner(const struct rs_battle *t)
     screen_out();
 }
 
-static void draw_battle(const struct rs_view *v, const struct rs_fx *fx, uint32_t now_ms, uint8_t to_win, uint8_t arena)
+static void draw_battle(const struct rs_view *v, const struct rs_fx *fx, uint32_t now_ms, uint8_t to_win, uint8_t arena,
+                        uint32_t held)
 {
     const struct rs_battle *t = &v->battle;
     int beat = v->loop_len % 3 == 0 && v->loop_len % 4 != 0 ? 3 : 4, b, live = v->playing && t->phase != RS_BT_OFF;
     uint32_t goal = live ? t->to_win : to_win;
     if (live && t->phase == RS_BT_MATCH) { bt_winner(t); return; }
     cv_begin(240, 240, C_BG);
-    /* the header: the names, the round between; down the sides the score bars */
+    /* the header: the names and their lives, the round between; down the sides the score bars */
     cv_text(4, 1, &FONT_S, BT_NAME[0], C_BOT_A);
     cv_text(236 - text_w(&FONT_S, BT_NAME[1]), 1, &FONT_S, BT_NAME[1], C_BOT_B);
+    for (int r = 0; r < 2; r++) {
+        int32_t heat = v->bot[r].heat < 0 ? 0 : v->bot[r].heat > 6 ? 6 : v->bot[r].heat;
+        bt_life(r ? 236 - text_w(&FONT_S, BT_NAME[1]) - 46 : 64, r, live ? 6 - heat : 6);
+    }
     {
-        char r[12] = "ROUND 1";
-        r[6] = (char)('0' + (live ? t->round : 1) % 10u);
+        char r[4] = "R1";
+        r[1] = (char)('0' + (live ? t->round : 1) % 10u);
         int hot = live && t->phase == RS_BT_FIGHT && t->beats >= RS_BT_OVERHEAT;
-        const char *mid = hot ? "OVERHEAT" : live ? r : "VS";
+        const char *mid = hot ? "HOT" : live ? r : "VS";
         cv_text(120 - text_w(&FONT_S, mid) / 2, 1, &FONT_S, mid, hot ? C_DANGER : C_MUTED);
     }
     bt_score(0, live ? t->wins[0] : 0, goal), bt_score(1, live ? t->wins[1] : 0, goal);
@@ -106,14 +120,7 @@ static void draw_battle(const struct rs_view *v, const struct rs_fx *fx, uint32_
     }
     for (b = 0; b < 2; b++)
         if ((int32_t)(fx->boom_until[b] - now_ms) > 0) draw_explosion(BX + v->bot[b].x * CELL, BY + v->bot[b].y * CELL, b);
-    /* the foot: each robot's life (6, less its heat) */
-    for (b = 0; b < 2; b++) {
-        int32_t heat = v->bot[b].heat < 0 ? 0 : v->bot[b].heat > 6 ? 6 : v->bot[b].heat, hp = live ? 6 - heat : 6, x = b ? 124 : 4;
-        uint16_t c = hp <= 2 ? C_DANGER : hp <= 4 ? C_WARN : C_PULSE;
-        for (int32_t k = 0; k < 6; k++) cv_rect(x + k * 19, 226, 17, 10, k < hp ? c : RGB(0x1a, 0x1a, 0x2e));
-        if (b) cv_rect(x, 224, 112, 1, C_BOT_B);
-        else cv_rect(x, 224, 112, 1, C_BOT_A);
-    }
+    bt_keymap(222, held);                       /* the foot: the players' keys, lit as they are held */
     /* what is happening */
     if (!live) {                                /* stopped: how to play, the match's settings */
         static const char *const AR[RS_NARENAS] = {"SAME", "NEXT ONE", "RANDOM"};
@@ -126,15 +133,14 @@ static void draw_battle(const struct rs_view *v, const struct rs_fx *fx, uint32_
         cv_rect(10, 26, 220, 176, RGB(0x05, 0x10, 0x10));
         frame(10, 26, 220, 176, 1, C_MUTED);
         cv_text(120 - text_w(&FONT_L, "BATTLE") / 2, 30, &FONT_L, "BATTLE", C_WHITE);
-        cv_text(18, 66, &FONT_S, "SCOUT-7 F3 F#3 G3 A3", C_BOT_A), cv_text(18, 80, &FONT_S, "  STRIKE / PLAY B3", C_BOT_A);
-        cv_text(18, 96, &FONT_S, "ECHO-3  C5 C#5 D5 E5", C_BOT_B), cv_text(18, 110, &FONT_S, "  STRIKE / PLAY F5", C_BOT_B);
+        cv_text(18, 66, &FONT_S, "SCOUT-7 F3 F#3 G3 A3", C_BOT_A), cv_text(18, 80, &FONT_S, "  STRIKE / PLAY C4", C_ACCENT);
+        cv_text(18, 96, &FONT_S, "ECHO-3  C5 C#5 D5 E5", C_BOT_B), cv_text(18, 110, &FONT_S, "  STRIKE / PLAY G5", C_WARN);
         cv_rect(18, 126, 204, 1, mix565(C_MUTED, C_BG, 90));
         cv_text(18, 132, &FONT_S, "K2 ROUNDS TO WIN", C_MUTED), cv_text(222 - text_w(&FONT_S, ro), 132, &FONT_S, ro, C_WHITE);
         cv_text(18, 146, &FONT_S, "K3 ARENA", C_MUTED), cv_text(222 - text_w(&FONT_S, arena_name), 146, &FONT_S, arena_name, C_WHITE);
         cv_text(18, 160, &FONT_S, "K4 EACH ROUND", C_MUTED);
         cv_text(222 - text_w(&FONT_S, AR[arena % RS_NARENAS]), 160, &FONT_S, AR[arena % RS_NARENAS], C_WHITE);
         cv_text(120 - text_w(&FONT_S, "PLAY: FIGHT") / 2, 182, &FONT_S, "PLAY: FIGHT", C_ACCENT);
-        bt_keymap(204);
     } else if (t->phase == RS_BT_READY) {       /* the countdown: the round, then 4 3 2 1 */
         char r[12] = "ROUND 1", d[2] = "4";
         r[6] = (char)('0' + t->round % 10u), d[0] = (char)('0' + (t->count < 5 ? t->count : 4));

@@ -395,8 +395,8 @@ static void keys_init(void)
     }
 }
 
-/* ---- the battle mode (D42): two players on the keyboard, a cluster each at its ends, as WASD and F: Scout-7's
- * F3 F#3 G3 A3 (left, up, down, right) and B3 (strike), Echo-3's C5 C#5 D5 E5 and F5. A way held is a step on every
+/* ---- the battle mode (D42): two players on the keyboard, a cluster each at its ends, as WASD, a white key free, and
+ * the strike: Scout-7's F3 F#3 G3 A3 (left, up, down, right) and C4, Echo-3's C5 C#5 D5 E5 and G5. A way held is a step on every
  * beat (the last one pressed, of those held); the strike held or tapped strikes on the next beat with the other in
  * reach, and out of reach it plays the lead: a tone of the chord where the robot stands, on up the chord as it is
  * pressed again on one tile (rs_battle_lead_note), held as long as the key is. */
@@ -408,7 +408,9 @@ static uint16_t bt_bpm_was;
 
 static int battle_keys(uint32_t held, uint32_t down)
 {
-    int changed = 0;
+    static uint32_t was;
+    int changed = held != was;                          /* (any key down or up: the keyboard on the screen lights it) */
+    was = held;
     for (int p = 0; p < 2; p++) {
         uint8_t hold = 0;
         for (int k = 0; k < 4; k++)
@@ -787,7 +789,7 @@ static void app_main(void)
             else if (page == PAGE_FX) draw_mix(mix.level, mix_cursor, colour_amt);
             else if (page == PAGE_ENV) draw_editor(v, &game, env_cx, env_cy, (fm1_ms / 300u) & 1u, env_edited);
             else if (page == PAGE_BOARDS) draw_boards(&game, (fm1_ms / 300u) & 1u, env_edited);
-            else if (page == PAGE_BATTLE) draw_battle(v, &fx, fm1_ms, bt_to_win, bt_arena);
+            else if (page == PAGE_BATTLE) draw_battle(v, &fx, fm1_ms, bt_to_win, bt_arena, notes);
             else draw_board(v, &fx, &ui, fm1_ms);
             due = fx_due(&fx, fm1_ms);
         }

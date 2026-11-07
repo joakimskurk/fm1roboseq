@@ -97,24 +97,24 @@ int main(void)
     draw_mix(LEVEL, 6, 40), shot("mix");
     {                                           /* the battle mode (D42): how to play, the countdown, a strike, a round, the winner */
         rs_default(&g), g.engine = RS_ENGINE_BAND, view_ui(), v.battle = g.battle;
-        draw_battle(&v, &fx, 0, 3, RS_ARENA_NEXT), shot("battle");
+        draw_battle(&v, &fx, 0, 3, RS_ARENA_NEXT, 0), shot("battle");
         rs_start(&g), rs_battle_start(&g, 3, RS_ARENA_SAME);
         while (g.battle.count > 2) rs_tick(&g, &o);
         view_ui(), v.battle = g.battle;
-        draw_battle(&v, &fx, 0, 3, RS_ARENA_NEXT), shot("battle-countdown");
+        draw_battle(&v, &fx, 0, 3, RS_ARENA_NEXT, 0), shot("battle-countdown");
         while (g.battle.phase == RS_BT_READY) rs_tick(&g, &o);
         g.bot[0].x = 1, g.bot[0].y = 2, g.bot[0].dir = RS_E, g.bot[1].x = 2, g.bot[1].y = 2, g.bot[1].dir = RS_W, g.bot[1].heat = 2;
         rs_battle_keys(&g, 0, 0, 1, 0), rs_battle_keys(&g, 1, RS_N + 1, 0, 0);
         do rs_tick(&g, &o); while (!(o.move_tick && g.step % 4 == 0));
         view_ui(), v.battle = g.battle, fx.clash_until[1] = 100;
-        draw_battle(&v, &fx, 0, 3, RS_ARENA_NEXT), shot("battle-strike");
+        draw_battle(&v, &fx, 0, 3, RS_ARENA_NEXT, 1u << 7 | 1u << 20), shot("battle-strike");   /* (C4 and C#5 held) */
         memset(&fx, 0, sizeof fx);
         g.battle.phase = RS_BT_ROUND, g.battle.winner = 0, g.battle.wins[0] = 1, g.bot[1].dying = 1, g.bot[1].heat = 6;
         view_ui(), v.battle = g.battle;
-        draw_battle(&v, &fx, 0, 3, RS_ARENA_NEXT), shot("battle-round");
+        draw_battle(&v, &fx, 0, 3, RS_ARENA_NEXT, 0), shot("battle-round");
         g.battle.phase = RS_BT_MATCH, g.battle.winner = 1, g.battle.wins[0] = 1, g.battle.wins[1] = 3;
         view_ui(), v.battle = g.battle;
-        draw_battle(&v, &fx, 0, 3, RS_ARENA_NEXT), shot("battle-winner");
+        draw_battle(&v, &fx, 0, 3, RS_ARENA_NEXT, 0), shot("battle-winner");
     }
     return 0;
 }

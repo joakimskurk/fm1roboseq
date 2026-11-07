@@ -756,3 +756,9 @@ it); rounds, then "<robot> wins" with the winning robot's picture. Along the way
 match on each of the six arenas. Every match ends: 24 rounds of 46 beats on average, 12 hits of 15 strikes, and no
 one hit two beats running.
 
+**D42, later the same day: the keys.** The product owner, on the screens: a white key free between WASD and the
+strike, and the keys lit on the keyboard. So Scout-7 strikes on C4 (B3 free) and Echo-3 on G5 (F5 free). The little
+keyboard is now at the foot of the fight too: each player's keys dim in its colour (the strike in the robot's
+accent), lit while held. The FM-1's keys have no lights, so the screen is where they light. The lives moved into the
+header beside the names.
+
