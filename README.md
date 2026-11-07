@@ -2,6 +2,23 @@
 
 # RoboSeq for the M-VAVE FM-1
 
+A sequencer that is a board game. Two robots walk a 5 x 5 board of conveyor belts, zap rails and rotators, each
+running a program of moves, and where they go, what they ride and what they bump into is the music. You play it by
+reaching in while it runs: steer them on the black keys, rewrite their programs, change their board, solo over them,
+or hand a friend the other end of the keyboard and fight them on the beat. A Dinghy 0.4 app, in the same family as
+[VaveHero](https://github.com/joakimskurk/fm1vavehero), [Star Distroyer](https://github.com/joakimskurk/fm1stardistroyer)
+and [SkurkyMello](https://github.com/joakimskurk/fm1mello).
+
+> **Status: playable, not yet on a real FM-1.** Every page, both engines, the lead and the battle are in, and the
+> project is kept over a power-off. It is tested on the computer and measured in
+> [fm1-emu](https://github.com/joakimeriksson/fm1-emu), but it has not met a real FM-1: if you have one,
+> [FIRST_FLASH.md](FIRST_FLASH.md) is a half-hour checklist with the way back (hold OCT- while switching on). The plan
+> is in [ROADMAP.md](ROADMAP.md).
+
+<p align="center"><img src="docs/screens/roboseq.gif" width="360" alt="The splash: the letters drop in, the two robots walk in from the sides and meet under a beating heart. Then HOME, the board playing: the robots walk their programs over belts, zap rails and rotators, the tiles light as they set them off, the steps they play framed down the board's sides"></p>
+
+<p align="center"><img src="docs/screens/reference-page.png" width="820" alt="The browser original playing: the transport, the board with its presets, and the two robots' program registers as step cards"></p>
+
 This one started as a little browser toy with a simple question: what if a sequencer were a board game? Two robots,
 register cards borrowed in spirit from RoboRally, a board full of conveyor belts and zap rails, and every move they
 make turned into a note. It was meant to be a quick experiment.
@@ -18,24 +35,14 @@ Enjoy the robots.
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-skurk-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/skurk)
 
-<p align="center">
-  <img src="docs/screens/home-playing.png" width="240" alt="HOME, playing">
-  <img src="docs/screens/battle-strike.png" width="240" alt="BATTLE">
-  <img src="docs/screens/boards.png" width="240" alt="The boards">
-</p>
-
-> **Status: tested on the computer and in an emulator, not yet on an FM-1.** Every build runs in
-> [fm1-emu](https://github.com/joakimeriksson/fm1-emu) under its strict mode, and its sound is checked against the
-> browser original's own renders. Nothing is saved to flash yet: a board or a program you build is gone when you
-> switch off. Every flash can brick a unit: hold OCT- while switching on to reach the updater.
-
 ## Contents
 
 **Getting started**
 1. [What it is](#what-it-is)
-2. [Install](#install)
-3. [Your first five minutes](#your-first-five-minutes)
-4. [The panel and the keyboard](#the-panel-and-the-keyboard)
+2. [Try it](#try-it)
+3. [Install](#install)
+4. [Your first five minutes](#your-first-five-minutes)
+5. [The panel and the keyboard](#the-panel-and-the-keyboard)
 
 **Lessons**
 - [1. Play and steer](#lesson-1-play-and-steer)
@@ -68,10 +75,32 @@ go, what they ride, what they bump into and when they meet becomes the music.
   original's score, note for note.
 - **It has a battle mode.** Two players, a robot each, moving on the beat, until one burns out.
 
+<p align="center">
+  <img src="docs/screens/home-playing.png" width="200" alt="HOME: the board playing, the programs down its sides">
+  <img src="docs/screens/seq.png" width="200" alt="SEQ: the two programs as step cards">
+  <img src="docs/screens/boards.png" width="200" alt="ENV: every board, the one playing and the one coming">
+  <img src="docs/screens/voicemod.png" width="200" alt="SCL: Voice Mod, a named chord progression">
+  <img src="docs/screens/battle-strike.png" width="200" alt="BATTLE: a strike">
+</p>
+
 RoboSeq began as a browser instrument ([reference/roboseq.html](reference/roboseq.html)), which stays the reference
 for how it sounds and behaves. This is its port to the FM-1 as firmware, built on
 [Dinghy](https://github.com/zvenson/dinghy) 0.4 by zvenson and, under that, the Felucca / SLOOP platform, made the same
 way as [SkurkyMello](https://github.com/joakimskurk/fm1mello).
+
+## Try it
+
+**The original, in a browser.** Open [`reference/roboseq.html`](reference/roboseq.html) in a browser (it loads
+Tone.js from the internet). The space bar or `S` plays and stops, `R` rolls new programs for both robots and `U`
+undoes; everything else is clicked: the presets, the board's tiles, every step. This is RoboSeq as it began, and it
+stays the reference for how the firmware sounds and behaves.
+
+**The firmware, without an FM-1.** fm1-emu runs the FM-1's own packages in the browser:
+1. Download `roboseq-X.Y.fwsc` from the [releases](https://github.com/joakimskurk/fm1roboseq/releases), or
+   `packages` from a build under *Actions* on GitHub (`roboseq.fwsc` is in it).
+2. Open [fm1-emu](https://joakimeriksson.github.io/fm1-emu/), click **Open .fwsc…** (or drop the file on the synth)
+   and press **Start**.
+3. Play it on the computer's keyboard, with the mouse, on a touch screen or with a MIDI keyboard.
 
 ## Install
 
@@ -86,13 +115,11 @@ python3 tools/fm1_install.py roboseq-0.1.fwsc
 python3 tools/fm1_install.py --info        # what the FM-1 runs now
 ```
 
-RoboSeq has not yet run on a real FM-1, only on the computer and in `fm1-emu`. If you have one, **[FIRST_FLASH.md](FIRST_FLASH.md)**
-is a half-hour checklist, with the way back. RoboSeq keeps its project in flash sectors of its own and does not read
-other firmwares' projects or samples.
-
-The same package plays in `fm1-emu` on a computer and in its web emulator. To go back to another firmware, use the
-[FM-1 Firmware Hub](https://thefirmwarehub.com) in Chrome or Edge. RoboSeq identifies itself as `FM-1_965`, free on the
-Hub (checked 2026-11-06), the same for every version.
+The first time, go through **[FIRST_FLASH.md](FIRST_FLASH.md)**: what to check, what to send back, and the way back.
+RoboSeq keeps its project in flash sectors of its own and does not read other firmwares' projects or samples. To go
+back to another firmware, use the [FM-1 Firmware Hub](https://thefirmwarehub.com) in Chrome or Edge, or hold **OCT-**
+while switching on for the updater. RoboSeq identifies itself as `FM-1_965`, free on the Hub (checked 2026-11-07),
+the same for every version.
 
 ## Your first five minutes
 
@@ -396,21 +423,46 @@ make lead       # a solo with the lead over it: build/host/lead.wav
 
 On macOS `make test` and the host builds run in a small Docker image (`make image`), because Dinghy's host mode needs
 Linux's sections. `make reference` re-renders the browser original's sound (node and a Chromium). The panel picture
-above is `make emu`'s.
+above is `make emu`'s; the film at the top is the app itself on the computer (`make screens`, from
+`tests/roboseq/gif.txt`), and the browser original's picture is `node tools/tone-ref/page_shot.mjs`.
+
+**Measured.**
+- **The game and the score:** ORIGINAL plays the browser original's notes tick by tick, 88,120 notes over 36
+  scenarios, checked against the HTML's own script.
+- **The sound:** most voices are within 0.15 dB of renders of the HTML's own audio, and the default song within
+  0.02 dB in level.
+- **In fm1-emu, strict:** the worst audio block of the default song takes 31 % of its 5.8 ms, and the stacks 7 % and
+  12 %. The model on the chip computes what it computes on the computer.
+- **The size:** RAM 75,768 B of 98,304, the image 156,080 B of 581,564.
+- **The controls:** every page's 27 keys, pressed while it plays, keep the playability rules
+  (`tests/roboseq/p4_test.c`).
+
+GitHub Actions builds the `.fwsc` on every push and runs the tests (`.github/workflows/build.yml`, through
+zvenson/fm1-build). A tag `vX.Y` publishes `roboseq-X.Y.fwsc` as a release, with `SHA256SUMS` and a build
+attestation.
 
 ## Where things are
 
-- [docs/roboseq/CONTROLS.md](docs/roboseq/CONTROLS.md): every control, page by page, and the rules they keep
-- [docs/roboseq/ENGINES.md](docs/roboseq/ENGINES.md): the two engines, BAND and ORIGINAL: what every move, tile and setting does in each
-- [docs/roboseq/DECISIONS.md](docs/roboseq/DECISIONS.md): why things are as they are
-- [ROADMAP.md](ROADMAP.md): the phases and the playability rules
-- [FIRST_FLASH.md](FIRST_FLASH.md): the first install on a real FM-1, a checklist
-- [fmhub.json](fmhub.json), [docs/card.png](docs/card.png): the Firmware Hub's card
-- [PLATFORM.md](PLATFORM.md): the Dinghy commit and what differs from it
-- [reference/](reference/): the browser original and its SHA-256
-- `tools/tone-ref/`, `tools/trace/`: how the sound and the score are checked against the original; `tools/art/`: the
-  pixel art, as code
+| | |
+|---|---|
+| [docs/roboseq/CONTROLS.md](docs/roboseq/CONTROLS.md) | Every control, page by page, and the rules they keep |
+| [docs/roboseq/ENGINES.md](docs/roboseq/ENGINES.md) | The two engines, BAND and ORIGINAL: what every move, tile and setting does in each |
+| [docs/roboseq/DECISIONS.md](docs/roboseq/DECISIONS.md) | Why things are as they are |
+| [ROADMAP.md](ROADMAP.md) | The phases, with checkboxes, and the playability rules |
+| [FIRST_FLASH.md](FIRST_FLASH.md) | The first install on a real FM-1: a checklist, and the way back |
+| [docs/releases/](docs/releases/) | The release notes |
+| [fmhub.json](fmhub.json), [docs/card.png](docs/card.png) | The Firmware Hub's card |
+| [reference/](reference/) | The browser original and its SHA-256 |
+| [firmware/](firmware/) | The firmware: Dinghy 0.4 and the app, `src/roboseq.c` and its `rs_*.c` |
+| [PLATFORM.md](PLATFORM.md) | The Dinghy commit, and what differs from it |
+| [tests/roboseq/](tests/roboseq/) | The host tests: the game, the score, the sound, the pages, the playability rules |
+| `tools/trace/`, `tools/tone-ref/` | How the score and the sound are checked against the original |
+| `tools/art/` | The pixel art, as code: the tiles, the robots, the splash, the logo, the film |
 
 ## Licence
 
-GPL-3.0-only, as Dinghy; [LICENSING.md](LICENSING.md) says who made what.
+GPL-3.0-only, as Dinghy ([LICENSE](LICENSE); [LICENSING.md](LICENSING.md) says who made what). It is built on
+[Dinghy](https://github.com/zvenson/dinghy) 0.4 by zvenson and, under that, the Felucca / SLOOP platform. The
+Terminus font is licensed under SIL OFL 1.1 ([assets/fonts/Terminus-LICENSE.txt](assets/fonts/Terminus-LICENSE.txt)).
+The panel picture is drawn by [fm1-emu](https://github.com/joakimeriksson/fm1-emu). This is a fan project and not an
+official M-VAVE product.
