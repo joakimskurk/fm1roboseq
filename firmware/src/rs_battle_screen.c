@@ -5,6 +5,7 @@
 static const char *const BT_NAME[2] = {"SCOUT-7", "ECHO-3"};
 static const uint8_t BT_KEY[2][5] = {{0, 1, 2, 4, 7}, {19, 20, 21, 23, 26}};   /* left, up, down, right; strike a white key on */
 static const uint8_t BT_DIR[4] = {RS_W, RS_N, RS_S, RS_E};
+#define BT_RESET 13u                                    /* F#4, the keyboard's middle: the match again (D42) */
 
 static void bt_banner(const char *big, const char *small, uint16_t c)   /* a band over the arena, its words in it */
 {
@@ -29,15 +30,66 @@ static void bt_score(int b, uint32_t wins, uint32_t to_win)   /* a robot's score
     }
 }
 
+static uint16_t bt_key_colour(uint32_t k, uint32_t held)   /* a battle key's colour, lit while held; 0 a key at rest */
+{
+    for (int p = 0; p < 2; p++)
+        for (int i = 0; i < 5; i++)
+            if (BT_KEY[p][i] == k) {
+                uint16_t c = i == 4 ? (p ? C_WARN : C_ACCENT) : p ? C_BOT_B : C_BOT_A;
+                return held >> k & 1u ? mix565(C_WHITE, c, 100) : mix565(c, C_BG, 120);
+            }
+    if (k == BT_RESET) return held >> k & 1u ? C_WHITE : C_MUTED;
+    return 0;
+}
+
 static void bt_keymap(int32_t y, uint32_t held)  /* the two players' keys on the little keyboard, lit as they are held */
 {
     uint16_t col[27] = {0};
-    for (int p = 0; p < 2; p++)
-        for (int k = 0; k < 5; k++) {
-            uint16_t c = k == 4 ? (p ? C_WARN : C_ACCENT) : p ? C_BOT_B : C_BOT_A;
-            col[BT_KEY[p][k]] = held >> BT_KEY[p][k] & 1u ? mix565(C_WHITE, c, 100) : mix565(c, C_BG, 120);
-        }
+    for (uint32_t k = 0; k < 27u; k++) col[k] = bt_key_colour(k, held);
     draw_keymap(y, col);
+}
+
+static void bt_mark(int32_t cx, int32_t cy, uint32_t k, uint16_t c)   /* what a battle key does: a way, the strike, reset */
+{
+    for (int p = 0; p < 2; p++)
+        for (int i = 0; i < 5; i++)
+            if (BT_KEY[p][i] == k) {
+                if (i < 4) {                            /* an arrow: a wedge and its shaft */
+                    static const uint8_t WAY[4] = {RS_W, RS_N, RS_S, RS_E};
+                    uint8_t d = WAY[i];
+                    draw_arrow_at(cx + (d == RS_E ? 2 : d == RS_W ? -2 : 0), cy + (d == RS_S ? 2 : d == RS_N ? -2 : 0), d, c);
+                    if (d == RS_E || d == RS_W) cv_rect(cx - 3 + (d == RS_E ? -1 : 2), cy - 1, 4, 3, c);
+                    else cv_rect(cx - 1, cy - 3 + (d == RS_S ? -1 : 2), 3, 4, c);
+                } else {                                /* the strike: a burst */
+                    cv_rect(cx - 4, cy - 1, 9, 3, c), cv_rect(cx - 1, cy - 4, 3, 9, c);
+                    cv_rect(cx - 3, cy - 3, 2, 2, c), cv_rect(cx + 2, cy - 3, 2, 2, c), cv_rect(cx - 3, cy + 2, 2, 2, c), cv_rect(cx + 2, cy + 2, 2, 2, c);
+                }
+                return;
+            }
+    if (k == BT_RESET) cv_text(cx - 4, cy - 8, &FONT_S, "R", c);
+}
+
+static void bt_bigkeys(int32_t x0, int32_t y, uint32_t held)   /* the keyboard, big: the players' keys marked and lit */
+{
+    const int32_t W = 14, H = 52, BW = 10, BH = 30;
+    uint32_t k, w = 0;
+    for (k = 0; k < 27u; k++)                   /* the white keys */
+        if (!((0x54Au >> ((53u + k) % 12u)) & 1u)) {
+            int32_t x = x0 + (int32_t)w * W;
+            uint16_t c = bt_key_colour(k, held);
+            cv_rect(x, y, W - 1, H, c ? c : RGB(0x2a, 0x3c, 0x3a));
+            if (c) bt_mark(x + W / 2 - 1, y + H - 11, k, RGB(0x05, 0x10, 0x10));
+            w++;
+        }
+    for (k = 0, w = 0; k < 27u; k++)            /* the black keys over the lines between */
+        if ((0x54Au >> ((53u + k) % 12u)) & 1u) {
+            int32_t x = x0 + (int32_t)w * W - BW / 2 - 1;
+            uint16_t c = bt_key_colour(k, held);
+            cv_rect(x - 1, y, BW + 2, BH + 1, RGB(0x05, 0x10, 0x10));
+            cv_rect(x, y, BW, BH, c ? c : RGB(0x10, 0x1c, 0x1c));
+            if (c) bt_mark(x + BW / 2, y + BH - 9, k, RGB(0x05, 0x10, 0x10));
+        } else
+            w++;
 }
 
 static void bt_life(int32_t x, int b, int32_t hp)   /* a robot's life in the header: six pips */
@@ -120,7 +172,7 @@ static void draw_battle(const struct rs_view *v, const struct rs_fx *fx, uint32_
     }
     for (b = 0; b < 2; b++)
         if ((int32_t)(fx->boom_until[b] - now_ms) > 0) draw_explosion(BX + v->bot[b].x * CELL, BY + v->bot[b].y * CELL, b);
-    bt_keymap(222, held);                       /* the foot: the players' keys, lit as they are held */
+    if (live) bt_keymap(222, held);             /* the foot: the players' keys, lit as they are held */
     /* what is happening */
     if (!live) {                                /* stopped: how to play, the match's settings */
         static const char *const AR[RS_NARENAS] = {"SAME", "NEXT ONE", "RANDOM"};
@@ -130,17 +182,18 @@ static void draw_battle(const struct rs_view *v, const struct rs_fx *fx, uint32_
         for (; an[i] && i < 11; i++) arena_name[i] = (char)(an[i] >= 'a' && an[i] <= 'z' ? an[i] - 32 : an[i]);
         arena_name[i] = 0;
         ro[0] = (char)('0' + to_win % 10u);
-        cv_rect(10, 26, 220, 176, RGB(0x05, 0x10, 0x10));
-        frame(10, 26, 220, 176, 1, C_MUTED);
-        cv_text(120 - text_w(&FONT_L, "BATTLE") / 2, 30, &FONT_L, "BATTLE", C_WHITE);
-        cv_text(18, 66, &FONT_S, "SCOUT-7 F3 F#3 G3 A3", C_BOT_A), cv_text(18, 80, &FONT_S, "  STRIKE / PLAY C4", C_ACCENT);
-        cv_text(18, 96, &FONT_S, "ECHO-3  C5 C#5 D5 E5", C_BOT_B), cv_text(18, 110, &FONT_S, "  STRIKE / PLAY G5", C_WARN);
-        cv_rect(18, 126, 204, 1, mix565(C_MUTED, C_BG, 90));
-        cv_text(18, 132, &FONT_S, "K2 ROUNDS TO WIN", C_MUTED), cv_text(222 - text_w(&FONT_S, ro), 132, &FONT_S, ro, C_WHITE);
-        cv_text(18, 146, &FONT_S, "K3 ARENA", C_MUTED), cv_text(222 - text_w(&FONT_S, arena_name), 146, &FONT_S, arena_name, C_WHITE);
-        cv_text(18, 160, &FONT_S, "K4 EACH ROUND", C_MUTED);
-        cv_text(222 - text_w(&FONT_S, AR[arena % RS_NARENAS]), 160, &FONT_S, AR[arena % RS_NARENAS], C_WHITE);
-        cv_text(120 - text_w(&FONT_S, "PLAY: FIGHT") / 2, 182, &FONT_S, "PLAY: FIGHT", C_ACCENT);
+        cv_rect(4, 24, 232, 186, RGB(0x05, 0x10, 0x10));
+        frame(4, 24, 232, 186, 1, C_MUTED);
+        cv_text(120 - text_w(&FONT_L, "BATTLE") / 2, 28, &FONT_L, "BATTLE", C_WHITE);
+        bt_bigkeys(8, 66, held);                    /* the keys, marked: the ways, the strike, reset in the middle */
+        cv_text(18, 124, &FONT_S, "SCOUT-7", C_BOT_A), cv_text(222 - text_w(&FONT_S, "ECHO-3"), 124, &FONT_S, "ECHO-3", C_BOT_B);
+        cv_text(120 - text_w(&FONT_S, "R RESET") / 2, 124, &FONT_S, "R RESET", C_MUTED);
+        cv_rect(18, 141, 204, 1, mix565(C_MUTED, C_BG, 90));
+        cv_text(18, 146, &FONT_S, "K2 ROUNDS TO WIN", C_MUTED), cv_text(222 - text_w(&FONT_S, ro), 146, &FONT_S, ro, C_WHITE);
+        cv_text(18, 160, &FONT_S, "K3 ARENA", C_MUTED), cv_text(222 - text_w(&FONT_S, arena_name), 160, &FONT_S, arena_name, C_WHITE);
+        cv_text(18, 174, &FONT_S, "K4 EACH ROUND", C_MUTED);
+        cv_text(222 - text_w(&FONT_S, AR[arena % RS_NARENAS]), 174, &FONT_S, AR[arena % RS_NARENAS], C_WHITE);
+        cv_text(120 - text_w(&FONT_S, "PLAY: FIGHT") / 2, 190, &FONT_S, "PLAY: FIGHT", C_ACCENT);
     } else if (t->phase == RS_BT_READY) {       /* the countdown: the round, then 4 3 2 1 */
         char r[12] = "ROUND 1", d[2] = "4";
         r[6] = (char)('0' + t->round % 10u), d[0] = (char)('0' + (t->count < 5 ? t->count : 4));

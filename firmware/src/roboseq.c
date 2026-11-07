@@ -423,6 +423,8 @@ static int battle_keys(uint32_t held, uint32_t down)
             if (last_held) hold = bt_last[p];
         }
         uint8_t act = held >> BT_KEY[p][4] & 1u, tap = down >> BT_KEY[p][4] & 1u;
+        if (p == 0 && down >> BT_RESET & 1u && game.playing && game.battle.phase != RS_BT_OFF)   /* RESET: the match again */
+            rs_battle_start(&game, bt_to_win, bt_arena), changed = 1;
         rs_battle_keys(&game, p, hold, act, tap);
         if (tap) changed = 1;
         if (tap && game.playing && game.battle.phase != RS_BT_OFF && !rs_battle_in_reach(&game, p)) {   /* out of reach: play */

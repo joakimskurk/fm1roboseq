@@ -97,7 +97,7 @@ int main(void)
     draw_mix(LEVEL, 6, 40), shot("mix");
     {                                           /* the battle mode (D42): how to play, the countdown, a strike, a round, the winner */
         rs_default(&g), g.engine = RS_ENGINE_BAND, view_ui(), v.battle = g.battle;
-        draw_battle(&v, &fx, 0, 3, RS_ARENA_NEXT, 0), shot("battle");
+        draw_battle(&v, &fx, 0, 3, RS_ARENA_NEXT, 1u << 1 | 1u << 26), shot("battle");   /* (F#3, G5 held) */
         rs_start(&g), rs_battle_start(&g, 3, RS_ARENA_SAME);
         while (g.battle.count > 2) rs_tick(&g, &o);
         view_ui(), v.battle = g.battle;

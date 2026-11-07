@@ -69,13 +69,15 @@ as everywhere.
 ## BATTLE (GLO's white key 16, D42)
 
 Two players, a robot each, on the music's beat. The keyboard is theirs: no register, no steering, no lead on REC. The
-little keyboard at the foot of the screen shows their keys, each lit while it is held.
+start screen draws the keyboard with their keys marked (arrows, a burst for the strike, R for reset), and in the
+fight a little keyboard at the foot shows them; each key is lit while it is held.
 
 | Control | Does |
 |---|---|
 | F3 F#3 G3 A3 | Scout-7: left, up, down, right. Held, a step that way on every beat (the last one pressed, of those held) |
 | C4 | Scout-7's strike (a white key free between it and A3): with Echo-3 in reach (a tile on the way it holds or faces, or two with the tile between open), it strikes on the next beat; out of reach it plays the lead now, a tone of the chord where Scout-7 stands, on up the chord when pressed again on one tile, held as long as the key |
 | C5 C#5 D5 E5 / G5 | the same for Echo-3 (F5 free) |
+| F#4 (the middle) | RESET: the match again from round 1, the countdown first |
 | PLAY | a match: the round, then 4 3 2 1 FIGHT on the beats; in a fight it stops (C1); on the winner, another match |
 | KNOB1 | the tempo (the battle starts at 112 BPM when it was slower; leaving brings the old back) |
 | KNOB2 | the rounds to win, 1 to 9 (before a match), a segment each in the score bars |

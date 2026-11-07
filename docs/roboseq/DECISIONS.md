@@ -760,5 +760,7 @@ one hit two beats running.
 strike, and the keys lit on the keyboard. So Scout-7 strikes on C4 (B3 free) and Echo-3 on G5 (F5 free). The little
 keyboard is now at the foot of the fight too: each player's keys dim in its colour (the strike in the robot's
 accent), lit while held. The FM-1's keys have no lights, so the screen is where they light. The lives moved into the
-header beside the names.
+header beside the names. The start screen draws the keyboard big with no note names: each player's keys marked with arrows and a burst
+for the strike, lit while held, which says enough. The key in the middle between the two, F#4, is RESET: the match
+again from round 1.
 
