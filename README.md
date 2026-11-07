@@ -35,14 +35,52 @@ Enjoy the robots.
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-skurk-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/skurk)
 
+## Meet the robots
+
+<table>
+<tr>
+<td align="center" width="50%"><img src="assets/readme/scout.svg" width="192" alt="Scout-7, the red robot"></td>
+<td align="center" width="50%"><img src="assets/readme/echo.svg" width="192" alt="Echo-3, the orange robot"></td>
+</tr>
+<tr>
+<td valign="top">
+
+**Scout-7** is red. It starts on its pad in the bottom-left corner, facing east, and its program runs down the
+board's left side. In BAND it sings the tune, and the tune comes back every bar; in ORIGINAL it plays a note every
+step from where it stands.
+
+**Steer it** on F#3 G#3 A#3 C#4 D#4: turn left, move, turn right, dash, ping.
+
+<p align="center"><img src="assets/readme/steer-scout-turn-l.svg" width="40" alt="turn l"> <img src="assets/readme/steer-scout-move.svg" width="40" alt="move"> <img src="assets/readme/steer-scout-turn-r.svg" width="40" alt="turn r"> <img src="assets/readme/steer-scout-dash.svg" width="40" alt="dash"> <img src="assets/readme/steer-scout-ping.svg" width="40" alt="ping"></p>
+
+**In the battle** it is the left hand: F3 F#3 G3 A3 to walk, C4 to strike.
+
+</td>
+<td valign="top">
+
+**Echo-3** is orange. It starts on its pad in the top-right corner, facing west, and its program runs down the
+board's right side. In BAND it answers Scout-7, then sings with it; in ORIGINAL it plays a harmony of Scout-7 every
+step, and the bass.
+
+**Steer it** on F#4 G#4 A#4 C#5 D#5: turn left, move, turn right, dash, ping.
+
+<p align="center"><img src="assets/readme/steer-echo-turn-l.svg" width="40" alt="turn l"> <img src="assets/readme/steer-echo-move.svg" width="40" alt="move"> <img src="assets/readme/steer-echo-turn-r.svg" width="40" alt="turn r"> <img src="assets/readme/steer-echo-dash.svg" width="40" alt="dash"> <img src="assets/readme/steer-echo-ping.svg" width="40" alt="ping"></p>
+
+**In the battle** it is the right hand: C5 C#5 D5 E5 to walk, G5 to strike.
+
+</td>
+</tr>
+</table>
+
 ## Contents
 
 **Getting started**
-1. [What it is](#what-it-is)
-2. [Try it without an FM-1](#try-it-without-an-fm-1)
-3. [Install](#install)
-4. [Your first five minutes](#your-first-five-minutes)
-5. [The panel and the keyboard](#the-panel-and-the-keyboard)
+1. [Meet the robots](#meet-the-robots)
+2. [What it is](#what-it-is)
+3. [Try it without an FM-1](#try-it-without-an-fm-1)
+4. [Install](#install)
+5. [Your first five minutes](#your-first-five-minutes)
+6. [The panel and the keyboard](#the-panel-and-the-keyboard)
 
 **Lessons**
 - [1. Play and steer](#lesson-1-play-and-steer)
@@ -60,7 +98,7 @@ Enjoy the robots.
 - [Build it yourself](#build-it-yourself)
 - [Where things are](#where-things-are)
 
----
+<p align="center"><img src="assets/readme/board-strip-1.svg" width="640" alt=""></p>
 
 ## What it is
 
@@ -154,13 +192,15 @@ the battle.
 
 On most pages:
 - **The white keys are positions:** a program's steps, Voice Mod's steps, the drum steps.
-- **The black keys steer the robots,** two hands of five and a swap:
+- **The black keys steer the robots,** two hands of five and a swap: the first five are Scout-7's (red), the next
+  five Echo-3's (orange), the last swaps who plays high.
 
 | Black key | F#3 | G#3 | A#3 | C#4 | D#4 | F#4 | G#4 | A#4 | C#5 | D#5 | F#5 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| **Does** | Scout-7 turn left | Scout-7 move | Scout-7 turn right | Scout-7 dash | Scout-7 ping | Echo-3 turn left | Echo-3 move | Echo-3 turn right | Echo-3 dash | Echo-3 ping | swap who plays high |
+| | <img src="assets/readme/steer-scout-turn-l.svg" width="36" alt="turn l"> | <img src="assets/readme/steer-scout-move.svg" width="36" alt="move"> | <img src="assets/readme/steer-scout-turn-r.svg" width="36" alt="turn r"> | <img src="assets/readme/steer-scout-dash.svg" width="36" alt="dash"> | <img src="assets/readme/steer-scout-ping.svg" width="36" alt="ping"> | <img src="assets/readme/steer-echo-turn-l.svg" width="36" alt="turn l"> | <img src="assets/readme/steer-echo-move.svg" width="36" alt="move"> | <img src="assets/readme/steer-echo-turn-r.svg" width="36" alt="turn r"> | <img src="assets/readme/steer-echo-dash.svg" width="36" alt="dash"> | <img src="assets/readme/steer-echo-ping.svg" width="36" alt="ping"> | <img src="assets/readme/steer-swap.svg" width="36" alt="swap"> |
+| **Does** | turn left | move | turn right | dash | ping | turn left | move | turn right | dash | ping | swap |
 
----
+<p align="center"><img src="assets/readme/board-strip-2.svg" width="640" alt=""></p>
 
 ## Lesson 1: Play and steer
 
@@ -194,9 +234,19 @@ A robot's program is its moves, a step each, up to 64.
 
 **On HOME,** the 16 white keys are the picked robot's steps.
 1. **EDIT** picks whose program it is. Lit means Echo-3.
-2. **A white key** turns its step to the next move: move, back, turn left, turn right, dash, ping, wait.
-3. **SELECT** changes what a key turns: the step's **move**, its **modifier** (steady, bright, low, wobble, glitch: how
-   its note sounds) or its **chance** (100, 75, 50 %: how likely it fires each loop).
+2. **A white key** turns its step to the next move, round and round:
+
+   | <img src="assets/readme/move-move.svg" width="36" alt="move"> | <img src="assets/readme/move-back.svg" width="36" alt="back"> | <img src="assets/readme/move-turn-l.svg" width="36" alt="turn left"> | <img src="assets/readme/move-turn-r.svg" width="36" alt="turn right"> | <img src="assets/readme/move-dash.svg" width="36" alt="dash"> | <img src="assets/readme/move-ping.svg" width="36" alt="ping"> | <img src="assets/readme/move-wait.svg" width="36" alt="wait"> |
+   |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+   | move | back | turn left | turn right | dash | ping | wait |
+
+3. **SELECT** changes what a key turns: the step's **move**, its **modifier** (how its note sounds) or its
+   **chance** (100, 75, 50 %: how likely it fires each loop). The modifiers:
+
+   | <img src="assets/readme/mod-steady.svg" width="36" alt="steady"> | <img src="assets/readme/mod-bright.svg" width="36" alt="bright"> | <img src="assets/readme/mod-low.svg" width="36" alt="low"> | <img src="assets/readme/mod-wobble.svg" width="36" alt="wobble"> | <img src="assets/readme/mod-glitch.svg" width="36" alt="glitch"> |
+   |:---:|:---:|:---:|:---:|:---:|
+   | steady | bright | low | wobble | glitch |
+
 4. **KNOB1** sets the program's length.
 
 **On SEQ,** you drive the program in like a game.
@@ -226,8 +276,12 @@ A robot's program is its moves, a step each, up to 64.
 
 **ENV again** is the builder: build the board under the robots while they walk it.
 1. **Move the cursor:** **A W S D** (F3 F#3 G3 A3).
-2. **Lay a tile:** C4 belt, D4 rotator left, E4 rotator right, F4 zap rail, G4 pulse pad, A4 crate. G#3 clears the
-   tile.
+2. **Lay a tile**, a key each:
+
+   | <img src="assets/readme/tile-belt.svg" width="48" alt="belt"> | <img src="assets/readme/tile-rot-l.svg" width="48" alt="rotator left"> | <img src="assets/readme/tile-rot-r.svg" width="48" alt="rotator right"> | <img src="assets/readme/tile-zap.svg" width="48" alt="zap rail"> | <img src="assets/readme/tile-pulse.svg" width="48" alt="pulse pad"> | <img src="assets/readme/tile-crate.svg" width="48" alt="crate"> | <img src="assets/readme/tile-open.svg" width="48" alt="clear"> |
+   |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+   | **C4**<br>belt | **D4**<br>rotator left | **E4**<br>rotator right | **F4**<br>zap rail | **G4**<br>pulse pad | **A4**<br>crate | **G#3**<br>clear |
+
 3. **Belts:** a belt points the way you last moved. Press C4 on a belt to turn it.
 4. **Presets:** KNOB1 runs through them.
 
@@ -301,6 +355,8 @@ In BAND the pattern is played by a drummer:
 
 ## Lesson 7: Battle: two players
 
+<p align="center"><img src="assets/readme/battle-vs.svg" width="384" alt="Scout-7 against Echo-3, a clash between them"></p>
+
 <img src="docs/screens/battle.png" width="240" align="right" alt="BATTLE">
 
 **GLO, then white key 16** opens the battle. Each player takes a robot and an end of the keyboard:
@@ -343,7 +399,7 @@ key as it is held. **F#4**, in the middle between you, is **RESET**: the match a
 
 <br clear="both">
 
----
+<p align="center"><img src="assets/readme/board-strip-3.svg" width="640" alt=""></p>
 
 ## The two engines
 
@@ -392,19 +448,32 @@ Every control, page by page, and the rules they keep: **[docs/roboseq/CONTROLS.m
 
 ## The rules of the game
 
-| Move | | Tile | |
-|---|---|---|---|
-| MOVE / BACK | a tile forward or back (walls and crates stop it) | Belt | carries a robot on a tile, mid-step |
-| TURN L / R | a quarter turn | Rotator | turns a robot left or right |
-| DASH | two tiles; landing on the other robot hits it (+2 heat for it) | Zap rail | +1 heat |
-| PING | a pulse straight ahead; reaching the other robot, +1 heat for it | Pulse pad | -1 heat |
-| WAIT | stays, so the tiles can sing | Crate | blocks the way |
+**The moves**, a step each in a robot's program, as the screen shows them:
+
+| | Move | What it does |
+|:---:|---|---|
+| <img src="assets/readme/move-move.svg" width="36" alt="move"> | **MOVE** | a tile forward (walls and crates stop it) |
+| <img src="assets/readme/move-back.svg" width="36" alt="back"> | **BACK** | a tile back |
+| <img src="assets/readme/move-turn-l.svg" width="36" alt="turn l"> <img src="assets/readme/move-turn-r.svg" width="36" alt="turn r"> | **TURN L / R** | a quarter turn |
+| <img src="assets/readme/move-dash.svg" width="36" alt="dash"> | **DASH** | two tiles; landing on the other robot hits it (+2 heat for it) |
+| <img src="assets/readme/move-ping.svg" width="36" alt="ping"> | **PING** | a pulse straight ahead; reaching the other robot, +1 heat for it |
+| <img src="assets/readme/move-wait.svg" width="36" alt="wait"> | **WAIT** | stays, so the tiles can sing |
+
+**The tiles:**
+
+| | Tile | What it does |
+|:---:|---|---|
+| <img src="assets/readme/tile-belt.svg" width="56" alt="belt"> | **Belt** | carries a robot on a tile, mid-step (each points a way) |
+| <img src="assets/readme/tile-rot-l.svg" width="56" alt="rot l"> <img src="assets/readme/tile-rot-r.svg" width="56" alt="rot r"> | **Rotator** | turns a robot left or right |
+| <img src="assets/readme/tile-zap.svg" width="56" alt="zap"> | **Zap rail** | +1 heat |
+| <img src="assets/readme/tile-pulse.svg" width="56" alt="pulse"> | **Pulse pad** | -1 heat |
+| <img src="assets/readme/tile-crate.svg" width="56" alt="crate"> | **Crate** | blocks the way |
 
 - **Heat 6** burns a robot out; it comes back in the corner farthest away.
 - **The loop:** at the end of every loop the robots go back to their pads and walk the same way again. That is why
   their tunes come back.
-- **Love:** two robots on one tile, two steps running, play the coin.
-- **Notes:** a step's modifier colours its note, and its chance says how likely it fires on a loop.
+- <img src="assets/readme/heart.svg" width="24" alt=""> **Love:** two robots on one tile, two steps running, play the coin.
+- **Notes:** a step's modifier colours its note (<img src="assets/readme/mod-steady.svg" width="24" alt="steady"> <img src="assets/readme/mod-bright.svg" width="24" alt="bright"> <img src="assets/readme/mod-low.svg" width="24" alt="low"> <img src="assets/readme/mod-wobble.svg" width="24" alt="wobble"> <img src="assets/readme/mod-glitch.svg" width="24" alt="glitch">), and its chance says how likely it fires on a loop.
 
 ## Build it yourself
 
@@ -421,7 +490,9 @@ make lead       # a solo with the lead over it: build/host/lead.wav
 On macOS `make test` and the host builds run in a small Docker image (`make image`), because Dinghy's host mode needs
 Linux's sections. `make reference` re-renders the browser original's sound (node and a Chromium). The panel picture
 above is `make emu`'s; the film at the top is the app itself on the computer (`make screens`, from
-`tests/roboseq/gif.txt`), and the battle at the top is `make panels`, in fm1-emu.
+`tests/roboseq/gif.txt`), and the battle at the top is `make panels`, in fm1-emu. The robots, the tiles, the moves
+and the strips between the parts (`assets/readme/`) are drawn by the firmware's own code too (`make screens`, from
+`tests/roboseq/art.c`).
 
 **Measured.**
 - **The game and the score:** ORIGINAL plays the browser original's notes tick by tick, 88,120 notes over 36
@@ -455,6 +526,7 @@ attestation.
 | [tests/roboseq/](tests/roboseq/) | The host tests: the game, the score, the sound, the pages, the playability rules |
 | `tools/trace/`, `tools/tone-ref/` | How the score and the sound are checked against the original |
 | `tools/art/` | The pixel art, as code: the tiles, the robots, the splash, the logo, the film |
+| [assets/readme/](assets/readme/) | This README's art, drawn by the firmware's own code: the robots, the tiles, the moves |
 
 ## Licence
 
