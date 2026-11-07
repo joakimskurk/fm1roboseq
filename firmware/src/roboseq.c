@@ -405,6 +405,7 @@ static uint8_t bt_note_k[2], bt_note_on[2];     /* the lead from the strike key:
 static int8_t bt_note_at[2] = {-1, -1};
 static int bt_note[2];
 static uint16_t bt_bpm_was;
+static uint32_t swap_until;                     /* the swap by hand shown in the header till then (fm1_ms, 0: not) */
 
 static int battle_keys(uint32_t held, uint32_t down)
 {
@@ -515,7 +516,7 @@ static int keys(uint32_t down)                  /* what the keys pressed now do;
     for (k = 0; k < 11u; k++)
         if (down >> black_key[k] & 1u) {
             if (k < 10u) rs_steer(&game, k < 5u ? 0 : 1, STEER[k % 5u]);
-            else rs_swap_registers(&game);
+            else rs_swap_registers(&game), swap_until = (fm1_ms + 500u) | 1u;
             changed = 1;
         }
     return changed;
@@ -534,8 +535,33 @@ static void ui_of(struct rs_ui *u, const struct rs_view *v)
     }
 }
 
+static void draw_page(const struct rs_view *v, struct rs_fx *fx, struct rs_ui *ui, uint32_t notes)   /* the page, drawn */
+{
+    int steering = page != PAGE_SEQ && page != PAGE_ENV && page != PAGE_BATTLE;   /* (the black keys steer here) */
+    ui_of(ui, v);
+    badge_steer[0] = steering ? game.steer[0] : 0, badge_steer[1] = steering ? game.steer[1] : 0;
+    badge_swap = steering && swap_until;
+    if (page == PAGE_SEQ) draw_seq(v, ui, &game, seq_scroll, seq_cursor);
+    else if (page == PAGE_GLO) draw_glo(&game, pending_loop);
+    else if (page == PAGE_SCL) draw_scl(&game, scl_cursor);
+    else if (page == PAGE_ARP) draw_arp(&game, arp_cursor);
+    else if (page == PAGE_LFO) draw_drums(v, &game, drum_row);
+    else if (page == PAGE_FX) draw_mix(mix.level, mix_cursor, colour_amt);
+    else if (page == PAGE_ENV) draw_editor(v, &game, env_cx, env_cy, (fm1_ms / 300u) & 1u, env_edited);
+    else if (page == PAGE_BOARDS) draw_boards(&game, (fm1_ms / 300u) & 1u, env_edited);
+    else if (page == PAGE_BATTLE) draw_battle(v, fx, fm1_ms, bt_to_win, bt_arena, notes);
+    else draw_board(v, fx, ui, fm1_ms);
+}
+
+#ifdef RS_P4_TEST
+#include "../../tests/roboseq/p4_test.c"        /* the playability rules, page by page (P4), on the host */
+#endif
+
 static void app_main(void)
 {
+#ifdef RS_P4_TEST
+    exit(p4_main());
+#endif
     static struct rs_fx fx;
     static struct rs_view last;
     static struct rs_ui ui;
@@ -777,22 +803,13 @@ static void app_main(void)
             last = *v, shown = key, dirty = 1;
         } else if (due && (int32_t)(fm1_ms - due) >= 0)   /* an effect ran out */
             dirty = 1;
+        if (swap_until && (int32_t)(fm1_ms - swap_until) >= 0) swap_until = 0, dirty = 1;
         if (dirty) {
             lead_badge = lead_on ? lead_oct : -99;
             lead_panel_v[0] = lead_knob[0], lead_panel_v[1] = lead_knob[1], lead_panel_v[2] = lead_knob[2], lead_panel_v[3] = lead_oct;
             lead_panel_arp = arp_mode ? (int8_t)arp_kind : -1;
             lead_panel_rate = arp_mode ? arp_rate : 1u;
-            ui_of(&ui, v);
-            if (page == PAGE_SEQ) draw_seq(v, &ui, &game, seq_scroll, seq_cursor);
-            else if (page == PAGE_GLO) draw_glo(&game, pending_loop);
-            else if (page == PAGE_SCL) draw_scl(&game, scl_cursor);
-            else if (page == PAGE_ARP) draw_arp(&game, arp_cursor);
-            else if (page == PAGE_LFO) draw_drums(v, &game, drum_row);
-            else if (page == PAGE_FX) draw_mix(mix.level, mix_cursor, colour_amt);
-            else if (page == PAGE_ENV) draw_editor(v, &game, env_cx, env_cy, (fm1_ms / 300u) & 1u, env_edited);
-            else if (page == PAGE_BOARDS) draw_boards(&game, (fm1_ms / 300u) & 1u, env_edited);
-            else if (page == PAGE_BATTLE) draw_battle(v, &fx, fm1_ms, bt_to_win, bt_arena, notes);
-            else draw_board(v, &fx, &ui, fm1_ms);
+            draw_page(v, &fx, &ui, notes);
             due = fx_due(&fx, fm1_ms);
         }
     }

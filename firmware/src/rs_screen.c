@@ -25,6 +25,8 @@ static int8_t lead_panel_v[4];                  /* the lead's knobs (D26): shown
 static int8_t lead_panel_arp = -1;              /* ARP on (D27): its kind, else -1 */
 static uint8_t lead_panel_rate = 1;             /* the arp's notes a step (D29) */
 static int hdr_board;                           /* the page drawn is the board: its header sits between the registers */
+static uint8_t badge_steer[2];                  /* a bot's next move by hand (action + 1): in its corner of the header (P3) */
+static uint8_t badge_swap;                      /* the registers swapped by hand just now: in both corners */
 static void screen_out(void);                   /* (every page ends with it: the lead's badge, then to the screen) */
 
 #define BX 20                                   /* the board's corner on the screen */
@@ -358,6 +360,7 @@ static void draw_board(const struct rs_view *v, const struct rs_fx *fx, const st
             if (b == 0 || !together) dim_cell(x, y);
             draw_bot(sx + 1, y + 20, b, 1, C_CELL);
             draw_arrow_at(sx + 10, y + 17, t->dir, b ? C_WARN : C_ACCENT);   /* its facing, over its head */
+            if (u->steer[b]) icon(sx + 3, y + 2, u->steer[b] - 1u, b ? C_BOT_B : C_BOT_A);   /* steered: its next move */
             if ((int32_t)(fx->clash_until[b] - now_ms) > 0) draw_clash(sx, y + 1, 2);   /* hit: the star over it */
         }
         for (b = 0; b < 2; b++)
@@ -477,6 +480,7 @@ static void draw_seq(const struct rs_view *v, const struct rs_ui *u, const struc
     cv_text(4, 0, &FONT_S, "SCOUT-7", u->sel ? mix565(C_BOT_A, C_BG, 120) : C_BOT_A);
     cv_text(236 - text_w(&FONT_S, "ECHO-3"), 0, &FONT_S, "ECHO-3", u->sel ? C_BOT_B : mix565(C_BOT_B, C_BG, 120));
     digits(108, 4, cursor + 1u, 2, C_TEXT);     /* the cursor's step */
+    if (g->swapped) icon(72, 1, RS_NACTIONS, C_BELT);   /* the registers swapped */
     cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
     screen_out();
 }
@@ -747,6 +751,16 @@ static void screen_out(void)                    /* while REC is on the header is
         }
         cv_rect(x0, SEQ_TOP - 1, 4 * w, 1, C_ACCENT);
     }
+    if (!hdr_board)                             /* what the black keys did (P3), till the step plays it: each bot's
+                                                   next move in its corner of the header, the swap in both */
+        for (int32_t b = 0; b < 2; b++) {
+            uint32_t i = badge_swap ? RS_NACTIONS : badge_steer[b] ? badge_steer[b] - 1u : 99u;
+            int32_t x = b ? 222 : 0;
+            if (i == 99u) continue;
+            cv_rect(x, 0, 18, 15, C_BG);
+            frame(x, 0, 18, 15, 1, b ? C_BOT_B : C_BOT_A);
+            icon(x + 2, 1, i, b ? C_BOT_B : C_BOT_A);
+        }
     hdr_board = 0;
     cv_blit(0, 0);
 }
