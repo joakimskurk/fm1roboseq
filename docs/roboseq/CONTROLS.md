@@ -63,7 +63,24 @@ Scout-7's and Echo-3's registers as two columns of step cards, the HTML's planne
 | KNOB4 | the speed: 1/1, 1/2, 1/4 (D22) |
 | SELECT | the engine: BAND (RoboSeq's own, where it starts) or ORIGINAL (the HTML's score) (D33, D39; docs/roboseq/ENGINES.md) |
 
-The white keys rest here (no register on the screen); the black keys steer as everywhere.
+The white keys rest here (no register on the screen) but the last, 16, which opens BATTLE (D42); the black keys steer
+as everywhere.
+
+## BATTLE (GLO's white key 16, D42)
+
+Two players, a robot each, on the music's beat. The keyboard is theirs: no register, no steering, no lead on REC.
+
+| Control | Does |
+|---|---|
+| F3 F#3 G3 A3 | Scout-7: left, up, down, right. Held, a step that way on every beat (the last one pressed, of those held) |
+| B3 | Scout-7's fifth key: with Echo-3 in reach (a tile on the way it holds or faces, or two with the tile between open), it strikes on the next beat; out of reach it plays the lead now, a tone of the chord where Scout-7 stands, on up the chord when pressed again on one tile, held as long as the key |
+| C5 C#5 D5 E5 / F5 | the same for Echo-3 |
+| PLAY | a match: the round, then 4 3 2 1 FIGHT on the beats; in a fight it stops (C1); on the winner, another match |
+| KNOB1 | the tempo (the battle starts at 112 BPM when it was slower; leaving brings the old back) |
+| KNOB2 | the rounds to win, 1 to 9 (before a match), a segment each in the score bars |
+| KNOB3 | the arena: the presets (not mid-fight) |
+| KNOB4 | each new round: the same arena, the next one, or a random roll |
+| any page button | leaves the battle: the registers play again |
 
 ## SCL (Voice Mod, the HTML's Seq 1; the SEL button)
 

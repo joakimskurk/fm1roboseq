@@ -59,6 +59,7 @@ static void app_idle(void);
 #include "rs_mix.c"                           /* the mix */
 #include "rs_screen.c"                        /* the board */
 #include "rs_splash.c"                        /* the splash at boot */
+#include "rs_battle_screen.c"                 /* the battle mode's screens (D42) */
 #ifndef RING_PUBLISH                            /* (platform.c's, on the chip) */
 #define RING_PUBLISH() __asm__ volatile("" ::: "memory")
 #endif
@@ -122,6 +123,7 @@ static void view_of(struct rs_view *v, const struct rs_tick_out *o, uint32_t t0)
     v->tpm = game.tpm ? game.tpm : 1;
     v->died[0] = o && o->died[0], v->died[1] = o && o->died[1], v->love = o && o->love;
     v->clash[0] = o && o->clash[0], v->clash[1] = o && o->clash[1];
+    v->battle = game.battle;
 }
 
 static void schedule(void)
@@ -278,7 +280,8 @@ static void board_patch(void)                   /* BAND: the board's touch on th
     for (uint32_t i = 0; game.engine && i < RS_ROWS * RS_COLS; i++)
         sig = (sig ^ (game.board.t[i].type * 4u + game.board.t[i].dir + 1u)) * 16777619u;
     if (sig == patch_sig) return;
-    struct rs_patch p = {{0}};
+    static const struct rs_patch none;
+    struct rs_patch p = none;
     if (game.engine) rs_band_patch(&game.board, &p);
     patch_sig = sig, rs_mix_patch(&mix, &p);
 }
@@ -296,7 +299,7 @@ static void lead_keys(uint32_t down, uint32_t up)   /* the last key held wins; l
     if (held_n) rs_lead_play(&mix.lead, 53 + 12 * lead_oct + held[held_n - 1u], 1, pressed);   /* (ARP: its notes over it) */
     else rs_lead_play(&mix.lead, 53 + 12 * lead_oct, 0, 0);
 }
-enum { PAGE_HOME, PAGE_SEQ, PAGE_GLO, PAGE_SCL, PAGE_ARP, PAGE_LFO, PAGE_FX, PAGE_ENV, PAGE_BOARDS };   /* the pages (D19, D32) */
+enum { PAGE_HOME, PAGE_SEQ, PAGE_GLO, PAGE_SCL, PAGE_ARP, PAGE_LFO, PAGE_FX, PAGE_ENV, PAGE_BOARDS, PAGE_BATTLE };   /* (D19, D32, D42) */
 static uint8_t page, scl_cursor, arp_cursor, drum_row, mix_cursor;
 static int32_t seq_scroll, seq_target;          /* the sequence page's scroll, px, and where it is going */
 
@@ -392,8 +395,67 @@ static void keys_init(void)
     }
 }
 
+/* ---- the battle mode (D42): two players on the keyboard, a cluster each at its ends, as WASD and F: Scout-7's
+ * F3 F#3 G3 A3 (left, up, down, right) and B3 (strike), Echo-3's C5 C#5 D5 E5 and F5. A way held is a step on every
+ * beat (the last one pressed, of those held); the strike held or tapped strikes on the next beat with the other in
+ * reach, and out of reach it plays the lead: a tone of the chord where the robot stands, on up the chord as it is
+ * pressed again on one tile (rs_battle_lead_note), held as long as the key is. */
+static uint8_t bt_to_win = 3, bt_arena, bt_last[2];   /* the rounds to win, the arena between rounds: set before (D42) */
+static uint8_t bt_note_k[2], bt_note_on[2];     /* the lead from the strike key: presses on one tile, a note held */
+static int8_t bt_note_at[2] = {-1, -1};
+static int bt_note[2];
+static uint16_t bt_bpm_was;
+
+static int battle_keys(uint32_t held, uint32_t down)
+{
+    int changed = 0;
+    for (int p = 0; p < 2; p++) {
+        uint8_t hold = 0;
+        for (int k = 0; k < 4; k++)
+            if (down >> BT_KEY[p][k] & 1u) bt_last[p] = (uint8_t)(BT_DIR[k] + 1), changed = 1;
+        for (int k = 0; k < 4; k++)                     /* the last pressed while it is held, else any held */
+            if (held >> BT_KEY[p][k] & 1u && (BT_DIR[k] + 1 == bt_last[p] || !hold)) hold = (uint8_t)(BT_DIR[k] + 1);
+        if (hold && hold != bt_last[p]) {
+            int last_held = 0;
+            for (int k = 0; k < 4; k++) last_held |= held >> BT_KEY[p][k] & 1u && BT_DIR[k] + 1 == bt_last[p];
+            if (last_held) hold = bt_last[p];
+        }
+        uint8_t act = held >> BT_KEY[p][4] & 1u, tap = down >> BT_KEY[p][4] & 1u;
+        rs_battle_keys(&game, p, hold, act, tap);
+        if (tap) changed = 1;
+        if (tap && game.playing && game.battle.phase != RS_BT_OFF && !rs_battle_in_reach(&game, p)) {   /* out of reach: play */
+            int8_t at = (int8_t)(game.bot[p].y * RS_COLS + game.bot[p].x);
+            if (at != bt_note_at[p]) bt_note_at[p] = at, bt_note_k[p] = 0;
+            bt_note[p] = rs_battle_lead_note(&game, p, bt_note_k[p]++), bt_note_on[p] = 1;
+            rs_lead_play(&mix.lead, bt_note[p], 1, 1);
+        } else if (!act && bt_note_on[p]) {             /* let go: the note ends, unless the other holds one */
+            bt_note_on[p] = 0;
+            if (bt_note_on[!p]) rs_lead_play(&mix.lead, bt_note[!p], 1, 0);
+            else rs_lead_play(&mix.lead, bt_note[p], 0, 0);
+        }
+    }
+    return changed;
+}
+
+static void battle_enter(void)                  /* GLO's key 16: the battle page; PLAY starts a match */
+{
+    if (page == PAGE_BATTLE) return;
+    if (game.playing) stop();
+    lead_on = 0, arp_mode = 0, held_n = 0;
+    page = PAGE_BATTLE, bt_bpm_was = game.bpm;
+    if (game.bpm < 100u) game.bpm = 112;              /* (a fight's tempo; K1 turns it, and leaving brings the old back) */
+    rs_reset(&game);
+}
+
+static void battle_leave(void)
+{
+    rs_battle_stop(&game);
+    if (bt_bpm_was) game.bpm = bt_bpm_was, bt_bpm_was = 0;
+}
+
 static int keys(uint32_t down)                  /* what the keys pressed now do; 1 when the screen should show it */
 {
+    if (page == PAGE_GLO && down >> white_key[15] & 1u) { battle_enter(); return 1; }   /* (D42) */
     if (page == PAGE_SEQ) return keys_seq(down);   /* (the builders' keys are their own: no steering there) */
     if (page == PAGE_ENV) return keys_env(down);
     uint32_t k, len = game.prog[sel_bot].len ? game.prog[sel_bot].len : game.loop_len;
@@ -497,9 +559,11 @@ static void app_main(void)
         platform_poll();
         b = fm1_input_edges(&rel);
         notes = fm1_in.notes;
-        if (lead_on) lead_keys(notes & ~prev, prev & ~notes);   /* REC: the keys are the lead's */
+        if (page == PAGE_BATTLE) dirty = battle_keys(notes, notes & ~prev);   /* (D42: the players') */
+        else if (lead_on) lead_keys(notes & ~prev, prev & ~notes);   /* REC: the keys are the lead's */
         else dirty = keys(notes & ~prev);
         prev = notes;
+        if (page == PAGE_BATTLE) b &= ~(1u << BTN_REC | 1u << BTN_ARP | 1u << BTN_EDIT);   /* (the keys are the players') */
         if (b & (1u << BTN_REC)) {             /* the lead on / off; off, what it holds lets go */
             lead_on = !lead_on, held_n = 0, dirty = 1;
             if (!lead_on) arp_mode = 0;         /* (the lead off, its arp with it) */
@@ -516,7 +580,15 @@ static void app_main(void)
             if (lead_oct != oct_was && held_n)  /* the key held, in its new octave at once (a glide there) */
                 rs_lead_play(&mix.lead, 53 + 12 * lead_oct + held[held_n - 1u], 1, 0);
         }
-        if (b & (1u << BTN_PLAY)) { if (game.playing) stop(); else play(); }
+        if (b & (1u << BTN_PLAY)) {
+            if (page == PAGE_BATTLE && game.playing && game.battle.phase == RS_BT_MATCH)
+                rs_battle_start(&game, bt_to_win, bt_arena);   /* the winner shown: PLAY is another match (D42) */
+            else if (game.playing) stop();
+            else {
+                play();
+                if (page == PAGE_BATTLE) rs_battle_start(&game, bt_to_win, bt_arena);   /* a match (D42) */
+            }
+        }
         if (b & (1u << BTN_HOME) && page != PAGE_HOME) page = PAGE_HOME, dirty = 1;
         if (b & (1u << BTN_SEQ) && page != PAGE_SEQ) page = PAGE_SEQ, seq_cursor_to((int32_t)seq_cursor), dirty = 1;
         if (b & (1u << BTN_GLO) && page != PAGE_GLO) page = PAGE_GLO, dirty = 1;
@@ -534,6 +606,11 @@ static void app_main(void)
             sel_bot ^= 1u, bank = 0, dirty = 1;
             if (page == PAGE_SEQ) seq_cursor_to((int32_t)seq_cursor);
         }
+        {                                       /* the battle's page left: the registers again (D42) */
+            static uint8_t was;
+            if (was == PAGE_BATTLE && page != PAGE_BATTLE) battle_leave(), dirty = 1;
+            was = page;
+        }
         if ((e = fm1_enc_take(ENC_SELECT)) != 0) {        /* SELECT: what the white keys turn */
             if (lead_on && arp_mode) {          /* ARP's: its notes a step, 1 .. 4 (D29, D30) */
                 int32_t r = arp_rate + e;
@@ -545,6 +622,22 @@ static void app_main(void)
             dirty = 1;
         }
         if (lead_on) {                          /* (the knobs are the lead's: lead_knobs above) */
+        } else if (page == PAGE_BATTLE) {       /* the battle: K1 the tempo, K2 the rounds to win (1-9), K3 the arena */
+            if ((e = fm1_enc_take(ENC_KNOB1)) != 0) {
+                int32_t bpm = (int32_t)game.bpm + e;
+                game.bpm = (uint16_t)(bpm < 60 ? 60 : bpm > 168 ? 168 : bpm), dirty = 1;
+            }
+            if ((e = fm1_enc_take(ENC_KNOB2)) != 0 && (!game.playing || game.battle.phase == RS_BT_MATCH)) {   /* (before a match) */
+                int32_t w = (int32_t)bt_to_win + (e > 0 ? 1 : -1);
+                bt_to_win = (uint8_t)(w < 1 ? 1 : w > 9 ? 9 : w), dirty = 1;
+            }
+            if ((e = fm1_enc_take(ENC_KNOB3)) != 0 && game.battle.phase != RS_BT_FIGHT) {   /* (not mid-fight) */
+                int32_t id = game.board_id < RS_NBOARDS ? (int32_t)game.board_id : 0;
+                id = ((id + (e > 0 ? 1 : -1)) % RS_NBOARDS + RS_NBOARDS) % RS_NBOARDS;
+                rs_load_board(&game, (uint8_t)id), dirty = 1;
+            }
+            if ((e = fm1_enc_take(ENC_KNOB4)) != 0 && (!game.playing || game.battle.phase == RS_BT_MATCH))   /* the arena */
+                bt_arena = (uint8_t)(((int32_t)bt_arena + (e > 0 ? 1 : -1) + RS_NARENAS) % RS_NARENAS), dirty = 1;   /* between rounds */
         } else if (page == PAGE_GLO) {          /* the knobs: tempo, moves, loop, speed */
             if ((e = fm1_enc_take(ENC_KNOB1)) != 0) {
                 int32_t bpm = (int32_t)game.bpm + e;
@@ -694,6 +787,7 @@ static void app_main(void)
             else if (page == PAGE_FX) draw_mix(mix.level, mix_cursor, colour_amt);
             else if (page == PAGE_ENV) draw_editor(v, &game, env_cx, env_cy, (fm1_ms / 300u) & 1u, env_edited);
             else if (page == PAGE_BOARDS) draw_boards(&game, (fm1_ms / 300u) & 1u, env_edited);
+            else if (page == PAGE_BATTLE) draw_battle(v, &fx, fm1_ms, bt_to_win, bt_arena);
             else draw_board(v, &fx, &ui, fm1_ms);
             due = fx_due(&fx, fm1_ms);
         }

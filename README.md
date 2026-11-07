@@ -72,6 +72,11 @@ The screens, drawn by the firmware itself (`make screens`): what you see, and wh
 | <img src="docs/screens/seq2.png" width="240" alt="SCL again: Seq 2"> | **SCL again: Seq 2**, the arrangement: four steps that change the board and the drum pattern and can swap the robots' registers, as Voice Mod comes round. |
 | <img src="docs/screens/drums.png" width="240" alt="LFO: the drums"> | **LFO: the drums.** Kick, snare and hihat over 16 steps; SELECT picks the row, a white key a step, KNOB1 the six patterns. |
 | <img src="docs/screens/mix.png" width="240" alt="FX: the mix"> | **FX: the mix.** Master, the five buses and the lead as faders (white keys 1-7 pick, KNOB1 sets). KNOB2, BOARD COLOUR: how much the board's tiles colour the whole sound. |
+| <img src="docs/screens/battle.png" width="240" alt="BATTLE"> | **BATTLE (GLO, white key 16): two players.** Each takes a robot and a corner of the keyboard: Scout-7 F3 F#3 G3 A3 (left, up, down, right) and B3, Echo-3 C5 C#5 D5 E5 and F5. Before the match: K2 the rounds to win, K3 the arena, K4 what each new round brings (the same arena, the next, a random one). PLAY starts it. |
+| <img src="docs/screens/battle-countdown.png" width="240" alt="The countdown"> | **4, 3, 2, 1, FIGHT!** on the music's beats, a beep each. |
+| <img src="docs/screens/battle-strike.png" width="240" alt="A strike"> | **Move on the beat.** Hold a way and your robot steps there on every beat; the arena's frame flashes with it. The fifth key strikes when the other is a tile on (or two, with the tile between open: you lunge): +2 heat, and the hit drives the two apart, the other two tiles back (a wall or a crate slams it: +1 more) and you a tile the other way. Out of reach the same key plays the lead, a tone of the chord where you stand. Zap rails heat you, pulse pads cool you, belts carry you, rotators turn you. Your health is at the foot. |
+| <img src="docs/screens/battle-round.png" width="240" alt="A round taken"> | **Burn the other out** (heat 6) to take the round: a segment lights in your score bar down your side. A round that drags overheats: the arena's edge starts to glow, then all but the middle. |
+| <img src="docs/screens/battle-winner.png" width="240" alt="The winner"> | **The first to the rounds wins**, big. PLAY: another match. Any page button leaves the battle. |
 
 ## The panel
 

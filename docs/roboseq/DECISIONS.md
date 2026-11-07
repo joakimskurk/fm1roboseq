@@ -687,3 +687,72 @@ band_test:
 
 The model's fingerprint stays 150e92e1: the selfcheck plays the HTML's hits.
 
+## D42. The battle mode: two players on the beat (2026-11-07)
+
+The product owner: a last mode, and it must work well: a two-player battle. Each side of the keyboard is WASD and an
+action to strike; held, the way you go is a step on the beat (moving on the beat as Crypt of the NecroDancer has
+it); rounds, then "<robot> wins" with the winning robot's picture. Along the way, in their words:
+- not best of three: the rounds set before the match, a score bar of segments down each side, where HOME shows the
+  registers;
+- the arena changed or rolled between rounds;
+- a hit should drive them apart, or they meet on a tile and trade blows to the end;
+- a 4 3 2 1 countdown with sound before the fight;
+- the action key one white key to the right, and out of reach it plays the lead, in tune with the music.
+
+**The game.** rs_battle.c, inside the model and with the game's own moves and tiles:
+- **The beat.** On every beat (4 steps; 3 in a triplet loop) each robot does what its player holds. A way held: it
+  faces that way and steps there. The fifth key held or tapped, with the other in reach (a tile on, or two with the
+  tile between open): it strikes instead.
+- **Steps, both at once.** A wall, a crate, the same tile, through each other, or onto the other where it stays: a
+  bump.
+- **A hit.** +2 heat. It drives the two apart: the other two tiles back, +1 for each a wall or a crate stops, and
+  the striker one tile the other way. The one hit reels: it cannot be hit on the next beat.
+- **The tiles, as in the game.** Belts carry, rotators turn, zap rails +1, pulse pads -1.
+- **The round.** Heat 6 burns a robot out and the other takes the round. Both at once: the more hits in the round
+  wins it, else the one nearer the middle, else it is a draw, played again, and a second draw running goes to a
+  coin.
+- **The overheat.** After 64 beats no pad cools, the arena's edge glows (+1 a beat), and hits are +3. After 96
+  beats all but the middle tile glow. So a round ends.
+- **Between rounds.** The robots go back to their pads, cool. The arena stays, is the next preset, or is a fresh
+  roll (the pads kept open), as K4 set it.
+- **The match** is the first to its rounds (1 to 9, K2, before it starts).
+- **The countdown** is the round's name, then 4 3 2 1 on the beats with a beep each (the coin voice, tuned to the
+  chord in BAND), and FIGHT on the fifth with a long high one; the robots go from the beat after.
+
+**The music runs on.** The engine plays the battle as it plays the registers: the robots' moves are their notes.
+- **The voices.** A strike is heard as a dash: BAND's kick clicks, the snare cracks. The heat makes them louder.
+- **Burning out** is the explosion.
+- **Between the beats** the robots stand, so their tunes are on the beat.
+- **The loop** no longer puts the robots back on their pads; only a new round does.
+
+**The keys** (a cluster each at the keyboard's ends, WASD and F):
+- Scout-7: F3 F#3 G3 A3 and B3. Echo-3: C5 C#5 D5 E5 and F5.
+- The last way pressed of those held wins.
+- **The fifth key out of reach** plays the lead now: the chord's tone where the robot stands on the board's keyboard
+  (Scout-7 an octave over Echo-3), on up the chord when pressed again on one tile, held as long as the key
+  (rs_battle_lead_note).
+- **Two exceptions to the control rules.** PLAY on the winner is the next match (C1's transport otherwise), and the
+  black keys are the players', not the steering (C3).
+
+**The screens** (rs_battle_screen.c):
+- **The start** shows the keys, the rounds, the arena and what each round brings, with the keyboard map.
+- **The fight** shows the names with the round between them, the score bars down the sides, the arena whose frame
+  flashes on the beat, a strike's flash the way it struck (white on a hit), the star on the one hit, and the
+  overheat's glowing tiles. Each robot's life is at the foot.
+- **The banners:** the countdown, the round taken (or the draw, or the coin).
+- **The winner:** its robot, 128 px, "<NAME> WINS!", the score and "PLAY: AGAIN".
+
+**battle_test:**
+- the countdown;
+- a step a beat and none between;
+- the bumps;
+- the strikes: the hit, the push apart, the slams, the lunge, the trade, the tap, the turn and strike;
+- the tiles;
+- the rounds, the match, a draw and the coin;
+- the arenas between rounds, the overheat;
+- that the music plays on in both engines, and that the registers play the same game after a battle.
+
+**The playtest.** Two scripted players, one greedy and one a little different, each turning when it bumps, play a
+match on each of the six arenas. Every match ends: 24 rounds of 46 beats on average, 12 hits of 15 strikes, and no
+one hit two beats running.
+

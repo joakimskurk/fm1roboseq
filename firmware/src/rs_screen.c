@@ -15,6 +15,7 @@ struct rs_view {
     uint8_t drum_tick, tpm;
     struct rs_bot bot[2];
     struct rs_board board;
+    struct rs_battle battle;                    /* the battle mode's (D42), as it was at that step */
 };
 
 #include "rs_icons.h"                         /* the step icons, the heart, the digits (tools/art/icons.py) */

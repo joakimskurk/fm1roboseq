@@ -15,7 +15,7 @@ static int32_t ease_out(int32_t t, int32_t len, int32_t from, int32_t to)   /* f
     return to + (int32_t)((int64_t)(from - to) * u * u / ((int64_t)len * len));
 }
 
-static void big_bot(int32_t x, int32_t y, int b)   /* a robot twice the size: the 32 x 32 art, 2 x 2 a pixel */
+static void big_bot_px(int32_t x, int32_t y, int b, int32_t px)   /* the 32 x 32 art, px x px a pixel */
 {
     uint16_t main = b ? C_BOT_B : C_BOT_A, dark = b ? C_BOT_B2 : C_BOT_A2, acc = b ? C_WARN : C_ACCENT;
     int32_t gx, gy;
@@ -34,9 +34,10 @@ static void big_bot(int32_t x, int32_t y, int b)   /* a robot twice the size: th
             case 't': c = mix565(acc, C_BG, 154); break;
             default: continue;
             }
-            cv_rect(x + 2 * gx, y + 2 * gy, 2, 2, c);
+            cv_rect(x + px * gx, y + px * gy, px, px, c);
         }
 }
+static void big_bot(int32_t x, int32_t y, int b) { big_bot_px(x, y, b, 2); }   /* a robot twice the size */
 
 static void corner(int32_t x, int32_t y, int32_t dx, int32_t dy, uint16_t c)   /* an L at a corner, its arms dx, dy */
 {
