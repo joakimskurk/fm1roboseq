@@ -595,6 +595,15 @@ static int home_idx(int idx, int pc, uint8_t sc)        /* the nearest note of p
     return idx;
 }
 
+static int under_lead(int idx, int lead, int root, uint8_t sc)   /* the chord tone nearest idx that sounds with lead */
+{
+    static const int8_t TRY[7] = {0, -1, 1, -2, 2, -3, 3};
+    for (int t = 0; t < 7; t++) {
+        int c = note_of(idx + TRY[t], sc), ic = mod12(lead - c);
+        if (chord_tone(c, root, sc) && ic != 1 && ic != 2 && ic != 6 && ic != 10 && ic != 11) return idx + TRY[t];
+    }
+    return idx;
+}
 static int snap_dir(int idx, int root, uint8_t sc, int dir)   /* the nearest chord tone, the way the tune goes first */
 {
     static const int8_t D[5] = {0, 1, -1, 2, -2};
@@ -701,7 +710,8 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
         const char *g = GROOVE[rs_plus_groove(s)];
         char c = g[slot(p, bar)];
         int eact = o->acted[1] && !s->bot[1].dying ? o->played[1].action : -1, pump = 0;
-        if ((c == '.' || c == '-') && peak && p % 2 == 0 && !fill) pump = 1, c = s->plus_bass ? 'P' : 'R';   /* (the big one: it pumps) */
+        if ((c == '.' || c == '-') && peak && p % 2 == 0 && !fill)   /* (the big one: it pumps, the chord's note it holds) */
+            pump = 1, c = s->plus_bass && chord_tone(s->plus_bass, root, sc) ? 'P' : 'R';
         if (fill) c = 'W';                              /* the phrase's end: under the drummer's fill, a run into the next */
         if (c != '.' && c != '-' && !(eact == RS_WAIT && !on_beat && c != 'W')) {
             int k = 1, r = fold(48 + root, bass), b = r;
@@ -806,14 +816,19 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
     }
     if (peak && !ping_used && !fill && !s->bot[0].dying) {
         int ct[8], nct = 0, j;                          /* the big one: the chord's tones over the tune, the way Scout-7 faces */
-        for (int m = 72; m <= 91 && nct < 8; m++)
+        for (int m = 67; m <= 86 && nct < 8; m++)
             if (chord_tone(m, root, sc)) ct[nct++] = m;
         if (nct > 1) {
             int pat = dir_pattern(s->bot[0].dir), w = 2 * nct - 2, u = p % w;
             j = pat == P_UP ? p % nct : pat == P_DOWN ? nct - 1 - p % nct : pat == P_UPDOWN ? (u < nct ? u : w - u)
               : (p & 1) ? nct - 1 - (p / 2) % nct : (p / 2) % nct;
-            note(o, RS_V_A_PING, ct[j], mulq(q, F(0.7)), 0, mulq(on_beat ? F(0.48) : p % 2 == 0 ? F(0.4) : F(0.32), warm0));
+            note(o, RS_V_A_PING, ct[j], mulq(q, F(0.8)), 0, mulq(on_beat ? F(0.78) : p % 2 == 0 ? F(0.66) : F(0.56), warm0));
         }
+    }
+    if (peak && !lead_on && !fill && p % 2 == 0 && s->plus_lead && p < calls && o->acted[0] && !s->bot[0].dying) {
+        int i = snap_idx(idx_of(s->plus_lead, sc), root, sc);   /* the big one: the tune's note struck again, the eighths */
+        note(o, RS_V_A_MAIN, note_of(i, sc), mulq(step, F(1.6)), 0, mulq(on_beat ? F(0.6) : F(0.5), warm0));
+        s->plus_lead = (int8_t)note_of(i, sc), lead_on = 2, lead_idx = i;
     }
     if (on_beat && !lead_on && s->plus_lead && p < s->plus_end && !chord_tone(s->plus_lead, root, sc)) {
         int i = snap_idx(idx_of(s->plus_lead, sc), root, sc);   /* (held into the beat: it resolves) */
@@ -843,25 +858,20 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
         } else if (sec_b && lead_on && p % 2 == 0 && act != RS_WAIT) {
             int under = snap_idx(lead_idx - (b->x & 1 ? 5 : 2), root, sc);   /* (a chord tone under it) */
             if (under >= lead_idx) under = snap_idx(under - 2, root, sc);
+            under = under_lead(under, note_of(lead_idx, sc), root, sc);
             e = note_of(keep_in(under, sc, 45, 74), sc), vel = F(0.42);
             k = zone ? end - p : hold_of(s, 0, p, end, 8);
         } else if (fresh && (on_beat || (sec_b && !lead_on && p - s->plus_at[0] >= 2))) {
             int i = snap_idx(idx_of(52, sc) + d, root, sc);   /* (the chord's tones: it sounds over Scout-7's) */
             i = keep_in(i, sc, 43, 74);
             while (s->plus_lead && note_of(i, sc) > s->plus_lead - 3 && note_of(i - n, sc) >= 43) i -= n;
-            if (p < s->plus_end) {                      /* under Scout-7's note still sounding: a consonance, a chord tone */
-                static const int8_t TRY[7] = {0, -1, 1, -2, 2, -3, 3};
-                for (int t = 0; t < 7; t++) {
-                    int c = note_of(i + TRY[t], sc), ic = mod12(s->plus_lead - c);
-                    if (chord_tone(c, root, sc) && ic != 1 && ic != 2 && ic != 6 && ic != 10 && ic != 11) { i += TRY[t]; break; }
-                }
-            }
+            if (p < s->plus_end) i = under_lead(i, s->plus_lead, root, sc);   /* (under Scout-7's note: a consonance) */
             e = note_of(i, sc), vel = on_beat ? F(0.56) : F(0.48);
             k = hold_of(s, 1, p, answer ? calls : end, 4);
             s->plus_cell[1] = (int8_t)d, s->plus_at[1] = (uint8_t)p;
         }
-        if (!e && peak && on_beat && s->plus_echo && act != RS_WAIT)   /* the big one: its chord tone again, on the beat */
-            e = note_of(snap_idx(idx_of(s->plus_echo, sc), root, sc), sc), vel = F(0.46);
+        if (!e && peak && p % 2 == 0 && s->plus_echo && act != RS_WAIT && !fill)   /* the big one: its chord tone again */
+            e = note_of(under_lead(snap_idx(idx_of(s->plus_echo, sc), root, sc), s->plus_lead, root, sc), sc), vel = F(0.46);
         if (e) {
             vel = mulq(vel, peak ? mulq(warm1, F(1.08)) : warm1);
             if (vel > ONE) vel = ONE;

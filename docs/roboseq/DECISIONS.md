@@ -476,3 +476,10 @@ for a run of four sixteenths, a scale step each, onto the next chord's root: up 
 or east as the run starts, down from above when it faces south or west (a turn is the player's say). plus_test: the
 run into the next phrase in 24 of 30 phrase ends (the rest moved a step off a clash).
 
+**D36d. The big one carries.** Rendered, D36b's big one was hardly there (the spectral flux of a render no higher
+than a B's): its arpeggio was on Scout-7's soft triangle at a third of the tune's level. So in the big one the tune's
+note is struck again on the eighths it holds (Scout-7's square, the HTML's density), Echo-3 strikes its chord tone on
+the eighths, and the arpeggio is up to 0.78 and an octave lower (G4 to D6). Rendered, the big one's flux is the
+HTML's (148 to 154 against CLASSIC's 146; a B's 102 to 120), 1 to 4 dB more between 1 and 4 kHz. Echo-3's notes and
+the bass's pump keep to the chord's tones that sound with Scout-7's (a diminished chord's own tritone included).
+
