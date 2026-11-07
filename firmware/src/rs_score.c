@@ -681,8 +681,9 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
     uint32_t phrase = rs_plus_phrase(s), in = s->cycle % phrase;
     struct range bass = {31, 52}, bass_hi = {31, 64};
     /* the intensity (D36b): every other phrase's B is the big one (Scout-7's ping voice runs an arpeggio of the
-     * chord over the tune, the bass pumps, the hats fill in, all louder), and the bots' heat (their pings and dashes,
-     * the HTML's) makes them louder as they run hot and, at 4, strikes a third above Scout-7's notes */
+     * chord over the tune, the bass pumps, the hats fill in, all louder), and the bots' heat (zap rails, the other's
+     * dash or ping into it; the HTML's) makes them louder as they run hot and, at 4, strikes a third above Scout-7's
+     * notes */
     int peak = sec_b && (s->cycle / phrase & 1u), ping_used = 0;
     int h0 = s->bot[0].heat < 0 ? 0 : s->bot[0].heat > 6 ? 6 : s->bot[0].heat;
     int h1 = s->bot[1].heat < 0 ? 0 : s->bot[1].heat > 6 ? 6 : s->bot[1].heat;
