@@ -460,3 +460,14 @@ board; the app sets it on the mix when the board changes (as D24's colour), CLAS
 is the HTML's voices. patch_test: six boards six patches, all within those bounds, the HTML's square sample for
 sample at a half's duty, the patched pulse without a DC and no more than a quarter louder.
 
+**D36b. The big one, and the bots' heat.** PLUS sat in between; the HTML's intensity came from every step sounding
+(a note, a ping a third above, Echo-3's FM and sub) and from the heat (pings and dashes) making it louder. So every
+other phrase's B is the big one (rs_plus_peak): Scout-7's ping voice runs an arpeggio of the chord's tones over the
+tune on every step (C5 to G6, up, down, up and down or ping-pong as Scout-7 faces: the HTML's dir_pattern), the bass
+pumps the note it holds on the eighths between the groove's, Echo-3 strikes its chord tone again on the beats, the
+tune is a tenth louder, the hats fill every sixteenth, a kick lands on three's and; the arpeggio rests under the
+drummer's fill. The song: A, B, A, the big one. And anywhere the heat counts, as the HTML's: each point of a bot's
+heat (to 6) makes its notes 5 % louder, and at 4 Scout-7's notes get the HTML's strike a third above. Steering
+dashes and pings is turning it up. plus_test: the big one 1.4 to 1.9 times the notes and the velocity of the other
+Bs on every board, its arpeggio and the bass on the eighths, no arpeggio outside it.
+

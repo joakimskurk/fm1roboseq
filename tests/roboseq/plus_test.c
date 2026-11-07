@@ -307,10 +307,49 @@ static void test_tunes(void)                            /* the tune comes back, 
     CHECK(homes * 10 >= phrases * 9, "a phrase ends on the chord's root (%ld of %ld)", homes, phrases);
 }
 
+static void test_peaks(void)                            /* every other phrase's B the big one: denser, louder, an arpeggio */
+{
+    static struct rs_state s;
+    static struct rs_tick_out o;
+    for (int board = 0; board < RS_NBOARDS; board++) {
+        long notes[2] = {0}, vel[2] = {0}, bars[2] = {0}, arps[2] = {0}, evens[2] = {0}, bassed[2] = {0}, a_arps = 0;
+        rs_default(&s);
+        rs_load_board(&s, (uint8_t)board);
+        s.music = RS_MUSIC_PLUS;
+        rs_start(&s);
+        while (s.cycle < 16) {
+            rs_tick(&s, &o);
+            if ((!o.move_tick && !o.loop_reset) || s.step < 0) continue;
+            int b = rs_plus_section(&s), pk = rs_plus_peak(&s), fill = s.cycle % 4 == 3 && s.step >= 12, ping = 0, sub = 0;
+            CHECK(!pk || b, "board %d: a peak only in a B", board);
+            if (s.step == 0) bars[pk] += b;
+            for (int i = 0; i < o.nnotes; i++) {
+                const struct rs_note *n = &o.notes[i];
+                if (n->voice > RS_V_B_SUB || !n->vel) continue;
+                if (b) notes[pk]++, vel[pk] += n->vel;
+                ping |= n->voice == RS_V_A_PING && n->at == 0;
+                sub |= n->voice == RS_V_B_SUB && n->at == 0;
+            }
+            if (!b) a_arps += ping && o.acted[0] && o.played[0].action != RS_PING && s.bot[0].stepped_tile != RS_T_BELT && s.bot[0].heat < 4;
+            if (b && s.step % 2 == 0 && !fill) evens[pk]++, arps[pk] += ping, bassed[pk] += sub;
+        }
+        printf("plus_test: board %d: B %ld notes a bar, the big one %ld (%.1fx the velocity), its arpeggio on %ld of %ld eighths, bass %ld\n",
+               board, notes[0] / bars[0], notes[1] / bars[1], (double)vel[1] * (double)bars[0] / ((double)vel[0] * (double)bars[1]),
+               arps[1], evens[1], bassed[1]);
+        CHECK(notes[1] * 10 >= notes[0] * 13, "board %d: the big one denser (%ld, %ld notes a bar)", board,
+              notes[1] / bars[1], notes[0] / bars[0]);
+        CHECK(vel[1] * 10 / bars[1] >= vel[0] * 13 / bars[0], "board %d: and louder, all told (%ld, %ld a bar)", board, vel[1] / bars[1], vel[0] / bars[0]);
+        CHECK(arps[1] * 10 >= evens[1] * 8 && bassed[1] * 10 >= evens[1] * 9, "board %d: its arpeggio (%ld) and bass (%ld) on the eighths (%ld)",
+              board, arps[1], bassed[1], evens[1]);
+        CHECK(arps[0] * 10 < evens[0] * 3 && a_arps == 0, "board %d: none in the other Bs (%ld of %ld) or an A (%ld)", board, arps[0], evens[0], a_arps);
+    }
+}
+
 int main(void)
 {
     test_lines();
     test_tunes();
+    test_peaks();
     test_compose();
     test_in_scale();
     test_harmony();

@@ -150,6 +150,7 @@ void rs_score_coin(const struct rs_state *s, struct rs_tick_out *o);   /* the lo
 void rs_score_plus(struct rs_state *s, struct rs_tick_out *o);  /* PLUS (D34): the tick's music, written anew */
 uint32_t rs_plus_phrase(const struct rs_state *s);              /* PLUS: a phrase, in loops (a Voice Mod round) */
 int rs_plus_section(const struct rs_state *s);                  /* PLUS: 1 in a phrase's second half (B) */
+int rs_plus_peak(const struct rs_state *s);                     /* PLUS: 1 in every other phrase's B, the big one (D36b) */
 int rs_plus_groove(const struct rs_state *s);                   /* PLUS: the bass's groove, 0..7 (the board's, D35) */
 struct rs_patch {                                               /* PLUS: the board's touch on the bots' synths (D36a) */
     uint16_t pw[2];                                             /* Scout-7's and Echo-3's square: its duty, Q16 (32768 a half, the HTML's) */

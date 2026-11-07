@@ -431,6 +431,11 @@ int rs_plus_section(const struct rs_state *s)           /* the phrase's second h
     return s->cycle % phrase >= phrase / 2u;
 }
 
+int rs_plus_peak(const struct rs_state *s)              /* every other phrase's B: the big one, as loud as the HTML's */
+{
+    return rs_plus_section(s) && (s->cycle / rs_plus_phrase(s) & 1u);
+}
+
 static void plus_drums(const struct rs_state *s, struct rs_tick_out *o, int bar, int beat)
 {
     int len = rs_drum_steps(s->loop_len), dp = (s->drum_tick + len - 1) % len, any = 0, i;
@@ -440,7 +445,7 @@ static void plus_drums(const struct rs_state *s, struct rs_tick_out *o, int bar,
     if (len != bar) bar = len, beat = len / 4;
     uint32_t phrase = rs_plus_phrase(s), in = s->cycle % phrase, sec_b = (uint32_t)rs_plus_section(s), last = in == phrase - 1u;
     int nk = s->drum_k[dp], ns = s->drum_s[dp], nh = s->drum_h[dp], nxs = s->drum_s[(dp + 1) % len];
-    int hs = s->bot[0].heat + s->bot[1].heat;
+    int hs = s->bot[0].heat + s->bot[1].heat, peak = rs_plus_peak(s);
     uint32_t h = mix32(s->cycle, (uint32_t)dp, 0x5EEDu), heat = hs > 0 ? (uint32_t)hs : 0u;
     uint32_t hum = F(0.96) + (h & 31u) * (F(0.08) / 31u);   /* a hair either way, never two hits the same */
     if (last && dp >= bar - 4) {                        /* the fill: the bar's last four, no hats */
@@ -461,15 +466,17 @@ static void plus_drums(const struct rs_state *s, struct rs_tick_out *o, int bar,
         drum(o, RS_V_HIHAT, SEC(0.55), F(0.5));
     else if (nh)                                        /* the hats: the beats, the eighths, the sixteenths in between */
         drum(o, RS_V_HIHAT, sec_b && dp == bar - 2 ? SEC(0.16) : SEC(0.03),
-             mulq(dp % beat == 0 ? F(0.5) : dp % 2 == 0 ? F(0.4) : F(0.27), hum));
-    else if ((dp & 1) && (sec_b || heat >= 6u) && (h >> 8 & 255u) < 140u)
-        drum(o, RS_V_HIHAT, SEC(0.025), mulq(F(0.2), hum));   /* B, or the bots hot: the sixteenths fill in */
+             mulq(dp % beat == 0 ? F(0.5) : dp % 2 == 0 ? F(0.4) : F(0.27), peak ? mulq(hum, F(1.15)) : hum));
+    else if ((dp & 1) && (sec_b || heat >= 6u) && (peak || (h >> 8 & 255u) < 140u))
+        drum(o, RS_V_HIHAT, SEC(0.025), mulq(peak ? F(0.26) : F(0.2), hum));   /* B, the bots hot: the sixteenths fill in */
     else if (sec_b && dp == bar - 2)
         drum(o, RS_V_HIHAT, SEC(0.16), F(0.4));         /* B: the open hat on four's and */
     if (nk)
         drum(o, RS_V_KICK, SEC(0.18), mulq(dp == 0 ? F(1.0) : dp == bar / 2 ? F(0.92) : F(0.82), hum));
     else if ((s->cycle & 1u) && dp == bar - 6 && (h >> 16 & 255u) < 160u)
         drum(o, RS_V_KICK, SEC(0.16), F(0.7));          /* every other loop: a kick pushing into four */
+    else if (peak && dp == bar / 2 + 2 && (h >> 16 & 255u) < 170u)
+        drum(o, RS_V_KICK, SEC(0.16), F(0.74));         /* the big one: a kick on three's and */
     if (ns)
         drum(o, RS_V_SNARE, SEC(0.1), mulq(dp % beat == 0 ? F(0.72) : F(0.5), hum));
     else if ((dp & 1) && nxs && (h >> 24) < 110u)
@@ -664,6 +671,14 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
     uint32_t q = rs_step_q8(s), step = q * (uint32_t)tpm;   /* a tick, a move */
     uint32_t phrase = rs_plus_phrase(s), in = s->cycle % phrase;
     struct range bass = {31, 52}, bass_hi = {31, 64};
+    /* the intensity (D36b): every other phrase's B is the big one (Scout-7's ping voice runs an arpeggio of the
+     * chord over the tune, the bass pumps, the hats fill in, all louder), and the bots' heat (their pings and dashes,
+     * the HTML's) makes them louder as they run hot and, at 4, strikes a third above Scout-7's notes */
+    int peak = sec_b && (s->cycle / phrase & 1u), ping_used = 0;
+    int h0 = s->bot[0].heat < 0 ? 0 : s->bot[0].heat > 6 ? 6 : s->bot[0].heat;
+    int h1 = s->bot[1].heat < 0 ? 0 : s->bot[1].heat > 6 ? 6 : s->bot[1].heat;
+    uint32_t warm0 = F(1.0) + (uint32_t)h0 * F(0.05), warm1 = F(1.0) + (uint32_t)h1 * F(0.05);
+    int fill = in == phrase - 1u && left <= bar - p && p >= end - 4;   /* (the drummer's fill: the arpeggio rests) */
     int one = o->loop_reset || (s->cycle == 0 && s->step == 0 && s->move_tick == 1);   /* (and the very first tick) */
     drop_lines(o);
     tune_sfx(o, root, sc);
@@ -685,11 +700,13 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
     {
         const char *g = GROOVE[rs_plus_groove(s)];
         char c = g[slot(p, bar)];
-        int eact = o->acted[1] && !s->bot[1].dying ? o->played[1].action : -1;
+        int eact = o->acted[1] && !s->bot[1].dying ? o->played[1].action : -1, pump = 0;
+        if ((c == '.' || c == '-') && peak && p % 2 == 0 && !fill) pump = 1, c = s->plus_bass ? 'P' : 'R';   /* (the big one: it pumps) */
         if (c != '.' && c != '-' && !(eact == RS_WAIT && !on_beat)) {
             int k = 1, r = fold(48 + root, bass), b = r;
-            while (p + k < end && g[slot(p + k, bar)] == '-') k++;
-            if (c == 'O') b = fold(r + 12, bass_hi);
+            while (!pump && p + k < end && g[slot(p + k, bar)] == '-') k++;
+            if (c == 'P') b = s->plus_bass;              /* (the note it holds, again) */
+            else if (c == 'O') b = fold(r + 12, bass_hi);
             else if (c == 'F') b = fifth > 0 ? fold(r + fifth, bass) : r;
             else if (c == 'T') b = third_of(root, sc) > 0 ? fold(r + third_of(root, sc), bass) : r;
             else if (c == 'A') {                        /* a scale step into the next chord's root (this one's if it stays) */
@@ -703,7 +720,8 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
                 b = iabs(c0 - last) <= iabs(c1 - last) ? c0 : c1;
             }
             if (eact == RS_DASH && c != 'O') b = fold(b + 12, bass_hi);
-            uint32_t vel = p == 0 ? F(0.62) : on_beat ? F(0.54) : p % 2 == 0 ? F(0.48) : F(0.42);
+            uint32_t vel = pump ? F(0.4) : p == 0 ? F(0.62) : on_beat ? F(0.54) : p % 2 == 0 ? F(0.48) : F(0.42);
+            if (peak) vel = mulq(vel, F(1.08));
             note(o, RS_V_B_SUB, b, mulq(step * (uint32_t)k, k > 1 ? F(0.95) : F(0.8)), 0, vel);
             if (eact == RS_PING) note(o, RS_V_B_SUB, b, mulq(step / 2u, F(0.8)), step / 2u, mulq(vel, F(0.7)));
             s->plus_bass = (int8_t)b;
@@ -746,6 +764,7 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
             if (!on_beat && clashes_but(o, m, 0)) i = snap_dir(i, root, sc, dir), m = note_of(i, sc);   /* (off the bass) */
             uint32_t dur = mulq(step * (uint32_t)k, F(0.94));
             if (act == RS_DASH) vel = mulq(vel, F(1.2));
+            vel = mulq(vel, peak ? mulq(warm0, F(1.1)) : warm0);
             if (st->modifier == RS_BRIGHT) vel = mulq(vel, F(1.15));
             else if (st->modifier == RS_LOW) vel = mulq(vel, F(0.8));
             else if (st->modifier == RS_GLITCH) dur = mulq(step, F(0.4));
@@ -753,16 +772,32 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
             if (vel > ONE) vel = ONE;
             note(o, RS_V_A_MAIN, m, dur, 0, vel);
             if (act == RS_PING)                         /* the glint: a chord tone an octave up */
-                note(o, RS_V_A_PING, note_of(keep_in(snap_idx(i + n, root, sc), sc, 60, 90), sc), q, q / 4u, mulq(vel, F(0.5)));
+                note(o, RS_V_A_PING, note_of(keep_in(snap_idx(i + n, root, sc), sc, 60, 90), sc), q, q / 4u, mulq(vel, F(0.5))),
+                ping_used = 1;
             if (a->stepped_tile == RS_T_BELT) {         /* riding a belt: the chord rolls up or down after it */
                 int up = a->stepped_dir == RS_N || a->stepped_dir == RS_E, j = snap_idx(i + (up ? 2 : -2), root, sc);
                 note(o, RS_V_A_PING, note_of(keep_in(j, sc, 60, 90), sc), q / 2u, step / 2u, mulq(vel, F(0.45)));
+                ping_used = 1;
             }
+            if (!ping_used && h0 >= 4 && !peak)         /* hot: the HTML's third above, a strike */
+                note(o, RS_V_A_PING, note_of(keep_in(i + 2, sc, 60, 90), sc), mulq(step, F(0.2)), mulq(step, F(0.03)),
+                     mulq(vel, F(0.4))), ping_used = 1;
             s->plus_cell[0] = (int8_t)d, s->plus_lead = (int8_t)m, s->plus_at[0] = (uint8_t)p;
             s->plus_end = (uint8_t)(st->modifier == RS_GLITCH ? p + 1 : p + k);
             if (s->plus_first == 255) s->plus_first = (uint8_t)p;
             if (p - s->plus_first < 4) s->plus_call[p - s->plus_first] = (int8_t)i;
             lead_on = 1, lead_idx = i;
+        }
+    }
+    if (peak && !ping_used && !fill && !s->bot[0].dying) {
+        int ct[8], nct = 0, j;                          /* the big one: the chord's tones over the tune, the way Scout-7 faces */
+        for (int m = 72; m <= 91 && nct < 8; m++)
+            if (chord_tone(m, root, sc)) ct[nct++] = m;
+        if (nct > 1) {
+            int pat = dir_pattern(s->bot[0].dir), w = 2 * nct - 2, u = p % w;
+            j = pat == P_UP ? p % nct : pat == P_DOWN ? nct - 1 - p % nct : pat == P_UPDOWN ? (u < nct ? u : w - u)
+              : (p & 1) ? nct - 1 - (p / 2) % nct : (p / 2) % nct;
+            note(o, RS_V_A_PING, ct[j], mulq(q, F(0.7)), 0, mulq(on_beat ? F(0.48) : p % 2 == 0 ? F(0.4) : F(0.32), warm0));
         }
     }
     if (on_beat && !lead_on && s->plus_lead && p < s->plus_end && !chord_tone(s->plus_lead, root, sc)) {
@@ -810,7 +845,11 @@ void rs_score_plus(struct rs_state *s, struct rs_tick_out *o)
             k = hold_of(s, 1, p, answer ? calls : end, 4);
             s->plus_cell[1] = (int8_t)d, s->plus_at[1] = (uint8_t)p;
         }
+        if (!e && peak && on_beat && s->plus_echo && act != RS_WAIT)   /* the big one: its chord tone again, on the beat */
+            e = note_of(snap_idx(idx_of(s->plus_echo, sc), root, sc), sc), vel = F(0.46);
         if (e) {
+            vel = mulq(vel, peak ? mulq(warm1, F(1.08)) : warm1);
+            if (vel > ONE) vel = ONE;
             note(o, RS_V_B_FM, e, mulq(step * (uint32_t)k, F(0.9)), 0, vel), s->plus_echo = (int8_t)e;
             if (b->stepped_tile == RS_T_BELT && !(lead_on && s->bot[0].stepped_tile == RS_T_BELT))
                 note(o, RS_V_B_FM, fold(e + 12, (struct range){45, 79}), q / 2u, step / 2u, mulq(vel, F(0.6)));
