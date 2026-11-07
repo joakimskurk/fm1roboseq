@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/roboseq-logo.svg" width="560" alt="RoboSeq"></p>
+
 # RoboSeq for the M-VAVE FM-1
 
 This one started as a little browser toy with a simple question: what if a sequencer were a board game? Two robots,

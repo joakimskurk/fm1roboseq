@@ -26,7 +26,10 @@ complete source under the same licence too.
 ## The logo
 
 `assets/logo.svg` / `logo.png` carry the designburg signet: Copyright (C) designburg, all rights reserved, not under
-the GPL. It marks Dinghy itself; a fork uses its own logo.
+the GPL. It marks Dinghy itself (Dinghy's own README, docs/DINGHY_README.md, shows it); a fork uses its own logo.
+
+RoboSeq's own logo is `assets/roboseq-logo.svg` / `roboseq-logo.png` and `assets/roboseq-icon.png`: the firmware's
+robots and lettering, written by `tools/art/logo.py`, GPL-3.0-only as the rest of RoboSeq.
 
 ## Trademarks
 

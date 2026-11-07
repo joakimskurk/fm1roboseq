@@ -34,7 +34,8 @@ music.
       (still Dinghy's sine) boots in fm1-emu 0.4.0 under FM1_STRICT: ROBOSEQ on the screen, a key plays (`make emu`)
 - [x] Check the identity against the Firmware Hub's list: 960 was SID-1's, so `FM-1_965` for every build (D31,
       2026-11-06, from the hub's catalog.json)
-- [ ] RoboSeq's own logo for `assets/` (Dinghy's is designburg's, not under the GPL)
+- [x] RoboSeq's own logo for `assets/` (Dinghy's is designburg's, not under the GPL): the firmware's robots and
+      lettering, `tools/art/logo.py` writes `assets/roboseq-logo.svg`, `.png` and `roboseq-icon.png` (2026-11-07)
 
 ## Phase 1: model and simulation (host only)
 
