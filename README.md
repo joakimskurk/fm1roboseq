@@ -16,6 +16,10 @@ and [SkurkyMello](https://github.com/joakimskurk/fm1mello).
 > [FIRST_FLASH.md](FIRST_FLASH.md) is a half-hour checklist with the way back (hold OCT- while switching on). The plan
 > is in [ROADMAP.md](ROADMAP.md).
 
+<p align="center">
+  <a href="https://joakimskurk.github.io/fm1roboseq/"><b>The page: hear it, and install it from the browser →</b></a>
+</p>
+
 <p align="center"><img src="docs/screens/roboseq.gif" width="360" alt="The splash: the letters drop in, the two robots walk in from the sides and meet under a beating heart. Then HOME, the board playing: the robots walk their programs over belts, zap rails and rotators, the tiles light as they set them off, the steps they play framed down the board's sides"></p>
 
 This one started as a little browser toy with a simple question: what if a sequencer were a board game? Two robots,
@@ -124,17 +128,19 @@ go, what they ride, what they bump into and when they meet becomes the music.
   <img src="docs/screens/battle-strike.png" width="200" alt="BATTLE: a strike">
 </p>
 
-RoboSeq began as a browser instrument ([reference/roboseq.html](reference/roboseq.html)), which stays the reference
-for how it sounds and behaves. This is its port to the FM-1 as firmware, built on
+RoboSeq began as a browser instrument ([play it at jhf.no](https://jhf.no/skurky/roboseq.html)), which stays the
+reference for how it sounds and behaves. This is its port to the FM-1 as firmware, built on
 [Dinghy](https://github.com/zvenson/dinghy) 0.4 by zvenson and, under that, the Felucca / SLOOP platform, made the same
 way as [SkurkyMello](https://github.com/joakimskurk/fm1mello).
 
 ## Try it without an FM-1
 
-RoboSeq runs in [fm1-emu](https://joakimeriksson.github.io/fm1-emu/), which runs the FM-1's own packages in a
-browser:
-1. Download `roboseq-X.Y.fwsc` from the [releases](https://github.com/joakimskurk/fm1roboseq/releases), or
-   `packages` from a build under *Actions* on GitHub (`roboseq.fwsc` is in it).
+**Hear it** on [the page](https://joakimskurk.github.io/fm1roboseq/#hear): the firmware itself playing the default
+song in both engines. **Play it** in [fm1-emu](https://joakimeriksson.github.io/fm1-emu/), which runs the FM-1's own
+packages in a browser:
+1. Download the firmware from [the page](https://joakimskurk.github.io/fm1roboseq/#try) (the latest build of `main`),
+   `roboseq-X.Y.fwsc` from the [releases](https://github.com/joakimskurk/fm1roboseq/releases), or `packages` from a
+   build under *Actions* on GitHub (`roboseq.fwsc` is in it).
 2. Open [fm1-emu](https://joakimeriksson.github.io/fm1-emu/), click **Open .fwsc…** (or drop the file on the synth)
    and press **Start**.
 3. Play it on the computer's keyboard, with the mouse, on a touch screen or with a MIDI keyboard. Your first five
@@ -142,7 +148,11 @@ browser:
 
 ## Install
 
-The package is `roboseq-X.Y.fwsc` from the [releases](https://github.com/joakimskurk/fm1roboseq/releases), with its
+**From the browser:** [the page](https://joakimskurk.github.io/fm1roboseq/#install), in Chrome or Edge on a computer,
+with the FM-1 on a USB data cable. It installs the latest build of `main`, the one its tests passed, and checks its
+SHA-256 first.
+
+**With the tool:** the package is `roboseq-X.Y.fwsc` from the [releases](https://github.com/joakimskurk/fm1roboseq/releases), with its
 SHA-256 in `SHA256SUMS` beside it, or `build/roboseq.fwsc` when you build it yourself (`make fw`). Its version is in
 the splash's corner (`v0.0`: not a release). Install it on an FM-1 running M-VAVE's official V15 (or another firmware
 with the FM-1 update loader), over USB-MIDI:
@@ -497,9 +507,10 @@ make lead       # a solo with the lead over it: build/host/lead.wav
 On macOS `make test` and the host builds run in a small Docker image (`make image`), because Dinghy's host mode needs
 Linux's sections. `make reference` re-renders the browser original's sound (node and a Chromium). The panel picture
 above is `make emu`'s; the film at the top is the app itself on the computer (`make screens`, from
-`tests/roboseq/gif.txt`), and the battle at the top is `make panels`, in fm1-emu. The robots, the tiles, the moves
-and the strips between the parts (`assets/readme/`) are drawn by the firmware's own code too (`make screens`, from
-`tests/roboseq/art.c`).
+`tests/roboseq/gif.txt`). The robots, the tiles, the moves and the strips between the parts (`assets/readme/`) are
+drawn by the firmware's own code too (`make screens`, from `tests/roboseq/art.c`). `make site` makes
+[the page](https://joakimskurk.github.io/fm1roboseq/) as CI publishes it (`web/`): the demos the app plays on the
+host, the installer, the FM-1 in BATTLE (`make panels`, in fm1-emu).
 
 **Measured.**
 - **The game and the score:** ORIGINAL plays the browser original's notes tick by tick, 88,120 notes over 36
@@ -513,8 +524,8 @@ and the strips between the parts (`assets/readme/`) are drawn by the firmware's 
   (`tests/roboseq/p4_test.c`).
 
 GitHub Actions builds the `.fwsc` on every push and runs the tests (`.github/workflows/build.yml`, through
-zvenson/fm1-build). A tag `vX.Y` publishes `roboseq-X.Y.fwsc` as a release, with `SHA256SUMS` and a build
-attestation.
+zvenson/fm1-build). On `main` it then publishes the page with that package. A tag `vX.Y` publishes
+`roboseq-X.Y.fwsc` as a release, with `SHA256SUMS` and a build attestation.
 
 ## Where things are
 
@@ -527,7 +538,8 @@ attestation.
 | [FIRST_FLASH.md](FIRST_FLASH.md) | The first install on a real FM-1: a checklist, and the way back |
 | [docs/releases/](docs/releases/) | The release notes |
 | [fmhub.json](fmhub.json), [docs/card.png](docs/card.png) | The Firmware Hub's card |
-| [reference/](reference/) | The browser original and its SHA-256 |
+| [reference/](reference/) | The browser original and its SHA-256 (to play: [jhf.no](https://jhf.no/skurky/roboseq.html)) |
+| [web/](web/) | The page: its installer in the browser (Web MIDI, SLOOP's), the demos, the link preview (`make site`) |
 | [firmware/](firmware/) | The firmware: Dinghy 0.4 and the app, `src/roboseq.c` and its `rs_*.c` |
 | [PLATFORM.md](PLATFORM.md) | The Dinghy commit, and what differs from it |
 | [tests/roboseq/](tests/roboseq/) | The host tests: the game, the score, the sound, the pages, the playability rules |
