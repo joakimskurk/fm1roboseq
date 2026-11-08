@@ -9,12 +9,15 @@ the firmware, the demos.
                              offered)
   audio/                     BAND and ORIGINAL (web/render_demos.sh: the app itself on the host, as the FM-1 sends its
                              sound over USB), AAC, and each one's spectrum as a picture (WebP), low to high
-  screens/                   the pictures: the logo, the film, the screens (make screens), the FM-1 in BATTLE
-                             (make panels), the link preview (web/make_og.py)
+  app/                       RoboSeq to play on the page: roboseq.wasm (web/app/build.sh: the firmware's own code
+                             on web/app/web_host.c), worklet.js (the audio thread), play.js (the FM-1 drawn)
+  screens/                   the pictures: the logo, the film, the screens (make screens), the link preview
+                             (web/make_og.py)
   art/                       the README's art (assets/readme: the robots, the tiles, the moves, the strips)
   .nojekyll                  (served as it is)
 
   sh web/render_demos.sh     (first: the demos)
+  sh web/app/build.sh        (and the firmware for the browser)
   python3 web/make_site.py build/roboseq.fwsc VERSION OUT_DIR
 
 The package must be RoboSeq's (its identity FM-1_965) with its update loader in it (which the installer talks to).
@@ -37,9 +40,9 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 BLOCKS, BLK, KEEP = 20, 0x30, 0x2F
 PICTURES = {"assets/roboseq-logo.svg": "logo.svg", "assets/roboseq-icon.png": "icon.png",
-            "docs/screens/roboseq.gif": "film.gif", "docs/screens/panel-battle.png": "panel-battle.png",
-            "web/og.png": "og.png"}
-SCREENS = ("home-playing", "home-lead", "seq", "voicemod", "seq2", "drums", "mix", "boards", "builder", "glo",
+            "docs/screens/roboseq.gif": "film.gif", "web/og.png": "og.png"}
+APP = {"build/web/roboseq.wasm": "roboseq.wasm", "web/app/worklet.js": "worklet.js", "web/app/play.js": "play.js"}
+SCREENS = ("splash", "home-playing", "home-lead", "seq", "voicemod", "seq2", "drums", "mix", "boards", "builder", "glo",
            "battle", "battle-countdown", "battle-strike", "battle-winner")
 DEMOS = [
     {"id": "band", "title": "BAND",
@@ -118,17 +121,21 @@ def main(pkg, version, out):
         raise SystemExit(f"{pkg}: identity {product!r} is not RoboSeq's (FM-1_965)")
     if b"FELUCCA-LOADER-1" not in raw:
         raise SystemExit(f"{pkg}: no update loader in it: the installer could not write it")
+    if not (ROOT / "build" / "web" / "roboseq.wasm").exists():
+        raise SystemExit("build/web/roboseq.wasm: missing (sh web/app/build.sh builds it)")
     for d in DEMOS:
         if not (ROOT / "build" / "audio" / f"{d['id']}.wav").exists():
             raise SystemExit(f"build/audio/{d['id']}.wav: missing (sh web/render_demos.sh renders it)")
     name = f"roboseq-{re.sub(r'[^A-Za-z0-9.-]', '-', version)}.fwsc"
     if out.exists():
         shutil.rmtree(out)
-    for sub in ("firmware", "screens", "audio", "art"):
+    for sub in ("firmware", "screens", "audio", "art", "app"):
         (out / sub).mkdir(parents=True)
     shutil.copy(pkg, out / "firmware" / name)
     for src, dst in PICTURES.items():
         shutil.copy(ROOT / src, out / "screens" / dst)
+    for src, dst in APP.items():
+        shutil.copy(ROOT / src, out / "app" / dst)
     for s in SCREENS:
         shutil.copy(ROOT / "docs" / "screens" / f"{s}.png", out / "screens" / f"{s}.png")
     for p in sorted((ROOT / "assets" / "readme").glob("*.svg")):
@@ -154,7 +161,8 @@ def main(pkg, version, out):
     (out / ".nojekyll").write_text("")
     size = sum(p.stat().st_size for p in out.rglob("*") if p.is_file())
     print(f"site: {out}: index.html ({len(html)} B), firmware/{name} ({len(raw)} B, {product}), "
-          f"{len(demos)} demos, {len(PICTURES) + len(SCREENS)} pictures, {size // 1024} KB in all")
+          f"{len(demos)} demos, RoboSeq to play ({(out / 'app' / 'roboseq.wasm').stat().st_size // 1024} KB), "
+          f"{len(PICTURES) + len(SCREENS)} pictures, {size // 1024} KB in all")
 
 
 if __name__ == "__main__":
