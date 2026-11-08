@@ -744,6 +744,10 @@ it); rounds, then "<robot> wins" with the winning robot's picture. Along the way
 - **The fight** shows the names with the round between them, the score bars down the sides, the arena whose frame
   flashes on the beat, a strike's flash the way it struck (white on a hit), the star on the one hit, and the
   overheat's glowing tiles. Each robot's life is at the foot.
+- **Later (2026-11-08), in the board's own art:** the product owner found the white bars (the beat's frame, the
+  strike) out of the design. On the beat the frame lights mint and the splash's corners in each robot's colour
+  (Scout-7's side red, Echo-3's orange; dim between the beats); a strike is three chevrons the way it struck, in the
+  striker's colour, outlined and lit as the step icons, brighter to the front, the front one white on a hit.
 - **The banners:** the countdown, the round taken (or the draw, or the coin).
 - **The winner:** its robot, 128 px, "<NAME> WINS!", the score and "PLAY: AGAIN".
 

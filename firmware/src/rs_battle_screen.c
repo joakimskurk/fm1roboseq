@@ -16,6 +16,37 @@ static void bt_banner(const char *big, const char *small, uint16_t c)   /* a ban
     if (small) cv_text(120 - text_w(&FONT_S, small) / 2, y + 38, &FONT_S, small, C_TEXT);
 }
 
+static void bt_chevron(int32_t cx, int32_t cy, uint32_t dir, uint16_t c)   /* a chevron pointing dir, its tip at cx, cy:
+                                                                          * 3 px thick, 7 px each side, outlined, its
+                                                                          * front edge lit (the step icons' way) */
+{
+    uint16_t lit = mix565(C_WHITE, c, 120);
+    for (int pass = 0; pass < 2; pass++)        /* the outline under it all, then the body */
+        for (int32_t i = -7; i <= 7; i++)
+            for (int32_t d = 0; d < 3; d++) {
+                int32_t a = -(i < 0 ? -i : i) - d, x, y;   /* back from the tip as it widens, d into the stroke */
+                if (dir == RS_E) x = cx + a, y = cy + i;
+                else if (dir == RS_W) x = cx - a, y = cy + i;
+                else if (dir == RS_S) x = cx + i, y = cy + a;
+                else x = cx + i, y = cy - a;
+                if (pass == 0) cv_rect(x - 1, y - 1, 3, 3, RGB(0x05, 0x05, 0x0c));
+                else cv_pset(x, y, d == 0 ? lit : c);
+            }
+}
+
+static void bt_corners(int on_beat)             /* the arena's corners, as the splash's: Scout-7's side red, Echo-3's
+                                                 * orange; lit on the beat */
+{
+    static const int32_t X0 = BX - 2, Y0 = BY - 2, S = 5 * CELL + 4, ARM = 22, T = 3;   /* (a pixel into the arena) */
+    for (int b = 0; b < 2; b++) {
+        uint16_t c = b ? C_BOT_B : C_BOT_A;
+        int32_t x = b ? X0 + S - ARM : X0, xv = b ? X0 + S - T : X0;
+        if (!on_beat) c = mix565(c, C_BG, 110);
+        cv_rect(x, Y0, ARM, T, c), cv_rect(xv, Y0, T, ARM, c);                  /* the top corner */
+        cv_rect(x, Y0 + S - T, ARM, T, c), cv_rect(xv, Y0 + S - ARM, T, ARM, c);   /* the bottom one */
+    }
+}
+
 static void bt_score(int b, uint32_t wins, uint32_t to_win)   /* a robot's score bar down its side of the arena (where
                                                                * HOME shows its register): a segment a round to win,
                                                                * lit from the bottom as it takes them */
@@ -141,9 +172,11 @@ static void draw_battle(const struct rs_view *v, const struct rs_fx *fx, uint32_
         cv_text(120 - text_w(&FONT_S, mid) / 2, 1, &FONT_S, mid, hot ? C_DANGER : C_MUTED);
     }
     bt_score(0, live ? t->wins[0] : 0, goal), bt_score(1, live ? t->wins[1] : 0, goal);
-    /* the arena; its frame flashes on the beat (what the robots step to) */
+    /* the arena; its frame flashes on the beat (what the robots step to): the line mint, the splash's corners lit in
+     * each robot's colour on its side */
     int on_beat = live && t->phase == RS_BT_FIGHT && v->step >= 0 && v->step % beat == 0;
-    frame(BX - 2, BY - 2, 5 * CELL + 4, 5 * CELL + 4, 2, on_beat ? C_WHITE : mix565(C_MUTED, C_BG, 90));
+    frame(BX - 2, BY - 2, 5 * CELL + 4, 5 * CELL + 4, 2, on_beat ? mix565(C_ACCENT, C_BG, 170) : mix565(C_MUTED, C_BG, 90));
+    bt_corners(on_beat);
     for (int i = 0; i < RS_ROWS * RS_COLS; i++) {
         int32_t x = BX + (i % RS_COLS) * CELL, y = BY + (i / RS_COLS) * CELL;
         draw_tile(x, y, &v->board.t[i]);
@@ -163,10 +196,16 @@ static void draw_battle(const struct rs_view *v, const struct rs_fx *fx, uint32_
         dim_cell(x, y);
         draw_bot(sx + 1, y + 16, b, 1, C_CELL);
         draw_arrow_at(sx + 10, y + 13, r->dir, b ? C_WARN : C_ACCENT);
-        if (live && t->did[b] == RS_BT_STRIKE && v->step % beat == 0) {   /* the strike: a flash the way it faces */
+        if (live && t->did[b] == RS_BT_STRIKE && v->step % beat == 0) {   /* the strike: chevrons the way it faces, in
+                                                                           * its colour, brighter to the front; a hit's
+                                                                           * front one white */
             int32_t cx = x + CELL / 2, cy = y + CELL / 2, dx = DX[t->sdir[b] & 3], dy = DY[t->sdir[b] & 3];
-            uint16_t c = t->hit[b] ? C_WHITE : b ? C_BOT_B : C_BOT_A;
-            for (int32_t k = 14; k < CELL + 10; k++) cv_rect(cx + dx * k - (dy ? 3 : 1), cy + dy * k - (dx ? 3 : 1), dy ? 7 : 3, dx ? 7 : 3, c);
+            uint16_t c = b ? C_BOT_B : C_BOT_A;
+            for (int32_t n = 0; n < 3; n++) {
+                uint16_t cn = n == 0 ? mix565(c, C_CELL, 150) : n == 1 ? c : t->hit[b] ? C_WHITE : mix565(C_WHITE, c, 80);
+                int32_t k = 22 + 10 * n;            /* the tips 22, 32 and 42 px on: to the next tile's middle */
+                bt_chevron(cx + dx * k, cy + dy * k, t->sdir[b] & 3u, cn);
+            }
         }
         if ((int32_t)(fx->clash_until[b] - now_ms) > 0) draw_clash(sx, y + 1, 2);   /* hit: the star */
     }
