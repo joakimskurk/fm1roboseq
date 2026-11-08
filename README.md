@@ -135,16 +135,22 @@ way as [SkurkyMello](https://github.com/joakimskurk/fm1mello).
 
 ## Try it without an FM-1
 
-**Hear it** on [the page](https://joakimskurk.github.io/fm1roboseq/#hear): the firmware itself playing the default
-song in both engines. **Play it** in [fm1-emu](https://joakimeriksson.github.io/fm1-emu/), which runs the FM-1's own
-packages in a browser:
-1. Download the firmware from [the page](https://joakimskurk.github.io/fm1roboseq/#try) (the latest build of `main`),
+**Play it on [the page](https://joakimskurk.github.io/fm1roboseq/#play).** The firmware's own code runs there,
+compiled for the browser, on an FM-1 drawn in the page's style: its screen, its sound, its knobs and buttons, and the
+27 keys, played with the mouse, a touch screen, the computer's keyboard or a MIDI keyboard. Two can battle on one
+keyboard. The page also lets you [hear it](https://joakimskurk.github.io/fm1roboseq/#hear), the default song in both
+engines.
+
+**Or run the package** in [fm1-emu](https://joakimeriksson.github.io/fm1-emu/), which runs the FM-1's own packages
+in a browser:
+1. Download the firmware from [the page](https://joakimskurk.github.io/fm1roboseq/#install) (the latest build of `main`),
    `roboseq-X.Y.fwsc` from the [releases](https://github.com/joakimskurk/fm1roboseq/releases), or `packages` from a
    build under *Actions* on GitHub (`roboseq.fwsc` is in it).
 2. Open [fm1-emu](https://joakimeriksson.github.io/fm1-emu/), click **Open .fwsc…** (or drop the file on the synth)
    and press **Start**.
-3. Play it on the computer's keyboard, with the mouse, on a touch screen or with a MIDI keyboard. Your first five
-   minutes are below.
+3. Play it on the computer's keyboard, with the mouse, on a touch screen or with a MIDI keyboard.
+
+Your first five minutes are below.
 
 ## Install
 
@@ -510,7 +516,8 @@ above is `make emu`'s; the film at the top is the app itself on the computer (`m
 `tests/roboseq/gif.txt`). The robots, the tiles, the moves and the strips between the parts (`assets/readme/`) are
 drawn by the firmware's own code too (`make screens`, from `tests/roboseq/art.c`). `make site` makes
 [the page](https://joakimskurk.github.io/fm1roboseq/) as CI publishes it (`web/`): the demos the app plays on the
-host, the installer, the FM-1 in BATTLE (`make panels`, in fm1-emu).
+host, the installer, and RoboSeq to play in the browser (`web/app/`: the firmware's own code compiled to WebAssembly
+on `web/app/web_host.c`, as FM-1 Clock's page does it).
 
 **Measured.**
 - **The game and the score:** ORIGINAL plays the browser original's notes tick by tick, 88,120 notes over 36
@@ -539,7 +546,7 @@ zvenson/fm1-build). On `main` it then publishes the page with that package. A ta
 | [docs/releases/](docs/releases/) | The release notes |
 | [fmhub.json](fmhub.json), [docs/card.png](docs/card.png) | The Firmware Hub's card |
 | [reference/](reference/) | The browser original and its SHA-256 (to play: [jhf.no](https://jhf.no/skurky/roboseq.html)) |
-| [web/](web/) | The page: its installer in the browser (Web MIDI, SLOOP's), the demos, the link preview (`make site`) |
+| [web/](web/) | The page: RoboSeq to play in the browser (`web/app/`), its installer (Web MIDI, SLOOP's), the demos, the link preview (`make site`) |
 | [firmware/](firmware/) | The firmware: Dinghy 0.4 and the app, `src/roboseq.c` and its `rs_*.c` |
 | [PLATFORM.md](PLATFORM.md) | The Dinghy commit, and what differs from it |
 | [tests/roboseq/](tests/roboseq/) | The host tests: the game, the score, the sound, the pages, the playability rules |

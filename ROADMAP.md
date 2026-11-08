@@ -146,7 +146,7 @@ and the limiter.)
       the card (`make screens`: docs/card.png) for the Firmware Hub (2026-11-07)
 - [x] The page (D44): joakimskurk.github.io/fm1roboseq, published by CI from `main`: the demos the app plays, the
       installer in the browser (SLOOP's), the robots, the controls, the battle; the original linked on jhf.no
-      (`make site`) (2026-11-08)
+      (`make site`) (2026-11-08); RoboSeq to play on the page, the firmware compiled to WebAssembly (2026-11-09)
 - [ ] The first release `roboseq-0.1.fwsc` (a `v*` tag: the product owner's call), a pre-release with the notes in
       `docs/releases/0.1.md` and the version on the splash (`v0.1`)
 - [ ] On a real FM-1: FIRST_FLASH.md's checklist ticked, then the Hub (it lists a firmware tested on one)

@@ -834,7 +834,17 @@ page links to the original, the link goes to it on jhf.no (`https://jhf.no/skurk
   `demo-original.txt`), the default song in BAND and in ORIGINAL, 33 s each, as the FM-1 sends its sound over USB;
   AAC, each with its spectrum as its seek bar (Star Distroyer's player).
 - **The pictures** are the firmware's own: its screens (`make screens`), the film, the README's art drawn by its code
-  (`assets/readme/`), the FM-1 in BATTLE in fm1-emu (`make panels`), the link preview (`web/make_og.py`).
+  (`assets/readme/`), the link preview (`web/make_og.py`).
+- **RoboSeq to play** (2026-11-09, the product owner: let people try it on the page, not a picture of the emulator, in
+  a more stylish FM-1): the firmware's own code compiled to WebAssembly (`web/app/build.sh`, clang and wasm-ld, no C
+  library) on `web/app/web_host.c`, an FM-1 for the page after FM-1 Clock's, in the audio thread
+  (`web/app/worklet.js`): its sound is its time base, a pass of the main loop for each millisecond of it. For that
+  `app_main` is a start, a pass of the splash and a pass of the loop (`DINGHY_WEB`: a pass a call; the FM-1 and the
+  host loop as before, the host's render byte for byte the one before), and `platform.c` includes the web host as
+  FM-1 Clock's does (PLATFORM.md). The FM-1 is drawn in the page's style (`web/app/play.js`): its screen, MASTER as
+  the page's volume, SELECT and K1-K4 (drag, scroll, the arrow keys), the buttons lit as their LEDs, the 27 keys (the
+  black ones marked in the robots' colours, whose nudge they are), the computer's keyboard (Z .. / and Q .. Y, the
+  black keys above) and a MIDI keyboard; the project RoboSeq saves is kept in the browser.
 - **The words** say what the README says: the programs decide, the black keys nudge, the battle is steered.
 
 Measured with it: the default song's render has 0.42 % of its samples at full scale (ORIGINAL 0.37 %), the HTML's own
