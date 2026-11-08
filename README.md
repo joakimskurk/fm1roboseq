@@ -3,9 +3,10 @@
 # RoboSeq for the M-VAVE FM-1
 
 A sequencer that is a board game. Two robots walk a 5 x 5 board of conveyor belts, zap rails and rotators, each
-running a program of moves, and where they go, what they ride and what they bump into is the music. You play it by
-reaching in while it runs: steer them on the black keys, rewrite their programs, change their board, solo over them,
-or hand a friend the other end of the keyboard and fight them on the beat. A Dinghy 0.4 app, in the same family as
+running a program of moves, and where they go, what they ride and what they bump into is the music. Their programs
+decide how they move, and you play it by changing them while it runs: turn their steps, type a program in, change
+their board, nudge a robot off its program for a step, solo over them. Or hand a friend the other end of the keyboard
+and steer them yourselves, in a battle on the beat. A Dinghy 0.4 app, in the same family as
 [VaveHero](https://github.com/joakimskurk/fm1vavehero), [Star Distroyer](https://github.com/joakimskurk/fm1stardistroyer)
 and [SkurkyMello](https://github.com/joakimskurk/fm1mello).
 
@@ -47,11 +48,12 @@ Enjoy the robots.
 board's left side. In BAND it sings the tune, and the tune comes back every bar; in ORIGINAL it plays a note every
 step from where it stands.
 
-**Steer it** on F#3 G#3 A#3 C#4 D#4: turn left, move, turn right, dash, ping.
+**Nudge it** on F#3 G#3 A#3 C#4 D#4: a key makes its next move a turn left, move, turn right, dash or ping, once,
+and then its program goes on.
 
 <p align="center"><img src="assets/readme/steer-scout-turn-l.svg" width="40" alt="turn l"> <img src="assets/readme/steer-scout-move.svg" width="40" alt="move"> <img src="assets/readme/steer-scout-turn-r.svg" width="40" alt="turn r"> <img src="assets/readme/steer-scout-dash.svg" width="40" alt="dash"> <img src="assets/readme/steer-scout-ping.svg" width="40" alt="ping"></p>
 
-**In the battle** it is the left hand: F3 F#3 G3 A3 to walk, C4 to strike.
+**In the battle** there is no program, and a player steers it: F3 F#3 G3 A3 to walk, C4 to strike.
 
 </td>
 <td valign="top">
@@ -60,11 +62,12 @@ step from where it stands.
 board's right side. In BAND it answers Scout-7, then sings with it; in ORIGINAL it plays a harmony of Scout-7 every
 step, and the bass.
 
-**Steer it** on F#4 G#4 A#4 C#5 D#5: turn left, move, turn right, dash, ping.
+**Nudge it** on F#4 G#4 A#4 C#5 D#5: a key makes its next move a turn left, move, turn right, dash or ping, once,
+and then its program goes on.
 
 <p align="center"><img src="assets/readme/steer-echo-turn-l.svg" width="40" alt="turn l"> <img src="assets/readme/steer-echo-move.svg" width="40" alt="move"> <img src="assets/readme/steer-echo-turn-r.svg" width="40" alt="turn r"> <img src="assets/readme/steer-echo-dash.svg" width="40" alt="dash"> <img src="assets/readme/steer-echo-ping.svg" width="40" alt="ping"></p>
 
-**In the battle** it is the right hand: C5 C#5 D5 E5 to walk, G5 to strike.
+**In the battle** there is no program, and a player steers it: C5 C#5 D5 E5 to walk, G5 to strike.
 
 </td>
 </tr>
@@ -81,7 +84,7 @@ step, and the bass.
 6. [The panel and the keyboard](#the-panel-and-the-keyboard)
 
 **Lessons**
-- [1. Play and steer](#lesson-1-play-and-steer)
+- [1. Play and nudge](#lesson-1-play-and-nudge)
 - [2. Program the robots](#lesson-2-program-the-robots)
 - [3. Build their world](#lesson-3-build-their-world)
 - [4. Chords and progressions](#lesson-4-chords-and-progressions)
@@ -104,12 +107,14 @@ Two little robots, **Scout-7** (red) and **Echo-3** (orange), walk a 5 x 5 board
 rotators, pulse pads and crates. Each runs its own program of moves: forward, back, turn, dash, ping, idle. Where they
 go, what they ride, what they bump into and when they meet becomes the music.
 
-- **You play it** by reaching into the robots while they run. Steer them, rewrite their programs, swap their board,
-  change the chords. Everything you change is heard on their next step.
+- **You play it** by changing what the robots do while they run. Their programs decide how they move: rewrite them,
+  swap their board, change the chords, or nudge a robot off its program for a step. Everything you change is heard on
+  their next step.
 - **It has two engines.** **BAND**, where it starts, turns the robots into a band: a tune that comes back every bar,
   an answering voice, a bass groove per board, a drummer, songs with a big chorus. **ORIGINAL** is the browser
   original's score, note for note.
-- **It has a battle mode.** Two players, a robot each, moving on the beat, until one burns out.
+- **It has a battle mode.** Two players, a robot each, steered by hand on the beat with no program, until one burns
+  out.
 
 <p align="center">
   <img src="docs/screens/home-playing.png" width="200" alt="HOME: the board playing, the programs down its sides">
@@ -160,7 +165,7 @@ the same for every version.
 |---|---|
 | **1.** Switch on | The robots walk in and meet under a heart. Any key skips it. You are on **HOME**, the board. |
 | **2.** Press **PLAY** | The robots start walking and the music is what they do. PLAY flashes on the beat. |
-| **3.** Press the black key **G#3** | Scout-7 steps forward now, out of its program, once. That is steering. |
+| **3.** Press the black key **G#3** | Scout-7's next move is a step forward, out of its program, once; then its program goes on. That is a nudge. |
 | **4.** Press **ENV**, then white key **6** | MAZE arrives as the loop comes round: a new board, a new bass groove, a new sound. |
 | **5.** Press **SEL** (SCL), then white key **16** | Voice Mod writes a new chord progression, and the header names it. |
 | **6.** Press **GLO**, then white key **16** | **BATTLE**: hand a friend the other end of the keyboard and press PLAY. |
@@ -190,8 +195,9 @@ the battle.
 
 On most pages:
 - **The white keys are positions:** a program's steps, Voice Mod's steps, the drum steps.
-- **The black keys steer the robots,** two hands of five and a swap: the first five are Scout-7's (red), the next
-  five Echo-3's (orange), the last swaps who plays high.
+- **The black keys nudge the robots,** two hands of five and a swap: a key decides that robot's next move,
+  once, and then its program goes on. The first five are Scout-7's (red), the next five Echo-3's (orange), the last
+  swaps who plays high.
 
 | Black key | F#3 | G#3 | A#3 | C#4 | D#4 | F#4 | G#4 | A#4 | C#5 | D#5 | F#5 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -200,7 +206,7 @@ On most pages:
 
 <p align="center"><img src="assets/readme/board-strip-2.svg" width="640" alt=""></p>
 
-## Lesson 1: Play and steer
+## Lesson 1: Play and nudge
 
 <img src="docs/screens/home.png" width="240" align="right" alt="HOME">
 
@@ -212,15 +218,18 @@ On most pages:
 
 1. **Press PLAY.** The robots move a step at a time. The tiles they set off light up, and each program frames the step
    it is playing.
-2. **Steer.** Press **G#3**. Scout-7's next move is a step forward, once; then its program goes on. Try **C#4**, a dash
+2. **Nudge.** Press **G#3**. Scout-7's next move is a step forward, once; then its program goes on. Try **C#4**, a dash
    of two tiles, and **D#4**, a ping straight ahead.
-3. **Steer Echo-3** the same way, an octave up: **F#4 to D#5**.
-4. **Meet.** Steer them onto the same tile and let them linger: a heart appears and a coin chimes. Dash one into the
+3. **Nudge Echo-3** the same way, an octave up: **F#4 to D#5**.
+4. **Meet.** Nudge them onto the same tile and let them linger: a heart appears and a coin chimes. Dash one into the
    other and a star flashes over the one hit.
 5. **Press PLAY again** to stop.
 
 *What is happening:* zap rails and hits heat a robot up. A hot robot plays louder, and at heat 6 it burns out and
 comes back in a far corner. Pulse pads cool it.
+
+*A nudge lasts the loop:* at the loop's end the robots go back to their pads and walk their programs again. To change
+where they go for good, change their programs (Lesson 2) or their board (Lesson 3).
 
 <br clear="right">
 
@@ -431,7 +440,7 @@ with the whole bank of progressions.
 
 | Page | The button | What it is | The keys | The knobs |
 |---|---|---|---|---|
-| HOME | HOME | the board | white: the program's steps; black: steer | K1 the program's length |
+| HOME | HOME | the board | white: the program's steps; black: nudge | K1 the program's length |
 | SEQ | SEQ | the programs as cards | type moves (A W S D and round them) | K1 the length |
 | SCL | SEL | Voice Mod, the chords | 1-4 a step; 12 FOLLOW, 13 NEXT, 14 ROOT, 15 reset, 16 roll | K1 scale, K2 root, K3 semitone, K4 when |
 | Seq 2 | SEL again | the arrangement | 1-4 a step; 12 on, 13/14 roll on the wrap, 15 reset, 16 random | K1 board, K2 drums, K3 swap, K4 progression |

@@ -55,7 +55,8 @@ Tick what works, and note what doesn't: what you did, what you saw or heard, wha
       (ENV, white key 6), which is the busiest board.
 
 **Playing it** (README.md's first five minutes and lessons)
-- [ ] The black keys steer: G#3 moves Scout-7 at once, its icon shows over its head till the step plays.
+- [ ] The black keys nudge: G#3 makes Scout-7's next move a step forward, its icon over its head till that step
+      plays; then its program goes on.
 - [ ] The white keys on HOME turn Scout-7's steps; EDIT gives them to Echo-3.
 - [ ] Every page's button opens its page, lit: SEQ, SEL (and SEL again), LFO, FX, ENV (and ENV again), GLO, HOME.
 - [ ] The knobs: one click is one step, both ways, on GLO's tempo and the FX faders.

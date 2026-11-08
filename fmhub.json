@@ -1,5 +1,5 @@
 {
-  "what": "Two robots walk a board of belts, rotators and zaps, and their moves are the music: a band with a lead, an answer, bass, drums and chords. Steer them live on the keys, program them, build their board, play a solo over them, or fight a two-player battle on the beat.",
+  "what": "Two robots walk a board of belts, rotators and zaps, and their moves are the music: a band with a lead, an answer, bass, drums and chords. Program them live, build their board, nudge them off their program, play a solo over them, or steer them yourselves in a two-player battle on the beat.",
   "author": "Joakim (joakimskurk)",
   "kinds": ["groove"],
   "cheat": "https://github.com/joakimskurk/fm1roboseq/blob/main/docs/roboseq/CONTROLS.md",
