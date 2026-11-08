@@ -24,8 +24,9 @@ Kept small, so a later Dinghy can be merged by diffing these files.
 | `tests/install_test.py` | `roboseq.*` names |
 | `README.md` | moved to `docs/DINGHY_README.md`; RoboSeq's README in its place |
 | `.github/workflows/release.yml` | replaced by `build.yml` (zvenson/fm1-build, as SkurkyMello) |
+| `firmware/src/platform.c` | with `DINGHY_WEB` (and `DINGHY_HOST`) it includes `web/app/web_host.c` in place of `tests/host.c`: RoboSeq in the browser (D44), the same three lines as FM-1 Clock's |
 
-Nothing in `firmware/hal/`, `firmware/loader/`, `firmware/app.ld`, `platform.c` or `tests/host.c` is changed but
+Nothing else in `firmware/hal/`, `firmware/loader/`, `firmware/app.ld`, `platform.c` or `tests/host.c` is changed but
 upstream's own `f77bf032` above.
 
 ## Updating Dinghy
