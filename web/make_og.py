@@ -31,9 +31,9 @@ def main():
         for i in range(40):
             for t in range(6):
                 px[cx + dx * i, cy + dy * t] = px[cx + dx * t, cy + dy * i] = CORNER[c]
-    logo = Image.open(ROOT / "assets" / "roboseq-logo.png").convert("RGB")   # 1140 x 240: the robots and the word
-    logo = logo.resize((950, 200), Image.NEAREST)
-    img.paste(logo, ((W - logo.width) // 2, 40))
+    logo = Image.open(ROOT / "assets" / "roboseq-logo.png").convert("RGBA")  # the robots and the word, transparent
+    logo = logo.resize((960, round(logo.height * 960 / logo.width)), Image.NEAREST)
+    img.paste(logo, ((W - logo.width) // 2, 140 - logo.height // 2), logo)
     shots = ["home-playing", "battle-strike", "boards"]
     size, gap = 288, 24
     x0 = (W - (len(shots) * size + (len(shots) - 1) * gap)) // 2
