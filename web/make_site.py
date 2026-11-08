@@ -43,11 +43,11 @@ SCREENS = ("home-playing", "home-lead", "seq", "voicemod", "seq2", "drums", "mix
            "battle", "battle-countdown", "battle-strike", "battle-winner")
 DEMOS = [
     {"id": "band", "title": "BAND",
-     "about": "The default song as RoboSeq starts, the robots alone, in BAND, RoboSeq's own engine: Scout-7's tune "
-              "comes back every bar and Echo-3 answers it, over the board's bass groove and a drummer. 80 BPM."},
+     "about": "RoboSeq's own engine. Scout-7 plays a tune that comes back every bar, Echo-3 answers it, and the "
+              "board adds a bass groove and a drummer. 80 BPM."},
     {"id": "original", "title": "ORIGINAL",
-     "about": "The same robots on the same board in ORIGINAL, the browser original's score note for note: a note "
-              "each step from where Scout-7 stands, Echo-3's harmony and sub, the drum pattern as it is."},
+     "about": "The same song as the original browser version plays it, note for note. Scout-7 plays a note on "
+              "every step, Echo-3 adds harmony and bass, and the drums play the pattern as it is."},
 ]
 # the spectrum's picture: 40 Hz .. 16 kHz on a log scale, 75 dB of range, in the splash's teal to mint
 SPEC_W, SPEC_H, SPEC_N = 1600, 240, 8192
