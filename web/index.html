@@ -9,19 +9,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RoboSeq</title>
-<meta name="description" content="RoboSeq: a sequencer that is a board game, firmware for the M-VAVE FM-1. Two robots walk a board of belts, rotators and zap rails, and their moves are the music. Hear it, and install it from the browser.">
+<meta name="description" content="RoboSeq is a sequencer that plays like a board game: firmware for the M-VAVE FM-1. Two robots move around a board of conveyor belts, rotators and zap rails, and everything they do becomes music. Listen to it, and install it from your browser.">
 <!-- the link preview: the card a chat or a post shows for the link (web/make_og.py makes the picture) -->
 <link rel="canonical" href="https://joakimskurk.github.io/fm1roboseq/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="RoboSeq">
-<meta property="og:title" content="RoboSeq: a sequencer that is a board game, for the M-VAVE FM-1">
-<meta property="og:description" content="Two robots walk a board of belts, rotators and zap rails, and their moves are the music. Program them while they play, or fight a battle on the beat. Free firmware, installed from the browser.">
+<meta property="og:title" content="RoboSeq: a sequencer that plays like a board game, for the M-VAVE FM-1">
+<meta property="og:description" content="Two robots move around a board of conveyor belts, rotators and zap rails, and everything they do becomes music. Change their programs while they play, or battle a friend on the beat. Free firmware, installed from your browser.">
 <meta property="og:url" content="https://joakimskurk.github.io/fm1roboseq/">
 <meta property="og:image" content="https://joakimskurk.github.io/fm1roboseq/screens/og.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="RoboSeq's logo, the two robots Scout-7 and Echo-3, over three of the FM-1's screens: the board playing, a battle and the boards">
+<meta property="og:image:alt" content="The RoboSeq logo with the two robots, Scout-7 and Echo-3, above three FM-1 screens: the board playing, a battle and the list of boards">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0b2324">
 <link rel="icon" href="screens/icon.png">
@@ -212,34 +212,35 @@
 <main>
   <header>
     <h1><img src="screens/logo.svg" width="840" height="166" alt="RoboSeq: the two robots, Scout-7 and Echo-3, either side of the word, Robo in mint and Seq in yellow"></h1>
-    <p class="tag"><b>A sequencer that is a board game</b>, firmware for the M-VAVE FM-1.</p>
+    <p class="tag"><b>A sequencer that plays like a board game.</b> Firmware for the M-VAVE FM-1.</p>
   </header>
 
-  <p class="warn" role="note"><b>⚠ Not yet tried on a real FM-1.</b> RoboSeq is built and tested on every change, on
-    a computer and in the FM-1 emulator, but it has not been tried on an actual device. Install it at your own risk.</p>
-  <p class="testers" role="note"><b>Testers wanted.</b> Have an FM-1, and know how to get it back (below the Install
-    button)? Be the first to play RoboSeq on one: <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/FIRST_FLASH.md">the
-    first flash</a> is a half-hour checklist, and an
-    <a href="https://github.com/joakimskurk/fm1roboseq/issues/new?title=Tried+on+an+FM-1">issue on GitHub</a> is where
-    to tell how it went: what worked, what did not, what the screen showed and how it sounded.</p>
+  <p class="warn" role="note"><b>⚠ Not yet tested on a real FM-1.</b> Every change to RoboSeq is built and tested on a
+    computer and in an FM-1 emulator, but it has never run on an actual device. Install it at your own risk.</p>
+  <p class="testers" role="note"><b>Testers wanted.</b> If you have an FM-1 and know how to restore it (see below the
+    Install button), you could be the first to play RoboSeq on real hardware. There is a
+    <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/FIRST_FLASH.md">half-hour checklist</a> for the first
+    install. Afterwards, <a href="https://github.com/joakimskurk/fm1roboseq/issues/new?title=Tried+on+an+FM-1">open an
+    issue on GitHub</a> and tell us how it went: what worked, what didn't, what the screen showed and how it
+    sounded.</p>
 
   <div class="hero">
-    <figure><img src="screens/film.gif" width="480" height="480" alt="The splash: the letters drop in, the two robots walk in from the sides and meet under a beating heart. Then HOME, the board playing: the robots walk their programs over belts, zap rails and rotators, the tiles light as they set them off"><figcaption>THE SPLASH, THEN THE BOARD PLAYING</figcaption></figure>
-    <figure><img src="screens/battle-strike.png" width="480" height="480" alt="BATTLE on the FM-1's screen: Scout-7 strikes Echo-3 on the beat, the score bars in the header, the players' keys lit on the little keyboard at the foot"><figcaption>A STRIKE IN THE BATTLE</figcaption></figure>
+    <figure><img src="screens/film.gif" width="480" height="480" alt="The start screen: the letters drop in, and the two robots walk in from the sides and meet under a beating heart. Then the board playing: the robots follow their programs over belts, zap rails and rotators, and the tiles light up as they trigger them"><figcaption>THE START SCREEN, THEN THE BOARD PLAYING</figcaption></figure>
+    <figure><img src="screens/battle-strike.png" width="480" height="480" alt="Battle mode on the FM-1's screen: Scout-7 hits Echo-3 on the beat. The scores are at the top, and the players' keys light up on the small keyboard at the bottom"><figcaption>A HIT IN BATTLE MODE</figcaption></figure>
   </div>
 
   <p class="lead">Two robots, <b style="color:var(--scout)">Scout-7</b> and <b style="color:var(--echo)">Echo-3</b>,
-    walk a 5 × 5 board of conveyor belts, zap rails, rotators, pulse pads and crates, each running a program of
-    moves, and where they go, what they ride and what they bump into is the music. Their programs decide how they
-    move, and you play it by changing them while it runs: turn their steps on the white keys, type a program in,
-    change their board, nudge a robot off its program for a step on the black keys, solo over them. Or hand a friend
-    the other end of the keyboard and steer them yourselves, in a battle on the beat.</p>
+    move around a 5 × 5 board of conveyor belts, zap rails, rotators, pulse pads and crates. Each robot follows its own
+    program of moves, and everything they do becomes music: where they go, what they ride and what they bump into. You
+    play RoboSeq by changing things while it runs. Edit their steps on the white keys, type in a new program, change
+    the board, give a robot a one-off nudge with the black keys, or play a solo over the top. Or give a friend the
+    other end of the keyboard and control the robots yourselves, in a battle on the beat.</p>
 
   <div class="facts">
-    <div class="fact"><b>2</b><span>robots, each a program of up to 64 steps</span></div>
-    <div class="fact"><b>6</b><span>boards, a random roll and your own, built while it plays</span></div>
+    <div class="fact"><b>2</b><span>robots, each with a program of up to 64 steps</span></div>
+    <div class="fact"><b>6</b><span>preset boards, plus random ones and your own, built while it plays</span></div>
     <div class="fact"><b>73</b><span>named chord progressions, in six keys</span></div>
-    <div class="fact"><b>2</b><span>players in the battle, a robot each, on the beat</span></div>
+    <div class="fact"><b>2</b><span>players in battle mode, one robot each</span></div>
   </div>
 
   <h2 id="hear"><img src="art/tile-pulse.svg" width="36" height="36" alt="">Hear it</h2>
@@ -257,105 +258,111 @@
       <li>Connect the FM-1 <b>directly</b> to the computer with a USB data cable, and switch it on.</li>
       <li>Close other apps that use MIDI, tick the box, press <b>Install</b> and allow MIDI when the browser asks.</li>
     </ol>
-    <label class="ack"><input type="checkbox" id="ack"><span>I understand that RoboSeq has not been tried on a real
-      FM-1 yet, and I install it at my own risk.</span></label>
+    <label class="ack"><input type="checkbox" id="ack"><span>I understand that RoboSeq has not been tested on a real
+      FM-1 yet, and that I install it at my own risk.</span></label>
     <button id="go" disabled>Install</button>
     <progress id="bar" max="100" value="0"></progress>
     <p id="status">Loading the firmware…</p>
     <p class="pkg" id="pkg"></p>
     <details><summary>Log</summary><pre id="log"></pre></details>
   </div>
-  <p class="small">This page installs the latest build of <code>main</code>, the one its tests passed. Do not unplug
-    the cable while it writes (about a minute). If an install is cut off, the FM-1 stays in update mode: replug it and
-    press Install again, and it finishes. If the FM-1 does not start at all, hold <b>OCT−</b> while switching it on: it
-    starts in the USB rescue, where an installer always works. RoboSeq keeps its project in flash sectors of its own
-    and does not read or write another firmware's projects or samples. To go back, install any firmware from the
-    <a href="https://thefirmwarehub.com">FM-1 Firmware Hub</a>, or the official one with M-VAVE's own updater
-    M-UPGRADE. Installing firmware is at your own risk.</p>
+  <p class="small">This page installs the latest build of the <code>main</code> branch, which has passed all its
+    tests. Don't unplug the cable while it is writing (about a minute). If an install is interrupted, the FM-1 stays in
+    update mode: plug it back in and press Install again to finish. If the FM-1 doesn't start at all, hold
+    <b>OCT−</b> while you switch it on. It then starts in its USB rescue mode, where installing always works. RoboSeq
+    keeps its project in its own part of the flash memory, and never reads or changes another firmware's projects or
+    samples. To go back, install any firmware from the <a href="https://thefirmwarehub.com">FM-1 Firmware Hub</a>, or
+    the official one with M-VAVE's own updater, M-UPGRADE. Installing firmware is at your own risk.</p>
 
   <h2 id="robots"><img src="art/heart.svg" width="36" height="32" alt="">Meet the robots</h2>
   <div class="bots">
     <div class="bot scout">
-      <img src="art/scout.svg" width="192" height="192" alt="Scout-7, the red robot, on a card of the splash's">
+      <img src="art/scout.svg" width="192" height="192" alt="Scout-7, the red robot">
       <h3>Scout-7</h3>
-      <p>Red. It starts on its pad in the bottom-left corner, facing east, and its program runs down the board's left
-        side. In BAND it sings the tune, and the tune comes back every bar; in ORIGINAL it plays a note every step from
-        where it stands.</p>
-      <p><b>Nudge it</b> on <span class="keys">F#3 G#3 A#3 C#4 D#4</span>: a key makes its next move one of these,
-        once, and then its program goes on.</p>
+      <p>The red one. Scout-7 starts in the bottom-left corner, facing right, and its program is shown down the left
+        side of the board. In BAND it plays the main tune, which comes back every bar. In ORIGINAL it plays a note on
+        every step, depending on where it stands.</p>
+      <p><b>Nudge it</b> with <span class="keys">F#3 G#3 A#3 C#4 D#4</span>. Each key replaces its next move with one
+        of these, just once, and then it carries on with its program.</p>
       <div class="chips">
         <figure><img src="art/steer-scout-turn-l.svg" alt="">turn L</figure><figure><img src="art/steer-scout-move.svg" alt="">move</figure>
         <figure><img src="art/steer-scout-turn-r.svg" alt="">turn R</figure><figure><img src="art/steer-scout-dash.svg" alt="">dash</figure>
         <figure><img src="art/steer-scout-ping.svg" alt="">ping</figure>
       </div>
-      <p><b>In the battle</b> there is no program, and a player steers it: <span class="keys">F3 F#3 G3 A3</span> to
-        walk, <span class="keys">C4</span> to strike.</p>
+      <p><b>In battle mode</b> it has no program, and a player controls it: <span class="keys">F3 F#3 G3 A3</span> to
+        move, <span class="keys">C4</span> to strike.</p>
     </div>
     <div class="bot echo">
-      <img src="art/echo.svg" width="192" height="192" alt="Echo-3, the orange robot, on a card of the splash's">
+      <img src="art/echo.svg" width="192" height="192" alt="Echo-3, the orange robot">
       <h3>Echo-3</h3>
-      <p>Orange. It starts on its pad in the top-right corner, facing west, and its program runs down the board's
-        right side. In BAND it answers Scout-7, then sings with it; in ORIGINAL it plays a harmony of Scout-7 every
-        step, and the bass.</p>
-      <p><b>Nudge it</b> on <span class="keys">F#4 G#4 A#4 C#5 D#5</span>: a key makes its next move one of these,
-        once, and then its program goes on.</p>
+      <p>The orange one. Echo-3 starts in the top-right corner, facing left, and its program is shown down the right
+        side of the board. In BAND it answers Scout-7, then sings along with it. In ORIGINAL it plays a harmony to
+        Scout-7 on every step, plus the bass.</p>
+      <p><b>Nudge it</b> with <span class="keys">F#4 G#4 A#4 C#5 D#5</span>. Each key replaces its next move with one
+        of these, just once, and then it carries on with its program.</p>
       <div class="chips">
         <figure><img src="art/steer-echo-turn-l.svg" alt="">turn L</figure><figure><img src="art/steer-echo-move.svg" alt="">move</figure>
         <figure><img src="art/steer-echo-turn-r.svg" alt="">turn R</figure><figure><img src="art/steer-echo-dash.svg" alt="">dash</figure>
         <figure><img src="art/steer-echo-ping.svg" alt="">ping</figure>
       </div>
-      <p><b>In the battle</b> there is no program, and a player steers it: <span class="keys">C5 C#5 D5 E5</span> to
-        walk, <span class="keys">G5</span> to strike.</p>
+      <p><b>In battle mode</b> it has no program, and a player controls it: <span class="keys">C5 C#5 D5 E5</span> to
+        move, <span class="keys">G5</span> to strike.</p>
     </div>
   </div>
-  <p class="small">The last black key, <span class="keys">F#5</span>, swaps their programs: who plays high. A nudge
-    lasts the loop: at its end the robots go back to their pads and walk their programs again.</p>
+  <p class="small">The last black key, <span class="keys">F#5</span>, swaps their programs, which changes who plays
+    high. A nudge only lasts until the end of the loop. Then the robots go back to their starting pads and follow their
+    programs again.</p>
 
   <h2 id="world"><img src="art/tile-belt.svg" width="36" height="36" alt="">Their world</h2>
-  <p><b>The moves</b>, a step each in a robot's program, as the screen shows them:</p>
+  <p><b>The moves</b> a robot can make, one for each step of its program, as they look on the screen:</p>
   <div class="world moves">
-    <div class="piece"><img src="art/move-move.svg" alt=""><b>Move</b><span>a tile forward; walls and crates stop it</span></div>
-    <div class="piece"><img src="art/move-back.svg" alt=""><b>Back</b><span>a tile back</span></div>
+    <div class="piece"><img src="art/move-move.svg" alt=""><b>Move</b><span>one tile forward, unless a wall or a crate is in the way</span></div>
+    <div class="piece"><img src="art/move-back.svg" alt=""><b>Back</b><span>one tile back</span></div>
     <div class="piece"><img src="art/move-turn-l.svg" alt=""><b>Turn L</b><span>a quarter turn left</span></div>
     <div class="piece"><img src="art/move-turn-r.svg" alt=""><b>Turn R</b><span>a quarter turn right</span></div>
-    <div class="piece"><img src="art/move-dash.svg" alt=""><b>Dash</b><span>two tiles; onto the other, a hit</span></div>
-    <div class="piece"><img src="art/move-ping.svg" alt=""><b>Ping</b><span>a pulse ahead; it heats the other</span></div>
-    <div class="piece"><img src="art/move-wait.svg" alt=""><b>Wait</b><span>stays, so the tiles can sing</span></div>
+    <div class="piece"><img src="art/move-dash.svg" alt=""><b>Dash</b><span>two tiles; landing on the other robot hits it</span></div>
+    <div class="piece"><img src="art/move-ping.svg" alt=""><b>Ping</b><span>a pulse forward that heats up the other robot</span></div>
+    <div class="piece"><img src="art/move-wait.svg" alt=""><b>Wait</b><span>stands still and lets the tiles play</span></div>
   </div>
-  <p style="margin-top:22px"><b>The tiles</b>, laid on the builder's keys while it plays:</p>
+  <p style="margin-top:22px"><b>The tiles</b>, which you can place with the board builder while it plays:</p>
   <div class="world tiles">
-    <div class="piece"><img src="art/tile-belt.svg" alt=""><b>Belt</b><span>carries a robot on, mid-step</span></div>
+    <div class="piece"><img src="art/tile-belt.svg" alt=""><b>Belt</b><span>carries a robot along</span></div>
     <div class="piece"><img src="art/tile-rot-l.svg" alt=""><b>Rotator L</b><span>turns a robot left</span></div>
     <div class="piece"><img src="art/tile-rot-r.svg" alt=""><b>Rotator R</b><span>turns a robot right</span></div>
-    <div class="piece"><img src="art/tile-zap.svg" alt=""><b>Zap rail</b><span>+1 heat</span></div>
-    <div class="piece"><img src="art/tile-pulse.svg" alt=""><b>Pulse pad</b><span>−1 heat</span></div>
+    <div class="piece"><img src="art/tile-zap.svg" alt=""><b>Zap rail</b><span>heats a robot up</span></div>
+    <div class="piece"><img src="art/tile-pulse.svg" alt=""><b>Pulse pad</b><span>cools a robot down</span></div>
     <div class="piece"><img src="art/tile-crate.svg" alt=""><b>Crate</b><span>blocks the way</span></div>
   </div>
-  <p class="small">Heat 6 burns a robot out, and it comes back in the corner farthest away. Two on one tile, two steps
-    running, fall in love and play the coin. In BAND each board is a band of its own: its bass groove, and its tiles
-    shape the notes (pulse pads long ones with vibrato, zap rails short hard ones, belts arpeggios, rotators bends,
-    crates stop a note dead).</p>
+  <p class="small">A robot that reaches heat 6 burns out and comes back in the farthest corner. If both robots stay on
+    the same tile for two steps in a row, they fall in love and a coin sound plays. In BAND every board sounds
+    different: each has its own bass groove, and its tiles shape the notes. Pulse pads give long notes with vibrato,
+    zap rails short hard ones, belts arpeggios and rotators pitch bends, and crates cut a note off.</p>
 
   <h2 id="playing"><img src="art/move-dash.svg" width="36" height="30" alt="">Playing it</h2>
   <table>
-    <tr><td>PLAY</td><td>Starts the board from its beginning, or stops. It flashes the beat.</td></tr>
-    <tr><td>White keys</td><td>On HOME, the picked robot's steps: a key turns its step to the next move. SELECT picks
-      what it turns: the move, its modifier (steady, bright, low, wobble, glitch) or its chance (100, 75, 50 %).</td></tr>
-    <tr><td>Black keys</td><td>Nudge the robots, two hands of five, and the swap.</td></tr>
-    <tr><td>EDIT</td><td>Whose program is on the white keys: Scout-7, or Echo-3 when lit.</td></tr>
-    <tr><td>SEQ</td><td>Both programs as step cards. Type moves in as you would drive: A W S D, and on.</td></tr>
-    <tr><td>SEL</td><td>Voice Mod, the chords; again, Seq 2, the arrangement. In BAND a roll is one of 73 named
-      progressions, and FOLLOW has a new one follow each time it comes round.</td></tr>
-    <tr><td>ENV</td><td>The boards, the one coming framed as the loop comes round; again, the builder: lay tiles under
-      the robots while they walk.</td></tr>
-    <tr><td>LFO · FX</td><td>The drums, a row on the white keys; the mix, its faders on KNOB1.</td></tr>
-    <tr><td>GLO</td><td>Tempo, ticks per move, the loop's length and the speed on the knobs; SELECT the engine;
-      white key 16 the battle.</td></tr>
-    <tr><td>REC · ARP</td><td>All 27 keys play a SID lead over the robots, with a ping-pong echo in time; ARP
-      arpeggiates a held chord.</td></tr>
-    <tr><td>SAVE</td><td>Lit while there are changes not kept yet. Stopped, RoboSeq keeps its project by itself;
-      SAVE keeps it at once.</td></tr>
-    <tr><td>K1–K4</td><td>The page's values, shown on the screen. They never stop the music.</td></tr>
+    <tr><td>PLAY</td><td>Starts the board from the beginning, or stops it. It flashes in time with the beat.</td></tr>
+    <tr><td>White keys</td><td>On HOME, these are the selected robot's steps: press a key to change its step to the
+      next move. SELECT chooses what the keys change: the move, its modifier (steady, bright, low, wobble, glitch) or
+      its chance of playing (100, 75 or 50 %).</td></tr>
+    <tr><td>Black keys</td><td>Nudge the robots: five keys for each robot, and one to swap their programs.</td></tr>
+    <tr><td>EDIT</td><td>Chooses whose program is on the white keys: Scout-7, or Echo-3 when it is lit.</td></tr>
+    <tr><td>SEQ</td><td>Shows both programs as step cards. Type moves in with the keys laid out as A W S D, as in a
+      game.</td></tr>
+    <tr><td>SEL</td><td>Voice Mod, which sets the chords. Press it again for Seq 2, the arrangement. In BAND a random
+      roll picks one of 73 named chord progressions, and FOLLOW picks a new one each time the last one comes
+      round.</td></tr>
+    <tr><td>ENV</td><td>All the boards, with the next one framed until the loop comes round. Press it again for the
+      board builder, where you place tiles under the robots while they move.</td></tr>
+    <tr><td>LFO · FX</td><td>The drums, one row at a time on the white keys; and the mixer, with the levels on
+      KNOB1.</td></tr>
+    <tr><td>GLO</td><td>Tempo, ticks per move, loop length and speed on the knobs. SELECT switches the engine, and
+      white key 16 starts battle mode.</td></tr>
+    <tr><td>REC · ARP</td><td>All 27 keys play a SID-style lead over the robots, with a ping-pong echo in time. ARP
+      turns a held chord into an arpeggio.</td></tr>
+    <tr><td>SAVE</td><td>Lights up when there are unsaved changes. RoboSeq saves by itself once it is stopped; press
+      SAVE to save right away.</td></tr>
+    <tr><td>K1–K4</td><td>The values on the current page, shown on the screen. Turning them never stops the
+      music.</td></tr>
   </table>
   <div class="shots">
     <figure><img src="screens/home-playing.png" width="480" height="480" alt="HOME, the board playing"><figcaption>HOME · the board</figcaption></figure>
@@ -367,52 +374,54 @@
     <figure><img src="screens/drums.png" width="480" height="480" alt="LFO, the drums"><figcaption>LFO · the drums</figcaption></figure>
     <figure><img src="screens/home-lead.png" width="480" height="480" alt="REC, the lead's four faders over the board"><figcaption>REC · the lead</figcaption></figure>
   </div>
-  <p class="small">Every control, page by page, and the rules they keep:
-    <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/docs/roboseq/CONTROLS.md">CONTROLS.md</a>. Seven
-    lessons from the first press: <a href="https://github.com/joakimskurk/fm1roboseq#readme">the README</a>.</p>
+  <p class="small">Every control on every page is listed in
+    <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/docs/roboseq/CONTROLS.md">CONTROLS.md</a>, and
+    <a href="https://github.com/joakimskurk/fm1roboseq#readme">the README</a> has seven lessons that start from the very
+    first key press.</p>
 
   <h2 id="battle"><img src="art/steer-swap.svg" width="36" height="30" alt="">The battle</h2>
   <img class="vs" src="art/battle-vs.svg" width="512" height="192" alt="Scout-7 against Echo-3, a clash between them">
-  <p>GLO, then white key 16. Each player takes a robot and an end of the keyboard, and there is no program: hold a way
-    and your robot steps there on every beat of the music, strike when the other is in reach. A hit is heat, and it
-    drives the two apart; at heat 6 a robot burns out and the other takes the round. A long round overheats the arena
-    from its edge. PLAY counts 4, 3, 2, 1 on the beats, and the first to the rounds (1 to 9, on K2) wins.</p>
+  <p>Press GLO, then white key 16. Each player takes a robot and one end of the keyboard, and there are no programs:
+    hold a direction and your robot takes a step that way on every beat of the music. Strike when the other robot is in
+    reach. A hit adds heat and knocks the two apart, and a robot that reaches heat 6 burns out and loses the round. If
+    a round goes on too long, the arena starts to overheat from the edges. PLAY counts in 4, 3, 2, 1 on the beat, and
+    the first to win the set number of rounds (1 to 9, set with K2) wins the match.</p>
   <table class="bkeys">
     <tr><td></td><td>Left</td><td>Up</td><td>Down</td><td>Right</td><td>Strike</td></tr>
     <tr><td class="s">Scout-7</td><td>F3</td><td>F#3</td><td>G3</td><td>A3</td><td>C4</td></tr>
     <tr><td class="e">Echo-3</td><td>C5</td><td>C#5</td><td>D5</td><td>E5</td><td>G5</td></tr>
   </table>
-  <p class="small">F#4, in the middle between you, starts the match again. Out of reach, the strike key plays the lead,
-    a tone of the chord where you stand.</p>
+  <p class="small">F#4, in the middle between the players, restarts the match. When the other robot is out of reach,
+    the strike key plays a lead note from the chord instead, depending on where you stand.</p>
   <div class="shots">
-    <figure><img src="screens/battle.png" width="480" height="480" alt="BATTLE's start: the keyboard with the players' keys marked"><figcaption>The keys, marked</figcaption></figure>
+    <figure><img src="screens/battle.png" width="480" height="480" alt="The start of battle mode: the keyboard with each player's keys marked"><figcaption>Each player's keys</figcaption></figure>
     <figure><img src="screens/battle-countdown.png" width="480" height="480" alt="The countdown on the beats"><figcaption>4, 3, 2, 1</figcaption></figure>
-    <figure><img src="screens/battle-strike.png" width="480" height="480" alt="A strike"><figcaption>A strike</figcaption></figure>
+    <figure><img src="screens/battle-strike.png" width="480" height="480" alt="A hit"><figcaption>A hit</figcaption></figure>
     <figure><img src="screens/battle-winner.png" width="480" height="480" alt="The winner"><figcaption>The winner</figcaption></figure>
   </div>
-  <img class="panel" src="screens/panel-battle.png" width="1280" height="820" alt="The FM-1 in the emulator fm1-emu, mid-battle: Scout-7 striking Echo-3, the panel's knobs, buttons and keys around the screen">
+  <img class="panel" src="screens/panel-battle.png" width="1280" height="820" alt="The FM-1 in the fm1-emu emulator during a battle: Scout-7 hits Echo-3, with the knobs, buttons and keys around the screen">
 
   <h2 id="try"><img src="art/move-ping.svg" width="36" height="30" alt="">Try it without an FM-1</h2>
-  <p><b>The firmware itself</b> runs in <a href="https://joakimeriksson.github.io/fm1-emu/" target="_blank" rel="noopener">fm1-emu</a>,
-    the FM-1 emulator, in the browser: download the file below, click <b>Open .fwsc…</b> there (or drop it on the
-    synth) and press <b>Start</b>. Play it on the computer's keyboard, with the mouse or a touch screen, or with a MIDI
-    keyboard.</p>
-  <p><b>The original:</b> RoboSeq began as an instrument in the browser, and it is still the reference for how the
-    firmware sounds and behaves.</p>
+  <p>You can run the firmware itself in <a href="https://joakimeriksson.github.io/fm1-emu/" target="_blank" rel="noopener">fm1-emu</a>,
+    an FM-1 emulator that runs in the browser. Download the file below, click <b>Open .fwsc…</b> in the emulator (or
+    drag the file onto it) and press <b>Start</b>. Then play it with your computer keyboard, the mouse, a touch screen or
+    a MIDI keyboard.</p>
+  <p>RoboSeq started out as an instrument in the browser, and that original is still the reference for how the
+    firmware should sound and behave. You can play it at jhf.no.</p>
   <a class="play" id="dl2" href="#">Download the firmware</a>
   <a class="play alt" href="https://jhf.no/skurky/roboseq.html" target="_blank" rel="noopener">Play the original at jhf.no</a>
 
   <h2><img src="art/move-wait.svg" width="36" height="30" alt="">More</h2>
   <ul class="links">
-    <li><a href="https://github.com/joakimskurk/fm1roboseq">The source on GitHub</a>, with everything about how it is made:
-      <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/docs/roboseq/ENGINES.md">the two engines</a>,
-      <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/docs/roboseq/CONTROLS.md">the controls</a>,
-      <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/docs/roboseq/DECISIONS.md">the decisions</a>.</li>
-    <li><a id="dl" href="#">Download the firmware file</a> (<code>.fwsc</code>), to install it another way
-      (<code>tools/fm1_install.py</code>).</li>
-    <li><a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/FIRST_FLASH.md">The first flash</a>: what to
-      check on a real FM-1, and what to send back.</li>
-    <li>The family: <a href="https://joakimskurk.github.io/fm1vavehero/">VaveHero</a>,
+    <li><a href="https://github.com/joakimskurk/fm1roboseq">The source code on GitHub</a>, with all the details of how
+      it is made: <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/docs/roboseq/ENGINES.md">the two engines</a>,
+      <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/docs/roboseq/CONTROLS.md">the controls</a> and
+      <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/docs/roboseq/DECISIONS.md">the design decisions</a>.</li>
+    <li><a id="dl" href="#">Download the firmware file</a> (<code>.fwsc</code>) to install it another way, for
+      example with <code>tools/fm1_install.py</code>.</li>
+    <li><a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/FIRST_FLASH.md">The first-install checklist</a>:
+      what to check on a real FM-1, and what to report back.</li>
+    <li>More FM-1 projects by the same maker: <a href="https://joakimskurk.github.io/fm1vavehero/">VaveHero</a>,
       <a href="https://joakimskurk.github.io/fm1stardistroyer/">Star Distroyer</a>,
       <a href="https://joakimskurk.github.io/fm1clock/">FM-1 Clock</a> and
       <a href="https://github.com/joakimskurk/fm1mello">SkurkyMello</a>.</li>
@@ -420,11 +429,11 @@
 
   <footer>
     <p>RoboSeq is free software under the GPL-3.0, with no warranty. It runs on
-      <a href="https://github.com/zvenson/dinghy">Dinghy</a> 0.4 (zvenson), built on
-      <a href="https://github.com/hugelton/Felucca">Felucca</a> by Leo Kuroshita (Hügelton Instruments) and the platform of
-      <a href="https://github.com/isod89/sloop-fm1">SLOOP</a> (isod89), whose installer this page uses. Its pictures are
-      the firmware's own, drawn by its code; the screen's letters are Terminus (SIL Open Font License), and the
-      panel is drawn by <a href="https://github.com/joakimeriksson/fm1-emu">fm1-emu</a>.</p>
+      <a href="https://github.com/zvenson/dinghy">Dinghy</a> 0.4 by zvenson, which is built on
+      <a href="https://github.com/hugelton/Felucca">Felucca</a> by Leo Kuroshita (Hügelton Instruments) and on
+      <a href="https://github.com/isod89/sloop-fm1">SLOOP</a> by isod89, whose installer this page uses. The pictures
+      on this page are drawn by the firmware's own code. The screen font is Terminus (SIL Open Font License), and the
+      picture of the FM-1 comes from <a href="https://github.com/joakimeriksson/fm1-emu">fm1-emu</a>.</p>
     <p>"M-VAVE" and "FM-1" belong to their owners; this is a fan project, not an official M-VAVE product.</p>
     <p class="coffee"><a href="https://buymeacoffee.com/skurk" target="_blank" rel="noopener">☕ Buy me a coffee</a></p>
   </footer>
@@ -446,7 +455,7 @@ for (const d of DEMOS) {
   el.className = "demo";
   el.innerHTML = `<div class="demo-top"><button class="pp" aria-label="Play ${d.title}">${ICON.play}</button>
     <div><b>${d.title}</b><span class="len">${mmss(d.secs)}</span><p>${d.about}</p></div></div>
-    <div class="spec"><img src="${d.spectrum}" alt="${d.title}'s spectrum from start to end, low to high">
+    <div class="spec"><img src="${d.spectrum}" alt="The spectrum of ${d.title} from start to end, low notes at the bottom">
     ${HZ.map((f) => `<div class="hz" style="top:${(100 * Math.log(16000 / f) / Math.log(16000 / 40)).toFixed(1)}%"><span>${f >= 1000 ? f / 1000 + "k" : f}</span></div>`).join("")}
     <div class="hover"></div><div class="head"></div>
     <input type="range" min="0" max="1000" value="0" step="1" aria-label="Position in ${d.title}"><div class="ring"></div></div>
