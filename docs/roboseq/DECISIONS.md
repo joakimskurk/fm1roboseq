@@ -814,3 +814,24 @@ copies of the project. The undo ring (12 KB) stays in RAM: 22 KB are still free 
 
 Later, if wanted: more projects in the other blobs and slots (SAVE and a key, say).
 
+
+## D44. The page: hear it, install it from the browser (2026-11-08)
+
+The product owner: a page as elaborate as VaveHero's, FM-1 Clock's and Star Distroyer's, and where the README or the
+page links to the original, the link goes to it on jhf.no (`https://jhf.no/skurky/roboseq.html`, byte for byte
+`reference/roboseq.html`), not to the file in the repository.
+
+**What it is.** `https://joakimskurk.github.io/fm1roboseq/`, made by `web/make_site.py` and published by CI from
+`main` after the build and its tests (the site job, as the three siblings'):
+- **The installer** is SLOOP's, as on the siblings' pages: `web/fm1pkg.js` and `web/fm1ota.js` unchanged (the same
+  bytes as theirs), the package this run built and tested, its SHA-256 checked before it is offered, a box to tick
+  that it has not been tried on a real FM-1. The package must be `FM-1_965` with its update loader in it.
+- **The demos** are the app itself on the host (`web/render_demos.sh`: `tests/roboseq/demo-band.txt` and
+  `demo-original.txt`), the default song in BAND and in ORIGINAL, 33 s each, as the FM-1 sends its sound over USB;
+  AAC, each with its spectrum as its seek bar (Star Distroyer's player).
+- **The pictures** are the firmware's own: its screens (`make screens`), the film, the README's art drawn by its code
+  (`assets/readme/`), the FM-1 in BATTLE in fm1-emu (`make panels`), the link preview (`web/make_og.py`).
+- **The words** say what the README says: the programs decide, the black keys nudge, the battle is steered.
+
+Measured with it: the default song's render has 0.42 % of its samples at full scale (ORIGINAL 0.37 %), the HTML's own
+render of it 0.48 % (its peak 1.64): the clipping is the HTML's, as D9-D14 port its gain staging, and stays.

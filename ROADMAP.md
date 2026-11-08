@@ -144,6 +144,9 @@ and the limiter.)
       7 % and 12 %; the saves over three runs on one flash file, D43) (2026-11-07)
 - [x] FIRST_FLASH.md for someone with an FM-1: the way back, the install, a checklist, what to send; `fmhub.json` and
       the card (`make screens`: docs/card.png) for the Firmware Hub (2026-11-07)
+- [x] The page (D44): joakimskurk.github.io/fm1roboseq, published by CI from `main`: the demos the app plays, the
+      installer in the browser (SLOOP's), the robots, the controls, the battle; the original linked on jhf.no
+      (`make site`) (2026-11-08)
 - [ ] The first release `roboseq-0.1.fwsc` (a `v*` tag: the product owner's call), a pre-release with the notes in
       `docs/releases/0.1.md` and the version on the splash (`v0.1`)
 - [ ] On a real FM-1: FIRST_FLASH.md's checklist ticked, then the Hub (it lists a firmware tested on one)

@@ -1,0 +1,558 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: GPL-3.0-only
+     RoboSeq's page and installer (web/make_site.py makes the site). The install flow and the demo players follow
+     Star Distroyer's and VaveHero's pages, after SLOOP's installer page (web/index_pkg.html, Copyright (C) 2026 Leo
+     Kuroshita (@kurogedelic), Hügelton Instruments; isod89); its protocol is SLOOP's own, unchanged: web/fm1pkg.js,
+     web/fm1ota.js. The pictures are the firmware's own: its screens and its art, drawn by its code. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RoboSeq</title>
+<meta name="description" content="RoboSeq: a sequencer that is a board game, firmware for the M-VAVE FM-1. Two robots walk a board of belts, rotators and zap rails, and their moves are the music. Hear it, and install it from the browser.">
+<!-- the link preview: the card a chat or a post shows for the link (web/make_og.py makes the picture) -->
+<link rel="canonical" href="https://joakimskurk.github.io/fm1roboseq/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RoboSeq">
+<meta property="og:title" content="RoboSeq: a sequencer that is a board game, for the M-VAVE FM-1">
+<meta property="og:description" content="Two robots walk a board of belts, rotators and zap rails, and their moves are the music. Program them while they play, or fight a battle on the beat. Free firmware, installed from the browser.">
+<meta property="og:url" content="https://joakimskurk.github.io/fm1roboseq/">
+<meta property="og:image" content="https://joakimskurk.github.io/fm1roboseq/screens/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="RoboSeq's logo, the two robots Scout-7 and Echo-3, over three of the FM-1's screens: the board playing, a battle and the boards">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b2324">
+<link rel="icon" href="screens/icon.png">
+<style>
+  :root { --bg: #0b2324; --panel: #0f3433; --panel2: #092e2c; --grid: #102f2f; --line: #2f6a63; --fg: #ebfff6;
+          --dim: #98d6be; --mint: #8fffd1; --yellow: #ffcc00; --pink: #ff3366; --scout: #ff6666; --echo: #ff9900;
+          --blue: #63d9ff; --green: #73ff9f; --good: #73ff9f; --bad: #ff6f61;
+          --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; background: var(--bg); }
+  body { margin: 0; color: var(--fg); background-color: var(--bg);
+         background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+         background-size: 24px 24px; background-position: 11px 11px;
+         font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  img.px { image-rendering: pixelated; }
+  main { max-width: 800px; margin: 0 auto; padding: 0 16px 56px; }
+  a { color: var(--mint); }
+  a:hover { color: #d6fff0; }
+
+  /* the board going by along the top: the README's strips, the robots setting off, in love, clashing */
+  .strip { overflow: hidden; height: 48px; border-bottom: 2px solid var(--line); background: #0c0c18; }
+  .strip-run { display: flex; width: max-content; animation: run 60s linear infinite; }
+  .strip-run img { display: block; height: 48px; width: 384px; image-rendering: pixelated; }
+  @keyframes run { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* a card as the splash: a frame, and its corners in two colours */
+  .corners { position: relative; --cl: var(--yellow); --cr: var(--pink); }
+  .corners::before, .corners::after { content: ""; position: absolute; inset: -7px; pointer-events: none; }
+  .corners::before { background: linear-gradient(var(--cl), var(--cl)) top left / 16px 3px no-repeat,
+                                  linear-gradient(var(--cl), var(--cl)) top left / 3px 16px no-repeat,
+                                  linear-gradient(var(--cr), var(--cr)) top right / 16px 3px no-repeat,
+                                  linear-gradient(var(--cr), var(--cr)) top right / 3px 16px no-repeat; }
+  .corners::after { background: linear-gradient(var(--cl), var(--cl)) bottom left / 16px 3px no-repeat,
+                                 linear-gradient(var(--cl), var(--cl)) bottom left / 3px 16px no-repeat,
+                                 linear-gradient(var(--cr), var(--cr)) bottom right / 16px 3px no-repeat,
+                                 linear-gradient(var(--cr), var(--cr)) bottom right / 3px 16px no-repeat; }
+
+  header { text-align: center; padding: 40px 0 0; }
+  h1 { margin: 0 auto; line-height: 0; width: min(620px, 100%); }
+  h1 img { display: block; width: 100%; height: auto; }
+  .tag { color: var(--dim); margin: 18px 0 0; font: 15px/1.5 var(--mono); letter-spacing: .04em; }
+  .tag b { color: var(--mint); font-weight: 600; }
+  h2 { display: flex; align-items: center; gap: 12px; margin: 56px 0 16px; font: 700 20px/1.2 var(--mono);
+       letter-spacing: .14em; text-transform: uppercase; color: var(--mint); }
+  h2 img { width: 36px; height: 30px; flex: none; image-rendering: pixelated; }
+  h2::after { content: ""; flex: 1; height: 2px; background: var(--line); }
+  h3 { margin: 0 0 6px; font: 700 15px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+
+  .warn { margin: 30px 0 0; padding: 12px 16px; border: 2px solid #e0443a; background: #3b1410; color: #ffdcd5;
+          font-size: 15px; line-height: 1.5; }
+  .warn b { color: var(--bad); }
+  .testers { margin: 10px 0 0; padding: 10px 16px; border-left: 3px solid var(--yellow); background: var(--panel);
+             font-size: 15px; line-height: 1.5; }
+  .testers b { color: var(--yellow); }
+
+  .hero { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin: 38px 0 30px; }
+  .hero figure { margin: 0; }
+  .hero img { display: block; width: 320px; max-width: 100%; height: auto; image-rendering: pixelated;
+              border: 2px solid var(--line); }
+  .hero figcaption { margin: 10px 0 0; text-align: center; color: var(--dim); font: 12px var(--mono); letter-spacing: .06em; }
+  .lead { font-size: 18px; margin: 0 0 22px; }
+  .facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 24px 0 0; }
+  .fact { background: var(--panel); border-top: 3px solid var(--mint); padding: 12px 12px 14px; }
+  .fact:nth-child(2) { border-color: var(--blue); } .fact:nth-child(3) { border-color: var(--yellow); }
+  .fact:nth-child(4) { border-color: var(--pink); }
+  .fact b { display: block; font: 700 28px/1.1 var(--mono); color: var(--fg); }
+  .fact span { display: block; color: var(--dim); font-size: 13px; line-height: 1.4; margin-top: 6px; }
+
+  /* the robots */
+  .bots { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .bot { background: var(--panel); border: 1px solid var(--line); padding: 18px 18px 14px; }
+  .bot.scout { border-top: 3px solid var(--scout); } .bot.echo { border-top: 3px solid var(--echo); }
+  .bot > img { display: block; width: 168px; height: 168px; margin: 4px auto 14px; image-rendering: pixelated; }
+  .bot h3 { text-align: center; font-size: 18px; } .scout h3 { color: var(--scout); } .echo h3 { color: var(--echo); }
+  .bot p { margin: 0 0 10px; font-size: 15px; line-height: 1.5; }
+  .chips { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin: 2px 0 12px; }
+  .chips figure { margin: 0; text-align: center; font: 11px/1.2 var(--mono); color: var(--dim); }
+  .chips img { display: block; width: 44px; height: 37px; margin: 0 auto 4px; image-rendering: pixelated; }
+  .keys { font-family: var(--mono); font-size: 14px; color: var(--fg); white-space: nowrap; }
+
+  /* the demos: a player each, its spectrum the seek bar */
+  .demo { margin: 0 0 18px; padding: 14px 14px 12px; background: var(--panel); border: 1px solid var(--line); }
+  .demo-top { display: flex; gap: 14px; align-items: flex-start; margin: 0 0 12px; }
+  .pp { flex: none; width: 46px; height: 46px; border: 2px solid var(--mint); background: transparent; color: var(--mint);
+        cursor: pointer; display: grid; place-items: center; padding: 0; }
+  .pp:hover { background: var(--mint); color: var(--bg); }
+  .pp.on { background: var(--yellow); border-color: var(--yellow); color: var(--bg); }
+  .pp svg { width: 18px; height: 18px; fill: currentColor; }
+  .demo-top b { font: 700 15px/1.3 var(--mono); letter-spacing: .14em; color: var(--mint); }
+  .demo-top .len { margin-left: 8px; font: 13px var(--mono); color: var(--dim); }
+  .demo-top p { margin: 2px 0 0; color: var(--dim); font-size: 14px; line-height: 1.45; }
+  .spec { position: relative; height: 128px; border: 1px solid var(--line); background: var(--bg); overflow: hidden;
+          touch-action: none; }
+  .spec img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .spec .hz { position: absolute; left: 0; right: 0; border-top: 1px dashed rgba(152, 214, 190, .22); pointer-events: none; }
+  .spec .hz span { position: absolute; left: 4px; top: -8px; font: 10px/1 var(--mono); color: var(--dim);
+                   background: rgba(11, 35, 36, .75); padding: 1px 3px; }
+  .spec .head { position: absolute; top: 0; bottom: 0; left: 0; width: 2px; margin-left: -1px; background: var(--yellow);
+                box-shadow: 0 0 8px var(--yellow); pointer-events: none; }
+  .spec .hover { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(214, 255, 240, .5); display: none;
+                 pointer-events: none; }
+  .spec:hover .hover { display: block; }
+  .spec input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+  .spec input:focus-visible + .ring { outline: 2px solid var(--mint); outline-offset: -2px; }
+  .ring { position: absolute; inset: 0; pointer-events: none; }
+  .clock { display: flex; justify-content: space-between; margin: 6px 0 0; font: 12px var(--mono); color: var(--dim);
+           font-variant-numeric: tabular-nums; }
+  .clock .now { color: var(--mint); }
+
+  /* the install */
+  .box { background: var(--panel); border: 1px solid var(--line); padding: 20px; }
+  ol { margin: 0 0 16px; padding-left: 22px; } li { margin: 0 0 4px; }
+  .ack { display: flex; gap: 10px; align-items: flex-start; margin: 0 0 14px; cursor: pointer; }
+  .ack input { width: 18px; height: 18px; margin: 3px 0 0; flex: none; accent-color: var(--mint); }
+  button#go { width: 100%; padding: 16px 0; border: 0; background: var(--mint); color: var(--bg); cursor: pointer;
+              font: 700 16px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+  button#go:hover:not(:disabled) { background: #d6fff0; }
+  button#go:disabled { background: var(--line); color: var(--dim); cursor: default; }
+  progress { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; margin: 14px 0 0; border: 0;
+             background: var(--line); }
+  progress::-webkit-progress-bar { background: var(--line); }
+  progress::-webkit-progress-value { background: var(--yellow); }
+  progress::-moz-progress-bar { background: var(--yellow); }
+  #status { margin: 12px 0 0; min-height: 1.6em; font-variant-numeric: tabular-nums; }
+  #status.good { color: var(--good); } #status.bad { color: var(--bad); }
+  .pkg { color: var(--dim); font: 12px/1.5 var(--mono); margin: 10px 0 0; overflow-wrap: anywhere; }
+  details { margin: 12px 0 0; } summary { cursor: pointer; color: var(--dim); font-size: 14px; }
+  pre { color: var(--dim); font-size: 12px; white-space: pre-wrap; max-height: 180px; overflow: auto; margin: 8px 0 0; }
+  .small { color: var(--dim); font-size: 14px; }
+
+  /* the controls, the screens */
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  td { border-top: 1px solid var(--line); padding: 8px 10px 8px 0; vertical-align: top; }
+  td:first-child { white-space: nowrap; font: 700 14px/1.6 var(--mono); color: var(--mint); padding-right: 18px; }
+  code { background: var(--panel); padding: 1px 5px; font: 14px var(--mono); }
+  .shots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 22px 0 0; }
+  .shots figure { margin: 0; }
+  .shots img { display: block; width: 100%; height: auto; border: 1px solid var(--line); image-rendering: pixelated; }
+  .shots figcaption { margin: 6px 0 0; color: var(--dim); font: 11px/1.3 var(--mono); letter-spacing: .04em; }
+
+  /* the board's world: the moves and the tiles */
+  .world { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 10px; margin: 12px 0 0; }
+  .piece { background: var(--panel); border: 1px solid var(--line); padding: 12px 8px 10px; text-align: center; }
+  .piece img { display: block; margin: 0 auto 8px; image-rendering: pixelated; }
+  .piece b { display: block; font: 700 12px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+  .piece span { display: block; margin-top: 4px; color: var(--dim); font-size: 12px; line-height: 1.35; }
+  .world.moves { grid-template-columns: repeat(7, 1fr); } .world.tiles { grid-template-columns: repeat(6, 1fr); }
+  .world.moves img { width: 54px; height: 45px; } .world.tiles img { width: 64px; height: 64px; }
+
+  /* the battle */
+  .vs { display: block; width: min(512px, 100%); height: auto; margin: 6px auto 22px; image-rendering: pixelated; }
+  .panel { display: block; width: 100%; height: auto; margin: 22px 0 0; border: 1px solid var(--line); }
+  .bkeys td:first-child { color: var(--fg); } .bkeys .s { color: var(--scout); } .bkeys .e { color: var(--echo); }
+  .bkeys td { font-family: var(--mono); font-size: 14px; }
+
+  .play { display: inline-block; margin: 6px 8px 0 0; padding: 12px 20px; background: var(--mint); color: var(--bg);
+          font: 700 14px/1 var(--mono); letter-spacing: .08em; text-decoration: none; }
+  .play:hover { background: #d6fff0; color: var(--bg); }
+  .play.alt { background: transparent; color: var(--mint); border: 2px solid var(--mint); padding: 10px 18px; }
+  .play.alt:hover { background: var(--mint); color: var(--bg); }
+  ul.links { padding-left: 20px; } ul.links li { margin: 0 0 6px; }
+  .coffee { margin: 20px 0 0; text-align: center; }
+  .coffee a { display: inline-block; padding: 10px 18px; border-radius: 8px; background: #ffdd00; color: #1b1309;
+              font-weight: 700; text-decoration: none; }
+  .coffee a:hover { background: #ffe74d; color: #1b1309; }
+  footer { margin-top: 56px; border-top: 2px solid var(--line); padding-top: 16px; color: var(--dim); font-size: 13px; }
+  footer p { margin: 0 0 8px; }
+  footer .strip { margin: 24px -16px 0; border: 0; border-top: 2px solid var(--line); }
+
+  @media (max-width: 640px) {
+    .facts, .shots { grid-template-columns: repeat(2, 1fr); }
+    .bots { grid-template-columns: 1fr; }
+    .world.moves { grid-template-columns: repeat(4, 1fr); } .world.tiles { grid-template-columns: repeat(3, 1fr); }
+    .hero img { width: 100%; }
+    td:first-child { white-space: normal; }
+    h2 { font-size: 17px; letter-spacing: .1em; }
+  }
+  @media (prefers-reduced-motion: reduce) { .strip-run { animation: none; } .spec .head { box-shadow: none; } }
+</style>
+</head>
+<body>
+<div class="strip" aria-hidden="true"><div class="strip-run">
+  <img src="art/board-strip-1.svg" alt=""><img src="art/board-strip-2.svg" alt=""><img src="art/board-strip-3.svg" alt="">
+  <img src="art/board-strip-1.svg" alt=""><img src="art/board-strip-2.svg" alt=""><img src="art/board-strip-3.svg" alt="">
+  <img src="art/board-strip-1.svg" alt=""><img src="art/board-strip-2.svg" alt=""><img src="art/board-strip-3.svg" alt="">
+  <img src="art/board-strip-1.svg" alt=""><img src="art/board-strip-2.svg" alt=""><img src="art/board-strip-3.svg" alt="">
+</div></div>
+<main>
+  <header>
+    <h1 class="corners"><img src="screens/logo.svg" width="1140" height="240" alt="RoboSeq: the two robots, Scout-7 and Echo-3, either side of the word"></h1>
+    <p class="tag"><b>A sequencer that is a board game</b>, firmware for the M-VAVE FM-1.</p>
+  </header>
+
+  <p class="warn" role="note"><b>⚠ Not yet tried on a real FM-1.</b> RoboSeq is built and tested on every change, on
+    a computer and in the FM-1 emulator, but it has not been tried on an actual device. Install it at your own risk.</p>
+  <p class="testers" role="note"><b>Testers wanted.</b> Have an FM-1, and know how to get it back (below the Install
+    button)? Be the first to play RoboSeq on one: <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/FIRST_FLASH.md">the
+    first flash</a> is a half-hour checklist, and an
+    <a href="https://github.com/joakimskurk/fm1roboseq/issues/new?title=Tried+on+an+FM-1">issue on GitHub</a> is where
+    to tell how it went: what worked, what did not, what the screen showed and how it sounded.</p>
+
+  <div class="hero">
+    <figure><img src="screens/film.gif" width="480" height="480" alt="The splash: the letters drop in, the two robots walk in from the sides and meet under a beating heart. Then HOME, the board playing: the robots walk their programs over belts, zap rails and rotators, the tiles light as they set them off"><figcaption>THE SPLASH, THEN THE BOARD PLAYING</figcaption></figure>
+    <figure><img src="screens/battle-strike.png" width="480" height="480" alt="BATTLE on the FM-1's screen: Scout-7 strikes Echo-3 on the beat, the score bars in the header, the players' keys lit on the little keyboard at the foot"><figcaption>A STRIKE IN THE BATTLE</figcaption></figure>
+  </div>
+
+  <p class="lead">Two robots, <b style="color:var(--scout)">Scout-7</b> and <b style="color:var(--echo)">Echo-3</b>,
+    walk a 5 × 5 board of conveyor belts, zap rails, rotators, pulse pads and crates, each running a program of
+    moves, and where they go, what they ride and what they bump into is the music. Their programs decide how they
+    move, and you play it by changing them while it runs: turn their steps on the white keys, type a program in,
+    change their board, nudge a robot off its program for a step on the black keys, solo over them. Or hand a friend
+    the other end of the keyboard and steer them yourselves, in a battle on the beat.</p>
+
+  <div class="facts">
+    <div class="fact"><b>2</b><span>robots, each a program of up to 64 steps</span></div>
+    <div class="fact"><b>6</b><span>boards, a random roll and your own, built while it plays</span></div>
+    <div class="fact"><b>73</b><span>named chord progressions, in six keys</span></div>
+    <div class="fact"><b>2</b><span>players in the battle, a robot each, on the beat</span></div>
+  </div>
+
+  <h2 id="hear"><img src="art/tile-pulse.svg" width="36" height="36" alt="">Hear it</h2>
+  <p>Both demos are the firmware itself, played on a computer as it sends its sound over USB: the same C as on the
+    FM-1, the robots left alone on the board it starts with. The picture under each is its spectrum, low to high, from
+    start to end: tap it to jump.</p>
+  <div id="demos"></div>
+  <p class="small">RoboSeq has two engines, and SELECT on GLO picks one. BAND is where it starts. ORIGINAL plays the
+    browser original's score, checked note for note: 88,120 notes over 36 scenarios.</p>
+
+  <h2 id="install"><img src="art/move-move.svg" width="36" height="30" alt="">Install</h2>
+  <div class="box">
+    <ol>
+      <li>Open this page in <b>Chrome or Edge</b> on a computer (they can talk to the FM-1 over USB MIDI).</li>
+      <li>Connect the FM-1 <b>directly</b> to the computer with a USB data cable, and switch it on.</li>
+      <li>Close other apps that use MIDI, tick the box, press <b>Install</b> and allow MIDI when the browser asks.</li>
+    </ol>
+    <label class="ack"><input type="checkbox" id="ack"><span>I understand that RoboSeq has not been tried on a real
+      FM-1 yet, and I install it at my own risk.</span></label>
+    <button id="go" disabled>Install</button>
+    <progress id="bar" max="100" value="0"></progress>
+    <p id="status">Loading the firmware…</p>
+    <p class="pkg" id="pkg"></p>
+    <details><summary>Log</summary><pre id="log"></pre></details>
+  </div>
+  <p class="small">This page installs the latest build of <code>main</code>, the one its tests passed. Do not unplug
+    the cable while it writes (about a minute). If an install is cut off, the FM-1 stays in update mode: replug it and
+    press Install again, and it finishes. If the FM-1 does not start at all, hold <b>OCT−</b> while switching it on: it
+    starts in the USB rescue, where an installer always works. RoboSeq keeps its project in flash sectors of its own
+    and does not read or write another firmware's projects or samples. To go back, install any firmware from the
+    <a href="https://thefirmwarehub.com">FM-1 Firmware Hub</a>, or the official one with M-VAVE's own updater
+    M-UPGRADE. Installing firmware is at your own risk.</p>
+
+  <h2 id="robots"><img src="art/heart.svg" width="36" height="32" alt="">Meet the robots</h2>
+  <div class="bots">
+    <div class="bot scout">
+      <img src="art/scout.svg" width="192" height="192" alt="Scout-7, the red robot, on a card of the splash's">
+      <h3>Scout-7</h3>
+      <p>Red. It starts on its pad in the bottom-left corner, facing east, and its program runs down the board's left
+        side. In BAND it sings the tune, and the tune comes back every bar; in ORIGINAL it plays a note every step from
+        where it stands.</p>
+      <p><b>Nudge it</b> on <span class="keys">F#3 G#3 A#3 C#4 D#4</span>: a key makes its next move one of these,
+        once, and then its program goes on.</p>
+      <div class="chips">
+        <figure><img src="art/steer-scout-turn-l.svg" alt="">turn L</figure><figure><img src="art/steer-scout-move.svg" alt="">move</figure>
+        <figure><img src="art/steer-scout-turn-r.svg" alt="">turn R</figure><figure><img src="art/steer-scout-dash.svg" alt="">dash</figure>
+        <figure><img src="art/steer-scout-ping.svg" alt="">ping</figure>
+      </div>
+      <p><b>In the battle</b> there is no program, and a player steers it: <span class="keys">F3 F#3 G3 A3</span> to
+        walk, <span class="keys">C4</span> to strike.</p>
+    </div>
+    <div class="bot echo">
+      <img src="art/echo.svg" width="192" height="192" alt="Echo-3, the orange robot, on a card of the splash's">
+      <h3>Echo-3</h3>
+      <p>Orange. It starts on its pad in the top-right corner, facing west, and its program runs down the board's
+        right side. In BAND it answers Scout-7, then sings with it; in ORIGINAL it plays a harmony of Scout-7 every
+        step, and the bass.</p>
+      <p><b>Nudge it</b> on <span class="keys">F#4 G#4 A#4 C#5 D#5</span>: a key makes its next move one of these,
+        once, and then its program goes on.</p>
+      <div class="chips">
+        <figure><img src="art/steer-echo-turn-l.svg" alt="">turn L</figure><figure><img src="art/steer-echo-move.svg" alt="">move</figure>
+        <figure><img src="art/steer-echo-turn-r.svg" alt="">turn R</figure><figure><img src="art/steer-echo-dash.svg" alt="">dash</figure>
+        <figure><img src="art/steer-echo-ping.svg" alt="">ping</figure>
+      </div>
+      <p><b>In the battle</b> there is no program, and a player steers it: <span class="keys">C5 C#5 D5 E5</span> to
+        walk, <span class="keys">G5</span> to strike.</p>
+    </div>
+  </div>
+  <p class="small">The last black key, <span class="keys">F#5</span>, swaps their programs: who plays high. A nudge
+    lasts the loop: at its end the robots go back to their pads and walk their programs again.</p>
+
+  <h2 id="world"><img src="art/tile-belt.svg" width="36" height="36" alt="">Their world</h2>
+  <p><b>The moves</b>, a step each in a robot's program, as the screen shows them:</p>
+  <div class="world moves">
+    <div class="piece"><img src="art/move-move.svg" alt=""><b>Move</b><span>a tile forward; walls and crates stop it</span></div>
+    <div class="piece"><img src="art/move-back.svg" alt=""><b>Back</b><span>a tile back</span></div>
+    <div class="piece"><img src="art/move-turn-l.svg" alt=""><b>Turn L</b><span>a quarter turn left</span></div>
+    <div class="piece"><img src="art/move-turn-r.svg" alt=""><b>Turn R</b><span>a quarter turn right</span></div>
+    <div class="piece"><img src="art/move-dash.svg" alt=""><b>Dash</b><span>two tiles; onto the other, a hit</span></div>
+    <div class="piece"><img src="art/move-ping.svg" alt=""><b>Ping</b><span>a pulse ahead; it heats the other</span></div>
+    <div class="piece"><img src="art/move-wait.svg" alt=""><b>Wait</b><span>stays, so the tiles can sing</span></div>
+  </div>
+  <p style="margin-top:22px"><b>The tiles</b>, laid on the builder's keys while it plays:</p>
+  <div class="world tiles">
+    <div class="piece"><img src="art/tile-belt.svg" alt=""><b>Belt</b><span>carries a robot on, mid-step</span></div>
+    <div class="piece"><img src="art/tile-rot-l.svg" alt=""><b>Rotator L</b><span>turns a robot left</span></div>
+    <div class="piece"><img src="art/tile-rot-r.svg" alt=""><b>Rotator R</b><span>turns a robot right</span></div>
+    <div class="piece"><img src="art/tile-zap.svg" alt=""><b>Zap rail</b><span>+1 heat</span></div>
+    <div class="piece"><img src="art/tile-pulse.svg" alt=""><b>Pulse pad</b><span>−1 heat</span></div>
+    <div class="piece"><img src="art/tile-crate.svg" alt=""><b>Crate</b><span>blocks the way</span></div>
+  </div>
+  <p class="small">Heat 6 burns a robot out, and it comes back in the corner farthest away. Two on one tile, two steps
+    running, fall in love and play the coin. In BAND each board is a band of its own: its bass groove, and its tiles
+    shape the notes (pulse pads long ones with vibrato, zap rails short hard ones, belts arpeggios, rotators bends,
+    crates stop a note dead).</p>
+
+  <h2 id="playing"><img src="art/move-dash.svg" width="36" height="30" alt="">Playing it</h2>
+  <table>
+    <tr><td>PLAY</td><td>Starts the board from its beginning, or stops. It flashes the beat.</td></tr>
+    <tr><td>White keys</td><td>On HOME, the picked robot's steps: a key turns its step to the next move. SELECT picks
+      what it turns: the move, its modifier (steady, bright, low, wobble, glitch) or its chance (100, 75, 50 %).</td></tr>
+    <tr><td>Black keys</td><td>Nudge the robots, two hands of five, and the swap.</td></tr>
+    <tr><td>EDIT</td><td>Whose program is on the white keys: Scout-7, or Echo-3 when lit.</td></tr>
+    <tr><td>SEQ</td><td>Both programs as step cards. Type moves in as you would drive: A W S D, and on.</td></tr>
+    <tr><td>SEL</td><td>Voice Mod, the chords; again, Seq 2, the arrangement. In BAND a roll is one of 73 named
+      progressions, and FOLLOW has a new one follow each time it comes round.</td></tr>
+    <tr><td>ENV</td><td>The boards, the one coming framed as the loop comes round; again, the builder: lay tiles under
+      the robots while they walk.</td></tr>
+    <tr><td>LFO · FX</td><td>The drums, a row on the white keys; the mix, its faders on KNOB1.</td></tr>
+    <tr><td>GLO</td><td>Tempo, ticks per move, the loop's length and the speed on the knobs; SELECT the engine;
+      white key 16 the battle.</td></tr>
+    <tr><td>REC · ARP</td><td>All 27 keys play a SID lead over the robots, with a ping-pong echo in time; ARP
+      arpeggiates a held chord.</td></tr>
+    <tr><td>SAVE</td><td>Lit while there are changes not kept yet. Stopped, RoboSeq keeps its project by itself;
+      SAVE keeps it at once.</td></tr>
+    <tr><td>K1–K4</td><td>The page's values, shown on the screen. They never stop the music.</td></tr>
+  </table>
+  <div class="shots">
+    <figure><img src="screens/home-playing.png" width="480" height="480" alt="HOME, the board playing"><figcaption>HOME · the board</figcaption></figure>
+    <figure><img src="screens/seq.png" width="480" height="480" alt="SEQ, the two programs as step cards"><figcaption>SEQ · the programs</figcaption></figure>
+    <figure><img src="screens/voicemod.png" width="480" height="480" alt="SEL, Voice Mod with a named progression"><figcaption>SEL · the chords</figcaption></figure>
+    <figure><img src="screens/seq2.png" width="480" height="480" alt="SEL again, Seq 2"><figcaption>SEL again · Seq 2</figcaption></figure>
+    <figure><img src="screens/boards.png" width="480" height="480" alt="ENV, every board"><figcaption>ENV · the boards</figcaption></figure>
+    <figure><img src="screens/builder.png" width="480" height="480" alt="ENV again, the board builder"><figcaption>ENV again · the builder</figcaption></figure>
+    <figure><img src="screens/drums.png" width="480" height="480" alt="LFO, the drums"><figcaption>LFO · the drums</figcaption></figure>
+    <figure><img src="screens/home-lead.png" width="480" height="480" alt="REC, the lead's four faders over the board"><figcaption>REC · the lead</figcaption></figure>
+  </div>
+  <p class="small">Every control, page by page, and the rules they keep:
+    <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/docs/roboseq/CONTROLS.md">CONTROLS.md</a>. Seven
+    lessons from the first press: <a href="https://github.com/joakimskurk/fm1roboseq#readme">the README</a>.</p>
+
+  <h2 id="battle"><img src="art/steer-swap.svg" width="36" height="30" alt="">The battle</h2>
+  <img class="vs" src="art/battle-vs.svg" width="512" height="192" alt="Scout-7 against Echo-3, a clash between them">
+  <p>GLO, then white key 16. Each player takes a robot and an end of the keyboard, and there is no program: hold a way
+    and your robot steps there on every beat of the music, strike when the other is in reach. A hit is heat, and it
+    drives the two apart; at heat 6 a robot burns out and the other takes the round. A long round overheats the arena
+    from its edge. PLAY counts 4, 3, 2, 1 on the beats, and the first to the rounds (1 to 9, on K2) wins.</p>
+  <table class="bkeys">
+    <tr><td></td><td>Left</td><td>Up</td><td>Down</td><td>Right</td><td>Strike</td></tr>
+    <tr><td class="s">Scout-7</td><td>F3</td><td>F#3</td><td>G3</td><td>A3</td><td>C4</td></tr>
+    <tr><td class="e">Echo-3</td><td>C5</td><td>C#5</td><td>D5</td><td>E5</td><td>G5</td></tr>
+  </table>
+  <p class="small">F#4, in the middle between you, starts the match again. Out of reach, the strike key plays the lead,
+    a tone of the chord where you stand.</p>
+  <div class="shots">
+    <figure><img src="screens/battle.png" width="480" height="480" alt="BATTLE's start: the keyboard with the players' keys marked"><figcaption>The keys, marked</figcaption></figure>
+    <figure><img src="screens/battle-countdown.png" width="480" height="480" alt="The countdown on the beats"><figcaption>4, 3, 2, 1</figcaption></figure>
+    <figure><img src="screens/battle-strike.png" width="480" height="480" alt="A strike"><figcaption>A strike</figcaption></figure>
+    <figure><img src="screens/battle-winner.png" width="480" height="480" alt="The winner"><figcaption>The winner</figcaption></figure>
+  </div>
+  <img class="panel" src="screens/panel-battle.png" width="1280" height="820" alt="The FM-1 in the emulator fm1-emu, mid-battle: Scout-7 striking Echo-3, the panel's knobs, buttons and keys around the screen">
+
+  <h2 id="try"><img src="art/move-ping.svg" width="36" height="30" alt="">Try it without an FM-1</h2>
+  <p><b>The firmware itself</b> runs in <a href="https://joakimeriksson.github.io/fm1-emu/" target="_blank" rel="noopener">fm1-emu</a>,
+    the FM-1 emulator, in the browser: download the file below, click <b>Open .fwsc…</b> there (or drop it on the
+    synth) and press <b>Start</b>. Play it on the computer's keyboard, with the mouse or a touch screen, or with a MIDI
+    keyboard.</p>
+  <p><b>The original:</b> RoboSeq began as an instrument in the browser, and it is still the reference for how the
+    firmware sounds and behaves.</p>
+  <a class="play" id="dl2" href="#">Download the firmware</a>
+  <a class="play alt" href="https://jhf.no/skurky/roboseq.html" target="_blank" rel="noopener">Play the original at jhf.no</a>
+
+  <h2><img src="art/move-wait.svg" width="36" height="30" alt="">More</h2>
+  <ul class="links">
+    <li><a href="https://github.com/joakimskurk/fm1roboseq">The source on GitHub</a>, with everything about how it is made:
+      <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/docs/roboseq/ENGINES.md">the two engines</a>,
+      <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/docs/roboseq/CONTROLS.md">the controls</a>,
+      <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/docs/roboseq/DECISIONS.md">the decisions</a>.</li>
+    <li><a id="dl" href="#">Download the firmware file</a> (<code>.fwsc</code>), to install it another way
+      (<code>tools/fm1_install.py</code>).</li>
+    <li><a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/FIRST_FLASH.md">The first flash</a>: what to
+      check on a real FM-1, and what to send back.</li>
+    <li>The family: <a href="https://joakimskurk.github.io/fm1vavehero/">VaveHero</a>,
+      <a href="https://joakimskurk.github.io/fm1stardistroyer/">Star Distroyer</a>,
+      <a href="https://joakimskurk.github.io/fm1clock/">FM-1 Clock</a> and
+      <a href="https://github.com/joakimskurk/fm1mello">SkurkyMello</a>.</li>
+  </ul>
+
+  <footer>
+    <p>RoboSeq is free software under the GPL-3.0, with no warranty. It runs on
+      <a href="https://github.com/zvenson/dinghy">Dinghy</a> 0.4 (zvenson), built on
+      <a href="https://github.com/hugelton/Felucca">Felucca</a> by Leo Kuroshita (Hügelton Instruments) and the platform of
+      <a href="https://github.com/isod89/sloop-fm1">SLOOP</a> (isod89), whose installer this page uses. Its pictures are
+      the firmware's own, drawn by its code; the screen's letters are Terminus (SIL Open Font License), and the
+      panel is drawn by <a href="https://github.com/joakimeriksson/fm1-emu">fm1-emu</a>.</p>
+    <p>"M-VAVE" and "FM-1" belong to their owners; this is a fan project, not an official M-VAVE product.</p>
+    <p class="coffee"><a href="https://buymeacoffee.com/skurk" target="_blank" rel="noopener">☕ Buy me a coffee</a></p>
+  </footer>
+</main>
+<script type="module">
+/*LIB*/
+const $ = (id) => document.getElementById(id);
+const meta = /*META*/;
+const DEMOS = /*DEMOS*/;
+
+/* ---- the demos: a player each, its spectrum the seek bar (as Star Distroyer's page) */
+const mmss = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+const ICON = { play: '<svg viewBox="0 0 18 18"><path d="M4 2l12 7-12 7z"/></svg>',
+               pause: '<svg viewBox="0 0 18 18"><path d="M3 2h4v14H3zM11 2h4v14h-4z"/></svg>' };
+const HZ = [10000, 1000, 100];                   /* the guides: the picture is 40 Hz .. 16 kHz, log */
+const players = [];
+for (const d of DEMOS) {
+  const el = document.createElement("div");
+  el.className = "demo";
+  el.innerHTML = `<div class="demo-top"><button class="pp" aria-label="Play ${d.title}">${ICON.play}</button>
+    <div><b>${d.title}</b><span class="len">${mmss(d.secs)}</span><p>${d.about}</p></div></div>
+    <div class="spec"><img src="${d.spectrum}" alt="${d.title}'s spectrum from start to end, low to high">
+    ${HZ.map((f) => `<div class="hz" style="top:${(100 * Math.log(16000 / f) / Math.log(16000 / 40)).toFixed(1)}%"><span>${f >= 1000 ? f / 1000 + "k" : f}</span></div>`).join("")}
+    <div class="hover"></div><div class="head"></div>
+    <input type="range" min="0" max="1000" value="0" step="1" aria-label="Position in ${d.title}"><div class="ring"></div></div>
+    <div class="clock"><span>0:00</span><span class="now">0:00</span><span>${mmss(d.secs)}</span></div>`;
+  $("demos").append(el);
+  const audio = new Audio();
+  audio.preload = "none";
+  audio.src = d.src;
+  const pp = el.querySelector(".pp"), head = el.querySelector(".head"), range = el.querySelector("input"),
+        now = el.querySelector(".now"), hover = el.querySelector(".hover"), spec = el.querySelector(".spec");
+  const dur = () => (isFinite(audio.duration) && audio.duration > 0 ? audio.duration : d.secs);
+  let want = null;                              /* a jump asked for before the file's length is known */
+  const show = () => {
+    const t = want !== null ? want * dur() : audio.currentTime, f = Math.min(1, t / dur());
+    head.style.left = `${(f * 100).toFixed(3)}%`;
+    range.value = Math.round(f * 1000);
+    now.textContent = mmss(t);
+  };
+  const seek = (f) => { if (audio.readyState >= 1) audio.currentTime = f * dur(); else want = f; show(); };
+  audio.addEventListener("loadedmetadata", () => { if (want !== null) { audio.currentTime = want * dur(); want = null; } });
+  const set = (on) => { pp.classList.toggle("on", on); pp.innerHTML = on ? ICON.pause : ICON.play;
+                        pp.setAttribute("aria-label", `${on ? "Pause" : "Play"} ${d.title}`); };
+  let raf = 0;
+  const tick = () => { show(); if (!audio.paused) raf = requestAnimationFrame(tick); };
+  audio.addEventListener("play", () => { for (const p of players) if (p !== audio) p.pause(); set(true); tick(); });
+  audio.addEventListener("pause", () => { set(false); cancelAnimationFrame(raf); show(); });
+  audio.addEventListener("ended", () => { audio.currentTime = 0; show(); });
+  pp.addEventListener("click", () => { if (audio.paused) audio.play(); else audio.pause(); });
+  range.addEventListener("input", () => { seek(range.value / 1000); if (audio.paused) audio.play(); });
+  spec.addEventListener("pointermove", (e) => { const r = spec.getBoundingClientRect(); hover.style.left = `${e.clientX - r.left}px`; });
+  players.push(audio);
+}
+
+/* ---- the installer (SLOOP's protocol: Updater, productOf, logicalImage above) */
+const TEXT = {
+  nomidi: "This browser cannot talk to the FM-1. Open the page in Chrome or Edge on a computer.",
+  loadfail: "Could not load the firmware: ", badpkg: "The firmware file is damaged. Reload the page.",
+  start: "Starting", verify: "Checking", loader: "Switching the FM-1 to update mode", write: "Writing",
+  reboot: "Restarting", done: "Done: RoboSeq is installed.",
+  stopped: "Stopped. Replug the USB cable and press Install again.",
+  error: "Error: ",
+  denied: "MIDI (SysEx) was not allowed. Allow MIDI in the site settings (the address bar) and press Install again.",
+  notfound: "FM-1 not found. Check the USB cable (a data cable, directly to the computer), close other apps that use MIDI, and press Install again.",
+  model: "The connected device is not an FM-1.",
+  lost: "The USB connection was lost. Replug it and press Install again.",
+  noloader: "The FM-1 in update mode was not found. Replug the USB cable and press Install again (it stays in update mode until it is finished).",
+  noreturn: "The FM-1 did not come back. Switch it off and on.",
+  mismatch: "Written, but the FM-1 reports another version: ",
+  foreign: "The FM-1 is in the update mode of another firmware. Finish that update with its own updater (M-UPGRADE), then press Install again: ",
+  leave: "Writing. Do not close the page.",
+};
+const say = (k, arg = "", cls = "") => { const s = $("status"); s.textContent = (TEXT[k] ?? k) + arg; s.className = cls; };
+const log = (t) => { $("log").textContent += t + "\n"; };
+let image = null, writing = false;
+const lock = (on) => { writing = on; $("go").disabled = on || !image || !$("ack").checked; };   /* (not tried on an FM-1: the box first) */
+$("ack").addEventListener("change", () => lock(writing));
+window.addEventListener("beforeunload", (e) => { if (writing) { e.preventDefault(); e.returnValue = TEXT.leave; } });
+for (const id of ["dl", "dl2"]) { $(id).href = meta.pkg; $(id).setAttribute("download", meta.pkg.split("/").pop()); }
+$("pkg").textContent = `RoboSeq ${meta.version} · ${meta.product} · SHA-256 ${meta.sha256}`;
+(async () => {
+  try {
+    const sha = async (b) => [...new Uint8Array(await crypto.subtle.digest("SHA-256", b))].map((x) => x.toString(16).padStart(2, "0")).join("");
+    const get = async (cache) => {
+      const r = await fetch(meta.pkg, { cache });
+      if (!r.ok) throw new Error(`${meta.pkg}: HTTP ${r.status}`);
+      return new Uint8Array(await r.arrayBuffer());
+    };
+    let pkg = await get("no-cache");                 /* (a copy the browser kept of an older build: fetched again) */
+    const check = self.crypto && crypto.subtle;
+    if (check && (await sha(pkg)) !== meta.sha256) pkg = await get("reload");
+    if (productOf(pkg) !== meta.product || (check && (await sha(pkg)) !== meta.sha256)) { say("badpkg", "", "bad"); return; }
+    image = logicalImage(pkg);
+    if (!navigator.requestMIDIAccess) { say("nomidi", "", "bad"); return; }
+    say(`Ready: RoboSeq ${meta.version}.`);
+    lock(false);
+  } catch (e) { say("loadfail", e.message, "bad"); }
+})();
+const step = (k, a) => {
+  const total = 74 + Math.ceil((image ? image.length : 0) / 512);   /* the reads: the check, then the write */
+  log(`${k} ${a ?? ""}`);
+  if (k === "verify") $("bar").value = Math.min(100, (a / total) * 100);
+  if (k === "write") $("bar").value = Math.min(100, ((74 + a) / total) * 100);
+  if (k === "done") { $("bar").value = 100; say("done", "", "good"); return; }
+  if (["start", "verify", "loader", "write", "reboot"].includes(k)) say(k);
+};
+$("go").addEventListener("click", async () => {
+  if (writing || !$("ack").checked) return;
+  lock(true);
+  let midi;
+  try { midi = await navigator.requestMIDIAccess({ sysex: true }); }
+  catch (e) { say("denied", "", "bad"); lock(false); return; }
+  try {
+    const up = new Updater(midi, log);
+    const ota = await up.find((id) => /^ota-/i.test(id.model), true);   /* an install cut off: finish it */
+    if (ota) {
+      ota.link.close();
+      if (await up.resume(image, step)) say("done", "", "good"); else say("stopped", "", "bad");
+    } else {
+      await up.install(image, meta.product, step);
+    }
+  } catch (e) {
+    if (e && e.code && TEXT[e.code]) say(e.code, e.detail || "", "bad"); else say("error", e && e.message, "bad");
+    log(String(e && e.stack || e));
+  }
+  lock(false);
+});
+</script>
+</body>
+</html>
