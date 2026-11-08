@@ -1,0 +1,10 @@
+# The page's demo ORIGINAL (web/render_demos.sh): the same robots and board in ORIGINAL, the browser original's score
+# (a button at 0.1 s skips the splash; GLO is 7, SELECT anticlockwise is ORIGINAL; HOME 8, PLAY 12)
+100 btn 8
+300 btn 7
+500 enc 0 -1
+600 shot
+800 btn 8
+1000 btn 12
+33000 btn 12
+34000 end

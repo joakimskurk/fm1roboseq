@@ -1,0 +1,6 @@
+# The page's demo BAND (web/render_demos.sh): the default song as the app starts, in BAND, the robots alone
+# (a button at 0.1 s skips the splash; PLAY is 12)
+100 btn 8
+500 btn 12
+32500 btn 12
+33500 end
