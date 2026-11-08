@@ -85,7 +85,7 @@ emu:             # (PLAY at 5 s, after the boot and the splash: the default song
 	@echo "panel -> build/emu/panel.png"
 panels:          # the page's FM-1 in fm1-emu, strict: BATTLE, Scout-7 striking Echo-3 (build/roboseq.fwsc: make fw first)
 	mkdir -p build/panels/work
-	cd build/panels && FM1_STRICT=1 FM1_BENCH_KEYS='$(BATTLE_KEYS)' $(abspath $(EMU)) --fwsc ../roboseq.fwsc --shot 10500 >/dev/null
+	cd build/panels && FM1_STRICT=1 FM1_BENCH_KEYS='$(BATTLE_KEYS)' $(abspath $(EMU)) --fwsc ../roboseq.fwsc --shot 10410 >/dev/null
 	$(PY) -c "from PIL import Image; Image.open('build/panels/work/panel.ppm').save('docs/screens/panel-battle.png', optimize=True)"
 	@echo "panel -> docs/screens/panel-battle.png"
 site: $(IMG)       # the page as CI makes it (GitHub Pages): build/site, with build/roboseq.fwsc (make fw first)
