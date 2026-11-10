@@ -622,16 +622,16 @@ static void project_keep(uint32_t held, int now)   /* the main loop's; now: SAVE
     saved = *a, unsaved = 0;
 }
 
-#ifdef RS_P4_TEST
-#include "../../tests/roboseq/p4_test.c"        /* the playability rules, page by page (P4), on the host */
-#endif
-
 static struct {                                 /* the main loop's state, kept from pass to pass */
     struct rs_fx fx;
     struct rs_view last;
     struct rs_ui ui;
     uint32_t due, shown, prev, beat_ms;
 } ml = {.shown = ~0u};
+
+#ifdef RS_P4_TEST
+#include "../../tests/roboseq/p4_test.c"        /* the playability rules, page by page (P4), on the host */
+#endif
 
 static void app_start(void)                     /* RoboSeq's start, before the splash */
 {
@@ -847,6 +847,8 @@ static void app_pass(void)                      /* a pass of the main loop: a mi
         if (b & (1u << BTN_OCT_UP) && (bank + 1u) * 16u < len) bank++, dirty = 1;
         if (bank * 16u >= len) bank = 0;
     }
+    for (k = 0; k < 4u; k++) (void)fm1_enc_take(ENC_KNOB1 + k);   /* the knobs this page did not read: let go, not kept */
+    (void)fm1_enc_take(ENC_ALGORITHM), (void)fm1_enc_take(ENC_PRESETS);   /* for the next (K3 on HOME was GLO's loop, D45) */
     schedule();
     board_colour();
     board_patch();

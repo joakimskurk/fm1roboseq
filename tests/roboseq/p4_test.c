@@ -104,6 +104,8 @@ static void p4_page_test(uint8_t pg, const char *name)
     if (pg == PAGE_BATTLE) rs_battle_stop(&game);
 }
 
+#include "ctl_test.c"                           /* the controls as they were played (D45) */
+
 static int p4_main(void)
 {
     static const struct { uint8_t page; const char *name; } PAGES[] = {
@@ -117,5 +119,6 @@ static int p4_main(void)
     for (int t = 0; t < 21; t++) rs_tick(&game, &tick_out);   /* (the robots a few steps in) */
     for (unsigned i = 0; i < sizeof PAGES / sizeof PAGES[0]; i++) p4_page_test(PAGES[i].page, PAGES[i].name);
     printf("p4_test: %s\n", p4_fails ? "FAILED" : "all pass");
-    return p4_fails != 0;
+    int ctl = ctl_main();                       /* (the controls as they were played: tests/roboseq/ctl_test.c) */
+    return p4_fails != 0 || ctl;
 }
