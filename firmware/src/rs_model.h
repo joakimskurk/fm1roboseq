@@ -208,7 +208,8 @@ void rs_cycle_action(struct rs_state *s, int bot, int i);       /* cycleAction()
 void rs_set_step(struct rs_state *s, int bot, int i, int action, int modifier, int prob);   /* updateStep(), -1 keeps */
 void rs_place_tile(struct rs_state *s, int x, int y, uint8_t type, uint8_t dir);   /* a tile by hand (D28) */
 void rs_steer(struct rs_state *s, int bot, uint8_t action);    /* the bot's next move does this, once (D16) */
-void rs_swap_registers(struct rs_state *s);                     /* swapRegisters() */
+void rs_swap_registers(struct rs_state *s);                     /* swapRegisters(): who plays high (Seq 2) */
+void rs_swap_programs(struct rs_state *s);                      /* (D45) the robots' programs exchanged, undone as one */
 void rs_cycle_modifier(struct rs_state *s, int bot, int i);     /* cycleModifier() */
 void rs_cycle_prob(struct rs_state *s, int bot, int i);         /* cycleProbability(): 100 -> 75 -> 50 */
 void rs_cycle_bassmod(struct rs_state *s, int i, int field, int dir);   /* cycleBassModStepValue(): 0 scale, 1 root, 2 semitone */

@@ -85,7 +85,8 @@ static void p4_page_test(uint8_t pg, const char *name)
         if (!p4_changed()) continue;
         effect++;
         int is_black = (0x54Au >> ((53u + k) % 12u)) & 1u;
-        if (is_black && (memcmp(game.steer, p4_game.steer, sizeof game.steer) || game.swapped != p4_game.swapped)) steer++;
+        if (is_black && (memcmp(game.steer, p4_game.steer, sizeof game.steer) || game.swapped != p4_game.swapped ||
+                         memcmp(game.prog, p4_game.prog, sizeof game.prog))) steer++;   /* (F#5: the programs swapped, D45) */
         if (memcmp(game.prog, p4_game.prog, sizeof game.prog) || memcmp(&game.board, &p4_game.board, sizeof game.board) ||
             memcmp(game.battle.hold, p4_game.battle.hold, sizeof game.battle.hold))
             world++;

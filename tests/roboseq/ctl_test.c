@@ -3,6 +3,7 @@
  * own passes and keys, after tests/roboseq/p4_test.c (included at its end, built into roboseq.c with -DRS_P4_TEST):
  *
  *   knobs    a knob a page does not read is let go, not kept for the next page (K3 on HOME was GLO's loop later)
+ *   swap     F#5 (HOME) and F5 (SEQ) swap the robots' programs, steps and lengths; SEQ's undo brings them back
  *
  * Exits through p4_main: 0 when all hold. */
 
@@ -38,9 +39,29 @@ static void ctl_knobs(void)                     /* a turn a page leaves unread i
     CTL_CHECK(game.loop_len == loop && game.quarter == quarter, "knobs: K3 / K4 turned on SEQ moved GLO's loop or speed");
 }
 
+static void ctl_swap(void)                      /* the swap is of the programs, not of who plays high */
+{
+    ctl_fresh(PAGE_HOME);
+    rs_randomize_all(&game);
+    rs_set_prog_len(&game, 1, 12);
+    struct rs_prog a = game.prog[0], b = game.prog[1];
+    uint8_t swapped = game.swapped;
+    keys(1u << 25);                             /* F#5 on HOME */
+    CTL_CHECK(!memcmp(&game.prog[0], &b, sizeof b) && !memcmp(&game.prog[1], &a, sizeof a),
+              "swap: F#5 on HOME did not swap the programs");
+    CTL_CHECK(game.swapped == swapped, "swap: F#5 on HOME swapped who plays high (REG SWAP), not the programs");
+    CTL_CHECK(game.prog[0].len == 12 && game.prog[1].len == a.len, "swap: the lengths did not go with the programs");
+    page = PAGE_SEQ;
+    keys(1u << 24);                             /* F5 on SEQ: back */
+    CTL_CHECK(!memcmp(&game.prog[0], &a, sizeof a) && !memcmp(&game.prog[1], &b, sizeof b), "swap: F5 on SEQ did not swap back");
+    keys(1u << 20);                             /* C#5: undo, the swap before it */
+    CTL_CHECK(!memcmp(&game.prog[0], &b, sizeof b) && !memcmp(&game.prog[1], &a, sizeof a), "swap: undo did not bring the swap back");
+}
+
 static int ctl_main(void)
 {
     ctl_knobs();
+    ctl_swap();
     printf("ctl_test: %s\n", ctl_fails ? "FAILED" : "all pass");
     return ctl_fails != 0;
 }

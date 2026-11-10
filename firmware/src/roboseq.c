@@ -338,7 +338,7 @@ static int keys_seq(uint32_t down)              /* SEQ: the keys program the pic
         else if (k == SK_UNDO) rs_pop_undo(&game);
         else if (k == SK_RND) rs_randomize_steps(&game, sel_bot);
         else if (k == SK_RNDALL) rs_randomize_all(&game);
-        else if (k == SK_SWAP) rs_swap_registers(&game);
+        else if (k == SK_SWAP) rs_swap_programs(&game);   /* (their programs: D45; who plays high is Seq 2's) */
         else if (k == SK_CLEAR) rs_clear_steps(&game);
         else changed = 0;
     }
@@ -516,7 +516,7 @@ static int keys(uint32_t down)                  /* what the keys pressed now do;
     for (k = 0; k < 11u; k++)
         if (down >> black_key[k] & 1u) {
             if (k < 10u) rs_steer(&game, k < 5u ? 0 : 1, STEER[k % 5u]);
-            else rs_swap_registers(&game), swap_until = (fm1_ms + 500u) | 1u;
+            else rs_swap_programs(&game), swap_until = (fm1_ms + 500u) | 1u;   /* F#5: their programs swapped (D45) */
             changed = 1;
         }
     return changed;

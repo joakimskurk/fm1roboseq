@@ -493,6 +493,14 @@ void rs_steer(struct rs_state *s, int bot, uint8_t action)
 
 void rs_swap_registers(struct rs_state *s) { s->swapped = !s->swapped; }
 
+void rs_swap_programs(struct rs_state *s)               /* (D45, the port's) Scout-7 takes Echo-3's program and Echo-3
+                                                         * Scout-7's, their steps and lengths; heard on the next step */
+{
+    struct rs_prog t = s->prog[0];
+    rs_push_undo(s);
+    s->prog[0] = s->prog[1], s->prog[1] = t;
+}
+
 void rs_set_step(struct rs_state *s, int bot, int i, int action, int modifier, int prob)   /* updateStep(): -1 keeps */
 {
     struct rs_step *st = &s->prog[bot & 1].s[i & 63];
