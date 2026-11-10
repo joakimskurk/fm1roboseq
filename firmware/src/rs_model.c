@@ -576,10 +576,9 @@ uint32_t rs_random(struct rs_state *s, uint32_t n)      /* Math.floor(Math.rando
     return (uint32_t)(((uint64_t)x * n) >> 32);
 }
 
-void rs_randomize_steps(struct rs_state *s, int bot)    /* randomizeSteps() */
+static void roll_steps(struct rs_state *s, int bot)    /* randomizeSteps() less its pushUndo() */
 {
     static const uint8_t EARLY[8] = {RS_MOVE, RS_MOVE, RS_MOVE, RS_MOVE, RS_DASH, RS_DASH, RS_TURNL, RS_TURNR};
-    rs_push_undo(s);
     for (int i = 0; i < RS_MAX_STEPS; i++) {            /* the draws in the HTML's order: action, chance, modifier */
         struct rs_step *st = &s->prog[bot & 1].s[i];
         st->action = i < 3 ? EARLY[rs_random(s, 8)] : (uint8_t)rs_random(s, RS_NACTIONS);
@@ -588,7 +587,14 @@ void rs_randomize_steps(struct rs_state *s, int bot)    /* randomizeSteps() */
     }
 }
 
-void rs_randomize_all(struct rs_state *s) { rs_randomize_steps(s, 0); rs_randomize_steps(s, 1); }
+void rs_randomize_steps(struct rs_state *s, int bot) { rs_push_undo(s); roll_steps(s, bot); }   /* randomizeSteps() */
+
+void rs_randomize_all(struct rs_state *s)               /* randomizeAllSteps(): the same draws; one undo for both (D45: */
+{                                                       /* the HTML pushes one a register, two undos for one roll) */
+    rs_push_undo(s);
+    roll_steps(s, 0);
+    roll_steps(s, 1);
+}
 
 void rs_clear_steps(struct rs_state *s)                 /* resetAllSteps(): every step idle, steady, certain */
 {

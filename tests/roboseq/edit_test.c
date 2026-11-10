@@ -101,10 +101,9 @@ static void test_undo(void)
     CHECK(!rs_pop_undo(&s), "nothing to undo");
     t = s;
     rs_randomize_all(&s);
-    CHECK(rs_undo_depth() == 2, "two pushes for both registers");
+    CHECK(rs_undo_depth() == 1, "one push for both registers (D45; the HTML pushes two)");
     rs_pop_undo(&s);
-    rs_pop_undo(&s);
-    CHECK(!memcmp(s.prog, t.prog, sizeof s.prog), "undone: the registers as before");
+    CHECK(!memcmp(s.prog, t.prog, sizeof s.prog), "undone: the registers as before, in one undo");
     /* 25 pushes keep the last 20 */
     rs_undo_clear();
     for (int i = 0; i < 25; i++) { s.bpm = (uint16_t)(100 + i); rs_push_undo(&s); }
