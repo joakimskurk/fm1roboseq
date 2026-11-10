@@ -4,6 +4,7 @@
  *
  *   knobs    a knob a page does not read is let go, not kept for the next page (K3 on HOME was GLO's loop later)
  *   swap     F#5 (HOME) and F5 (SEQ) swap the robots' programs, steps and lengths; SEQ's undo brings them back
+ *   roll     on HOME, K2 rolls the picked robot's program, K3 both, a roll a turn, while it plays
  *
  * Exits through p4_main: 0 when all hold. */
 
@@ -58,10 +59,32 @@ static void ctl_swap(void)                      /* the swap is of the programs, 
     CTL_CHECK(!memcmp(&game.prog[0], &b, sizeof b) && !memcmp(&game.prog[1], &a, sizeof a), "swap: undo did not bring the swap back");
 }
 
+static void ctl_roll(void)                      /* new programs on HOME, while it plays */
+{
+    ctl_fresh(PAGE_HOME);
+    play();
+    sel_bot = 1;                                /* (EDIT: Echo-3's on the keys) */
+    struct rs_prog a = game.prog[0], b = game.prog[1];
+    host_enc[ENC_KNOB2] = 1;
+    app_pass();
+    CTL_CHECK(!memcmp(&game.prog[0], &a, sizeof a) && memcmp(&game.prog[1], &b, sizeof b),
+              "roll: K2 on HOME did not roll the picked robot's program (and only it)");
+    a = game.prog[0], b = game.prog[1];
+    host_enc[ENC_KNOB3] = -1;
+    app_pass();
+    CTL_CHECK(memcmp(&game.prog[0], &a, sizeof a) && memcmp(&game.prog[1], &b, sizeof b), "roll: K3 on HOME did not roll both");
+    CTL_CHECK(game.playing, "roll: a roll stopped the music");
+    page = PAGE_SEQ;
+    keys(1u << 20);                             /* SEQ's undo: the roll before */
+    CTL_CHECK(!memcmp(&game.prog[0], &a, sizeof a) && !memcmp(&game.prog[1], &b, sizeof b), "roll: undo did not bring K3's roll back");
+    rs_stop(&game);
+}
+
 static int ctl_main(void)
 {
     ctl_knobs();
     ctl_swap();
+    ctl_roll();
     printf("ctl_test: %s\n", ctl_fails ? "FAILED" : "all pass");
     return ctl_fails != 0;
 }

@@ -841,8 +841,10 @@ static void app_pass(void)                      /* a pass of the main loop: a mi
             seq_scroll += d ? d : seq_target > seq_scroll ? 1 : -1;
             dirty = 1;
         }
-    } else {
-        (void)fm1_enc_take(ENC_KNOB2);
+    } else {                                /* HOME: K2 a new program for the picked robot, K3 new ones for both, a roll
+                                             * a turn (D45; each one undone on SEQ) */
+        if (fm1_enc_take(ENC_KNOB2)) rs_randomize_steps(&game, (int)sel_bot), dirty = 1;
+        if (fm1_enc_take(ENC_KNOB3)) rs_randomize_all(&game), dirty = 1;
         if (b & (1u << BTN_OCT_DOWN) && bank > 0) bank--, dirty = 1;
         if (b & (1u << BTN_OCT_UP) && (bank + 1u) * 16u < len) bank++, dirty = 1;
         if (bank * 16u >= len) bank = 0;
