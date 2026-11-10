@@ -102,10 +102,12 @@ if (fm1) {
   const btnEls = [...fm1.querySelectorAll('[data-btn]')];
   for (const b of btnEls) b.addEventListener('click', () => send({ type: 'btn', id: +b.dataset.btn }));
 
-  // ---- the knobs: a detent each 14 px dragged, each notch of a wheel, each arrow key; their mark turns with them
+  // ---- the knobs: a detent each 14 px dragged, each arrow key, and the wheel once the knob is clicked (focused): a
+  // scroll of the page over a knob scrolls the page, and a trackpad's swipe is gathered, 60 px a detent (D45: a
+  // scroll over the panel turned the tempo, the loop and the speed by dozens of detents)
   const ANGLE = 18;
   for (const k of fm1.querySelectorAll('[data-enc], #vol')) {
-    let turned = k.id === 'vol' ? 8 : 0, y0 = null, acc = 0;
+    let turned = k.id === 'vol' ? 8 : 0, y0 = null, acc = 0, wacc = 0;
     const show = () => { k.style.setProperty('--a', `${k.id === 'vol' ? -135 + turned * 27 : turned * ANGLE}deg`); };
     const turn = (n) => {
       if (k.id === 'vol') {                       // MASTER: the page's volume, 0 .. 10
@@ -127,7 +129,13 @@ if (fm1) {
     const end = () => { y0 = null; };
     k.addEventListener('pointerup', end);
     k.addEventListener('pointercancel', end);
-    k.addEventListener('wheel', (e) => { e.preventDefault(); turn(e.deltaY < 0 ? 1 : -1); }, { passive: false });
+    k.addEventListener('wheel', (e) => {
+      if (document.activeElement !== k) return;   // (not clicked: the page scrolls)
+      e.preventDefault();
+      wacc -= e.deltaY * (e.deltaMode === 1 ? 20 : e.deltaMode === 2 ? 400 : 1);
+      while (Math.abs(wacc) >= 60) { const n = wacc > 0 ? 1 : -1; turn(n); wacc -= 60 * n; }
+    }, { passive: false });
+    k.addEventListener('blur', () => { wacc = 0; });
     k.addEventListener('keydown', (e) => {
       const n = { ArrowUp: 1, ArrowRight: 1, ArrowDown: -1, ArrowLeft: -1 }[e.key];
       if (n) { e.preventDefault(); e.stopPropagation(); turn(n); }
