@@ -7,6 +7,8 @@ RoboSeq runs on **Dinghy 0.4**, imported as source (the first commit of this rep
 - and upstream's `f77bf032` (2026-11-03): `firmware/hal/fm1_flash_map.h` accepts the UC25HQ80 (`0xB36014`) of
   FM-1s sold since autumn 2026 beside the Puya `0x856014` (without it the update loader refuses to install on them);
   `tests/roboseq/flash_id_test.c` holds it
+- that is all of **Dinghy 0.5**'s code (2026-11-07, checked 2026-11-10): its other changes are its README and its
+  `release.yml`, which RoboSeq does not use (`build.yml`, zvenson/fm1-build)
 - Dinghy's docs stay in `docs/` (`API.md`, `RULES.md`, `MAKE-IT-YOURS.md`, `SMK37.md`); its README is
   `docs/DINGHY_README.md` (the toolchain, the SDK, the host mode)
 

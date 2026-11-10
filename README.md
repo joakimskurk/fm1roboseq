@@ -160,8 +160,9 @@ SHA-256 first.
 
 **With the tool:** the package is `roboseq-X.Y.fwsc` from the [releases](https://github.com/joakimskurk/fm1roboseq/releases), with its
 SHA-256 in `SHA256SUMS` beside it, or `build/roboseq.fwsc` when you build it yourself (`make fw`). Its version is in
-the splash's corner (`v0.0`: not a release). Install it on an FM-1 running M-VAVE's official V15 (or another firmware
-with the FM-1 update loader), over USB-MIDI:
+the splash's corner (`v0.0`: not a release). Install it on an FM-1 running M-VAVE's official V15 or V16 (or another
+firmware with the FM-1 update loader), over USB-MIDI. RoboSeq works with both flash chips FM-1s carry: the Puya
+P25Q80 and the UC25HQ80 of units sold since autumn 2026.
 
 ```sh
 pip3 install mido python-rtmidi

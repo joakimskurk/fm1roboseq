@@ -8,11 +8,21 @@ update loader behave as the emulator says. If you have an FM-1 and half an hour,
 
 ## What could go wrong, and the way back
 
-Nothing here is new to the FM-1's update path: RoboSeq is built on Dinghy 0.4, whose loader and USB rescue are in
-the community firmwares on the [Firmware Hub](https://thefirmwarehub.com). Still, before you start:
+Nothing here is new to the FM-1's update path: RoboSeq is built on Dinghy (0.4, with 0.5's flash fix), whose
+loader and USB rescue are in the community firmwares on the [Firmware Hub](https://thefirmwarehub.com). Still, before
+you start:
 
 - **The USB rescue.** Hold **OCT-** while you switch on: no sound, only the updater. From there any firmware
-  installs again, the stock V15 included. If RoboSeq crashes twice at boot, the FM-1 goes there by itself.
+  installs again, the stock V15 or V16 included. If RoboSeq crashes twice at boot, the FM-1 goes there by itself.
+- **The newer flash chip.** FM-1s sold since autumn 2026 carry a UC25HQ80 flash chip (JEDEC `0xB36014`) in place of
+  the Puya P25Q80 (`0x856014`). RoboSeq knows both, in the firmware, the USB rescue and the update loader, so it saves
+  and updates on either. But an older custom firmware may not know the new chip: if yours runs one, its update loader
+  can refuse to install anything. Then go back to the official firmware first (M-VAVE's M-UPGRADE with V16), and
+  install RoboSeq from there.
+- **If even the USB rescue does not come up** (a black screen, no USB): the community's recovery tools reach the
+  chip's own boot ROM over plain USB, such as [MvaveFM1Unbricker](https://github.com/Quixotic7/MvaveFM1Unbricker), or
+  with a small dongle, such as [FM-1 Transporter](https://github.com/kurogedelic/FM-1-transporter). More of them, and
+  how they work, are listed in [aroum/fm1-custom-fw](https://github.com/aroum/fm1-custom-fw).
 - **A crash** shows a screen with where it happened (a PC address) and restarts. Photograph that screen.
 - **Your data.** RoboSeq keeps its project in sectors of its own and never reads or writes another firmware's
   projects or samples. Their data stays where it is, but RoboSeq cannot open it.
@@ -20,7 +30,7 @@ the community firmwares on the [Firmware Hub](https://thefirmwarehub.com). Still
 
 ## What you need
 
-- An FM-1 on M-VAVE's V15 or on any firmware with the FM-1 update loader (all Hub firmwares have it).
+- An FM-1 on M-VAVE's V15 or V16, or on any firmware with the FM-1 update loader (all Hub firmwares have it).
 - A USB cable and a computer with Python 3, or Chrome / Edge for the Hub.
 - `tools/fm1_install.py` from this repository (a clone, or the file alone).
 - The package: `roboseq-0.1.fwsc` from the [release](https://github.com/joakimskurk/fm1roboseq/releases) (or the
@@ -79,6 +89,8 @@ Open an issue at [joakimskurk/fm1roboseq](https://github.com/joakimskurk/fm1robo
 
 - the checklist, ticked;
 - what `fm1_install.py --info` said before and after;
+- the flash chip your unit carries, if you know it (the Puya P25Q80, or the UC25HQ80 of units sold since autumn
+  2026), and the stock firmware it came with (V14, V15, V16);
 - the package's SHA-256, and the version on the splash;
 - photos of anything that looked wrong, a crash screen's PC, and a recording of anything that sounded wrong
   (a phone is fine).
