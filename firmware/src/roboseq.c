@@ -126,6 +126,17 @@ static void view_of(struct rs_view *v, const struct rs_tick_out *o, uint32_t t0)
     v->battle = game.battle;
 }
 
+static void loop_to(uint8_t len, int live)      /* the loop's new length (GLO's K3); a program as long as the loop goes
+                                                 * with it, up as down, one made shorter stays (D45: the HTML only cuts) */
+{
+    int follow[2];
+    for (int b = 0; b < 2; b++) follow[b] = !game.prog[b].len || game.prog[b].len == game.loop_len;
+    if (live) rs_set_loop_len_live(&game, len);
+    else rs_set_loop_len(&game, len);
+    for (int b = 0; b < 2; b++)
+        if (follow[b]) rs_set_prog_len(&game, b, len);
+}
+
 static void schedule(void)
 {
     uint32_t k;
@@ -147,7 +158,7 @@ static void schedule(void)
         RING_PUBLISH();                         /* the notes before the head that shows them */
         qn_head = h;
         if (pending_loop && tick_out.loop_reset) {   /* a new loop length lands as the loop comes round (D20) */
-            rs_set_loop_len_live(&game, pending_loop);
+            loop_to(pending_loop, 1);
             pending_loop = 0;
         }
         mix.lead.tick_at[mix.lead.tick_head % 8u] = t;   /* the step's time to the lead: its arp steps with the robots */
@@ -764,7 +775,7 @@ static void app_pass(void)                      /* a pass of the main loop: a mi
             uint32_t cur = pending_loop ? pending_loop : game.loop_len, k2;
             for (; e > 0; e--) for (k2 = 0; k2 < 7u; k2++) if (LENGTHS[k2] > cur) { cur = LENGTHS[k2]; break; }
             for (; e < 0; e++) for (k2 = 7u; k2-- > 0;) if (LENGTHS[k2] < cur) { cur = LENGTHS[k2]; break; }
-            if (!game.playing) rs_set_loop_len(&game, (uint8_t)cur), pending_loop = 0;
+            if (!game.playing) loop_to((uint8_t)cur, 0), pending_loop = 0;
             else pending_loop = cur == game.loop_len ? 0 : (uint8_t)cur;
             dirty = 1;
         }

@@ -5,6 +5,8 @@
  *   knobs    a knob a page does not read is let go, not kept for the next page (K3 on HOME was GLO's loop later)
  *   swap     F#5 (HOME) and F5 (SEQ) swap the robots' programs, steps and lengths; SEQ's undo brings them back
  *   roll     on HOME, K2 rolls the picked robot's program, K3 both, a roll a turn, while it plays
+ *   loop     a program as long as the loop follows GLO's K3 up and down, stopped or as the loop comes round;
+ *            one made shorter stays (the HTML only cuts: a loop of 8 once left the programs at 8)
  *
  * Exits through p4_main: 0 when all hold. */
 
@@ -80,11 +82,44 @@ static void ctl_roll(void)                      /* new programs on HOME, while i
     rs_stop(&game);
 }
 
+static uint32_t ctl_len(int b) { return game.prog[b].len ? game.prog[b].len : game.loop_len; }
+
+static void ctl_loop(void)
+{
+    ctl_fresh(PAGE_GLO);
+    rs_set_prog_len(&game, 1, 12);              /* Echo-3's made shorter on purpose */
+    host_enc[ENC_KNOB3] = 2;                    /* stopped: 16 -> 32 at once */
+    app_pass();
+    CTL_CHECK(game.loop_len == 32 && ctl_len(0) == 32 && ctl_len(1) == 12,
+              "loop: 16 -> 32 stopped: the loop %u, Scout-7 %u (32: it was the loop's), Echo-3 %u (12: made shorter)",
+              game.loop_len, ctl_len(0), ctl_len(1));
+    host_enc[ENC_KNOB3] = -3;                   /* 32 -> 8: both cut */
+    app_pass();
+    CTL_CHECK(game.loop_len == 12 && ctl_len(0) == 12 && ctl_len(1) == 12, "loop: 32 -> 12: the loop %u, %u, %u",
+              game.loop_len, ctl_len(0), ctl_len(1));
+    host_enc[ENC_KNOB3] = -1;
+    app_pass();
+    host_enc[ENC_KNOB3] = 2;                    /* 8 -> 16: both follow it back (the bug: they stayed at 8) */
+    app_pass();
+    CTL_CHECK(game.loop_len == 16 && ctl_len(0) == 16 && ctl_len(1) == 16,
+              "loop: 8 -> 16: the programs did not follow the loop back (the loop %u, %u, %u)", game.loop_len, ctl_len(0), ctl_len(1));
+    play();                                     /* playing: as the loop comes round */
+    host_enc[ENC_KNOB3] = 1;
+    app_pass();
+    CTL_CHECK(game.loop_len == 16 && pending_loop == 24, "loop: playing, K3 did not wait for the loop (%u, pending %u)",
+              game.loop_len, pending_loop);
+    for (int i = 0; i < 400 && pending_loop; i++) audio_now += 2048u, schedule();
+    CTL_CHECK(game.loop_len == 24 && ctl_len(0) == 24 && ctl_len(1) == 24 && game.playing,
+              "loop: playing, 16 -> 24 as it came round: the loop %u, %u, %u", game.loop_len, ctl_len(0), ctl_len(1));
+    rs_stop(&game);
+}
+
 static int ctl_main(void)
 {
     ctl_knobs();
     ctl_swap();
     ctl_roll();
+    ctl_loop();
     printf("ctl_test: %s\n", ctl_fails ? "FAILED" : "all pass");
     return ctl_fails != 0;
 }
