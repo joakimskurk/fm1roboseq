@@ -849,3 +849,30 @@ page links to the original, the link goes to it on jhf.no (`https://jhf.no/skurk
 
 Measured with it: the default song's render has 0.42 % of its samples at full scale (ORIGINAL 0.37 %), the HTML's own
 render of it 0.48 % (its peak 1.64): the clipping is the HTML's, as D9-D14 port its gain staging, and stays.
+
+## D45. The controls as they were played: the knobs, the swap, the rolls, the loop (2026-11-10)
+
+The product owner played the page and found four things wrong: they could not roll or swap the robots'
+sequencers, the global settings changed by themselves, and the loop locked itself to its steps so that changes did
+not work. Asked, they chose each of the answers below. `tests/roboseq/ctl_test.c` (with P4, in `make test`) holds
+each one on the app's own passes and keys; each failed before its fix.
+
+**The knobs let go of what a page does not read.** The FM-1 counts a knob's clicks until they are read, and HOME and
+SEQ never read K3 and K4: turned there, they waited, and the first pass on GLO took them as its loop and speed (three
+clicks of K3 on HOME took the loop from 16 to 48). Every pass now takes and drops the knobs its page did not read.
+On the page, the mouse wheel turned whatever knob a scroll of the page passed over, a click each wheel event (a
+trackpad's swipe was dozens): it now turns a knob only once it is clicked (has the focus), 60 px a click.
+
+**Swap is of the programs.** The HTML's REG SWAP swaps who plays high and who low (the robots' pitch ranges), which
+is little to hear and nothing to see. F#5 (HOME and the other steering pages) and F5 on SEQ now swap the robots'
+programs: Scout-7 takes Echo-3's, its steps and length, and Echo-3 Scout-7's (`rs_swap_programs`, the port's), one
+undo. REG SWAP stays where the HTML has it in a song: Seq 2's steps (K3).
+
+**The rolls are on HOME too.** K2 rolls a new program for the picked robot (EDIT's), K3 new ones for both, a roll a
+turn, while it plays; SEQ keeps D5 and E5, and its C#5 undoes either. A roll of both is one undo now: the HTML's
+randomizeAllSteps() pushes one a register, two presses to undo one roll (the same draws: the traces are unchanged).
+
+**A program as long as the loop follows the loop.** The HTML's setLoopLength() only cuts: a loop of 8 once left both
+programs at 8, and every longer loop after it played them over and over. GLO's K3 now takes a program as long as the
+loop with it, up as down, stopped at once and playing as the loop comes round (D20); one made shorter on purpose
+stays as it is.

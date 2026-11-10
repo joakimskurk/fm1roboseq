@@ -9,13 +9,13 @@ robots are the instrument; D16 says how the keys reach them. A rule here is a te
 |---|---|
 | C1 | **PLAY is the transport**, on every page: start from the board's start, stop with the HTML's panic. Nothing else. Its light flashes the beat (D29). |
 | C2 | **The white keys are positions.** Where a page has steps (a register, Voice Mod, the drums) the 16 white keys are its steps, OCT- / OCT+ the next 16. A key turns its step to its next value, as the HTML's buttons cycle. |
-| C3 | **The black keys steer the bots**, on every page but the two builders, SEQ and ENV (D28), while it plays (P1): the first five Scout-7's TURN L, MOVE, TURN R, DASH, PING, the next five Echo-3's, the last swaps the registers. A steer is the bot's next move, once. |
-| C4 | **What a key does is on the screen** (P3); on the builders a little keyboard at the foot in each key's colour (D28): both registers down the board's sides (Scout-7 left, Echo-3 right, top to bottom = white keys left to right), the one on the white keys bright, the step playing framed; the registers swapped shows. A steer shows till its step plays: on HOME its icon over the bot's head, on the other pages in the bot's corner of the header (Scout-7 left, Echo-3 right), the swap in both. The FM-1's keys have no lights, so the screen is the only place. |
+| C3 | **The black keys steer the bots**, on every page but the two builders, SEQ and ENV (D28), while it plays (P1): the first five Scout-7's TURN L, MOVE, TURN R, DASH, PING, the next five Echo-3's, the last swaps their programs (D45). A steer is the bot's next move, once. |
+| C4 | **What a key does is on the screen** (P3); on the builders a little keyboard at the foot in each key's colour (D28): both registers down the board's sides (Scout-7 left, Echo-3 right, top to bottom = white keys left to right), the one on the white keys bright, the step playing framed; who plays high swapped (Seq 2's) shows. A steer shows till its step plays: on HOME its icon over the bot's head, on the other pages in the bot's corner of the header (Scout-7 left, Echo-3 right), the swap in both. The FM-1's keys have no lights, so the screen is the only place. |
 | C5 | **The result is heard on the next step**, never later: the game runs 64 ms ahead (D12), so an edit or a steer lands on the next step the game computes. |
 | C6 | **EDIT picks whose register** is on the white keys (lit: Echo-3's), on every page with a register. |
 | C7 | **SELECT picks which part of a step** the white keys turn: its ACTION, MODIFIER or CHANCE (the HTML's step card's three buttons), named over the board in the picked bot's colour; the register on the keys shows that part, the other its actions. |
 | C9 | **REC turns the keys into the lead** (D21) on every page: all 27 play it, OCT- / OCT+ its octave, K1-K4 its cutoff, echo, bite and octave (D26, D30), shown as four faders in the header line. Only ARP (lit) arpeggiates: the chord held, K4 its kind (D27), SELECT its notes a step, 1-4 (D29, D30). REC again gives the keys and knobs back. |
-| C8 | **The knobs never stop the music.** KNOB1 is the picked register's length (8, 12, 16 ... up to the loop's). What the HTML does only by stopping (the loop's length) waits for a page of its own. |
+| C8 | **The knobs never stop the music**, and a knob a page does not read is let go, never kept for another page (D45). KNOB1 is the picked register's length (8, 12, 16 ... up to the loop's). What the HTML does only by stopping (the loop's length) waits for a page of its own. |
 | C10 | **The project keeps itself** (D43): stopped, it is saved by itself (a save stops the sound ~50 ms, so never while it plays). SAVE is lit while there are changes not kept yet; pressed while stopped, it keeps them at once. |
 
 ## The pages (D19)
@@ -31,10 +31,12 @@ pressed again, the board builder (D32), GLO the global settings; the page's butt
 | white keys 1-16 | the picked bot's register, steps 1-16 (OCT+ 17-32 ...): the next action, move > back > turn L > turn R > dash > ping > wait |
 | black keys F#3 G#3 A#3 C#4 D#4 | Scout-7's next move: TURN L, MOVE, TURN R, DASH, PING |
 | black keys F#4 G#4 A#4 C#5 D#5 | the same for Echo-3 |
-| black key F#5 | swap the registers (the HTML's REG SWAP) |
+| black key F#5 | swap the robots' programs, steps and lengths (D45; the HTML's REG SWAP, who plays high, is Seq 2's) |
 | EDIT | Scout-7's or Echo-3's register on the white keys |
 | SELECT | what a white key turns: ACTION (move > back > turn L > turn R > dash > ping > wait), MODIFIER (steady > bright > low > wobble > glitch), CHANCE (100 > 75 > 50 %) |
 | KNOB1 | the picked register's length |
+| KNOB2 | a new program for the picked bot, a roll a turn (D45; SEQ's C#5 undoes it) |
+| KNOB3 | new programs for both |
 | OCT- / OCT+ | the register's 16 steps before / after (lit where there are more) |
 | MASTER | the volume |
 
@@ -51,7 +53,7 @@ Scout-7's and Echo-3's registers as two columns of step cards, the HTML's planne
 | G#3 / A#3 / B3 | type WAIT / DASH / PING, and on |
 | C4 D4 E4 F4 G4 | the cursor's modifier: steady, bright, low, wobble, glitch |
 | A4 B4 C5 | its chance: 100, 75, 50 % |
-| C#5 / D5 / E5 / F5 / G5 | undo / roll this register / roll both / swap the registers / clear them |
+| C#5 / D5 / E5 / F5 / G5 | undo / roll this register / roll both (one undo) / swap the robots' programs / clear them |
 | KNOB1 | the picked register's length |
 
 ## GLO (the global settings)
@@ -60,7 +62,7 @@ Scout-7's and Echo-3's registers as two columns of step cards, the HTML's planne
 |---|---|
 | KNOB1 | the tempo, 60-168 BPM |
 | KNOB2 | the bots move every 1, 2 or 4 ticks |
-| KNOB3 | the loop's length (8 ... 64): at once when stopped, else as the loop comes round (D20) |
+| KNOB3 | the loop's length (8 ... 64): at once when stopped, else as the loop comes round (D20); a program as long as the loop goes with it, one made shorter stays (D45) |
 | KNOB4 | the speed: 1/1, 1/2, 1/4 (D22) |
 | SELECT | the engine: BAND (RoboSeq's own, where it starts) or ORIGINAL (the HTML's score) (D33, D39; docs/roboseq/ENGINES.md) |
 
@@ -107,7 +109,7 @@ ready on the round's last step.
 |---|---|
 | white keys 1-4 | pick a step (framed) |
 | KNOB1 / KNOB2 | the picked step's board / drum pattern ("--": unchanged) |
-| KNOB3 | the registers swapped on that step (clockwise on) |
+| KNOB3 | who plays high swapped on that step (the HTML's REG SWAP; clockwise on) |
 | KNOB4 | the chain: the step's progression, "--" (as it is), RND (a new one, following on) or one of the named ones by number (its name at the foot) (D38) |
 | white key 12 | Seq 2 on / off (queued while playing: it starts on Voice Mod's next wrap) |
 | white keys 13 / 14 | roll Scout-7's / Echo-3's register as Seq 2 wraps |

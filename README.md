@@ -213,7 +213,7 @@ On most pages:
 - **The white keys are positions:** a program's steps, Voice Mod's steps, the drum steps.
 - **The black keys nudge the robots,** two hands of five and a swap: a key decides that robot's next move,
   once, and then its program goes on. The first five are Scout-7's (red), the next five Echo-3's (orange), the last
-  swaps who plays high.
+  swaps their programs.
 
 | Black key | F#3 | G#3 | A#3 | C#4 | D#4 | F#4 | G#4 | A#4 | C#5 | D#5 | F#5 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -271,12 +271,14 @@ A robot's program is its moves, a step each, up to 64.
    | steady | bright | low | wobble | glitch |
 
 4. **KNOB1** sets the program's length.
+5. **K2 rolls** a new program for the picked robot, a roll a turn, and **K3** new ones for both, while it plays.
+   SEQ's undo (C#5) brings the last one back.
 
 **On SEQ,** you drive the program in like a game.
 - **Type moves:** F3 F#3 G3 A3 are **A W S D**: turn left, move, back, turn right. G#3 is wait, A#3 dash, B3 ping.
   Each move lands at the cursor, and the cursor goes on.
 - **Colour them:** C4 to G4 set the modifier, A4 B4 C5 the chance.
-- **Tools:** C#5 undo, D5 roll this program, E5 roll both, F5 swap them, G5 clear them.
+- **Tools:** C#5 undo, D5 roll this program, E5 roll both, F5 swap the two programs, G5 clear them.
 - **The cursor:** SELECT moves it, OCT- / OCT+ by 8.
 
 *Try this:* roll both (E5) a couple of times while it plays. In BAND every new program is a new tune.
@@ -330,7 +332,7 @@ dead.
 <img src="docs/screens/seq2.png" width="240" align="right" alt="SCL again: Seq 2">
 
 **SCL again** is **Seq 2**, the arrangement: four steps, one each time Voice Mod comes round.
-- **What each step sets:** K1 a board, K2 a drum pattern, K3 whether the robots swap registers, K4 a progression
+- **What each step sets:** K1 a board, K2 a drum pattern, K3 whether the robots swap who plays high, K4 a progression
   (`--` as it is, `RND` a new one, or one of the 73 by number).
 - **The keys:** key 12 turns it on, keys 13 and 14 roll a robot's program each time it comes round.
 
@@ -456,7 +458,7 @@ with the whole bank of progressions.
 
 | Page | The button | What it is | The keys | The knobs |
 |---|---|---|---|---|
-| HOME | HOME | the board | white: the program's steps; black: nudge | K1 the program's length |
+| HOME | HOME | the board | white: the program's steps; black: nudge, F#5 swap the programs | K1 the program's length, K2 roll the picked one, K3 roll both |
 | SEQ | SEQ | the programs as cards | type moves (A W S D and round them) | K1 the length |
 | SCL | SEL | Voice Mod, the chords | 1-4 a step; 12 FOLLOW, 13 NEXT, 14 ROOT, 15 reset, 16 roll | K1 scale, K2 root, K3 semitone, K4 when |
 | Seq 2 | SEL again | the arrangement | 1-4 a step; 12 on, 13/14 roll on the wrap, 15 reset, 16 random | K1 board, K2 drums, K3 swap, K4 progression |
@@ -464,7 +466,7 @@ with the whole bank of progressions.
 | FX | FX | the mix | 1-7 a fader | K1 level, K2 board colour |
 | ENV | ENV | the boards | 1-6 presets, 7 roll, 8 yours, 9 save, 10 clear, 11 pads | K1 presets, K2 fullness |
 | Builder | ENV again | build a board | A W S D cursor, the tiles above them | K1 presets, K2 fullness |
-| GLO | GLO | the global settings | 16 BATTLE | K1 tempo, K2 moves every 1/2/4 ticks, K3 the loop, K4 speed; SELECT the engine |
+| GLO | GLO | the global settings | 16 BATTLE | K1 tempo, K2 moves every 1/2/4 ticks, K3 the loop (the programs as long as it go with it), K4 speed; SELECT the engine |
 | BATTLE | GLO, key 16 | two players | the two clusters | K1 tempo, K2 rounds, K3 arena, K4 each round |
 
 Every control, page by page, and the rules they keep: **[docs/roboseq/CONTROLS.md](docs/roboseq/CONTROLS.md)**.
