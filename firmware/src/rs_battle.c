@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* The battle mode (D42): two players, one robot each, on the board's tiles and to the music's beat. Included at the
  * end of rs_model.c: the game's own moves (attempt_move's walls and crates) and tiles (apply_tile_effects: belts
  * carry, rotators turn, zap rails heat, pulse pads cool) are the battle's.

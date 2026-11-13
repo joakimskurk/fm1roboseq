@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* RoboSeq's splash at boot, after the product owner's draft (2026-11-06), animated: the letters drop in one by one,
  * the star over them twinkles, the robots come in from the sides to meet in the middle and bob, a heart beats
  * over them, the dots fill as it starts. About 2.6 s; a key or a button skips it. Main loop (rs_screen.c's canvas);

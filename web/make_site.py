@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Joakim (joakimskurk)
 """RoboSeq's site (GitHub Pages, https://joakimskurk.github.io/fm1roboseq/): its page, its installer in the browser,
 the firmware, the demos.
 

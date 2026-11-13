@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* RoboSeq's game: the board, the two bots, their registers and the sequencers around them, as
  * reference/roboseq.html runs them (advanceSequence and what it calls). Integers only, no platform: it runs the same
  * on the FM-1 and on a computer, where tests/roboseq/ checks it tick by tick against the HTML's golden traces.

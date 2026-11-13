@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* The battle mode (D42): the robots move on the beat as their players hold, strike, heat up and burn out; the rounds
  * and the match; the tiles as in the game; the music runs on. battle_test: exit 0 all pass */
 #include <stdio.h>

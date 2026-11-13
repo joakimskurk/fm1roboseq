@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* seededChance() without float. The HTML:
  *     seed = (step + 1) * 12.9898 + (cycle + 1) * 78.233 + botCode * 31.7 + (repeat + 1) * 19.19
  *     chance = |sin(seed) * 43758.5453| % 1

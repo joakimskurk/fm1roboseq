@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* RoboSeq's score: what reference/roboseq.html's audio plays, note by note, at each point of advanceSequence(), as
  * rs_note (voice, midi, velocity, start, length). playBoardSound(), playGhostTick(), playEventSound(),
  * playDrumStep() and the love check's coin, in the HTML's order and with its quirks; tests/roboseq checks every note

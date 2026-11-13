@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk); from Dinghy's dinghy.c by zvenson */
 /* RoboSeq for the M-VAVE FM-1: the app (reference/roboseq.html on the FM-1; README.md is the manual, ROADMAP.md the
  * plan, docs/roboseq/CONTROLS.md every control). The controls, as this file wires them:
  *

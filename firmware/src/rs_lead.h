@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* RoboSeq's lead (rs_lead.c): a SID-style solo voice for the FM-1's keys, played over the robots (D21). */
 #ifndef RS_LEAD_H
 #define RS_LEAD_H

@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* BAND, RoboSeq's own music on top of the HTML's (D33): what each part promises. ORIGINAL is held by the traces. */
 #include <stdio.h>
 #include <string.h>

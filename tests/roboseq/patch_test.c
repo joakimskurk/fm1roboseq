@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* The board's touch on the bots' synths (rs_band_patch, rs_mix_patch, D36a): a little, each board its own, an empty
  * board and ORIGINAL the HTML's voices exactly; the patched pulse in range and without a DC. A note's gesture (D37a):
  * the vibratos and the bends as they should be, none the HTML's. patch_test: exit 0 */

@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* The board's colour (rs_mix_colour, D24): 0 % is the HTML's sound exactly; at 100 % each board pulls the way its
  * tiles say (garden: a bigger, wetter, warmer room; gauntlet: drier, brighter, driven; maze: a smaller room), and
  * rendered, two boards sound apart. colour_test: exit 0 all pass */

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
+// Copyright (C) 2026 Joakim (joakimskurk)
 // reference/roboseq.html's own script (tools/trace/html.mjs's patch) on a page in headless Chromium, with Tone 14.7.77
 // as the page loads it, for Tone.Offline renders of its own buildAudio(). The browser: $CHROME, else Brave, Chrome
 // or Chromium where they usually are.

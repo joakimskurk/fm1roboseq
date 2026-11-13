@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* The README's art, drawn by the firmware's own code (rs_screen.c, rs_splash.c) and written as SVG, every pixel kept
  * (a path per colour, crisp at any size): the two robots on cards, the tiles, the moves and the modifiers as the
  * screen's chips, the steering in each robot's colour, a strip of the board between the README's parts, and the

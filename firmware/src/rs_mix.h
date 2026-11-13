@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* RoboSeq's mix: the HTML's buildAudio() after the voices, for the audio interrupt. The sixteen voices (rs_voice)
  * on their five buses at DEFAULT_MIXER's levels; bot B's bus through its 1400 Hz low-pass; the melody, percussion
  * and FX buses sent at 0.45 into the hall reverb, whose return goes to the master (DECISIONS.md D9); the master

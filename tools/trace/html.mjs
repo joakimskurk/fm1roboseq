@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
+// Copyright (C) 2026 Joakim (joakimskurk)
 // Runs reference/roboseq.html's own script in Node, without a browser: the DOM, Tone.js and localStorage are stubs,
 // so nothing sounds or draws, but the game (the board, the bots, the registers, the sequencers) runs exactly as the
 // page runs it. The script is changed in memory only, in two places: every event is also recorded (pushEvent), and

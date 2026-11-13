@@ -1,5 +1,6 @@
 #!/bin/sh
 # SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Joakim (joakimskurk)
 # The page's demos: the app itself on the host (tests/host.c), its sound as the FM-1 sends it over USB, into
 # build/audio/<id>.wav (web/make_site.py encodes them and draws their spectra). Linux (CI); on a Mac: make site.
 set -e

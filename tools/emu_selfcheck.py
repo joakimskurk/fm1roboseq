@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Joakim (joakimskurk)
 # The model on the chip: rs_boot_check (rs_selfcheck() at boot, firmware/src/roboseq.c) read from fm1-emu's RAM dump,
 # against the same fingerprint computed on this computer (build/test/trace_test); and the audio interrupt's worst
 # block (rs_audio_us_worst), which must stay under half its 5805 us (docs/RULES.md); and how deep the two stacks went

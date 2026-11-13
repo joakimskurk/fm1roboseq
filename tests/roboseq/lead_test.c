@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* The lead (rs_lead.c, D21) on its own: a held note at its pitch, legato gliding to the next, the vibrato only after
  * its delay, silence after the release, a new press from silence starting again. lead_test: exit 0 all pass */
 #include <math.h>

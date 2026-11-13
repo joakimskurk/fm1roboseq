@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* The battle mode's screens (D42): the arena as it is heard, the beat on its frame, both robots' heat and rounds;
  * the countdown, a round won, and the match: the winner, big. Included after rs_screen.c and rs_splash.c. */
 

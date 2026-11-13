@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* RoboSeq's voices (rs_voice.h), after Tone.js 14.7.77 as the HTML's buildAudio() makes them:
  *
  *   triggerAttackRelease(note, d, t, vel) = triggerAttack(t) then triggerRelease(t + d), in that order.

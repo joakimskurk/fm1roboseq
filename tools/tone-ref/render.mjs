@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
+// Copyright (C) 2026 Joakim (joakimskurk)
 // The golden renders: every stimulus in stimuli.json through reference/roboseq.html's own buildAudio() (D9: the
 // reverb's return to the master) under Tone.Offline in headless Chromium, as WAVs in
 // tests/golden/html/ (voices 16-bit mono, chains float stereo). A fresh page per stimulus, Math.random seeded, so they repeat.

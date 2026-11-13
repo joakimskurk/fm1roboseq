@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
+// Copyright (C) 2026 Joakim (joakimskurk)
 // What the HTML's chain really passes: one sound on each bus through its own buildAudio() under Tone.Offline, and
 // the level of each in its window, and after it (a reverb would ring there). node tools/tone-ref/probe_chain.mjs
 import { openBrowser, openPage, render, rms, db, wavFloat32 } from "./page.mjs";

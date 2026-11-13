@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Joakim (joakimskurk)
 """The page's link preview, web/og.png (1200 x 630: the card a chat or a post shows for the link): RoboSeq's logo
 over three of the firmware's own screens (make screens), on the splash's ground and grid.
 

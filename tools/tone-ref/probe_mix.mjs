@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
+// Copyright (C) 2026 Joakim (joakimskurk)
 // The HTML's mix pieces on their own, as Tone 14.7.77 builds them in Chromium (for 2c: the C port's models of them):
 //   limiter   Tone.Limiter(-6) (Chromium's DynamicsCompressor) fed a test signal: a 440 Hz sine in level steps,
 //             then bursts; build/probe/limiter_in.wav and limiter_out.wav

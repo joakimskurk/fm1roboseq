@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Joakim (joakimskurk)
 """RoboSeq's own logo (ROADMAP phase 0: Dinghy's assets/logo.svg is designburg's, not under the GPL): the two robots
 of tools/art/robots.py either side of the lettering of tools/art/splash.py, the firmware's own pixel art, on nothing
 (transparent): "Robo" mint and "Seq" yellow as on the splash, each letter pixel three, lit on top and shaded at the

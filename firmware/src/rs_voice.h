@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* RoboSeq's voices: the HTML's sixteen Tone.js instruments (buildAudio) as fixed-point voices for the audio
  * interrupt. Each voice is monophonic as Tone's Synth, NoiseSynth and MembraneSynth are: notes arrive in the HTML's
  * call order (rs_score) and edit the voice's timeline the way Tone edits its envelope, frequency and source

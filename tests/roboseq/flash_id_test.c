@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* The FM-1's flash chips (hal/fm1_flash_map.h, FL_JEDEC_OK): the app's storage and the update loader accept the Puya
  * P25Q80 (0x856014) and the UC25HQ80 of FM-1s sold since autumn 2026 (0xB36014; Dinghy f77bf032), and nothing else.
  * Without the second, RoboSeq's loader refuses to install on those units. */

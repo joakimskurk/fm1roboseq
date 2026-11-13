@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
+// Copyright (C) 2026 Joakim (joakimskurk)
 // The golden traces: reference/roboseq.html's game (tools/trace/html.mjs) run tick by tick for a set of scenarios,
 // written to tests/golden/traces/*.trace. tests/roboseq/trace_test.c runs the same scenarios through the C model and
 // compares line by line. node tools/trace/gen.mjs  (make traces)

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Joakim (joakimskurk)
 """The C sound against the HTML's: renders tools/tone-ref/stimuli.json's stimuli through tests/parity/render (the C
 voices and mix) and holds each against tests/golden/html (Tone.Offline renders of the HTML's own buildAudio()); the
 C limiter against compressor.py (Chromium's compressor, checked against Chromium by probe_mix.mjs) and the C reverb's

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Joakim (joakimskurk)
 # RoboSeq: the everyday commands. The firmware itself is built by ./build.sh (docs/DINGHY_README.md: the toolchain).
 #   make test    the model against the HTML's traces, then the app on the host (that in Docker on macOS: Dinghy's
 #                host mode needs ELF sections); seconds, no FM-1

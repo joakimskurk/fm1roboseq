@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* RoboSeq's game (rs_model.h): reference/roboseq.html's advanceSequence() and what it calls, in its order. Each
  * function names the HTML function it follows; where the HTML has a quirk, this keeps it (the HTML wins,
  * CLAUDE.md), and says so. */

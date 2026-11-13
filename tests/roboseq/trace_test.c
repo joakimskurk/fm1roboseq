@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* The C model (firmware/src/rs_model.c) against reference/roboseq.html, tick by tick: every scenario in
  * tests/golden/traces (made by tools/trace/gen.mjs from the HTML's own script) is set up the same way, run, and each
  * tick's line is compared with the HTML's. Then rs_chance against the HTML's seededChance for 1024 loops.

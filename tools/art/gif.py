@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Joakim (joakimskurk)
 """The README's film: the host app's frames (tests/host.c with an FPS: OUT-NNNNN.ppm, the screen as the firmware draws
 it) into one animated GIF, the pixels doubled. One palette for every frame (the firmware's colours are few), no
 dithering, so the pixel art stays as it is drawn.

@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* The board's moments that a song may take a while to reach, drawn straight from a view (rs_screen.c): two bots on
  * one tile after a dash (the clash star over the one hit), in love (the heart over them), apart; the sequence page
  * of a 32-step loop half way scrolled.

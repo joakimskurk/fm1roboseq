@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* RoboSeq's lead: a solo voice to play over the robots on the FM-1's keys (REC: D21, D23). Not the HTML's: a sharp
  * SID lead of our own. The pulse and the saw together (the SID's combined waves, more or less), the pulse's width
  * sweeping wide (PWM), folded back where it is driven past its edge (more on the attack), a vibrato that comes in

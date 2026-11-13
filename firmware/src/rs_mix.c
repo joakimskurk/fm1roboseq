@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* RoboSeq's mix (rs_mix.h): buildAudio()'s buses, low-pass, hall reverb and limiter, in integers.
  *
  *   voices -> bus x level ---------------------------------------------+-> master x level -> limiter -> out L R

@@ -1,5 +1,6 @@
 #!/bin/sh
 # SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Joakim (joakimskurk)
 # RoboSeq for the browser: firmware/src/roboseq.c, unchanged, compiled to WebAssembly on web/app/web_host.c (the
 # page's FM-1) instead of the chip: build/web/roboseq.wasm, no imports, no C library. clang with the wasm32 target
 # and wasm-ld (lld): apt install clang lld (the Docker image has them: make site). As FM-1 Clock's web/app/build.sh.

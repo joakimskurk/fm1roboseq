@@ -1,5 +1,6 @@
 #!/bin/sh
 # SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Joakim (joakimskurk)
 # RoboSeq's own host tests (no FM-1, no toolchain, seconds): the C model against reference/roboseq.html's golden
 # traces (tests/golden, made by tools/trace/gen.mjs), its editing, randomizers and undo; plain and with UBSan + ASan
 # where the compiler has them.

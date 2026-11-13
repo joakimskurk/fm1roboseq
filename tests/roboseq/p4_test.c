@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* P4 (ROADMAP): the playability rules P1-P3 as a test, page by page. Built into firmware/src/roboseq.c on the host
  * (tests/run_host.sh: -DRS_P4_TEST), so it presses the app's own keys on its own pages, while the robots play:
  *

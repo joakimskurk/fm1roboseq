@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
+// Copyright (C) 2026 Joakim (joakimskurk)
 // RoboSeq on its own page: the firmware runs in the audio thread (worklet.js, roboseq.wasm); here its screen, its
 // button lights and the FM-1's controls, drawn in the page's style: the knobs (drag, scroll or the arrow keys), the
 // buttons, the 27 keys (click or touch, several at once), the computer's keyboard and a MIDI keyboard as its keys.

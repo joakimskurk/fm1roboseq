@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* The C sound (rs_voice.c, rs_mix.c) plays tools/tone-ref's stimuli, as tools/tone-ref/compare.py writes them out
  * (build/parity/stimuli.txt), into build/parity/<name>.wav (32-bit float, mono) for compare.py to hold against the
  * HTML's renders in tests/golden/html.

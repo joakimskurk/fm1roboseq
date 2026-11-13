@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* The model's editing, randomizers and undo (rs_model.c). The HTML draws its random values from Math.random, so
  * these can't be traces: each test holds the HTML's rules instead (what can come out, how often, what is kept). */
 #include <stdio.h>

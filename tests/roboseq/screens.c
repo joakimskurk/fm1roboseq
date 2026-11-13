@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/* Copyright (C) 2026 Joakim (joakimskurk) */
 /* The README's first tour: every page as the firmware draws it (rs_screen.c, rs_splash.c), from a real game a few
  * steps in, into docs/screens/<name>.ppm (make screens turns them into PNG). */
 #include <stdint.h>
