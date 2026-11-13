@@ -14,7 +14,7 @@ RoboSeq runs on **Dinghy 0.4**, imported as source (the first commit of this rep
 
 ## What differs from upstream
 
-Kept small, so a later Dinghy can be merged by diffing these files.
+Kept small, so a later Dinghy can be merged by diffing these files. Each changed file of Dinghy's says so at its top ("Changed for RoboSeq").
 
 | file | change |
 | --- | --- |

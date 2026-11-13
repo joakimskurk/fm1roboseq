@@ -1,5 +1,6 @@
 #!/bin/sh
 # SPDX-License-Identifier: GPL-3.0-only
+# Changed for RoboSeq by Joakim (joakimskurk), 2026-11; PLATFORM.md lists the changes.
 # Run firmware/src/roboseq.c on this computer (tests/host.c): build/host/roboseq.wav and the screens as PNG; without a
 # script also the playability test (tests/roboseq/p4_test.c).
 #   tests/run_host.sh [script]               your own script (tests/host.c says what a line can do)

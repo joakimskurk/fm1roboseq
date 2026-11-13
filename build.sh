@@ -1,6 +1,7 @@
 #!/bin/sh
 # SPDX-License-Identifier: GPL-3.0-only
 # Copyright (C) 2026 Leo Kuroshita (@kurogedelic), Hügelton Instruments
+# Changed for RoboSeq by Joakim (joakimskurk), 2026-11; PLATFORM.md lists the changes.
 # Build RoboSeq on Dinghy (see docs/DINGHY_README.md for the toolchain).
 #   ./build.sh [--release X.Y]
 #   JIELI_TOOLCHAIN  JieLi Linux toolchain (default: ~/.jieli/toolchain)
