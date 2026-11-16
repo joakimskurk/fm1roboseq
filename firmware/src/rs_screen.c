@@ -26,6 +26,8 @@ static int8_t lead_panel_arp = -1;              /* ARP on (D27): its kind, else 
 static uint8_t lead_panel_rate = 1;             /* the arp's notes a step (D29) */
 static int hdr_board;                           /* the page drawn is the board: its header sits between the registers */
 static uint8_t badge_steer[2];                  /* a bot's next move by hand (action + 1): in its corner of the header (P3) */
+static char toast[32];                          /* a key's name and what it did, over the header (D46, rs_keyhelp.c) */
+static uint32_t toast_until;                    /* (the app's: 0 when it is not shown) */
 static uint8_t badge_swap;                      /* the registers swapped by hand just now: in both corners */
 static void screen_out(void);                   /* (every page ends with it: the lead's badge, then to the screen) */
 
@@ -761,6 +763,15 @@ static void screen_out(void)                    /* while REC is on the header is
             frame(x, 0, 18, 15, 1, b ? C_BOT_B : C_BOT_A);
             icon(x + 2, 1, i, b ? C_BOT_B : C_BOT_A);
         }
+    if (toast_until) {                          /* a key's name, between the corners' badges (D46) */
+        char t[26];
+        int32_t i;
+        for (i = 0; i < 25 && toast[i]; i++) t[i] = toast[i];
+        t[i] = 0;
+        cv_rect(19, 0, 202, 16, RGB(0x05, 0x10, 0x10));
+        cv_rect(19, 15, 202, 1, C_WARN);
+        cv_text(120 - text_w(&FONT_S, t) / 2, 0, &FONT_S, t, C_WARN);
+    }
     hdr_board = 0;
     cv_blit(0, 0);
 }

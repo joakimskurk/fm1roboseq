@@ -7,6 +7,8 @@
  *   roll     on HOME, K2 rolls the picked robot's program, K3 both, a roll a turn, while it plays
  *   loop     a program as long as the loop follows GLO's K3 up and down, stopped or as the loop comes round;
  *            one made shorter stays (the HTML only cuts: a loop of 8 once left the programs at 8)
+ *   keys     the key map while a page's own button is held 400 ms (off when let go, not on a short press), and
+ *            a key's name in the header after a press (D46: the product owner could not tell what was what)
  *
  * Exits through p4_main: 0 when all hold. */
 
@@ -114,12 +116,44 @@ static void ctl_loop(void)
     rs_stop(&game);
 }
 
+static void ctl_keys(void)                      /* (fm1_ms moved by hand and put back: no host script runs) */
+{
+    uint32_t ms = fm1_ms;
+    ctl_fresh(PAGE_HOME);
+    help_on = 0, fm1_in.buttons = 1u << BTN_HOME;   /* HOME held on HOME */
+    keyhelp_poll(), fm1_ms += 200u, keyhelp_poll();
+    CTL_CHECK(!help_on, "keys: the map came on a short press");
+    fm1_ms += 250u;
+    CTL_CHECK(keyhelp_poll() && help_on, "keys: HOME held 450 ms did not show the map");
+    fm1_in.buttons = 0;
+    CTL_CHECK(keyhelp_poll() && !help_on, "keys: the map stayed when HOME was let go");
+    fm1_in.buttons = 1u << BTN_SEQ;             /* (another page's button, not this page's: no map) */
+    keyhelp_poll(), fm1_ms += 500u, keyhelp_poll();
+    CTL_CHECK(!help_on, "keys: SEQ held on HOME showed a map");
+    fm1_in.buttons = 0, keyhelp_poll();
+    fm1_ms = ms;
+    page = PAGE_SEQ;                            /* a key's name: D5 on SEQ */
+    keyhelp_say(1u << 21);
+    CTL_CHECK(!strcmp(toast, "D5: ROLL SCOUT-7") && toast_until, "keys: D5 on SEQ said \"%s\"", toast);
+    page = PAGE_HOME;
+    rs_set_step(&game, 0, 4, RS_DASH, -1, -1);
+    keyhelp_say(1u << 7);                       /* C4: the fifth white key, step 5 */
+    CTL_CHECK(!strcmp(toast, "C4: STEP 5 DASH"), "keys: C4 on HOME said \"%s\"", toast);
+    keyhelp_say(1u << 25);
+    CTL_CHECK(!strcmp(toast, "F#5: SWAP PROGRAMS"), "keys: F#5 on HOME said \"%s\"", toast);
+    page = PAGE_GLO;
+    keyhelp_say(1u << 0);
+    CTL_CHECK(!strcmp(toast, "F3: NOT USED HERE"), "keys: F3 on GLO said \"%s\"", toast);
+    toast_until = 0;
+}
+
 static int ctl_main(void)
 {
     ctl_knobs();
     ctl_swap();
     ctl_roll();
     ctl_loop();
+    ctl_keys();
     printf("ctl_test: %s\n", ctl_fails ? "FAILED" : "all pass");
     return ctl_fails != 0;
 }

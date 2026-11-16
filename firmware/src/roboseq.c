@@ -546,8 +546,11 @@ static void ui_of(struct rs_ui *u, const struct rs_view *v)
     }
 }
 
+#include "rs_keyhelp.c"                        /* what the keys do: the key map on a held page button, a key's name (D46) */
+
 static void draw_page(const struct rs_view *v, struct rs_fx *fx, struct rs_ui *ui, uint32_t notes)   /* the page, drawn */
 {
+    if (help_on) { draw_keyhelp(); return; }
     int steering = page != PAGE_SEQ && page != PAGE_ENV && page != PAGE_BATTLE;   /* (the black keys steer here) */
     ui_of(ui, v);
     badge_steer[0] = steering ? game.steer[0] : 0, badge_steer[1] = steering ? game.steer[1] : 0;
@@ -683,7 +686,10 @@ static void app_pass(void)                      /* a pass of the main loop: a mi
     notes = fm1_in.notes;
     if (page == PAGE_BATTLE) dirty = battle_keys(notes, notes & ~ml.prev);   /* (D42: the players') */
     else if (lead_on) lead_keys(notes & ~ml.prev, ml.prev & ~notes);   /* REC: the keys are the lead's */
-    else dirty = keys(notes & ~ml.prev);
+    else {
+        dirty = keys(notes & ~ml.prev);
+        if (notes & ~ml.prev) keyhelp_say(notes & ~ml.prev), dirty = 1;   /* the key's name in the header (D46) */
+    }
     ml.prev = notes;
     if (page == PAGE_BATTLE) b &= ~(1u << BTN_REC | 1u << BTN_ARP | 1u << BTN_EDIT);   /* (the keys are the players') */
     if (b & (1u << BTN_REC)) {             /* the lead on / off; off, what it holds lets go */
@@ -902,6 +908,8 @@ static void app_pass(void)                      /* a pass of the main loop: a mi
     } else if (ml.due && (int32_t)(fm1_ms - ml.due) >= 0)   /* an effect ran out */
         dirty = 1;
     if (swap_until && (int32_t)(fm1_ms - swap_until) >= 0) swap_until = 0, dirty = 1;
+    if (toast_until && (int32_t)(fm1_ms - toast_until) >= 0) toast_until = 0, dirty = 1;
+    if (keyhelp_poll()) dirty = 1;              /* the key map while the page's button is held (D46) */
     if (dirty) {
         lead_badge = lead_on ? lead_oct : -99;
         lead_panel_v[0] = lead_knob[0], lead_panel_v[1] = lead_knob[1], lead_panel_v[2] = lead_knob[2], lead_panel_v[3] = lead_oct;
