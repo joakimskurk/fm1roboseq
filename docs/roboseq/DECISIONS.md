@@ -876,3 +876,15 @@ randomizeAllSteps() pushes one a register, two presses to undo one roll (the sam
 programs at 8, and every longer loop after it played them over and over. GLO's K3 now takes a program as long as the
 loop with it, up as down, stopped at once and playing as the loop comes round (D20); one made shorter on purpose
 stays as it is.
+
+## D46. The page names what the keys and knobs do, page by page (2026-11-16)
+
+The product owner: so much is on the keys that they could not tell what was what. The FM-1's keys have no lights, and
+on most pages the screen shows the steps or the board, not the keys (C4 covers the builders and the battle). On the
+page every key can say it: the browser build tells the page which page RoboSeq is on and in what mode
+(`web_app_state` in roboseq.c, `DINGHY_WEB` only: the FM-1 and the host are unchanged): the page, REC and ARP, what
+SELECT has the white keys turn, whose program is on them, the 16 steps shown, the drum row and a 12-step drum loop.
+`web/app/play.js` then names each key on the drawn FM-1 (a short name on it, in the colour of what it does, its edge
+in that colour too; the whole text on hover, with the computer's key), each knob and OCT (a line under it), and says
+the page in a sentence over the keys. The names follow CONTROLS.md, page by page: HOME, SEQ, GLO, SCL and Seq 2, LFO,
+FX, the boards and the builder, the battle, and the lead under REC and ARP.

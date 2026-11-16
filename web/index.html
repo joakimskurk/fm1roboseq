@@ -212,10 +212,14 @@
   .fm1-keys { position: relative; height: 112px; margin: 18px 0 0; }
   .fm1-keys button { position: absolute; padding: 0; border-radius: 12px; cursor: pointer; touch-action: none; }
   .fm1-keys .kw { bottom: 0; height: 58px; border: 2px solid #061413; background: linear-gradient(#5b4a50, #44353a);
-                  box-shadow: inset 0 2px 0 rgba(255, 255, 255, .12), 0 2px 0 #061413; margin: 0 2px; width: auto; }
+                  box-shadow: inset 0 2px 0 rgba(255, 255, 255, .12), inset 0 -3px 0 var(--mark, transparent), 0 2px 0 #061413;
+                  margin: 0 2px; width: auto; }
   .fm1-keys .kb { top: 0; height: 50px; border: 2px solid #061413; background: linear-gradient(#4a3a40, #33272c);
                   box-shadow: inset 0 -4px 0 var(--mark, transparent), 0 2px 0 #061413; z-index: 1; }
-  .fm1-keys .kb.scout { --mark: var(--scout); } .fm1-keys .kb.echo { --mark: var(--echo); } .fm1-keys .kb.swap { --mark: var(--blue); }
+  .fm1-keys [data-c="scout"] { --mark: var(--scout); } .fm1-keys [data-c="echo"] { --mark: var(--echo); }
+  .fm1-keys [data-c="swap"], .fm1-keys [data-c="prob"] { --mark: var(--blue); } .fm1-keys [data-c="tool"] { --mark: var(--yellow); }
+  .fm1-keys [data-c="move"] { --mark: var(--green); } .fm1-keys [data-c="mod"] { --mark: var(--mint); }
+  .fm1-keys [data-c="tile"] { --mark: #ffd36b; }
   .fm1-keys .down { background: linear-gradient(#cdfde9, #8fffd1) !important; border-color: var(--mint); }
   .fm1-keys .kb.down { background: linear-gradient(var(--mark), var(--mark)) !important; }
   .fm1-foot { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between;
@@ -228,6 +232,26 @@
           font-size: 14px; color: var(--dim); }
   .kmap b { color: var(--fg); } .kmap kbd { font: 12px var(--mono); padding: 1px 5px; border: 1px solid var(--line);
           border-bottom-width: 2px; border-radius: 4px; color: var(--fg); background: var(--panel); }
+
+  /* what the keys and knobs do now (D46): a name on each key and under each knob, the page's line over the keys */
+  .kf { display: block; min-height: 1.2em; margin-top: 1px; font: 700 9px/1.2 var(--mono); letter-spacing: .05em;
+        color: var(--yellow); font-style: normal; text-align: center; white-space: nowrap; }
+  .octs { display: flex; flex-direction: column; gap: 4px; }
+  .fm1-help { margin: 16px 0 0; padding: 8px 12px; min-height: 3.2em; background: rgba(5, 12, 12, .55);
+              border-left: 3px solid var(--mint); font-size: 13px; line-height: 1.45; color: var(--dim); }
+  .fm1-help b { margin-right: 6px; font: 700 12px var(--mono); letter-spacing: .1em; color: var(--mint); }
+  .fm1-keys .lbl, .fm1-keys .ck { position: absolute; left: 0; right: 0; text-align: center; pointer-events: none;
+                                  font-family: var(--mono); white-space: nowrap; overflow: hidden; }
+  .fm1-keys .lbl { font-weight: 700; font-size: 10px; color: var(--fg); }
+  .fm1-keys .kw .lbl { bottom: 7px; } .fm1-keys .kb .lbl { top: 7px; }
+  .fm1-keys .ck { font-size: 9px; color: rgba(255, 255, 255, .3); }
+  .fm1-keys .kw .ck { top: 5px; } .fm1-keys .kb .ck { bottom: 8px; }
+  .fm1-keys [data-c="scout"] .lbl { color: var(--scout); } .fm1-keys [data-c="echo"] .lbl { color: var(--echo); }
+  .fm1-keys [data-c="swap"] .lbl { color: var(--blue); } .fm1-keys [data-c="tool"] .lbl { color: var(--yellow); }
+  .fm1-keys [data-c="move"] .lbl { color: var(--green); } .fm1-keys [data-c="mod"] .lbl { color: var(--mint); }
+  .fm1-keys [data-c="prob"] .lbl { color: var(--blue); } .fm1-keys [data-c="tile"] .lbl { color: #ffd36b; }
+  .fm1-keys [data-c="step"] .lbl { color: var(--fg); } .fm1-keys [data-c="note"] .lbl { color: var(--dim); font-weight: 400; }
+  .fm1-keys .down .lbl { color: var(--bg) !important; }
 
   /* the battle */
   .vs { display: block; width: min(512px, 100%); height: auto; margin: 6px auto 22px; image-rendering: pixelated; }
@@ -260,6 +284,9 @@
     .btns { width: 100%; }
     .fm1-keys { height: 88px; }
     .fm1-keys .kw { height: 46px; margin: 0 1px; border-radius: 8px; } .fm1-keys .kb { height: 38px; border-radius: 8px; }
+    .fm1-keys .ck { display: none; } .fm1-keys .lbl { font-size: 7px; letter-spacing: -.02em; }
+    .fm1-keys .kw .lbl { bottom: 5px; } .fm1-keys .kb .lbl { top: 5px; }
+    .fm1-help { font-size: 12px; }
   }
   @media (max-width: 640px) {
     .facts, .shots { grid-template-columns: repeat(2, 1fr); }
@@ -329,19 +356,20 @@
     <div class="fm1-top">
       <div class="fm1-side fm1-left">
         <div class="knobs">
-          <label class="knob"><span class="dial vol" id="vol" tabindex="0" role="slider" aria-label="MASTER, the volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80"></span>MASTER</label>
-          <label class="knob"><span class="dial" data-enc="0" tabindex="0" role="slider" aria-label="SELECT"></span>SELECT</label>
+          <label class="knob"><span class="dial vol" id="vol" tabindex="0" role="slider" aria-label="MASTER, the volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80"></span>MASTER<i class="kf">VOLUME</i></label>
+          <label class="knob"><span class="dial" data-enc="0" tabindex="0" role="slider" aria-label="SELECT"></span>SELECT<i class="kf" id="kf0"></i></label>
         </div>
-        <div class="oct"><button class="b" data-btn="0" type="button">OCT−</button><button class="b" data-btn="1" type="button">OCT+</button></div>
+        <div class="octs"><div class="oct"><button class="b" data-btn="0" type="button">OCT−</button><button class="b" data-btn="1" type="button">OCT+</button></div>
+          <i class="kf" id="kf-oct"></i></div>
       </div>
       <div class="screen corners"><canvas id="lcd" width="480" height="480" aria-label="RoboSeq's screen"></canvas>
         <button id="start" type="button">▶ Start</button></div>
       <div class="fm1-side fm1-right">
         <div class="knobs">
-          <label class="knob"><span class="dial" data-enc="2" tabindex="0" role="slider" aria-label="KNOB1"></span>K1</label>
-          <label class="knob"><span class="dial" data-enc="3" tabindex="0" role="slider" aria-label="KNOB2"></span>K2</label>
-          <label class="knob"><span class="dial" data-enc="4" tabindex="0" role="slider" aria-label="KNOB3"></span>K3</label>
-          <label class="knob"><span class="dial" data-enc="5" tabindex="0" role="slider" aria-label="KNOB4"></span>K4</label>
+          <label class="knob"><span class="dial" data-enc="2" tabindex="0" role="slider" aria-label="KNOB1"></span>K1<i class="kf" id="kf2"></i></label>
+          <label class="knob"><span class="dial" data-enc="3" tabindex="0" role="slider" aria-label="KNOB2"></span>K2<i class="kf" id="kf3"></i></label>
+          <label class="knob"><span class="dial" data-enc="4" tabindex="0" role="slider" aria-label="KNOB3"></span>K3<i class="kf" id="kf4"></i></label>
+          <label class="knob"><span class="dial" data-enc="5" tabindex="0" role="slider" aria-label="KNOB4"></span>K4<i class="kf" id="kf5"></i></label>
         </div>
         <div class="btns">
           <button class="b" data-btn="2" type="button">FX</button><button class="b" data-btn="3" type="button">SCL</button>
@@ -353,6 +381,7 @@
         </div>
       </div>
     </div>
+    <div class="fm1-help" id="keyhelp" aria-live="polite"><b id="kh-page">HOME</b> <span id="kh-text"></span></div>
     <div class="fm1-keys" id="keys" aria-label="The keys, F3 to G5"></div>
     <div class="fm1-foot">
       <span>F3 · · · · · · · · · · · · · G5</span>

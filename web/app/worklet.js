@@ -80,7 +80,7 @@ class RoboSeq extends AudioWorkletProcessor {
     if (this.since >= sampleRate / 40) {         // the screen (when it changed), the lights, a project saved
       this.since = 0;
       const rev = x.web_lcd_rev();
-      const msg = { type: 'frame', leds: x.web_leds_lo(), ms: x.web_ms() };
+      const msg = { type: 'frame', leds: x.web_leds_lo(), ms: x.web_ms(), app: x.web_app_state ? x.web_app_state() : 0 };
       const transfer = [];
       if (rev !== this.rev) {
         this.rev = rev;

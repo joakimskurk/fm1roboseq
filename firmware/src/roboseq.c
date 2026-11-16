@@ -929,3 +929,15 @@ static void app_main(void)                      /* the FM-1 and the host: the st
     for (;;) app_pass();
 #endif
 }
+
+#ifdef DINGHY_WEB
+/* For the page (web/app/play.js), so it can name what the keys and knobs do now (D46): the page on (bits 0-3), REC's
+ * lead on (4), ARP on (5), what SELECT has the white keys turn on HOME (6-7), whose program is on them (8), the 16
+ * steps shown (9-10), the drum row (11-12), a 12-step drum loop (13). The FM-1 itself shows it on its screen. */
+WEB_EXPORT(web_app_state) uint32_t web_app_state(void)
+{
+    return (uint32_t)page | (uint32_t)(lead_on != 0) << 4 | (uint32_t)(arp_mode != 0) << 5 | (uint32_t)(layer & 3u) << 6 |
+           (sel_bot & 1u) << 8 | (bank & 3u) << 9 | (uint32_t)(drum_row & 3u) << 11 |
+           (uint32_t)(rs_drum_steps(game.loop_len) == 12) << 13;
+}
+#endif
