@@ -11,6 +11,7 @@
  *   web_lcd(), web_lcd_rev()  the screen, 240 x 240 RGB565 (CPU order), and a count that moves when it changes
  *   web_leds_lo / hi()      the button LEDs: bit id (0..13 the buttons)
  *   web_btn(id)             a button pressed and let go (BTN_*)
+ *   web_btn_down / up(id)   a button held, let go (fm1_in.buttons: a page's button held shows its key map, D46)
  *   web_enc(id, n)          an encoder turned n detents (ENC_*, + = clockwise)
  *   web_keys(mask)          the keys held now: bit k is key k, F3 .. G5
  *   web_blob(i), web_blob_rev()  blob i's bytes (its used flag and length first, as host.c keeps them) and a count
@@ -210,6 +211,14 @@ WEB_EXPORT(web_leds_hi) uint32_t web_leds_hi(void) { return (uint32_t)(host_leds
 WEB_EXPORT(web_btn) void web_btn(uint32_t id)
 {
     if (id < 32u) { host_edges |= 1u << id; host_rel_next |= 1u << id; }
+}
+WEB_EXPORT(web_btn_down) void web_btn_down(uint32_t id)
+{
+    if (id < 32u) { host_edges |= 1u << id; fm1_in.buttons |= 1u << id; }
+}
+WEB_EXPORT(web_btn_up) void web_btn_up(uint32_t id)
+{
+    if (id < 32u) { host_rel |= 1u << id; fm1_in.buttons &= ~(1u << id); }
 }
 WEB_EXPORT(web_enc) void web_enc(uint32_t id, int32_t n) { host_enc[id % HOST_NENC] += n; }
 WEB_EXPORT(web_keys) void web_keys(uint32_t mask) { fm1_in.notes = mask & 0x7FFFFFFu; }

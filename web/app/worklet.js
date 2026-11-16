@@ -40,6 +40,8 @@ class RoboSeq extends AudioWorkletProcessor {
     const x = this.x;
     if (!x) return;
     if (m.type === 'btn') x.web_btn(m.id);
+    else if (m.type === 'btndown') x.web_btn_down(m.id);   // (held: a page's button held shows its key map, D46)
+    else if (m.type === 'btnup') x.web_btn_up(m.id);
     else if (m.type === 'enc') x.web_enc(m.id, m.n);
     else if (m.type === 'keys') x.web_keys(m.mask >>> 0);
   }

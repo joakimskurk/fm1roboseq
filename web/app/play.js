@@ -248,7 +248,15 @@ if (fm1) {
 
   // ---- the buttons, lit as the firmware lights them
   const btnEls = [...fm1.querySelectorAll('[data-btn]')];
-  for (const b of btnEls) b.addEventListener('click', () => send({ type: 'btn', id: +b.dataset.btn }));
+  for (const b of btnEls) {                     // held as on the FM-1: a page's button held shows its key map (D46)
+    let down = null;
+    b.addEventListener('pointerdown', (e) => { e.preventDefault(); b.setPointerCapture(e.pointerId); down = e.pointerId;
+                                               send({ type: 'btndown', id: +b.dataset.btn }); });
+    const up = (e) => { if (down !== e.pointerId) return; down = null; send({ type: 'btnup', id: +b.dataset.btn }); };
+    b.addEventListener('pointerup', up);
+    b.addEventListener('pointercancel', up);
+    b.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); send({ type: 'btn', id: +b.dataset.btn }); } });
+  }
 
   // ---- the knobs: a detent each 14 px dragged, each arrow key, and the wheel once the knob is clicked (focused): a
   // scroll of the page over a knob scrolls the page, and a trackpad's swipe is gathered, 60 px a detent (D45: a
