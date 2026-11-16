@@ -187,7 +187,9 @@ the same for every version.
 | **5.** Press **SEL** (SCL), then white key **16** | Voice Mod writes a new chord progression, and the header names it. |
 | **6.** Press **GLO**, then white key **16** | **BATTLE**: hand a friend the other end of the keyboard and press PLAY. |
 
-Lost? Press **HOME**. Every page says on the screen what its keys do.
+Lost? **Hold the page's own button** (HOME on HOME, SEQ on SEQ ...): the screen shows what its keys and knobs do,
+in colours, until you let go. Every key you press also says its name at the top for a second, and **HOME** takes you
+back to the board.
 
 ## The panel and the keyboard
 

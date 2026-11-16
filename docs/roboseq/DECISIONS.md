@@ -888,3 +888,17 @@ SELECT has the white keys turn, whose program is on them, the 16 steps shown, th
 in that colour too; the whole text on hover, with the computer's key), each knob and OCT (a line under it), and says
 the page in a sentence over the keys. The names follow CONTROLS.md, page by page: HOME, SEQ, GLO, SCL and Seq 2, LFO,
 FX, the boards and the builder, the battle, and the lead under REC and ARP.
+
+**D46 on the FM-1 itself (the same day).** The product owner: and on a real FM-1. Asked, they chose both of two ways
+(`firmware/src/rs_keyhelp.c`):
+- **The key map.** While a page's own button is held 400 ms (HOME on HOME, SEQ on SEQ, SEL on Voice Mod or Seq 2,
+  ENV on the boards or the builder ...), the screen shows the page's keys: the 27 in colours (the little keyboard of
+  C4), a line a colour saying what those keys do, and the knobs. Let go, the page again. A short press is as before;
+  pressed on another page, a page button opens its page and, held on, shows the map of the page it opened. The battle
+  draws its keys itself; under REC the map is the lead's.
+- **A key's name.** Every key pressed says, in the header for a second between the badges' corners, its note and
+  what it did: "D5: ROLL SCOUT-7", "C4: STEP 5 DASH" (the step and what it is now), "F#3: SCOUT-7 TURN L", or
+  "F3: NOT USED HERE". Not in the battle, and not under REC, where the keys are notes.
+On the page the drawn FM-1 holds its buttons as the FM-1's are held (`web_btn_down`, `web_btn_up`), so the map is
+there too. `ctl_test` holds both: the map after 400 ms held and not on a short press, off when let go, not for another
+page's button; the names of D5 on SEQ, C4 and F#5 on HOME, F3 on GLO.
