@@ -902,3 +902,30 @@ FX, the boards and the builder, the battle, and the lead under REC and ARP.
 On the page the drawn FM-1 holds its buttons as the FM-1's are held (`web_btn_down`, `web_btn_up`), so the map is
 there too. `ctl_test` holds both: the map after 400 ms held and not on a short press, off when let go, not for another
 page's button; the names of D5 on SEQ, C4 and F#5 on HOME, F3 on GLO.
+
+## D47. The free knobs: PRESETS the board, ALGORITHM the chords, K2 and K3 back through the rolls (2026-11-18)
+
+The product owner, with RoboSeq running on a real FM-1: what more makes it nicer to play, now that HOME has knobs
+free? PRESETS could change the board, the boards over the page as on ENV while the knob turns. The important thing:
+nothing may get cluttered anywhere. Asked, they chose three of four: PRESETS the board, ALGORITHM the chords, and K2
+and K3 back through the rolls (not K4 the tempo on HOME). All three show only while they are used, and no page got a
+line more (`firmware/src/rs_quick.c`).
+- **PRESETS, on every page but the battle:** the six presets, then the user's, round and round (from a rolled board,
+  from the first). Stopped, it loads at once; playing, it comes as the loop comes round (D20, as ENV's keys do, D32).
+  While it turns and for 1.2 s after, the boards over the page as ENV draws them, but only those the knob reaches: no
+  key numbers, no SAVE, CLEAR, RESET or fullness, the rolled one only while it is the board. The header says which
+  (3/7) and when (NOW, PLAYING, NEXT LOOP); the one coming is framed yellow, blinking.
+- **ALGORITHM, on every page but the battle:** the 73 named progressions, 1 to 73, round. Stopped, at once (as Voice
+  Mod's roll, key 16); playing, for the next round (`rs_queue_prog`: the queue FOLLOW uses, taken at Voice Mod's
+  wrap), in the key that plays now. While it turns, the list over the page: the picked one framed, two each side, NEXT
+  ROUND, and what plays now underneath.
+- **K2 and K3 on HOME, a history of the rolls:** clockwise as in D45, a new program (K2 the picked robot's, K3
+  both); anticlockwise back to the programs before, a roll a turn; clockwise again forward, and only at the last a
+  new roll. The last 8 are kept, both programs each. An edit made after going back is kept, and what was ahead of it
+  goes, as in an editor's undo. The header says it for a second: "NEW: SCOUT-7 2/2", "BACK 1/3", "FORWARD 3/3".
+  SEQ's undo (C#5) works as before.
+The battle keeps its own knobs, and a turn of PRESETS or ALGORITHM there is let go (D45). The key map names the two
+knobs on every page, and HOME's says "K2/K3 LEFT: BACK A ROLL". The drawn FM-1 on the page has PRESETS and ALGORITHM
+where the FM-1 has them, under MASTER and SELECT, named BOARD and CHORDS. `ctl_test` holds it: PRESETS stopped and
+playing and round to the user's, ALGORITHM stopped and playing, neither in the battle nor saved for HOME after it,
+the rolls back, forward, a new one at the last, an edit after going back kept, and a full history in order.

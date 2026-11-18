@@ -72,6 +72,8 @@ Tick what works, and note what doesn't: what you did, what you saw or heard, wha
 - [ ] Held, a page's own button shows its key map (HOME on HOME, SEQ on SEQ), gone when you let go; a key pressed
       says its name at the top for a second ("D5: ROLL SCOUT-7" on SEQ).
 - [ ] The knobs: one click is one step, both ways, on GLO's tempo and the FX faders.
+- [ ] PRESETS while it plays: the boards over the page, the next one framed yellow; it comes in as the loop comes
+  round. ALGORITHM: the chords, the next round's framed. On HOME, K2 clockwise rolls, anticlockwise goes back.
 - [ ] REC: all 27 keys play the lead, OCT- / OCT+ its octave, K1-K4 its sound. ARP arpeggiates a held chord.
 - [ ] GLO, white key 16: BATTLE. Two players, PLAY: the countdown with its beeps, the fight on the beat, a winner.
 

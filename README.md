@@ -275,7 +275,8 @@ A robot's program is its moves, a step each, up to 64.
 
 4. **KNOB1** sets the program's length.
 5. **K2 rolls** a new program for the picked robot, a roll a turn, and **K3** new ones for both, while it plays.
-   SEQ's undo (C#5) brings the last one back.
+   Turn them **back** and the programs before come back, one roll a turn; forward again, and the newest. The last 8
+   are kept.
 
 **On SEQ,** you drive the program in like a game.
 - **Type moves:** F3 F#3 G3 A3 are **A W S D**: turn left, move, back, turn right. G#3 is wait, A#3 dash, B3 ping.
@@ -298,6 +299,7 @@ A robot's program is its moves, a step each, up to 64.
   - **7** rolls a random board, **8** brings back your own;
   - **9** saves the board as yours, **10** clears yours, **11** puts the robots back on their pads.
 - **While it plays,** a new board comes in as the loop comes round: framed yellow, blinking, until it arrives.
+- **From any page,** PRESETS turns through the boards. They show over the page while it turns.
 - **KNOB2** sets how full a rolled board is.
 
 <img src="docs/screens/builder.png" width="240" align="right" alt="The builder">
@@ -461,7 +463,7 @@ with the whole bank of progressions.
 
 | Page | The button | What it is | The keys | The knobs |
 |---|---|---|---|---|
-| HOME | HOME | the board | white: the program's steps; black: nudge, F#5 swap the programs | K1 the program's length, K2 roll the picked one, K3 roll both |
+| HOME | HOME | the board | white: the program's steps; black: nudge, F#5 swap the programs | K1 the program's length, K2 roll the picked one, K3 roll both (back: the rolls before) |
 | SEQ | SEQ | the programs as cards | type moves (A W S D and round them) | K1 the length |
 | SCL | SEL | Voice Mod, the chords | 1-4 a step; 12 FOLLOW, 13 NEXT, 14 ROOT, 15 reset, 16 roll | K1 scale, K2 root, K3 semitone, K4 when |
 | Seq 2 | SEL again | the arrangement | 1-4 a step; 12 on, 13/14 roll on the wrap, 15 reset, 16 random | K1 board, K2 drums, K3 swap, K4 progression |
@@ -471,6 +473,9 @@ with the whole bank of progressions.
 | Builder | ENV again | build a board | A W S D cursor, the tiles above them | K1 presets, K2 fullness |
 | GLO | GLO | the global settings | 16 BATTLE | K1 tempo, K2 moves every 1/2/4 ticks, K3 the loop (the programs as long as it go with it), K4 speed; SELECT the engine |
 | BATTLE | GLO, key 16 | two players | the two clusters | K1 tempo, K2 rounds, K3 arena, K4 each round |
+
+On every page but the battle, **PRESETS** changes the board and **ALGORITHM** the chords (one of the 73 named
+progressions, for the next round). Each shows its list over the page while it turns, and then the page again.
 
 Every control, page by page, and the rules they keep: **[docs/roboseq/CONTROLS.md](docs/roboseq/CONTROLS.md)**.
 

@@ -23,6 +23,13 @@ robots are the instrument; D16 says how the keys reach them. A rule here is a te
 HOME the board, SEQ the sequence, SCL Voice Mod and, pressed again, Seq 2 (D27), LFO the drums, FX the mix, ENV the boards and,
 pressed again, the board builder (D32), GLO the global settings; the page's button is lit.
 
+## On every page but the battle (D47)
+
+| Control | Does |
+|---|---|
+| PRESETS | the board: the six presets, then yours, round. Stopped, at once; playing, as the loop comes round. While it turns, the boards over the page, the one coming framed yellow |
+| ALGORITHM | the chords: the 73 named progressions, round. Stopped, at once; playing, on the next round, in the key that plays. While it turns, the list over the page |
+
 ## HOME (the board)
 
 | Control | Does |
@@ -35,8 +42,8 @@ pressed again, the board builder (D32), GLO the global settings; the page's butt
 | EDIT | Scout-7's or Echo-3's register on the white keys |
 | SELECT | what a white key turns: ACTION (move > back > turn L > turn R > dash > ping > wait), MODIFIER (steady > bright > low > wobble > glitch), CHANCE (100 > 75 > 50 %) |
 | KNOB1 | the picked register's length |
-| KNOB2 | a new program for the picked bot, a roll a turn (D45; SEQ's C#5 undoes it) |
-| KNOB3 | new programs for both |
+| KNOB2 | a new program for the picked bot, a roll a turn (D45); anticlockwise back to the programs before, clockwise forward again, and at the last a new one (D47: the last 8 kept). SEQ's C#5 undoes as well |
+| KNOB3 | the same for both |
 | OCT- / OCT+ | the register's 16 steps before / after (lit where there are more) |
 | MASTER | the volume |
 
