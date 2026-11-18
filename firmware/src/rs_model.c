@@ -879,6 +879,17 @@ void rs_apply_prog(struct rs_state *s, uint8_t id, uint8_t key)
     set_prog(s, id, key);
 }
 
+void rs_queue_prog(struct rs_state *s, uint8_t id, uint8_t key)   /* (D47, the port's) the next round's progression,
+                                                                   * picked by hand: ready as FOLLOW's would be, and
+                                                                   * in on the round's wrap (rs_advance_voice_mod) */
+{
+    if (id == 0 || id > NPROG) return;
+    prog_into(s->bm_next, s->bassmod_len ? s->bassmod_len : 4, id, key);
+    s->next_id = id, s->next_key = fixed_key(PROG[id - 1].mode) ? KEY_C : key, s->next_ready = 1;
+}
+
+uint8_t rs_prog_home_key(const struct rs_state *s) { return s->prog_id ? s->prog_key : (uint8_t)KEY_C; }
+
 void rs_set_follow(struct rs_state *s, uint8_t on)
 {
     s->vm_follow = on ? 1 : 0;

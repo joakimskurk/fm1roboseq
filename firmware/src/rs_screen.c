@@ -855,7 +855,9 @@ static void mini_board(int32_t x, int32_t y, const struct rs_board *bd)   /* 5 x
     }
 }
 
-static void draw_boards(const struct rs_state *g, int blink, int edited)
+/* quick: PRESETS's overlay on the other pages (D47): only the boards the knob reaches, without ENV's key numbers,
+ * actions and fullness; the header says which one and when it comes, as the chords' overlay does. */
+static void draw_boards(const struct rs_state *g, int blink, int edited, int quick)
 {
     static const char *const NAME[8] = {"DEFAULT", "CORRIDOR", "GARDEN", "GAUNTLET", "SPINNER", "MAZE", "ROLL", "USER"};
     static const char *const DENS[3] = {"SPARSE", "BALANCED", "CHAOS"};
@@ -863,13 +865,24 @@ static void draw_boards(const struct rs_state *g, int blink, int edited)
     uint16_t card = RGB(0x12, 0x12, 0x24), act_c[3] = {C_ACCENT, C_DANGER, C_TEXT};
     uint32_t k, dens = g->density >= 60 ? 2u : g->density >= 45 ? 1u : 0u;
     cv_begin(240, 240, C_BG);
-    cv_text(4, 0, &FONT_S, "BOARDS", C_TEXT);
-    knob_tag(56, 2, 1);
-    cv_text(236 - text_w(&FONT_S, DENS[dens]), 0, &FONT_S, DENS[dens], C_MUTED);
-    knob_tag(232 - text_w(&FONT_S, DENS[dens]) - 15, 2, 2);
+    if (quick) {
+        uint8_t id = g->pending_board != RS_B_NONE ? g->pending_board : g->board_id;
+        uint32_t at = id < RS_NBOARDS ? id + 1u : id == RS_B_USER ? RS_NBOARDS + 1u : 0u;
+        const char *when = g->pending_board != RS_B_NONE ? "NEXT LOOP" : g->playing ? "PLAYING" : "NOW";
+        char t[4];
+        cv_text(4, 0, &FONT_S, "BOARDS", C_ACCENT);
+        if (at) t[0] = (char)('0' + at), t[1] = '/', t[2] = (char)('0' + RS_NBOARDS + 1), t[3] = 0, cv_text(64, 0, &FONT_S, t, C_MUTED);
+        cv_text(236 - text_w(&FONT_S, when), 0, &FONT_S, when, C_WARN);
+    } else {
+        cv_text(4, 0, &FONT_S, "BOARDS", C_TEXT);
+        knob_tag(56, 2, 1);
+        cv_text(236 - text_w(&FONT_S, DENS[dens]), 0, &FONT_S, DENS[dens], C_MUTED);
+        knob_tag(232 - text_w(&FONT_S, DENS[dens]) - 15, 2, 2);
+    }
     cv_rect(0, SEQ_TOP - 1, 240, 1, C_CELL_LINE);
     for (k = 0; k < 9u; k++) {
         int32_t x = (int32_t)(k % 3u) * 80 + 1, y = 18 + (int32_t)(k / 3u) * 74;
+        if (quick && (k == 8u || (k == 6u && g->board_id != RS_B_RANDOM))) continue;   /* (not on the knob) */
         cv_rect(x, y, 78, 72, card);
         if (k == 8u) {                          /* 9 SAVE (the board as the user's), 10 CLEAR it, 11 RESET (bots to pads) */
             uint32_t a;
@@ -902,7 +915,7 @@ static void draw_boards(const struct rs_state *g, int blink, int edited)
             while (*n && c < 9u) name[c++] = *n++;
             if (on && edited) name[c++] = '*';
             name[c] = 0;
-            digits(x + 4, y + 5, k + 1u, 1, on ? C_ACCENT : C_MUTED);
+            if (!quick) digits(x + 4, y + 5, k + 1u, 1, on ? C_ACCENT : C_MUTED);
             cv_text(x + 39 - text_w(&FONT_S, name) / 2, y + 55, &FONT_S, name, queued ? C_WARN : on ? C_ACCENT : C_TEXT);
             if (on) frame(x, y, 78, 72, 2, C_ACCENT);
             if (queued) frame(x, y, 78, 72, 2, blink ? C_WARN : mix565(C_WARN, card, 90));

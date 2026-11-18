@@ -229,6 +229,8 @@ uint32_t rs_nprogs(void);                                       /* the named pro
 const char *rs_prog_name(uint8_t id);                           /* "I V vi IV" ("--" for 0, "RND" for RS_P_RND) */
 void rs_prog_key_name(uint8_t id, uint8_t key, char *out);      /* its key, "G", "Am", "C" (4 bytes) */
 void rs_apply_prog(struct rs_state *s, uint8_t id, uint8_t key);   /* a named progression into Voice Mod (undoable) */
+void rs_queue_prog(struct rs_state *s, uint8_t id, uint8_t key);   /* (D47) one for the next round, as FOLLOW's */
+uint8_t rs_prog_home_key(const struct rs_state *s);             /* the key a progression picked by hand is in */
 void rs_set_follow(struct rs_state *s, uint8_t on);             /* FOLLOW: every round a new progression, following on */
 /* the battle mode (D42, rs_battle.c): two players steer the robots, a step on every beat, and strike */
 void rs_battle_start(struct rs_state *s, uint8_t to_win, uint8_t arena);   /* a match: round 1, the robots at their pads */

@@ -547,10 +547,12 @@ static void ui_of(struct rs_ui *u, const struct rs_view *v)
 }
 
 #include "rs_keyhelp.c"                        /* what the keys do: the key map on a held page button, a key's name (D46) */
+#include "rs_quick.c"                          /* PRESETS the board, ALGORITHM the chords, K2 / K3 the rolls' history (D47) */
 
 static void draw_page(const struct rs_view *v, struct rs_fx *fx, struct rs_ui *ui, uint32_t notes)   /* the page, drawn */
 {
     if (help_on) { draw_keyhelp(); return; }
+    if (quick_on) { draw_quick(); return; }
     int steering = page != PAGE_SEQ && page != PAGE_ENV && page != PAGE_BATTLE;   /* (the black keys steer here) */
     ui_of(ui, v);
     badge_steer[0] = steering ? game.steer[0] : 0, badge_steer[1] = steering ? game.steer[1] : 0;
@@ -562,7 +564,7 @@ static void draw_page(const struct rs_view *v, struct rs_fx *fx, struct rs_ui *u
     else if (page == PAGE_LFO) draw_drums(v, &game, drum_row);
     else if (page == PAGE_FX) draw_mix(mix.level, mix_cursor, colour_amt);
     else if (page == PAGE_ENV) draw_editor(v, &game, env_cx, env_cy, (fm1_ms / 300u) & 1u, env_edited);
-    else if (page == PAGE_BOARDS) draw_boards(&game, (fm1_ms / 300u) & 1u, env_edited);
+    else if (page == PAGE_BOARDS) draw_boards(&game, (fm1_ms / 300u) & 1u, env_edited, 0);
     else if (page == PAGE_BATTLE) draw_battle(v, fx, fm1_ms, bt_to_win, bt_arena, notes);
     else draw_board(v, fx, ui, fm1_ms);
 }
@@ -860,12 +862,17 @@ static void app_pass(void)                      /* a pass of the main loop: a mi
         }
     } else {                                /* HOME: K2 a new program for the picked robot, K3 new ones for both, a roll
                                              * a turn (D45; each one undone on SEQ) */
-        if (fm1_enc_take(ENC_KNOB2)) rs_randomize_steps(&game, (int)sel_bot), dirty = 1;
-        if (fm1_enc_take(ENC_KNOB3)) rs_randomize_all(&game), dirty = 1;
+        if ((e = fm1_enc_take(ENC_KNOB2)) != 0) roll_turn(e, 0), dirty = 1;   /* (and back, and forward again: D47) */
+        if ((e = fm1_enc_take(ENC_KNOB3)) != 0) roll_turn(e, 1), dirty = 1;
         if (b & (1u << BTN_OCT_DOWN) && bank > 0) bank--, dirty = 1;
         if (b & (1u << BTN_OCT_UP) && (bank + 1u) * 16u < len) bank++, dirty = 1;
         if (bank * 16u >= len) bank = 0;
     }
+    if (page != PAGE_BATTLE) {                  /* on every page but the battle (D47): PRESETS the board, ALGORITHM the chords */
+        if ((e = fm1_enc_take(ENC_PRESETS)) != 0) quick_board(e), quick_show(QK_BOARDS), dirty = 1;
+        if ((e = fm1_enc_take(ENC_ALGORITHM)) != 0) quick_chords(e), quick_show(QK_CHORDS), dirty = 1;
+    }
+    if (quick_on && (int32_t)(fm1_ms - quick_until) >= 0) quick_on = 0, dirty = 1;
     for (k = 0; k < 4u; k++) (void)fm1_enc_take(ENC_KNOB1 + k);   /* the knobs this page did not read: let go, not kept */
     (void)fm1_enc_take(ENC_ALGORITHM), (void)fm1_enc_take(ENC_PRESETS);   /* for the next (K3 on HOME was GLO's loop, D45) */
     schedule();
@@ -896,7 +903,8 @@ static void app_pass(void)                      /* a pass of the main loop: a mi
     }
     {                                       /* ENV's cursor blinks */
         static uint32_t blink_was;
-        if ((page == PAGE_ENV || (page == PAGE_BOARDS && game.pending_board != RS_B_NONE)) && fm1_ms / 300u != blink_was)
+        if ((page == PAGE_ENV || ((page == PAGE_BOARDS || quick_on == QK_BOARDS) && game.pending_board != RS_B_NONE)) &&
+            fm1_ms / 300u != blink_was)
             blink_was = fm1_ms / 300u, dirty = 1;   /* (the builder's cursor; the board coming, on the boards) */
     }
     v = view_now();

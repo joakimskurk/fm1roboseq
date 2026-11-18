@@ -63,10 +63,10 @@ static void kh_nudges(struct kh_line *L, uint32_t *n)
     L[(*n)++] = (struct kh_line){kh_b(11, 11), C_BELT, "F#5: SWAP THE PROGRAMS"};
 }
 
-static uint32_t kh_lines(struct kh_line *L, const char **title, const char **k1, const char **k2)
+static uint32_t kh_lines(struct kh_line *L, const char **title, const char **k1, const char **k2, const char **k3)
 {
     uint32_t n = 0;
-    *k2 = "";
+    *k2 = "", *k3 = "";
     if (lead_on) {
         *title = arp_mode ? "ARP: WHAT THE KEYS DO" : "REC: WHAT THE KEYS DO";
         L[n++] = (struct kh_line){0x7FFFFFFu, C_ACCENT, arp_mode ? "HOLD A CHORD: AN ARPEGGIO" : "EVERY KEY: THE LEAD"};
@@ -81,7 +81,8 @@ static uint32_t kh_lines(struct kh_line *L, const char **title, const char **k1,
         L[n++] = (struct kh_line){kh_w(1, 16), C_ACCENT, sel_bot ? "WHITE: ECHO-3'S STEPS" : "WHITE: SCOUT-7'S STEPS"};
         kh_nudges(L, &n);
         *k1 = "K1 LENGTH K2 ROLL K3 BOTH";
-        *k2 = "SELECT: MOVE/MOD/CHANCE";
+        *k2 = "K2/K3 LEFT: BACK A ROLL";   /* (D47) */
+        *k3 = "SELECT: MOVE/MOD/CHANCE";
         break;
     case PAGE_SEQ:
         *title = "SEQ: WHAT THE KEYS DO";
@@ -155,8 +156,9 @@ static uint32_t kh_lines(struct kh_line *L, const char **title, const char **k1,
 static void draw_keyhelp(void)                  /* the key map, the whole screen */
 {
     struct kh_line L[8];
-    const char *title, *k1, *k2;
-    uint32_t n = kh_lines(L, &title, &k1, &k2), i, k;
+    const char *title, *k1, *k2, *k3;
+    uint32_t n = kh_lines(L, &title, &k1, &k2, &k3), i, k;
+    int32_t ky = *k3 ? 166 : 184;               /* (the knobs: a line more on a page with few keys) */
     uint16_t col[27];
     int32_t y = 46;
     for (k = 0; k < 27u; k++) col[k] = 0;
@@ -171,9 +173,11 @@ static void draw_keyhelp(void)                  /* the key map, the whole screen
         if (L[i].keys) cv_rect(4, y + 4, 8, 8, L[i].c);
         cv_text(16, y, &FONT_S, L[i].t, C_TEXT);
     }
-    cv_rect(0, 197, 240, 1, mix565(C_MUTED, C_BG, 90));
-    cv_text(4, 202, &FONT_S, k1, C_WARN);
-    cv_text(4, 220, &FONT_S, k2, C_WARN);
+    cv_rect(0, ky - 5, 240, 1, mix565(C_MUTED, C_BG, 90));
+    cv_text(4, ky, &FONT_S, k1, C_WARN);
+    cv_text(4, ky + 18, &FONT_S, k2, C_WARN);
+    if (*k3) cv_text(4, ky + 36, &FONT_S, k3, C_WARN);
+    cv_text(4, 220, &FONT_S, "PRESETS BOARD ALGO CHORDS", mix565(C_WARN, C_BG, 170));   /* (every page's, D47) */
     badge_steer[0] = badge_steer[1] = 0, badge_swap = 0, lead_badge = -99, toast_until = 0;   /* (the map alone) */
     screen_out();
 }

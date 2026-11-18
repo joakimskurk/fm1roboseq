@@ -82,7 +82,7 @@ int main(void)
     rs_place_tile(&g, 0, 2, RS_T_BELT, RS_E), rs_place_tile(&g, 1, 2, RS_T_BELT, RS_E);
     view_ui(), draw_editor(&v, &g, 2, 2, 1, 1), shot("builder");
     rs_default(&g), rs_start(&g), rs_load_board(&g, RS_B_SPINNER);   /* the boards: DEFAULT playing, SPINNER coming */
-    draw_boards(&g, 1, 0), shot("boards");
+    draw_boards(&g, 1, 0, 0), shot("boards");
     rs_default(&g), rs_start(&g);
     g.engine = RS_ENGINE_BAND, draw_glo(&g, 32), shot("glo");   /* (the app starts in BAND: D33) */
     rs_apply_prog(&g, 1, 5), rs_set_follow(&g, 1);   /* (D38: I V vi IV in G, FOLLOW on, the next one ready) */
