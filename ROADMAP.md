@@ -149,4 +149,6 @@ and the limiter.)
       (`make site`) (2026-11-08); RoboSeq to play on the page, the firmware compiled to WebAssembly (2026-11-09)
 - [ ] The first release `roboseq-0.1.fwsc` (a `v*` tag: the product owner's call), a pre-release with the notes in
       `docs/releases/0.1.md` and the version on the splash (`v0.1`)
-- [ ] On a real FM-1: FIRST_FLASH.md's checklist ticked, then the Hub (it lists a firmware tested on one)
+- [ ] On a real FM-1: FIRST_FLASH.md's checklist ticked, then the Hub (it lists a firmware tested on one).
+      2026-11-18: it runs on a real FM-1 and plays as it should, the product owner reports; the checklist's report
+      for the Hub still to come

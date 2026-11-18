@@ -1,10 +1,10 @@
-# The first RoboSeq on a real FM-1
+# RoboSeq on your FM-1: the first install
 
-RoboSeq has never run on a real FM-1. It is built and tested on a computer: the game is checked tick by tick
-against the browser original, every page's keys are checked by a test, and the package runs in
-[fm1-emu](https://github.com/joakimeriksson/fm1-emu) in its strict mode, saves included. What only a real FM-1 can
-show is how it sounds through its speaker and jacks, how the keys and knobs feel, and whether the flash and the
-update loader behave as the emulator says. If you have an FM-1 and half an hour, this page is for you.
+RoboSeq has run on a real FM-1, and played as it should. It is also built and tested on a computer: the game is
+checked tick by tick against the browser original, every page's keys are checked by a test, and the package runs in
+[fm1-emu](https://github.com/joakimeriksson/fm1-emu) in its strict mode, saves included. What a report from your
+FM-1 adds is another unit: its flash chip and the stock firmware it came with, its speaker and jacks, and how its
+keys and knobs feel. If you have an FM-1 and half an hour, this page is for you.
 
 ## What could go wrong, and the way back
 
@@ -99,5 +99,4 @@ Open an issue at [joakimskurk/fm1roboseq](https://github.com/joakimskurk/fm1robo
 - photos of anything that looked wrong, a crash screen's PC, and a recording of anything that sounded wrong
   (a phone is fine).
 
-Thank you. With your report RoboSeq can go on the Firmware Hub, where a firmware is listed only once it has been
-tested on a real FM-1.
+Thank you. A report like yours is what the Firmware Hub asks for before it lists a firmware.

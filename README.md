@@ -10,11 +10,11 @@ and steer them yourselves, in a battle on the beat. A Dinghy 0.4 app, in the sam
 [VaveHero](https://github.com/joakimskurk/fm1vavehero), [Star Distroyer](https://github.com/joakimskurk/fm1stardistroyer)
 and [SkurkyMello](https://github.com/joakimskurk/fm1mello).
 
-> **Status: playable, not yet on a real FM-1.** Every page, both engines, the lead and the battle are in, and the
+> **Status: playable, and it runs on a real FM-1.** Every page, both engines, the lead and the battle are in, and the
 > project is kept over a power-off. It is tested on the computer and measured in
-> [fm1-emu](https://github.com/joakimeriksson/fm1-emu), but it has not met a real FM-1: if you have one,
-> [FIRST_FLASH.md](FIRST_FLASH.md) is a half-hour checklist with the way back (hold OCT- while switching on). The plan
-> is in [ROADMAP.md](ROADMAP.md).
+> [fm1-emu](https://github.com/joakimeriksson/fm1-emu), and it has played on a real FM-1 as it should. If you have
+> one, [FIRST_FLASH.md](FIRST_FLASH.md) is a half-hour checklist with the way back (hold OCT- while switching on):
+> a report from another unit helps. The plan is in [ROADMAP.md](ROADMAP.md).
 
 <p align="center">
   <a href="https://joakimskurk.github.io/fm1roboseq/"><b>The page: hear it, and install it from the browser →</b></a>
@@ -30,7 +30,7 @@ Bringing it to the FM-1 was a chance to make it something you play with your han
 robots, build their board, type their programs in as if you were driving them, and solo over the chaos they make.
 It is more toy than tool, and that is the point. And now two of you can fight with them, on the beat.
 
-It has not met a real FM-1 yet, so please be kind.
+It runs on a real FM-1 now, but it is still young, so please be kind.
 
 Enjoy the robots.
 

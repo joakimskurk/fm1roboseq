@@ -312,12 +312,13 @@
     <p class="tag"><b>A sequencer that plays like a board game.</b> Firmware for the M-VAVE FM-1.</p>
   </header>
 
-  <p class="warn" role="note"><b>⚠ Not yet tested on a real FM-1.</b> Every change to RoboSeq is built and tested on a
-    computer and in an FM-1 emulator, but it has never run on an actual device. Install it at your own risk.</p>
-  <p class="testers" role="note"><b>Testers wanted.</b> If you have an FM-1 and know how to restore it (see below the
-    Install button), you could be the first to play RoboSeq on real hardware. There is a
-    <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/FIRST_FLASH.md">half-hour checklist</a> for the first
-    install. Afterwards, <a href="https://github.com/joakimskurk/fm1roboseq/issues/new?title=Tried+on+an+FM-1">open an
+  <p class="warn" role="note"><b>⚠ Install at your own risk.</b> RoboSeq runs on a real FM-1, and every change to it
+    is built and tested on a computer and in an FM-1 emulator. It is still new, so know the way back (below the
+    Install button) before you install.</p>
+  <p class="testers" role="note"><b>Testers wanted.</b> RoboSeq has played on one FM-1 so far. If you have one and
+    know how to restore it, a report from yours helps, above all with another flash chip or stock firmware. There is
+    a <a href="https://github.com/joakimskurk/fm1roboseq/blob/HEAD/FIRST_FLASH.md">half-hour checklist</a> for the
+    first install. Afterwards, <a href="https://github.com/joakimskurk/fm1roboseq/issues/new?title=Tried+on+an+FM-1">open an
     issue on GitHub</a> and tell us how it went: what worked, what didn't, what the screen showed and how it
     sounded.</p>
 
@@ -417,8 +418,8 @@
       <li>Connect the FM-1 <b>directly</b> to the computer with a USB data cable, and switch it on.</li>
       <li>Close other apps that use MIDI, tick the box, press <b>Install</b> and allow MIDI when the browser asks.</li>
     </ol>
-    <label class="ack"><input type="checkbox" id="ack"><span>I understand that RoboSeq has not been tested on a real
-      FM-1 yet, and that I install it at my own risk.</span></label>
+    <label class="ack"><input type="checkbox" id="ack"><span>I understand that RoboSeq is new, and that I install it
+      at my own risk.</span></label>
     <button id="go" disabled>Install</button>
     <progress id="bar" max="100" value="0"></progress>
     <p id="status">Loading the firmware…</p>
