@@ -138,7 +138,8 @@ if (fm1) {
       page = 'HOME';
       help = `The white keys are ${robot}'s steps ${bank * 16 + 1} to ${bank * 16 + 16}: a press changes the step's `
            + `${LAYER[layer]} (SELECT picks move, modifier or chance; EDIT picks the robot). The black keys nudge the `
-           + 'robots, red Scout-7 and orange Echo-3, and the last one swaps their programs.';
+           + 'robots, red Scout-7 and orange Echo-3, and the last one swaps their programs. K2 rolls a new program '
+           + `for ${robot}, K3 for both; turn them back to go back to the programs before.`;
       kn = [LAYER[layer].toUpperCase(), 'LENGTH', 'ROLL', 'ROLL BOTH', ''];
       oct = '16 STEPS ←→';
     } else if (pg === 1) {                        // SEQ
@@ -240,6 +241,9 @@ if (fm1) {
       el.title = `${noteName(k)}${KEYCAP[k] ? ` (${KEYCAP[k]})` : ''}${w ? ': ' + w : ': nothing here'}`;
     });
     ['kf0', 'kf2', 'kf3', 'kf4', 'kf5'].forEach((id, i) => { $(id).textContent = d.kn[i] || '·'; });
+    const battle = (st & 15) === 9;               // PRESETS and ALGORITHM: every page's but the battle's (D47)
+    $('kf6').textContent = battle ? '·' : 'BOARD';
+    $('kf1').textContent = battle ? '·' : 'CHORDS';
     $('kf-oct').textContent = d.oct || '·';
     $('kh-page').textContent = d.page;
     $('kh-text').textContent = d.help;

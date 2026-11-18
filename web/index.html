@@ -351,7 +351,8 @@
   <h2 id="play"><img src="art/steer-scout-move.svg" width="36" height="30" alt="">Play it here</h2>
   <p>This is the firmware itself, compiled for the browser: the same code as on the FM-1, with its screen, its sound
     and its controls. Press <b>Start</b>, then <b>PLAY</b>. Turn a knob by dragging it up or down; once you have
-    clicked it, the mouse wheel and the arrow keys turn it too. <b>Hold a page's button</b> (HOME on HOME, SEQ on SEQ)
+    clicked it, the mouse wheel and the arrow keys turn it too. <b>PRESETS</b> changes the board and
+    <b>ALGORITHM</b> the chords, from any page, while the music plays. <b>Hold a page's button</b> (HOME on HOME, SEQ on SEQ)
     and the screen shows what its keys do, as on the FM-1; each key you press says its name at the top.</p>
   <div class="fm1" id="fm1">
     <div class="fm1-top">
@@ -359,6 +360,8 @@
         <div class="knobs">
           <label class="knob"><span class="dial vol" id="vol" tabindex="0" role="slider" aria-label="MASTER, the volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80"></span>MASTER<i class="kf">VOLUME</i></label>
           <label class="knob"><span class="dial" data-enc="0" tabindex="0" role="slider" aria-label="SELECT"></span>SELECT<i class="kf" id="kf0"></i></label>
+          <label class="knob"><span class="dial" data-enc="6" tabindex="0" role="slider" aria-label="PRESETS, the board"></span>PRESETS<i class="kf" id="kf6"></i></label>
+          <label class="knob"><span class="dial" data-enc="1" tabindex="0" role="slider" aria-label="ALGORITHM, the chords"></span>ALGORITHM<i class="kf" id="kf1"></i></label>
         </div>
         <div class="octs"><div class="oct"><button class="b" data-btn="0" type="button">OCT−</button><button class="b" data-btn="1" type="button">OCT+</button></div>
           <i class="kf" id="kf-oct"></i></div>
